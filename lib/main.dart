@@ -80,9 +80,8 @@ class WebViewExample extends StatefulWidget {
 }
 
 class _WebViewExampleState extends State<WebViewExample> {
-  final Completer<WebViewController> _controller =
-  Completer<WebViewController>();
-
+  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  late WebViewController __controller;
   @override
   void initState() {
     super.initState();
@@ -108,7 +107,7 @@ class _WebViewExampleState extends State<WebViewExample> {
         userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
+          _controller.complete(__controller = webViewController);
         },
         onProgress: (int progress) {
           print('WebView is loading (progress : $progress%)');
@@ -129,6 +128,13 @@ class _WebViewExampleState extends State<WebViewExample> {
         },
         onPageFinished: (String url) {
           print('Page finished loading: $url');
+          setState(() {
+            if(url.startsWith('https://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/')) {
+              print('is game origin url');
+              __controller.runJavascript('''window.open("http:"+gadgetInfo.URL,'_blank');''');
+            }
+          });
+
         },
         gestureNavigationEnabled: true,
         backgroundColor: const Color(0x00000000),
