@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 const String gameUrl =
@@ -86,14 +85,6 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                   gestureNavigationEnabled: true,
                   backgroundColor: CupertinoColors.extraLightBackgroundGray,
                 ))),
-        ),
-        bottomNavigationBar: const BottomAppBar(
-          //TODO: 下边全面屏未适配
-          child: CupertinoNavigationBar(
-            middle: Icon(CupertinoIcons.home),
-            leading: Icon(CupertinoIcons.plus),
-            trailing: Icon(CupertinoIcons.fullscreen),
-          ),
         ),
       ),
     );
