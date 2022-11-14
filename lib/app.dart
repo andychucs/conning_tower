@@ -34,6 +34,8 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
@@ -53,42 +55,49 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
         ),
         child: CupertinoPageScaffold(
             child: SafeArea(
-                left: false,
+                // left: false,
                 bottom: false,
-                right: false,
-                child: WebView(
-                  initialUrl: 'http://$gameUrl',
-                  userAgent:
-                      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onWebViewCreated: (WebViewController webViewController) {
-                    _controller.complete(__controller = webViewController);
-                  },
-                  onProgress: (int progress) {
-                    print('WebView is loading (progress : $progress%)');
-                  },
-                  javascriptChannels: <JavascriptChannel>{
-                    _toasterJavascriptChannel(context),
-                  },
-                  navigationDelegate: (NavigationRequest request) {
-                    print('allowing navigation to $request');
-                    return NavigationDecision.navigate;
-                  },
-                  onPageStarted: (String url) {
-                    print('Page started loading: $url');
-                  },
-                  onPageFinished: (String url) {
-                    print('Page finished loading: $url');
-                    setState(() {
-                      if (url.endsWith(gameUrl)) {
-                        print('is game origin url');
-                        __controller.runJavascript(
-                            '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                      }
-                    });
-                  },
-                  gestureNavigationEnabled: true,
-                  backgroundColor: CupertinoColors.extraLightBackgroundGray,
+                // right: false,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          screenSize.width / screenSize.height > 5.0 / 3.0
+                              ? screenSize.width / 9.8
+                              : 0),
+                  child: WebView(
+                    initialUrl: 'http://$gameUrl',
+                    userAgent:
+                        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
+                    javascriptMode: JavascriptMode.unrestricted,
+                    onWebViewCreated: (WebViewController webViewController) {
+                      _controller.complete(__controller = webViewController);
+                    },
+                    onProgress: (int progress) {
+                      print('WebView is loading (progress : $progress%)');
+                    },
+                    javascriptChannels: <JavascriptChannel>{
+                      _toasterJavascriptChannel(context),
+                    },
+                    navigationDelegate: (NavigationRequest request) {
+                      print('allowing navigation to $request');
+                      return NavigationDecision.navigate;
+                    },
+                    onPageStarted: (String url) {
+                      print('Page started loading: $url');
+                    },
+                    onPageFinished: (String url) {
+                      print('Page finished loading: $url');
+                      setState(() {
+                        if (url.endsWith(gameUrl)) {
+                          print('is game origin url');
+                          __controller.runJavascript(
+                              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                        }
+                      });
+                    },
+                    gestureNavigationEnabled: true,
+                    backgroundColor: CupertinoColors.extraLightBackgroundGray,
+                  ),
                 ))),
       ),
     );
