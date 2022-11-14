@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-const String gameUrl =
-    'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+import 'generated/l10n.dart';
+
+const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -21,6 +21,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late WebViewController __controller;
+
   // const ConnTowerHomePage({Key? key}) : super(key: key);
 
   @override
@@ -33,67 +34,62 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations(
-    //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-    return CupertinoApp(
-      theme: const CupertinoThemeData(),
-      home: Scaffold(
-        body: CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: const Text('Conning Tower'),
-            leading: IconButton(
-                onPressed: () async {
-                  if (await __controller.canGoBack()) {
+    return Scaffold(
+      body: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(S.of(context).AppName),
+          leading: IconButton(
+              onPressed: () async {
+                if (await __controller.canGoBack()) {
                   await __controller.goBack();
-                  }
-                },
-                icon: const Icon(CupertinoIcons.back)),
-            trailing: IconButton(
-                onPressed: (){
-                  __controller.reload();
-                },
-                icon: const Icon(CupertinoIcons.refresh)),
-          ),
-          child: CupertinoPageScaffold(
-              child: SafeArea(
-                  left: false,
-                  bottom: false,
-                  right: false,
-                  child: WebView(
-                    initialUrl: 'http://$gameUrl',
-                    userAgent:
-                        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
-                    javascriptMode: JavascriptMode.unrestricted,
-                    onWebViewCreated: (WebViewController webViewController) {
-                      _controller.complete(__controller = webViewController);
-                    },
-                    onProgress: (int progress) {
-                      print('WebView is loading (progress : $progress%)');
-                    },
-                    javascriptChannels: <JavascriptChannel>{
-                      _toasterJavascriptChannel(context),
-                    },
-                    navigationDelegate: (NavigationRequest request) {
-                      print('allowing navigation to $request');
-                      return NavigationDecision.navigate;
-                    },
-                    onPageStarted: (String url) {
-                      print('Page started loading: $url');
-                    },
-                    onPageFinished: (String url) {
-                      print('Page finished loading: $url');
-                      setState(() {
-                        if (url.endsWith(gameUrl)) {
-                          print('is game origin url');
-                          __controller.runJavascript(
-                              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                        }
-                      });
-                    },
-                    gestureNavigationEnabled: true,
-                    backgroundColor: CupertinoColors.extraLightBackgroundGray,
-                  ))),
+                }
+              },
+              icon: const Icon(CupertinoIcons.back)),
+          trailing: IconButton(
+              onPressed: () {
+                __controller.reload();
+              },
+              icon: const Icon(CupertinoIcons.refresh)),
         ),
+        child: CupertinoPageScaffold(
+            child: SafeArea(
+                left: false,
+                bottom: false,
+                right: false,
+                child: WebView(
+                  initialUrl: 'http://$gameUrl',
+                  userAgent:
+                      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (WebViewController webViewController) {
+                    _controller.complete(__controller = webViewController);
+                  },
+                  onProgress: (int progress) {
+                    print('WebView is loading (progress : $progress%)');
+                  },
+                  javascriptChannels: <JavascriptChannel>{
+                    _toasterJavascriptChannel(context),
+                  },
+                  navigationDelegate: (NavigationRequest request) {
+                    print('allowing navigation to $request');
+                    return NavigationDecision.navigate;
+                  },
+                  onPageStarted: (String url) {
+                    print('Page started loading: $url');
+                  },
+                  onPageFinished: (String url) {
+                    print('Page finished loading: $url');
+                    setState(() {
+                      if (url.endsWith(gameUrl)) {
+                        print('is game origin url');
+                        __controller.runJavascript(
+                            '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                      }
+                    });
+                  },
+                  gestureNavigationEnabled: true,
+                  backgroundColor: CupertinoColors.extraLightBackgroundGray,
+                ))),
       ),
     );
   }
