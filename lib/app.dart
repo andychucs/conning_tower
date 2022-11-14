@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-const String gameUrl =
-    'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+import 'generated/l10n.dart';
+
+const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -21,6 +21,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late WebViewController __controller;
+
   // const ConnTowerHomePage({Key? key}) : super(key: key);
 
   @override
@@ -33,32 +34,36 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setPreferredOrientations(
-    //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-    return CupertinoApp(
-      theme: const CupertinoThemeData(),
-      home: Scaffold(
-        body: CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: const Text('Conning Tower'),
-            leading: IconButton(
-                onPressed: () async {
-                  if (await __controller.canGoBack()) {
+    final screenSize = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(S.of(context).AppName),
+          leading: IconButton(
+              onPressed: () async {
+                if (await __controller.canGoBack()) {
                   await __controller.goBack();
-                  }
-                },
-                icon: const Icon(CupertinoIcons.back)),
-            trailing: IconButton(
-                onPressed: (){
-                  __controller.reload();
-                },
-                icon: const Icon(CupertinoIcons.refresh)),
-          ),
-          child: CupertinoPageScaffold(
-              child: SafeArea(
-                  left: false,
-                  bottom: false,
-                  right: false,
+                }
+              },
+              icon: const Icon(CupertinoIcons.back)),
+          trailing: IconButton(
+              onPressed: () {
+                __controller.reload();
+              },
+              icon: const Icon(CupertinoIcons.refresh)),
+        ),
+        child: CupertinoPageScaffold(
+            child: SafeArea(
+                // left: false,
+                bottom: false,
+                // right: false,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          screenSize.width / screenSize.height > 5.0 / 3.0
+                              ? screenSize.width / 9.8
+                              : 0),
                   child: WebView(
                     initialUrl: 'http://$gameUrl',
                     userAgent:
@@ -92,8 +97,8 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     },
                     gestureNavigationEnabled: true,
                     backgroundColor: CupertinoColors.extraLightBackgroundGray,
-                  ))),
-        ),
+                  ),
+                ))),
       ),
     );
   }
