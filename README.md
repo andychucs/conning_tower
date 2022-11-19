@@ -1,16 +1,22 @@
 # Conning Tower	
 
 ![GitHub all releases](https://img.shields.io/github/downloads/AndyZhuAZ/conning_tower/total?label=Downloads&logo=github)
-![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/AndyZhuAZ/conning_tower?include_prereleases&label=per-release)
+![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/AndyZhuAZ/conning_tower?include_prereleases&label=Release)
 ![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?logo=Flutter&logoColor=white)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=zh-Hans&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=zh-Hant&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=en&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=ja&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
 
 Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
 
 舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。
 
 艦橋または司令塔はクロスプラットフォームプレイ対応の艦隊これくしょん専用ブラウザ。
+
+![IMG_B67B259FEB3F-1](https://user-images.githubusercontent.com/24852023/202851360-cd6c3879-d3be-4857-adef-faebbc4e3eea.jpeg)
 
 ## Installation
 
