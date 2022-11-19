@@ -3,6 +3,11 @@ on:
     tags:
       - "v*"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag'
+        required: true
+        default: ''
 
 name: Build and Release apk
 jobs:
@@ -26,5 +31,6 @@ jobs:
         uses: ncipollo/release-action@v1.11.2
         with:
           allowUpdates: true
+          tag: ${{ inputs.tag }}
           artifacts: "build/app/outputs/apk/release/*.apk"
           token: ${{ secrets.ACTIONS_TOKEN }}
