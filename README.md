@@ -1,7 +1,7 @@
 # Conning Tower	
 
 ![GitHub all releases](https://img.shields.io/github/downloads/AndyZhuAZ/conning_tower/total?label=Downloads&logo=github)
-![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/AndyZhuAZ/conning_tower?include_prereleases&label=per-release)
+![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/AndyZhuAZ/conning_tower?include_prereleases&label=Release)
 ![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?logo=Flutter&logoColor=white)
