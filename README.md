@@ -1,16 +1,34 @@
-# conning_tower
+# Conning Tower	
 
-司令塔/艦橋 aka Conning tower or Bridge is a cross-platform KanColle viewer
+![GitHub all releases](https://img.shields.io/github/downloads/AndyZhuAZ/conning_tower/total?label=Downloads&logo=github)
+![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/AndyZhuAZ/conning_tower?include_prereleases&label=per-release)
 
-## Getting Started
+![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
-This project is a starting point for a Flutter application.
+Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browsers.
 
-A few resources to get you started if this is your first Flutter project:
+舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+艦橋または司令塔はクロスプラットフォームプレイ対応の艦隊これくしょん専用ブラウザ。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## About
+
+Conning Tower is design to play KanColle on single app include assistant utilities.
+Now available on iOS and Android.
+Development on iOS16, other platform may have issues.
+Best platform suggest is iPad.
+Will support macOS, Windows and Linux in the future.
+
+## Why start this project
+
+Playing KanColle on the iOS is not easy.
+And KanColle player data on the Android cannot sync with desktop platform.
+And there is no one software to play KanColle on mobile platform and desktop platform.
+
+This project goal is use same UI and be able to synchronize player data on all platforms.
+
+## Thanks
+
+HTTP redirect solution for iOS15+ is from ![Twitter URL](https://img.shields.io/twitter/url?label=naayu1012&style=social&url=https%3A%2F%2Ftwitter.com%2Fnaayu1012)
