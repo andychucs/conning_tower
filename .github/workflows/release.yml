@@ -2,8 +2,9 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
-name: Test, Build and Release apk
+name: Build and Release apk
 jobs:
   build:
     name: Build APK
