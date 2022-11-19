@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'generated/l10n.dart';
@@ -21,6 +23,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late WebViewController __controller;
+  late bool needAutoRedirect = false;
 
   // const ConnTowerHomePage({Key? key}) : super(key: key);
 
@@ -30,28 +33,69 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     if (Platform.isAndroid) {
       WebView.platform = SurfaceAndroidWebView();
     }
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    if (Platform.isIOS) {
+      var iosInfo = await DeviceInfoPlugin().iosInfo;
+      var version = double.tryParse(iosInfo.systemVersion ?? "14.0");
+      if (version! >= 15.0) {
+        needAutoRedirect = true;
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       body: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: Text(S.of(context).AppName),
-          leading: IconButton(
-              onPressed: () async {
-                if (await __controller.canGoBack()) {
-                  await __controller.goBack();
-                }
-              },
-              icon: const Icon(CupertinoIcons.back)),
-          trailing: IconButton(
-              onPressed: () {
-                __controller.reload();
-              },
-              icon: const Icon(CupertinoIcons.refresh)),
+          leading: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                  onPressed: () async {
+                    HapticFeedback.heavyImpact();
+                    if (await __controller.canGoBack()) {
+                      await __controller.goBack();
+                    }
+                  },
+                  icon: const Icon(CupertinoIcons.back)),
+              IconButton(
+                  onPressed: () {
+                    HapticFeedback.heavyImpact();
+                    __controller.reload();
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.refresh,
+                    size: 26.0,
+                  )),
+            ],
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                  onPressed: () async {
+                    HapticFeedback.heavyImpact();
+                    __controller.loadUrl(gameUrl);
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.home,
+                    size: 30.0,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    HapticFeedback.heavyImpact();
+                    __controller.runJavascript(
+                        '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                  },
+                  icon: const Icon(CupertinoIcons.arrow_up_down_square))
+            ],
+          ),
         ),
         child: CupertinoPageScaffold(
             child: SafeArea(
@@ -88,8 +132,9 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     onPageFinished: (String url) {
                       print('Page finished loading: $url');
                       setState(() {
-                        if (url.endsWith(gameUrl)) {
+                        if (url.endsWith(gameUrl) && needAutoRedirect) {
                           print('is game origin url');
+                          HapticFeedback.lightImpact();
                           __controller.runJavascript(
                               '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                         }
