@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
 import 'generated/l10n.dart';
 
 const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
@@ -95,21 +94,26 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     destinations: <NavigationRailDestination>[
                       NavigationRailDestination(
                         icon: const Icon(CupertinoIcons.home),
-                        selectedIcon: const Icon(CupertinoIcons.home, color: Colors.blue),
+                        selectedIcon:
+                            const Icon(CupertinoIcons.home, color: Colors.blue),
                         label: Text(S.of(context).AppHome),
                       ),
-                      NavigationRailDestination(icon: const Icon(CupertinoIcons.fullscreen), label: Text(S.of(context).AppResize)),
+                      NavigationRailDestination(
+                          icon: const Icon(CupertinoIcons.fullscreen),
+                          label: Text(S.of(context).AppResize)),
                       NavigationRailDestination(
                         icon: const Icon(CupertinoIcons.arrow_up_down_square,
                             color: Colors.black),
                         label: Text(S.of(context).AppRedirect),
                       ),
                       NavigationRailDestination(
-                        icon: const Icon(CupertinoIcons.back, color: Colors.black),
+                        icon: const Icon(CupertinoIcons.back,
+                            color: Colors.black),
                         label: Text(S.of(context).AppBack),
                       ),
                       NavigationRailDestination(
-                        icon: const Icon(CupertinoIcons.refresh, color: Colors.red),
+                        icon: const Icon(CupertinoIcons.refresh,
+                            color: Colors.red),
                         label: Text(S.of(context).AppRefresh),
                       ),
                     ],
