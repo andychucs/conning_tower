@@ -56,7 +56,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
         1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.white, // For Debug
         body: SafeArea(
           bottom: false,
           child: Row(
@@ -67,7 +67,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                 child: IntrinsicHeight(
                   child: NavigationRail(
                     labelType: NavigationRailLabelType.all,
-                    backgroundColor: Colors.black87, // For Debug
+                    backgroundColor: Colors.white, // For Debug
                     selectedIndex: 0,
                     groupAlignment: 0,
                     onDestinationSelected: (int index) {
@@ -101,11 +101,11 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                       NavigationRailDestination(icon: const Icon(CupertinoIcons.fullscreen), label: Text(S.of(context).AppResize)),
                       NavigationRailDestination(
                         icon: const Icon(CupertinoIcons.arrow_up_down_square,
-                            color: Colors.white),
+                            color: Colors.black),
                         label: Text(S.of(context).AppRedirect),
                       ),
                       NavigationRailDestination(
-                        icon: const Icon(CupertinoIcons.back, color: Colors.white),
+                        icon: const Icon(CupertinoIcons.back, color: Colors.black),
                         label: Text(S.of(context).AppBack),
                       ),
                       NavigationRailDestination(
