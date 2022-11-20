@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+
 import 'generated/l10n.dart';
 
-const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+
+//const String gameUrl = 'www.google.com/';
+ const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -49,103 +52,110 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final kancolleHeigth = 720;
+    final deviceDpi = MediaQuery.of(context).devicePixelRatio * 160;
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
-      body: CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text(S.of(context).AppName),
-          leading: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                  onPressed: () async {
+        backgroundColor: Colors.black87,
+        body: SafeArea(
+          child: Row(
+            children: <Widget>[
+              NavigationRail(
+                backgroundColor: Colors.black87,
+                selectedIndex: 0,
+                groupAlignment: 0,
+                onDestinationSelected: (int index) {
+                  if (index == 0) {
                     HapticFeedback.heavyImpact();
-                    if (await __controller.canGoBack()) {
-                      await __controller.goBack();
-                    }
-                  },
-                  icon: const Icon(CupertinoIcons.back)),
-              IconButton(
-                  onPressed: () {
-                    HapticFeedback.heavyImpact();
-                    __controller.reload();
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.refresh,
-                    size: 26.0,
-                  )),
-            ],
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                  onPressed: () async {
-                    HapticFeedback.heavyImpact();
-                    __controller.loadUrl(gameUrl);
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.home,
-                    size: 30.0,
-                  )),
-              IconButton(
-                  onPressed: () {
+                    __controller.loadUrl('https://' + gameUrl);
+                  } else if (index == 1) {
                     HapticFeedback.heavyImpact();
                     __controller.runJavascript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                    __controller.runJavascript(
+                        '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+
+                    __controller.runJavascript(
+                        '''document.body.style.backgroundColor = "black";''');
+
+                    double resizeScale = 1- (screenSize.height/(kancolleHeigth*(deviceDpi/160)));
+                    __controller.runJavascript(
+                        '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+
+                    __controller.runJavascript(
+                        '''document.getElementById("htmlWrap").style.transform = "scale(0.85,0.85)";''');
+                  } else if (index == 2) {
+                    HapticFeedback.heavyImpact();
+                    __controller.goBack();
+                  } else if (index == 3) {
+                    HapticFeedback.heavyImpact();
+                    __controller.reload();
+                  }
+                },
+                destinations: const <NavigationRailDestination>[
+                  NavigationRailDestination(
+                    icon: Icon(CupertinoIcons.home),
+                    selectedIcon: Icon(CupertinoIcons.home, color: Colors.blue),
+                    label: Text('Home'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(CupertinoIcons.arrow_up_down_square,
+                        color: Colors.white),
+                    label: Text('Auto'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(CupertinoIcons.back, color: Colors.white),
+                    label: Text('Back'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(CupertinoIcons.refresh, color: Colors.red),
+                    label: Text('Refresh'),
+                  ),
+                ],
+              ),
+              const VerticalDivider(thickness: 1, width: 1),
+              // This is the main content.
+              Expanded(
+                child: WebView(
+                  zoomEnabled: true,
+                  initialUrl: 'http://$gameUrl',
+                  userAgent:
+                      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (WebViewController webViewController) {
+                    _controller.complete(__controller = webViewController);
                   },
-                  icon: const Icon(CupertinoIcons.arrow_up_down_square))
+                  onProgress: (int progress) {
+                    print('WebView is loading (progress : $progress%)');
+                  },
+                  javascriptChannels: <JavascriptChannel>{
+                    _toasterJavascriptChannel(context),
+                  },
+                  navigationDelegate: (NavigationRequest request) {
+                    print('allowing navigation to $request');
+                    return NavigationDecision.navigate;
+                  },
+                  onPageStarted: (String url) {
+                    print('Page started loading: $url');
+                  },
+                  onPageFinished: (String url) {
+                    print('Page finished loading: $url');
+                    setState(() {
+                      if (url.endsWith(gameUrl) && needAutoRedirect) {
+                        print('is game origin url');
+                        HapticFeedback.lightImpact();
+                        __controller.runJavascript(
+                            '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                      }
+                    });
+                  },
+                  gestureNavigationEnabled: true,
+                  backgroundColor: CupertinoColors.extraLightBackgroundGray,
+                ),
+              ),
             ],
           ),
-        ),
-        child: CupertinoPageScaffold(
-            child: SafeArea(
-                // left: false,
-                bottom: false,
-                // right: false,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal:
-                          screenSize.width / screenSize.height > 5.0 / 3.0
-                              ? screenSize.width / 9.8
-                              : 0),
-                  child: WebView(
-                    initialUrl: 'http://$gameUrl',
-                    userAgent:
-                        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
-                    javascriptMode: JavascriptMode.unrestricted,
-                    onWebViewCreated: (WebViewController webViewController) {
-                      _controller.complete(__controller = webViewController);
-                    },
-                    onProgress: (int progress) {
-                      print('WebView is loading (progress : $progress%)');
-                    },
-                    javascriptChannels: <JavascriptChannel>{
-                      _toasterJavascriptChannel(context),
-                    },
-                    navigationDelegate: (NavigationRequest request) {
-                      print('allowing navigation to $request');
-                      return NavigationDecision.navigate;
-                    },
-                    onPageStarted: (String url) {
-                      print('Page started loading: $url');
-                    },
-                    onPageFinished: (String url) {
-                      print('Page finished loading: $url');
-                      setState(() {
-                        if (url.endsWith(gameUrl) && needAutoRedirect) {
-                          print('is game origin url');
-                          HapticFeedback.lightImpact();
-                          __controller.runJavascript(
-                              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                        }
-                      });
-                    },
-                    gestureNavigationEnabled: true,
-                    backgroundColor: CupertinoColors.extraLightBackgroundGray,
-                  ),
-                ))),
-      ),
-    );
+        ));
   }
 }
 
