@@ -58,6 +58,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     return Scaffold(
         backgroundColor: Colors.black87,
         body: SafeArea(
+          bottom: false,
           child: Row(
             children: <Widget>[
               NavigationRail(
