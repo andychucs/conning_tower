@@ -50,11 +50,61 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Conning Tower`
+  /// `Back`
+  String get AppBack {
+    return Intl.message(
+      'Back',
+      name: 'AppBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get AppHome {
+    return Intl.message(
+      'Home',
+      name: 'AppHome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bridge`
   String get AppName {
     return Intl.message(
-      'Conning Tower',
+      'Bridge',
       name: 'AppName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HTTP Redirect`
+  String get AppRedirect {
+    return Intl.message(
+      'HTTP Redirect',
+      name: 'AppRedirect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh`
+  String get AppRefresh {
+    return Intl.message(
+      'Refresh',
+      name: 'AppRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resize`
+  String get AppResize {
+    return Intl.message(
+      'Resize',
+      name: 'AppResize',
       desc: '',
       args: [],
     );

@@ -1,3 +1,15 @@
 {
-  "AppName": "艦橋"
+  "@@locale": "ja",
+  "AppBack": "戻る",
+  "@AppBack": {},
+  "AppHome": "ホーム",
+  "@AppHome": {},
+  "AppName": "艦橋",
+  "@AppName": {},
+  "AppRedirect": "HTTP リダイレクト",
+  "@AppRedirect": {},
+  "AppRefresh": "リフレッシュ",
+  "@AppRefresh": {},
+  "AppResize": "画面変換",
+  "@AppResize": {}
 }

@@ -21,6 +21,12 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"AppName": MessageLookupByLibrary.simpleMessage("艦橋")};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
+        "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
+        "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
+        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP リダイレクト"),
+        "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
+        "AppResize": MessageLookupByLibrary.simpleMessage("画面変換")
+      };
 }
