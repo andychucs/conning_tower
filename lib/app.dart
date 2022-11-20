@@ -51,7 +51,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final deviceDpi = MediaQuery.of(context).devicePixelRatio * 160;
-    final kancolleHeigth = 720;
+    const kancolleHeigth = 720;
     double resizeScale =
         1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
@@ -61,54 +61,60 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
           bottom: false,
           child: Row(
             children: <Widget>[
-              NavigationRail(
-                backgroundColor: Colors.black87,
-                selectedIndex: 0,
-                groupAlignment: 0,
-                onDestinationSelected: (int index) {
-                  if (index == 0) {
-                    HapticFeedback.heavyImpact();
-                    __controller.loadUrl('https://' + gameUrl);
-                  } else if (index == 1) {
-                    HapticFeedback.heavyImpact();
-                    __controller.runJavascript(
-                        '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                    __controller.runJavascript(
-                        '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+              SingleChildScrollView(
+                controller: ScrollController(),
+                scrollDirection: Axis.vertical,
+                child: IntrinsicHeight(
+                  child: NavigationRail(
+                    labelType: NavigationRailLabelType.all,
+                    backgroundColor: Colors.black87, // For Debug
+                    selectedIndex: 0,
+                    groupAlignment: 0,
+                    onDestinationSelected: (int index) {
+                      HapticFeedback.heavyImpact();
+                      if (index == 0) {
+                        __controller.loadUrl('https://$gameUrl');
+                      } else if (index == 1) {
+                        __controller.runJavascript(
+                            '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
 
-                    __controller.runJavascript(
-                        '''document.body.style.backgroundColor = "black";''');
+                        __controller.runJavascript(
+                            '''document.body.style.backgroundColor = "black";''');
 
-                    __controller.runJavascript(//Scale to correct size
-                        '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
-                  } else if (index == 2) {
-                    HapticFeedback.heavyImpact();
-                    __controller.goBack();
-                  } else if (index == 3) {
-                    HapticFeedback.heavyImpact();
-                    __controller.reload();
-                  }
-                },
-                destinations: const <NavigationRailDestination>[
-                  NavigationRailDestination(
-                    icon: Icon(CupertinoIcons.home),
-                    selectedIcon: Icon(CupertinoIcons.home, color: Colors.blue),
-                    label: Text('Home'),
+                        __controller.runJavascript(//Scale to correct size
+                            '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                      } else if (index == 2) {
+                        __controller.runJavascript(
+                            '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                      } else if (index == 3) {
+                        __controller.goBack();
+                      } else if (index == 4) {
+                        __controller.reload();
+                      }
+                    },
+                    destinations: <NavigationRailDestination>[
+                      NavigationRailDestination(
+                        icon: const Icon(CupertinoIcons.home),
+                        selectedIcon: const Icon(CupertinoIcons.home, color: Colors.blue),
+                        label: Text(S.of(context).AppHome),
+                      ),
+                      NavigationRailDestination(icon: const Icon(CupertinoIcons.fullscreen), label: Text(S.of(context).AppResize)),
+                      NavigationRailDestination(
+                        icon: const Icon(CupertinoIcons.arrow_up_down_square,
+                            color: Colors.white),
+                        label: Text(S.of(context).AppRedirect),
+                      ),
+                      NavigationRailDestination(
+                        icon: const Icon(CupertinoIcons.back, color: Colors.white),
+                        label: Text(S.of(context).AppBack),
+                      ),
+                      NavigationRailDestination(
+                        icon: const Icon(CupertinoIcons.refresh, color: Colors.red),
+                        label: Text(S.of(context).AppRefresh),
+                      ),
+                    ],
                   ),
-                  NavigationRailDestination(
-                    icon: Icon(CupertinoIcons.arrow_up_down_square,
-                        color: Colors.white),
-                    label: Text('Auto'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(CupertinoIcons.back, color: Colors.white),
-                    label: Text('Back'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(CupertinoIcons.refresh, color: Colors.red),
-                    label: Text('Refresh'),
-                  ),
-                ],
+                ),
               ),
               const VerticalDivider(thickness: 1, width: 1),
               // This is the main content.
