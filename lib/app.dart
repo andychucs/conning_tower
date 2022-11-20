@@ -10,9 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'generated/l10n.dart';
 
-
-//const String gameUrl = 'www.google.com/';
- const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -52,8 +50,10 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final kancolleHeigth = 720;
     final deviceDpi = MediaQuery.of(context).devicePixelRatio * 160;
+    final kancolleHeigth = 720;
+    double resizeScale =
+        1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
         backgroundColor: Colors.black87,
@@ -78,12 +78,8 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     __controller.runJavascript(
                         '''document.body.style.backgroundColor = "black";''');
 
-                    double resizeScale = 1- (screenSize.height/(kancolleHeigth*(deviceDpi/160)));
-                    __controller.runJavascript(
+                    __controller.runJavascript(//Scale to correct size
                         '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
-
-                    __controller.runJavascript(
-                        '''document.getElementById("htmlWrap").style.transform = "scale(0.85,0.85)";''');
                   } else if (index == 2) {
                     HapticFeedback.heavyImpact();
                     __controller.goBack();
