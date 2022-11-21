@@ -9,7 +9,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'generated/l10n.dart';
 
-const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+//const String gameUrl = 'www.youtube.com/'; // For Debug
+ const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -53,6 +54,11 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     const kancolleHeigth = 720;
     double resizeScale =
         1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
+
+    if (resizeScale <= 0) { //if screen size bigger then kancolle iframe size
+      resizeScale++;
+    }
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
         backgroundColor: Colors.white, // For Debug
@@ -79,9 +85,13 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
 
                         __controller.runJavascript(
                             '''document.body.style.backgroundColor = "black";''');
-
-                        __controller.runJavascript(//Scale to correct size
-                            '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                        if (Platform.isIOS) {
+                          __controller.runJavascript(//Scale to correct size(ios webkit)
+                              '''document.getElementById("htmlWrap").style.webkitTransform: = "scale($resizeScale,$resizeScale)";''');
+                        } else {
+                          __controller.runJavascript(//Scale to correct size
+                              '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                        }
                       } else if (index == 2) {
                         __controller.runJavascript(
                             '''window.open("http:"+gadgetInfo.URL,'_blank');''');
