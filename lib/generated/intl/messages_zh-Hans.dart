@@ -23,9 +23,12 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "AppHome": MessageLookupByLibrary.simpleMessage("主页"),
         "AppName": MessageLookupByLibrary.simpleMessage("舰桥"),
-        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP重载"),
+        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP跳转"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("刷新"),
-        "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸")
+        "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸"),
+        "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
+        "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动")
       };
 }

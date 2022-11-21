@@ -11,5 +11,9 @@
   "AppRefresh": "刷新",
   "@AppRefresh": {},
   "AppResize": "调整尺寸",
-  "@AppResize": {}
+  "@AppResize": {},
+  "AppScrollDown": "向下滚动",
+  "@AppScrollDown": {},
+  "AppScrollUp": "向上滚动",
+  "@AppScrollUp": {}
 }

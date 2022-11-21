@@ -10,7 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'generated/l10n.dart';
 
 //const String gameUrl = 'www.youtube.com/'; // For Debug
- const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -55,7 +55,8 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     double resizeScale =
         1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
 
-    if (resizeScale <= 0) { //if screen size bigger then kancolle iframe size
+    if (resizeScale <= 0) {
+      //if screen size bigger then kancolle iframe size
       resizeScale++;
     }
 
@@ -80,6 +81,10 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                       if (index == 0) {
                         __controller.loadUrl('https://$gameUrl');
                       } else if (index == 1) {
+                        __controller.scrollBy(0, -1);
+                      } else if (index == 2) {
+                        __controller.scrollBy(0, 1);
+                      } else if (index == 3) {
                         __controller.runJavascript(
                             '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
 
@@ -92,12 +97,12 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                           __controller.runJavascript(//Scale to correct size
                               '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
                         }
-                      } else if (index == 2) {
+                      } else if (index == 4) {
                         __controller.runJavascript(
                             '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                      } else if (index == 3) {
+                      } else if (index == 5) {
                         __controller.goBack();
-                      } else if (index == 4) {
+                      } else if (index == 6) {
                         __controller.reload();
                       }
                     },
@@ -108,6 +113,12 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                             const Icon(CupertinoIcons.home, color: Colors.blue),
                         label: Text(S.of(context).AppHome),
                       ),
+                      NavigationRailDestination(
+                          icon: const Icon(CupertinoIcons.up_arrow),
+                          label: Text(S.of(context).AppScrollUp)),
+                      NavigationRailDestination(
+                          icon: const Icon(CupertinoIcons.down_arrow),
+                          label: Text(S.of(context).AppScrollDown)),
                       NavigationRailDestination(
                           icon: const Icon(CupertinoIcons.fullscreen),
                           label: Text(S.of(context).AppResize)),

@@ -11,5 +11,9 @@
   "AppRefresh": "リフレッシュ",
   "@AppRefresh": {},
   "AppResize": "画面変換",
-  "@AppResize": {}
+  "@AppResize": {},
+  "AppScrollDown": "下へスクロール",
+  "@AppScrollDown": {},
+  "AppScrollUp": "上へスクロール",
+  "@AppScrollUp": {}
 }

@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppName": MessageLookupByLibrary.simpleMessage("Bridge"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP Redirect"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
-        "AppResize": MessageLookupByLibrary.simpleMessage("Resize")
+        "AppResize": MessageLookupByLibrary.simpleMessage("Resize"),
+        "AppScrollDown": MessageLookupByLibrary.simpleMessage("Scroll Down"),
+        "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up")
       };
 }

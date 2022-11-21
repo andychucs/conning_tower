@@ -109,6 +109,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Scroll Down`
+  String get AppScrollDown {
+    return Intl.message(
+      'Scroll Down',
+      name: 'AppScrollDown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scroll Up`
+  String get AppScrollUp {
+    return Intl.message(
+      'Scroll Up',
+      name: 'AppScrollUp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

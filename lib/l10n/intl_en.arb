@@ -11,5 +11,9 @@
   "AppRefresh": "Refresh",
   "@AppRefresh": {},
   "AppResize": "Resize",
-  "@AppResize": {}
+  "@AppResize": {},
+  "AppScrollDown": "Scroll Down",
+  "@AppScrollDown": {},
+  "AppScrollUp": "Scroll Up",
+  "@AppScrollUp": {}
 }
