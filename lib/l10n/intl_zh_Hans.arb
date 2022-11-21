@@ -1,3 +1,19 @@
 {
-  "AppName": "舰桥"
+  "@@locale": "zh-Hans",
+  "AppBack": "返回",
+  "@AppBack": {},
+  "AppHome": "主页",
+  "@AppHome": {},
+  "AppName": "舰桥",
+  "@AppName": {},
+  "AppRedirect": "HTTP跳转",
+  "@AppRedirect": {},
+  "AppRefresh": "刷新",
+  "@AppRefresh": {},
+  "AppResize": "调整尺寸",
+  "@AppResize": {},
+  "AppScrollDown": "向下滚动",
+  "@AppScrollDown": {},
+  "AppScrollUp": "向上滚动",
+  "@AppScrollUp": {}
 }

@@ -1,3 +1,19 @@
 {
-  "AppName": "Conning Tower"
+  "@@locale": "en",
+  "AppBack": "Back",
+  "@AppBack": {},
+  "AppHome": "Home",
+  "@AppHome": {},
+  "AppName": "Bridge",
+  "@AppName": {},
+  "AppRedirect": "HTTP Redirect",
+  "@AppRedirect": {},
+  "AppRefresh": "Refresh",
+  "@AppRefresh": {},
+  "AppResize": "Resize",
+  "@AppResize": {},
+  "AppScrollDown": "Scroll Down",
+  "@AppScrollDown": {},
+  "AppScrollUp": "Scroll Up",
+  "@AppScrollUp": {}
 }
