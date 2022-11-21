@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP リダイレクト"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
         "AppResize": MessageLookupByLibrary.simpleMessage("画面変換"),
-        "AppScrollDown": MessageLookupByLibrary.simpleMessage("下へスクロール"),
-        "AppScrollUp": MessageLookupByLibrary.simpleMessage("上へスクロール")
+        "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
+        "AppScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール")
       };
 }
