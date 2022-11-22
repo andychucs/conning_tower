@@ -86,7 +86,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                         __controller.scrollBy(0, 1);
                       } else if (index == 3) {
                         __controller.runJavascript(
-                            '''document.getElementById("htmlWrap").style.display = "";''');
+                            '''document.getElementById("spacing_top").style.display = "none";''');
                         __controller.runJavascript(
                             '''document.getElementById("sectionWrap").style.display = "none";''');
                         __controller.runJavascript(
