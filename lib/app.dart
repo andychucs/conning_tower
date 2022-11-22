@@ -94,8 +94,10 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                         __controller.runJavascript(
                             '''document.body.style.backgroundColor = "black";''');
                         if (Platform.isIOS) {
+                          print('''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
                           __controller.runJavascript(//Scale to correct size(ios webkit)
-                              '''document.getElementById("htmlWrap").style.webkitTransform: = "scale($resizeScale,$resizeScale)";''');
+                              '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+                          //FIXME: get "scale(0.4208333333333333,0.4208333333333333)" on iPad Air 3, make screen small, scale(1) is ok
                         } else {
                           __controller.runJavascript(//Scale to correct size
                               '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
