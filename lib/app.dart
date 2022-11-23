@@ -52,8 +52,14 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     final screenSize = MediaQuery.of(context).size;
     final deviceDpi = MediaQuery.of(context).devicePixelRatio * 160;
     const kancolleHeigth = 720;
-    double resizeScale =
-        1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
+    double resizeScale = 1;
+    if (Platform.isIOS) {
+      resizeScale =
+          1 - (screenSize.width / (kancolleHeigth * (deviceDpi / 160)));
+    } else {
+      resizeScale =
+          1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
+    }
 
     if (resizeScale <= 0) {
       //if screen size bigger then kancolle iframe size
@@ -94,8 +100,10 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                         __controller.runJavascript(
                             '''document.body.style.backgroundColor = "black";''');
                         if (Platform.isIOS) {
-                          print('''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                          __controller.runJavascript(//Scale to correct size(ios webkit)
+                          print(
+                              '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+                          __controller.runJavascript(
+                              //Scale to correct size(ios webkit)
                               '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
                           //FIXME: get "scale(0.4208333333333333,0.4208333333333333)" on iPad Air 3, make screen small, scale(1) is ok
                         } else {
