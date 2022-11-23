@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'generated/l10n.dart';
 
-//const String gameUrl = 'www.youtube.com/'; // For Debug
+//const String gameUrl = 'google.com/'; // For Debug
 const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
@@ -47,17 +48,27 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     }
   }
 
+  bool inKancolleWindow = false;
+  bool autoAdjusted = false;
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final deviceDpi = MediaQuery.of(context).devicePixelRatio * 160;
+    var webviewHeigth;
+    var webviewWidth;
     const kancolleHeigth = 720;
-    double resizeScale =
-        1 - (screenSize.height / (kancolleHeigth * (deviceDpi / 160)));
-
-    if (resizeScale <= 0) {
-      //if screen size bigger then kancolle iframe size
-      resizeScale++;
+    const kancolleWidth = 1200;
+    const kancollePixel = kancolleHeigth * kancolleWidth;
+    getResizeScale(double heigth, double width) {
+      var scale = (heigth * width) / kancollePixel;
+      if (scale < 0.5) {
+        scale = 1 - scale;
+        return sqrt(scale);
+      } else {
+        while (kancolleWidth * scale > webviewWidth ||
+            kancolleHeigth * scale > webviewHeigth) {
+          scale = scale - 0.05;
+        }
+        return scale;
+      }
     }
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
@@ -76,7 +87,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     backgroundColor: Colors.white, // For Debug
                     selectedIndex: 0,
                     groupAlignment: 0,
-                    onDestinationSelected: (int index) {
+                    onDestinationSelected: (int index) async {
                       HapticFeedback.heavyImpact();
                       if (index == 0) {
                         __controller.loadUrl('https://$gameUrl');
@@ -85,26 +96,55 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                       } else if (index == 2) {
                         __controller.scrollBy(0, 1);
                       } else if (index == 3) {
-                        __controller.runJavascript(
-                            '''document.getElementById("spacing_top").style.display = "none";''');
-                        __controller.runJavascript(
-                            '''document.getElementById("sectionWrap").style.display = "none";''');
-                        __controller.runJavascript(
-                            '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-                        __controller.runJavascript(
-                            '''document.body.style.backgroundColor = "black";''');
-                        if (Platform.isIOS) {
-                          print('''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                          __controller.runJavascript(//Scale to correct size(ios webkit)
-                              '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                          //FIXME: get "scale(0.4208333333333333,0.4208333333333333)" on iPad Air 3, make screen small, scale(1) is ok
-                        } else {
-                          __controller.runJavascript(//Scale to correct size
-                              '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                        if (inKancolleWindow && !autoAdjusted) {
+                          __controller.runJavascript(
+                              '''document.getElementById("spacing_top").style.display = "none";''');
+                          __controller.runJavascript(
+                              '''document.getElementById("sectionWrap").style.display = "none";''');
+                          __controller.runJavascript(
+                              '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+                          __controller.runJavascript(
+                              '''document.body.style.backgroundColor = "black";''');
+                          __controller
+                              .runJavascriptReturningResult('''window.innerHeight;''').then(
+                                  (value) =>
+                                      webviewHeigth = double.parse(value));
+                          __controller
+                              .runJavascriptReturningResult('''window.innerWidth;''').then(
+                                  (value) =>
+                                      webviewWidth = double.parse(value));
+                          var resizeScale = 1.0;
+                          if (webviewHeigth != null && webviewWidth != null) {
+                            resizeScale =
+                                getResizeScale(webviewHeigth, webviewWidth);
+                            autoAdjusted = true;
+                          }
+                          print(webviewHeigth);
+                          print(webviewWidth);
+                          print(resizeScale);
+                          if (Platform.isIOS) {
+                            __controller.runJavascript(
+                                //Scale to correct size(ios webkit)
+                                '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+                          } else {
+                            __controller.runJavascript(//Scale to correct size
+                                '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                          }
                         }
+
+                        print("autoAdjusted: " + "$autoAdjusted");
                       } else if (index == 4) {
-                        __controller.runJavascript(
-                            '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                        if (!inKancolleWindow) {
+                          String? currentUrl = await __controller.currentUrl();
+                          //print(currentUrl);
+                          if ((currentUrl ?? "").endsWith(gameUrl)) { // May be HTTPS or HTTP
+                            inKancolleWindow = true;
+
+                            __controller.runJavascript(
+                                '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                          }
+                        }
+                        print("inKancolleWindow: " + "$inKancolleWindow");
                       } else if (index == 5) {
                         __controller.goBack();
                       } else if (index == 6) {
@@ -170,6 +210,15 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                   },
                   onPageStarted: (String url) {
                     print('Page started loading: $url');
+                    setState(() {
+                      if (url.endsWith(gameUrl)) {
+                        inKancolleWindow = false;
+                        autoAdjusted = false;
+                      } else if(url.startsWith("http://osapi.dmm.com")){
+                        inKancolleWindow = true;
+                        autoAdjusted = false;
+                      }
+                    });
                   },
                   onPageFinished: (String url) {
                     print('Page finished loading: $url');
