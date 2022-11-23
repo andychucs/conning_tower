@@ -64,8 +64,8 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
         return sqrt(scale);
       } else {
         while (kancolleWidth * scale > webviewWidth ||
-            kancolleHeigth * scale > webviewHeigth ) {
-          scale = scale-0.05;
+            kancolleHeigth * scale > webviewHeigth) {
+          scale = scale - 0.05;
         }
         return scale;
       }
@@ -123,12 +123,9 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                           print(webviewWidth);
                           print(resizeScale);
                           if (Platform.isIOS) {
-                            print(
-                                '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
                             __controller.runJavascript(
                                 //Scale to correct size(ios webkit)
                                 '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                            //FIXME: get "scale(0.4208333333333333,0.4208333333333333)" on iPad Air 3, make screen small, scale(1) is ok
                           } else {
                             __controller.runJavascript(//Scale to correct size
                                 '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
@@ -140,8 +137,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                         if (!inKancolleWindow) {
                           String? currentUrl = await __controller.currentUrl();
                           //print(currentUrl);
-                          if (currentUrl ==
-                              "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/") {
+                          if ((currentUrl ?? "").endsWith(gameUrl)) { // May be HTTPS or HTTP
                             inKancolleWindow = true;
 
                             __controller.runJavascript(
@@ -214,6 +210,15 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                   },
                   onPageStarted: (String url) {
                     print('Page started loading: $url');
+                    setState(() {
+                      if (url.endsWith(gameUrl)) {
+                        inKancolleWindow = false;
+                        autoAdjusted = false;
+                      } else if(url.startsWith("http://osapi.dmm.com")){
+                        inKancolleWindow = true;
+                        autoAdjusted = false;
+                      }
+                    });
                   },
                   onPageFinished: (String url) {
                     print('Page finished loading: $url');
