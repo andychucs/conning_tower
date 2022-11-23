@@ -86,13 +86,18 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                         __controller.scrollBy(0, 1);
                       } else if (index == 3) {
                         __controller.runJavascript(
+                            '''document.getElementById("spacing_top").style.display = "none";''');
+                        __controller.runJavascript(
+                            '''document.getElementById("sectionWrap").style.display = "none";''');
+                        __controller.runJavascript(
                             '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-
                         __controller.runJavascript(
                             '''document.body.style.backgroundColor = "black";''');
                         if (Platform.isIOS) {
+                          print('''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
                           __controller.runJavascript(//Scale to correct size(ios webkit)
-                              '''document.getElementById("htmlWrap").style.webkitTransform: = "scale($resizeScale,$resizeScale)";''');
+                              '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+                          //FIXME: get "scale(0.4208333333333333,0.4208333333333333)" on iPad Air 3, make screen small, scale(1) is ok
                         } else {
                           __controller.runJavascript(//Scale to correct size
                               '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
