@@ -64,8 +64,8 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
         return sqrt(scale);
       } else {
         while (kancolleWidth * scale > webviewWidth ||
-            kancolleHeigth * scale > webviewHeigth) {
-          scale = sqrt(scale);
+            kancolleHeigth * scale > webviewHeigth ) {
+          scale = scale-0.05;
         }
         return scale;
       }
