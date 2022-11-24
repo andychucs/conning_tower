@@ -13,6 +13,8 @@ import 'generated/l10n.dart';
 
 //const String gameUrl = 'screenresolutiontest.com/'; // For Debug
 const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+const String safariUA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15";
+const String chromeUA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36";
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -27,6 +29,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
       Completer<WebViewController>();
   late WebViewController __controller;
   late bool needAutoRedirect = false;
+  late String defaultUA;
 
   // const ConnTowerHomePage({Key? key}) : super(key: key);
 
@@ -34,7 +37,11 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   void initState() {
     super.initState();
     if (Platform.isAndroid) {
+      defaultUA = chromeUA;
       WebView.platform = SurfaceAndroidWebView();
+    }
+    if (Platform.isIOS) {
+      defaultUA = safariUA;
     }
     initPlatformState();
   }
@@ -238,8 +245,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                   child: WebView(
                     zoomEnabled: false,
                     initialUrl: 'http://$gameUrl',
-                    userAgent:
-                        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
+                    userAgent: defaultUA,
                     javascriptMode: JavascriptMode.unrestricted,
                     onWebViewCreated: (WebViewController webViewController) {
                       _controller.complete(__controller = webViewController);
@@ -258,37 +264,40 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                           Fluttertoast.showToast(msg: "Game load completed");
                           loadCompleted = true;
                           HapticFeedback.mediumImpact();
-                          __controller.runJavascript(
-                              '''document.getElementById("spacing_top").style.display = "none";''');
-                          __controller.runJavascript(
-                              '''document.getElementById("sectionWrap").style.display = "none";''');
-                          __controller.runJavascript(
-                              '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-                          __controller.runJavascript(
-                              '''document.body.style.backgroundColor = "black";''');
-                          __controller
-                              .runJavascriptReturningResult('''window.innerHeight;''').then(
-                                  (value) =>
-                                      webviewHeigth = double.parse(value));
-                          __controller
-                              .runJavascriptReturningResult('''window.innerWidth;''').then(
-                                  (value) =>
-                                      webviewWidth = double.parse(value));
-                          var resizeScale = 1.0;
-                          if (webviewHeigth != null && webviewWidth != null) {
-                            resizeScale =
-                                getResizeScale(webviewHeigth, webviewWidth);
-                            autoAdjusted = true;
-                          }
-                          if (Platform.isIOS) {
+
+                          if (!autoAdjusted) {
                             __controller.runJavascript(
-                                //Scale to correct size(ios webkit)
-                                '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                          } else {
-                            __controller.runJavascript(//Scale to correct size
-                                '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                                '''document.getElementById("spacing_top").style.display = "none";''');
+                            __controller.runJavascript(
+                                '''document.getElementById("sectionWrap").style.display = "none";''');
+                            __controller.runJavascript(
+                                '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+                            __controller.runJavascript(
+                                '''document.body.style.backgroundColor = "black";''');
+                            __controller
+                                .runJavascriptReturningResult('''window.innerHeight;''').then(
+                                    (value) =>
+                                        webviewHeigth = double.parse(value));
+                            __controller
+                                .runJavascriptReturningResult('''window.innerWidth;''').then(
+                                    (value) =>
+                                        webviewWidth = double.parse(value));
+                            var resizeScale = 1.0;
+                            if (webviewHeigth != null && webviewWidth != null) {
+                              resizeScale =
+                                  getResizeScale(webviewHeigth, webviewWidth);
+                              autoAdjusted = true;
+                            }
+                            if (Platform.isIOS) {
+                              __controller.runJavascript(
+                                  //Scale to correct size(ios webkit)
+                                  '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+                            } else {
+                              __controller.runJavascript(//Scale to correct size
+                                  '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                            }
+                            Fluttertoast.showToast(msg: "Auto adjusted!");
                           }
-                          Fluttertoast.showToast(msg: "Auto adjusted!");
                         }
                       });
                       return NavigationDecision.navigate;
