@@ -103,7 +103,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     onDestinationSelected: (int index) async {
                       HapticFeedback.heavyImpact();
                       if (index == 0) {
-                        __controller.loadUrl('https://$gameUrl');
+                        __controller.loadUrl('http://$gameUrl');
                       } else if (index == 1) {
                         __controller.scrollBy(0, -1);
                       } else if (index == 2) {
