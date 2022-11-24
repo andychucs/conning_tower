@@ -7,10 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'generated/l10n.dart';
 
-//const String gameUrl = 'google.com/'; // For Debug
+//const String gameUrl = 'screenresolutiontest.com/'; // For Debug
 const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
 
 class ConnTowerApp extends StatefulWidget {
@@ -54,6 +55,17 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   Widget build(BuildContext context) {
     var webviewHeigth;
     var webviewWidth;
+    var deviceHeigth;
+    var deviceWidth;
+
+    if (Platform.isIOS) {
+      deviceHeigth = MediaQuery.of(context).size.width;
+      deviceWidth = MediaQuery.of(context).size.height;
+    } else {
+      deviceHeigth = MediaQuery.of(context).size.height;
+      deviceWidth = MediaQuery.of(context).size.width;
+    }
+
     const kancolleHeigth = 720;
     const kancolleWidth = 1200;
     const kancollePixel = kancolleHeigth * kancolleWidth;
@@ -73,7 +85,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
-        backgroundColor: Colors.white, // For Debug
+        backgroundColor: Colors.black, // For Debug
         body: SafeArea(
           bottom: false,
           child: Row(
@@ -84,7 +96,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                 child: IntrinsicHeight(
                   child: NavigationRail(
                     labelType: NavigationRailLabelType.all,
-                    backgroundColor: Colors.white, // For Debug
+                    backgroundColor: Colors.black, // For Debug
                     selectedIndex: 0,
                     groupAlignment: 0,
                     onDestinationSelected: (int index) async {
@@ -131,19 +143,28 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                                 '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
                           }
                         }
+                        if (autoAdjusted) {
+                          Fluttertoast.showToast(msg: "Already auto adjusted!");
+                        }
 
                         print("autoAdjusted: " + "$autoAdjusted");
                       } else if (index == 4) {
                         if (!inKancolleWindow) {
                           String? currentUrl = await __controller.currentUrl();
                           //print(currentUrl);
-                          if ((currentUrl ?? "").endsWith(gameUrl)) { // May be HTTPS or HTTP
+                          if ((currentUrl ?? "").endsWith(gameUrl)) {
+                            // May be HTTPS or HTTP
                             inKancolleWindow = true;
 
                             __controller.runJavascript(
                                 '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                           }
                         }
+                        if (inKancolleWindow) {
+                          Fluttertoast.showToast(
+                              msg: "Already in game window!");
+                        }
+
                         print("inKancolleWindow: " + "$inKancolleWindow");
                       } else if (index == 5) {
                         __controller.goBack();
@@ -156,31 +177,43 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                         icon: const Icon(CupertinoIcons.home),
                         selectedIcon:
                             const Icon(CupertinoIcons.home, color: Colors.blue),
-                        label: Text(S.of(context).AppHome),
+                        label: Text(S.of(context).AppHome,
+                            style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
-                          icon: const Icon(CupertinoIcons.up_arrow),
-                          label: Text(S.of(context).AppScrollUp)),
+                          icon: const Icon(
+                            CupertinoIcons.up_arrow,
+                            color: Colors.white,
+                          ),
+                          label: Text(S.of(context).AppScrollUp,
+                              style: TextStyle(color: Colors.white))),
                       NavigationRailDestination(
-                          icon: const Icon(CupertinoIcons.down_arrow),
-                          label: Text(S.of(context).AppScrollDown)),
+                          icon: const Icon(CupertinoIcons.down_arrow,
+                              color: Colors.white),
+                          label: Text(S.of(context).AppScrollDown,
+                              style: TextStyle(color: Colors.white))),
                       NavigationRailDestination(
-                          icon: const Icon(CupertinoIcons.fullscreen),
-                          label: Text(S.of(context).AppResize)),
+                          icon: const Icon(CupertinoIcons.fullscreen,
+                              color: Colors.white),
+                          label: Text(S.of(context).AppResize,
+                              style: TextStyle(color: Colors.white))),
                       NavigationRailDestination(
                         icon: const Icon(CupertinoIcons.arrow_up_down_square,
-                            color: Colors.black),
-                        label: Text(S.of(context).AppRedirect),
+                            color: Colors.white),
+                        label: Text(S.of(context).AppRedirect,
+                            style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
                         icon: const Icon(CupertinoIcons.back,
-                            color: Colors.black),
-                        label: Text(S.of(context).AppBack),
+                            color: Colors.white),
+                        label: Text(S.of(context).AppBack,
+                            style: TextStyle(color: Colors.white)),
                       ),
                       NavigationRailDestination(
                         icon: const Icon(CupertinoIcons.refresh,
                             color: Colors.red),
-                        label: Text(S.of(context).AppRefresh),
+                        label: Text(S.of(context).AppRefresh,
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ],
                   ),
@@ -189,52 +222,87 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
               const VerticalDivider(thickness: 1, width: 1),
               // This is the main content.
               Expanded(
-                child: WebView(
-                  zoomEnabled: true,
-                  initialUrl: 'http://$gameUrl',
-                  userAgent:
-                      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onWebViewCreated: (WebViewController webViewController) {
-                    _controller.complete(__controller = webViewController);
-                  },
-                  onProgress: (int progress) {
-                    print('WebView is loading (progress : $progress%)');
-                  },
-                  javascriptChannels: <JavascriptChannel>{
-                    _toasterJavascriptChannel(context),
-                  },
-                  navigationDelegate: (NavigationRequest request) {
-                    print('allowing navigation to $request');
-                    return NavigationDecision.navigate;
-                  },
-                  onPageStarted: (String url) {
-                    print('Page started loading: $url');
-                    setState(() {
-                      if (url.endsWith(gameUrl)) {
-                        inKancolleWindow = false;
-                        autoAdjusted = false;
-                      } else if(url.startsWith("http://osapi.dmm.com")){
-                        inKancolleWindow = true;
-                        autoAdjusted = false;
-                      }
-                    });
-                  },
-                  onPageFinished: (String url) {
-                    print('Page finished loading: $url');
-                    setState(() {
-                      if (url.endsWith(gameUrl) && needAutoRedirect) {
-                        print('is game origin url');
-                        HapticFeedback.lightImpact();
-                        __controller.runJavascript(
-                            '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                      }
-                    });
-                  },
-                  gestureNavigationEnabled: true,
-                  backgroundColor: CupertinoColors.extraLightBackgroundGray,
+                  child: Container(
+                color: Colors.black,
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: deviceWidth,
+                child: AspectRatio(
+                  aspectRatio: 5 / 3,
+                  child: WebView(
+                    zoomEnabled: false,
+                    initialUrl: 'http://$gameUrl',
+                    userAgent:
+                        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15',
+                    javascriptMode: JavascriptMode.unrestricted,
+                    onWebViewCreated: (WebViewController webViewController) {
+                      _controller.complete(__controller = webViewController);
+                    },
+                    onProgress: (int progress) {
+                      print('WebView is loading (progress : $progress%)');
+                    },
+                    javascriptChannels: <JavascriptChannel>{
+                      _toasterJavascriptChannel(context),
+                    },
+                    navigationDelegate: (NavigationRequest request) {
+                      print('allowing navigation to $request');
+                      return NavigationDecision.navigate;
+                    },
+                    onPageStarted: (String url) {
+                      print('Page started loading: $url');
+                      setState(() {
+                        if (url.endsWith(gameUrl)) {
+                          inKancolleWindow = false;
+                          autoAdjusted = false;
+                        } else if (url.startsWith("http://osapi.dmm.com")) {
+                          inKancolleWindow = true;
+                          autoAdjusted = false;
+                        }
+                      });
+                    },
+                    onPageFinished: (String url) {
+                      print('Page finished loading: $url');
+                      setState(() {
+                        if (url.endsWith(gameUrl)) {
+                          print('is game origin url');
+                          HapticFeedback.lightImpact();
+                          __controller.runJavascript(
+                              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                          Fluttertoast.showToast(msg: "Loaded in game window!");
+                          inKancolleWindow = true;
+                        } else if (url.startsWith("http://osapi.dmm.com")) {
+                          HapticFeedback.mediumImpact();
+                          __controller.runJavascript(
+                              '''document.getElementById("spacing_top").style.display = "none";''');
+                          __controller.runJavascript(
+                              '''document.getElementById("sectionWrap").style.display = "none";''');
+                          __controller.runJavascript(
+                              '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+                          __controller.runJavascript(
+                              '''document.body.style.backgroundColor = "black";''');
+                          __controller
+                              .runJavascriptReturningResult('''window.innerHeight;''').then(
+                                  (value) =>
+                                      webviewHeigth = double.parse(value));
+                          __controller
+                              .runJavascriptReturningResult('''window.innerWidth;''').then(
+                                  (value) =>
+                                      webviewWidth = double.parse(value));
+                          var resizeScale = 1.0;
+                          if (webviewHeigth != null && webviewWidth != null) {
+                            resizeScale =
+                                getResizeScale(webviewHeigth, webviewWidth);
+                            autoAdjusted = true;
+                          }
+                          Fluttertoast.showToast(msg: "Auto adjusted!");
+                        }
+                      });
+                    },
+                    gestureNavigationEnabled: true,
+                    backgroundColor: CupertinoColors.extraLightBackgroundGray,
+                  ),
                 ),
-              ),
+              )),
             ],
           ),
         ));
