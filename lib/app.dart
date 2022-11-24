@@ -243,7 +243,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                 child: AspectRatio(
                   aspectRatio: 5 / 3,
                   child: WebView(
-                    zoomEnabled: false,
+                    zoomEnabled: Platform.isAndroid ? false : true,
                     initialUrl: 'http://$gameUrl',
                     userAgent: defaultUA,
                     javascriptMode: JavascriptMode.unrestricted,
