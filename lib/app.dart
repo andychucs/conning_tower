@@ -51,6 +51,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
 
   bool inKancolleWindow = false;
   bool autoAdjusted = false;
+  bool loadCompleted = false;
   @override
   Widget build(BuildContext context) {
     var webviewHeigth;
@@ -108,6 +109,11 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                       } else if (index == 2) {
                         __controller.scrollBy(0, 1);
                       } else if (index == 3) {
+                        if (!loadCompleted) {
+                          Fluttertoast.showToast(
+                              msg: "Game not load complete yet");
+                          return;
+                        }
                         if (inKancolleWindow && !autoAdjusted) {
                           __controller.runJavascript(
                               '''document.getElementById("spacing_top").style.display = "none";''');
@@ -246,6 +252,45 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     },
                     navigationDelegate: (NavigationRequest request) {
                       print('allowing navigation to $request');
+                      setState(() {
+                        if (request.url.contains(
+                            "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
+                          Fluttertoast.showToast(msg: "Game load completed");
+                          loadCompleted = true;
+                          HapticFeedback.mediumImpact();
+                          __controller.runJavascript(
+                              '''document.getElementById("spacing_top").style.display = "none";''');
+                          __controller.runJavascript(
+                              '''document.getElementById("sectionWrap").style.display = "none";''');
+                          __controller.runJavascript(
+                              '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+                          __controller.runJavascript(
+                              '''document.body.style.backgroundColor = "black";''');
+                          __controller
+                              .runJavascriptReturningResult('''window.innerHeight;''').then(
+                                  (value) =>
+                                      webviewHeigth = double.parse(value));
+                          __controller
+                              .runJavascriptReturningResult('''window.innerWidth;''').then(
+                                  (value) =>
+                                      webviewWidth = double.parse(value));
+                          var resizeScale = 1.0;
+                          if (webviewHeigth != null && webviewWidth != null) {
+                            resizeScale =
+                                getResizeScale(webviewHeigth, webviewWidth);
+                            autoAdjusted = true;
+                          }
+                          if (Platform.isIOS) {
+                            __controller.runJavascript(
+                                //Scale to correct size(ios webkit)
+                                '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+                          } else {
+                            __controller.runJavascript(//Scale to correct size
+                                '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+                          }
+                          Fluttertoast.showToast(msg: "Auto adjusted!");
+                        }
+                      });
                       return NavigationDecision.navigate;
                     },
                     onPageStarted: (String url) {
@@ -270,31 +315,6 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                               '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                           Fluttertoast.showToast(msg: "Loaded in game window!");
                           inKancolleWindow = true;
-                        } else if (url.startsWith("http://osapi.dmm.com")) {
-                          HapticFeedback.mediumImpact();
-                          __controller.runJavascript(
-                              '''document.getElementById("spacing_top").style.display = "none";''');
-                          __controller.runJavascript(
-                              '''document.getElementById("sectionWrap").style.display = "none";''');
-                          __controller.runJavascript(
-                              '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-                          __controller.runJavascript(
-                              '''document.body.style.backgroundColor = "black";''');
-                          __controller
-                              .runJavascriptReturningResult('''window.innerHeight;''').then(
-                                  (value) =>
-                                      webviewHeigth = double.parse(value));
-                          __controller
-                              .runJavascriptReturningResult('''window.innerWidth;''').then(
-                                  (value) =>
-                                      webviewWidth = double.parse(value));
-                          var resizeScale = 1.0;
-                          if (webviewHeigth != null && webviewWidth != null) {
-                            resizeScale =
-                                getResizeScale(webviewHeigth, webviewWidth);
-                            autoAdjusted = true;
-                          }
-                          Fluttertoast.showToast(msg: "Auto adjusted!");
                         }
                       });
                     },
