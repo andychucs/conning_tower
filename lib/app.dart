@@ -13,8 +13,10 @@ import 'generated/l10n.dart';
 
 //const String gameUrl = 'screenresolutiontest.com/'; // For Debug
 const String gameUrl = 'www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
-const String safariUA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15";
-const String chromeUA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36";
+const String safariUA =
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15";
+const String chromeUA =
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36";
 
 class ConnTowerApp extends StatefulWidget {
   const ConnTowerApp({Key? key, this.cookieManager}) : super(key: key);
@@ -36,11 +38,11 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   @override
   void initState() {
     super.initState();
+    defaultUA = safariUA;
     if (Platform.isAndroid) {
       defaultUA = chromeUA;
       WebView.platform = SurfaceAndroidWebView();
-    }
-    if (Platform.isIOS) {
+    } else if (Platform.isIOS) {
       defaultUA = safariUA;
     }
     initPlatformState();
@@ -69,7 +71,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     if (Platform.isIOS) {
       deviceHeigth = MediaQuery.of(context).size.width;
       deviceWidth = MediaQuery.of(context).size.height;
-    } else {
+    } else if (Platform.isAndroid) {
       deviceHeigth = MediaQuery.of(context).size.height;
       deviceWidth = MediaQuery.of(context).size.width;
     }
@@ -78,6 +80,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
     const kancolleWidth = 1200;
     const kancollePixel = kancolleHeigth * kancolleWidth;
     getResizeScale(double heigth, double width) {
+      //Get Kancolle iframe resize scale
       var scale = (heigth * width) / kancollePixel;
       if (scale < 0.5) {
         scale = 1 - scale;
@@ -89,6 +92,58 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
         }
         return scale;
       }
+    }
+
+    Future<bool> autoAdjustWindow() async {
+      //Adjust Kancolle window
+      if (inKancolleWindow && !autoAdjusted) {
+        int getWebviewSizeCount = 0;
+        do {
+          __controller
+              .runJavascriptReturningResult('''window.innerHeight;''').then(
+                  (value) => webviewHeigth = double.parse(value));
+          __controller
+              .runJavascriptReturningResult('''window.innerWidth;''').then(
+                  (value) => webviewWidth = double.parse(value));
+          if (webviewHeigth == null || webviewWidth == null) {
+            await Future.delayed(const Duration(seconds: 2));
+          } else {
+            getWebviewSizeCount = 99;
+          }
+          print("obtaining webview size");
+          getWebviewSizeCount++;
+        } while (getWebviewSizeCount < 5);
+        var resizeScale = 1.0;
+        if (webviewHeigth != null && webviewWidth != null) {
+          resizeScale = getResizeScale(webviewHeigth, webviewWidth);
+          autoAdjusted = true;
+        } else {
+          print("autoAdjustWindow fail");
+          return false;
+        }
+        __controller.runJavascript(
+            '''document.getElementById("spacing_top").style.display = "none";''');
+        __controller.runJavascript(
+            '''document.getElementById("sectionWrap").style.display = "none";''');
+        __controller.runJavascript(
+            '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
+        __controller.runJavascript(
+            '''document.body.style.backgroundColor = "black";''');
+
+        if (Platform.isIOS) {
+          __controller.runJavascript(
+              //Scale to correct size(ios webkit)
+              '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+        } else if (Platform.isAndroid) {
+          __controller.runJavascript(//Scale to correct size(android chrome)
+              '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+        }
+        Fluttertoast.showToast(msg: "Auto adjust success");
+        print("Auto adjust success");
+        return true;
+      }
+      print("autoAdjustWindow fail");
+      return false;
     }
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
@@ -110,61 +165,27 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     onDestinationSelected: (int index) async {
                       HapticFeedback.heavyImpact();
                       if (index == 0) {
+                        //Home Button
                         __controller.loadUrl('http://$gameUrl');
                       } else if (index == 1) {
+                        //Scroll Down Button
                         __controller.scrollBy(0, -1);
                       } else if (index == 2) {
+                        //Scroll Up Button
                         __controller.scrollBy(0, 1);
                       } else if (index == 3) {
+                        //Resizen Button
                         if (!loadCompleted) {
                           Fluttertoast.showToast(
                               msg: "Game not load complete yet");
                           return;
+                        } else {
+                          autoAdjustWindow();
                         }
-                        if (inKancolleWindow && !autoAdjusted) {
-                          __controller.runJavascript(
-                              '''document.getElementById("spacing_top").style.display = "none";''');
-                          __controller.runJavascript(
-                              '''document.getElementById("sectionWrap").style.display = "none";''');
-                          __controller.runJavascript(
-                              '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-                          __controller.runJavascript(
-                              '''document.body.style.backgroundColor = "black";''');
-                          __controller
-                              .runJavascriptReturningResult('''window.innerHeight;''').then(
-                                  (value) =>
-                                      webviewHeigth = double.parse(value));
-                          __controller
-                              .runJavascriptReturningResult('''window.innerWidth;''').then(
-                                  (value) =>
-                                      webviewWidth = double.parse(value));
-                          var resizeScale = 1.0;
-                          if (webviewHeigth != null && webviewWidth != null) {
-                            resizeScale =
-                                getResizeScale(webviewHeigth, webviewWidth);
-                            autoAdjusted = true;
-                          }
-                          print(webviewHeigth);
-                          print(webviewWidth);
-                          print(resizeScale);
-                          if (Platform.isIOS) {
-                            __controller.runJavascript(
-                                //Scale to correct size(ios webkit)
-                                '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                          } else {
-                            __controller.runJavascript(//Scale to correct size
-                                '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
-                          }
-                        }
-                        if (autoAdjusted) {
-                          Fluttertoast.showToast(msg: "Already auto adjusted!");
-                        }
-
-                        print("autoAdjusted: " + "$autoAdjusted");
                       } else if (index == 4) {
+                        //HTTP Redirect Button
                         if (!inKancolleWindow) {
                           String? currentUrl = await __controller.currentUrl();
-                          //print(currentUrl);
                           if ((currentUrl ?? "").endsWith(gameUrl)) {
                             // May be HTTPS or HTTP
                             inKancolleWindow = true;
@@ -172,16 +193,19 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                             __controller.runJavascript(
                                 '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                           }
-                        }
-                        if (inKancolleWindow) {
+                          Fluttertoast.showToast(msg: "Loaded in game window!");
+                          print("HTTP Redirect success");
+                        } else {
                           Fluttertoast.showToast(
                               msg: "Already in game window!");
+                          print("HTTP Redirect fail");
                         }
-
                         print("inKancolleWindow: " + "$inKancolleWindow");
                       } else if (index == 5) {
+                        //Back Button
                         __controller.goBack();
                       } else if (index == 6) {
+                        //Reload Button
                         __controller.reload();
                       }
                     },
@@ -243,7 +267,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                 child: AspectRatio(
                   aspectRatio: 5 / 3,
                   child: WebView(
-                    zoomEnabled: Platform.isAndroid ? false : true,
+                    zoomEnabled: true,
                     initialUrl: 'http://$gameUrl',
                     userAgent: defaultUA,
                     javascriptMode: JavascriptMode.unrestricted,
@@ -259,44 +283,23 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     navigationDelegate: (NavigationRequest request) {
                       print('allowing navigation to $request');
                       setState(() {
-                        if (request.url.contains(
-                            "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
-                          Fluttertoast.showToast(msg: "Game load completed");
-                          loadCompleted = true;
-                          HapticFeedback.mediumImpact();
-
-                          if (!autoAdjusted) {
-                            __controller.runJavascript(
-                                '''document.getElementById("spacing_top").style.display = "none";''');
-                            __controller.runJavascript(
-                                '''document.getElementById("sectionWrap").style.display = "none";''');
-                            __controller.runJavascript(
-                                '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-                            __controller.runJavascript(
-                                '''document.body.style.backgroundColor = "black";''');
-                            __controller
-                                .runJavascriptReturningResult('''window.innerHeight;''').then(
-                                    (value) =>
-                                        webviewHeigth = double.parse(value));
-                            __controller
-                                .runJavascriptReturningResult('''window.innerWidth;''').then(
-                                    (value) =>
-                                        webviewWidth = double.parse(value));
-                            var resizeScale = 1.0;
-                            if (webviewHeigth != null && webviewWidth != null) {
-                              resizeScale =
-                                  getResizeScale(webviewHeigth, webviewWidth);
-                              autoAdjusted = true;
-                            }
-                            if (Platform.isIOS) {
-                              __controller.runJavascript(
-                                  //Scale to correct size(ios webkit)
-                                  '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
-                            } else {
-                              __controller.runJavascript(//Scale to correct size
-                                  '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
-                            }
-                            Fluttertoast.showToast(msg: "Auto adjusted!");
+                        if (Platform.isIOS) {
+                          if (request.url.contains(
+                              "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
+                            Fluttertoast.showToast(msg: "Game load completed");
+                            loadCompleted = true;
+                            inKancolleWindow = true;
+                            HapticFeedback.mediumImpact();
+                            autoAdjustWindow();
+                          }
+                        } else if (Platform.isAndroid) {
+                          //chrome can't detect /kcs2/.....
+                          if (request.url.startsWith("http://osapi.dmm.com")) {
+                            Fluttertoast.showToast(msg: "Game load completed");
+                            loadCompleted = true;
+                            inKancolleWindow = true;
+                            HapticFeedback.mediumImpact();
+                            autoAdjustWindow();
                           }
                         }
                       });
@@ -323,6 +326,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                           __controller.runJavascript(
                               '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                           Fluttertoast.showToast(msg: "Loaded in game window!");
+                          print("HTTP Redirect success");
                           inKancolleWindow = true;
                         }
                       });
