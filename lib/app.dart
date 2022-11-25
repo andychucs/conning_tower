@@ -38,6 +38,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
   @override
   void initState() {
     super.initState();
+    defaultUA = safariUA;
     if (Platform.isAndroid) {
       defaultUA = chromeUA;
       WebView.platform = SurfaceAndroidWebView();
@@ -93,15 +94,25 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
       }
     }
 
-    bool autoAdjustWindow() {
+    Future<bool> autoAdjustWindow() async {
       //Adjust Kancolle window
       if (inKancolleWindow && !autoAdjusted) {
-        __controller
-            .runJavascriptReturningResult('''window.innerHeight;''').then(
-                (value) => webviewHeigth = double.parse(value));
-        __controller
-            .runJavascriptReturningResult('''window.innerWidth;''').then(
-                (value) => webviewWidth = double.parse(value));
+        int getWebviewSizeCount = 0;
+        do {
+          __controller
+              .runJavascriptReturningResult('''window.innerHeight;''').then(
+                  (value) => webviewHeigth = double.parse(value));
+          __controller
+              .runJavascriptReturningResult('''window.innerWidth;''').then(
+                  (value) => webviewWidth = double.parse(value));
+          if (webviewHeigth == null || webviewWidth == null) {
+            await Future.delayed(const Duration(seconds: 2));
+          } else {
+            getWebviewSizeCount = 99;
+          }
+          print("obtaining webview size");
+          getWebviewSizeCount++;
+        } while (getWebviewSizeCount < 5);
         var resizeScale = 1.0;
         if (webviewHeigth != null && webviewWidth != null) {
           resizeScale = getResizeScale(webviewHeigth, webviewWidth);
@@ -283,12 +294,12 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                           }
                         } else if (Platform.isAndroid) {
                           //chrome can't detect /kcs2/.....
-                          //AutoAdjustWindow in onPageFinished function
                           if (request.url.startsWith("http://osapi.dmm.com")) {
                             Fluttertoast.showToast(msg: "Game load completed");
                             loadCompleted = true;
                             inKancolleWindow = true;
                             HapticFeedback.mediumImpact();
+                            autoAdjustWindow();
                           }
                         }
                       });
@@ -308,7 +319,7 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                     },
                     onPageFinished: (String url) {
                       print('Page finished loading: $url');
-                      setState(() async {
+                      setState(() {
                         if (url.endsWith(gameUrl)) {
                           print('is game origin url');
                           HapticFeedback.lightImpact();
@@ -317,13 +328,6 @@ class ConnTowerHomePage extends State<ConnTowerApp> {
                           Fluttertoast.showToast(msg: "Loaded in game window!");
                           print("HTTP Redirect success");
                           inKancolleWindow = true;
-                        } else if (Platform.isAndroid &&
-                            url.startsWith("http://osapi.dmm.com")) {
-                          if (autoAdjustWindow() == false &&
-                              autoAdjusted == false) {
-                            await Future.delayed(Duration(seconds: 3));
-                            autoAdjustWindow();
-                          }
                         }
                       });
                     },
