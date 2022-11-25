@@ -1,3 +1,4 @@
+![banner](https://user-images.githubusercontent.com/24852023/204034626-1752b077-006b-4660-b337-4dde275bd307.jpeg)
 # Conning Tower	
 
 ![GitHub all releases](https://img.shields.io/github/downloads/AndyZhuAZ/conning_tower/total?label=Downloads&logo=github)
@@ -16,9 +17,6 @@ Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-�
 
 艦橋または司令塔はクロスプラットフォームプレイ対応の艦隊これくしょん専用ブラウザ。
 
-![舰桥banner 001](https://user-images.githubusercontent.com/24852023/204034626-1752b077-006b-4660-b337-4dde275bd307.jpeg)
-
-
 ## Installation
 
 [GitHub Releases](https://github.com/AndyZhuAZ/conning_tower/releases)
@@ -29,17 +27,17 @@ No official app store, need sideloading.
 
 Conning Tower is design to play KanColle on single app include assistant utilities.
 Now available on iOS and Android.
-Development on iOS16, other platform may have issues.
+The minimum OS versions are iOS 11.0 and Android 4.4.
 Best platform suggest is iPad.
 Will support macOS, Windows and Linux in the future.
 
 ## Why start this project
 
-Playing KanColle on the iOS is not easy.
+Playing KanColle on iOS is not easy.
 KanColle player data on the Android 3rd party browsers cannot sync with desktop platform browsers.
 And there is no one software to play KanColle on mobile platform and desktop platform.
 
-This project goal is use same UI and be able to synchronize player data on all platforms.
+This project goal is use same UI and be able to sync player data on all platforms.
 
 ## Thanks
 
