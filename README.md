@@ -16,7 +16,8 @@ Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-�
 
 艦橋または司令塔はクロスプラットフォームプレイ対応の艦隊これくしょん専用ブラウザ。
 
-![IMG_9146](https://user-images.githubusercontent.com/24852023/203087433-0e6fda34-fa50-4ec5-9839-8c0b55cc262d.jpg)
+![舰桥banner 001](https://user-images.githubusercontent.com/24852023/204034626-1752b077-006b-4660-b337-4dde275bd307.jpeg)
+
 
 ## Installation
 
