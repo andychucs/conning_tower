@@ -1,4 +1,5 @@
-![banner](https://user-images.githubusercontent.com/24852023/204034626-1752b077-006b-4660-b337-4dde275bd307.jpeg)
+![banner](https://user-images.githubusercontent.com/24852023/204077251-bd441c6f-5908-455c-959f-ab0b3b2b0368.jpeg)
+
 # Conning Tower	
 
 ![GitHub all releases](https://img.shields.io/github/downloads/AndyZhuAZ/conning_tower/total?label=Downloads&logo=github)
