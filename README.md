@@ -41,6 +41,10 @@ And there is no one software to play KanColle on mobile platform and desktop pla
 
 This project goal is use same UI and be able to sync player data on all platforms.
 
+## Release Notify
+
+Join in [Telegram Group](https://t.me/ConningTower)
+
 ## Thanks
 
 HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.github.io/) by ![Twitter URL](https://img.shields.io/twitter/url?label=naayu1012&style=social&url=https%3A%2F%2Ftwitter.com%2Fnaayu1012)
