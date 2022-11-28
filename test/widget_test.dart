@@ -11,6 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test("home url assert", () {
-    expect("www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/", gameUrl);
+    expect("www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/", kGameUrl);
   });
 }
