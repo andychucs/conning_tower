@@ -25,10 +25,40 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
         "AppName": MessageLookupByLibrary.simpleMessage("Bridge"),
+        "AppNotify": MessageLookupByLibrary.simpleMessage(
+            "Admiral welcome to Bridge, Bridge will clean your desk and make Kancolle interface automatic fullscreen, If you see DMM GAMES top bar long time please click HTTP Redirect button before your command."),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP Redirect"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
         "AppResize": MessageLookupByLibrary.simpleMessage("Resize"),
+        "AppRightSideControlsLoad":
+            MessageLookupByLibrary.simpleMessage("Load url"),
+        "AppRightSideControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView not ready"),
+        "AppRightSideControlsScrollDown":
+            MessageLookupByLibrary.simpleMessage("ScrollDown"),
+        "AppRightSideControlsScrollUp":
+            MessageLookupByLibrary.simpleMessage("ScrollUp"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("Scroll Down"),
-        "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up")
+        "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up"),
+        "FutureAutoAdjustWindowFail":
+            MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
+        "FutureAutoAdjustWindowSuccess":
+            MessageLookupByLibrary.simpleMessage("Fullscreen success"),
+        "KCViewFuncMsgAutoGameRedirect":
+            MessageLookupByLibrary.simpleMessage("Loaded in game window!"),
+        "KCViewFuncMsgNavi":
+            MessageLookupByLibrary.simpleMessage("Now navigation to"),
+        "KCViewFuncMsgNaviGameLoadCompleted":
+            MessageLookupByLibrary.simpleMessage("Game load completed"),
+        "KCViewFuncMsgNaviGameLoadFailed":
+            MessageLookupByLibrary.simpleMessage("Game load failed"),
+        "KCViewFuncMsgPageFinished":
+            MessageLookupByLibrary.simpleMessage("Page finished loading:"),
+        "KCViewFuncMsgPageFinishedIsGame":
+            MessageLookupByLibrary.simpleMessage("is game origin url"),
+        "KCViewFuncMsgPageStart":
+            MessageLookupByLibrary.simpleMessage("Page started loading:"),
+        "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
+            "For Admiral who use iOS 15 upper OS, when you see DMM GAMES top bar display and get a blank page please click HTTP Redirect button.")
       };
 }

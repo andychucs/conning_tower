@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Admiral welcome to Bridge, Bridge will clean your desk and make Kancolle interface automatic fullscreen, If you see DMM GAMES top bar long time please click HTTP Redirect button before your command.`
+  String get AppNotify {
+    return Intl.message(
+      'Admiral welcome to Bridge, Bridge will clean your desk and make Kancolle interface automatic fullscreen, If you see DMM GAMES top bar long time please click HTTP Redirect button before your command.',
+      name: 'AppNotify',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `HTTP Redirect`
   String get AppRedirect {
     return Intl.message(
@@ -110,6 +120,46 @@ class S {
     );
   }
 
+  /// `Load url`
+  String get AppRightSideControlsLoad {
+    return Intl.message(
+      'Load url',
+      name: 'AppRightSideControlsLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WebView not ready`
+  String get AppRightSideControlsNotReady {
+    return Intl.message(
+      'WebView not ready',
+      name: 'AppRightSideControlsNotReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ScrollDown`
+  String get AppRightSideControlsScrollDown {
+    return Intl.message(
+      'ScrollDown',
+      name: 'AppRightSideControlsScrollDown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ScrollUp`
+  String get AppRightSideControlsScrollUp {
+    return Intl.message(
+      'ScrollUp',
+      name: 'AppRightSideControlsScrollUp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Scroll Down`
   String get AppScrollDown {
     return Intl.message(
@@ -125,6 +175,106 @@ class S {
     return Intl.message(
       'Scroll Up',
       name: 'AppScrollUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullscreen fail`
+  String get FutureAutoAdjustWindowFail {
+    return Intl.message(
+      'Fullscreen fail',
+      name: 'FutureAutoAdjustWindowFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullscreen success`
+  String get FutureAutoAdjustWindowSuccess {
+    return Intl.message(
+      'Fullscreen success',
+      name: 'FutureAutoAdjustWindowSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loaded in game window!`
+  String get KCViewFuncMsgAutoGameRedirect {
+    return Intl.message(
+      'Loaded in game window!',
+      name: 'KCViewFuncMsgAutoGameRedirect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now navigation to`
+  String get KCViewFuncMsgNavi {
+    return Intl.message(
+      'Now navigation to',
+      name: 'KCViewFuncMsgNavi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game load completed`
+  String get KCViewFuncMsgNaviGameLoadCompleted {
+    return Intl.message(
+      'Game load completed',
+      name: 'KCViewFuncMsgNaviGameLoadCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game load failed`
+  String get KCViewFuncMsgNaviGameLoadFailed {
+    return Intl.message(
+      'Game load failed',
+      name: 'KCViewFuncMsgNaviGameLoadFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page finished loading:`
+  String get KCViewFuncMsgPageFinished {
+    return Intl.message(
+      'Page finished loading:',
+      name: 'KCViewFuncMsgPageFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `is game origin url`
+  String get KCViewFuncMsgPageFinishedIsGame {
+    return Intl.message(
+      'is game origin url',
+      name: 'KCViewFuncMsgPageFinishedIsGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page started loading:`
+  String get KCViewFuncMsgPageStart {
+    return Intl.message(
+      'Page started loading:',
+      name: 'KCViewFuncMsgPageStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For Admiral who use iOS 15 upper OS, when you see DMM GAMES top bar display and get a blank page please click HTTP Redirect button.`
+  String get MsgIOSNote {
+    return Intl.message(
+      'For Admiral who use iOS 15 upper OS, when you see DMM GAMES top bar display and get a blank page please click HTTP Redirect button.',
+      name: 'MsgIOSNote',
       desc: '',
       args: [],
     );
