@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `Admiral welcome to Bridge, Bridge will clean your desk and make Kancolle interface automatic fullscreen, If you see DMM GAMES top bar long time please click HTTP Redirect button before your command.`
+  /// `Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command.`
   String get AppNotify {
     return Intl.message(
-      'Admiral welcome to Bridge, Bridge will clean your desk and make Kancolle interface automatic fullscreen, If you see DMM GAMES top bar long time please click HTTP Redirect button before your command.',
+      'Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command.',
       name: 'AppNotify',
       desc: '',
       args: [],
@@ -120,13 +120,13 @@ class S {
     );
   }
 
-  /// `Load url`
-  String get AppRightSideControlsLoad {
+  /// `Load URL: {url}`
+  String AppRightSideControlsLoad(Object url) {
     return Intl.message(
-      'Load url',
+      'Load URL: $url',
       name: 'AppRightSideControlsLoad',
       desc: '',
-      args: [],
+      args: [url],
     );
   }
 
@@ -140,20 +140,20 @@ class S {
     );
   }
 
-  /// `ScrollDown`
+  /// `Scroll down`
   String get AppRightSideControlsScrollDown {
     return Intl.message(
-      'ScrollDown',
+      'Scroll down',
       name: 'AppRightSideControlsScrollDown',
       desc: '',
       args: [],
     );
   }
 
-  /// `ScrollUp`
+  /// `Scroll up`
   String get AppRightSideControlsScrollUp {
     return Intl.message(
-      'ScrollUp',
+      'Scroll up',
       name: 'AppRightSideControlsScrollUp',
       desc: '',
       args: [],
@@ -210,13 +210,13 @@ class S {
     );
   }
 
-  /// `Now navigation to`
-  String get KCViewFuncMsgNavi {
+  /// `Now navigation to {url}`
+  String KCViewFuncMsgNavi(Object url) {
     return Intl.message(
-      'Now navigation to',
+      'Now navigation to $url',
       name: 'KCViewFuncMsgNavi',
       desc: '',
-      args: [],
+      args: [url],
     );
   }
 
@@ -240,13 +240,13 @@ class S {
     );
   }
 
-  /// `Page finished loading:`
-  String get KCViewFuncMsgPageFinished {
+  /// `Page finished loading: {url}`
+  String KCViewFuncMsgPageFinished(Object url) {
     return Intl.message(
-      'Page finished loading:',
+      'Page finished loading: $url',
       name: 'KCViewFuncMsgPageFinished',
       desc: '',
-      args: [],
+      args: [url],
     );
   }
 
@@ -260,20 +260,20 @@ class S {
     );
   }
 
-  /// `Page started loading:`
-  String get KCViewFuncMsgPageStart {
+  /// `Page started loading: {url}`
+  String KCViewFuncMsgPageStart(Object url) {
     return Intl.message(
-      'Page started loading:',
+      'Page started loading: $url',
       name: 'KCViewFuncMsgPageStart',
       desc: '',
-      args: [],
+      args: [url],
     );
   }
 
-  /// `For Admiral who use iOS 15 upper OS, when you see DMM GAMES top bar display and get a blank page please click HTTP Redirect button.`
+  /// `For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.`
   String get MsgIOSNote {
     return Intl.message(
-      'For Admiral who use iOS 15 upper OS, when you see DMM GAMES top bar display and get a blank page please click HTTP Redirect button.',
+      'For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.',
       name: 'MsgIOSNote',
       desc: '',
       args: [],
