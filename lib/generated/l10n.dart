@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command.`
+  String get AppNotify {
+    return Intl.message(
+      'Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command.',
+      name: 'AppNotify',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `HTTP Redirect`
   String get AppRedirect {
     return Intl.message(
@@ -110,6 +120,46 @@ class S {
     );
   }
 
+  /// `Load URL: {url}`
+  String AppRightSideControlsLoad(Object url) {
+    return Intl.message(
+      'Load URL: $url',
+      name: 'AppRightSideControlsLoad',
+      desc: '',
+      args: [url],
+    );
+  }
+
+  /// `WebView not ready`
+  String get AppRightSideControlsNotReady {
+    return Intl.message(
+      'WebView not ready',
+      name: 'AppRightSideControlsNotReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scroll down`
+  String get AppRightSideControlsScrollDown {
+    return Intl.message(
+      'Scroll down',
+      name: 'AppRightSideControlsScrollDown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scroll up`
+  String get AppRightSideControlsScrollUp {
+    return Intl.message(
+      'Scroll up',
+      name: 'AppRightSideControlsScrollUp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Scroll Down`
   String get AppScrollDown {
     return Intl.message(
@@ -125,6 +175,106 @@ class S {
     return Intl.message(
       'Scroll Up',
       name: 'AppScrollUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullscreen fail`
+  String get FutureAutoAdjustWindowFail {
+    return Intl.message(
+      'Fullscreen fail',
+      name: 'FutureAutoAdjustWindowFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fullscreen success`
+  String get FutureAutoAdjustWindowSuccess {
+    return Intl.message(
+      'Fullscreen success',
+      name: 'FutureAutoAdjustWindowSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loaded in game window!`
+  String get KCViewFuncMsgAutoGameRedirect {
+    return Intl.message(
+      'Loaded in game window!',
+      name: 'KCViewFuncMsgAutoGameRedirect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now navigation to {url}`
+  String KCViewFuncMsgNavi(Object url) {
+    return Intl.message(
+      'Now navigation to $url',
+      name: 'KCViewFuncMsgNavi',
+      desc: '',
+      args: [url],
+    );
+  }
+
+  /// `Game load completed`
+  String get KCViewFuncMsgNaviGameLoadCompleted {
+    return Intl.message(
+      'Game load completed',
+      name: 'KCViewFuncMsgNaviGameLoadCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game load failed`
+  String get KCViewFuncMsgNaviGameLoadFailed {
+    return Intl.message(
+      'Game load failed',
+      name: 'KCViewFuncMsgNaviGameLoadFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page finished loading: {url}`
+  String KCViewFuncMsgPageFinished(Object url) {
+    return Intl.message(
+      'Page finished loading: $url',
+      name: 'KCViewFuncMsgPageFinished',
+      desc: '',
+      args: [url],
+    );
+  }
+
+  /// `is game origin url`
+  String get KCViewFuncMsgPageFinishedIsGame {
+    return Intl.message(
+      'is game origin url',
+      name: 'KCViewFuncMsgPageFinishedIsGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page started loading: {url}`
+  String KCViewFuncMsgPageStart(Object url) {
+    return Intl.message(
+      'Page started loading: $url',
+      name: 'KCViewFuncMsgPageStart',
+      desc: '',
+      args: [url],
+    );
+  }
+
+  /// `For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.`
+  String get MsgIOSNote {
+    return Intl.message(
+      'For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.',
+      name: 'MsgIOSNote',
       desc: '',
       args: [],
     );
