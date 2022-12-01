@@ -134,12 +134,12 @@ class HomePageState extends State<HomePage> {
                     }
                   });
                 },
-                onPageFinished: (String url) {
+                onPageFinished: (String url) async {
                   print('Page finished loading: $url');
                   if (url.endsWith(kGameUrl)) {
                     print('is game origin url');
                     HapticFeedback.lightImpact();
-                    __controller.runJavascript(
+                    await __controller.runJavascript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                     Fluttertoast.showToast(msg: "Loaded in game window!");
                     print("HTTP Redirect success");
@@ -210,7 +210,7 @@ class AppRightSideControls extends StatelessWidget {
                   Fluttertoast.showToast(msg: "Game not load complete yet");
                   return;
                 } else {
-                  autoAdjustWindow(controller!);
+                  await autoAdjustWindow(controller!);
                 }
                 break;
               case 4:
@@ -218,10 +218,10 @@ class AppRightSideControls extends StatelessWidget {
                   Future<String?> currentUrl = controller!.currentUrl();
                   if (currentUrl.toString().endsWith(kGameUrl)) {
                     // May be HTTPS or HTTP
-                    inKancolleWindow = true;
                     allowNavi = true;
-                    controller.runJavascript(
+                    await controller.runJavascript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                    inKancolleWindow = true;
                   }
                   Fluttertoast.showToast(msg: "Loaded in game window!");
                   print("HTTP Redirect success");
@@ -317,21 +317,21 @@ Future<bool> autoAdjustWindow(
       print("autoAdjustWindow fail");
       return false;
     }
-    controller.runJavascript(
+    await controller.runJavascript(
         '''document.getElementById("spacing_top").style.display = "none";''');
-    controller.runJavascript(
+    await controller.runJavascript(
         '''document.getElementById("sectionWrap").style.display = "none";''');
-    controller.runJavascript(
+    await controller.runJavascript(
         '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-    controller
+    await controller
         .runJavascript('''document.body.style.backgroundColor = "black";''');
 
     if (Platform.isIOS) {
-      controller.runJavascript(
+      await controller.runJavascript(
           //Scale to correct size(ios webkit)
           '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
     } else if (Platform.isAndroid) {
-      controller.runJavascript(//Scale to correct size(android chrome)
+      await controller.runJavascript(//Scale to correct size(android chrome)
           '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
     }
     Fluttertoast.showToast(msg: "Auto adjust success");
