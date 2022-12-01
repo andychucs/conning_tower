@@ -21,6 +21,7 @@ class ConnTowerApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       theme: const CupertinoThemeData(),
       home: const Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: CupertinoColors.black,
         body: SafeArea(
           bottom: false,
