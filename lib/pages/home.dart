@@ -215,7 +215,7 @@ class AppRightSideControls extends StatelessWidget {
                 break;
               case 4:
                 if (!inKancolleWindow) {
-                  Future<String?> currentUrl = controller!.currentUrl();
+                  String? currentUrl = await controller!.currentUrl();
                   if (currentUrl.toString().endsWith(kGameUrl)) {
                     // May be HTTPS or HTTP
                     allowNavi = true;
