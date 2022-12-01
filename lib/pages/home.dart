@@ -11,13 +11,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
 import '../generated/l10n.dart';
 
-
 late bool inKancolleWindow;
 late bool autoAdjusted;
 late bool gameLoadCompleted;
 double kWebviewHeight = 0.0;
 double kWebviewWidth = 0.0;
-
+bool allowNavi = true;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -29,7 +28,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   final Completer<WebViewController> _controller =
-  Completer<WebViewController>();
+      Completer<WebViewController>();
   late WebViewController __controller;
   late String defaultUA;
   late double deviceWidth;
@@ -91,8 +90,7 @@ class HomePageState extends State<HomePage> {
                   if (Platform.isIOS) {
                     if (request.url.contains(
                         "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
-                      Fluttertoast.showToast(
-                          msg: "Game load completed");
+                      Fluttertoast.showToast(msg: "Game load completed");
                       setState(() {
                         gameLoadCompleted = true;
                         inKancolleWindow = true;
@@ -102,10 +100,8 @@ class HomePageState extends State<HomePage> {
                     }
                   } else if (Platform.isAndroid) {
                     //chrome can't detect /kcs2/.....
-                    if (request.url
-                        .startsWith("http://osapi.dmm.com")) {
-                      Fluttertoast.showToast(
-                          msg: "Game load completed");
+                    if (request.url.startsWith("http://osapi.dmm.com")) {
+                      Fluttertoast.showToast(msg: "Game load completed");
                       setState(() {
                         gameLoadCompleted = true;
                         inKancolleWindow = true;
@@ -115,8 +111,16 @@ class HomePageState extends State<HomePage> {
                     }
                   }
 
+                  if (request.url.startsWith("http://osapi.dmm.com") ||
+                      request.url.contains(
+                          "www.dmm.com/netgame/social/-/gadgets/=/app_id=854854")) {
+                    Fluttertoast.showToast(msg: "navigation to game page");
+                    if (!allowNavi) {
+                      Fluttertoast.showToast(msg: "navigation is stop");
+                      return NavigationDecision.prevent;
+                    }
+                  }
                   return NavigationDecision.navigate;
-
                 },
                 onPageStarted: (String url) {
                   print('Page started loading: $url');
@@ -137,14 +141,12 @@ class HomePageState extends State<HomePage> {
                     HapticFeedback.lightImpact();
                     __controller.runJavascript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                    Fluttertoast.showToast(
-                        msg: "Loaded in game window!");
+                    Fluttertoast.showToast(msg: "Loaded in game window!");
                     print("HTTP Redirect success");
                     setState(() {
                       inKancolleWindow = true;
                     });
                   }
-
                 },
                 gestureNavigationEnabled: true,
                 backgroundColor: CupertinoColors.extraLightBackgroundGray,
@@ -194,6 +196,7 @@ class AppRightSideControls extends StatelessWidget {
             }
             switch (index) {
               case 0:
+                allowNavi = true;
                 controller!.loadUrl("http://$kGameUrl");
                 break;
               case 1:
@@ -216,7 +219,7 @@ class AppRightSideControls extends StatelessWidget {
                   if (currentUrl.toString().endsWith(kGameUrl)) {
                     // May be HTTPS or HTTP
                     inKancolleWindow = true;
-
+                    allowNavi = true;
                     controller.runJavascript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                   }
@@ -229,11 +232,13 @@ class AppRightSideControls extends StatelessWidget {
                 print("inKancolleWindow: $inKancolleWindow");
                 break;
               case 5:
+                allowNavi = true;
                 if (await controller!.canGoBack()) {
                   await controller.goBack();
                 }
                 break;
               case 6:
+                allowNavi = true;
                 controller!.reload();
                 break;
             }
@@ -254,12 +259,12 @@ class AppRightSideControls extends StatelessWidget {
                     style: TextStyle(color: Colors.white))),
             NavigationRailDestination(
                 icon:
-                const Icon(CupertinoIcons.down_arrow, color: Colors.white),
+                    const Icon(CupertinoIcons.down_arrow, color: Colors.white),
                 label: Text(S.of(context).AppScrollDown,
                     style: TextStyle(color: Colors.white))),
             NavigationRailDestination(
                 icon:
-                const Icon(CupertinoIcons.fullscreen, color: Colors.white),
+                    const Icon(CupertinoIcons.fullscreen, color: Colors.white),
                 label: Text(S.of(context).AppResize,
                     style: TextStyle(color: Colors.white))),
             NavigationRailDestination(
@@ -286,16 +291,16 @@ class AppRightSideControls extends StatelessWidget {
 }
 
 Future<bool> autoAdjustWindow(
-    WebViewController controller,
-    ) async {
+  WebViewController controller,
+) async {
   //Adjust Kancolle window
   if (inKancolleWindow && !autoAdjusted) {
     int getWebviewSizeCount = 0;
     do {
       controller.runJavascriptReturningResult('''window.innerHeight;''').then(
-              (value) => kWebviewHeight = double.parse(value));
+          (value) => kWebviewHeight = double.parse(value));
       controller.runJavascriptReturningResult('''window.innerWidth;''').then(
-              (value) => kWebviewWidth = double.parse(value));
+          (value) => kWebviewWidth = double.parse(value));
       if (kWebviewHeight == 0.0 || kWebviewWidth == 0.0) {
         await Future.delayed(const Duration(seconds: 2));
       } else {
@@ -323,7 +328,7 @@ Future<bool> autoAdjustWindow(
 
     if (Platform.isIOS) {
       controller.runJavascript(
-        //Scale to correct size(ios webkit)
+          //Scale to correct size(ios webkit)
           '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
     } else if (Platform.isAndroid) {
       controller.runJavascript(//Scale to correct size(android chrome)
@@ -331,6 +336,7 @@ Future<bool> autoAdjustWindow(
     }
     Fluttertoast.showToast(msg: "Auto adjust success");
     print("Auto adjust success");
+    allowNavi = false;
     return true;
   }
   print("autoAdjustWindow fail");
