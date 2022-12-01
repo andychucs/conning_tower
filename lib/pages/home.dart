@@ -90,7 +90,7 @@ class HomePageState extends State<HomePage> {
                   if (Platform.isIOS) {
                     if (request.url.contains(
                         "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
-                      Fluttertoast.showToast(msg: "Game load completed");
+                      Fluttertoast.showToast(msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
                       setState(() {
                         gameLoadCompleted = true;
                         inKancolleWindow = true;
@@ -101,7 +101,7 @@ class HomePageState extends State<HomePage> {
                   } else if (Platform.isAndroid) {
                     //chrome can't detect /kcs2/.....
                     if (request.url.startsWith("http://osapi.dmm.com")) {
-                      Fluttertoast.showToast(msg: "Game load completed");
+                      Fluttertoast.showToast(msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
                       setState(() {
                         gameLoadCompleted = true;
                         inKancolleWindow = true;
@@ -116,7 +116,7 @@ class HomePageState extends State<HomePage> {
                           "www.dmm.com/netgame/social/-/gadgets/=/app_id=854854")) {
                     Fluttertoast.showToast(msg: "navigation to game page");
                     if (!allowNavi) {
-                      Fluttertoast.showToast(msg: "navigation is stop");
+                      Fluttertoast.showToast(msg: "navigation is block");
                       return NavigationDecision.prevent;
                     }
                   }
@@ -141,7 +141,7 @@ class HomePageState extends State<HomePage> {
                     HapticFeedback.lightImpact();
                     await __controller.runJavascript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                    Fluttertoast.showToast(msg: "Loaded in game window!");
+                    Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
                     print("HTTP Redirect success");
                     setState(() {
                       inKancolleWindow = true;
@@ -223,7 +223,7 @@ class AppRightSideControls extends StatelessWidget {
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                     inKancolleWindow = true;
                   }
-                  Fluttertoast.showToast(msg: "Loaded in game window!");
+                  Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
                   print("HTTP Redirect success");
                 } else {
                   Fluttertoast.showToast(msg: "Already in game window!");
@@ -334,7 +334,7 @@ Future<bool> autoAdjustWindow(
       await controller.runJavascript(//Scale to correct size(android chrome)
           '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
     }
-    Fluttertoast.showToast(msg: "Auto adjust success");
+    Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
     print("Auto adjust success");
     allowNavi = false;
     return true;
