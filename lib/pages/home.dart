@@ -29,7 +29,6 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
-  late WebViewController __controller;
   late String defaultUA;
   late double deviceWidth;
 
@@ -77,7 +76,7 @@ class HomePageState extends State<HomePage> {
                 userAgent: defaultUA,
                 javascriptMode: JavascriptMode.unrestricted,
                 onWebViewCreated: (WebViewController webViewController) {
-                  _controller.complete(__controller = webViewController);
+                  _controller.complete(webViewController);
                 },
                 onProgress: (int progress) {
                   print('WebView is loading (progress : $progress%)');
@@ -90,24 +89,30 @@ class HomePageState extends State<HomePage> {
                   if (Platform.isIOS) {
                     if (request.url.contains(
                         "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
-                      Fluttertoast.showToast(msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                      Fluttertoast.showToast(
+                          msg:
+                              S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
                       setState(() {
                         gameLoadCompleted = true;
                         inKancolleWindow = true;
                       });
                       HapticFeedback.mediumImpact();
-                      await autoAdjustWindow(__controller);
+                      _controller.future.then((controller) async =>
+                          await autoAdjustWindow(controller));
                     }
                   } else if (Platform.isAndroid) {
                     //chrome can't detect /kcs2/.....
                     if (request.url.startsWith("http://osapi.dmm.com")) {
-                      Fluttertoast.showToast(msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                      Fluttertoast.showToast(
+                          msg:
+                              S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
                       setState(() {
                         gameLoadCompleted = true;
                         inKancolleWindow = true;
                       });
                       HapticFeedback.mediumImpact();
-                      await autoAdjustWindow(__controller);
+                      _controller.future.then((controller) async =>
+                          await autoAdjustWindow(controller));
                     }
                   }
 
@@ -139,13 +144,17 @@ class HomePageState extends State<HomePage> {
                   if (url.endsWith(kGameUrl)) {
                     print('is game origin url');
                     HapticFeedback.lightImpact();
-                    await __controller.runJavascript(
-                        '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                    Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
-                    print("HTTP Redirect success");
-                    setState(() {
-                      inKancolleWindow = true;
-                    });
+                    _controller.future
+                        .then((controller) async => await controller.runJavascript(
+                            '''window.open("http:"+gadgetInfo.URL,'_blank');'''))
+                        .whenComplete(() => () {
+                              Fluttertoast.showToast(
+                                  msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                              print("HTTP Redirect success");
+                              setState(() {
+                                inKancolleWindow = true;
+                              });
+                            });
                   }
                 },
                 gestureNavigationEnabled: true,
@@ -223,7 +232,8 @@ class AppRightSideControls extends StatelessWidget {
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                     inKancolleWindow = true;
                   }
-                  Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                  Fluttertoast.showToast(
+                      msg: S.current.KCViewFuncMsgAutoGameRedirect);
                   print("HTTP Redirect success");
                 } else {
                   Fluttertoast.showToast(msg: "Already in game window!");
