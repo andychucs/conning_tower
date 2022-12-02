@@ -126,8 +126,7 @@ class AppRightSideControls extends StatelessWidget {
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                     inKancolleWindow = true;
                   }
-                  Fluttertoast.showToast(
-                      msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                  Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
                   print("HTTP Redirect success");
                 } else {
                   Fluttertoast.showToast(msg: "Already in game window!");
