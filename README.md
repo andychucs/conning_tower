@@ -8,10 +8,10 @@
 ![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?logo=Flutter&logoColor=white)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=zh-Hans&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=zh-Hant&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?label=简体中文&languageCode=zh-Hans&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?label=繁體中文&languageCode=zh-Hant&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
 ![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=en&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=ja&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?label=%E6%97%A5%E6%9C%AC%E8%AA%9E&languageCode=ja&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
 
 Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
 
