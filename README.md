@@ -25,6 +25,14 @@ Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-�
 
 No official app store, need sideloading.
 
+## 本地化 地域化 Localization 
+
+L10Nはまだ不完全なので、プルリクエストをお願いします。日本語👉`lib/l10n/intl_ja.arb`
+
+Localization is still not complete, hope to receive pull requests.　English👉`lib/l10n/intl_en.arb`
+
+Also welcome other language. Add new file as `lib/l10n/intl_<language code>.arb`
+
 ## About
 
 Conning Tower is design to play KanColle on single app include assistant utilities.
