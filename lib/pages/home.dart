@@ -18,6 +18,8 @@ late bool gameLoadCompleted;
 double kWebviewHeight = 0.0;
 double kWebviewWidth = 0.0;
 bool allowNavi = true;
+double bottomPadding = 0.0;
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -49,14 +51,14 @@ class HomePageState extends State<HomePage> {
           controller: ScrollController(),
           scrollDirection: Axis.vertical,
           child: IntrinsicHeight(
-            child: AppRightSideControls(_controller.future),
+            child: AppLeftSideControls(_controller.future),
           ),
         ),
         const VerticalDivider(thickness: 1, width: 1),
         // This is the main content.
         Expanded(
           child: Container(
-            color: Colors.black,
+            padding: EdgeInsets.only(bottom: bottomPadding),
             alignment: Alignment.center,
             width: double.infinity,
             height: deviceWidth,
@@ -71,9 +73,8 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-
-class AppRightSideControls extends StatelessWidget {
-  const AppRightSideControls(this._webViewControllerFuture, {Key? key})
+class AppLeftSideControls extends StatelessWidget {
+  const AppLeftSideControls(this._webViewControllerFuture, {Key? key})
       : super(key: key);
 
   final Future<WebViewController> _webViewControllerFuture;
@@ -89,7 +90,6 @@ class AppRightSideControls extends StatelessWidget {
         final WebViewController? controller = snapshot.data;
         return NavigationRail(
           labelType: NavigationRailLabelType.all,
-          backgroundColor: Colors.black, // For Debug
           selectedIndex: 0,
           groupAlignment: 0,
           onDestinationSelected: (int index) async {
@@ -126,7 +126,8 @@ class AppRightSideControls extends StatelessWidget {
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                     inKancolleWindow = true;
                   }
-                  Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                  Fluttertoast.showToast(
+                      msg: S.current.KCViewFuncMsgAutoGameRedirect);
                   print("HTTP Redirect success");
                 } else {
                   Fluttertoast.showToast(msg: "Already in game window!");
@@ -135,12 +136,19 @@ class AppRightSideControls extends StatelessWidget {
                 print("inKancolleWindow: $inKancolleWindow");
                 break;
               case 5:
-                allowNavi = true;
-                if (await controller!.canGoBack()) {
-                  await controller.goBack();
+                if (bottomPadding == 0.0) {
+                  bottomPadding = 20.0;
+                } else {
+                  bottomPadding = 0.0;
                 }
                 break;
               case 6:
+              allowNavi = true;
+              if (await controller!.canGoBack()) {
+                await controller.goBack();
+              }
+              break;
+              case 7:
                 allowNavi = true;
                 controller!.reload();
                 break;
@@ -149,42 +157,40 @@ class AppRightSideControls extends StatelessWidget {
           destinations: [
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.home),
-              selectedIcon: const Icon(CupertinoIcons.home, color: Colors.blue),
-              label: Text(S.of(context).AppHome,
-                  style: TextStyle(color: Colors.white)),
+              label: Text(
+                S.of(context).AppHome,
+              ),
             ),
             NavigationRailDestination(
-                icon: const Icon(
-                  CupertinoIcons.up_arrow,
-                  color: Colors.white,
-                ),
-                label: Text(S.of(context).AppScrollUp,
-                    style: TextStyle(color: Colors.white))),
-            NavigationRailDestination(
-                icon:
-                    const Icon(CupertinoIcons.down_arrow, color: Colors.white),
-                label: Text(S.of(context).AppScrollDown,
-                    style: TextStyle(color: Colors.white))),
-            NavigationRailDestination(
-                icon:
-                    const Icon(CupertinoIcons.fullscreen, color: Colors.white),
-                label: Text(S.of(context).AppResize,
-                    style: TextStyle(color: Colors.white))),
-            NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.arrow_up_down_square,
-                  color: Colors.white),
-              label: Text(S.of(context).AppRedirect,
-                  style: TextStyle(color: Colors.white)),
+              icon: const Icon(CupertinoIcons.up_arrow),
+              label: Text(S.of(context).AppScrollUp),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.back, color: Colors.white),
-              label: Text(S.of(context).AppBack,
-                  style: TextStyle(color: Colors.white)),
+              icon: const Icon(CupertinoIcons.down_arrow),
+              label: Text(S.of(context).AppScrollDown),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.refresh, color: Colors.red),
-              label: Text(S.of(context).AppRefresh,
-                  style: TextStyle(color: Colors.white)),
+              icon: const Icon(CupertinoIcons.fullscreen),
+              label: Text(S.of(context).AppResize),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.arrow_up_down_square),
+              label: Text(S.of(context).AppRedirect),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.square_arrow_up_fill),
+              label: Text(S.of(context).AppBottomSafe),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.back),
+              label: Text(S.of(context).AppBack),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.refresh,
+                color: CupertinoColors.destructiveRed,
+              ),
+              label: Text(S.of(context).AppRefresh),
             ),
           ],
         );

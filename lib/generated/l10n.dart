@@ -120,41 +120,51 @@ class S {
     );
   }
 
+  /// `Bottom-up`
+  String get AppBottomSafe {
+    return Intl.message(
+      'Bottom-up',
+      name: 'AppBottomSafe',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
-  String AppRightSideControlsLoad(Object url) {
+  String AppLeftSideControlsLoad(Object url) {
     return Intl.message(
       'Load URL: $url',
-      name: 'AppRightSideControlsLoad',
+      name: 'AppLeftSideControlsLoad',
       desc: '',
       args: [url],
     );
   }
 
   /// `WebView not ready`
-  String get AppRightSideControlsNotReady {
+  String get AppLeftSideControlsNotReady {
     return Intl.message(
       'WebView not ready',
-      name: 'AppRightSideControlsNotReady',
+      name: 'AppLeftSideControlsNotReady',
       desc: '',
       args: [],
     );
   }
 
   /// `Scroll down`
-  String get AppRightSideControlsScrollDown {
+  String get AppLeftSideControlsScrollDown {
     return Intl.message(
       'Scroll down',
-      name: 'AppRightSideControlsScrollDown',
+      name: 'AppLeftSideControlsScrollDown',
       desc: '',
       args: [],
     );
   }
 
   /// `Scroll up`
-  String get AppRightSideControlsScrollUp {
+  String get AppLeftSideControlsScrollUp {
     return Intl.message(
       'Scroll up',
-      name: 'AppRightSideControlsScrollUp',
+      name: 'AppLeftSideControlsScrollUp',
       desc: '',
       args: [],
     );

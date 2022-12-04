@@ -31,20 +31,21 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppHome": MessageLookupByLibrary.simpleMessage("主页"),
+        "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView还没有准备好"),
+        "AppLeftSideControlsScrollDown":
+            MessageLookupByLibrary.simpleMessage("向下滚动"),
+        "AppLeftSideControlsScrollUp":
+            MessageLookupByLibrary.simpleMessage("向上滚动"),
         "AppName": MessageLookupByLibrary.simpleMessage("舰桥"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成自动全屏，如果你长时间看到DMM GAMES的顶栏，请在你指挥舰队前点击HTTP跳转按钮。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP跳转"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("刷新"),
         "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸"),
-        "AppRightSideControlsLoad": m0,
-        "AppRightSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView还没有准备好"),
-        "AppRightSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("向下滚动"),
-        "AppRightSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("向上滚动"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动"),
         "FutureAutoAdjustWindowFail":
