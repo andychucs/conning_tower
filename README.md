@@ -1,5 +1,4 @@
-![banner](https://user-images.githubusercontent.com/24852023/204078116-31f89653-997c-46a2-bb3f-d6f78100b202.jpeg)
-
+![banner](https://user-images.githubusercontent.com/24852023/205666592-0683320b-2a57-4cf4-b159-9cdc7233653c.png)
 
 # Conning Tower	
 
@@ -8,10 +7,11 @@
 ![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?logo=Flutter&logoColor=white)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=zh-Hans&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=zh-Hant&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=en&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
-![Localizely language progress](https://img.shields.io/localizely/progress/aeda17c7-6440-4108-9712-7f9067d75f71?languageCode=ja&token=3b21ab873f294474b0892493fcb65f7a5f059d7331bc4e7aa86522c5ff13a624)
+![Localizely language progress](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-100%25-brightgreen)
+![Localizely language progress](https://img.shields.io/badge/繁體中文-80%25-yellow)
+![Localizely language progress](https://img.shields.io/badge/English-100%25-brightgreen)
+![Localizely language progress](https://img.shields.io/badge/日本語-80%25-yellow)
+[![Twitter URL](https://img.shields.io/twitter/url?label=Follow&style=social&url=https%3A%2F%2Ftwitter.com%2Fconntower)](https://twitter.com/conntower)
 
 Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
 
@@ -24,6 +24,14 @@ Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-�
 [GitHub Releases](https://github.com/AndyZhuAZ/conning_tower/releases)
 
 No official app store, need sideloading.
+
+## 本地化 地域化 Localization 
+
+L10Nはまだ不完全なので、プルリクエストをお願いします。日本語👉`lib/l10n/intl_ja.arb`
+
+Localization is still not complete, hope to receive pull requests.　English👉`lib/l10n/intl_en.arb`
+
+Also welcome other language. Add new file as `lib/l10n/intl_<language code>.arb`
 
 ## About
 
