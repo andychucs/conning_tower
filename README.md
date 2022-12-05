@@ -1,6 +1,4 @@
-![banner](https://user-images.githubusercontent.com/24852023/205665246-56acb890-feb1-4996-a589-ae7f8b13d6d8.jpeg)
-
-
+![banner](https://user-images.githubusercontent.com/24852023/205666592-0683320b-2a57-4cf4-b159-9cdc7233653c.png)
 
 # Conning Tower	
 
