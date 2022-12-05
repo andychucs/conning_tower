@@ -18,8 +18,7 @@ late bool gameLoadCompleted;
 double kWebviewHeight = 0.0;
 double kWebviewWidth = 0.0;
 bool allowNavi = true;
-double bottomPadding = 0.0;
-
+bool bottomPadding = false;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -43,6 +42,8 @@ class HomePageState extends State<HomePage> {
       WebView.platform = SurfaceAndroidWebView();
     } else if (Platform.isIOS) {
       deviceWidth = MediaQuery.of(context).size.height;
+    } else {
+      deviceWidth = MediaQuery.of(context).size.width;
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Row(
@@ -51,14 +52,19 @@ class HomePageState extends State<HomePage> {
           controller: ScrollController(),
           scrollDirection: Axis.vertical,
           child: IntrinsicHeight(
-            child: AppLeftSideControls(_controller.future),
+            child: AppLeftSideControls(
+              _controller.future,
+              notifyParent: () {
+                setState(() {});
+              },
+            ),
           ),
         ),
         const VerticalDivider(thickness: 1, width: 1),
         // This is the main content.
         Expanded(
           child: Container(
-            padding: EdgeInsets.only(bottom: bottomPadding),
+            padding: EdgeInsets.only(bottom: bottomPadding ? deviceWidth / 10 : 0.0),
             alignment: Alignment.center,
             width: double.infinity,
             height: deviceWidth,
@@ -74,9 +80,10 @@ class HomePageState extends State<HomePage> {
 }
 
 class AppLeftSideControls extends StatelessWidget {
-  const AppLeftSideControls(this._webViewControllerFuture, {Key? key})
+  const AppLeftSideControls(this._webViewControllerFuture,
+      {Key? key, required this.notifyParent})
       : super(key: key);
-
+  final Function() notifyParent;
   final Future<WebViewController> _webViewControllerFuture;
 
   @override
@@ -136,18 +143,19 @@ class AppLeftSideControls extends StatelessWidget {
                 print("inKancolleWindow: $inKancolleWindow");
                 break;
               case 5:
-                if (bottomPadding == 0.0) {
-                  bottomPadding = 20.0;
+                if (bottomPadding) {
+                  bottomPadding = false;
                 } else {
-                  bottomPadding = 0.0;
+                  bottomPadding = true;
                 }
+                notifyParent();
                 break;
               case 6:
-              allowNavi = true;
-              if (await controller!.canGoBack()) {
-                await controller.goBack();
-              }
-              break;
+                allowNavi = true;
+                if (await controller!.canGoBack()) {
+                  await controller.goBack();
+                }
+                break;
               case 7:
                 allowNavi = true;
                 controller!.reload();
