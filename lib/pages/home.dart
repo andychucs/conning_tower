@@ -64,7 +64,9 @@ class HomePageState extends State<HomePage> {
         // This is the main content.
         Expanded(
           child: Container(
-            padding: EdgeInsets.only(bottom: bottomPadding ? deviceWidth / 10 : 0.0),
+            padding: EdgeInsets.only(
+              bottom: bottomPadding ? deviceWidth / 10 : 0.0,
+            ),
             alignment: Alignment.center,
             width: double.infinity,
             height: deviceWidth,
@@ -110,12 +112,6 @@ class AppLeftSideControls extends StatelessWidget {
                 controller!.loadUrl("http://$kGameUrl");
                 break;
               case 1:
-                controller!.scrollBy(0, -1);
-                break;
-              case 2:
-                controller!.scrollBy(0, 1);
-                break;
-              case 3:
                 if (!gameLoadCompleted) {
                   Fluttertoast.showToast(msg: "Game not load complete yet");
                   return;
@@ -123,7 +119,7 @@ class AppLeftSideControls extends StatelessWidget {
                   await autoAdjustWindow(controller!);
                 }
                 break;
-              case 4:
+              case 2:
                 if (!inKancolleWindow) {
                   String? currentUrl = await controller!.currentUrl();
                   if (currentUrl.toString().endsWith(kGameUrl)) {
@@ -142,13 +138,19 @@ class AppLeftSideControls extends StatelessWidget {
                 }
                 print("inKancolleWindow: $inKancolleWindow");
                 break;
-              case 5:
+              case 3:
                 if (bottomPadding) {
                   bottomPadding = false;
                 } else {
                   bottomPadding = true;
                 }
                 notifyParent();
+                break;
+              case 4:
+                controller!.scrollBy(0, -1);
+                break;
+              case 5:
+                controller!.scrollBy(0, 1);
                 break;
               case 6:
                 allowNavi = true;
@@ -170,14 +172,6 @@ class AppLeftSideControls extends StatelessWidget {
               ),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.up_arrow),
-              label: Text(S.of(context).AppScrollUp),
-            ),
-            NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.down_arrow),
-              label: Text(S.of(context).AppScrollDown),
-            ),
-            NavigationRailDestination(
               icon: const Icon(CupertinoIcons.fullscreen),
               label: Text(S.of(context).AppResize),
             ),
@@ -188,6 +182,14 @@ class AppLeftSideControls extends StatelessWidget {
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.square_arrow_up_fill),
               label: Text(S.of(context).AppBottomSafe),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.up_arrow),
+              label: Text(S.of(context).AppScrollUp),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.down_arrow),
+              label: Text(S.of(context).AppScrollDown),
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.back),
