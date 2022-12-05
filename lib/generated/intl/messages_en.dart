@@ -31,20 +31,21 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
+        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
+        "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView not ready"),
+        "AppLeftSideControlsScrollDown":
+            MessageLookupByLibrary.simpleMessage("Scroll down"),
+        "AppLeftSideControlsScrollUp":
+            MessageLookupByLibrary.simpleMessage("Scroll up"),
         "AppName": MessageLookupByLibrary.simpleMessage("Bridge"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command."),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP Redirect"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
         "AppResize": MessageLookupByLibrary.simpleMessage("Resize"),
-        "AppRightSideControlsLoad": m0,
-        "AppRightSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView not ready"),
-        "AppRightSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("Scroll down"),
-        "AppRightSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("Scroll up"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("Scroll Down"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up"),
         "FutureAutoAdjustWindowFail":

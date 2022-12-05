@@ -31,20 +31,21 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppHome": MessageLookupByLibrary.simpleMessage("首頁"),
+        "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("Web 視圖還沒有準備好"),
+        "AppLeftSideControlsScrollDown":
+            MessageLookupByLibrary.simpleMessage("向下捲動"),
+        "AppLeftSideControlsScrollUp":
+            MessageLookupByLibrary.simpleMessage("向上捲動"),
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command."),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("重定向"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("重新整理"),
         "AppResize": MessageLookupByLibrary.simpleMessage("調整大小"),
-        "AppRightSideControlsLoad": m0,
-        "AppRightSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("Web 視圖還沒有準備好"),
-        "AppRightSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("向下捲動"),
-        "AppRightSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("向上捲動"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下捲動"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上捲動"),
         "FutureAutoAdjustWindowFail":

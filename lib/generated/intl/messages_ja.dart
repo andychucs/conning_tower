@@ -31,20 +31,21 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
+        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
+        "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView の準備が整っていません"),
+        "AppLeftSideControlsScrollDown":
+            MessageLookupByLibrary.simpleMessage("下スクロール"),
+        "AppLeftSideControlsScrollUp":
+            MessageLookupByLibrary.simpleMessage("上スクロール"),
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督、艦橋へようこそ、艦橋は艦これの画面を自動的に全画面にします、もし長い間DMM GAMESのトップバーを見る場合、艦隊の指示の前にHTTPリダイレクトを押してください。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP リダイレクト"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
         "AppResize": MessageLookupByLibrary.simpleMessage("画面変換"),
-        "AppRightSideControlsLoad": m0,
-        "AppRightSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView の準備が整っていません"),
-        "AppRightSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("下スクロール"),
-        "AppRightSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("上スクロール"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール"),
         "FutureAutoAdjustWindowFail":

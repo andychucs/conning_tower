@@ -10,8 +10,7 @@ class ConnTowerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      onGenerateTitle: (context) => S.of(context).AppName,
+    return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -19,10 +18,19 @@ class ConnTowerApp extends StatelessWidget {
         S.delegate
       ],
       supportedLocales: S.delegate.supportedLocales,
-      theme: const CupertinoThemeData(),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        colorSchemeSeed: CupertinoColors.lightBackgroundGray,
+        dividerColor: CupertinoColors.secondarySystemFill
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
+        dividerColor: CupertinoColors.tertiarySystemFill
+      ),
+      themeMode: ThemeMode.system,
       home: const Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: CupertinoColors.black,
         body: SafeArea(
           bottom: false,
           child: HomePage(),
