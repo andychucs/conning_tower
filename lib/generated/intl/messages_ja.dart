@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督、艦橋へようこそ、艦橋は艦これの画面を自動的に全画面にします、もし長い間DMM GAMESのトップバーを見る場合、艦隊の指示の前にHTTPリダイレクトを押してください。"),
-        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP リダイレクト"),
+        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP転送"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
         "AppResize": MessageLookupByLibrary.simpleMessage("画面変換"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
