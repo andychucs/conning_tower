@@ -8,7 +8,7 @@
   "@AppName": {},
   "AppNotify": "提督、艦橋へようこそ、艦橋は艦これの画面を自動的に全画面にします、もし長い間DMM GAMESのトップバーを見る場合、艦隊の指示の前にHTTPリダイレクトを押してください。",
   "@AppNotify": {},
-  "AppRedirect": "HTTP リダイレクト",
+  "AppRedirect": "HTTP転送",
   "@AppRedirect": {},
   "AppRefresh": "リフレッシュ",
   "@AppRefresh": {},
