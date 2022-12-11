@@ -7,6 +7,7 @@
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="landscape"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
