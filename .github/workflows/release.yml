@@ -50,4 +50,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             New Release is update: 
-            https://github.com/AndyZhuAZ/conning_tower/releases/tag/${{ steps.version.outputs.version }}
+            https://github.com/andychucs/conning_tower/releases/tag/${{ steps.version.outputs.version }}
