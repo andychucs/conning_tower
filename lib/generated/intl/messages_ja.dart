@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
-  static String m0(url) => "URL をロード: ${url}";
+  static String m0(url) => "URLをロード: ${url}";
 
   static String m1(url) => "Now navigation to ${url}";
 
@@ -35,25 +35,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
         "AppLeftSideControlsLoad": m0,
         "AppLeftSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView の準備が整っていません"),
+            MessageLookupByLibrary.simpleMessage("WebViewの準備がまだ整っていません"),
         "AppLeftSideControlsScrollDown":
             MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppLeftSideControlsScrollUp":
             MessageLookupByLibrary.simpleMessage("上スクロール"),
-        "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
+        "AppName": MessageLookupByLibrary.simpleMessage("conning tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督、艦橋へようこそ、艦橋は艦これの画面を自動的に全画面にします、もし長い間DMM GAMESのトップバーを見る場合、艦隊の指示の前にHTTPリダイレクトを押してください。"),
-        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP転送"),
+            "提督、conning towerへようこそ。conning towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、HTTPリダイレクトを押してください。"),
+        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP\nリダイレクト"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
         "AppResize": MessageLookupByLibrary.simpleMessage("画面変換"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール"),
         "FutureAutoAdjustWindowFail":
-            MessageLookupByLibrary.simpleMessage("全画面表示失敗"),
+            MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
-            MessageLookupByLibrary.simpleMessage("全画面表示成功"),
+            MessageLookupByLibrary.simpleMessage("全画面表示に成功しました"),
         "KCViewFuncMsgAutoGameRedirect":
-            MessageLookupByLibrary.simpleMessage("ゲームウィンドウに読み込まれました！"),
+            MessageLookupByLibrary.simpleMessage("ゲームウィンドウが読み込まれました！"),
         "KCViewFuncMsgNavi": m1,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
@@ -64,6 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "iOS 15.0以降をお使いの提督は、DMM GAMESのトップバーが表示され、真っ白なページが表示される場合、HTTPリダイレクトを押してください。")
+            "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、HTTPリダイレクトを押すことでプレイ可能な状態になります。")
       };
 }

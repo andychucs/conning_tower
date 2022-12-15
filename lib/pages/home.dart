@@ -15,10 +15,10 @@ import '../generated/l10n.dart';
 late bool inKancolleWindow;
 late bool autoAdjusted;
 late bool gameLoadCompleted;
-double kWebviewHeight = 0.0;
-double kWebviewWidth = 0.0;
-bool allowNavi = true;
-bool bottomPadding = false;
+late double kWebviewHeight;
+late double kWebviewWidth;
+late bool allowNavi;
+late bool bottomPadding;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -32,6 +32,18 @@ class HomePageState extends State<HomePage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late double deviceWidth;
+
+  @override
+  void initState() {
+    super.initState();
+    gameLoadCompleted = false;
+    inKancolleWindow = false;
+    autoAdjusted = false;
+    kWebviewHeight = 0.0;
+    kWebviewWidth = 0.0;
+    allowNavi = true;
+    bottomPadding = false;
+  }
 
   // const ConnTowerHomePage({Key? key}) : super(key: key);
 
@@ -177,7 +189,10 @@ class AppLeftSideControls extends StatelessWidget {
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.arrow_up_down_square),
-              label: Text(S.of(context).AppRedirect),
+              label: Text(
+                S.of(context).AppRedirect,
+                textAlign: TextAlign.center,
+              ),
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.square_arrow_up_fill),

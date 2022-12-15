@@ -1,5 +1,5 @@
 name: conning_tower
-description: 司令塔/艦橋 aka Conning tower or Bridge is a cross-platform KanColle browser
+description: 艦橋 aka Conning tower or Bridge is a cross-platform KanColle browser
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
