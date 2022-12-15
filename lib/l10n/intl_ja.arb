@@ -8,7 +8,7 @@
   "@AppName": {},
   "AppNotify": "提督、conning towerへようこそ。conning towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、HTTPリダイレクトを押してください。",
   "@AppNotify": {},
-  "AppRedirect": "HTTP転送",
+  "AppRedirect": "HTTP\nリダイレクト",
   "@AppRedirect": {},
   "AppRefresh": "リフレッシュ",
   "@AppRefresh": {},

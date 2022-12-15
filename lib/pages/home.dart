@@ -177,7 +177,10 @@ class AppLeftSideControls extends StatelessWidget {
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.arrow_up_down_square),
-              label: Text(S.of(context).AppRedirect),
+              label: Text(
+                S.of(context).AppRedirect,
+                textAlign: TextAlign.center,
+              ),
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.square_arrow_up_fill),
