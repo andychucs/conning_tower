@@ -16,7 +16,7 @@ jobs:
           VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Setup Java JDK
-          uses: actions/setup-java@v3.7.0
+          uses: actions/setup-java@v3
           with:
             java-version: "12.x"
             distribution: temurin
