@@ -28,7 +28,7 @@ No official app store, need sideloading.
 
 ## 本地化 地域化 Localization 
 
-翻訳の誤りを見つけたらプルリクエストを発行してください。日本語👉`lib/l10n/intl_ja.arb`
+もし翻訳の誤りがあった際はプルリクエストを発行してください。日本語👉`lib/l10n/intl_ja.arb`
 
 Localization is still not complete, hope to receive pull requests.　English👉`lib/l10n/intl_en.arb`
 
