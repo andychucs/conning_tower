@@ -6,7 +6,7 @@ on:
         required: true
         default: ''
 
-name: Build and Release apk
+name: Build and Release apk (Manual)
 jobs:
   build:
     name: Build APK
