@@ -15,13 +15,14 @@ class KCWebView extends StatefulWidget {
   const KCWebView(this.controller, {super.key});
   final Completer<WebViewController> controller;
 
+
   @override
   State<StatefulWidget> createState() => KCWebViewState();
 }
 
 class KCWebViewState extends State<KCWebView> {
   late String defaultUA;
-
+  final CookieManager _cookieManager = CookieManager();
   @override
   void initState() {
     super.initState();
@@ -31,6 +32,9 @@ class KCWebViewState extends State<KCWebView> {
     } else if (Platform.isIOS) {
       defaultUA = kSafariUA;
     }
+  }
+  Future<bool> clearCookie(){
+    return _cookieManager.clearCookies();
   }
 
   @override

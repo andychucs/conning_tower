@@ -174,6 +174,11 @@ class AppLeftSideControls extends StatelessWidget {
                 allowNavi = true;
                 controller!.reload();
                 break;
+              case 8:
+                if(await KCWebViewState().clearCookie()){
+                  Fluttertoast.showToast(msg: "Clear cookie");
+                }
+                break;
             }
           },
           destinations: [
@@ -216,6 +221,13 @@ class AppLeftSideControls extends StatelessWidget {
                 color: CupertinoColors.destructiveRed,
               ),
               label: Text(S.of(context).AppRefresh),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.delete_solid,
+                color: CupertinoColors.destructiveRed,
+              ),
+              label: Text("Clear Cookie"),
             ),
           ],
         );
