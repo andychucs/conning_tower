@@ -7,7 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../constants.dart';
 import '../generated/l10n.dart';
 import '../helper.dart';
-import 'home.dart';
+import '../pages/home.dart';
 import 'kcwebview.dart';
 
 class AppLeftSideControls extends StatelessWidget {

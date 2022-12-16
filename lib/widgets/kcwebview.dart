@@ -10,7 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../constants.dart';
 import '../generated/l10n.dart';
 import '../helper.dart';
-import 'home.dart';
+import '../pages/home.dart';
 
 class KCWebView extends StatefulWidget {
   const KCWebView(this.controller, {super.key});

@@ -1,20 +1,19 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:conning_tower/pages/kcwebview.dart';
+import 'package:conning_tower/widgets/controls.dart';
+import 'package:conning_tower/widgets/kcwebview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'controls.dart';
-
-late bool inKancolleWindow;
+late bool allowNavi;
 late bool autoAdjusted;
+late bool bottomPadding;
 late bool gameLoadCompleted;
+late bool inKancolleWindow;
 late double kWebviewHeight;
 late double kWebviewWidth;
-late bool allowNavi;
-late bool bottomPadding;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -40,8 +39,6 @@ class HomePageState extends State<HomePage> {
     allowNavi = true;
     bottomPadding = false;
   }
-
-  // const ConnTowerHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
