@@ -11,6 +11,7 @@ class ConnTowerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -19,15 +20,13 @@ class ConnTowerApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       theme: ThemeData(
-        brightness: Brightness.light,
-        colorSchemeSeed: CupertinoColors.lightBackgroundGray,
-        dividerColor: CupertinoColors.secondarySystemFill
-      ),
+          brightness: Brightness.light,
+          colorSchemeSeed: CupertinoColors.lightBackgroundGray,
+          dividerColor: CupertinoColors.secondarySystemFill),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
-        dividerColor: CupertinoColors.tertiarySystemFill
-      ),
+          brightness: Brightness.dark,
+          colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
+          dividerColor: CupertinoColors.tertiarySystemFill),
       themeMode: ThemeMode.system,
       home: const Scaffold(
         resizeToAvoidBottomInset: false,
