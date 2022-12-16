@@ -9,12 +9,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
 import '../generated/l10n.dart';
+import '../helper.dart';
 import 'home.dart';
 
 class KCWebView extends StatefulWidget {
   const KCWebView(this.controller, {super.key});
   final Completer<WebViewController> controller;
-
 
   @override
   State<StatefulWidget> createState() => KCWebViewState();
@@ -33,7 +33,8 @@ class KCWebViewState extends State<KCWebView> {
       defaultUA = kSafariUA;
     }
   }
-  Future<bool> clearCookie(){
+
+  Future<bool> clearCookie() {
     return _cookieManager.clearCookies();
   }
 
