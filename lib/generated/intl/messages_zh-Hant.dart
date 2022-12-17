@@ -32,11 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
-        "AppClearCache": MessageLookupByLibrary.simpleMessage("刪除Cache"),
+        "AppClearCache": MessageLookupByLibrary.simpleMessage("刪除緩存"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("登出"),
         "AppHome": MessageLookupByLibrary.simpleMessage("首頁"),
         "AppLeftSideControlsClearCache":
-            MessageLookupByLibrary.simpleMessage("Cache cleared."),
+            MessageLookupByLibrary.simpleMessage("已刪除緩存"),
         "AppLeftSideControlsLoad": m0,
         "AppLeftSideControlsLogoutFailed":
             MessageLookupByLibrary.simpleMessage("未找到Cookie"),
