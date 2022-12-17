@@ -28,7 +28,7 @@ Future<bool> autoAdjustWindow(
       getWebviewSizeCount++;
     } while (getWebviewSizeCount < 5);
     var resizeScale = 1.0;
-    if (kWebviewHeight != null && kWebviewWidth != null) {
+    if (kWebviewHeight != 0.0 && kWebviewWidth != 0.0) {
       resizeScale = getResizeScale(kWebviewHeight, kWebviewWidth);
       autoAdjusted = true;
     } else {
@@ -39,10 +39,6 @@ Future<bool> autoAdjustWindow(
         '''document.getElementById("spacing_top").style.display = "none";''');
     await controller.runJavascript(
         '''document.getElementById("sectionWrap").style.display = "none";''');
-    await controller.runJavascript(
-        '''document.getElementById("flashWrap").style.backgroundColor = "black";''');
-    await controller
-        .runJavascript('''document.body.style.backgroundColor = "black";''');
 
     if (Platform.isIOS) {
       await controller.runJavascript(
