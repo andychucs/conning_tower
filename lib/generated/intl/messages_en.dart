@@ -32,8 +32,17 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
+        "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("Logout"),
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
+        "AppLeftSideControlsClearCache":
+            MessageLookupByLibrary.simpleMessage("Cache cleared."),
         "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsLogoutFailed": MessageLookupByLibrary.simpleMessage(
+            "There are no cookies. May not need logout."),
+        "AppLeftSideControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage(
+                "Cookies are gone, website logout success"),
         "AppLeftSideControlsNotReady":
             MessageLookupByLibrary.simpleMessage("WebView not ready"),
         "AppLeftSideControlsScrollDown":
@@ -52,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("Fullscreen success"),
+        "KCViewFuncMsgAlreadyGameRedirect":
+            MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("Loaded in game window!"),
         "KCViewFuncMsgNavi": m1,
@@ -59,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Game load completed"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("Game load failed"),
+        "KCViewFuncMsgNaviGameLoadNotCompleted":
+            MessageLookupByLibrary.simpleMessage("Game not load complete yet"),
         "KCViewFuncMsgPageFinished": m2,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),

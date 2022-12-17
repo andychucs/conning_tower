@@ -120,6 +120,26 @@ class S {
     );
   }
 
+  /// `Logout`
+  String get AppClearCookie {
+    return Intl.message(
+      'Logout',
+      name: 'AppClearCookie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear Cache`
+  String get AppClearCache {
+    return Intl.message(
+      'Clear Cache',
+      name: 'AppClearCache',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bottom-up`
   String get AppBottomSafe {
     return Intl.message(
@@ -145,6 +165,36 @@ class S {
     return Intl.message(
       'WebView not ready',
       name: 'AppLeftSideControlsNotReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cookies are gone, website logout success`
+  String get AppLeftSideControlsLogoutSuccess {
+    return Intl.message(
+      'Cookies are gone, website logout success',
+      name: 'AppLeftSideControlsLogoutSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no cookies. May not need logout.`
+  String get AppLeftSideControlsLogoutFailed {
+    return Intl.message(
+      'There are no cookies. May not need logout.',
+      name: 'AppLeftSideControlsLogoutFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cache cleared.`
+  String get AppLeftSideControlsClearCache {
+    return Intl.message(
+      'Cache cleared.',
+      name: 'AppLeftSideControlsClearCache',
       desc: '',
       args: [],
     );
@@ -220,6 +270,16 @@ class S {
     );
   }
 
+  /// `Already in game window!`
+  String get KCViewFuncMsgAlreadyGameRedirect {
+    return Intl.message(
+      'Already in game window!',
+      name: 'KCViewFuncMsgAlreadyGameRedirect',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Now navigation to {url}`
   String KCViewFuncMsgNavi(Object url) {
     return Intl.message(
@@ -235,6 +295,16 @@ class S {
     return Intl.message(
       'Game load completed',
       name: 'KCViewFuncMsgNaviGameLoadCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game not load complete yet`
+  String get KCViewFuncMsgNaviGameLoadNotCompleted {
+    return Intl.message(
+      'Game not load complete yet',
+      name: 'KCViewFuncMsgNaviGameLoadNotCompleted',
       desc: '',
       args: [],
     );

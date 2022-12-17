@@ -32,8 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
+        "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("Logout"),
         "AppHome": MessageLookupByLibrary.simpleMessage("首頁"),
+        "AppLeftSideControlsClearCache":
+            MessageLookupByLibrary.simpleMessage("Cache cleared."),
         "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsLogoutFailed":
+            MessageLookupByLibrary.simpleMessage("未发现Cookie，可能不需要退出登陆"),
+        "AppLeftSideControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage("Cookie已清除，已退出网站登陆"),
         "AppLeftSideControlsNotReady":
             MessageLookupByLibrary.simpleMessage("Web 視圖還沒有準備好"),
         "AppLeftSideControlsScrollDown":
@@ -52,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全螢幕成功"),
+        "KCViewFuncMsgAlreadyGameRedirect":
+            MessageLookupByLibrary.simpleMessage("已載入遊戲視窗，无需执行"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("已載入遊戲視窗！"),
         "KCViewFuncMsgNavi": m1,
@@ -59,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("遊戲加載完成"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("遊戲加載失敗"),
+        "KCViewFuncMsgNaviGameLoadNotCompleted":
+            MessageLookupByLibrary.simpleMessage("游戏尚未加载完毕"),
         "KCViewFuncMsgPageFinished": m2,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),

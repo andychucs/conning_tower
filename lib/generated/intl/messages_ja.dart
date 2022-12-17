@@ -32,8 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
+        "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュ\nを消去"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("ログアウト"),
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
+        "AppLeftSideControlsClearCache":
+            MessageLookupByLibrary.simpleMessage("キャッシュを消去が完了しました"),
         "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsLogoutFailed":
+            MessageLookupByLibrary.simpleMessage("Cookieは見つかりません、ログアウトが必要ないかも"),
+        "AppLeftSideControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage("Cookieを消去しました、ログアウトが成功しました"),
         "AppLeftSideControlsNotReady":
             MessageLookupByLibrary.simpleMessage("WebViewの準備がまだ整っていません"),
         "AppLeftSideControlsScrollDown":
@@ -52,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全画面表示に成功しました"),
+        "KCViewFuncMsgAlreadyGameRedirect":
+            MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("ゲームウィンドウが読み込まれました！"),
         "KCViewFuncMsgNavi": m1,
@@ -59,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("ゲームの読み込みに失敗しました"),
+        "KCViewFuncMsgNaviGameLoadNotCompleted":
+            MessageLookupByLibrary.simpleMessage("ゲームのロードはまだ完了しません"),
         "KCViewFuncMsgPageFinished": m2,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
