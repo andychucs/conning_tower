@@ -300,6 +300,26 @@ class S {
     );
   }
 
+  /// `Game homepage is loading`
+  String get KCViewFuncMsgGameNavi {
+    return Intl.message(
+      'Game homepage is loading',
+      name: 'KCViewFuncMsgGameNavi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `refresh on game homepage is block`
+  String get KCViewFuncMsgGameNaviBlock {
+    return Intl.message(
+      'refresh on game homepage is block',
+      name: 'KCViewFuncMsgGameNaviBlock',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Game not load complete yet`
   String get KCViewFuncMsgNaviGameLoadNotCompleted {
     return Intl.message(

@@ -64,6 +64,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面"),
+        "KCViewFuncMsgGameNavi":
+            MessageLookupByLibrary.simpleMessage("游戏主页加载中"),
+        "KCViewFuncMsgGameNaviBlock":
+            MessageLookupByLibrary.simpleMessage("游戏主页的重载已被拦截"),
         "KCViewFuncMsgNavi": m1,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("游戏加载完毕"),

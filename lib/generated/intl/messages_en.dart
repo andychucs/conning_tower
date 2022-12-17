@@ -65,6 +65,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("Loaded in game window!"),
+        "KCViewFuncMsgGameNavi":
+            MessageLookupByLibrary.simpleMessage("Game homepage is loading"),
+        "KCViewFuncMsgGameNaviBlock": MessageLookupByLibrary.simpleMessage(
+            "refresh on game homepage is block"),
         "KCViewFuncMsgNavi": m1,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("Game load completed"),

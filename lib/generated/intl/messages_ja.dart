@@ -64,6 +64,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("ゲームウィンドウが読み込まれました！"),
+        "KCViewFuncMsgGameNavi":
+            MessageLookupByLibrary.simpleMessage("艦これのロード中"),
+        "KCViewFuncMsgGameNaviBlock":
+            MessageLookupByLibrary.simpleMessage("艦これのリフレッシュは遮断されました"),
         "KCViewFuncMsgNavi": m1,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
