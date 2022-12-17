@@ -8,7 +8,20 @@ import '../constants.dart';
 import '../generated/l10n.dart';
 import '../helper.dart';
 import '../pages/home.dart';
-import 'kcwebview.dart';
+
+enum ConFunc {
+  adjustWindow,
+  loadHome,
+  httpRedirect,
+  bottomUp,
+  scrollUp,
+  scrollDown,
+  goBack,
+  refresh,
+  clearCookies,
+  clearCache,
+  doRequest,
+}
 
 class AppLeftSideControls extends StatelessWidget {
   AppLeftSideControls(
@@ -19,6 +32,19 @@ class AppLeftSideControls extends StatelessWidget {
   final Function() notifyParent;
   final Future<WebViewController> _webViewControllerFuture;
   late final CookieManager cookieManager;
+
+  final Map funcMap = {
+    0: ConFunc.loadHome,
+    1: ConFunc.adjustWindow,
+    2: ConFunc.httpRedirect,
+    3: ConFunc.bottomUp,
+    4: ConFunc.scrollUp,
+    5: ConFunc.scrollDown,
+    6: ConFunc.goBack,
+    7: ConFunc.refresh,
+    8: ConFunc.clearCookies,
+    9: ConFunc.clearCache
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -35,69 +61,42 @@ class AppLeftSideControls extends StatelessWidget {
           groupAlignment: 0,
           onDestinationSelected: (int index) async {
             HapticFeedback.heavyImpact();
+            var func = funcMap[index];
             if (!webViewReady) {
+              Fluttertoast.showToast(
+                  msg: S.of(context).AppLeftSideControlsNotReady);
               return;
-            }
-            switch (index) {
-              case 0:
-                allowNavi = true;
-                controller!.loadUrl("http://$kGameUrl");
+            } else if (func == ConFunc.bottomUp) {}
+            switch (func) {
+              case ConFunc.loadHome:
+                _onLoadHome(controller!);
                 break;
-              case 1:
-                if (!gameLoadCompleted) {
-                  Fluttertoast.showToast(msg: "Game not load complete yet");
-                  return;
-                } else {
-                  await autoAdjustWindow(controller!);
-                }
+              case ConFunc.adjustWindow:
+                _onAdjustWindow(controller!);
                 break;
-              case 2:
-                if (!inKancolleWindow) {
-                  String? currentUrl = await controller!.currentUrl();
-                  if (currentUrl.toString().endsWith(kGameUrl)) {
-                    // May be HTTPS or HTTP
-                    allowNavi = true;
-                    await controller.runJavascript(
-                        '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                    inKancolleWindow = true;
-                  }
-                  Fluttertoast.showToast(
-                      msg: S.current.KCViewFuncMsgAutoGameRedirect);
-                  print("HTTP Redirect success");
-                } else {
-                  Fluttertoast.showToast(msg: "Already in game window!");
-                  print("HTTP Redirect fail");
-                }
-                print("inKancolleWindow: $inKancolleWindow");
+              case ConFunc.httpRedirect:
+                _onHttpRedirect(controller!);
                 break;
-              case 3:
-                if (bottomPadding) {
-                  bottomPadding = false;
-                } else {
-                  bottomPadding = true;
-                }
-                notifyParent();
+              case ConFunc.bottomUp:
+                _onBottomUp();
                 break;
-              case 4:
+              case ConFunc.scrollUp:
                 controller!.scrollBy(0, -1);
                 break;
-              case 5:
+              case ConFunc.scrollDown:
                 controller!.scrollBy(0, 1);
                 break;
-              case 6:
-                allowNavi = true;
-                if (await controller!.canGoBack()) {
-                  await controller.goBack();
-                }
+              case ConFunc.goBack:
+                _onGoBack(controller!);
                 break;
-              case 7:
-                allowNavi = true;
-                controller!.reload();
+              case ConFunc.refresh:
+                _onRefresh(controller!);
                 break;
-              case 8:
-                if (await KCWebViewState().clearCookie()) {
-                  Fluttertoast.showToast(msg: "Clear cookie");
-                }
+              case ConFunc.clearCookies:
+                _onClearCookies();
+                break;
+              case ConFunc.clearCache:
+                _onClearCache(controller!);
                 break;
             }
           },
@@ -113,14 +112,14 @@ class AppLeftSideControls extends StatelessWidget {
               label: Text(S.of(context).AppResize),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.arrow_up_down_square),
+              icon: const Icon(CupertinoIcons.rectangle_expand_vertical),
               label: Text(
                 S.of(context).AppRedirect,
                 textAlign: TextAlign.center,
               ),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.square_arrow_up_fill),
+              icon: const Icon(CupertinoIcons.rectangle_dock),
               label: Text(S.of(context).AppBottomSafe),
             ),
             NavigationRailDestination(
@@ -144,10 +143,20 @@ class AppLeftSideControls extends StatelessWidget {
             ),
             NavigationRailDestination(
               icon: const Icon(
-                CupertinoIcons.delete_solid,
+                CupertinoIcons.square_arrow_left,
                 color: CupertinoColors.destructiveRed,
               ),
-              label: Text("Clear Cookie"),
+              label: Text(S.of(context).AppClearCookie),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.delete,
+                color: CupertinoColors.destructiveRed,
+              ),
+              label: Text(
+                S.of(context).AppClearCache,
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         );
@@ -155,15 +164,67 @@ class AppLeftSideControls extends StatelessWidget {
     );
   }
 
-  Future<void> _onClearCookies(BuildContext context) async {
-    final bool hadCookies = await cookieManager.clearCookies();
-    String message = 'There were cookies. Now, they are gone!';
-    if (!hadCookies) {
-      message = 'There are no cookies.';
+  Future<void> _onRefresh(WebViewController controller) async {
+    allowNavi = true;
+    await controller.reload();
+  }
+
+  Future<void> _onGoBack(WebViewController controller) async {
+    allowNavi = true;
+    if (await controller.canGoBack()) {
+      await controller.goBack();
     }
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-    ));
+  }
+
+  void _onBottomUp() {
+    if (bottomPadding) {
+      bottomPadding = false;
+    } else {
+      bottomPadding = true;
+    }
+    notifyParent();
+  }
+
+  Future<void> _onHttpRedirect(WebViewController controller) async {
+    if (!inKancolleWindow) {
+      String? currentUrl = await controller.currentUrl();
+      if (currentUrl.toString().endsWith(kGameUrl)) {
+        // May be HTTPS or HTTP
+        allowNavi = true;
+        await controller
+            .runJavascript('''window.open("http:"+gadgetInfo.URL,'_blank');''');
+        inKancolleWindow = true;
+      }
+      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+      print("HTTP Redirect success");
+    } else {
+      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
+      print("HTTP Redirect fail");
+    }
+    print("inKancolleWindow: $inKancolleWindow");
+  }
+
+  Future<void> _onAdjustWindow(WebViewController controller) async {
+    if (gameLoadCompleted) {
+      await autoAdjustWindow(controller);
+    } else {
+      Fluttertoast.showToast(
+          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
+    }
+  }
+
+  Future<void> _onLoadHome(WebViewController controller) async {
+    allowNavi = true;
+    await controller.loadUrl("http://$kGameUrl");
+  }
+
+  Future<void> _onClearCookies() async {
+    final bool hadCookies = await cookieManager.clearCookies();
+    String message = S.current.AppLeftSideControlsLogoutSuccess;
+    if (!hadCookies) {
+      message = S.current.AppLeftSideControlsLogoutFailed;
+    }
+    Fluttertoast.showToast(msg: message);
   }
 
   Future<void> _onListCookies(
@@ -204,11 +265,8 @@ class AppLeftSideControls extends StatelessWidget {
         '.then((caches) => Toaster.postMessage(caches))');
   }
 
-  Future<void> _onClearCache(
-      WebViewController controller, BuildContext context) async {
+  Future<void> _onClearCache(WebViewController controller) async {
     await controller.clearCache();
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Cache cleared.'),
-    ));
+    Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
   }
 }

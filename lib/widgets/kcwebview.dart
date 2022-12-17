@@ -91,9 +91,9 @@ class KCWebViewState extends State<KCWebView> {
               if (request.url.startsWith("http://osapi.dmm.com") ||
                   request.url.contains(
                       "www.dmm.com/netgame/social/-/gadgets/=/app_id=854854")) {
-                Fluttertoast.showToast(msg: "navigation to game page");
+                Fluttertoast.showToast(msg: S.current.KCViewFuncMsgGameNavi);
                 if (!allowNavi) {
-                  Fluttertoast.showToast(msg: "navigation is block");
+                  Fluttertoast.showToast(msg: S.current.KCViewFuncMsgGameNaviBlock);
                   return NavigationDecision.prevent;
                 }
               }

@@ -71,7 +71,7 @@ class HomePageState extends State<HomePage> {
         Expanded(
           child: Container(
             padding: EdgeInsets.only(
-              bottom: bottomPadding ? deviceWidth / 10 : 0.0,
+              bottom: bottomPadding ? deviceWidth / 18 : 0.0,
             ),
             alignment: Alignment.center,
             width: double.infinity,

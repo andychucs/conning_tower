@@ -32,8 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
-        "AppHome": MessageLookupByLibrary.simpleMessage("首頁"),
+        "AppClearCache": MessageLookupByLibrary.simpleMessage("刪除緩存"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("登出"),
+        "AppHome": MessageLookupByLibrary.simpleMessage("主頁"),
+        "AppLeftSideControlsClearCache":
+            MessageLookupByLibrary.simpleMessage("已刪除緩存"),
         "AppLeftSideControlsLoad": m0,
+        "AppLeftSideControlsLogoutFailed":
+            MessageLookupByLibrary.simpleMessage("未找到Cookie"),
+        "AppLeftSideControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage("已成功刪除Cookie"),
         "AppLeftSideControlsNotReady":
             MessageLookupByLibrary.simpleMessage("Web 視圖還沒有準備好"),
         "AppLeftSideControlsScrollDown":
@@ -52,13 +60,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全螢幕成功"),
+        "KCViewFuncMsgAlreadyGameRedirect":
+            MessageLookupByLibrary.simpleMessage("已載入遊戲視窗，無需執行"),
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("已載入遊戲視窗！"),
+        "KCViewFuncMsgGameNavi":
+            MessageLookupByLibrary.simpleMessage("遊戲視窗載入中"),
+        "KCViewFuncMsgGameNaviBlock":
+            MessageLookupByLibrary.simpleMessage("遊戲視窗的重載已被攔截"),
         "KCViewFuncMsgNavi": m1,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("遊戲加載完成"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("遊戲加載失敗"),
+        "KCViewFuncMsgNaviGameLoadNotCompleted":
+            MessageLookupByLibrary.simpleMessage("遊戲未加載完畢"),
         "KCViewFuncMsgPageFinished": m2,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),
