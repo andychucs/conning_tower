@@ -63,7 +63,8 @@ class AppLeftSideControls extends StatelessWidget {
             HapticFeedback.heavyImpact();
             var func = funcMap[index];
             if (!webViewReady) {
-              Fluttertoast.showToast(msg: S.of(context).AppLeftSideControlsNotReady);
+              Fluttertoast.showToast(
+                  msg: S.of(context).AppLeftSideControlsNotReady);
               return;
             } else if (func == ConFunc.bottomUp) {}
             switch (func) {
@@ -152,7 +153,10 @@ class AppLeftSideControls extends StatelessWidget {
                 CupertinoIcons.delete,
                 color: CupertinoColors.destructiveRed,
               ),
-              label: Text(S.of(context).AppClearCache),
+              label: Text(
+                S.of(context).AppClearCache,
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         );
@@ -204,7 +208,8 @@ class AppLeftSideControls extends StatelessWidget {
     if (gameLoadCompleted) {
       await autoAdjustWindow(controller);
     } else {
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
+      Fluttertoast.showToast(
+          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
     }
   }
 
