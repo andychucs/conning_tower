@@ -266,6 +266,7 @@ class AppLeftSideControls extends StatelessWidget {
   }
 
   Future<void> _onClearCache(WebViewController controller) async {
+    allowNavi = true;
     await controller.clearCache();
     Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
   }
