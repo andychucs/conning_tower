@@ -2,10 +2,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:conning_tower/widgets/controls.dart';
+import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/kcwebview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../generated/l10n.dart';
 
 late bool allowNavi;
 late bool autoAdjusted;
@@ -38,6 +41,19 @@ class HomePageState extends State<HomePage> {
     kWebviewWidth = 0.0;
     allowNavi = true;
     bottomPadding = false;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _showMyDialog(S.current.AppNotify);
+    });
+  }
+
+  Future<void> _showMyDialog(String msg) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CustomAlertDialog(msg: msg,);
+      },
+    );
   }
 
   @override
@@ -65,6 +81,13 @@ class HomePageState extends State<HomePage> {
               },
             ),
           ),
+        ),
+        TextButton(
+          onPressed: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => const CustomAlertDialog(msg: 'msg')
+          ),
+          child: const Text('Show Dialog'),
         ),
         const VerticalDivider(thickness: 1, width: 1),
         // This is the main content.
