@@ -43,6 +43,9 @@ class HomePageState extends State<HomePage> {
     bottomPadding = false;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _showMyDialog(S.current.AppNotify);
+      if (Platform.isIOS) {
+        await _showMyDialog(S.current.MsgIOSNote);
+      }
     });
   }
 
@@ -81,13 +84,6 @@ class HomePageState extends State<HomePage> {
               },
             ),
           ),
-        ),
-        TextButton(
-          onPressed: () => showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => const CustomAlertDialog(msg: 'msg')
-          ),
-          child: const Text('Show Dialog'),
         ),
         const VerticalDivider(thickness: 1, width: 1),
         // This is the main content.
