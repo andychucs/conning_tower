@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AlertNotShowAgain":
+            MessageLookupByLibrary.simpleMessage("Don\'t show again"),
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),

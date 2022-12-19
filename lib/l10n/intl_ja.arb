@@ -20,6 +20,8 @@
   "@AppClearCookie": {},
   "AppClearCache": "キャッシュ\nを消去",
   "@AppClearCache": {},
+  "AlertNotShowAgain": "再表示しない",
+  "@AlertNotShowAgain": {},
   "AppLeftSideControlsLoad": "URLをロード: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebViewの準備がまだ整っていません",

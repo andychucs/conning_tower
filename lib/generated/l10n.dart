@@ -150,6 +150,16 @@ class S {
     );
   }
 
+  /// `Don't show again`
+  String get AlertNotShowAgain {
+    return Intl.message(
+      'Don\'t show again',
+      name: 'AlertNotShowAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
   String AppLeftSideControlsLoad(Object url) {
     return Intl.message(
