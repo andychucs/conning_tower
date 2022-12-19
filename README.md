@@ -11,7 +11,7 @@
 ![Localizely language progress](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-100%25-brightgreen)
 ![Localizely language progress](https://img.shields.io/badge/繁體中文-80%25-yellow)
 ![Localizely language progress](https://img.shields.io/badge/English-100%25-brightgreen)
-![Localizely language progress](https://img.shields.io/badge/日本語-80%25-yellow)
+![Localizely language progress](https://img.shields.io/badge/日本語-100%25-brightgreen)
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow&style=social&url=https%3A%2F%2Ftwitter.com%2Fconntower)](https://twitter.com/conntower)
 
 Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
