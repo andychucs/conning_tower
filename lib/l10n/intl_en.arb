@@ -20,6 +20,8 @@
   "@AppClearCache": {},
   "AppBottomSafe": "Bottom-up",
   "@AppBottomSafe": {},
+  "AlertNotShowAgain": "Don't show again",
+  "@AlertNotShowAgain": {},
   "AppLeftSideControlsLoad": "Load URL: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView not ready",

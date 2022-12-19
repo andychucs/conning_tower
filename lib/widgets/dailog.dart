@@ -2,11 +2,25 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class CustomAlertDialog extends StatelessWidget{
+import '../generated/l10n.dart';
+
+class CustomAlertDialog extends StatelessWidget {
   final String msg;
 
   const CustomAlertDialog({super.key, required this.msg});
+
+  Future<void> setConfig(BuildContext context, VoidCallback onSuccess) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (msg == S.current.AppNotify) {
+      prefs.setBool('showNotify', false);
+    }
+    if (msg == S.current.MsgIOSNote) {
+      prefs.setBool('showIosNotify', false);
+    }
+    onSuccess.call();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +34,13 @@ class CustomAlertDialog extends StatelessWidget{
           ),
         ),
         actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: CupertinoColors.destructiveRed),
+            onPressed: () => setConfig(context, () {
+              Navigator.of(context).pop();
+            }),
+            child: Text(S.of(context).AlertNotShowAgain),
+          ),
           TextButton(
             child: const Text('OK'),
             onPressed: () {
@@ -39,6 +60,13 @@ class CustomAlertDialog extends StatelessWidget{
       ),
       actions: <Widget>[
         TextButton(
+          style: TextButton.styleFrom(foregroundColor: CupertinoColors.destructiveRed),
+          onPressed: () => setConfig(context, () {
+            Navigator.of(context).pop();
+          }),
+          child: Text(S.of(context).AlertNotShowAgain),
+        ),
+        TextButton(
           child: const Text('OK'),
           onPressed: () {
             Navigator.of(context).pop();
@@ -47,5 +75,4 @@ class CustomAlertDialog extends StatelessWidget{
       ],
     );
   }
-
 }

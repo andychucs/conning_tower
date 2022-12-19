@@ -20,6 +20,8 @@
   "@AppClearCache": {},
   "AppBottomSafe": "底部上移",
   "@AppBottomSafe": {},
+  "AlertNotShowAgain": "不再显示",
+  "@AlertNotShowAgain": {},
   "AppLeftSideControlsLoad": "加载URl：{url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView还没有准备好",

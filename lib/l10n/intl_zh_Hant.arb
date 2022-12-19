@@ -20,6 +20,8 @@
   "@AppClearCookie": {},
   "AppClearCache": "刪除緩存",
   "@AppClearCache": {},
+  "AlertNotShowAgain": "不再顯示",
+  "@AlertNotShowAgain": {},
   "AppLeftSideControlsLoad": "載入網址: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "Web 視圖還沒有準備好",

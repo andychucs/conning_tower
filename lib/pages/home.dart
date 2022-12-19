@@ -6,6 +6,7 @@ import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/kcwebview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../generated/l10n.dart';
@@ -30,6 +31,8 @@ class HomePageState extends State<HomePage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late double deviceWidth;
+  bool _showNotify = true;
+  bool _showIosNotify = true;
 
   @override
   void initState() {
@@ -41,11 +44,23 @@ class HomePageState extends State<HomePage> {
     kWebviewWidth = 0.0;
     allowNavi = true;
     bottomPadding = false;
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _showMyDialog(S.current.AppNotify);
-      if (Platform.isIOS) {
+      await _loadConfig();
+      if (_showNotify) {
+        await _showMyDialog(S.current.AppNotify);
+      }
+      if (Platform.isIOS && _showIosNotify) {
         await _showMyDialog(S.current.MsgIOSNote);
       }
+    });
+  }
+
+  Future<void> _loadConfig() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _showNotify = (prefs.getBool('showNotify') ?? true);
+      _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
     });
   }
 
@@ -54,7 +69,9 @@ class HomePageState extends State<HomePage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return CustomAlertDialog(msg: msg,);
+        return CustomAlertDialog(
+          msg: msg,
+        );
       },
     );
   }
