@@ -8,8 +8,9 @@ import '../generated/l10n.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String msg;
+  final bool isNormal;
 
-  const CustomAlertDialog({super.key, required this.msg});
+  const CustomAlertDialog({super.key, required this.msg, this.isNormal = false});
 
   Future<void> setConfig(BuildContext context, VoidCallback onSuccess) async {
     final prefs = await SharedPreferences.getInstance();
@@ -39,12 +40,12 @@ class CustomAlertDialog extends StatelessWidget {
             onPressed: () => setConfig(context, () {
               Navigator.of(context).pop();
             }),
-            child: Text(S.of(context).AlertNotShowAgain),
+            child: Text(isNormal? 'Cancel' :S.of(context).AlertNotShowAgain),
           ),
           TextButton(
             child: const Text('OK'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             },
           ),
         ],
@@ -64,12 +65,12 @@ class CustomAlertDialog extends StatelessWidget {
           onPressed: () => setConfig(context, () {
             Navigator.of(context).pop();
           }),
-          child: Text(S.of(context).AlertNotShowAgain),
+          child: Text(isNormal? 'Cancel' :S.of(context).AlertNotShowAgain),
         ),
         TextButton(
           child: const Text('OK'),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           },
         ),
       ],
