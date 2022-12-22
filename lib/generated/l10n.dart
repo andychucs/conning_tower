@@ -160,6 +160,16 @@ class S {
     );
   }
 
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'Cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
   String AppLeftSideControlsLoad(Object url) {
     return Intl.message(

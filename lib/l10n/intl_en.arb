@@ -22,6 +22,8 @@
   "@AppBottomSafe": {},
   "AlertNotShowAgain": "Don't show again",
   "@AlertNotShowAgain": {},
+  "Cancel": "Cancel",
+  "@Cancel": {},
   "AppLeftSideControlsLoad": "Load URL: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView not ready",

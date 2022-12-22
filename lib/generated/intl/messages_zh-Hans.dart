@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动"),
+        "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
         "FutureAutoAdjustWindowSuccess":
