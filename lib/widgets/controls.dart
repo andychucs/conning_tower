@@ -1,3 +1,4 @@
+import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,7 +71,7 @@ class AppLeftSideControls extends StatelessWidget {
             } else if (func == ConFunc.bottomUp) {}
             switch (func) {
               case ConFunc.loadHome:
-                _onLoadHome(controller!);
+                _onLoadHome(context, controller!);
                 break;
               case ConFunc.adjustWindow:
                 _onAdjustWindow(controller!);
@@ -91,13 +92,13 @@ class AppLeftSideControls extends StatelessWidget {
                 _onGoBack(controller!);
                 break;
               case ConFunc.refresh:
-                _onRefresh(controller!);
+                _onRefresh(context, controller!);
                 break;
               case ConFunc.clearCookies:
-                _onClearCookies();
+                _onClearCookies(context);
                 break;
               case ConFunc.clearCache:
-                _onClearCache(controller!);
+                _onClearCache(context, controller!);
                 break;
             }
           },
@@ -165,9 +166,14 @@ class AppLeftSideControls extends StatelessWidget {
     );
   }
 
-  Future<void> _onRefresh(WebViewController controller) async {
-    allowNavi = true;
-    await controller.reload();
+  Future<void> _onRefresh(BuildContext context, WebViewController controller) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppRefresh,isNormal: true);
+    });
+    if (value ?? false) {
+      allowNavi = true;
+      await controller.reload();
+    }
   }
 
   Future<void> _onGoBack(WebViewController controller) async {
@@ -214,18 +220,28 @@ class AppLeftSideControls extends StatelessWidget {
     }
   }
 
-  Future<void> _onLoadHome(WebViewController controller) async {
-    allowNavi = true;
-    await controller.loadUrl("http://$kGameUrl");
+  Future<void> _onLoadHome(BuildContext context, WebViewController controller) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppHome,isNormal: true);
+    });
+    if (value ?? false) {
+      allowNavi = true;
+      await controller.loadUrl("http://$kGameUrl");
+    }
   }
 
-  Future<void> _onClearCookies() async {
-    final bool hadCookies = await cookieManager.clearCookies();
-    String message = S.current.AppLeftSideControlsLogoutSuccess;
-    if (!hadCookies) {
-      message = S.current.AppLeftSideControlsLogoutFailed;
+  Future<void> _onClearCookies(BuildContext context) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppClearCookie,isNormal: true);
+    });
+    if (value ?? false) {
+      final bool hadCookies = await cookieManager.clearCookies();
+      String message = S.current.AppLeftSideControlsLogoutSuccess;
+      if (!hadCookies) {
+        message = S.current.AppLeftSideControlsLogoutFailed;
+      }
+      Fluttertoast.showToast(msg: message);
     }
-    Fluttertoast.showToast(msg: message);
   }
 
   Future<void> _onListCookies(
@@ -266,11 +282,16 @@ class AppLeftSideControls extends StatelessWidget {
         '.then((caches) => Toaster.postMessage(caches))');
   }
 
-  Future<void> _onClearCache(WebViewController controller) async {
-    allowNavi = true;
-    await controller.clearCache();
-    final prefs = await SharedPreferences.getInstance(); //temporarily
-    prefs.clear(); //temporarily
-    Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
+  Future<void> _onClearCache(BuildContext context, WebViewController controller) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppClearCache.replaceAll('\n', ''),isNormal: true);
+    });
+    if (value ?? false) {
+      allowNavi = true;
+      await controller.clearCache();
+      final prefs = await SharedPreferences.getInstance(); //temporarily
+      prefs.clear(); //temporarily
+      Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
+    }
   }
 }

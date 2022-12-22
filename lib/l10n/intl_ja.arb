@@ -22,6 +22,8 @@
   "@AppClearCache": {},
   "AlertNotShowAgain": "再表示しない",
   "@AlertNotShowAgain": {},
+  "Cancel": "キャンセル",
+  "@Cancel": {},
   "AppLeftSideControlsLoad": "URLをロード: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebViewの準備がまだ整っていません",

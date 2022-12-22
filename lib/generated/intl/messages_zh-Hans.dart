@@ -51,12 +51,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("向上滚动"),
         "AppName": MessageLookupByLibrary.simpleMessage("舰桥"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成自动全屏，如果你长时间看到DMM GAMES的顶栏，请在你指挥舰队前点击HTTP跳转按钮。"),
+            "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成后自动调整屏幕尺寸到合适大小，如果长时间看到DMM GAMES的顶栏存在，请在你指挥舰队前点击HTTP跳转按钮。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP跳转"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("刷新"),
         "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动"),
+        "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
         "FutureAutoAdjustWindowSuccess":
@@ -81,6 +82,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP重定向按钮。")
+            "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP跳转按钮。")
       };
 }
