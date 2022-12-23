@@ -23,6 +23,9 @@ enum ConFunc {
   clearCookies,
   clearCache,
   doRequest,
+  navi2About,
+  navi2Tool,
+  navi2Mng,
 }
 
 class AppLeftSideControls extends StatelessWidget {
@@ -37,9 +40,12 @@ class AppLeftSideControls extends StatelessWidget {
 
   final Map funcMap = {
     0: ConFunc.loadHome,
-    1: ConFunc.adjustWindow,
-    2: ConFunc.httpRedirect,
-    3: ConFunc.bottomUp,
+    1: ConFunc.navi2Tool,
+    2: ConFunc.navi2Mng,
+    3: ConFunc.navi2About,
+    // 1: ConFunc.adjustWindow,
+    // 2: ConFunc.httpRedirect,
+    // 3: ConFunc.bottomUp,
     4: ConFunc.scrollUp,
     5: ConFunc.scrollDown,
     6: ConFunc.goBack,
@@ -70,8 +76,25 @@ class AppLeftSideControls extends StatelessWidget {
               return;
             } else if (func == ConFunc.bottomUp) {}
             switch (func) {
+              case ConFunc.navi2About:
+                selectedIndex = 3;
+                notifyParent();
+                break;
+              case ConFunc.navi2Tool:
+                selectedIndex = 1;
+                notifyParent();
+                break;
+              case ConFunc.navi2Mng:
+                selectedIndex = 2;
+                notifyParent();
+                break;
               case ConFunc.loadHome:
-                _onLoadHome(context, controller!);
+                if (selectedIndex != 0) {
+                  selectedIndex = 0;
+                  notifyParent();
+                } else {
+                  _onLoadHome(context, controller!);
+                }
                 break;
               case ConFunc.adjustWindow:
                 _onAdjustWindow(controller!);

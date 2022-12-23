@@ -41,13 +41,7 @@ class ConnTowerApp extends StatelessWidget {
         dividerColor: CupertinoColors.systemFill,
       ),
       themeMode: ThemeMode.system,
-      home: const Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          bottom: false,
-          child: HomePage(),
-        ),
-      ),
+      home: const HomePage(),
     );
   }
 }

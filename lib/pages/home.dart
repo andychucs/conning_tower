@@ -18,6 +18,7 @@ late bool gameLoadCompleted;
 late bool inKancolleWindow;
 late double kWebviewHeight;
 late double kWebviewWidth;
+late int selectedIndex;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -44,6 +45,7 @@ class HomePageState extends State<HomePage> {
     kWebviewWidth = 0.0;
     allowNavi = true;
     bottomPadding = false;
+    selectedIndex = 0;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _loadConfig();
@@ -87,38 +89,74 @@ class HomePageState extends State<HomePage> {
       deviceWidth = MediaQuery.of(context).size.width;
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    return Row(
-      children: <Widget>[
-        SingleChildScrollView(
-          controller: ScrollController(),
-          scrollDirection: Axis.vertical,
-          child: IntrinsicHeight(
-            child: AppLeftSideControls(
-              _controller.future,
-              widget.cookieManager,
-              notifyParent: () {
-                setState(() {});
-              },
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: null,
+      body: SafeArea(
+        bottom: false,
+        child: Row(
+          children: <Widget>[
+            SingleChildScrollView(
+              controller: ScrollController(),
+              scrollDirection: Axis.vertical,
+              child: IntrinsicHeight(
+                child: AppLeftSideControls(
+                  _controller.future,
+                  widget.cookieManager,
+                  notifyParent: () {
+                    setState(() {});
+                  },
+                ),
+              ),
             ),
-          ),
+            const VerticalDivider(thickness: 1, width: 1),
+            // This is the main content.
+            Expanded(
+              child: IndexedStack(
+                index: selectedIndex,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      bottom: bottomPadding ? deviceWidth / 18 : 0.0,
+                    ),
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: deviceWidth,
+                    child: AspectRatio(
+                      aspectRatio: 5 / 3,
+                      child: KCWebView(_controller),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.yellow,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Tool',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.green,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Manager',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.blue,
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'About',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        const VerticalDivider(thickness: 1, width: 1),
-        // This is the main content.
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.only(
-              bottom: bottomPadding ? deviceWidth / 18 : 0.0,
-            ),
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: deviceWidth,
-            child: AspectRatio(
-              aspectRatio: 5 / 3,
-              child: KCWebView(_controller),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
