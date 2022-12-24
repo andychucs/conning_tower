@@ -119,6 +119,7 @@ class HomePageState extends State<HomePage> {
             Expanded(
               child: FadeIndexedStack(
                 index: selectedIndex,
+                duration: const Duration(milliseconds: 300),
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(
