@@ -13,6 +13,7 @@ class ToolsPage extends StatelessWidget{
         'Tool',
         style: TextStyle(fontSize: 40),
       ),
+      //TODO: move clearCache .. to here
     );
   }
 

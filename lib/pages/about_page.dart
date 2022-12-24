@@ -12,6 +12,7 @@ class AboutPage extends StatelessWidget{
       child: const Text(
         'About',
         style: TextStyle(fontSize: 40),
+        //TODO: project address, software version, contributions, some info from readme
       ),
     );
   }

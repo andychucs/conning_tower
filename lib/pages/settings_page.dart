@@ -12,6 +12,7 @@ class SettingsPage extends StatelessWidget{
       child: const Text(
         'Settings',
         style: TextStyle(fontSize: 40),
+        //TODO: software settings, move _onClearCache.prefs.clear() to here as reset soft
       ),
     );
   }
