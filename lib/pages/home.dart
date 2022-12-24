@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:conning_tower/pages/about_page.dart';
+import 'package:conning_tower/pages/settings_page.dart';
+import 'package:conning_tower/pages/tools_page.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/fade_indexed_stack.dart';
@@ -89,45 +92,7 @@ class HomePageState extends State<HomePage> {
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
-    List<Widget> pages = <Widget>[
-      Container(
-        padding: EdgeInsets.only(
-          bottom: bottomPadding ? deviceWidth / 18 : 0.0,
-        ),
-        alignment: Alignment.center,
-        width: double.infinity,
-        height: deviceWidth,
-        child: AspectRatio(
-          aspectRatio: 5 / 3,
-          child: KCWebView(_controller),
-        ),
-      ),
-      Container(
-        color: Colors.yellow,
-        alignment: Alignment.center,
-        child: const Text(
-          'Tool',
-          style: TextStyle(fontSize: 40),
-        ),
-      ),
-      Container(
-        color: Colors.green,
-        alignment: Alignment.center,
-        child: const Text(
-          'Manager',
-          style: TextStyle(fontSize: 40),
-        ),
-      ),
-      Container(
-        color: Colors.blue,
-        alignment: Alignment.center,
-        child: const Text(
-          'About',
-          style: TextStyle(fontSize: 40),
-        ),
-      ),
-    ];
-    
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -153,8 +118,25 @@ class HomePageState extends State<HomePage> {
             // This is the main content.
             Expanded(
               child: FadeIndexedStack(
-                  index: selectedIndex,
-                  children: pages)
+                index: selectedIndex,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      bottom: bottomPadding ? deviceWidth / 18 : 0.0,
+                    ),
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: deviceWidth,
+                    child: AspectRatio(
+                      aspectRatio: 5 / 3,
+                      child: KCWebView(_controller),
+                    ),
+                  ),
+                  const ToolsPage(),
+                  const SettingsPage(),
+                  const AboutPage(),
+                ],
+              ),
             ),
           ],
         ),
