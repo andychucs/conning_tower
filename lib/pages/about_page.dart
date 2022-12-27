@@ -52,16 +52,29 @@ class AboutPage extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          child: InkWell(
-                        onTap: () => launchUrl(Uri.parse(
-                            'https://github.com/andychucs/conning_tower')),
-                        child: Text(
-                          'Github',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: CupertinoColors.link),
+                        child: InkWell(
+                          onTap: () => launchUrl(Uri.parse(
+                              'https://github.com/andychucs/conning_tower')),
+                          child: Text(
+                            'Github',
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: CupertinoColors.link),
+                          ),
                         ),
-                      )),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () => launchUrl(Uri.parse(
+                              'https://github.com/andychucs/conning_tower/wiki')),
+                          child: Text(
+                            'Wiki',
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: CupertinoColors.link),
+                          ),
+                        ),
+                      ),
                       Expanded(
                         child: InkWell(
                           onTap: () => launchUrl(
