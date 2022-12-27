@@ -10,6 +10,7 @@ import 'package:conning_tower/widgets/fade_indexed_stack.dart';
 import 'package:conning_tower/widgets/kcwebview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -38,6 +39,14 @@ class HomePageState extends State<HomePage> {
   late double deviceWidth;
   bool _showNotify = true;
   bool _showIosNotify = true;
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+    installerStore: 'Unknown',
+  );
 
   @override
   void initState() {
@@ -59,6 +68,14 @@ class HomePageState extends State<HomePage> {
       if (Platform.isIOS && _showIosNotify) {
         await _showMyDialog(S.current.MsgIOSNote);
       }
+    });
+
+    _initPackageInfo();
+  }
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
     });
   }
 
@@ -135,7 +152,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   const ToolsPage(),
                   const SettingsPage(),
-                  const AboutPage(),
+                  AboutPage(packageInfo: _packageInfo,),
                 ],
               ),
             ),
