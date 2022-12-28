@@ -23,7 +23,12 @@ class AboutPage extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Image.asset('assets/images/logo.png'),
+                        child:
+                        SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Image.asset('assets/images/logo.png'),
+                        ),
                       ),
                       Expanded(
                         child: Text(
