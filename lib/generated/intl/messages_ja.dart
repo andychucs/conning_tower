@@ -30,8 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "AboutButton":
-            MessageLookupByLibrary.simpleMessage("ConningTower\nについて"),
+        "AboutButton": MessageLookupByLibrary.simpleMessage("本アプリ\nについて"),
         "AboutDescription": MessageLookupByLibrary.simpleMessage(
             "Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("再表示しない"),
