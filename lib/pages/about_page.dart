@@ -42,7 +42,6 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 30,
                   child: Text(
                     S.of(context).AboutDescription,
                     style: const TextStyle(fontSize: 16),
