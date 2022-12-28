@@ -15,36 +15,23 @@ class AboutPage extends StatelessWidget {
       alignment: Alignment.center,
       child: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-              pinned: true,
-              expandedHeight: 250.0,
-              flexibleSpace: Stack(
-                children: [
-                  Positioned.fill(
-                      child: Image.network(
-                    "https://user-images.githubusercontent.com/24852023/206192958-70954235-f287-4f5b-b4b4-0d2099e078f9.png",
-                    fit: BoxFit.cover,
-                  )),
-                ],
-              )),
           SliverList(
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  height: 30,
-                ),
-                Container(
-                  height: 50,
-                  child: Text(
-                    '${packageInfo.appName} ${packageInfo.version}',
-                    style: const TextStyle(fontSize: 36),
-                  ),
-                ),
-                Container(
-                  height: 30,
-                  child: const Text(
-                    'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
-                    style: TextStyle(fontSize: 16),
+                  height: 280,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Image.asset('assets/images/logo.png'),
+                      ),
+                      Expanded(
+                        child: Text(
+                          '${packageInfo.appName} ${packageInfo.version}',
+                          style: const TextStyle(fontSize: 36),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
@@ -99,7 +86,7 @@ class AboutPage extends StatelessWidget {
                 ),
                 Container(
                   height: 30,
-                  child: Text('Contributors',style: TextStyle(fontSize: 24)),
+                  child: Text('Contributors', style: TextStyle(fontSize: 24)),
                 ),
               ],
             ),
@@ -133,7 +120,6 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Container(
                   height: 80,
                   child: Card(
@@ -160,7 +146,6 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Container(
                   height: 80,
                   child: Card(
@@ -187,7 +172,6 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Container(
                   height: 100,
                 ),
