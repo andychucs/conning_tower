@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   final PackageInfo packageInfo;
+
   const AboutPage({super.key, required this.packageInfo});
 
   @override
@@ -31,21 +32,23 @@ class AboutPage extends StatelessWidget {
               [
                 Container(
                   height: 30,
-                  child: Text(''),
                 ),
                 Container(
                   height: 50,
                   child: Text(
                     '${packageInfo.appName} ${packageInfo.version}',
-                    style: TextStyle(fontSize: 36),
+                    style: const TextStyle(fontSize: 36),
                   ),
                 ),
                 Container(
                   height: 30,
-                  child: Text(
+                  child: const Text(
                     'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
                     style: TextStyle(fontSize: 16),
                   ),
+                ),
+                Container(
+                  height: 30,
                 ),
                 Container(
                   height: 30,
@@ -55,7 +58,7 @@ class AboutPage extends StatelessWidget {
                         child: InkWell(
                           onTap: () => launchUrl(Uri.parse(
                               'https://github.com/andychucs/conning_tower')),
-                          child: Text(
+                          child: const Text(
                             'Github',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
@@ -67,7 +70,7 @@ class AboutPage extends StatelessWidget {
                         child: InkWell(
                           onTap: () => launchUrl(Uri.parse(
                               'https://github.com/andychucs/conning_tower/wiki')),
-                          child: Text(
+                          child: const Text(
                             'Wiki',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
@@ -79,7 +82,7 @@ class AboutPage extends StatelessWidget {
                         child: InkWell(
                           onTap: () => launchUrl(
                               Uri.parse('https://twitter.com/conntower')),
-                          child: Text(
+                          child: const Text(
                             'Twitter',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
@@ -96,7 +99,7 @@ class AboutPage extends StatelessWidget {
                 ),
                 Container(
                   height: 30,
-                  child: Text('Contributors'),
+                  child: Text('Contributors',style: TextStyle(fontSize: 24)),
                 ),
               ],
             ),
@@ -105,55 +108,88 @@ class AboutPage extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  height: 30,
-                  child: InkWell(
-                    onTap: () =>
-                        launchUrl(Uri.parse('https://github.com/andychucs/')),
-                    child: Text(
-                      '@andychucs',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: CupertinoColors.link),
+                  height: 80,
+                  child: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          leading: const Image(
+                              image: NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/24852023?v=4')),
+                          title: const Text('Andy Chu'),
+                          subtitle: InkWell(
+                            onTap: () => launchUrl(
+                                Uri.parse('https://github.com/andychucs/')),
+                            child: const Text(
+                              '@andychucs',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: CupertinoColors.link),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+
                 Container(
-                  height: 30,
-                  child: InkWell(
-                    onTap: () => launchUrl(
-                        Uri.parse('https://github.com/anguslaw63631')),
-                    child: Text(
-                      '@anguslaw63631',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: CupertinoColors.link),
+                  height: 80,
+                  child: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          leading: const Image(
+                              image: NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/91370281?v=4')),
+                          title: const Text('Angus'),
+                          subtitle: InkWell(
+                            onTap: () => launchUrl(
+                                Uri.parse('https://github.com/anguslaw63631')),
+                            child: const Text(
+                              '@anguslaw63631',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: CupertinoColors.link),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+
                 Container(
-                  height: 30,
-                  child: InkWell(
-                    onTap: () => launchUrl(
-                        Uri.parse('https://github.com/lovetwice1012')),
-                    child: Text(
-                      '@lovetwice1012',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: CupertinoColors.link),
+                  height: 80,
+                  child: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          leading: const Image(
+                              image: NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/59718878?v=4')),
+                          title: const Text('lovetwice1012'),
+                          subtitle: InkWell(
+                            onTap: () => launchUrl(
+                                Uri.parse('https://github.com/lovetwice1012')),
+                            child: const Text(
+                              '@lovetwice1012',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: CupertinoColors.link),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
+
                 Container(
                   height: 100,
-                  child: InkWell(
-                    onTap: () => launchUrl(Uri.parse('')),
-                    child: Text(
-                      '',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: CupertinoColors.link),
-                    ),
-                  ),
                 ),
               ],
             ),
