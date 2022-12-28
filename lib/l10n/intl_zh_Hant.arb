@@ -26,6 +26,8 @@
   "@Cancel": {},
   "AboutButton": "About",
   "@AboutButton": {},
+  "AboutDescription": "Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.",
+  "@AboutDescription": {},
   "ToolsButton": "Tools",
   "@ToolsButton": {},
   "SettingsButton": "Settings",

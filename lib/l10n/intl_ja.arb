@@ -26,6 +26,8 @@
   "@Cancel": {},
   "AboutButton": "ConningTower\nについて",
   "@AboutButton": {},
+  "AboutDescription": "Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。",
+  "@AboutDescription": {},
   "ToolsButton": "ツール",
   "@ToolsButton": {},
   "SettingsButton": "設定",

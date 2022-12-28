@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AboutButton": MessageLookupByLibrary.simpleMessage("关于"),
+        "AboutDescription": MessageLookupByLibrary.simpleMessage(
+            "舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再显示"),
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
@@ -82,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP跳转按钮。")
+            "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP跳转按钮。"),
+        "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };
 }

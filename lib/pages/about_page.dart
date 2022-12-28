@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../generated/l10n.dart';
+
 class AboutPage extends StatelessWidget {
   final PackageInfo packageInfo;
 
@@ -37,6 +39,13 @@ class AboutPage extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Container(
+                  height: 30,
+                  child: Text(
+                    S.of(context).AboutDescription,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 Container(

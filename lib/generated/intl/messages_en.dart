@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AboutButton": MessageLookupByLibrary.simpleMessage("About"),
+        "AboutDescription": MessageLookupByLibrary.simpleMessage(
+            "Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser."),
         "AlertNotShowAgain":
             MessageLookupByLibrary.simpleMessage("Don\'t show again"),
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
@@ -84,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("is game origin url"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.")
+            "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button."),
+        "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
       };
 }

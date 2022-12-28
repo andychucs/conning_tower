@@ -148,7 +148,7 @@ class AppLeftSideControls extends StatelessWidget {
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.game_controller),
-              label: Text(S.of(context).AppResize),
+              label: Text(S.of(context).ToolsButton),
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.rectangle_dock),
@@ -178,7 +178,7 @@ class AppLeftSideControls extends StatelessWidget {
                 CupertinoIcons.settings,
                 color: CupertinoColors.systemYellow,
               ),
-              label: Text(S.of(context).AppClearCookie),
+              label: Text(S.of(context).SettingsButton),
             ),
             NavigationRailDestination(
               icon: const Icon(
@@ -186,7 +186,7 @@ class AppLeftSideControls extends StatelessWidget {
                 color: CupertinoColors.systemTeal,
               ),
               label: Text(
-                S.of(context).AppClearCache,
+                S.of(context).AboutButton,
                 textAlign: TextAlign.center,
               ),
             ),

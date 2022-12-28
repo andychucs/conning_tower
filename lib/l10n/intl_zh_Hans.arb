@@ -26,6 +26,8 @@
   "@Cancel": {},
   "AboutButton": "关于",
   "@AboutButton": {},
+  "AboutDescription": "舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。",
+  "@AboutDescription": {},
   "ToolsButton": "工具",
   "@ToolsButton": {},
   "SettingsButton": "设置",
