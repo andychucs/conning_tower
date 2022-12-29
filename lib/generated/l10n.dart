@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `Reset App`
+  String get SettingsReset {
+    return Intl.message(
+      'Reset App',
+      name: 'SettingsReset',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
   String AppLeftSideControlsLoad(Object url) {
     return Intl.message(

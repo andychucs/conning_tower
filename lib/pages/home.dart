@@ -150,7 +150,13 @@ class HomePageState extends State<HomePage> {
                       child: KCWebView(_controller),
                     ),
                   ),
-                  const ToolsPage(),
+                  ToolsPage(
+                    _controller.future,
+                    widget.cookieManager,
+                    notifyParent: () {
+                      setState(() {});
+                    },
+                  ),
                   const SettingsPage(),
                   AboutPage(packageInfo: _packageInfo,),
                 ],

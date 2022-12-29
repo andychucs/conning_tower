@@ -32,6 +32,8 @@
   "@ToolsButton": {},
   "SettingsButton": "設定",
   "@SettingsButton": {},
+  "SettingsReset": "アプリを初期化",
+  "@SettingsReset": {},
   "AppLeftSideControlsLoad": "URLをロード: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebViewの準備がまだ整っていません",

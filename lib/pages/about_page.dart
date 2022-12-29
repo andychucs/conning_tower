@@ -142,7 +142,7 @@ class AboutPage extends StatelessWidget {
                         ListTile(
                           leading: const Image(
                               image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/91370281?v=4')),
+                                  'https://avatars.githubusercontent.com/u/91370281?v=4')), //FIXME: add a default image or not display when network fail
                           title: const Text('Angus'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(

@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
+        "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
       };
 }

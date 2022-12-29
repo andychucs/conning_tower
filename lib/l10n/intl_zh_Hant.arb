@@ -32,6 +32,8 @@
   "@ToolsButton": {},
   "SettingsButton": "Settings",
   "@SettingsButton": {},
+  "SettingsReset": "Reset App",
+  "@SettingsReset": {},
   "AppLeftSideControlsLoad": "載入網址: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "Web 視圖還沒有準備好",

@@ -32,6 +32,8 @@
   "@ToolsButton": {},
   "SettingsButton": "Settings",
   "@SettingsButton": {},
+  "SettingsReset": "Reset App",
+  "@SettingsReset": {},
   "AppLeftSideControlsLoad": "Load URL: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView not ready",

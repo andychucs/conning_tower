@@ -32,6 +32,8 @@
   "@ToolsButton": {},
   "SettingsButton": "设置",
   "@SettingsButton": {},
+  "SettingsReset": "設定",
+  "@SettingsReset": {},
   "AppLeftSideControlsLoad": "加载URl：{url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView还没有准备好",
