@@ -22,17 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "載入網址: ${url}";
 
-  static String m1(url) => "Now navigation to ${url}";
+  static String m1(url) => "正在加載 ${url}";
 
-  static String m2(url) => "Page finished loading: ${url}";
+  static String m2(url) => "頁面加載完畢: ${url}";
 
   static String m3(url) => "頁面開始載入 ${url}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "AboutButton": MessageLookupByLibrary.simpleMessage("About"),
+        "AboutButton": MessageLookupByLibrary.simpleMessage("關於"),
         "AboutDescription": MessageLookupByLibrary.simpleMessage(
-            "Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser."),
+            "艦橋是一款跨平台艦隊Collection「艦隊これくしょん-艦これ-」專用瀏覽器。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再顯示"),
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
@@ -47,14 +47,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppLeftSideControlsLogoutSuccess":
             MessageLookupByLibrary.simpleMessage("已成功刪除Cookie"),
         "AppLeftSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("Web 視圖還沒有準備好"),
+            MessageLookupByLibrary.simpleMessage("WebView還沒有準備好"),
         "AppLeftSideControlsScrollDown":
             MessageLookupByLibrary.simpleMessage("向下捲動"),
         "AppLeftSideControlsScrollUp":
             MessageLookupByLibrary.simpleMessage("向上捲動"),
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command."),
+            "提督，歡迎來到艦橋，艦橋會在Kancolle界面加載完成後自動調整屏幕尺寸到合適大小，如果長時間看到DMM GAMES的頂欄存在，請在你指揮艦隊前點擊重定向按鈕。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("重定向"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("重新整理"),
         "AppResize": MessageLookupByLibrary.simpleMessage("調整大小"),
@@ -82,12 +82,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("遊戲未加載完畢"),
         "KCViewFuncMsgPageFinished": m2,
         "KCViewFuncMsgPageFinishedIsGame":
-            MessageLookupByLibrary.simpleMessage("is game origin url"),
+            MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button."),
-        "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
-        "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
-        "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
+            "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊重定向按鈕。"),
+        "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
+        "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };
 }
