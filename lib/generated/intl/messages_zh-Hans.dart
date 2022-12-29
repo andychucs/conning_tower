@@ -87,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP跳转按钮。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
-        "SettingsReset": MessageLookupByLibrary.simpleMessage("設定"),
+        "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };
 }

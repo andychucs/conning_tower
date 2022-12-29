@@ -9,26 +9,29 @@ class SettingsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        CupertinoSliverNavigationBar(
-          largeTitle: Text(S.of(context).SettingsButton),
-        ),
-        SliverFillRemaining(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              CupertinoButton.filled(
-                onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance(); //temporarily
-                  prefs.clear(); //temporarily
-                },
-                child: Text(S.of(context).SettingsReset),
-              ),
-            ],
+    return CupertinoApp(
+      theme: const CupertinoThemeData(),
+      home: CustomScrollView(
+        slivers: [
+          CupertinoSliverNavigationBar(
+            largeTitle: Text(S.of(context).SettingsButton),
           ),
-        ),
-      ],
+          SliverFillRemaining(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CupertinoButton.filled(
+                  onPressed: () async {
+                    final prefs = await SharedPreferences.getInstance(); //temporarily
+                    prefs.clear(); //temporarily
+                  },
+                  child: Text(S.of(context).SettingsReset),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

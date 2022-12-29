@@ -61,52 +61,55 @@ class ToolsPage extends StatelessWidget {
         final bool webViewReady =
             snapshot.connectionState == ConnectionState.done;
         final WebViewController? controller = snapshot.data;
-        return CustomScrollView(
-          slivers: [
-            CupertinoSliverNavigationBar(
-              largeTitle: Text(S.of(context).ToolsButton),
-            ),
-            SliverFillRemaining(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  CupertinoButton.filled(
-                    onPressed: () {
-                      if (!webViewReady) {
-                        Fluttertoast.showToast(
-                            msg: S.of(context).AppLeftSideControlsNotReady);
-                        return;
-                      }
-                      _onClearCache(context, controller!);
-                    },
-                    child: Text(S.of(context).AppClearCache.replaceAll('\n', '')),
-                  ),
-                  CupertinoButton.filled(
-                    onPressed: () {
-                      if (!webViewReady) {
-                        Fluttertoast.showToast(
-                            msg: S.of(context).AppLeftSideControlsNotReady);
-                        return;
-                      }
-                      _onClearCookies(context);
-                    },
-                    child: Text(S.of(context).AppClearCookie),
-                  ),
-                  CupertinoButton.filled(
-                    onPressed: () {
-                      if (!webViewReady) {
-                        Fluttertoast.showToast(
-                            msg: S.of(context).AppLeftSideControlsNotReady);
-                        return;
-                      }
-                      _onAdjustWindow(controller!);
-                    },
-                    child: Text(S.of(context).AppResize),
-                  ),
-                ],
+        return CupertinoApp(
+          theme: const CupertinoThemeData(),
+          home: CustomScrollView(
+            slivers: [
+              CupertinoSliverNavigationBar(
+                largeTitle: Text(S.of(context).ToolsButton),
               ),
-            ),
-          ],
+              SliverFillRemaining(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        if (!webViewReady) {
+                          Fluttertoast.showToast(
+                              msg: S.of(context).AppLeftSideControlsNotReady);
+                          return;
+                        }
+                        _onClearCache(context, controller!);
+                      },
+                      child: Text(S.of(context).AppClearCache.replaceAll('\n', '')),
+                    ),
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        if (!webViewReady) {
+                          Fluttertoast.showToast(
+                              msg: S.of(context).AppLeftSideControlsNotReady);
+                          return;
+                        }
+                        _onClearCookies(context);
+                      },
+                      child: Text(S.of(context).AppClearCookie),
+                    ),
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        if (!webViewReady) {
+                          Fluttertoast.showToast(
+                              msg: S.of(context).AppLeftSideControlsNotReady);
+                          return;
+                        }
+                        _onAdjustWindow(controller!);
+                      },
+                      child: Text(S.of(context).AppResize),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

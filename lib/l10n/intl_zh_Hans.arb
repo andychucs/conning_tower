@@ -32,7 +32,7 @@
   "@ToolsButton": {},
   "SettingsButton": "设置",
   "@SettingsButton": {},
-  "SettingsReset": "設定",
+  "SettingsReset": "重置",
   "@SettingsReset": {},
   "AppLeftSideControlsLoad": "加载URl：{url}",
   "@AppLeftSideControlsLoad": {},
