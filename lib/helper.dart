@@ -15,8 +15,10 @@ Future<bool> autoAdjustWindow(
   if (inKancolleWindow && !autoAdjusted) {
     int getWebviewSizeCount = 0;
     do {
-      kWebviewHeight = await controller.runJavaScriptReturningResult('''window.innerHeight;''') as double;
-      kWebviewWidth = await controller.runJavaScriptReturningResult('''window.innerWidth;''') as double;
+      kWebviewHeight = await controller
+          .runJavaScriptReturningResult('''window.innerHeight;''') as double;
+      kWebviewWidth = await controller
+          .runJavaScriptReturningResult('''window.innerWidth;''') as double;
       if (kWebviewHeight == 0.0 || kWebviewWidth == 0.0) {
         await Future.delayed(const Duration(seconds: 2));
       } else {

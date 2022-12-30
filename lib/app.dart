@@ -20,11 +20,12 @@ class ConnTowerApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       theme: ThemeData(
-        brightness: Brightness.light,
-        colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
-        dividerColor: CupertinoColors.secondarySystemFill,
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0x00000000),)
-      ),
+          brightness: Brightness.light,
+          colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
+          dividerColor: CupertinoColors.secondarySystemFill,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0x00000000),
+          )),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: CupertinoColors.systemBackground,

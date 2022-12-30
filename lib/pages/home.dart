@@ -8,13 +8,23 @@ import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/fade_indexed_stack.dart';
 import 'package:conning_tower/widgets/kcwebview.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+// #docregion platform_imports
+// Import for Android features.
+import 'package:webview_flutter_android/webview_flutter_android.dart';
+// Import for iOS features.
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+// #enddocregion platform_imports
 
+import '../constants.dart';
 import '../generated/l10n.dart';
+import '../helper.dart';
 
 late bool allowNavi;
 late bool autoAdjusted;
@@ -34,8 +44,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
+  late final WebViewController _controller;
   late double deviceWidth;
   bool _showNotify = true;
   bool _showIosNotify = true;
@@ -71,7 +80,143 @@ class HomePageState extends State<HomePage> {
     });
 
     _initPackageInfo();
+
+    _initWebviewController();
   }
+
+  Future<void> _initWebviewController() async {
+    String defaultUA;
+
+    // #docregion platform_features
+    late final PlatformWebViewControllerCreationParams params;
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      defaultUA = kSafariUA;
+      params = WebKitWebViewControllerCreationParams(
+        allowsInlineMediaPlayback: true,
+        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+      );
+    } else {
+      defaultUA = kChromeUA;
+      params = const PlatformWebViewControllerCreationParams();
+    }
+
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
+    // #enddocregion platform_features
+
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(CupertinoColors.extraLightBackgroundGray)
+      ..loadRequest(Uri.parse('http://$kGameUrl'))
+      ..setUserAgent(defaultUA)
+      ..enableZoom(true)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            debugPrint('WebView is loading (progress : $progress%)');
+          },
+          onPageStarted: (String url) {
+            debugPrint('Page started loading: $url');
+            setState(() {
+              if (url.endsWith(kGameUrl)) {
+                inKancolleWindow = false;
+                autoAdjusted = false;
+              } else if (url.startsWith("http://osapi.dmm.com")) {
+                inKancolleWindow = true;
+                autoAdjusted = false;
+              }
+            });
+          },
+          onPageFinished: (String url) async {
+            debugPrint('Page finished loading: $url');
+            if (url.endsWith(kGameUrl)) {
+              print('is game origin url');
+              HapticFeedback.lightImpact();
+              await controller.runJavaScript(
+                  '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+              Fluttertoast.showToast(
+                  msg: S.current.KCViewFuncMsgAutoGameRedirect);
+              print("HTTP Redirect success");
+              setState(() {
+                inKancolleWindow = true;
+              });
+            }
+          },
+          onWebResourceError: (WebResourceError error) {
+            debugPrint('''
+Page resource error:
+  code: ${error.errorCode}
+  description: ${error.description}
+  errorType: ${error.errorType}
+  isForMainFrame: ${error.isForMainFrame}
+          ''');
+          },
+          onNavigationRequest: (NavigationRequest request) async {
+            print('allowing navigation to $request');
+            if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+              if (request.url.contains(
+                  "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
+                Fluttertoast.showToast(
+                    msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                setState(() {
+                  gameLoadCompleted = true;
+                  inKancolleWindow = true;
+                });
+                HapticFeedback.mediumImpact();
+                await autoAdjustWindow(controller);
+              }
+            } else {
+              //chrome can't detect /kcs2/.....
+              if (request.url.startsWith("http://osapi.dmm.com")) {
+                Fluttertoast.showToast(
+                    msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                setState(() {
+                  gameLoadCompleted = true;
+                  inKancolleWindow = true;
+                });
+                HapticFeedback.mediumImpact();
+                await autoAdjustWindow(controller);
+              }
+            }
+
+            if (request.url.startsWith("http://osapi.dmm.com") ||
+                request.url.contains(
+                    "www.dmm.com/netgame/social/-/gadgets/=/app_id=854854")) {
+              Fluttertoast.showToast(msg: S.current.KCViewFuncMsgGameNavi);
+              if (!allowNavi) {
+                Fluttertoast.showToast(
+                    msg: S.current.KCViewFuncMsgGameNaviBlock);
+                return NavigationDecision.prevent;
+              }
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..addJavaScriptChannel(
+        'Toaster',
+        onMessageReceived: (JavaScriptMessage message) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message.message)),
+          );
+        },
+      );
+
+    // #docregion platform_features
+    if (controller.platform is AndroidWebViewController) {
+      AndroidWebViewController.enableDebugging(true);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
+    if (controller.platform is WebKitWebViewController) {
+      (controller.platform as WebKitWebViewController)
+          .setAllowsBackForwardNavigationGestures(true);
+    }
+    // #enddocregion platform_features
+
+    _controller = controller;
+  }
+
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
     setState(() {
@@ -103,7 +248,6 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
       deviceWidth = MediaQuery.of(context).size.width;
-      WebView.platform = SurfaceAndroidWebView();
     } else if (Platform.isIOS) {
       deviceWidth = MediaQuery.of(context).size.height;
     } else {
@@ -123,7 +267,7 @@ class HomePageState extends State<HomePage> {
               scrollDirection: Axis.vertical,
               child: IntrinsicHeight(
                 child: AppLeftSideControls(
-                  _controller.future,
+                  _controller,
                   widget.cookieManager,
                   notifyParent: () {
                     setState(() {});
@@ -136,7 +280,7 @@ class HomePageState extends State<HomePage> {
             Expanded(
               child: FadeIndexedStack(
                 index: selectedIndex,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 100),
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(
@@ -145,20 +289,19 @@ class HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     width: double.infinity,
                     height: deviceWidth,
-                    child: AspectRatio(
-                      aspectRatio: 5 / 3,
-                      child: KCWebView(_controller),
-                    ),
+                    child: KCWebView(_controller),
                   ),
                   ToolsPage(
-                    _controller.future,
+                    _controller,
                     widget.cookieManager,
                     notifyParent: () {
                       setState(() {});
                     },
                   ),
                   const SettingsPage(),
-                  AboutPage(packageInfo: _packageInfo,),
+                  AboutPage(
+                    packageInfo: _packageInfo,
+                  ),
                 ],
               ),
             ),

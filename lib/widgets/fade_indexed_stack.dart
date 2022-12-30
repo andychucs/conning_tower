@@ -27,7 +27,7 @@ class FadeIndexedStack extends StatefulWidget {
 class FadeIndexedStackState extends State<FadeIndexedStack>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller =
-  AnimationController(vsync: this, duration: widget.duration);
+      AnimationController(vsync: this, duration: widget.duration);
 
   @override
   void didUpdateWidget(FadeIndexedStack oldWidget) {
