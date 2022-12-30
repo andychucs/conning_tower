@@ -10,7 +10,7 @@ class SettingsPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: const CupertinoThemeData(),
+      theme: const CupertinoThemeData(primaryColor: CupertinoColors.systemGrey),
       home: CustomScrollView(
         slivers: [
           CupertinoSliverNavigationBar(

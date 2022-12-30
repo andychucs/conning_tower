@@ -62,7 +62,7 @@ class ToolsPage extends StatelessWidget {
             snapshot.connectionState == ConnectionState.done;
         final WebViewController? controller = snapshot.data;
         return CupertinoApp(
-          theme: const CupertinoThemeData(),
+          theme: const CupertinoThemeData(primaryColor: CupertinoColors.systemGrey),
           home: CustomScrollView(
             slivers: [
               CupertinoSliverNavigationBar(
