@@ -15,10 +15,10 @@ Future<bool> autoAdjustWindow(
   if (inKancolleWindow && !autoAdjusted) {
     int getWebviewSizeCount = 0;
     do {
-      controller.runJavascriptReturningResult('''window.innerHeight;''').then(
-          (value) => kWebviewHeight = double.parse(value));
-      controller.runJavascriptReturningResult('''window.innerWidth;''').then(
-          (value) => kWebviewWidth = double.parse(value));
+      kWebviewHeight = await controller
+          .runJavaScriptReturningResult('''window.innerHeight;''') as double;
+      kWebviewWidth = await controller
+          .runJavaScriptReturningResult('''window.innerWidth;''') as double;
       if (kWebviewHeight == 0.0 || kWebviewWidth == 0.0) {
         await Future.delayed(const Duration(seconds: 2));
       } else {
@@ -35,17 +35,17 @@ Future<bool> autoAdjustWindow(
       print("autoAdjustWindow fail");
       return false;
     }
-    await controller.runJavascript(
+    await controller.runJavaScript(
         '''document.getElementById("spacing_top").style.display = "none";''');
-    await controller.runJavascript(
+    await controller.runJavaScript(
         '''document.getElementById("sectionWrap").style.display = "none";''');
 
     if (Platform.isIOS) {
-      await controller.runJavascript(
+      await controller.runJavaScript(
           //Scale to correct size(ios webkit)
           '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
     } else if (Platform.isAndroid) {
-      await controller.runJavascript(//Scale to correct size(android chrome)
+      await controller.runJavaScript(//Scale to correct size(android chrome)
           '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
     }
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);

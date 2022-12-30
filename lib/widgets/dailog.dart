@@ -10,7 +10,8 @@ class CustomAlertDialog extends StatelessWidget {
   final String msg;
   final bool isNormal;
 
-  const CustomAlertDialog({super.key, required this.msg, this.isNormal = false});
+  const CustomAlertDialog(
+      {super.key, required this.msg, this.isNormal = false});
 
   Future<void> setConfig(BuildContext context, VoidCallback onSuccess) async {
     if (!isNormal) {
@@ -38,11 +39,14 @@ class CustomAlertDialog extends StatelessWidget {
         ),
         actions: <Widget>[
           TextButton(
-            style: TextButton.styleFrom(foregroundColor: CupertinoColors.destructiveRed),
+            style: TextButton.styleFrom(
+                foregroundColor: CupertinoColors.destructiveRed),
             onPressed: () => setConfig(context, () {
               Navigator.of(context).pop();
             }),
-            child: Text(isNormal? S.of(context).Cancel :S.of(context).AlertNotShowAgain),
+            child: Text(isNormal
+                ? S.of(context).Cancel
+                : S.of(context).AlertNotShowAgain),
           ),
           TextButton(
             child: const Text('OK'),
@@ -63,11 +67,14 @@ class CustomAlertDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          style: TextButton.styleFrom(foregroundColor: CupertinoColors.destructiveRed),
+          style: TextButton.styleFrom(
+              foregroundColor: CupertinoColors.destructiveRed),
           onPressed: () => setConfig(context, () {
             Navigator.of(context).pop();
           }),
-          child: Text(isNormal? S.of(context).Cancel :S.of(context).AlertNotShowAgain),
+          child: Text(isNormal
+              ? S.of(context).Cancel
+              : S.of(context).AlertNotShowAgain),
         ),
         TextButton(
           child: const Text('OK'),
