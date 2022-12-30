@@ -16,7 +16,7 @@
   "@AppResize": {},
   "AppBottomSafe": "底部上移",
   "@AppBottomSafe": {},
-  "AppClearCookie": "登出",
+  "AppClearCookie": "刪除Cookie",
   "@AppClearCookie": {},
   "AppClearCache": "刪除緩存",
   "@AppClearCache": {},
