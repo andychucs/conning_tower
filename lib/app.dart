@@ -23,6 +23,7 @@ class ConnTowerApp extends StatelessWidget {
         brightness: Brightness.light,
         colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
         dividerColor: CupertinoColors.secondarySystemFill,
+        appBarTheme: const AppBarTheme(backgroundColor: Color(0x00000000),)
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -41,13 +42,7 @@ class ConnTowerApp extends StatelessWidget {
         dividerColor: CupertinoColors.systemFill,
       ),
       themeMode: ThemeMode.system,
-      home: const Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          bottom: false,
-          child: HomePage(),
-        ),
-      ),
+      home: const HomePage(),
     );
   }
 }

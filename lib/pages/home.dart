@@ -1,11 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:conning_tower/pages/about_page.dart';
+import 'package:conning_tower/pages/settings_page.dart';
+import 'package:conning_tower/pages/tools_page.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/fade_indexed_stack.dart';
 import 'package:conning_tower/widgets/kcwebview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -18,6 +23,7 @@ late bool gameLoadCompleted;
 late bool inKancolleWindow;
 late double kWebviewHeight;
 late double kWebviewWidth;
+late int selectedIndex;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -33,6 +39,14 @@ class HomePageState extends State<HomePage> {
   late double deviceWidth;
   bool _showNotify = true;
   bool _showIosNotify = true;
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+    installerStore: 'Unknown',
+  );
 
   @override
   void initState() {
@@ -44,6 +58,7 @@ class HomePageState extends State<HomePage> {
     kWebviewWidth = 0.0;
     allowNavi = true;
     bottomPadding = false;
+    selectedIndex = 0;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _loadConfig();
@@ -53,6 +68,14 @@ class HomePageState extends State<HomePage> {
       if (Platform.isIOS && _showIosNotify) {
         await _showMyDialog(S.current.MsgIOSNote);
       }
+    });
+
+    _initPackageInfo();
+  }
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
     });
   }
 
@@ -86,39 +109,62 @@ class HomePageState extends State<HomePage> {
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    return Row(
-      children: <Widget>[
-        SingleChildScrollView(
-          controller: ScrollController(),
-          scrollDirection: Axis.vertical,
-          child: IntrinsicHeight(
-            child: AppLeftSideControls(
-              _controller.future,
-              widget.cookieManager,
-              notifyParent: () {
-                setState(() {});
-              },
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: null,
+      body: SafeArea(
+        bottom: false,
+        child: Row(
+          children: <Widget>[
+            SingleChildScrollView(
+              controller: ScrollController(),
+              scrollDirection: Axis.vertical,
+              child: IntrinsicHeight(
+                child: AppLeftSideControls(
+                  _controller.future,
+                  widget.cookieManager,
+                  notifyParent: () {
+                    setState(() {});
+                  },
+                ),
+              ),
             ),
-          ),
+            const VerticalDivider(thickness: 1, width: 1),
+            // This is the main content.
+            Expanded(
+              child: FadeIndexedStack(
+                index: selectedIndex,
+                duration: const Duration(milliseconds: 300),
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      bottom: bottomPadding ? deviceWidth / 18 : 0.0,
+                    ),
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: deviceWidth,
+                    child: AspectRatio(
+                      aspectRatio: 5 / 3,
+                      child: KCWebView(_controller),
+                    ),
+                  ),
+                  ToolsPage(
+                    _controller.future,
+                    widget.cookieManager,
+                    notifyParent: () {
+                      setState(() {});
+                    },
+                  ),
+                  const SettingsPage(),
+                  AboutPage(packageInfo: _packageInfo,),
+                ],
+              ),
+            ),
+          ],
         ),
-        const VerticalDivider(thickness: 1, width: 1),
-        // This is the main content.
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.only(
-              bottom: bottomPadding ? deviceWidth / 18 : 0.0,
-            ),
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: deviceWidth,
-            child: AspectRatio(
-              aspectRatio: 5 / 3,
-              child: KCWebView(_controller),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

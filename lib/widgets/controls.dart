@@ -23,6 +23,9 @@ enum ConFunc {
   clearCookies,
   clearCache,
   doRequest,
+  navi2About,
+  navi2Tool,
+  navi2Settings,
 }
 
 class AppLeftSideControls extends StatelessWidget {
@@ -37,15 +40,25 @@ class AppLeftSideControls extends StatelessWidget {
 
   final Map funcMap = {
     0: ConFunc.loadHome,
-    1: ConFunc.adjustWindow,
-    2: ConFunc.httpRedirect,
+    1: ConFunc.httpRedirect,
+    2: ConFunc.navi2Tool,
     3: ConFunc.bottomUp,
-    4: ConFunc.scrollUp,
-    5: ConFunc.scrollDown,
-    6: ConFunc.goBack,
-    7: ConFunc.refresh,
-    8: ConFunc.clearCookies,
-    9: ConFunc.clearCache
+    4: ConFunc.refresh,
+    5: ConFunc.scrollUp,
+    6: ConFunc.scrollDown,
+    7: ConFunc.goBack,
+    8: ConFunc.navi2Settings,
+    9: ConFunc.navi2About,
+    // 1: ConFunc.adjustWindow,
+    // 8: ConFunc.clearCookies,
+    // 9: ConFunc.clearCache
+  };
+
+  final Map naviItems = {
+    0:0,//loadHome
+    1:2,//navi2Tool
+    2:8,//navi2Settings
+    3:9,//navi2About
   };
 
   @override
@@ -59,7 +72,7 @@ class AppLeftSideControls extends StatelessWidget {
         final WebViewController? controller = snapshot.data;
         return NavigationRail(
           labelType: NavigationRailLabelType.all,
-          selectedIndex: 0,
+          selectedIndex: naviItems[selectedIndex],
           groupAlignment: 0,
           onDestinationSelected: (int index) async {
             HapticFeedback.heavyImpact();
@@ -70,8 +83,25 @@ class AppLeftSideControls extends StatelessWidget {
               return;
             } else if (func == ConFunc.bottomUp) {}
             switch (func) {
+              case ConFunc.navi2About:
+                selectedIndex = 3;
+                notifyParent();
+                break;
+              case ConFunc.navi2Tool:
+                selectedIndex = 1;
+                notifyParent();
+                break;
+              case ConFunc.navi2Settings:
+                selectedIndex = 2;
+                notifyParent();
+                break;
               case ConFunc.loadHome:
-                _onLoadHome(context, controller!);
+                if (selectedIndex != 0) {
+                  selectedIndex = 0;
+                  notifyParent();
+                } else {
+                  _onLoadHome(context, controller!);
+                }
                 break;
               case ConFunc.adjustWindow:
                 _onAdjustWindow(controller!);
@@ -110,10 +140,6 @@ class AppLeftSideControls extends StatelessWidget {
               ),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.fullscreen),
-              label: Text(S.of(context).AppResize),
-            ),
-            NavigationRailDestination(
               icon: const Icon(CupertinoIcons.rectangle_expand_vertical),
               label: Text(
                 S.of(context).AppRedirect,
@@ -121,8 +147,19 @@ class AppLeftSideControls extends StatelessWidget {
               ),
             ),
             NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.game_controller),
+              label: Text(S.of(context).ToolsButton),
+            ),
+            NavigationRailDestination(
               icon: const Icon(CupertinoIcons.rectangle_dock),
               label: Text(S.of(context).AppBottomSafe),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.refresh,
+                color: CupertinoColors.destructiveRed,
+              ),
+              label: Text(S.of(context).AppRefresh),
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.up_arrow),
@@ -138,25 +175,18 @@ class AppLeftSideControls extends StatelessWidget {
             ),
             NavigationRailDestination(
               icon: const Icon(
-                CupertinoIcons.refresh,
-                color: CupertinoColors.destructiveRed,
+                CupertinoIcons.settings,
+                color: CupertinoColors.systemYellow,
               ),
-              label: Text(S.of(context).AppRefresh),
+              label: Text(S.of(context).SettingsButton),
             ),
             NavigationRailDestination(
               icon: const Icon(
-                CupertinoIcons.square_arrow_left,
-                color: CupertinoColors.destructiveRed,
-              ),
-              label: Text(S.of(context).AppClearCookie),
-            ),
-            NavigationRailDestination(
-              icon: const Icon(
-                CupertinoIcons.delete,
-                color: CupertinoColors.destructiveRed,
+                CupertinoIcons.info,
+                color: CupertinoColors.systemTeal,
               ),
               label: Text(
-                S.of(context).AppClearCache,
+                S.of(context).AboutButton,
                 textAlign: TextAlign.center,
               ),
             ),

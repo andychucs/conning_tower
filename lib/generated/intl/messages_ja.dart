@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AboutButton": MessageLookupByLibrary.simpleMessage("本アプリ\nについて"),
+        "AboutDescription": MessageLookupByLibrary.simpleMessage(
+            "Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("再表示しない"),
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
@@ -82,6 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、HTTPリダイレクトを押すことでプレイ可能な状態になります。")
+            "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、HTTPリダイレクトを押すことでプレイ可能な状態になります。"),
+        "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
+        "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("ツール")
       };
 }

@@ -170,6 +170,56 @@ class S {
     );
   }
 
+  /// `About`
+  String get AboutButton {
+    return Intl.message(
+      'About',
+      name: 'AboutButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.`
+  String get AboutDescription {
+    return Intl.message(
+      'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
+      name: 'AboutDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tools`
+  String get ToolsButton {
+    return Intl.message(
+      'Tools',
+      name: 'ToolsButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get SettingsButton {
+    return Intl.message(
+      'Settings',
+      name: 'SettingsButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset App`
+  String get SettingsReset {
+    return Intl.message(
+      'Reset App',
+      name: 'SettingsReset',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
   String AppLeftSideControlsLoad(Object url) {
     return Intl.message(
