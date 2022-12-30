@@ -27,7 +27,7 @@ late int selectedIndex;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
-  final CookieManager? cookieManager;
+  final WebViewCookieManager? cookieManager;
 
   @override
   State<StatefulWidget> createState() => HomePageState();

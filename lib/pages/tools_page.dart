@@ -9,14 +9,14 @@ import '../widgets/dailog.dart';
 import 'home.dart';
 
 class ToolsPage extends StatelessWidget {
-  ToolsPage(this._webViewControllerFuture, CookieManager? cookieManager,
+  ToolsPage(this._webViewControllerFuture, WebViewCookieManager? cookieManager,
       {Key? key, required this.notifyParent})
-      : cookieManager = cookieManager ?? CookieManager(),
+      : cookieManager = cookieManager ?? WebViewCookieManager(),
         super(key: key);
 
   final Function() notifyParent;
   final Future<WebViewController> _webViewControllerFuture;
-  late final CookieManager cookieManager;
+  late final WebViewCookieManager cookieManager;
 
   Future<void> _onClearCache(BuildContext context, WebViewController controller) async {
     bool? value = await showDialog(context: context, builder: (context){

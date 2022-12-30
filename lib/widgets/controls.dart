@@ -30,13 +30,13 @@ enum ConFunc {
 
 class AppLeftSideControls extends StatelessWidget {
   AppLeftSideControls(
-      this._webViewControllerFuture, CookieManager? cookieManager,
+      this._webViewControllerFuture, WebViewCookieManager? cookieManager,
       {Key? key, required this.notifyParent})
-      : cookieManager = cookieManager ?? CookieManager(),
+      : cookieManager = cookieManager ?? WebViewCookieManager(),
         super(key: key);
   final Function() notifyParent;
   final Future<WebViewController> _webViewControllerFuture;
-  late final CookieManager cookieManager;
+  late final WebViewCookieManager cookieManager;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -229,7 +229,7 @@ class AppLeftSideControls extends StatelessWidget {
         // May be HTTPS or HTTP
         allowNavi = true;
         await controller
-            .runJavascript('''window.open("http:"+gadgetInfo.URL,'_blank');''');
+            .runJavaScript('''window.open("http:"+gadgetInfo.URL,'_blank');''');
         inKancolleWindow = true;
       }
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
@@ -256,7 +256,7 @@ class AppLeftSideControls extends StatelessWidget {
     });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadUrl("http://$kGameUrl");
+      await controller.loadRequest(Uri.parse("http://$kGameUrl"));
     }
   }
 
@@ -277,7 +277,7 @@ class AppLeftSideControls extends StatelessWidget {
   Future<void> _onListCookies(
       WebViewController controller, BuildContext context) async {
     final String cookies =
-        await controller.runJavascriptReturningResult('document.cookie');
+        await controller.runJavaScriptReturningResult('document.cookie') as String;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -306,7 +306,7 @@ class AppLeftSideControls extends StatelessWidget {
 
   Future<void> _onListCache(
       WebViewController controller, BuildContext context) async {
-    await controller.runJavascript('caches.keys()'
+    await controller.runJavaScript('caches.keys()'
         // ignore: missing_whitespace_between_adjacent_strings
         '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
         '.then((caches) => Toaster.postMessage(caches))');
