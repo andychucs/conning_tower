@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Checkout tag
+        run: git checkout ${{ inputs.tag }}
+      - run: cat pubspec.yaml
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
