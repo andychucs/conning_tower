@@ -22,8 +22,8 @@ class SettingsPage extends StatelessWidget {
                 CupertinoButton.filled(
                   onPressed: () async {
                     final prefs =
-                        await SharedPreferences.getInstance(); //temporarily
-                    prefs.clear(); //temporarily
+                        await SharedPreferences.getInstance();
+                    prefs.clear();
                   },
                   child: Text(S.of(context).SettingsReset),
                 ),
