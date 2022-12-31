@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -75,18 +76,21 @@ class ToolsPage extends StatelessWidget {
               children: <Widget>[
                 CupertinoButton.filled(
                   onPressed: () {
+                    HapticFeedback.heavyImpact();
                     _onClearCache(context, controller);
                   },
                   child: Text(S.of(context).AppClearCache.replaceAll('\n', '')),
                 ),
                 CupertinoButton.filled(
                   onPressed: () {
+                    HapticFeedback.heavyImpact();
                     _onClearCookies(context);
                   },
                   child: Text(S.of(context).AppClearCookie),
                 ),
                 CupertinoButton.filled(
                   onPressed: () {
+                    HapticFeedback.heavyImpact();
                     _onAdjustWindow(controller);
                   },
                   child: Text(S.of(context).AppResize),

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../generated/l10n.dart';
@@ -21,6 +22,7 @@ class SettingsPage extends StatelessWidget {
               children: <Widget>[
                 CupertinoButton.filled(
                   onPressed: () async {
+                    HapticFeedback.heavyImpact();
                     final prefs =
                         await SharedPreferences.getInstance();
                     prefs.clear();
