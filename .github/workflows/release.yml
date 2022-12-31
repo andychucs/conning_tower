@@ -15,9 +15,11 @@ jobs:
         run: |
           VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-      - name: Checkout tag
-        run: git checkout ${{ steps.version.outputs.version }}
-      - run: cat pubspec.yaml
+      - name: Create Sentry
+        env:
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        run: |
+          echo $SENTRY_DSN | base64 -d > assets/config/sentry
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:

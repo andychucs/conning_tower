@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.7
   package_info_plus: ^3.0.2
+  sentry_flutter: ^6.18.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/logo.png
+    - assets/config/sentry
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
