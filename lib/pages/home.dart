@@ -31,6 +31,7 @@ late bool autoAdjusted;
 late bool bottomPadding;
 late bool gameLoadCompleted;
 late bool inKancolleWindow;
+late bool beforeRedirect;
 late double kWebviewHeight;
 late double kWebviewWidth;
 late int selectedIndex;
@@ -103,6 +104,7 @@ class HomePageState extends State<HomePage> {
     final WebViewController controller =
         WebViewController.fromPlatformCreationParams(params);
     // #enddocregion platform_features
+    beforeRedirect = false;
 
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -112,13 +114,28 @@ class HomePageState extends State<HomePage> {
       ..enableZoom(true)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
+          onProgress: (int progress) async {
             debugPrint('WebView is loading (progress : $progress%)');
+            if (beforeRedirect){
+              if (progress >= 80){
+                HapticFeedback.lightImpact();
+                await controller.runJavaScript(
+                    '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                Fluttertoast.showToast(
+                    msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                debugPrint("HTTP Redirect success");
+                setState(() {
+                  inKancolleWindow = true;
+                });
+              }
+            }
           },
           onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
             setState(() {
+              beforeRedirect = false;
               if (url.endsWith(kGameUrl)) {
+                beforeRedirect = true;
                 inKancolleWindow = false;
                 autoAdjusted = false;
               } else if (url.startsWith("http://osapi.dmm.com")) {
@@ -129,18 +146,6 @@ class HomePageState extends State<HomePage> {
           },
           onPageFinished: (String url) async {
             debugPrint('Page finished loading: $url');
-            if (url.endsWith(kGameUrl)) {
-              print('is game origin url');
-              HapticFeedback.lightImpact();
-              await controller.runJavaScript(
-                  '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-              Fluttertoast.showToast(
-                  msg: S.current.KCViewFuncMsgAutoGameRedirect);
-              print("HTTP Redirect success");
-              setState(() {
-                inKancolleWindow = true;
-              });
-            }
           },
           onWebResourceError: (WebResourceError error) {
             debugPrint('''
