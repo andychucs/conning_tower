@@ -20,7 +20,7 @@ class AboutPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Container(
+                SizedBox(
                   height: 280,
                   child: Row(
                     children: [
@@ -32,9 +32,51 @@ class AboutPage extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Text(
-                          '${packageInfo.appName} ${packageInfo.version}',
-                          style: const TextStyle(fontSize: 36),
+                        child: SizedBox(
+                          height: 200,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                packageInfo.appName,
+                                style: const TextStyle(fontSize: 36),
+                              ),
+                              Text(
+                                'version: ${packageInfo.version}',
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              InkWell(
+                                onTap: () => launchUrl(Uri.parse(
+                                    'https://github.com/andychucs/conning_tower')),
+                                child: const Text(
+                                  'Github',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: CupertinoColors.link),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => launchUrl(Uri.parse(
+                                    'https://github.com/andychucs/conning_tower/wiki')),
+                                child: const Text(
+                                  'Wiki',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: CupertinoColors.link),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => launchUrl(
+                                    Uri.parse('https://twitter.com/conntower')),
+                                child: const Text(
+                                  'Twitter',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: CupertinoColors.link),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -46,57 +88,10 @@ class AboutPage extends StatelessWidget {
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),
-                Container(
+                const SizedBox(
                   height: 30,
                 ),
-                Container(
-                  height: 30,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => launchUrl(Uri.parse(
-                              'https://github.com/andychucs/conning_tower')),
-                          child: const Text(
-                            'Github',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: CupertinoColors.link),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => launchUrl(Uri.parse(
-                              'https://github.com/andychucs/conning_tower/wiki')),
-                          child: const Text(
-                            'Wiki',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: CupertinoColors.link),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => launchUrl(
-                              Uri.parse('https://twitter.com/conntower')),
-                          child: const Text(
-                            'Twitter',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: CupertinoColors.link),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 30,
-                  child: Text(''),
-                ),
-                Container(
+                const SizedBox(
                   height: 30,
                   child: Text('Contributors', style: TextStyle(fontSize: 24)),
                 ),
