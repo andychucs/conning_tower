@@ -152,6 +152,7 @@ Future<bool> autoAdjustWindowV2(WebViewController controller,) async {
 })(document, window)
 ''');
     }
+    autoAdjusted = true;
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
     print("Auto adjust success");
     allowNavi = false;
