@@ -15,9 +15,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 // #docregion platform_imports
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
@@ -116,19 +118,29 @@ class HomePageState extends State<HomePage> {
         NavigationDelegate(
           onProgress: (int progress) async {
             debugPrint('WebView is loading (progress : $progress%)');
-            if (beforeRedirect && !inKancolleWindow){
-              if (progress >= 90){
+            if (beforeRedirect && !inKancolleWindow) {
+              if (progress >= 90) {
                 HapticFeedback.lightImpact();
-                if(Platform.isIOS){
+                if (Platform.isIOS) {
                   await controller.runJavaScript(
                       '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                  Fluttertoast.showToast(
+                      msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                  debugPrint("HTTP Redirect success");
+                  setState(() {
+                    inKancolleWindow = true;
+                  });
                 }
-                Fluttertoast.showToast(
-                    msg: S.current.KCViewFuncMsgAutoGameRedirect);
-                debugPrint("HTTP Redirect success");
-                setState(() {
-                  inKancolleWindow = true;
-                });
+                if (Platform.isAndroid) {
+                  Fluttertoast.showToast(
+                      msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                  setState(() {
+                    gameLoadCompleted = true;
+                    inKancolleWindow = true;
+                  });
+                  HapticFeedback.mediumImpact();
+                  await autoAdjustWindowV2(controller);
+                }
               }
             }
           },
