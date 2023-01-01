@@ -200,6 +200,26 @@ class S {
     );
   }
 
+  /// `GameMute`
+  String get GameMute {
+    return Intl.message(
+      'Game Volumn Off',
+      name: 'GameMute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GameUnmute`
+  String get GameUnmute {
+    return Intl.message(
+      'Game Volumn On',
+      name: 'GameUnmute',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get SettingsButton {
     return Intl.message(
@@ -455,6 +475,24 @@ class S {
     return Intl.message(
       'For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.',
       name: 'MsgIOSNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get MsgMuteGame {
+    return Intl.message(
+      'Game will be muted after refresh.',
+      name: 'MsgMuteGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get MsgUnmuteGame {
+    return Intl.message(
+      'Game will be unmuted after refresh.',
+      name: 'MsgUnmuteGame',
       desc: '',
       args: [],
     );

@@ -61,6 +61,22 @@ class ToolsPage extends StatelessWidget {
     }
   }
 
+  Future<void> _muteGame(WebViewController controller) async {
+    await controller.runJavaScript('''document.cookie=
+    "kcs_options=vol_bgm%3D0%3Bvol_se%3D0%3Bvol_voice%3D0%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"
+	''');
+    Fluttertoast.showToast(
+        msg: S.current.MsgMuteGame);
+  }
+
+  Future<void> _unMuteGame(WebViewController controller) async {
+    await controller.runJavaScript('''	document.cookie=
+    "kcs_options=vol_bgm%3D30%3Bvol_se%3D40%3Bvol_voice%3D60%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"''');
+    Fluttertoast.showToast(
+        msg: S.current.MsgUnmuteGame);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
@@ -95,6 +111,25 @@ class ToolsPage extends StatelessWidget {
                   },
                   child: Text(S.of(context).AppResize),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        HapticFeedback.heavyImpact();
+                        _unMuteGame(controller);
+                      },
+                      child: Text(S.of(context).GameUnmute),
+                    ),
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        HapticFeedback.heavyImpact();
+                        _muteGame(controller);
+                      },
+                      child: Text(S.of(context).GameMute),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

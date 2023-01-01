@@ -30,6 +30,10 @@
   "@AboutDescription": {},
   "ToolsButton": "工具",
   "@ToolsButton": {},
+  "GameMute": "遊戲靜音",
+  "@GameMute": {},
+  "GameUnmute": "遊戲解除靜音",
+  "@GameUnmute": {},
   "SettingsButton": "設定",
   "@SettingsButton": {},
   "SettingsReset": "重設",
@@ -82,4 +86,8 @@
   "@KCViewFuncMsgPageStart": {},
   "MsgIOSNote": "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊重定向按鈕。",
   "@MsgIOSNote": {}
+  "MsgMuteGame": "遊戲將會在重新載入後靜音。",
+  "@MsgMuteGame": {},
+  "MsgUnmuteGame": "遊戲將會在重新載入後解除靜音。",
+  "@MsgUnmuteGame": {},
 }
