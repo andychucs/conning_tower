@@ -90,9 +90,10 @@ class ToolsPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Flexible(
-                      flex: 1,
-                      child: Expanded(
+                    Flexible(
+                      flex: 2,
+                      fit: FlexFit.tight,
+                      child: Container(
                         child: Text(
                           "Clear",
                           textAlign: TextAlign.center,
@@ -100,34 +101,51 @@ class ToolsPage extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      flex: 2,
-                      child: CupertinoButton.filled(
-                        onPressed: () {
-                          HapticFeedback.heavyImpact();
-                          _onClearCache(context, controller);
-                        },
-                        child: Text(
-                            S.of(context).AppClearCache.replaceAll('\n', '')),
-                      ),
+                        flex: 4,
+                        fit: FlexFit.tight,
+                        child: Container(
+                          child: CupertinoButton.filled(
+                            onPressed: () {
+                              HapticFeedback.heavyImpact();
+                              _onClearCache(context, controller);
+                            },
+                            child: Text(S
+                                .of(context)
+                                .AppClearCache
+                                .replaceAll('\n', '')),
+                          ),
+                        )),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(),
                     ),
                     Flexible(
-                      flex: 2,
-                      child: CupertinoButton.filled(
-                        onPressed: () {
-                          HapticFeedback.heavyImpact();
-                          _onClearCookies(context);
-                        },
-                        child: Text(S.of(context).AppClearCookie),
-                      ),
+                        flex: 4,
+                        fit: FlexFit.tight,
+                        child: Container(
+                          child: CupertinoButton.filled(
+                            onPressed: () {
+                              HapticFeedback.heavyImpact();
+                              _onClearCookies(context);
+                            },
+                            child: Text(S.of(context).AppClearCookie),
+                          ),
+                        )),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(),
                     ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Flexible(
-                      flex: 1,
-                      child: Expanded(
+                    Flexible(
+                      flex: 2,
+                      fit: FlexFit.tight,
+                      child: Container(
                         child: Text(
                           "Game Sound",
                           textAlign: TextAlign.center,
@@ -135,33 +153,50 @@ class ToolsPage extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      flex: 2,
-                      child: CupertinoButton.filled(
-                        onPressed: () {
-                          HapticFeedback.heavyImpact();
-                          _unMuteGame(controller);
-                        },
-                        child: Text(S.of(context).GameUnmute),
+                      flex: 4,
+                      fit: FlexFit.tight,
+                      child: Container(
+                        child: CupertinoButton.filled(
+                          onPressed: () {
+                            HapticFeedback.heavyImpact();
+                            _unMuteGame(controller);
+                          },
+                          child: Text(S.of(context).GameUnmute),
+                        ),
                       ),
                     ),
                     Flexible(
-                      flex: 2,
-                      child: CupertinoButton.filled(
-                        onPressed: () {
-                          HapticFeedback.heavyImpact();
-                          _muteGame(controller);
-                        },
-                        child: Text(S.of(context).GameMute),
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(),
+                    ),
+                    Flexible(
+                      flex: 4,
+                      fit: FlexFit.tight,
+                      child: Container(
+                        child: CupertinoButton.filled(
+                          onPressed: () {
+                            HapticFeedback.heavyImpact();
+                            _muteGame(controller);
+                          },
+                          child: Text(S.of(context).GameMute),
+                        ),
                       ),
-                    )
+                    ),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(),
+                    ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Flexible(
-                      flex: 1,
-                      child: Expanded(
+                    Flexible(
+                      flex: 2,
+                      fit: FlexFit.tight,
+                      child: Container(
                         child: Text(
                           "Game Screen",
                           textAlign: TextAlign.center,
@@ -169,22 +204,35 @@ class ToolsPage extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      flex: 2,
-                      child: CupertinoButton.filled(
-                        onPressed: () {
-                          HapticFeedback.heavyImpact();
-                          _onAdjustWindow(controller);
-                        },
-                        child: Text(S.of(context).AppResize),
+                      flex: 4,
+                      fit: FlexFit.tight,
+                      child: Container(
+                        child: CupertinoButton.filled(
+                          onPressed: () {
+                            HapticFeedback.heavyImpact();
+                            _onAdjustWindow(controller);
+                          },
+                          child: Text(S.of(context).AppResize),
+                        ),
                       ),
                     ),
                     Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
                       child: Container(),
-                      flex: 2,
+                    ),
+                    Flexible(
+                      flex: 4,
+                      fit: FlexFit.tight,
+                      child: Container(),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: Container(),
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
