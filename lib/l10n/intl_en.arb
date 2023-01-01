@@ -34,6 +34,8 @@
   "@SettingsButton": {},
   "SettingsReset": "Reset App",
   "@SettingsReset": {},
+  "SettingsEnableAutoProcess": "Enable Auto Fullscreen",
+  "@SettingsEnableAutoProcess": {},
   "AppLeftSideControlsLoad": "Load URL: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView not ready",

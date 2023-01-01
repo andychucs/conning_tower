@@ -5,22 +5,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../generated/l10n.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({super.key, required this.reloadConfig});
+  final Function() reloadConfig;
+
 
   @override
   State<SettingsPage> createState() => SettingsPageState();
 }
 
 class SettingsPageState extends State<SettingsPage> {
-  late bool enableAutoProcessSwitchValue;
+  bool enableAutoProcessSwitchValue = true;
 
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _loadConfig();
-    });
+    _loadConfig();
   }
 
   Future<void> _loadConfig() async {
@@ -46,15 +45,17 @@ class SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Text('Enable Auto Process'),
+                    Text(S.of(context).SettingsEnableAutoProcess),
                     CupertinoSwitch(
                         value: enableAutoProcessSwitchValue,
                         onChanged: (value) async {
-                          final prefs = await SharedPreferences.getInstance();
-                          prefs.setBool('enableAutoProcess', value);
+                          HapticFeedback.heavyImpact();
                           setState(() {
                             enableAutoProcessSwitchValue = value;
                           });
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.setBool('enableAutoProcess', value);
+                          widget.reloadConfig();
                     })
                   ],
                 ),
@@ -64,6 +65,8 @@ class SettingsPageState extends State<SettingsPage> {
                     final prefs =
                         await SharedPreferences.getInstance();
                     prefs.clear();
+                    _loadConfig();
+                    widget.reloadConfig();
                   },
                   child: Text(S.of(context).SettingsReset),
                 ),

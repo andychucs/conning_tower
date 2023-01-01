@@ -34,6 +34,8 @@
   "@SettingsButton": {},
   "SettingsReset": "アプリを初期化",
   "@SettingsReset": {},
+  "SettingsEnableAutoProcess": "艦これの画面を自動的に全画面する",
+  "@SettingsEnableAutoProcess": {},
   "AppLeftSideControlsLoad": "URLをロード: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebViewの準備がまだ整っていません",

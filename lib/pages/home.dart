@@ -119,7 +119,10 @@ class HomePageState extends State<HomePage> {
         NavigationDelegate(
           onProgress: (int progress) async {
             debugPrint('WebView is loading (progress : $progress%)');
-            if (_enableAutoProcess && beforeRedirect && !inKancolleWindow && progress >= 90) {
+            if (_enableAutoProcess &&
+                beforeRedirect &&
+                !inKancolleWindow &&
+                progress >= 90) {
               if (Platform.isIOS) {
                 await controller.runJavaScript(
                     '''window.open("http:"+gadgetInfo.URL,'_blank');''');
@@ -183,8 +186,7 @@ Page resource error:
                   HapticFeedback.mediumImpact();
                   await autoAdjustWindowV2(controller);
                 }
-              }
-              else {
+              } else {
                 //chrome can't detect /kcs2/.....
                 if (request.url.startsWith("http://osapi.dmm.com")) {
                   Fluttertoast.showToast(
@@ -319,7 +321,11 @@ Page resource error:
                       setState(() {});
                     },
                   ),
-                  const SettingsPage(),
+                  SettingsPage(
+                    reloadConfig: () {
+                      _loadConfig();
+                    },
+                  ),
                   AboutPage(
                     packageInfo: _packageInfo,
                   ),
