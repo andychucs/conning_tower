@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -216,8 +218,10 @@ class AppLeftSideControls extends StatelessWidget {
       if (currentUrl.toString().endsWith(kGameUrl)) {
         // May be HTTPS or HTTP
         allowNavi = true;
-        await controller
-            .runJavaScript('''window.open("http:"+gadgetInfo.URL,'_blank');''');
+        if (Platform.isIOS) {
+          await controller.runJavaScript(
+              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+        }
         inKancolleWindow = true;
       }
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
@@ -231,7 +235,7 @@ class AppLeftSideControls extends StatelessWidget {
 
   Future<void> _onAdjustWindow(WebViewController controller) async {
     if (gameLoadCompleted) {
-      await autoAdjustWindow(controller);
+      await autoAdjustWindowV2(controller);
     } else {
       Fluttertoast.showToast(
           msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);

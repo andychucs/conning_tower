@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、HTTPリダイレクトを押すことでプレイ可能な状態になります。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
+        "SettingsEnableAutoProcess":
+            MessageLookupByLibrary.simpleMessage("艦これの画面を自動的に全画面する"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("ツール")
       };

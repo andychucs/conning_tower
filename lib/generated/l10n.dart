@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Enable Auto Fullscreen`
+  String get SettingsEnableAutoProcess {
+    return Intl.message(
+      'Enable Auto Fullscreen',
+      name: 'SettingsEnableAutoProcess',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
   String AppLeftSideControlsLoad(Object url) {
     return Intl.message(

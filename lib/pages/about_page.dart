@@ -20,7 +20,7 @@ class AboutPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Container(
+                SizedBox(
                   height: 280,
                   child: Row(
                     children: [
@@ -32,9 +32,51 @@ class AboutPage extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Text(
-                          '${packageInfo.appName} ${packageInfo.version}',
-                          style: const TextStyle(fontSize: 36),
+                        child: SizedBox(
+                          height: 200,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                packageInfo.appName,
+                                style: const TextStyle(fontSize: 36),
+                              ),
+                              Text(
+                                'version: ${packageInfo.version}',
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              InkWell(
+                                onTap: () => launchUrl(Uri.parse(
+                                    'https://github.com/andychucs/conning_tower')),
+                                child: const Text(
+                                  'Github',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: CupertinoColors.link),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => launchUrl(Uri.parse(
+                                    'https://github.com/andychucs/conning_tower/wiki')),
+                                child: const Text(
+                                  'Wiki',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: CupertinoColors.link),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => launchUrl(
+                                    Uri.parse('https://twitter.com/conntower')),
+                                child: const Text(
+                                  'Twitter',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: CupertinoColors.link),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -46,57 +88,10 @@ class AboutPage extends StatelessWidget {
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),
-                Container(
+                const SizedBox(
                   height: 30,
                 ),
-                Container(
-                  height: 30,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => launchUrl(Uri.parse(
-                              'https://github.com/andychucs/conning_tower')),
-                          child: const Text(
-                            'Github',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: CupertinoColors.link),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => launchUrl(Uri.parse(
-                              'https://github.com/andychucs/conning_tower/wiki')),
-                          child: const Text(
-                            'Wiki',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: CupertinoColors.link),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => launchUrl(
-                              Uri.parse('https://twitter.com/conntower')),
-                          child: const Text(
-                            'Twitter',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: CupertinoColors.link),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 30,
-                  child: Text(''),
-                ),
-                Container(
+                const SizedBox(
                   height: 30,
                   child: Text('Contributors', style: TextStyle(fontSize: 24)),
                 ),
@@ -113,9 +108,22 @@ class AboutPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
-                          leading: const Image(
-                              image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/24852023?v=4')),
+                          leading: FadeInImage(
+                              height: 50,
+                              width: 50,
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeInCurve: Curves.easeInExpo,
+                              fadeOutCurve: Curves.easeOutExpo,
+                              placeholder: const AssetImage(
+                                  "assets/images/defaultAvatarImage.png.png"),
+                              image: const NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/24852023?v=4'),
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                    child: Image.asset(
+                                        "assets/images/defaultAvatarImage.png"));
+                              },
+                              fit: BoxFit.cover),
                           title: const Text('Andy Chu'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(
@@ -139,9 +147,22 @@ class AboutPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
-                          leading: const Image(
-                              image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/91370281?v=4')), //FIXME: add a default image or not display when network fail
+                          leading: FadeInImage(
+                              height: 50,
+                              width: 50,
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeInCurve: Curves.easeInExpo,
+                              fadeOutCurve: Curves.easeOutExpo,
+                              placeholder: const AssetImage(
+                                  "assets/images/defaultAvatarImage.png.png"),
+                              image: const NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/91370281?v=4'),
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                    child: Image.asset(
+                                        "assets/images/defaultAvatarImage.png"));
+                              },
+                              fit: BoxFit.cover),
                           title: const Text('Angus'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(
@@ -165,9 +186,22 @@ class AboutPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
-                          leading: const Image(
-                              image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/59718878?v=4')),
+                          leading: FadeInImage(
+                              height: 50,
+                              width: 50,
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              fadeInCurve: Curves.easeInExpo,
+                              fadeOutCurve: Curves.easeOutExpo,
+                              placeholder: const AssetImage(
+                                  "assets/images/defaultAvatarImage.png"),
+                              image: const NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/59718878?v=4'),
+                              imageErrorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                    child: Image.asset(
+                                        "assets/images/defaultAvatarImage.png"));
+                              },
+                              fit: BoxFit.cover),
                           title: const Text('lovetwice1012'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(

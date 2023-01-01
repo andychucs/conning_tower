@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊重定向按鈕。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
+        "SettingsEnableAutoProcess":
+            MessageLookupByLibrary.simpleMessage("啟用自動全螢幕"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };

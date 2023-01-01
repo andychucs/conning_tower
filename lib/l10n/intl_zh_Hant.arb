@@ -34,6 +34,8 @@
   "@SettingsButton": {},
   "SettingsReset": "重設",
   "@SettingsReset": {},
+  "SettingsEnableAutoProcess": "啟用自動全螢幕",
+  "@SettingsEnableAutoProcess": {},
   "AppLeftSideControlsLoad": "載入網址: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView還沒有準備好",

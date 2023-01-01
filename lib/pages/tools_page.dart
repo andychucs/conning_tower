@@ -54,7 +54,7 @@ class ToolsPage extends StatelessWidget {
 
   Future<void> _onAdjustWindow(WebViewController controller) async {
     if (gameLoadCompleted) {
-      await autoAdjustWindow(controller);
+      await autoAdjustWindowV2(controller);
     } else {
       Fluttertoast.showToast(
           msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);

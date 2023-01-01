@@ -15,9 +15,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 // #docregion platform_imports
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
@@ -49,6 +51,7 @@ class HomePageState extends State<HomePage> {
   late double deviceWidth;
   bool _showNotify = true;
   bool _showIosNotify = true;
+  bool _enableAutoProcess = true;
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -116,9 +119,11 @@ class HomePageState extends State<HomePage> {
         NavigationDelegate(
           onProgress: (int progress) async {
             debugPrint('WebView is loading (progress : $progress%)');
-            if (beforeRedirect && !inKancolleWindow){
-              if (progress >= 90){
-                HapticFeedback.lightImpact();
+            if (_enableAutoProcess &&
+                beforeRedirect &&
+                !inKancolleWindow &&
+                progress >= 90) {
+              if (Platform.isIOS) {
                 await controller.runJavaScript(
                     '''window.open("http:"+gadgetInfo.URL,'_blank');''');
                 Fluttertoast.showToast(
@@ -127,6 +132,16 @@ class HomePageState extends State<HomePage> {
                 setState(() {
                   inKancolleWindow = true;
                 });
+              }
+              if (Platform.isAndroid) {
+                Fluttertoast.showToast(
+                    msg: S.current.KCViewFuncMsgNaviGameLoadCompleted);
+                setState(() {
+                  gameLoadCompleted = true;
+                  inKancolleWindow = true;
+                });
+                HapticFeedback.mediumImpact();
+                await autoAdjustWindowV2(controller);
               }
             }
           },
@@ -158,29 +173,31 @@ Page resource error:
           },
           onNavigationRequest: (NavigationRequest request) async {
             print('allowing navigation to $request');
-            if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-              if (request.url.contains(
-                  "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
-                Fluttertoast.showToast(
-                    msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
-                setState(() {
-                  gameLoadCompleted = true;
-                  inKancolleWindow = true;
-                });
-                HapticFeedback.mediumImpact();
-                await autoAdjustWindow(controller);
-              }
-            } else {
-              //chrome can't detect /kcs2/.....
-              if (request.url.startsWith("http://osapi.dmm.com")) {
-                Fluttertoast.showToast(
-                    msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
-                setState(() {
-                  gameLoadCompleted = true;
-                  inKancolleWindow = true;
-                });
-                HapticFeedback.mediumImpact();
-                await autoAdjustWindow(controller);
+            if (_enableAutoProcess) {
+              if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+                if (request.url.contains(
+                    "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
+                  Fluttertoast.showToast(
+                      msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                  setState(() {
+                    gameLoadCompleted = true;
+                    inKancolleWindow = true;
+                  });
+                  HapticFeedback.mediumImpact();
+                  await autoAdjustWindowV2(controller);
+                }
+              } else {
+                //chrome can't detect /kcs2/.....
+                if (request.url.startsWith("http://osapi.dmm.com")) {
+                  Fluttertoast.showToast(
+                      msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+                  setState(() {
+                    gameLoadCompleted = true;
+                    inKancolleWindow = true;
+                  });
+                  HapticFeedback.mediumImpact();
+                  await autoAdjustWindowV2(controller);
+                }
               }
             }
 
@@ -234,6 +251,7 @@ Page resource error:
     setState(() {
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
+      _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
     });
   }
 
@@ -303,7 +321,11 @@ Page resource error:
                       setState(() {});
                     },
                   ),
-                  const SettingsPage(),
+                  SettingsPage(
+                    reloadConfig: () {
+                      _loadConfig();
+                    },
+                  ),
                   AboutPage(
                     packageInfo: _packageInfo,
                   ),
