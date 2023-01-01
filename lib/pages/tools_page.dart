@@ -65,16 +65,13 @@ class ToolsPage extends StatelessWidget {
     await controller.runJavaScript('''document.cookie=
     "kcs_options=vol_bgm%3D0%3Bvol_se%3D0%3Bvol_voice%3D0%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"
 	''');
-    Fluttertoast.showToast(
-        msg: S.current.MsgMuteGame);
+    Fluttertoast.showToast(msg: S.current.MsgMuteGame);
   }
 
   Future<void> _unMuteGame(WebViewController controller) async {
     await controller.runJavaScript('''	document.cookie=
     "kcs_options=vol_bgm%3D30%3Bvol_se%3D40%3Bvol_voice%3D60%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"''');
-    Fluttertoast.showToast(
-        msg: S.current.MsgUnmuteGame);
-
+    Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
   @override
@@ -90,46 +87,104 @@ class ToolsPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                CupertinoButton.filled(
-                  onPressed: () {
-                    HapticFeedback.heavyImpact();
-                    _onClearCache(context, controller);
-                  },
-                  child: Text(S.of(context).AppClearCache.replaceAll('\n', '')),
-                ),
-                CupertinoButton.filled(
-                  onPressed: () {
-                    HapticFeedback.heavyImpact();
-                    _onClearCookies(context);
-                  },
-                  child: Text(S.of(context).AppClearCookie),
-                ),
-                CupertinoButton.filled(
-                  onPressed: () {
-                    HapticFeedback.heavyImpact();
-                    _onAdjustWindow(controller);
-                  },
-                  child: Text(S.of(context).AppResize),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Flexible(
+                      flex: 1,
+                      child: Expanded(
+                        child: Text(
+                          "Clear",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: CupertinoButton.filled(
+                        onPressed: () {
+                          HapticFeedback.heavyImpact();
+                          _onClearCache(context, controller);
+                        },
+                        child: Text(
+                            S.of(context).AppClearCache.replaceAll('\n', '')),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: CupertinoButton.filled(
+                        onPressed: () {
+                          HapticFeedback.heavyImpact();
+                          _onClearCookies(context);
+                        },
+                        child: Text(S.of(context).AppClearCookie),
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CupertinoButton.filled(
-                      onPressed: () {
-                        HapticFeedback.heavyImpact();
-                        _unMuteGame(controller);
-                      },
-                      child: Text(S.of(context).GameUnmute),
+                    const Flexible(
+                      flex: 1,
+                      child: Expanded(
+                        child: Text(
+                          "Game Sound",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                    CupertinoButton.filled(
-                      onPressed: () {
-                        HapticFeedback.heavyImpact();
-                        _muteGame(controller);
-                      },
-                      child: Text(S.of(context).GameMute),
+                    Flexible(
+                      flex: 2,
+                      child: CupertinoButton.filled(
+                        onPressed: () {
+                          HapticFeedback.heavyImpact();
+                          _unMuteGame(controller);
+                        },
+                        child: Text(S.of(context).GameUnmute),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: CupertinoButton.filled(
+                        onPressed: () {
+                          HapticFeedback.heavyImpact();
+                          _muteGame(controller);
+                        },
+                        child: Text(S.of(context).GameMute),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Flexible(
+                      flex: 1,
+                      child: Expanded(
+                        child: Text(
+                          "Game Screen",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: CupertinoButton.filled(
+                        onPressed: () {
+                          HapticFeedback.heavyImpact();
+                          _onAdjustWindow(controller);
+                        },
+                        child: Text(S.of(context).AppResize),
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(),
+                      flex: 2,
                     ),
                   ],
-                )
+                ),
+
               ],
             ),
           ),
