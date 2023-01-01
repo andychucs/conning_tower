@@ -120,7 +120,6 @@ class HomePageState extends State<HomePage> {
             debugPrint('WebView is loading (progress : $progress%)');
             if (beforeRedirect && !inKancolleWindow) {
               if (progress >= 90) {
-                HapticFeedback.lightImpact();
                 if (Platform.isIOS) {
                   await controller.runJavaScript(
                       '''window.open("http:"+gadgetInfo.URL,'_blank');''');
