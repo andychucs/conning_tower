@@ -218,9 +218,9 @@ class AppLeftSideControls extends StatelessWidget {
       if (currentUrl.toString().endsWith(kGameUrl)) {
         // May be HTTPS or HTTP
         allowNavi = true;
-        if(Platform.isIOS){
-          await controller
-              .runJavaScript('''window.open("http:"+gadgetInfo.URL,'_blank');''');
+        if (Platform.isIOS) {
+          await controller.runJavaScript(
+              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
         }
         inKancolleWindow = true;
       }

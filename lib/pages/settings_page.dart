@@ -8,7 +8,6 @@ class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, required this.reloadConfig});
   final Function() reloadConfig;
 
-
   @override
   State<SettingsPage> createState() => SettingsPageState();
 }
@@ -25,7 +24,8 @@ class SettingsPageState extends State<SettingsPage> {
   Future<void> _loadConfig() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      enableAutoProcessSwitchValue = (prefs.getBool('enableAutoProcess') ?? true);
+      enableAutoProcessSwitchValue =
+          (prefs.getBool('enableAutoProcess') ?? true);
     });
   }
 
@@ -56,14 +56,13 @@ class SettingsPageState extends State<SettingsPage> {
                           final prefs = await SharedPreferences.getInstance();
                           prefs.setBool('enableAutoProcess', value);
                           widget.reloadConfig();
-                    })
+                        })
                   ],
                 ),
                 CupertinoButton.filled(
                   onPressed: () async {
                     HapticFeedback.heavyImpact();
-                    final prefs =
-                        await SharedPreferences.getInstance();
+                    final prefs = await SharedPreferences.getInstance();
                     prefs.clear();
                     _loadConfig();
                     widget.reloadConfig();

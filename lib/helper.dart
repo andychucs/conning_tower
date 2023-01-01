@@ -8,7 +8,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'constants.dart';
 import 'generated/l10n.dart';
 
-Future<bool> autoAdjustWindow(WebViewController controller,) async {
+Future<bool> autoAdjustWindow(
+  WebViewController controller,
+) async {
   //Adjust Kancolle window
   if (inKancolleWindow && !autoAdjusted) {
     int getWebviewSizeCount = 0;
@@ -40,10 +42,10 @@ Future<bool> autoAdjustWindow(WebViewController controller,) async {
 
     if (Platform.isIOS) {
       await controller.runJavaScript(
-        //Scale to correct size(ios webkit)
+          //Scale to correct size(ios webkit)
           '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
     } else if (Platform.isAndroid) {
-      await controller.runJavaScript( //Scale to correct size(android chrome)
+      await controller.runJavaScript(//Scale to correct size(android chrome)
           '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
     }
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
@@ -70,7 +72,9 @@ getResizeScale(double height, double width) {
   }
 }
 
-Future<bool> autoAdjustWindowV2(WebViewController controller,) async {
+Future<bool> autoAdjustWindowV2(
+  WebViewController controller,
+) async {
   //Adjust Kancolle window
   if (inKancolleWindow && !autoAdjusted) {
     if (Platform.isIOS) {
