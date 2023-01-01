@@ -10,6 +10,5 @@ void main() {
           [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
       .then((value) async => await SentryFlutter.init((options) async {
             options.dsn = await rootBundle.loadString('assets/config/sentry');
-            options.tracesSampler = 1.0 as TracesSamplerCallback?;
           }, appRunner: () => runApp(const ConnTowerApp())));
 }
