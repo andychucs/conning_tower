@@ -34,6 +34,8 @@
   "@SettingsButton": {},
   "SettingsReset": "重置",
   "@SettingsReset": {},
+  "SettingsEnableAutoProcess": "启用自动全屏",
+  "@SettingsEnableAutoProcess": {},
   "AppLeftSideControlsLoad": "加载URl：{url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView还没有准备好",
