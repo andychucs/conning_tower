@@ -115,7 +115,7 @@ class AboutPage extends StatelessWidget {
                               fadeInCurve: Curves.easeInExpo,
                               fadeOutCurve: Curves.easeOutExpo,
                               placeholder: const AssetImage(
-                                  "assets/images/defaultAvatarImage.png.png"),
+                                  "assets/images/defaultAvatarImage.png"),
                               image: const NetworkImage(
                                   'https://avatars.githubusercontent.com/u/24852023?v=4'),
                               imageErrorBuilder: (context, error, stackTrace) {
@@ -154,7 +154,7 @@ class AboutPage extends StatelessWidget {
                               fadeInCurve: Curves.easeInExpo,
                               fadeOutCurve: Curves.easeOutExpo,
                               placeholder: const AssetImage(
-                                  "assets/images/defaultAvatarImage.png.png"),
+                                  "assets/images/defaultAvatarImage.png"),
                               image: const NetworkImage(
                                   'https://avatars.githubusercontent.com/u/91370281?v=4'),
                               imageErrorBuilder: (context, error, stackTrace) {
