@@ -108,9 +108,19 @@ class AboutPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
-                          leading: const Image(
-                              image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/24852023?v=4')),
+                          leading: FadeInImage(
+    height: 50,
+    width: 50,
+    fadeInDuration: const Duration(milliseconds: 500),
+    fadeInCurve: Curves.easeInExpo,
+    fadeOutCurve: Curves.easeOutExpo,
+    placeholder: AssetImage("assets/images/defaultAvatarImage.png.png"),
+    image: NetworkImage('https://avatars.githubusercontent.com/u/24852023?v=4'
+    ),
+    imageErrorBuilder: (context, error, stackTrace) {
+    return Container(child: Image.asset("assets/images/defaultAvatarImage.png"));
+    },
+    fit: BoxFit.cover),
                           title: const Text('Andy Chu'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(
@@ -134,9 +144,19 @@ class AboutPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
-                          leading: const Image(
-                              image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/91370281?v=4')), //FIXME: add a default image or not display when network fail
+                          leading: FadeInImage(
+    height: 50,
+    width: 50,
+    fadeInDuration: const Duration(milliseconds: 500),
+    fadeInCurve: Curves.easeInExpo,
+    fadeOutCurve: Curves.easeOutExpo,
+    placeholder: AssetImage("assets/images/defaultAvatarImage.png.png"),
+    image: NetworkImage('https://avatars.githubusercontent.com/u/91370281?v=4'
+    ),
+    imageErrorBuilder: (context, error, stackTrace) {
+    return Container(child: Image.asset("assets/images/defaultAvatarImage.png"));
+    },
+    fit: BoxFit.cover),
                           title: const Text('Angus'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(
@@ -160,9 +180,19 @@ class AboutPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ListTile(
-                          leading: const Image(
-                              image: NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/59718878?v=4')),
+                          leading: FadeInImage(
+    height: 50,
+    width: 50,
+    fadeInDuration: const Duration(milliseconds: 500),
+    fadeInCurve: Curves.easeInExpo,
+    fadeOutCurve: Curves.easeOutExpo,
+    placeholder: AssetImage("assets/images/defaultAvatarImage.png"),
+    image: NetworkImage('https://avatars.githubusercontent.com/u/59718878?v=4'
+    ),
+    imageErrorBuilder: (context, error, stackTrace) {
+    return Container(child: Image.asset("assets/images/defaultAvatarImage.png"));
+    },
+    fit: BoxFit.cover),
                           title: const Text('lovetwice1012'),
                           subtitle: InkWell(
                             onTap: () => launchUrl(
