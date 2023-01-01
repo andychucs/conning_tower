@@ -119,8 +119,10 @@ class HomePageState extends State<HomePage> {
             if (beforeRedirect && !inKancolleWindow){
               if (progress >= 90){
                 HapticFeedback.lightImpact();
-                await controller.runJavaScript(
-                    '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                if(Platform.isIOS){
+                  await controller.runJavaScript(
+                      '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+                }
                 Fluttertoast.showToast(
                     msg: S.current.KCViewFuncMsgAutoGameRedirect);
                 debugPrint("HTTP Redirect success");
@@ -168,7 +170,7 @@ Page resource error:
                   inKancolleWindow = true;
                 });
                 HapticFeedback.mediumImpact();
-                await autoAdjustWindow(controller);
+                await autoAdjustWindowV2(controller);
               }
             } else {
               //chrome can't detect /kcs2/.....
@@ -180,7 +182,7 @@ Page resource error:
                   inKancolleWindow = true;
                 });
                 HapticFeedback.mediumImpact();
-                await autoAdjustWindow(controller);
+                await autoAdjustWindowV2(controller);
               }
             }
 
