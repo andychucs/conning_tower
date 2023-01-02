@@ -30,6 +30,10 @@
   "@AboutDescription": {},
   "ToolsButton": "Tools",
   "@ToolsButton": {},
+  "GameMute": "Game Volumn Off",
+  "@GameMute": {},
+  "GameUnmute": "Game Volumn On",
+  "@GameUnmute": {},
   "SettingsButton": "Settings",
   "@SettingsButton": {},
   "SettingsReset": "Reset App",
@@ -81,5 +85,9 @@
   "KCViewFuncMsgPageStart": "Page started loading: {url}",
   "@KCViewFuncMsgPageStart": {},
   "MsgIOSNote": "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.",
-  "@MsgIOSNote": {}
+  "@MsgIOSNote": {},
+  "MsgMuteGame": "The game will be muted after refreshing.",
+  "@MsgMuteGame": {},
+  "MsgUnmuteGame": "The game will be unmuted after refreshing.",
+  "@MsgUnmuteGame": {},
 }
