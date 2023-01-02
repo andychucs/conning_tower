@@ -88,10 +88,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button."),
+        "MsgMuteGame": MessageLookupByLibrary.simpleMessage(
+            "The game will be muted after refreshing.。"),
+        "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
+            "The game will be unmuted after refreshing."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
-        "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("Game Volumn Off"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("Game Volumn On")
       };
 }
