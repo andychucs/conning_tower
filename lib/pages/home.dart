@@ -124,10 +124,27 @@ class HomePageState extends State<HomePage> {
                 !inKancolleWindow &&
                 progress >= 90) {
               if (Platform.isIOS) {
-                await controller.runJavaScript(
-                    '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                Fluttertoast.showToast(
-                    msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                await controller
+                    .runJavaScript(
+                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                    .whenComplete(() => Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect))
+                    .onError((error, stackTrace) => () async {
+                      Future.delayed(const Duration(seconds: 1), () async {
+                        await controller.runJavaScript('''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                            .whenComplete(
+                                () => Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect));
+                      });
+                    });
+
+                /*FIXME: get a lot of bug reports:
+                   PlatformException: PlatformException(FWFEvaluateJavaScriptError, Failed evaluating JavaScript., Instance of 'NSError', null)
+                   File "web_kit_api_impls.dart", line 1013, in WKWebViewHostApiImpl.evaluateJavaScriptForInstances
+                   File "<asynchronous suspension>"
+                   File "webkit_webview_controller.dart", line 266, in WebKitWebViewController.runJavaScript
+                   File "<asynchronous suspension>"
+                   File "home.dart", line 127, in HomePageState._initWebviewController.<fn>
+                   maybe because gadgetInfo or gadgetInfo.URL not found, try catch retry or use js judge gadgetInfo.URL is defined can solve?
+                */
                 debugPrint("HTTP Redirect success");
                 setState(() {
                   inKancolleWindow = true;
