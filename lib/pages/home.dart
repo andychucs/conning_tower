@@ -126,11 +126,37 @@ class HomePageState extends State<HomePage> {
               if (Platform.isIOS) {
                 await controller
                     .runJavaScript(
-                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                        '''openKCWindow();
+async function openKCWindow() {
+  try {
+    window.open("http:"+gadgetInfo.URL,'_blank');
+  } catch (error) {
+    await wait(3000);
+    window.open("http:"+gadgetInfo.URL,'_blank');
+  }
+}
+function wait(time) {
+    return new Promise(resolve => {
+        setTimeout(resolve, time);
+    });
+}''')
                     .whenComplete(() => Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect))
                     .onError((error, stackTrace) => () async {
                       Future.delayed(const Duration(seconds: 1), () async {
-                        await controller.runJavaScript('''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                        await controller.runJavaScript('''openKCWindow();
+async function openKCWindow() {
+  try {
+    window.open("http:"+gadgetInfo.URL,'_blank');
+  } catch (error) {
+    await wait(3000);
+    window.open("http:"+gadgetInfo.URL,'_blank');
+  }
+}
+function wait(time) {
+    return new Promise(resolve => {
+        setTimeout(resolve, time);
+    });
+}''')
                             .whenComplete(
                                 () => Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect));
                       });
