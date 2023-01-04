@@ -65,7 +65,10 @@ class SettingsPageState extends State<SettingsPage> {
                     title: Text(S.of(context).SettingsEnableAutoProcess),
                   ),
                   SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.refresh),
+                    leading: const Icon(
+                      CupertinoIcons.refresh,
+                      color: CupertinoColors.destructiveRed,
+                    ),
                     title: Text(S.of(context).SettingsReset),
                     onPressed: (context) async {
                       HapticFeedback.heavyImpact();
