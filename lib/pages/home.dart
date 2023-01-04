@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -124,10 +125,40 @@ class HomePageState extends State<HomePage> {
                 !inKancolleWindow &&
                 progress >= 90) {
               if (Platform.isIOS) {
-                await controller.runJavaScript(
-                    '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-                Fluttertoast.showToast(
-                    msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                await controller
+                    .runJavaScript(
+                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                    .whenComplete(() => Fluttertoast.showToast(
+                        msg: S.current.KCViewFuncMsgAutoGameRedirect))
+                    .onError(
+                      (error, stackTrace) => () async {
+                        await Sentry.captureMessage(
+                            'Error on 1st time run redirect');
+                        Future.delayed(
+                          const Duration(seconds: 1),
+                          () async {
+                            await controller
+                                .runJavaScript(
+                                    '''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                                .whenComplete(
+                                  () => Fluttertoast.showToast(
+                                      msg: S.current
+                                          .KCViewFuncMsgAutoGameRedirect))
+                                .onError(
+                                  (error, stackTrace) => () async {
+                                    await Sentry.captureException(
+                                        error,
+                                        stackTrace: stackTrace
+                                    );
+                                    await Sentry.captureMessage(
+                                        'Error on 2nd time run redirect'
+                                    );
+                                  },
+                                );
+                          },
+                        );
+                      },
+                    );
                 debugPrint("HTTP Redirect success");
                 setState(() {
                   inKancolleWindow = true;
