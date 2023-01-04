@@ -50,17 +50,6 @@ class SettingsPageState extends State<SettingsPage> {
               SettingsSection(
                 title: Text(S.of(context).AppName),
                 tiles: <SettingsTile>[
-                  SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.refresh),
-                    title: Text(S.of(context).SettingsReset),
-                    onPressed: (context) async {
-                      HapticFeedback.heavyImpact();
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.clear();
-                      _loadConfig();
-                      widget.reloadConfig();
-                    },
-                  ),
                   SettingsTile.switchTile(
                     onToggle: (value) async {
                       HapticFeedback.heavyImpact();
@@ -74,6 +63,17 @@ class SettingsPageState extends State<SettingsPage> {
                     initialValue: enableAutoProcessSwitchValue,
                     leading: const Icon(CupertinoIcons.fullscreen),
                     title: Text(S.of(context).SettingsEnableAutoProcess),
+                  ),
+                  SettingsTile.navigation(
+                    leading: const Icon(CupertinoIcons.refresh),
+                    title: Text(S.of(context).SettingsReset),
+                    onPressed: (context) async {
+                      HapticFeedback.heavyImpact();
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.clear();
+                      _loadConfig();
+                      widget.reloadConfig();
+                    },
                   ),
                 ],
               ),
