@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -126,51 +127,38 @@ class HomePageState extends State<HomePage> {
               if (Platform.isIOS) {
                 await controller
                     .runJavaScript(
-                        '''openKCWindow();
-async function openKCWindow() {
-  try {
-    window.open("http:"+gadgetInfo.URL,'_blank');
-  } catch (error) {
-    await wait(3000);
-    window.open("http:"+gadgetInfo.URL,'_blank');
-  }
-}
-function wait(time) {
-    return new Promise(resolve => {
-        setTimeout(resolve, time);
-    });
-}''')
-                    .whenComplete(() => Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect))
-                    .onError((error, stackTrace) => () async {
-                      Future.delayed(const Duration(seconds: 1), () async {
-                        await controller.runJavaScript('''openKCWindow();
-async function openKCWindow() {
-  try {
-    window.open("http:"+gadgetInfo.URL,'_blank');
-  } catch (error) {
-    await wait(3000);
-    window.open("http:"+gadgetInfo.URL,'_blank');
-  }
-}
-function wait(time) {
-    return new Promise(resolve => {
-        setTimeout(resolve, time);
-    });
-}''')
-                            .whenComplete(
-                                () => Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect));
-                      });
-                    });
-
-                /*FIXME: get a lot of bug reports:
-                   PlatformException: PlatformException(FWFEvaluateJavaScriptError, Failed evaluating JavaScript., Instance of 'NSError', null)
-                   File "web_kit_api_impls.dart", line 1013, in WKWebViewHostApiImpl.evaluateJavaScriptForInstances
-                   File "<asynchronous suspension>"
-                   File "webkit_webview_controller.dart", line 266, in WebKitWebViewController.runJavaScript
-                   File "<asynchronous suspension>"
-                   File "home.dart", line 127, in HomePageState._initWebviewController.<fn>
-                   maybe because gadgetInfo or gadgetInfo.URL not found, try catch retry or use js judge gadgetInfo.URL is defined can solve?
-                */
+                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                    .whenComplete(() => Fluttertoast.showToast(
+                        msg: S.current.KCViewFuncMsgAutoGameRedirect))
+                    .onError(
+                      (error, stackTrace) => () async {
+                        await Sentry.captureMessage(
+                            'Error on 1st time run redirect');
+                        Future.delayed(
+                          const Duration(seconds: 1),
+                          () async {
+                            await controller
+                                .runJavaScript(
+                                    '''window.open("http:"+gadgetInfo.URL,'_blank');''')
+                                .whenComplete(
+                                  () => Fluttertoast.showToast(
+                                      msg: S.current
+                                          .KCViewFuncMsgAutoGameRedirect))
+                                .onError(
+                                  (error, stackTrace) => () async {
+                                    await Sentry.captureException(
+                                        error,
+                                        stackTrace: stackTrace
+                                    );
+                                    await Sentry.captureMessage(
+                                        'Error on 2nd time run redirect'
+                                    );
+                                  },
+                                );
+                          },
+                        );
+                      },
+                    );
                 debugPrint("HTTP Redirect success");
                 setState(() {
                   inKancolleWindow = true;
