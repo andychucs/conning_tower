@@ -85,9 +85,9 @@
   "KCViewFuncMsgPageStart": "頁面開始載入 {url}",
   "@KCViewFuncMsgPageStart": {},
   "MsgIOSNote": "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊重定向按鈕。",
-  "@MsgIOSNote": {}
+  "@MsgIOSNote": {},
   "MsgMuteGame": "遊戲將會在重新載入後靜音。",
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "遊戲將會在重新載入後解除靜音。",
-  "@MsgUnmuteGame": {},
+  "@MsgUnmuteGame": {}
 }

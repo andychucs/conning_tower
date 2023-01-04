@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全螢幕成功"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("遊戲靜音"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("遊戲解除靜音"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已載入遊戲視窗，無需執行"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -86,16 +88,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊重定向按鈕。"),
-        "MsgMuteGame": MessageLookupByLibrary.simpleMessage(
-            "遊戲將會在重新載入後靜音。"),
-        "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
-            "遊戲將會在重新載入後解除靜音。"),
+        "MsgMuteGame": MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後靜音。"),
+        "MsgUnmuteGame":
+            MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後解除靜音。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("啟用自動全螢幕"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
-        "ToolsButton": MessageLookupByLibrary.simpleMessage("工具"),
-        "GameMute": MessageLookupByLibrary.simpleMessage("遊戲靜音"),
-        "GameUnmute": MessageLookupByLibrary.simpleMessage("遊戲解除靜音")
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };
 }

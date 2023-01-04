@@ -89,5 +89,5 @@
   "MsgMuteGame": "The game will be muted after refreshing.",
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "The game will be unmuted after refreshing.",
-  "@MsgUnmuteGame": {},
+  "@MsgUnmuteGame": {}
 }

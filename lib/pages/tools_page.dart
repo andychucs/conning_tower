@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:settings_ui/settings_ui.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../generated/l10n.dart';
@@ -61,14 +62,14 @@ class ToolsPage extends StatelessWidget {
     }
   }
 
-  Future<void> _muteGame(WebViewController controller) async {
+  Future<void> _onMuteGame(WebViewController controller) async {
     await controller.runJavaScript('''document.cookie=
     "kcs_options=vol_bgm%3D0%3Bvol_se%3D0%3Bvol_voice%3D0%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"
 	''');
     Fluttertoast.showToast(msg: S.current.MsgMuteGame);
   }
 
-  Future<void> _unMuteGame(WebViewController controller) async {
+  Future<void> _onUnmuteGame(WebViewController controller) async {
     await controller.runJavaScript('''	document.cookie=
     "kcs_options=vol_bgm%3D30%3Bvol_se%3D40%3Bvol_voice%3D60%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"''');
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
@@ -77,166 +78,77 @@ class ToolsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: const CupertinoThemeData(primaryColor: CupertinoColors.systemGrey),
-      home: CustomScrollView(
-        slivers: [
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(S.of(context).ToolsButton),
+      useInheritedMediaQuery: true,
+      home: CupertinoPageScaffold(
+        child: NestedScrollView(
+          headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+            return [
+              CupertinoSliverNavigationBar(
+                largeTitle: Text(S.current.ToolsButton),
+              ),
+            ];
+          },
+          body: SettingsList(
+            sections: [
+              SettingsSection(
+                title: const Text('Web'),
+                tiles: [
+                  SettingsTile.navigation(
+                    leading: const Icon(CupertinoIcons.delete),
+                    title:
+                        Text(S.of(context).AppClearCache.replaceAll('\n', '')),
+                    onPressed: (context) {
+                      HapticFeedback.heavyImpact();
+                      _onClearCache(context, controller);
+                    },
+                  ),
+                  SettingsTile.navigation(
+                    leading: const Icon(CupertinoIcons.square_arrow_left),
+                    title: Text(S.of(context).AppClearCookie),
+                    onPressed: (context) {
+                      HapticFeedback.heavyImpact();
+                      _onClearCookies(context);
+                    },
+                  ),
+                ],
+              ),
+              SettingsSection(
+                title: const Text('Game Sound'),
+                tiles: [
+                  SettingsTile.navigation(
+                    leading: const Icon(CupertinoIcons.volume_down),
+                    title: Text(S.of(context).GameUnmute),
+                    onPressed: (context) {
+                      HapticFeedback.heavyImpact();
+                      _onUnmuteGame(controller);
+                    },
+                  ),
+                  SettingsTile.navigation(
+                    leading: const Icon(CupertinoIcons.volume_off),
+                    title: Text(S.of(context).GameMute),
+                    onPressed: (context) {
+                      HapticFeedback.heavyImpact();
+                      _onMuteGame(controller);
+                    },
+                  ),
+                ],
+              ),
+              SettingsSection(
+                title: const Text('Game Screen'),
+                tiles: [
+                  SettingsTile.navigation(
+                    leading: const Icon(CupertinoIcons.fullscreen),
+                    title: Text(S.of(context).AppResize),
+                    onPressed: (context) {
+                      HapticFeedback.heavyImpact();
+                      _onAdjustWindow(controller);
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
-          SliverFillRemaining(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      fit: FlexFit.tight,
-                      child: Container(
-                        child: Text(
-                          "Clear",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                        flex: 4,
-                        fit: FlexFit.tight,
-                        child: Container(
-                          child: CupertinoButton.filled(
-                            onPressed: () {
-                              HapticFeedback.heavyImpact();
-                              _onClearCache(context, controller);
-                            },
-                            child: Text(S
-                                .of(context)
-                                .AppClearCache
-                                .replaceAll('\n', '')),
-                          ),
-                        )),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                    Flexible(
-                        flex: 4,
-                        fit: FlexFit.tight,
-                        child: Container(
-                          child: CupertinoButton.filled(
-                            onPressed: () {
-                              HapticFeedback.heavyImpact();
-                              _onClearCookies(context);
-                            },
-                            child: Text(S.of(context).AppClearCookie),
-                          ),
-                        )),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      fit: FlexFit.tight,
-                      child: Container(
-                        child: Text(
-                          "Game Sound",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 4,
-                      fit: FlexFit.tight,
-                      child: Container(
-                        child: CupertinoButton.filled(
-                          onPressed: () {
-                            HapticFeedback.heavyImpact();
-                            _unMuteGame(controller);
-                          },
-                          child: Text(S.of(context).GameUnmute),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                    Flexible(
-                      flex: 4,
-                      fit: FlexFit.tight,
-                      child: Container(
-                        child: CupertinoButton.filled(
-                          onPressed: () {
-                            HapticFeedback.heavyImpact();
-                            _muteGame(controller);
-                          },
-                          child: Text(S.of(context).GameMute),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      fit: FlexFit.tight,
-                      child: Container(
-                        child: Text(
-                          "Game Screen",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 4,
-                      fit: FlexFit.tight,
-                      child: Container(
-                        child: CupertinoButton.filled(
-                          onPressed: () {
-                            HapticFeedback.heavyImpact();
-                            _onAdjustWindow(controller);
-                          },
-                          child: Text(S.of(context).AppResize),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                    Flexible(
-                      flex: 4,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Container(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

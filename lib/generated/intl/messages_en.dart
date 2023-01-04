@@ -67,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("Fullscreen success"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("Game Volumn Off"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("Game Volumn On"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -89,15 +91,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button."),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage(
-            "The game will be muted after refreshing.。"),
+            "The game will be muted after refreshing."),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "The game will be unmuted after refreshing."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
-        "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools"),
-        "GameMute": MessageLookupByLibrary.simpleMessage("Game Volumn Off"),
-        "GameUnmute": MessageLookupByLibrary.simpleMessage("Game Volumn On")
+        "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
       };
 }

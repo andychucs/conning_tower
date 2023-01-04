@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppLeftSideControlsScrollUp":
             MessageLookupByLibrary.simpleMessage("上スクロール"),
-        "AppName": MessageLookupByLibrary.simpleMessage("conning tower"),
+        "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督、conning towerへようこそ。conning towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、HTTPリダイレクトを押してください。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP\nリダイレクト"),

@@ -200,7 +200,7 @@ class S {
     );
   }
 
-  /// `GameMute`
+  /// `Game Volumn Off`
   String get GameMute {
     return Intl.message(
       'Game Volumn Off',
@@ -210,7 +210,7 @@ class S {
     );
   }
 
-  /// `GameUnmute`
+  /// `Game Volumn On`
   String get GameUnmute {
     return Intl.message(
       'Game Volumn On',
@@ -480,18 +480,20 @@ class S {
     );
   }
 
+  /// `The game will be muted after refreshing.`
   String get MsgMuteGame {
     return Intl.message(
-      'Game will be muted after refresh.',
+      'The game will be muted after refreshing.',
       name: 'MsgMuteGame',
       desc: '',
       args: [],
     );
   }
 
+  /// `The game will be unmuted after refreshing.`
   String get MsgUnmuteGame {
     return Intl.message(
-      'Game will be unmuted after refresh.',
+      'The game will be unmuted after refreshing.',
       name: 'MsgUnmuteGame',
       desc: '',
       args: [],
