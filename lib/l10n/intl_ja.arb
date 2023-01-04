@@ -1,5 +1,13 @@
 {
   "@@locale": "ja",
+  "ToolTitleGameSound": "ゲームの音声",
+  "@ToolTitleGameSound": {},
+  "ToolTitleGameScreen": "ゲームの画面",
+  "@ToolTitleGameScreen": {},
+  "MsgMuteGame": "リフレッシュするとゲームの音声が消えます。",
+  "@MsgMuteGame": {},
+  "MsgUnmuteGame": "リフレッシュ後にゲームの音声が元に復します。",
+  "@MsgUnmuteGame": {},
   "AppBack": "戻る",
   "@AppBack": {},
   "AppHome": "ホーム",

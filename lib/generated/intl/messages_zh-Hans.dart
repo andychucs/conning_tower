@@ -86,10 +86,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP跳转按钮。"),
+        "MsgMuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏将静音"),
+        "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏声音将打开"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("启用自动全屏"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
+        "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("游戏画面"),
+        "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };
 }

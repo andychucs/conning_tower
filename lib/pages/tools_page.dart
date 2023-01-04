@@ -91,7 +91,7 @@ class ToolsPage extends StatelessWidget {
           body: SettingsList(
             sections: [
               SettingsSection(
-                title: const Text('Web'),
+                title: Text(S.of(context).ToolTitleWeb),
                 tiles: [
                   SettingsTile.navigation(
                     leading: const Icon(CupertinoIcons.delete),
@@ -113,7 +113,7 @@ class ToolsPage extends StatelessWidget {
                 ],
               ),
               SettingsSection(
-                title: const Text('Game Sound'),
+                title: Text(S.of(context).ToolTitleGameSound),
                 tiles: [
                   SettingsTile.navigation(
                     leading: const Icon(CupertinoIcons.volume_down),
@@ -134,7 +134,7 @@ class ToolsPage extends StatelessWidget {
                 ],
               ),
               SettingsSection(
-                title: const Text('Game Screen'),
+                title: Text(S.of(context).ToolTitleGameScreen),
                 tiles: [
                   SettingsTile.navigation(
                     leading: const Icon(CupertinoIcons.fullscreen),

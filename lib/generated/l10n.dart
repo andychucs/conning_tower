@@ -50,6 +50,36 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Web`
+  String get ToolTitleWeb {
+    return Intl.message(
+      'Web',
+      name: 'ToolTitleWeb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game Sound`
+  String get ToolTitleGameSound {
+    return Intl.message(
+      'Game Sound',
+      name: 'ToolTitleGameSound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game Screen`
+  String get ToolTitleGameScreen {
+    return Intl.message(
+      'Game Screen',
+      name: 'ToolTitleGameScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Back`
   String get AppBack {
     return Intl.message(

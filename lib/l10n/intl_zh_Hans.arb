@@ -1,5 +1,13 @@
 {
   "@@locale": "zh-Hans",
+  "ToolTitleGameSound": "游戏声音",
+  "@ToolTitleGameSound": {},
+  "ToolTitleGameScreen": "游戏画面",
+  "@ToolTitleGameScreen": {},
+  "MsgMuteGame": "刷新后游戏将静音",
+  "@MsgMuteGame": {},
+  "MsgUnmuteGame": "刷新后游戏声音将打开",
+  "@MsgUnmuteGame": {},
   "AppBack": "返回",
   "@AppBack": {},
   "AppHome": "主页",

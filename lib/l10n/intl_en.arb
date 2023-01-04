@@ -1,5 +1,11 @@
 {
   "@@locale": "en",
+  "ToolTitleWeb": "Web",
+  "@ToolTitleWeb": {},
+  "ToolTitleGameSound": "Game Sound",
+  "@ToolTitleGameSound": {},
+  "ToolTitleGameScreen": "Game Screen",
+  "@ToolTitleGameScreen": {},
   "AppBack": "Back",
   "@AppBack": {},
   "AppHome": "Home",

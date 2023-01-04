@@ -98,6 +98,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
+        "ToolTitleGameScreen":
+            MessageLookupByLibrary.simpleMessage("Game Screen"),
+        "ToolTitleGameSound":
+            MessageLookupByLibrary.simpleMessage("Game Sound"),
+        "ToolTitleWeb": MessageLookupByLibrary.simpleMessage("Web"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
       };
 }
