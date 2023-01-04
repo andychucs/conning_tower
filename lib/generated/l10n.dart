@@ -230,20 +230,20 @@ class S {
     );
   }
 
-  /// `Game Volumn Off`
+  /// `Off`
   String get GameMute {
     return Intl.message(
-      'Game Volumn Off',
+      'Off',
       name: 'GameMute',
       desc: '',
       args: [],
     );
   }
 
-  /// `Game Volumn On`
+  /// `On`
   String get GameUnmute {
     return Intl.message(
-      'Game Volumn On',
+      'On',
       name: 'GameUnmute',
       desc: '',
       args: [],

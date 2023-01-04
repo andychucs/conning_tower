@@ -67,8 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("Fullscreen success"),
-        "GameMute": MessageLookupByLibrary.simpleMessage("Game Volumn Off"),
-        "GameUnmute": MessageLookupByLibrary.simpleMessage("Game Volumn On"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("Off"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("On"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
