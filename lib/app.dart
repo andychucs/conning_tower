@@ -27,6 +27,10 @@ class ConnTowerApp extends StatelessWidget {
             backgroundColor: Color(0x00000000),
           )),
       darkTheme: ThemeData(
+        // cupertinoOverrideTheme: const CupertinoThemeData(
+        //         barBackgroundColor: Color(0xFF1b1b1b),
+        //         brightness: Brightness.dark,
+        //         textTheme: CupertinoTextThemeData(primaryColor: Colors.white)),
         brightness: Brightness.dark,
         primaryColor: CupertinoColors.systemBackground,
         // colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,

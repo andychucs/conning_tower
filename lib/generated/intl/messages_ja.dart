@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全画面表示に成功しました"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("消す"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("つける"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":

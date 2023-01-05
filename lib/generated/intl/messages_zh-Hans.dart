@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("屏幕调整完毕"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("关闭"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("打开"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
         "KCViewFuncMsgAutoGameRedirect":
