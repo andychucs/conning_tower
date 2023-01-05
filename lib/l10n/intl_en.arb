@@ -1,5 +1,11 @@
 {
   "@@locale": "en",
+  "ToolTitleWeb": "Web",
+  "@ToolTitleWeb": {},
+  "ToolTitleGameSound": "Game Sound",
+  "@ToolTitleGameSound": {},
+  "ToolTitleGameScreen": "Game Screen",
+  "@ToolTitleGameScreen": {},
   "AppBack": "Back",
   "@AppBack": {},
   "AppHome": "Home",
@@ -30,9 +36,9 @@
   "@AboutDescription": {},
   "ToolsButton": "Tools",
   "@ToolsButton": {},
-  "GameMute": "Game Volumn Off",
+  "GameMute": "Off",
   "@GameMute": {},
-  "GameUnmute": "Game Volumn On",
+  "GameUnmute": "On",
   "@GameUnmute": {},
   "SettingsButton": "Settings",
   "@SettingsButton": {},
@@ -89,5 +95,5 @@
   "MsgMuteGame": "The game will be muted after refreshing.",
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "The game will be unmuted after refreshing.",
-  "@MsgUnmuteGame": {},
+  "@MsgUnmuteGame": {}
 }

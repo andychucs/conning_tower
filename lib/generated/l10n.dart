@@ -50,6 +50,36 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Web`
+  String get ToolTitleWeb {
+    return Intl.message(
+      'Web',
+      name: 'ToolTitleWeb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game Sound`
+  String get ToolTitleGameSound {
+    return Intl.message(
+      'Game Sound',
+      name: 'ToolTitleGameSound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game Screen`
+  String get ToolTitleGameScreen {
+    return Intl.message(
+      'Game Screen',
+      name: 'ToolTitleGameScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Back`
   String get AppBack {
     return Intl.message(
@@ -200,20 +230,20 @@ class S {
     );
   }
 
-  /// `GameMute`
+  /// `Off`
   String get GameMute {
     return Intl.message(
-      'Game Volumn Off',
+      'Off',
       name: 'GameMute',
       desc: '',
       args: [],
     );
   }
 
-  /// `GameUnmute`
+  /// `On`
   String get GameUnmute {
     return Intl.message(
-      'Game Volumn On',
+      'On',
       name: 'GameUnmute',
       desc: '',
       args: [],
@@ -480,18 +510,20 @@ class S {
     );
   }
 
+  /// `The game will be muted after refreshing.`
   String get MsgMuteGame {
     return Intl.message(
-      'Game will be muted after refresh.',
+      'The game will be muted after refreshing.',
       name: 'MsgMuteGame',
       desc: '',
       args: [],
     );
   }
 
+  /// `The game will be unmuted after refreshing.`
   String get MsgUnmuteGame {
     return Intl.message(
-      'Game will be unmuted after refresh.',
+      'The game will be unmuted after refreshing.',
       name: 'MsgUnmuteGame',
       desc: '',
       args: [],

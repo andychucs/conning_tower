@@ -52,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppLeftSideControlsScrollUp":
             MessageLookupByLibrary.simpleMessage("上スクロール"),
-        "AppName": MessageLookupByLibrary.simpleMessage("conning tower"),
+        "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督、conning towerへようこそ。conning towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、HTTPリダイレクトを押してください。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP\nリダイレクト"),
@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全画面表示に成功しました"),
+        "GameMute": MessageLookupByLibrary.simpleMessage("消す"),
+        "GameUnmute": MessageLookupByLibrary.simpleMessage("つける"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -86,10 +88,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、HTTPリダイレクトを押すことでプレイ可能な状態になります。"),
+        "MsgMuteGame":
+            MessageLookupByLibrary.simpleMessage("リフレッシュするとゲームの音声が消えます。"),
+        "MsgUnmuteGame":
+            MessageLookupByLibrary.simpleMessage("リフレッシュ後にゲームの音声が元に復します。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("艦これの画面を自動的に全画面する"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
+        "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("ゲームの画面"),
+        "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("ツール")
       };
 }
