@@ -128,8 +128,14 @@ class HomePageState extends State<HomePage> {
                 await controller
                     .runJavaScript(
                         '''window.open("http:"+gadgetInfo.URL,'_blank');''')
-                    .whenComplete(() => Fluttertoast.showToast(
-                        msg: S.current.KCViewFuncMsgAutoGameRedirect))
+                    .whenComplete(() => () {
+                          Fluttertoast.showToast(
+                              msg: S.current.KCViewFuncMsgAutoGameRedirect);
+                          debugPrint("HTTP Redirect success");
+                          setState(() {
+                            inKancolleWindow = true;
+                          });
+                        })
                     .onError(
                       (error, stackTrace) => () async {
                         await Sentry.captureMessage(
@@ -140,29 +146,27 @@ class HomePageState extends State<HomePage> {
                             await controller
                                 .runJavaScript(
                                     '''window.open("http:"+gadgetInfo.URL,'_blank');''')
-                                .whenComplete(
-                                  () => Fluttertoast.showToast(
-                                      msg: S.current
-                                          .KCViewFuncMsgAutoGameRedirect))
+                                .whenComplete(() => () {
+                                      Fluttertoast.showToast(
+                                          msg: S.current
+                                              .KCViewFuncMsgAutoGameRedirect);
+                                      debugPrint("HTTP Redirect success");
+                                      setState(() {
+                                        inKancolleWindow = true;
+                                      });
+                                    })
                                 .onError(
                                   (error, stackTrace) => () async {
-                                    await Sentry.captureException(
-                                        error,
-                                        stackTrace: stackTrace
-                                    );
+                                    await Sentry.captureException(error,
+                                        stackTrace: stackTrace);
                                     await Sentry.captureMessage(
-                                        'Error on 2nd time run redirect'
-                                    );
+                                        'Error on 2nd time run redirect');
                                   },
                                 );
                           },
                         );
                       },
                     );
-                debugPrint("HTTP Redirect success");
-                setState(() {
-                  inKancolleWindow = true;
-                });
               }
               if (Platform.isAndroid) {
                 Fluttertoast.showToast(

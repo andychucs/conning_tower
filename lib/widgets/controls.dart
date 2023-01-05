@@ -41,15 +41,15 @@ class AppLeftSideControls extends StatelessWidget {
 
   final Map funcMap = {
     0: ConFunc.loadHome,
-    1: ConFunc.httpRedirect,
-    2: ConFunc.navi2Tool,
-    3: ConFunc.bottomUp,
-    4: ConFunc.refresh,
-    5: ConFunc.scrollUp,
-    6: ConFunc.scrollDown,
-    7: ConFunc.goBack,
-    8: ConFunc.navi2Settings,
-    9: ConFunc.navi2About,
+    // 1: ConFunc.httpRedirect,
+    1: ConFunc.navi2Tool,
+    2: ConFunc.bottomUp,
+    3: ConFunc.refresh,
+    4: ConFunc.scrollUp,
+    5: ConFunc.scrollDown,
+    6: ConFunc.goBack,
+    7: ConFunc.navi2Settings,
+    8: ConFunc.navi2About,
     // 1: ConFunc.adjustWindow,
     // 8: ConFunc.clearCookies,
     // 9: ConFunc.clearCache
@@ -57,9 +57,9 @@ class AppLeftSideControls extends StatelessWidget {
 
   final Map naviItems = {
     0: 0, //loadHome
-    1: 2, //navi2Tool
-    2: 8, //navi2Settings
-    3: 9, //navi2About
+    1: 1, //navi2Tool
+    2: 7, //navi2Settings
+    3: 8, //navi2About
   };
 
   @override
@@ -129,13 +129,6 @@ class AppLeftSideControls extends StatelessWidget {
           ),
         ),
         NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.rectangle_expand_vertical),
-          label: Text(
-            S.of(context).AppRedirect,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        NavigationRailDestination(
           icon: const Icon(CupertinoIcons.game_controller),
           label: Text(S.of(context).ToolsButton),
         ),
@@ -165,14 +158,12 @@ class AppLeftSideControls extends StatelessWidget {
         NavigationRailDestination(
           icon: const Icon(
             CupertinoIcons.settings,
-            color: CupertinoColors.systemYellow,
           ),
           label: Text(S.of(context).SettingsButton),
         ),
         NavigationRailDestination(
           icon: const Icon(
             CupertinoIcons.info,
-            color: CupertinoColors.systemTeal,
           ),
           label: Text(
             S.of(context).AboutButton,

@@ -20,22 +20,32 @@ class ConnTowerApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       theme: ThemeData(
+        brightness: Brightness.light,
+        cupertinoOverrideTheme: const CupertinoThemeData(
+            barBackgroundColor: Color(0xF0F9F9F9),
+            brightness: Brightness.light,
+            textTheme:
+                CupertinoTextThemeData(primaryColor: CupertinoColors.label)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: CupertinoColors.activeBlue,
+          surface: const Color(0xF0F9F9F9),
+          onSurface: CupertinoColors.label,
+          onBackground: CupertinoColors.white,
+          background: const Color(0xF0F9F9F9),
           brightness: Brightness.light,
-          colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
-          dividerColor: CupertinoColors.secondarySystemFill,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0x00000000),
-          )),
+        ),
+        dividerColor: CupertinoColors.secondarySystemFill,
+      ),
       darkTheme: ThemeData(
-        // cupertinoOverrideTheme: const CupertinoThemeData(
-        //         barBackgroundColor: Color(0xFF1b1b1b),
-        //         brightness: Brightness.dark,
-        //         textTheme: CupertinoTextThemeData(primaryColor: Colors.white)),
+        cupertinoOverrideTheme: const CupertinoThemeData(
+            barBackgroundColor: Color(0xFF1b1b1b),
+            brightness: Brightness.dark,
+            textTheme: CupertinoTextThemeData(primaryColor: Colors.white)),
         brightness: Brightness.dark,
         primaryColor: CupertinoColors.systemBackground,
         // colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: CupertinoColors.extraLightBackgroundGray,
+          seedColor: CupertinoColors.activeOrange,
           surface: CupertinoColors.black,
           onSurface: CupertinoColors.white,
           onBackground: CupertinoColors.white,

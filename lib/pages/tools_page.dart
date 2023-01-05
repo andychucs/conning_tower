@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../constants.dart';
 import '../generated/l10n.dart';
 import '../helper.dart';
 import '../widgets/dailog.dart';
@@ -19,6 +22,27 @@ class ToolsPage extends StatelessWidget {
   final Function() notifyParent;
   final WebViewController controller;
   late final WebViewCookieManager cookieManager;
+
+  Future<void> _onHttpRedirect(WebViewController controller) async {
+    if (!inKancolleWindow) {
+      String? currentUrl = await controller.currentUrl();
+      if (currentUrl.toString().endsWith(kGameUrl)) {
+        // May be HTTPS or HTTP
+        allowNavi = true;
+        if (Platform.isIOS) {
+          await controller.runJavaScript(
+              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+        }
+        inKancolleWindow = true;
+      }
+      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+      print("HTTP Redirect success");
+    } else {
+      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
+      print("HTTP Redirect fail");
+    }
+    print("inKancolleWindow: $inKancolleWindow");
+  }
 
   Future<void> _onClearCache(
       BuildContext context, WebViewController controller) async {
@@ -77,78 +101,80 @@ class ToolsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      useInheritedMediaQuery: true,
-      home: CupertinoPageScaffold(
-        child: NestedScrollView(
-          headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-            return [
-              CupertinoSliverNavigationBar(
-                largeTitle: Text(S.current.ToolsButton),
+    return NestedScrollView(
+      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+        return [
+          CupertinoSliverNavigationBar(
+            largeTitle: Text(S.current.ToolsButton),
+          ),
+        ];
+      },
+      body: SettingsList(
+        sections: [
+          SettingsSection(
+            title: Text(S.of(context).ToolTitleWeb),
+            tiles: [
+              SettingsTile.navigation(
+                leading: const Icon(CupertinoIcons.rectangle_expand_vertical),
+                title: Text(S.of(context).AppRedirect),
+                onPressed: (context) {
+                  HapticFeedback.heavyImpact();
+                  _onHttpRedirect(controller);
+                },
               ),
-            ];
-          },
-          body: SettingsList(
-            sections: [
-              SettingsSection(
-                title: Text(S.of(context).ToolTitleWeb),
-                tiles: [
-                  SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.delete),
-                    title:
-                        Text(S.of(context).AppClearCache.replaceAll('\n', '')),
-                    onPressed: (context) {
-                      HapticFeedback.heavyImpact();
-                      _onClearCache(context, controller);
-                    },
-                  ),
-                  SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.square_arrow_left),
-                    title: Text(S.of(context).AppClearCookie),
-                    onPressed: (context) {
-                      HapticFeedback.heavyImpact();
-                      _onClearCookies(context);
-                    },
-                  ),
-                ],
+              SettingsTile.navigation(
+                leading: const Icon(CupertinoIcons.delete),
+                title: Text(S.of(context).AppClearCache),
+                onPressed: (context) {
+                  HapticFeedback.heavyImpact();
+                  _onClearCache(context, controller);
+                },
               ),
-              SettingsSection(
-                title: Text(S.of(context).ToolTitleGameSound),
-                tiles: [
-                  SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.volume_down),
-                    title: Text(S.of(context).GameUnmute),
-                    onPressed: (context) {
-                      HapticFeedback.heavyImpact();
-                      _onUnmuteGame(controller);
-                    },
-                  ),
-                  SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.volume_off),
-                    title: Text(S.of(context).GameMute),
-                    onPressed: (context) {
-                      HapticFeedback.heavyImpact();
-                      _onMuteGame(controller);
-                    },
-                  ),
-                ],
-              ),
-              SettingsSection(
-                title: Text(S.of(context).ToolTitleGameScreen),
-                tiles: [
-                  SettingsTile.navigation(
-                    leading: const Icon(CupertinoIcons.fullscreen),
-                    title: Text(S.of(context).AppResize),
-                    onPressed: (context) {
-                      HapticFeedback.heavyImpact();
-                      _onAdjustWindow(controller);
-                    },
-                  ),
-                ],
+              SettingsTile.navigation(
+                leading: const Icon(CupertinoIcons.square_arrow_left),
+                title: Text(S.of(context).AppClearCookie),
+                onPressed: (context) {
+                  HapticFeedback.heavyImpact();
+                  _onClearCookies(context);
+                },
               ),
             ],
           ),
-        ),
+          SettingsSection(
+            title: Text(S.of(context).ToolTitleGameSound),
+            tiles: [
+              SettingsTile.navigation(
+                leading: const Icon(CupertinoIcons.volume_down),
+                title: Text(S.of(context).GameUnmute),
+                onPressed: (context) {
+                  HapticFeedback.heavyImpact();
+                  _onUnmuteGame(controller);
+                },
+              ),
+              SettingsTile.navigation(
+                leading: const Icon(CupertinoIcons.volume_off),
+                title: Text(S.of(context).GameMute),
+                onPressed: (context) {
+                  HapticFeedback.heavyImpact();
+                  _onMuteGame(controller);
+                },
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: Text(S.of(context).ToolTitleGameScreen),
+            tiles: [
+              SettingsTile.navigation(
+                leading: const Icon(CupertinoIcons.fullscreen),
+                title: Text(S.of(context).AppResize),
+                onPressed: (context) {
+                  HapticFeedback.heavyImpact();
+                  _onAdjustWindow(controller);
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
