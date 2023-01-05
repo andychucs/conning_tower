@@ -54,10 +54,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("向上捲動"),
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督，歡迎來到艦橋，艦橋會在Kancolle界面加載完成後自動調整屏幕尺寸到合適大小，如果長時間看到DMM GAMES的頂欄存在，請在你指揮艦隊前點擊重定向按鈕。"),
+            "提督，歡迎來到艦橋，艦橋會在Kancolle界面加載完成後自動調整屏幕尺寸到合適大小，如果長時間看到DMM GAMES的頂欄存在，請在你指揮艦隊前點擊「工具-Web-重定向」。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("重定向"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("重新整理"),
-        "AppResize": MessageLookupByLibrary.simpleMessage("調整大小"),
+        "AppResize": MessageLookupByLibrary.simpleMessage("調整大小至適合屏幕"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下捲動"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上捲動"),
         "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
@@ -87,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊重定向按鈕。"),
+            "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊「工具-Web-重定向」。"),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後靜音。"),
         "MsgUnmuteGame":
             MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後解除靜音。"),

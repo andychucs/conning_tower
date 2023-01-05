@@ -56,10 +56,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Scroll up"),
         "AppName": MessageLookupByLibrary.simpleMessage("Bridge"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command."),
+            "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command."),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP Redirect"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
-        "AppResize": MessageLookupByLibrary.simpleMessage("Resize"),
+        "AppResize":
+            MessageLookupByLibrary.simpleMessage("Resize to fit screen"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("Scroll Down"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up"),
         "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -89,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("is game origin url"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button."),
+            "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click \'Tools-Web-HTTP Redirect\' button."),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage(
             "The game will be muted after refreshing."),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(

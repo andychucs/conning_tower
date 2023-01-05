@@ -33,56 +33,51 @@ class SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      useInheritedMediaQuery: true,
-      home: CupertinoPageScaffold(
-        child: NestedScrollView(
-          headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-            return [
-              CupertinoSliverNavigationBar(
-                largeTitle: Text(S.current.SettingsButton),
+    return NestedScrollView(
+      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+        return [
+          CupertinoSliverNavigationBar(
+            largeTitle: Text(S.current.SettingsButton),
+          ),
+        ];
+      },
+      body: SettingsList(
+        // shrinkWrap: true,
+        sections: [
+          SettingsSection(
+            title: Text(S.of(context).AppName),
+            tiles: <SettingsTile>[
+              SettingsTile.switchTile(
+                onToggle: (value) async {
+                  HapticFeedback.heavyImpact();
+                  setState(() {
+                    enableAutoProcessSwitchValue = value;
+                  });
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('enableAutoProcess', value);
+                  widget.reloadConfig();
+                },
+                initialValue: enableAutoProcessSwitchValue,
+                leading: const Icon(CupertinoIcons.fullscreen),
+                title: Text(S.of(context).SettingsEnableAutoProcess),
               ),
-            ];
-          },
-          body: SettingsList(
-            // shrinkWrap: true,
-            sections: [
-              SettingsSection(
-                title: Text(S.of(context).AppName),
-                tiles: <SettingsTile>[
-                  SettingsTile.switchTile(
-                    onToggle: (value) async {
-                      HapticFeedback.heavyImpact();
-                      setState(() {
-                        enableAutoProcessSwitchValue = value;
-                      });
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('enableAutoProcess', value);
-                      widget.reloadConfig();
-                    },
-                    initialValue: enableAutoProcessSwitchValue,
-                    leading: const Icon(CupertinoIcons.fullscreen),
-                    title: Text(S.of(context).SettingsEnableAutoProcess),
-                  ),
-                  SettingsTile.navigation(
-                    leading: const Icon(
-                      CupertinoIcons.refresh,
-                      color: CupertinoColors.destructiveRed,
-                    ),
-                    title: Text(S.of(context).SettingsReset),
-                    onPressed: (context) async {
-                      HapticFeedback.heavyImpact();
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.clear();
-                      _loadConfig();
-                      widget.reloadConfig();
-                    },
-                  ),
-                ],
+              SettingsTile.navigation(
+                leading: const Icon(
+                  CupertinoIcons.refresh,
+                  color: CupertinoColors.destructiveRed,
+                ),
+                title: Text(S.of(context).SettingsReset),
+                onPressed: (context) async {
+                  HapticFeedback.heavyImpact();
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.clear();
+                  _loadConfig();
+                  widget.reloadConfig();
+                },
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

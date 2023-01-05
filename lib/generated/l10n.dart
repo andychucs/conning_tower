@@ -110,10 +110,10 @@ class S {
     );
   }
 
-  /// `Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command.`
+  /// `Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the 'Tools-Web-HTTP Redirect' button before you command.`
   String get AppNotify {
     return Intl.message(
-      'Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the HTTP Redirect button before you command.',
+      'Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command.',
       name: 'AppNotify',
       desc: '',
       args: [],
@@ -140,10 +140,10 @@ class S {
     );
   }
 
-  /// `Resize`
+  /// `Resize to fit screen`
   String get AppResize {
     return Intl.message(
-      'Resize',
+      'Resize to fit screen',
       name: 'AppResize',
       desc: '',
       args: [],
@@ -500,10 +500,10 @@ class S {
     );
   }
 
-  /// `For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.`
+  /// `For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click 'Tools-Web-HTTP Redirect' button.`
   String get MsgIOSNote {
     return Intl.message(
-      'For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click HTTP Redirect button.',
+      'For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click \'Tools-Web-HTTP Redirect\' button.',
       name: 'MsgIOSNote',
       desc: '',
       args: [],

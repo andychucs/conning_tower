@@ -18,13 +18,13 @@
   "@AppHome": {},
   "AppName": "舰桥",
   "@AppName": {},
-  "AppNotify": "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成后自动调整屏幕尺寸到合适大小，如果长时间看到DMM GAMES的顶栏存在，请在你指挥舰队前点击HTTP跳转按钮。",
+  "AppNotify": "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成后自动调整屏幕尺寸到合适大小，如果长时间看到DMM GAMES的顶栏存在，请在你指挥舰队前点击「工具-Web-HTTP跳转」。",
   "@AppNotify": {},
   "AppRedirect": "HTTP跳转",
   "@AppRedirect": {},
   "AppRefresh": "刷新",
   "@AppRefresh": {},
-  "AppResize": "调整尺寸",
+  "AppResize": "调整尺寸至适合屏幕",
   "@AppResize": {},
   "AppClearCookie": "退出登录",
   "@AppClearCookie": {},
@@ -92,6 +92,6 @@
   "@KCViewFuncMsgPageFinishedIsGame": {},
   "KCViewFuncMsgPageStart": "页面开始加载：{url}",
   "@KCViewFuncMsgPageStart": {},
-  "MsgIOSNote": "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击HTTP跳转按钮。",
+  "MsgIOSNote": "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。",
   "@MsgIOSNote": {}
 }

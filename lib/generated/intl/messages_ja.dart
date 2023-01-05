@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("再表示しない"),
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
-        "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュ\nを消去"),
+        "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュを消去"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("ログアウト"),
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
         "AppLeftSideControlsClearCache":
@@ -54,10 +54,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("上スクロール"),
         "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督、conning towerへようこそ。conning towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、HTTPリダイレクトを押してください。"),
-        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP\nリダイレクト"),
+            "提督、conning towerへようこそ。conning towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、「ツール-Web-HTTPリダイレクト」を押してください。"),
+        "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTPリダイレクト"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
-        "AppResize": MessageLookupByLibrary.simpleMessage("画面変換"),
+        "AppResize": MessageLookupByLibrary.simpleMessage("画面に合わせてリサイズする"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール"),
         "Cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
@@ -87,11 +87,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
         "KCViewFuncMsgPageStart": m3,
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
-            "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、HTTPリダイレクトを押すことでプレイ可能な状態になります。"),
+            "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、「ツール-Web-HTTPリダイレクト」を押すことでプレイ可能な状態になります。"),
         "MsgMuteGame":
             MessageLookupByLibrary.simpleMessage("リフレッシュするとゲームの音声が消えます。"),
         "MsgUnmuteGame":
-            MessageLookupByLibrary.simpleMessage("リフレッシュ後にゲームの音声が元に復します。"),
+            MessageLookupByLibrary.simpleMessage("リフレッシュするとゲームの音声が元に復します。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("艦これの画面を自動的に全画面する"),
