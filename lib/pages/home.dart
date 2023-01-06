@@ -311,35 +311,49 @@ Page resource error:
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
-
+    var orientation = MediaQuery.of(context).orientation;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: MediaQuery.of(context).size.width < MediaQuery.of(context).size.height ? NaviBar(_controller,
-                  widget.cookieManager,
-                  notifyParent: () {
-                    setState(() {});
-                  },) : null,
-      body: SafeArea(
-        bottom: false,
-        child: Row(
-          children: <Widget>[
-            if (MediaQuery.of(context).size.width >= MediaQuery.of(context).size.height)
-            SingleChildScrollView(
-              controller: ScrollController(),
-              scrollDirection: Axis.vertical,
-              child: IntrinsicHeight(
-                child: AppLeftSideControls(
+      bottomNavigationBar: orientation == Orientation.portrait
+          ? SingleChildScrollView(
+        controller: ScrollController(),
+        scrollDirection: Axis.horizontal,
+            child: IntrinsicWidth(
+              child: Controls(
                   _controller,
                   widget.cookieManager,
                   notifyParent: () {
                     setState(() {});
                   },
+                  orientation: orientation,
+                ),
+            ),
+          )
+          : null,
+      body: SafeArea(
+        top: false,
+        right: false,
+        bottom: false,
+        child: Row(
+          children: <Widget>[
+            if (orientation == Orientation.landscape)
+              SingleChildScrollView(
+                controller: ScrollController(),
+                scrollDirection: Axis.vertical,
+                child: IntrinsicHeight(
+                  child: Controls(
+                    _controller,
+                    widget.cookieManager,
+                    notifyParent: () {
+                      setState(() {});
+                    },
+                    orientation: orientation,
+                  ),
                 ),
               ),
-            ),
-            if(MediaQuery.of(context).size.width < MediaQuery.of(context).size.height)
-            const VerticalDivider(thickness: 1, width: 1),
+            if (orientation == Orientation.landscape)
+              const VerticalDivider(thickness: 1, width: 1),
             // This is the main content.
             Expanded(
               child: FadeIndexedStack(

@@ -30,129 +30,15 @@ enum ConFunc {
   navi2Settings,
 }
 
-class NaviBar extends AppLeftSideControls{
-  const NaviBar({super.key}) : super(key, key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      unselectedItemColor: CupertinoColors.inactiveGray,
-      selectedItemColor: Theme.of(context).primaryColor,
-      onTap: ((value) async {
-        HapticFeedback.heavyImpact();
-        var func = funcMap[value];
-        switch (func) {
-          case ConFunc.navi2About:
-            selectedIndex = 3;
-            notifyParent();
-            break;
-          case ConFunc.navi2Tool:
-            selectedIndex = 1;
-            notifyParent();
-            break;
-          case ConFunc.navi2Settings:
-            selectedIndex = 2;
-            notifyParent();
-            break;
-          case ConFunc.loadHome:
-            if (selectedIndex != 0) {
-              selectedIndex = 0;
-              notifyParent();
-            } else {
-              _onLoadHome(context, controller);
-            }
-            break;
-          case ConFunc.adjustWindow:
-            _onAdjustWindow(controller);
-            break;
-          case ConFunc.httpRedirect:
-            _onHttpRedirect(controller);
-            break;
-          case ConFunc.bottomUp:
-            _onBottomUp();
-            break;
-          case ConFunc.scrollUp:
-            controller.scrollBy(0, -1);
-            break;
-          case ConFunc.scrollDown:
-            controller.scrollBy(0, 1);
-            break;
-          case ConFunc.goBack:
-            _onGoBack(controller);
-            break;
-          case ConFunc.refresh:
-            _onRefresh(context, controller);
-            break;
-          case ConFunc.clearCookies:
-            _onClearCookies(context);
-            break;
-          case ConFunc.clearCache:
-            _onClearCache(context, controller);
-            break;
-        }
-      }),
-      items: [
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.home),
-          label: S.of(context).AppHome,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.game_controller),
-          label: S.of(context).ToolsButton,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.rectangle_dock),
-          label: S.of(context).AppBottomSafe,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            CupertinoIcons.refresh,
-            color: CupertinoColors.destructiveRed,
-          ),
-          label: S.of(context).AppRefresh,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.up_arrow),
-          label: S.of(context).AppScrollUp,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.down_arrow),
-          label: S.of(context).AppScrollDown,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.back),
-          label: S.of(context).AppBack,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            CupertinoIcons.settings,
-          ),
-          label: S.of(context).SettingsButton,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            CupertinoIcons.info,
-            color: CupertinoColors.inactiveGray,
-          ),
-          label: S.of(context).AboutButton,
-        ),
-
-      ],
-    );
-
-  }
-}
-
-
-class AppLeftSideControls extends StatelessWidget {
-  AppLeftSideControls(this.controller, WebViewCookieManager? cookieManager,
-      {Key? key, required this.notifyParent})
+class Controls extends StatelessWidget {
+  Controls(this.controller, WebViewCookieManager? cookieManager,
+      {Key? key, required this.notifyParent, required this.orientation})
       : cookieManager = cookieManager ?? WebViewCookieManager(),
         super(key: key);
   final Function() notifyParent;
   final WebViewController controller;
   late final WebViewCookieManager cookieManager;
+  final Orientation orientation;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -179,62 +65,69 @@ class AppLeftSideControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (orientation == Orientation.portrait) {
+      return BottomNavigationBar(
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        currentIndex: naviItems[selectedIndex],
+        unselectedItemColor: CupertinoColors.inactiveGray,
+        selectedItemColor: Theme.of(context).primaryColor,
+        onTap: ((value) async {
+          _onTap(value, context);
+        }),
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.home),
+            label: S.of(context).AppHome,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.game_controller),
+            label: S.of(context).ToolsButton,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.rectangle_dock),
+            label: S.of(context).AppBottomSafe,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              CupertinoIcons.refresh,
+              color: CupertinoColors.destructiveRed,
+            ),
+            label: S.of(context).AppRefresh,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.up_arrow),
+            label: S.of(context).AppScrollUp,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.down_arrow),
+            label: S.of(context).AppScrollDown,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.back),
+            label: S.of(context).AppBack,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              CupertinoIcons.settings,
+            ),
+            label: S.of(context).SettingsButton,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              CupertinoIcons.info,
+            ),
+            label: S.of(context).AboutButton,
+          ),
+        ],
+      );
+    }
     return NavigationRail(
       labelType: NavigationRailLabelType.all,
       selectedIndex: naviItems[selectedIndex],
       groupAlignment: 0,
       onDestinationSelected: (int index) async {
-        HapticFeedback.heavyImpact();
-        var func = funcMap[index];
-        switch (func) {
-          case ConFunc.navi2About:
-            selectedIndex = 3;
-            notifyParent();
-            break;
-          case ConFunc.navi2Tool:
-            selectedIndex = 1;
-            notifyParent();
-            break;
-          case ConFunc.navi2Settings:
-            selectedIndex = 2;
-            notifyParent();
-            break;
-          case ConFunc.loadHome:
-            if (selectedIndex != 0) {
-              selectedIndex = 0;
-              notifyParent();
-            } else {
-              _onLoadHome(context, controller);
-            }
-            break;
-          case ConFunc.adjustWindow:
-            _onAdjustWindow(controller);
-            break;
-          case ConFunc.httpRedirect:
-            _onHttpRedirect(controller);
-            break;
-          case ConFunc.bottomUp:
-            _onBottomUp();
-            break;
-          case ConFunc.scrollUp:
-            controller.scrollBy(0, -1);
-            break;
-          case ConFunc.scrollDown:
-            controller.scrollBy(0, 1);
-            break;
-          case ConFunc.goBack:
-            _onGoBack(controller);
-            break;
-          case ConFunc.refresh:
-            _onRefresh(context, controller);
-            break;
-          case ConFunc.clearCookies:
-            _onClearCookies(context);
-            break;
-          case ConFunc.clearCache:
-            _onClearCache(context, controller);
-            break;
-        }
+        _onTap(index, context);
       },
       destinations: [
         NavigationRailDestination(
@@ -287,6 +180,60 @@ class AppLeftSideControls extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _onTap(int value, BuildContext context) {
+    HapticFeedback.heavyImpact();
+    var func = funcMap[value];
+    switch (func) {
+      case ConFunc.navi2About:
+        selectedIndex = 3;
+        notifyParent();
+        break;
+      case ConFunc.navi2Tool:
+        selectedIndex = 1;
+        notifyParent();
+        break;
+      case ConFunc.navi2Settings:
+        selectedIndex = 2;
+        notifyParent();
+        break;
+      case ConFunc.loadHome:
+        if (selectedIndex != 0) {
+          selectedIndex = 0;
+          notifyParent();
+        } else {
+          _onLoadHome(context, controller);
+        }
+        break;
+      case ConFunc.adjustWindow:
+        _onAdjustWindow(controller);
+        break;
+      case ConFunc.httpRedirect:
+        _onHttpRedirect(controller);
+        break;
+      case ConFunc.bottomUp:
+        _onBottomUp();
+        break;
+      case ConFunc.scrollUp:
+        controller.scrollBy(0, -1);
+        break;
+      case ConFunc.scrollDown:
+        controller.scrollBy(0, 1);
+        break;
+      case ConFunc.goBack:
+        _onGoBack(controller);
+        break;
+      case ConFunc.refresh:
+        _onRefresh(context, controller);
+        break;
+      case ConFunc.clearCookies:
+        _onClearCookies(context);
+        break;
+      case ConFunc.clearCache:
+        _onClearCache(context, controller);
+        break;
+    }
   }
 
   Future<void> _onRefresh(
