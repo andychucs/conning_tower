@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュを消去"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("ログアウト"),
+        "AppForward": MessageLookupByLibrary.simpleMessage("前へ"),
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
         "AppLeftSideControlsClearCache":
             MessageLookupByLibrary.simpleMessage("キャッシュを消去が完了しました"),

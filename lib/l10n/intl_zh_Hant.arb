@@ -2,6 +2,8 @@
   "@@locale": "zh-Hant",
   "AppBack": "返回",
   "@AppBack": {},
+  "AppForward": "前進",
+  "@AppForward": {},
   "AppHome": "主頁",
   "@AppHome": {},
   "AppName": "艦橋",

@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("清除缓存"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("退出登录"),
+        "AppForward": MessageLookupByLibrary.simpleMessage("前进"),
         "AppHome": MessageLookupByLibrary.simpleMessage("主页"),
         "AppLeftSideControlsClearCache":
             MessageLookupByLibrary.simpleMessage("缓存已删除"),

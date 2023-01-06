@@ -14,6 +14,8 @@
   "@MsgUnmuteGame": {},
   "AppBack": "戻る",
   "@AppBack": {},
+  "AppForward": "前へ",
+  "@AppForward": {},
   "AppHome": "ホーム",
   "@AppHome": {},
   "AppName": "Conning Tower",

@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -86,6 +85,16 @@ class S {
     return Intl.message(
       'Back',
       name: 'AppBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forward`
+  String get AppForward {
+    return Intl.message(
+      'Forward',
+      name: 'AppForward',
       desc: '',
       args: [],
     );

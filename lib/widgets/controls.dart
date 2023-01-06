@@ -21,6 +21,7 @@ enum ConFunc {
   scrollUp,
   scrollDown,
   goBack,
+  goForward,
   refresh,
   clearCookies,
   clearCache,
@@ -46,11 +47,12 @@ class Controls extends StatelessWidget {
     1: ConFunc.navi2Tool,
     2: ConFunc.bottomUp,
     3: ConFunc.refresh,
-    4: ConFunc.scrollUp,
-    5: ConFunc.scrollDown,
-    6: ConFunc.goBack,
-    7: ConFunc.navi2Settings,
-    8: ConFunc.navi2About,
+    // 4: ConFunc.scrollUp,
+    // 5: ConFunc.scrollDown,
+    4: ConFunc.goBack,
+    5: ConFunc.goForward,
+    6: ConFunc.navi2Settings,
+    7: ConFunc.navi2About,
     // 1: ConFunc.adjustWindow,
     // 8: ConFunc.clearCookies,
     // 9: ConFunc.clearCache
@@ -59,8 +61,8 @@ class Controls extends StatelessWidget {
   final Map naviItems = {
     0: 0, //loadHome
     1: 1, //navi2Tool
-    2: 7, //navi2Settings
-    3: 8, //navi2About
+    2: 6, //navi2Settings
+    3: 7, //navi2About
   };
 
   @override
@@ -96,16 +98,12 @@ class Controls extends StatelessWidget {
             label: S.of(context).AppRefresh,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.up_arrow),
-            label: S.of(context).AppScrollUp,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.down_arrow),
-            label: S.of(context).AppScrollDown,
-          ),
-          BottomNavigationBarItem(
             icon: const Icon(CupertinoIcons.back),
             label: S.of(context).AppBack,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.forward),
+            label: S.of(context).AppForward,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
@@ -152,16 +150,12 @@ class Controls extends StatelessWidget {
           label: Text(S.of(context).AppRefresh),
         ),
         NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.up_arrow),
-          label: Text(S.of(context).AppScrollUp),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.down_arrow),
-          label: Text(S.of(context).AppScrollDown),
-        ),
-        NavigationRailDestination(
           icon: const Icon(CupertinoIcons.back),
           label: Text(S.of(context).AppBack),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(CupertinoIcons.forward),
+          label: Text(S.of(context).AppForward),
         ),
         NavigationRailDestination(
           icon: const Icon(
@@ -224,6 +218,9 @@ class Controls extends StatelessWidget {
       case ConFunc.goBack:
         _onGoBack(controller);
         break;
+      case ConFunc.goForward:
+        _onGoForward(controller);
+        break;
       case ConFunc.refresh:
         _onRefresh(context, controller);
         break;
@@ -253,6 +250,13 @@ class Controls extends StatelessWidget {
     allowNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
+    }
+  }
+
+  Future<void> _onGoForward(WebViewController controller) async {
+    allowNavi = true;
+    if (await controller.canGoForward()) {
+      await controller.goForward();
     }
   }
 
