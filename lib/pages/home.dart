@@ -16,13 +16,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 // #docregion platform_imports
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
-
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+
 // #enddocregion platform_imports
 
 import '../constants.dart';
@@ -311,31 +310,49 @@ Page resource error:
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
-
+    var orientation = MediaQuery.of(context).orientation;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: MediaQuery.of(context).size.width > MediaQuery.of(context).size.height ? NaviBar() : null,
-      body: SafeArea(
-        bottom: false,
-        child: Row(
-          children: <Widget>[
-            if (MediaQuery.of(context).size.width < MediaQuery.of(context).size.height)
-            SingleChildScrollView(
+      bottomNavigationBar: orientation == Orientation.portrait
+          ? SingleChildScrollView(
               controller: ScrollController(),
-              scrollDirection: Axis.vertical,
-              child: IntrinsicHeight(
-                child: AppLeftSideControls(
+              scrollDirection: Axis.horizontal,
+              child: IntrinsicWidth(
+                child: Controls(
                   _controller,
                   widget.cookieManager,
                   notifyParent: () {
                     setState(() {});
                   },
+                  orientation: orientation,
                 ),
               ),
-            ),
-            if(MediaQuery.of(context).size.width < MediaQuery.of(context).size.height)
-            const VerticalDivider(thickness: 1, width: 1),
+            )
+          : null,
+      body: SafeArea(
+        top: false,
+        right: false,
+        bottom: false,
+        child: Row(
+          children: <Widget>[
+            if (orientation == Orientation.landscape)
+              SingleChildScrollView(
+                controller: ScrollController(),
+                scrollDirection: Axis.vertical,
+                child: IntrinsicHeight(
+                  child: Controls(
+                    _controller,
+                    widget.cookieManager,
+                    notifyParent: () {
+                      setState(() {});
+                    },
+                    orientation: orientation,
+                  ),
+                ),
+              ),
+            if (orientation == Orientation.landscape)
+              const VerticalDivider(thickness: 1, width: 1),
             // This is the main content.
             Expanded(
               child: FadeIndexedStack(
@@ -373,138 +390,5 @@ Page resource error:
         ),
       ),
     );
-  }
-}
-
-class NaviBar extends StatelessWidget{
-  NaviBar({super.key});
-  final Map funcMap = {
-    0: ConFunc.loadHome,
-    // 1: ConFunc.httpRedirect,
-    1: ConFunc.navi2Tool,
-    2: ConFunc.bottomUp,
-    3: ConFunc.refresh,
-    4: ConFunc.scrollUp,
-    5: ConFunc.scrollDown,
-    6: ConFunc.goBack,
-    7: ConFunc.navi2Settings,
-    8: ConFunc.navi2About,
-    // 1: ConFunc.adjustWindow,
-    // 8: ConFunc.clearCookies,
-    // 9: ConFunc.clearCache
-  };
-  final Map naviItems = {
-    0: 0, //loadHome
-    1: 1, //navi2Tool
-    2: 7, //navi2Settings
-    3: 8, //navi2About
-  };
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      unselectedItemColor: CupertinoColors.inactiveGray,
-      selectedItemColor: Theme.of(context).primaryColor,
-      onTap: ((value) async {
-        HapticFeedback.heavyImpact();
-        var func = funcMap[index];
-        switch (func) {
-          case ConFunc.navi2About:
-            selectedIndex = 3;
-            notifyParent();
-            break;
-          case ConFunc.navi2Tool:
-            selectedIndex = 1;
-            notifyParent();
-            break;
-          case ConFunc.navi2Settings:
-            selectedIndex = 2;
-            notifyParent();
-            break;
-          case ConFunc.loadHome:
-            if (selectedIndex != 0) {
-              selectedIndex = 0;
-              notifyParent();
-            } else {
-              _onLoadHome(context, controller);
-            }
-            break;
-          case ConFunc.adjustWindow:
-            _onAdjustWindow(controller);
-            break;
-          case ConFunc.httpRedirect:
-            _onHttpRedirect(controller);
-            break;
-          case ConFunc.bottomUp:
-            _onBottomUp();
-            break;
-          case ConFunc.scrollUp:
-            controller.scrollBy(0, -1);
-            break;
-          case ConFunc.scrollDown:
-            controller.scrollBy(0, 1);
-            break;
-          case ConFunc.goBack:
-            _onGoBack(controller);
-            break;
-          case ConFunc.refresh:
-            _onRefresh(context, controller);
-            break;
-          case ConFunc.clearCookies:
-            _onClearCookies(context);
-            break;
-          case ConFunc.clearCache:
-            _onClearCache(context, controller);
-            break;
-        }
-      }),
-      items: [
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.home),
-          label: S.of(context).AppHome,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.game_controller),
-          label: S.of(context).ToolsButton,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.rectangle_dock),
-          label: S.of(context).AppBottomSafe,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            CupertinoIcons.refresh,
-            color: CupertinoColors.destructiveRed,
-          ),
-          label: S.of(context).AppRefresh,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.up_arrow),
-          label: S.of(context).AppScrollUp,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.down_arrow),
-          label: S.of(context).AppScrollDown,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(CupertinoIcons.back),
-          label: S.of(context).AppBack,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            CupertinoIcons.settings,
-          ),
-          label: S.of(context).SettingsButton,
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon(
-            CupertinoIcons.info,
-            color: CupertinoColors.inactiveGray,
-          ),
-          label: S.of(context).AboutButton,
-        ),
-
-      ],
-    );
-
   }
 }

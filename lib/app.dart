@@ -11,7 +11,7 @@ class ConnTowerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -30,7 +30,7 @@ class ConnTowerApp extends StatelessWidget {
           seedColor: CupertinoColors.activeBlue,
           surface: const Color(0xF0F9F9F9),
           onSurface: CupertinoColors.label,
-          onBackground: CupertinoColors.white,
+          onBackground: CupertinoColors.label,
           background: const Color(0xF0F9F9F9),
           brightness: Brightness.light,
         ),
