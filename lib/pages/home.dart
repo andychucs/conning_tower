@@ -16,13 +16,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 // #docregion platform_imports
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
-
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+
 // #enddocregion platform_imports
 
 import '../constants.dart';
@@ -317,10 +316,10 @@ Page resource error:
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: orientation == Orientation.portrait
           ? SingleChildScrollView(
-        controller: ScrollController(),
-        scrollDirection: Axis.horizontal,
-            child: IntrinsicWidth(
-              child: Controls(
+              controller: ScrollController(),
+              scrollDirection: Axis.horizontal,
+              child: IntrinsicWidth(
+                child: Controls(
                   _controller,
                   widget.cookieManager,
                   notifyParent: () {
@@ -328,8 +327,8 @@ Page resource error:
                   },
                   orientation: orientation,
                 ),
-            ),
-          )
+              ),
+            )
           : null,
       body: SafeArea(
         top: false,
