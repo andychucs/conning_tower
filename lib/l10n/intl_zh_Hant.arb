@@ -1,8 +1,8 @@
 {
   "@@locale": "zh-Hant",
-  "AppBack": "返回",
+  "AppBack": "上一頁",
   "@AppBack": {},
-  "AppForward": "前進",
+  "AppForward": "下一頁",
   "@AppForward": {},
   "AppHome": "主頁",
   "@AppHome": {},
