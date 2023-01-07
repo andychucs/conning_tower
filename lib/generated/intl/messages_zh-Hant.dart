@@ -34,10 +34,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescription": MessageLookupByLibrary.simpleMessage(
             "艦橋是一款跨平台艦隊Collection「艦隊これくしょん-艦これ-」專用瀏覽器。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再顯示"),
-        "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
+        "AppBack": MessageLookupByLibrary.simpleMessage("上一頁"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("刪除緩存"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("刪除Cookie"),
+        "AppForward": MessageLookupByLibrary.simpleMessage("下一頁"),
         "AppHome": MessageLookupByLibrary.simpleMessage("主頁"),
         "AppLeftSideControlsClearCache":
             MessageLookupByLibrary.simpleMessage("已刪除緩存"),

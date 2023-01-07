@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("Logout"),
+        "AppForward": MessageLookupByLibrary.simpleMessage("Forward"),
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
         "AppLeftSideControlsClearCache":
             MessageLookupByLibrary.simpleMessage("Cache cleared."),

@@ -8,6 +8,8 @@
   "@ToolTitleGameScreen": {},
   "AppBack": "Back",
   "@AppBack": {},
+  "AppForward": "Forward",
+  "@AppForward": {},
   "AppHome": "Home",
   "@AppHome": {},
   "AppName": "Bridge",

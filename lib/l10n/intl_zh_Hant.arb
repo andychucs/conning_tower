@@ -1,7 +1,9 @@
 {
   "@@locale": "zh-Hant",
-  "AppBack": "返回",
+  "AppBack": "上一頁",
   "@AppBack": {},
+  "AppForward": "下一頁",
+  "@AppForward": {},
   "AppHome": "主頁",
   "@AppHome": {},
   "AppName": "艦橋",
