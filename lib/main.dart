@@ -11,6 +11,6 @@ void main() {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.portraitUp
   ]).then((value) async => await SentryFlutter.init((options) async {
-        options.dsn = '';
+        options.dsn = await rootBundle.loadString('assets/config/sentry');
       }, appRunner: () => runApp(const ConnTowerApp())));
 }
