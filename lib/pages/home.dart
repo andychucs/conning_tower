@@ -85,7 +85,7 @@ class HomePageState extends State<HomePage> {
     });
 
     _initPackageInfo();
-
+    home = Uri.parse(kGameUrl);
     _initWebviewController();
   }
 
@@ -287,7 +287,7 @@ Page resource error:
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
-      home = (Uri.parse(prefs.getString('homeUrl') ?? kGameUrl));
+      // home = Uri.parse(prefs.getString('homeUrl') ?? kGameUrl);
     });
   }
 
@@ -317,20 +317,14 @@ Page resource error:
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: orientation == Orientation.portrait
-          ? SingleChildScrollView(
-              controller: ScrollController(),
-              scrollDirection: Axis.horizontal,
-              child: IntrinsicWidth(
-                child: Controls(
-                  _controller,
-                  widget.cookieManager,
-                  notifyParent: () {
-                    setState(() {});
-                  },
-                  orientation: orientation,
-                ),
-              ),
-            )
+          ? Controls(
+                _controller,
+                widget.cookieManager,
+                notifyParent: () {
+                  setState(() {});
+                },
+                orientation: orientation,
+              )
           : null,
       body: SafeArea(
         top: false,

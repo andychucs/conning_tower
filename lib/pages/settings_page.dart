@@ -42,20 +42,22 @@ class SettingsPageState extends State<SettingsPage> {
         ];
       },
       body: SafeArea(
+        top: false,
+        bottom: false,
         child: SettingsList(
           // shrinkWrap: true,
           sections: [
             SettingsSection(
               title: Text(S.of(context).AppName),
               tiles: <SettingsTile>[
-                SettingsTile.navigation(
-                  leading: const Icon(
-                    CupertinoIcons.home,
-                  ),
-                  title: Text(S.of(context).AppHome),
-                  onPressed: (context) {
-                  },
-                ),
+                // SettingsTile.navigation(
+                //   leading: const Icon(
+                //     CupertinoIcons.home,
+                //   ),
+                //   title: Text(S.of(context).AppHome),
+                //   onPressed: (context) {
+                //   },
+                // ),
                 SettingsTile.switchTile(
                   onToggle: (value) async {
                     HapticFeedback.heavyImpact();

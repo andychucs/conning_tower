@@ -21,6 +21,8 @@ class AboutPage extends StatelessWidget {
       ];
     },
       body: SafeArea(
+        top: false,
+        bottom: false,
         child: CustomScrollView(
           slivers: <Widget>[
             SliverPadding(

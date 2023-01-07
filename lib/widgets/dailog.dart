@@ -87,13 +87,17 @@ class CustomAlertDialog extends StatelessWidget {
   }
 }
 
-class DialogWithInput extends StatelessWidget {
-  const DialogWithInput({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
-}
+// class DialogWithInput extends StatelessWidget {
+//   const DialogWithInput({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     if (Platform.isIOS || Platform.isMacOS){
+//       return CupertinoAlertDialog(
+//         content: Card(),
+//       );
+//     }
+//     return AlertDialog();
+//   }
+//
+// }

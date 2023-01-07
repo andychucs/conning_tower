@@ -45,14 +45,14 @@ class Controls extends StatelessWidget {
     0: ConFunc.loadHome,
     // 1: ConFunc.httpRedirect,
     1: ConFunc.navi2Tool,
-    2: ConFunc.bottomUp,
-    3: ConFunc.refresh,
+    // 2: ConFunc.bottomUp,
+    2: ConFunc.refresh,
     // 4: ConFunc.scrollUp,
     // 5: ConFunc.scrollDown,
-    4: ConFunc.goBack,
-    5: ConFunc.goForward,
-    6: ConFunc.navi2Settings,
-    7: ConFunc.navi2About,
+    3: ConFunc.goBack,
+    4: ConFunc.goForward,
+    5: ConFunc.navi2Settings,
+    6: ConFunc.navi2About,
     // 1: ConFunc.adjustWindow,
     // 8: ConFunc.clearCookies,
     // 9: ConFunc.clearCache
@@ -61,8 +61,8 @@ class Controls extends StatelessWidget {
   final Map naviItems = {
     0: 0, //loadHome
     1: 1, //navi2Tool
-    2: 6, //navi2Settings
-    3: 7, //navi2About
+    2: 5, //navi2Settings
+    3: 6, //navi2About
   };
 
   @override
@@ -85,10 +85,6 @@ class Controls extends StatelessWidget {
           BottomNavigationBarItem(
             icon: const Icon(CupertinoIcons.game_controller),
             label: S.of(context).ToolsButton,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.rectangle_dock),
-            label: S.of(context).AppBottomSafe,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
@@ -137,10 +133,6 @@ class Controls extends StatelessWidget {
         NavigationRailDestination(
           icon: const Icon(CupertinoIcons.game_controller),
           label: Text(S.of(context).ToolsButton),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.rectangle_dock),
-          label: Text(S.of(context).AppBottomSafe),
         ),
         NavigationRailDestination(
           icon: const Icon(
