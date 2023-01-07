@@ -20,11 +20,15 @@ Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-�
 
 Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。
 
-## Installation
+## 安装 Installation インスタレーション
 
-[GitHub Releases](https://github.com/AndyZhuAZ/conning_tower/releases)
+Donwload :[GitHub Releases](https://github.com/AndyZhuAZ/conning_tower/releases)
 
 No official app store, need sideloading.
+
+ConningTower-vx.x.x-arch.apk for Android
+
+ConningTower-vx.x.x.ipa for iOS/iPadOS, Validated sideloading tool [altstore.io](https://altstore.io/) 
 
 ## 本地化 地域化 Localization 
 
