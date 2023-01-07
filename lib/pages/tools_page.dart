@@ -110,6 +110,8 @@ class ToolsPage extends StatelessWidget {
         ];
       },
       body: SafeArea(
+        top: false,
+        bottom: false,
         child: SettingsList(
           sections: [
             SettingsSection(

@@ -85,7 +85,7 @@ class HomePageState extends State<HomePage> {
     });
 
     _initPackageInfo();
-
+    home = Uri.parse(kGameUrl);
     _initWebviewController();
   }
 
@@ -287,7 +287,7 @@ Page resource error:
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
-      home = (Uri.parse(prefs.getString('homeUrl') ?? kGameUrl));
+      // home = Uri.parse(prefs.getString('homeUrl') ?? kGameUrl);
     });
   }
 
