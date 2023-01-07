@@ -98,6 +98,14 @@ class ToolsPage extends StatelessWidget {
     "kcs_options=vol_bgm%3D30%3Bvol_se%3D40%3Bvol_voice%3D60%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"''');
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
+  void _onBottomUp() {
+    if (bottomPadding) {
+      bottomPadding = false;
+    } else {
+      bottomPadding = true;
+    }
+    notifyParent();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +181,14 @@ class ToolsPage extends StatelessWidget {
                   onPressed: (context) {
                     HapticFeedback.heavyImpact();
                     _onAdjustWindow(controller);
+                  },
+                ),
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.rectangle_dock),
+                  title: Text(S.of(context).AppBottomSafe),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onBottomUp();
                   },
                 ),
               ],

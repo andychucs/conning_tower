@@ -317,20 +317,14 @@ Page resource error:
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: orientation == Orientation.portrait
-          ? SingleChildScrollView(
-              controller: ScrollController(),
-              scrollDirection: Axis.horizontal,
-              child: IntrinsicWidth(
-                child: Controls(
-                  _controller,
-                  widget.cookieManager,
-                  notifyParent: () {
-                    setState(() {});
-                  },
-                  orientation: orientation,
-                ),
-              ),
-            )
+          ? Controls(
+                _controller,
+                widget.cookieManager,
+                notifyParent: () {
+                  setState(() {});
+                },
+                orientation: orientation,
+              )
           : null,
       body: SafeArea(
         top: false,
