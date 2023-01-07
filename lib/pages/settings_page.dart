@@ -41,43 +41,53 @@ class SettingsPageState extends State<SettingsPage> {
           ),
         ];
       },
-      body: SettingsList(
-        // shrinkWrap: true,
-        sections: [
-          SettingsSection(
-            title: Text(S.of(context).AppName),
-            tiles: <SettingsTile>[
-              SettingsTile.switchTile(
-                onToggle: (value) async {
-                  HapticFeedback.heavyImpact();
-                  setState(() {
-                    enableAutoProcessSwitchValue = value;
-                  });
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.setBool('enableAutoProcess', value);
-                  widget.reloadConfig();
-                },
-                initialValue: enableAutoProcessSwitchValue,
-                leading: const Icon(CupertinoIcons.fullscreen),
-                title: Text(S.of(context).SettingsEnableAutoProcess),
-              ),
-              SettingsTile.navigation(
-                leading: const Icon(
-                  CupertinoIcons.refresh,
-                  color: CupertinoColors.destructiveRed,
+      body: SafeArea(
+        child: SettingsList(
+          // shrinkWrap: true,
+          sections: [
+            SettingsSection(
+              title: Text(S.of(context).AppName),
+              tiles: <SettingsTile>[
+                SettingsTile.navigation(
+                  leading: const Icon(
+                    CupertinoIcons.home,
+                  ),
+                  title: Text(S.of(context).AppHome),
+                  onPressed: (context) {
+                  },
                 ),
-                title: Text(S.of(context).SettingsReset),
-                onPressed: (context) async {
-                  HapticFeedback.heavyImpact();
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.clear();
-                  _loadConfig();
-                  widget.reloadConfig();
-                },
-              ),
-            ],
-          ),
-        ],
+                SettingsTile.switchTile(
+                  onToggle: (value) async {
+                    HapticFeedback.heavyImpact();
+                    setState(() {
+                      enableAutoProcessSwitchValue = value;
+                    });
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool('enableAutoProcess', value);
+                    widget.reloadConfig();
+                  },
+                  initialValue: enableAutoProcessSwitchValue,
+                  leading: const Icon(CupertinoIcons.fullscreen),
+                  title: Text(S.of(context).SettingsEnableAutoProcess),
+                ),
+                SettingsTile.navigation(
+                  leading: const Icon(
+                    CupertinoIcons.refresh,
+                    color: CupertinoColors.destructiveRed,
+                  ),
+                  title: Text(S.of(context).SettingsReset),
+                  onPressed: (context) async {
+                    HapticFeedback.heavyImpact();
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.clear();
+                    _loadConfig();
+                    widget.reloadConfig();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -109,72 +109,74 @@ class ToolsPage extends StatelessWidget {
           ),
         ];
       },
-      body: SettingsList(
-        sections: [
-          SettingsSection(
-            title: Text(S.of(context).ToolTitleWeb),
-            tiles: [
-              SettingsTile.navigation(
-                leading: const Icon(CupertinoIcons.rectangle_expand_vertical),
-                title: Text(S.of(context).AppRedirect),
-                onPressed: (context) {
-                  HapticFeedback.heavyImpact();
-                  _onHttpRedirect(controller);
-                },
-              ),
-              SettingsTile.navigation(
-                leading: const Icon(CupertinoIcons.delete),
-                title: Text(S.of(context).AppClearCache),
-                onPressed: (context) {
-                  HapticFeedback.heavyImpact();
-                  _onClearCache(context, controller);
-                },
-              ),
-              SettingsTile.navigation(
-                leading: const Icon(CupertinoIcons.square_arrow_left),
-                title: Text(S.of(context).AppClearCookie),
-                onPressed: (context) {
-                  HapticFeedback.heavyImpact();
-                  _onClearCookies(context);
-                },
-              ),
-            ],
-          ),
-          SettingsSection(
-            title: Text(S.of(context).ToolTitleGameSound),
-            tiles: [
-              SettingsTile.navigation(
-                leading: const Icon(CupertinoIcons.volume_down),
-                title: Text(S.of(context).GameUnmute),
-                onPressed: (context) {
-                  HapticFeedback.heavyImpact();
-                  _onUnmuteGame(controller);
-                },
-              ),
-              SettingsTile.navigation(
-                leading: const Icon(CupertinoIcons.volume_off),
-                title: Text(S.of(context).GameMute),
-                onPressed: (context) {
-                  HapticFeedback.heavyImpact();
-                  _onMuteGame(controller);
-                },
-              ),
-            ],
-          ),
-          SettingsSection(
-            title: Text(S.of(context).ToolTitleGameScreen),
-            tiles: [
-              SettingsTile.navigation(
-                leading: const Icon(CupertinoIcons.fullscreen),
-                title: Text(S.of(context).AppResize),
-                onPressed: (context) {
-                  HapticFeedback.heavyImpact();
-                  _onAdjustWindow(controller);
-                },
-              ),
-            ],
-          ),
-        ],
+      body: SafeArea(
+        child: SettingsList(
+          sections: [
+            SettingsSection(
+              title: Text(S.of(context).ToolTitleWeb),
+              tiles: [
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.rectangle_expand_vertical),
+                  title: Text(S.of(context).AppRedirect),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onHttpRedirect(controller);
+                  },
+                ),
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.delete),
+                  title: Text(S.of(context).AppClearCache),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onClearCache(context, controller);
+                  },
+                ),
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.square_arrow_left),
+                  title: Text(S.of(context).AppClearCookie),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onClearCookies(context);
+                  },
+                ),
+              ],
+            ),
+            SettingsSection(
+              title: Text(S.of(context).ToolTitleGameSound),
+              tiles: [
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.volume_down),
+                  title: Text(S.of(context).GameUnmute),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onUnmuteGame(controller);
+                  },
+                ),
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.volume_off),
+                  title: Text(S.of(context).GameMute),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onMuteGame(controller);
+                  },
+                ),
+              ],
+            ),
+            SettingsSection(
+              title: Text(S.of(context).ToolTitleGameScreen),
+              tiles: [
+                SettingsTile.navigation(
+                  leading: const Icon(CupertinoIcons.fullscreen),
+                  title: Text(S.of(context).AppResize),
+                  onPressed: (context) {
+                    HapticFeedback.heavyImpact();
+                    _onAdjustWindow(controller);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

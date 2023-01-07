@@ -363,7 +363,7 @@ Page resource error:
                     padding: EdgeInsets.only(
                       bottom: bottomPadding ? deviceWidth / 18 : 0.0,
                     ),
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                     width: double.infinity,
                     height: deviceWidth,
                     child: KCWebView(_controller),
