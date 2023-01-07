@@ -313,7 +313,11 @@ Page resource error:
       deviceWidth = MediaQuery.of(context).size.width;
     }
     var orientation = MediaQuery.of(context).orientation;
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    if (orientation == Orientation.landscape) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    } else {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: orientation == Orientation.portrait
