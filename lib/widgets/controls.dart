@@ -308,7 +308,7 @@ class Controls extends StatelessWidget {
         });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadRequest(Uri.parse("http://$kGameUrl"));
+      await controller.loadRequest(home);
     }
   }
 

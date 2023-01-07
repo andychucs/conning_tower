@@ -37,6 +37,7 @@ late bool beforeRedirect;
 late double kWebviewHeight;
 late double kWebviewWidth;
 late int selectedIndex;
+late Uri home;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -112,7 +113,7 @@ class HomePageState extends State<HomePage> {
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(CupertinoColors.extraLightBackgroundGray)
-      ..loadRequest(Uri.parse('http://$kGameUrl'))
+      ..loadRequest(home)
       ..setUserAgent(defaultUA)
       ..enableZoom(true)
       ..setNavigationDelegate(
@@ -181,13 +182,14 @@ class HomePageState extends State<HomePage> {
           },
           onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
+            var uri = Uri.parse(url);
             setState(() {
               beforeRedirect = false;
-              if (url.endsWith(kGameUrl)) {
+              if (uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')) {
                 beforeRedirect = true;
                 inKancolleWindow = false;
                 autoAdjusted = false;
-              } else if (url.startsWith("http://osapi.dmm.com")) {
+              } else if (uri.host == 'osapi.dmm.com') {
                 inKancolleWindow = true;
                 autoAdjusted = false;
               }
@@ -207,10 +209,10 @@ Page resource error:
           },
           onNavigationRequest: (NavigationRequest request) async {
             print('allowing navigation to $request');
+            var uri = Uri.parse(request.url);
             if (_enableAutoProcess) {
               if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-                if (request.url.contains(
-                    "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
+                if (uri.path.endsWith('/kcs2/index.php')) {
                   Fluttertoast.showToast(
                       msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
                   setState(() {
@@ -222,7 +224,7 @@ Page resource error:
                 }
               } else {
                 //chrome can't detect /kcs2/.....
-                if (request.url.startsWith("http://osapi.dmm.com")) {
+                if (uri.host == 'osapi.dmm.com') {
                   Fluttertoast.showToast(
                       msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
                   setState(() {
@@ -235,9 +237,8 @@ Page resource error:
               }
             }
 
-            if (request.url.startsWith("http://osapi.dmm.com") ||
-                request.url.contains(
-                    "www.dmm.com/netgame/social/-/gadgets/=/app_id=854854")) {
+            if (uri.host == 'osapi.dmm.com' ||
+                uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')) {
               Fluttertoast.showToast(msg: S.current.KCViewFuncMsgGameNavi);
               if (!allowNavi) {
                 Fluttertoast.showToast(
@@ -286,6 +287,7 @@ Page resource error:
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
+      home = (Uri.parse(prefs.getString('homeUrl') ?? kGameUrl));
     });
   }
 
@@ -363,7 +365,7 @@ Page resource error:
                     padding: EdgeInsets.only(
                       bottom: bottomPadding ? deviceWidth / 18 : 0.0,
                     ),
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                     width: double.infinity,
                     height: deviceWidth,
                     child: KCWebView(_controller),
