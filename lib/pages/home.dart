@@ -15,12 +15,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-// #docregion platform_imports
-// Import for Android features.
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-// Import for iOS features.
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 // #enddocregion platform_imports
 
@@ -40,18 +35,18 @@ late int selectedIndex;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
-  final WebViewCookieManager? cookieManager;
-
+  final CookieManager ? cookieManager;
   @override
   State<StatefulWidget> createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-  late final WebViewController _controller;
+  late final InAppWebViewController _controller;
   late double deviceWidth;
   bool _showNotify = true;
   bool _showIosNotify = true;
   bool _enableAutoProcess = true;
+
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -84,193 +79,11 @@ class HomePageState extends State<HomePage> {
     });
 
     _initPackageInfo();
-
     _initWebviewController();
   }
 
   Future<void> _initWebviewController() async {
-    String defaultUA;
-
-    // #docregion platform_features
-    late final PlatformWebViewControllerCreationParams params;
-    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      defaultUA = kSafariUA;
-      params = WebKitWebViewControllerCreationParams(
-        allowsInlineMediaPlayback: true,
-        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
-      );
-    } else {
-      defaultUA = kChromeUA;
-      params = const PlatformWebViewControllerCreationParams();
-    }
-
-    final WebViewController controller =
-        WebViewController.fromPlatformCreationParams(params);
-    // #enddocregion platform_features
-    beforeRedirect = false;
-
-    controller
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(CupertinoColors.extraLightBackgroundGray)
-      ..loadRequest(Uri.parse('http://$kGameUrl'))
-      ..setUserAgent(defaultUA)
-      ..enableZoom(true)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) async {
-            debugPrint('WebView is loading (progress : $progress%)');
-            if (_enableAutoProcess &&
-                beforeRedirect &&
-                !inKancolleWindow &&
-                progress >= 90) {
-              if (Platform.isIOS) {
-                await controller
-                    .runJavaScript(
-                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
-                    .whenComplete(() => () {
-                          Fluttertoast.showToast(
-                              msg: S.current.KCViewFuncMsgAutoGameRedirect);
-                          debugPrint("HTTP Redirect success");
-                          setState(() {
-                            inKancolleWindow = true;
-                          });
-                        })
-                    .onError(
-                      (error, stackTrace) => () async {
-                        await Sentry.captureMessage(
-                            'Error on 1st time run redirect');
-                        Future.delayed(
-                          const Duration(seconds: 1),
-                          () async {
-                            await controller
-                                .runJavaScript(
-                                    '''window.open("http:"+gadgetInfo.URL,'_blank');''')
-                                .whenComplete(() => () {
-                                      Fluttertoast.showToast(
-                                          msg: S.current
-                                              .KCViewFuncMsgAutoGameRedirect);
-                                      debugPrint("HTTP Redirect success");
-                                      setState(() {
-                                        inKancolleWindow = true;
-                                      });
-                                    })
-                                .onError(
-                                  (error, stackTrace) => () async {
-                                    await Sentry.captureException(error,
-                                        stackTrace: stackTrace);
-                                    await Sentry.captureMessage(
-                                        'Error on 2nd time run redirect');
-                                  },
-                                );
-                          },
-                        );
-                      },
-                    );
-              }
-              if (Platform.isAndroid) {
-                Fluttertoast.showToast(
-                    msg: S.current.KCViewFuncMsgNaviGameLoadCompleted);
-                setState(() {
-                  gameLoadCompleted = true;
-                  inKancolleWindow = true;
-                });
-                HapticFeedback.mediumImpact();
-                await autoAdjustWindowV2(controller);
-              }
-            }
-          },
-          onPageStarted: (String url) {
-            debugPrint('Page started loading: $url');
-            setState(() {
-              beforeRedirect = false;
-              if (url.endsWith(kGameUrl)) {
-                beforeRedirect = true;
-                inKancolleWindow = false;
-                autoAdjusted = false;
-              } else if (url.startsWith("http://osapi.dmm.com")) {
-                inKancolleWindow = true;
-                autoAdjusted = false;
-              }
-            });
-          },
-          onPageFinished: (String url) async {
-            debugPrint('Page finished loading: $url');
-          },
-          onWebResourceError: (WebResourceError error) {
-            debugPrint('''
-Page resource error:
-  code: ${error.errorCode}
-  description: ${error.description}
-  errorType: ${error.errorType}
-  isForMainFrame: ${error.isForMainFrame}
-          ''');
-          },
-          onNavigationRequest: (NavigationRequest request) async {
-            print('allowing navigation to $request');
-            if (_enableAutoProcess) {
-              if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-                if (request.url.contains(
-                    "/kcs2/index.php?api_root=/kcsapi&voice_root=/kcs/")) {
-                  Fluttertoast.showToast(
-                      msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
-                  setState(() {
-                    gameLoadCompleted = true;
-                    inKancolleWindow = true;
-                  });
-                  HapticFeedback.mediumImpact();
-                  await autoAdjustWindowV2(controller);
-                }
-              } else {
-                //chrome can't detect /kcs2/.....
-                if (request.url.startsWith("http://osapi.dmm.com")) {
-                  Fluttertoast.showToast(
-                      msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
-                  setState(() {
-                    gameLoadCompleted = true;
-                    inKancolleWindow = true;
-                  });
-                  HapticFeedback.mediumImpact();
-                  await autoAdjustWindowV2(controller);
-                }
-              }
-            }
-
-            if (request.url.startsWith("http://osapi.dmm.com") ||
-                request.url.contains(
-                    "www.dmm.com/netgame/social/-/gadgets/=/app_id=854854")) {
-              Fluttertoast.showToast(msg: S.current.KCViewFuncMsgGameNavi);
-              if (!allowNavi) {
-                Fluttertoast.showToast(
-                    msg: S.current.KCViewFuncMsgGameNaviBlock);
-                return NavigationDecision.prevent;
-              }
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..addJavaScriptChannel(
-        'Toaster',
-        onMessageReceived: (JavaScriptMessage message) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message.message)),
-          );
-        },
-      );
-
-    // #docregion platform_features
-    if (controller.platform is AndroidWebViewController) {
-      AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
-    }
-    if (controller.platform is WebKitWebViewController) {
-      (controller.platform as WebKitWebViewController)
-          .setAllowsBackForwardNavigationGestures(true);
-    }
-    // #enddocregion platform_features
-
-    _controller = controller;
+    _controller...
   }
 
   Future<void> _initPackageInfo() async {
