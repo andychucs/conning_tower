@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../constants.dart';
 import '../generated/l10n.dart';
@@ -21,7 +19,6 @@ enum ConFunc {
   scrollUp,
   scrollDown,
   goBack,
-  goForward,
   refresh,
   clearCookies,
   clearCache,
@@ -32,207 +29,178 @@ enum ConFunc {
 }
 
 class Controls extends StatelessWidget {
-  Controls(this.controller, CookieManager? cookieManager,
+  Controls(
+      this._webViewControllerFuture, CookieManager? cookieManager,
       {Key? key, required this.notifyParent, required this.orientation})
       : cookieManager = cookieManager ?? CookieManager.instance(),
         super(key: key);
   final Function() notifyParent;
-  final InAppWebViewController controller;
+  final Future<InAppWebViewController> _webViewControllerFuture;
   late final CookieManager cookieManager;
   final Orientation orientation;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
-    // 1: ConFunc.httpRedirect,
-    1: ConFunc.navi2Tool,
-    // 2: ConFunc.bottomUp,
-    2: ConFunc.refresh,
-    // 4: ConFunc.scrollUp,
-    // 5: ConFunc.scrollDown,
-    3: ConFunc.goBack,
-    4: ConFunc.goForward,
-    5: ConFunc.navi2Settings,
-    6: ConFunc.navi2About,
+    1: ConFunc.httpRedirect,
+    2: ConFunc.navi2Tool,
+    3: ConFunc.bottomUp,
+    4: ConFunc.refresh,
+    5: ConFunc.scrollUp,
+    6: ConFunc.scrollDown,
+    7: ConFunc.goBack,
+    8: ConFunc.navi2Settings,
+    9: ConFunc.navi2About,
     // 1: ConFunc.adjustWindow,
     // 8: ConFunc.clearCookies,
     // 9: ConFunc.clearCache
   };
 
   final Map naviItems = {
-    0: 0, //loadHome
-    1: 1, //navi2Tool
-    2: 5, //navi2Settings
-    3: 6, //navi2About
+    0:0,//loadHome
+    1:2,//navi2Tool
+    2:8,//navi2Settings
+    3:9,//navi2About
   };
 
   @override
   Widget build(BuildContext context) {
-
-    if (orientation == Orientation.portrait) {
-      return BottomNavigationBar(
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        currentIndex: naviItems[selectedIndex],
-        unselectedItemColor: CupertinoColors.inactiveGray,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: ((value) async {
-          _onTap(value, context);
-        }),
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.home),
-            label: S.of(context).AppHome,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.game_controller),
-            label: S.of(context).ToolsButton,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.refresh,
-              color: CupertinoColors.destructiveRed,
+    return FutureBuilder(
+      future: _webViewControllerFuture,
+      builder:
+          (BuildContext context, AsyncSnapshot<InAppWebViewController> snapshot) {
+        final bool webViewReady =
+            snapshot.connectionState == ConnectionState.done;
+        final InAppWebViewController? controller = snapshot.data;
+        return NavigationRail(
+          labelType: NavigationRailLabelType.all,
+          selectedIndex: naviItems[selectedIndex],
+          groupAlignment: 0,
+          onDestinationSelected: (int index) async {
+            HapticFeedback.heavyImpact();
+            var func = funcMap[index];
+            if (!webViewReady) {
+              Fluttertoast.showToast(
+                  msg: S.of(context).AppLeftSideControlsNotReady);
+              return;
+            } else if (func == ConFunc.bottomUp) {}
+            switch (func) {
+              case ConFunc.navi2About:
+                selectedIndex = 3;
+                notifyParent();
+                break;
+              case ConFunc.navi2Tool:
+                selectedIndex = 1;
+                notifyParent();
+                break;
+              case ConFunc.navi2Settings:
+                selectedIndex = 2;
+                notifyParent();
+                break;
+              case ConFunc.loadHome:
+                if (selectedIndex != 0) {
+                  selectedIndex = 0;
+                  notifyParent();
+                } else {
+                  _onLoadHome(context, controller!);
+                }
+                break;
+              case ConFunc.adjustWindow:
+                _onAdjustWindow(controller!);
+                break;
+              case ConFunc.httpRedirect:
+                _onHttpRedirect(controller!);
+                break;
+              case ConFunc.bottomUp:
+                _onBottomUp();
+                break;
+              case ConFunc.scrollUp:
+                // controller!.scrollBy(0, -1);
+                break;
+              case ConFunc.scrollDown:
+                // controller!.scrollBy(0, 1);
+                break;
+              case ConFunc.goBack:
+                _onGoBack(controller!);
+                break;
+              case ConFunc.refresh:
+                _onRefresh(context, controller!);
+                break;
+              case ConFunc.clearCookies:
+                _onClearCookies(context);
+                break;
+              case ConFunc.clearCache:
+                _onClearCache(context, controller!);
+                break;
+            }
+          },
+          destinations: [
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.home),
+              label: Text(
+                S.of(context).AppHome,
+              ),
             ),
-            label: S.of(context).AppRefresh,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.back),
-            label: S.of(context).AppBack,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.forward),
-            label: S.of(context).AppForward,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.settings,
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.rectangle_expand_vertical),
+              label: Text(
+                S.of(context).AppRedirect,
+                textAlign: TextAlign.center,
+              ),
             ),
-            label: S.of(context).SettingsButton,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.info,
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.game_controller),
+              label: Text(S.of(context).ToolsButton),
             ),
-            label: S.of(context).AboutButton,
-          ),
-        ],
-      );
-    }
-    return NavigationRail(
-      labelType: NavigationRailLabelType.all,
-      selectedIndex: naviItems[selectedIndex],
-      groupAlignment: 0,
-      onDestinationSelected: (int index) async {
-        _onTap(index, context);
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.rectangle_dock),
+              label: Text(S.of(context).AppBottomSafe),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.refresh,
+                color: CupertinoColors.destructiveRed,
+              ),
+              label: Text(S.of(context).AppRefresh),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.up_arrow),
+              label: Text(S.of(context).AppScrollUp),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.down_arrow),
+              label: Text(S.of(context).AppScrollDown),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.back),
+              label: Text(S.of(context).AppBack),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.settings,
+                color: CupertinoColors.systemYellow,
+              ),
+              label: Text(S.of(context).SettingsButton),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(
+                CupertinoIcons.info,
+                color: CupertinoColors.systemTeal,
+              ),
+              label: Text(
+                S.of(context).AboutButton,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        );
       },
-      destinations: [
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.home),
-          label: Text(
-            S.of(context).AppHome,
-          ),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.game_controller),
-          label: Text(S.of(context).ToolsButton),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(
-            CupertinoIcons.refresh,
-            color: CupertinoColors.destructiveRed,
-          ),
-          label: Text(S.of(context).AppRefresh),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.back),
-          label: Text(S.of(context).AppBack),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.forward),
-          label: Text(S.of(context).AppForward),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(
-            CupertinoIcons.settings,
-          ),
-          label: Text(S.of(context).SettingsButton),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(
-            CupertinoIcons.info,
-          ),
-          label: Text(
-            S.of(context).AboutButton,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
     );
   }
 
-  void _onTap(int value, BuildContext context) {
-    HapticFeedback.heavyImpact();
-    var func = funcMap[value];
-    switch (func) {
-      case ConFunc.navi2About:
-        selectedIndex = 3;
-        notifyParent();
-        break;
-      case ConFunc.navi2Tool:
-        selectedIndex = 1;
-        notifyParent();
-        break;
-      case ConFunc.navi2Settings:
-        selectedIndex = 2;
-        notifyParent();
-        break;
-      case ConFunc.loadHome:
-        if (selectedIndex != 0) {
-          selectedIndex = 0;
-          notifyParent();
-        } else {
-          _onLoadHome(context, controller);
-        }
-        break;
-      case ConFunc.adjustWindow:
-        _onAdjustWindow(controller);
-        break;
-      case ConFunc.httpRedirect:
-        _onHttpRedirect(controller);
-        break;
-      case ConFunc.bottomUp:
-        _onBottomUp();
-        break;
-      case ConFunc.scrollUp:
-        // controller.scrollBy(0, -1);
-        break;
-      case ConFunc.scrollDown:
-        // controller.scrollBy(0, 1);
-        break;
-      case ConFunc.goBack:
-        _onGoBack(controller);
-        break;
-      case ConFunc.goForward:
-        _onGoForward(controller);
-        break;
-      case ConFunc.refresh:
-        _onRefresh(context, controller);
-        break;
-      case ConFunc.clearCookies:
-        _onClearCookies(context);
-        break;
-      case ConFunc.clearCache:
-        _onClearCache(context, controller);
-        break;
-    }
-  }
-
-  Future<void> _onRefresh(
-      BuildContext context, InAppWebViewController controller) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(msg: S.current.AppRefresh, isNormal: true);
-        });
+  Future<void> _onRefresh(BuildContext context, InAppWebViewController controller) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppRefresh,isNormal: true);
+    });
     if (value ?? false) {
       allowNavi = true;
       await controller.reload();
@@ -243,13 +211,6 @@ class Controls extends StatelessWidget {
     allowNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
-    }
-  }
-
-  Future<void> _onGoForward(InAppWebViewController controller) async {
-    allowNavi = true;
-    if (await controller.canGoForward()) {
-      await controller.goForward();
     }
   }
 
@@ -268,10 +229,8 @@ class Controls extends StatelessWidget {
       if (currentUrl.toString().endsWith(kGameUrl)) {
         // May be HTTPS or HTTP
         allowNavi = true;
-        if (Platform.isIOS) {
-          await controller.evaluateJavascript(
-              source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-        }
+        await controller
+            .evaluateJavascript(source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
         inKancolleWindow = true;
       }
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
@@ -292,29 +251,20 @@ class Controls extends StatelessWidget {
     }
   }
 
-  Future<void> _onLoadHome(
-      BuildContext context, InAppWebViewController controller) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(msg: S.current.AppHome, isNormal: true);
-        });
+  Future<void> _onLoadHome(BuildContext context, InAppWebViewController controller) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppHome,isNormal: true);
+    });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadUrl(
-          urlRequest: URLRequest(
-          url: WebUri(
-          "https://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/")));
+      await controller.loadUrl(urlRequest: URLRequest(url:WebUri("http://$kGameUrl")));
     }
   }
 
   Future<void> _onClearCookies(BuildContext context) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCookie, isNormal: true);
-        });
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppClearCookie,isNormal: true);
+    });
     if (value ?? false) {
       await cookieManager.deleteAllCookies();
       String message = S.current.AppLeftSideControlsLogoutSuccess;
@@ -322,15 +272,48 @@ class Controls extends StatelessWidget {
     }
   }
 
-  Future<void> _onClearCache(
-      BuildContext context, InAppWebViewController controller) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCache.replaceAll('\n', ''),
-              isNormal: true);
-        });
+  Future<void> _onListCookies(
+      InAppWebViewController controller, BuildContext context) async {
+    final String cookies =
+    await controller.evaluateJavascript(source: 'document.cookie');
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const Text('Cookies:'),
+          _getCookieList(cookies),
+        ],
+      ),
+    ));
+  }
+
+  Widget _getCookieList(String cookies) {
+    if (cookies == '""') {
+      return Container();
+    }
+    final List<String> cookieList = cookies.split(';');
+    final Iterable<Text> cookieWidgets =
+    cookieList.map((String cookie) => Text(cookie));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: cookieWidgets.toList(),
+    );
+  }
+
+  Future<void> _onListCache(
+      InAppWebViewController controller, BuildContext context) async {
+    await controller.evaluateJavascript(source: 'caches.keys()'
+    // ignore: missing_whitespace_between_adjacent_strings
+        '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
+        '.then((caches) => Toaster.postMessage(caches))');
+  }
+
+  Future<void> _onClearCache(BuildContext context, InAppWebViewController controller) async {
+    bool? value = await showDialog(context: context, builder: (context){
+      return CustomAlertDialog(msg: S.current.AppClearCache.replaceAll('\n', ''),isNormal: true);
+    });
     if (value ?? false) {
       allowNavi = true;
       await controller.clearCache();

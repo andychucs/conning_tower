@@ -20,7 +20,7 @@ class ToolsPage extends StatelessWidget {
         super(key: key);
 
   final Function() notifyParent;
-  final InAppWebViewController controller;
+  final Future<InAppWebViewController> controller;
   late final CookieManager cookieManager;
 
   Future<void> _onHttpRedirect(InAppWebViewController controller) async {
@@ -106,93 +106,64 @@ class ToolsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-        return [
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(S.current.ToolsButton),
+    return FutureBuilder(
+      future: controller,
+      builder:
+          (BuildContext context, AsyncSnapshot<InAppWebViewController> snapshot) {
+        final bool webViewReady =
+            snapshot.connectionState == ConnectionState.done;
+        final InAppWebViewController? controller = snapshot.data;
+        return CupertinoApp(
+          theme: const CupertinoThemeData(primaryColor: CupertinoColors.systemGrey),
+          home: CustomScrollView(
+            slivers: [
+              CupertinoSliverNavigationBar(
+                largeTitle: Text(S.of(context).ToolsButton),
+              ),
+              SliverFillRemaining(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        if (!webViewReady) {
+                          Fluttertoast.showToast(
+                              msg: S.of(context).AppLeftSideControlsNotReady);
+                          return;
+                        }
+                        _onClearCache(context, controller!);
+                      },
+                      child: Text(S.of(context).AppClearCache.replaceAll('\n', '')),
+                    ),
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        if (!webViewReady) {
+                          Fluttertoast.showToast(
+                              msg: S.of(context).AppLeftSideControlsNotReady);
+                          return;
+                        }
+                        _onClearCookies(context);
+                      },
+                      child: Text(S.of(context).AppClearCookie),
+                    ),
+                    CupertinoButton.filled(
+                      onPressed: () {
+                        if (!webViewReady) {
+                          Fluttertoast.showToast(
+                              msg: S.of(context).AppLeftSideControlsNotReady);
+                          return;
+                        }
+                        _onAdjustWindow(controller!);
+                      },
+                      child: Text(S.of(context).AppResize),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ];
+        );
       },
-      body: SafeArea(
-        top: false,
-        bottom: false,
-        child: SettingsList(
-          sections: [
-            SettingsSection(
-              title: Text(S.of(context).ToolTitleWeb),
-              tiles: [
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.rectangle_expand_vertical),
-                  title: Text(S.of(context).AppRedirect),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onHttpRedirect(controller);
-                  },
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.delete),
-                  title: Text(S.of(context).AppClearCache),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onClearCache(context, controller);
-                  },
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.square_arrow_left),
-                  title: Text(S.of(context).AppClearCookie),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onClearCookies(context);
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(S.of(context).ToolTitleGameSound),
-              tiles: [
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.volume_down),
-                  title: Text(S.of(context).GameUnmute),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onUnmuteGame(controller);
-                  },
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.volume_off),
-                  title: Text(S.of(context).GameMute),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onMuteGame(controller);
-                  },
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: Text(S.of(context).ToolTitleGameScreen),
-              tiles: [
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.fullscreen),
-                  title: Text(S.of(context).AppResize),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onAdjustWindow(controller);
-                  },
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(CupertinoIcons.rectangle_dock),
-                  title: Text(S.of(context).AppBottomSafe),
-                  onPressed: (context) {
-                    HapticFeedback.heavyImpact();
-                    _onBottomUp();
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
