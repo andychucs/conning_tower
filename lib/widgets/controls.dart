@@ -4,9 +4,9 @@ import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
 import '../generated/l10n.dart';
@@ -32,13 +32,13 @@ enum ConFunc {
 }
 
 class Controls extends StatelessWidget {
-  Controls(this.controller, WebViewCookieManager? cookieManager,
+  Controls(this.controller, CookieManager? cookieManager,
       {Key? key, required this.notifyParent, required this.orientation})
-      : cookieManager = cookieManager ?? WebViewCookieManager(),
+      : cookieManager = cookieManager ?? CookieManager.instance(),
         super(key: key);
   final Function() notifyParent;
-  final WebViewController controller;
-  late final WebViewCookieManager cookieManager;
+  final InAppWebViewController controller;
+  late final CookieManager cookieManager;
   final Orientation orientation;
 
   final Map funcMap = {
@@ -67,6 +67,7 @@ class Controls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     if (orientation == Orientation.portrait) {
       return BottomNavigationBar(
         showSelectedLabels: true,
@@ -202,10 +203,10 @@ class Controls extends StatelessWidget {
         _onBottomUp();
         break;
       case ConFunc.scrollUp:
-        controller.scrollBy(0, -1);
+        // controller.scrollBy(0, -1);
         break;
       case ConFunc.scrollDown:
-        controller.scrollBy(0, 1);
+        // controller.scrollBy(0, 1);
         break;
       case ConFunc.goBack:
         _onGoBack(controller);
@@ -226,7 +227,7 @@ class Controls extends StatelessWidget {
   }
 
   Future<void> _onRefresh(
-      BuildContext context, WebViewController controller) async {
+      BuildContext context, InAppWebViewController controller) async {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
@@ -238,14 +239,14 @@ class Controls extends StatelessWidget {
     }
   }
 
-  Future<void> _onGoBack(WebViewController controller) async {
+  Future<void> _onGoBack(InAppWebViewController controller) async {
     allowNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
     }
   }
 
-  Future<void> _onGoForward(WebViewController controller) async {
+  Future<void> _onGoForward(InAppWebViewController controller) async {
     allowNavi = true;
     if (await controller.canGoForward()) {
       await controller.goForward();
@@ -261,15 +262,15 @@ class Controls extends StatelessWidget {
     notifyParent();
   }
 
-  Future<void> _onHttpRedirect(WebViewController controller) async {
+  Future<void> _onHttpRedirect(InAppWebViewController controller) async {
     if (!inKancolleWindow) {
-      String? currentUrl = await controller.currentUrl();
+      String? currentUrl = await controller.getUrl().toString();
       if (currentUrl.toString().endsWith(kGameUrl)) {
         // May be HTTPS or HTTP
         allowNavi = true;
         if (Platform.isIOS) {
-          await controller.runJavaScript(
-              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+          await controller.evaluateJavascript(
+              source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
         }
         inKancolleWindow = true;
       }
@@ -282,7 +283,7 @@ class Controls extends StatelessWidget {
     print("inKancolleWindow: $inKancolleWindow");
   }
 
-  Future<void> _onAdjustWindow(WebViewController controller) async {
+  Future<void> _onAdjustWindow(InAppWebViewController controller) async {
     if (gameLoadCompleted) {
       await autoAdjustWindowV2(controller);
     } else {
@@ -292,7 +293,7 @@ class Controls extends StatelessWidget {
   }
 
   Future<void> _onLoadHome(
-      BuildContext context, WebViewController controller) async {
+      BuildContext context, InAppWebViewController controller) async {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
@@ -300,7 +301,10 @@ class Controls extends StatelessWidget {
         });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadRequest(home);
+      await controller.loadUrl(
+          urlRequest: URLRequest(
+          url: WebUri(
+          "https://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854/")));
     }
   }
 
@@ -312,17 +316,14 @@ class Controls extends StatelessWidget {
               msg: S.current.AppClearCookie, isNormal: true);
         });
     if (value ?? false) {
-      final bool hadCookies = await cookieManager.clearCookies();
+      await cookieManager.deleteAllCookies();
       String message = S.current.AppLeftSideControlsLogoutSuccess;
-      if (!hadCookies) {
-        message = S.current.AppLeftSideControlsLogoutFailed;
-      }
       Fluttertoast.showToast(msg: message);
     }
   }
 
   Future<void> _onClearCache(
-      BuildContext context, WebViewController controller) async {
+      BuildContext context, InAppWebViewController controller) async {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
