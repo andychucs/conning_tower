@@ -132,9 +132,6 @@ Future<bool> autoAdjustWindow(
     }
     await controller.evaluateJavascript(
         source: '''document.getElementById("spacing_top").style.display = "none";''');
-    await controller.evaluateJavascript(
-        source: '''document.getElementById("sectionWrap").style.display = "none";''');
-
     if (Platform.isIOS) {
       await controller.evaluateJavascript(
         //Scale to correct size(ios webkit)
@@ -143,6 +140,9 @@ Future<bool> autoAdjustWindow(
       await controller.evaluateJavascript(//Scale to correct size(android chrome)
           source: '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
     }
+    await Future.delayed(const Duration(seconds: 2));
+    await controller.evaluateJavascript(
+        source: '''document.getElementById("sectionWrap").style.display = "none";''');
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
     print("Auto adjust success");
     allowNavi = false;
@@ -156,8 +156,11 @@ getResizeScale(double height, double width) {
   //Get Kancolle iframe resize scale
   var scale = (height * width) / kKancollePixel;
   if (scale < 0.5) {
-    scale = 1 - scale;
-    return sqrt(scale);
+    while (kKancolleWidth * scale < kWebviewWidth ||
+        kKancolleHeight * scale < kWebviewHeight) {
+      scale = scale + 0.05;
+    }
+    return scale;
   } else {
     while (kKancolleWidth * scale > kWebviewWidth ||
         kKancolleHeight * scale > kWebviewHeight) {
