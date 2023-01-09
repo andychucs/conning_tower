@@ -40,8 +40,7 @@ class KCWebViewState extends State<KCWebView> {
       key: webViewKey,
       initialSettings: webViewSetting,
       initialUrlRequest: URLRequest(
-          url: WebUri(
-              "https://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854")),
+          url: WebUri.uri(home)),
       onWebViewCreated: (InAppWebViewController controller) {
         widget.webViewController.complete(controller);
 
@@ -56,16 +55,15 @@ class KCWebViewState extends State<KCWebView> {
 
       },
       onLoadStart: (controller,uri){
-
-      },
-      onLoadStop: (controller,uri){
         inKancolleWindow = false;
         autoAdjusted = false;
         gameLoadCompleted = false;
+      },
+      onLoadStop: (controller,uri){
         if(Platform.isIOS){
-          if(uri.toString().contains("app_id=854854")){
+          if(uri!.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')){
             controller.evaluateJavascript(source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
-          }else if(uri.toString().contains("osapi.dmm.com'")){
+          }else if(uri.host == 'osapi.dmm.com'){
             Fluttertoast.showToast(
                 msg: S.current.KCViewFuncMsgAutoGameRedirect);
             inKancolleWindow = true;
@@ -78,7 +76,7 @@ class KCWebViewState extends State<KCWebView> {
             }
           }
         }else{
-          if(uri.toString().contains("app_id=854854")){
+          if(uri!.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')){
             inKancolleWindow = true;
             gameLoadCompleted = true;
             Fluttertoast.showToast(
