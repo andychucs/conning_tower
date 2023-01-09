@@ -64,7 +64,6 @@ class KCWebViewState extends State<KCWebView> {
         gameLoadCompleted = false;
         if(Platform.isIOS){
           if(uri.toString().contains("app_id=854854")){
-            inKancolleWindow = false;
             controller.evaluateJavascript(source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
           }else if(uri.toString().contains("osapi.dmm.com'")){
             Fluttertoast.showToast(
@@ -74,7 +73,9 @@ class KCWebViewState extends State<KCWebView> {
             Fluttertoast.showToast(
                 msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
             HapticFeedback.mediumImpact();
-            autoAdjustWindowV2(controller);
+            if(enableAutoScale){
+              autoAdjustWindowV2(controller);
+            }
           }
         }else{
           if(uri.toString().contains("app_id=854854")){
@@ -83,7 +84,9 @@ class KCWebViewState extends State<KCWebView> {
             Fluttertoast.showToast(
                 msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
             HapticFeedback.mediumImpact();
-            autoAdjustWindowV2(controller);
+            if(enableAutoScale){
+              autoAdjustWindowV2(controller);
+            }
           }
         }
       },

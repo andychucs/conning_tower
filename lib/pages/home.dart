@@ -12,20 +12,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// #enddocregion platform_imports
 
 import '../constants.dart';
 import '../generated/l10n.dart';
-import '../helper.dart';
 
 late bool allowNavi;
 late bool autoAdjusted;
 late bool bottomPadding;
+late bool enableAutoScale;
 late bool gameLoadCompleted;
 late bool inKancolleWindow;
 late bool beforeRedirect;
@@ -69,6 +65,7 @@ class HomePageState extends State<HomePage> {
     allowNavi = true;
     bottomPadding = false;
     selectedIndex = 0;
+    enableAutoScale = _enableAutoProcess;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _loadConfig();
@@ -97,6 +94,7 @@ class HomePageState extends State<HomePage> {
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
+      enableAutoScale = _enableAutoProcess;
       // home = Uri.parse(prefs.getString('homeUrl') ?? kGameUrl);
     });
   }
