@@ -73,7 +73,7 @@ class KCWebViewState extends State<KCWebView> {
                 msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
             HapticFeedback.mediumImpact();
             if(enableAutoScale){
-              autoAdjustWindowV2(controller);
+              autoAdjustWindow(controller);
             }
           }
         }else{
@@ -87,6 +87,11 @@ class KCWebViewState extends State<KCWebView> {
               autoAdjustWindowV2(controller);
             }
           }
+        }
+      },
+      onZoomScaleChanged: (controller,oldScale,newScale){
+        if(Platform.isIOS){
+          autoAdjustWindow(controller);
         }
       },
       onCreateWindow: (controller,uri){
