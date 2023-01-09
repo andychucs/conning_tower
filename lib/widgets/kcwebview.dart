@@ -89,8 +89,14 @@ class KCWebViewState extends State<KCWebView> {
           }
         }
       },
-      onZoomScaleChanged: (controller,oldScale,newScale){
-        controller.scrollTo(x: 0, y: 0);
+      onZoomScaleChanged: (controller,oldScale,newScale) async {
+        var ScrollY = await controller.getScrollY();
+        debugPrint("ScrollY:$ScrollY");
+        await controller.evaluateJavascript(
+            source: '''document.getElementById("spacing_top").style.display = "none";''');
+        await controller.evaluateJavascript(
+            source: '''document.getElementById("sectionWrap").style.display = "none";''');
+        controller.scrollBy(x: 0, y: 0 - ScrollY!);
       },
       onCreateWindow: (controller,uri){
         return true as Future<bool>;
