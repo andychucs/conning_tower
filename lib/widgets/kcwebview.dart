@@ -79,6 +79,7 @@ class KCWebViewState extends State<KCWebView> {
         }else{
           if(uri.toString().contains("app_id=854854")){
             inKancolleWindow = true;
+            gameLoadCompleted = true;
             Fluttertoast.showToast(
                 msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
             HapticFeedback.mediumImpact();
