@@ -19,6 +19,7 @@ enum ConFunc {
   scrollUp,
   scrollDown,
   goBack,
+  goForward,
   refresh,
   clearCookies,
   clearCache,
@@ -41,25 +42,26 @@ class Controls extends StatelessWidget {
 
   final Map funcMap = {
     0: ConFunc.loadHome,
-    1: ConFunc.httpRedirect,
-    2: ConFunc.navi2Tool,
-    3: ConFunc.bottomUp,
-    4: ConFunc.refresh,
-    5: ConFunc.scrollUp,
-    6: ConFunc.scrollDown,
-    7: ConFunc.goBack,
-    8: ConFunc.navi2Settings,
-    9: ConFunc.navi2About,
+    // 1: ConFunc.httpRedirect,
+    1: ConFunc.navi2Tool,
+    // 2: ConFunc.bottomUp,
+    2: ConFunc.refresh,
+    // 4: ConFunc.scrollUp,
+    // 5: ConFunc.scrollDown,
+    3: ConFunc.goBack,
+    4: ConFunc.goForward,
+    5: ConFunc.navi2Settings,
+    6: ConFunc.navi2About,
     // 1: ConFunc.adjustWindow,
     // 8: ConFunc.clearCookies,
     // 9: ConFunc.clearCache
   };
 
   final Map naviItems = {
-    0:0,//loadHome
-    1:2,//navi2Tool
-    2:8,//navi2Settings
-    3:9,//navi2About
+    0: 0, //loadHome
+    1: 1, //navi2Tool
+    2: 5, //navi2Settings
+    3: 6, //navi2About
   };
 
   @override
@@ -68,70 +70,63 @@ class Controls extends StatelessWidget {
       future: _webViewControllerFuture,
       builder:
           (BuildContext context, AsyncSnapshot<InAppWebViewController> snapshot) {
-        final bool webViewReady =
-            snapshot.connectionState == ConnectionState.done;
+        final bool webViewReady = snapshot.connectionState == ConnectionState.done;
         final InAppWebViewController? controller = snapshot.data;
+        if (orientation == Orientation.portrait) {
+          return BottomNavigationBar(
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            currentIndex: naviItems[selectedIndex],
+            unselectedItemColor: CupertinoColors.inactiveGray,
+            selectedItemColor: Theme.of(context).primaryColor,
+            onTap: ((value) async {
+              _onTap(value, context,controller!);
+            }),
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.home),
+                label: S.of(context).AppHome,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.game_controller),
+                label: S.of(context).ToolsButton,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(
+                  CupertinoIcons.refresh,
+                  color: CupertinoColors.destructiveRed,
+                ),
+                label: S.of(context).AppRefresh,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.back),
+                label: S.of(context).AppBack,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.forward),
+                label: S.of(context).AppForward,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(
+                  CupertinoIcons.settings,
+                ),
+                label: S.of(context).SettingsButton,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(
+                  CupertinoIcons.info,
+                ),
+                label: S.of(context).AboutButton,
+              ),
+            ],
+          );
+        }
         return NavigationRail(
           labelType: NavigationRailLabelType.all,
           selectedIndex: naviItems[selectedIndex],
           groupAlignment: 0,
           onDestinationSelected: (int index) async {
-            HapticFeedback.heavyImpact();
-            var func = funcMap[index];
-            if (!webViewReady) {
-              Fluttertoast.showToast(
-                  msg: S.of(context).AppLeftSideControlsNotReady);
-              return;
-            } else if (func == ConFunc.bottomUp) {}
-            switch (func) {
-              case ConFunc.navi2About:
-                selectedIndex = 3;
-                notifyParent();
-                break;
-              case ConFunc.navi2Tool:
-                selectedIndex = 1;
-                notifyParent();
-                break;
-              case ConFunc.navi2Settings:
-                selectedIndex = 2;
-                notifyParent();
-                break;
-              case ConFunc.loadHome:
-                if (selectedIndex != 0) {
-                  selectedIndex = 0;
-                  notifyParent();
-                } else {
-                  _onLoadHome(context, controller!);
-                }
-                break;
-              case ConFunc.adjustWindow:
-                _onAdjustWindow(controller!);
-                break;
-              case ConFunc.httpRedirect:
-                _onHttpRedirect(controller!);
-                break;
-              case ConFunc.bottomUp:
-                _onBottomUp();
-                break;
-              case ConFunc.scrollUp:
-                // controller!.scrollBy(0, -1);
-                break;
-              case ConFunc.scrollDown:
-                // controller!.scrollBy(0, 1);
-                break;
-              case ConFunc.goBack:
-                _onGoBack(controller!);
-                break;
-              case ConFunc.refresh:
-                _onRefresh(context, controller!);
-                break;
-              case ConFunc.clearCookies:
-                _onClearCookies(context);
-                break;
-              case ConFunc.clearCache:
-                _onClearCache(context, controller!);
-                break;
-            }
+            _onTap(index, context,controller!);
           },
           destinations: [
             NavigationRailDestination(
@@ -141,19 +136,8 @@ class Controls extends StatelessWidget {
               ),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.rectangle_expand_vertical),
-              label: Text(
-                S.of(context).AppRedirect,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            NavigationRailDestination(
               icon: const Icon(CupertinoIcons.game_controller),
               label: Text(S.of(context).ToolsButton),
-            ),
-            NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.rectangle_dock),
-              label: Text(S.of(context).AppBottomSafe),
             ),
             NavigationRailDestination(
               icon: const Icon(
@@ -163,28 +147,22 @@ class Controls extends StatelessWidget {
               label: Text(S.of(context).AppRefresh),
             ),
             NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.up_arrow),
-              label: Text(S.of(context).AppScrollUp),
-            ),
-            NavigationRailDestination(
-              icon: const Icon(CupertinoIcons.down_arrow),
-              label: Text(S.of(context).AppScrollDown),
-            ),
-            NavigationRailDestination(
               icon: const Icon(CupertinoIcons.back),
               label: Text(S.of(context).AppBack),
             ),
             NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.forward),
+              label: Text(S.of(context).AppForward),
+            ),
+            NavigationRailDestination(
               icon: const Icon(
                 CupertinoIcons.settings,
-                color: CupertinoColors.systemYellow,
               ),
               label: Text(S.of(context).SettingsButton),
             ),
             NavigationRailDestination(
               icon: const Icon(
                 CupertinoIcons.info,
-                color: CupertinoColors.systemTeal,
               ),
               label: Text(
                 S.of(context).AboutButton,
@@ -195,6 +173,63 @@ class Controls extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _onTap(int value, BuildContext context,InAppWebViewController controller) {
+    HapticFeedback.heavyImpact();
+    var func = funcMap[value];
+    switch (func) {
+      case ConFunc.navi2About:
+        selectedIndex = 3;
+        notifyParent();
+        break;
+      case ConFunc.navi2Tool:
+        selectedIndex = 1;
+        notifyParent();
+        break;
+      case ConFunc.navi2Settings:
+        selectedIndex = 2;
+        notifyParent();
+        break;
+      case ConFunc.loadHome:
+        if (selectedIndex != 0) {
+          selectedIndex = 0;
+          notifyParent();
+        } else {
+          _onLoadHome(context, controller);
+        }
+        break;
+      case ConFunc.adjustWindow:
+        _onAdjustWindow(controller);
+        break;
+      case ConFunc.httpRedirect:
+        _onHttpRedirect(controller);
+        break;
+      case ConFunc.bottomUp:
+        _onBottomUp();
+        break;
+      case ConFunc.scrollUp:
+        controller.scrollBy(x: 1, y: 0);
+        break;
+      case ConFunc.scrollDown:
+        controller.scrollBy(x: 0, y: 1);
+        break;
+      case ConFunc.goBack:
+        _onGoBack(controller);
+        break;
+      case ConFunc.goForward:
+        _onGoForward(controller);
+        break;
+      case ConFunc.refresh:
+        _onRefresh(context, controller);
+        break;
+      case ConFunc.clearCookies:
+        _onClearCookies(context);
+        break;
+      case ConFunc.clearCache:
+        _onClearCache(context, controller);
+        break;
+    }
   }
 
   Future<void> _onRefresh(BuildContext context, InAppWebViewController controller) async {
@@ -211,6 +246,13 @@ class Controls extends StatelessWidget {
     allowNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
+    }
+  }
+
+  Future<void> _onGoForward(InAppWebViewController controller) async {
+    allowNavi = true;
+    if (await controller.canGoForward()) {
+      await controller.goForward();
     }
   }
 
@@ -257,7 +299,7 @@ class Controls extends StatelessWidget {
     });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadUrl(urlRequest: URLRequest(url:WebUri("http://$kGameUrl")));
+      await controller.loadUrl(urlRequest: URLRequest(url:WebUri("$kGameUrl")));
     }
   }
 
@@ -270,44 +312,6 @@ class Controls extends StatelessWidget {
       String message = S.current.AppLeftSideControlsLogoutSuccess;
       Fluttertoast.showToast(msg: message);
     }
-  }
-
-  Future<void> _onListCookies(
-      InAppWebViewController controller, BuildContext context) async {
-    final String cookies =
-    await controller.evaluateJavascript(source: 'document.cookie');
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const Text('Cookies:'),
-          _getCookieList(cookies),
-        ],
-      ),
-    ));
-  }
-
-  Widget _getCookieList(String cookies) {
-    if (cookies == '""') {
-      return Container();
-    }
-    final List<String> cookieList = cookies.split(';');
-    final Iterable<Text> cookieWidgets =
-    cookieList.map((String cookie) => Text(cookie));
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      mainAxisSize: MainAxisSize.min,
-      children: cookieWidgets.toList(),
-    );
-  }
-
-  Future<void> _onListCache(
-      InAppWebViewController controller, BuildContext context) async {
-    await controller.evaluateJavascript(source: 'caches.keys()'
-    // ignore: missing_whitespace_between_adjacent_strings
-        '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
-        '.then((caches) => Toaster.postMessage(caches))');
   }
 
   Future<void> _onClearCache(BuildContext context, InAppWebViewController controller) async {

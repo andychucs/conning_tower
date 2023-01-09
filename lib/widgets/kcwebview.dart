@@ -25,7 +25,7 @@ class KCWebViewState extends State<KCWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return InAppWebView(
+    return AspectRatio(aspectRatio: 5/3,child: InAppWebView(
       key: webViewKey,
       initialSettings: webViewSetting,
       initialUrlRequest: URLRequest(
@@ -56,6 +56,6 @@ class KCWebViewState extends State<KCWebView> {
         // }
         return null;
       },
-    );
+    ),);
   }
 }
