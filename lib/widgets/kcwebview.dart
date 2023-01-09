@@ -1,8 +1,15 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../generated/l10n.dart';
 
 class KCWebView extends StatefulWidget {
   const KCWebView(this.webViewController, {super.key});
@@ -11,17 +18,21 @@ class KCWebView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => KCWebViewState();
+
+
 }
 
 class KCWebViewState extends State<KCWebView> {
   final GlobalKey webViewKey = GlobalKey();
   InAppWebViewSettings webViewSetting = InAppWebViewSettings(
     javaScriptEnabled: true,
+    userAgent: kSafariUA,
+    preferredContentMode: UserPreferredContentMode.DESKTOP,
+    //Allow window.open JS
+    javaScriptCanOpenWindowsAutomatically: true,
+    //Android intercept kancolle API
     useShouldInterceptRequest: true,
-    userAgent:
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
   );
-  //InAppWebViewController? webViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +44,50 @@ class KCWebViewState extends State<KCWebView> {
               "https://www.dmm.com/netgame/social/application/-/detail/=/app_id=854854")),
       onWebViewCreated: (InAppWebViewController controller) {
         widget.webViewController.complete(controller);
-        WebMessageListener kcListener= WebMessageListener(jsObjectName: "kcMessage",
-          // onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
-          //   kancolleMessageHandle(message!);
-          // }
-        );
-        controller.addWebMessageListener(kcListener);
+
+        if(Platform.isAndroid){ //Listen Kancolle API
+          WebMessageListener kcListener= WebMessageListener(jsObjectName: "kcMessage",
+              onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+                // kancolleMessageHandle(message!);
+              }
+          );
+          controller.addWebMessageListener(kcListener);
+        }
+
+      },
+      onLoadStart: (controller,uri){
+
       },
       onLoadStop: (controller,uri){
-        if(uri.toString().contains("app_id=854854")){
-          print("autoscale");
-          controller.injectJavascriptFileFromAsset(assetFilePath: "assets/js/gameAutoFitAndroid.js");
+        inKancolleWindow = false;
+        autoAdjusted = false;
+        gameLoadCompleted = false;
+        if(Platform.isIOS){
+          if(uri.toString().contains("app_id=854854")){
+            inKancolleWindow = false;
+            controller.evaluateJavascript(source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+          }else if(uri.toString().contains("osapi.dmm.com'")){
+            Fluttertoast.showToast(
+                msg: S.current.KCViewFuncMsgAutoGameRedirect);
+            inKancolleWindow = true;
+            gameLoadCompleted = true;
+            Fluttertoast.showToast(
+                msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+            HapticFeedback.mediumImpact();
+            autoAdjustWindowV2(controller);
+          }
+        }else{
+          if(uri.toString().contains("app_id=854854")){
+            inKancolleWindow = true;
+            Fluttertoast.showToast(
+                msg: S.of(context).KCViewFuncMsgNaviGameLoadCompleted);
+            HapticFeedback.mediumImpact();
+            autoAdjustWindowV2(controller);
+          }
         }
+      },
+      onCreateWindow: (controller,uri){
+        return true as Future<bool>;
       },
       shouldInterceptRequest: (
           controller,
