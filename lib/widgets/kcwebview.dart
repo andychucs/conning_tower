@@ -32,6 +32,7 @@ class KCWebViewState extends State<KCWebView> {
     javaScriptCanOpenWindowsAutomatically: true,
     //Android intercept kancolle API
     useShouldInterceptRequest: true,
+    isElementFullscreenEnabled: false
   );
 
   @override
