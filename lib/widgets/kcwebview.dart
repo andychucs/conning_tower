@@ -90,9 +90,7 @@ class KCWebViewState extends State<KCWebView> {
         }
       },
       onZoomScaleChanged: (controller,oldScale,newScale){
-        if(Platform.isIOS){
-          autoAdjustWindow(controller);
-        }
+        controller.scrollTo(x: 0, y: 0);
       },
       onCreateWindow: (controller,uri){
         return true as Future<bool>;
