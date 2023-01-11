@@ -260,6 +260,16 @@ class S {
     );
   }
 
+  /// `Lock screen orientation`
+  String get SettingsLockDeviceOrientation {
+    return Intl.message(
+      'Lock screen orientation',
+      name: 'SettingsLockDeviceOrientation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get SettingsButton {
     return Intl.message(

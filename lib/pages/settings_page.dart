@@ -16,6 +16,7 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
+  bool lockDeviceOrientation = false;
 
   @override
   void initState() {
@@ -58,6 +59,25 @@ class SettingsPageState extends State<SettingsPage> {
                 //   onPressed: (context) {
                 //   },
                 // ),
+                SettingsTile.switchTile(initialValue: lockDeviceOrientation, onToggle: (value) {
+                  HapticFeedback.heavyImpact();
+                  setState(() {
+                    lockDeviceOrientation = value;
+                  });
+                  if (value) {
+                    Orientation orientation = MediaQuery.of(context).orientation;
+                    if (orientation == Orientation.landscape){
+                      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+                    } else {
+                      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                    }
+                  } else {
+                    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+                  }
+                },
+                  title: Text(S.of(context).SettingsLockDeviceOrientation),
+                  leading: Icon(lockDeviceOrientation ? CupertinoIcons.lock_rotation : CupertinoIcons.lock_rotation_open),
+                ),
                 SettingsTile.switchTile(
                   onToggle: (value) async {
                     HapticFeedback.heavyImpact();

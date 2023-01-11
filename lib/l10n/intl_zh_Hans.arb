@@ -46,6 +46,8 @@
   "@ToolsButton": {},
   "SettingsButton": "设置",
   "@SettingsButton": {},
+  "SettingsLockDeviceOrientation": "锁定屏幕方向",
+  "@SettingsLockDeviceOrientation": {},
   "SettingsReset": "重置",
   "@SettingsReset": {},
   "SettingsEnableAutoProcess": "启用自动全屏",

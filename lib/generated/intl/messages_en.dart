@@ -99,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
+        "SettingsLockDeviceOrientation":
+            MessageLookupByLibrary.simpleMessage("Lock screen orientation"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "ToolTitleGameScreen":
             MessageLookupByLibrary.simpleMessage("Game Screen"),

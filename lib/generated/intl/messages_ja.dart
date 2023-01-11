@@ -96,6 +96,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("艦これの画面を自動的に全画面する"),
+        "SettingsLockDeviceOrientation":
+            MessageLookupByLibrary.simpleMessage("画面の方向を固定する"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("ゲームの画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),

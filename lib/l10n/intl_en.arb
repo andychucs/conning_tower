@@ -42,6 +42,8 @@
   "@GameMute": {},
   "GameUnmute": "On",
   "@GameUnmute": {},
+  "SettingsLockDeviceOrientation": "Lock screen orientation",
+  "@SettingsLockDeviceOrientation": {},
   "SettingsButton": "Settings",
   "@SettingsButton": {},
   "SettingsReset": "Reset App",
