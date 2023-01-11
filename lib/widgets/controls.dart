@@ -70,7 +70,7 @@ class Controls extends StatelessWidget {
     if (orientation == Orientation.portrait) {
       return BottomNavigationBar(
         showSelectedLabels: true,
-        showUnselectedLabels: true,
+        // showUnselectedLabels: true,
         currentIndex: naviItems[selectedIndex],
         unselectedItemColor: CupertinoColors.inactiveGray,
         selectedItemColor: Theme.of(context).primaryColor,
@@ -111,7 +111,7 @@ class Controls extends StatelessWidget {
             icon: const Icon(
               CupertinoIcons.info,
             ),
-            label: S.of(context).AboutButton,
+            label: S.of(context).AboutButton.replaceAll('\n', ''),
           ),
         ],
       );
