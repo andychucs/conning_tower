@@ -44,6 +44,8 @@
   "@AboutDescription": {},
   "ToolsButton": "ツール",
   "@ToolsButton": {},
+  "SettingsLockDeviceOrientation": "画面の方向を固定する",
+  "@SettingsLockDeviceOrientation": {},
   "SettingsButton": "設定",
   "@SettingsButton": {},
   "SettingsReset": "アプリを初期化",

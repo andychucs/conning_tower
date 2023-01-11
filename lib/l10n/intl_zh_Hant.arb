@@ -38,6 +38,8 @@
   "@GameUnmute": {},
   "SettingsButton": "設定",
   "@SettingsButton": {},
+  "SettingsLockDeviceOrientation": "鎖定屏幕方向",
+  "@SettingsLockDeviceOrientation": {},
   "SettingsReset": "重設",
   "@SettingsReset": {},
   "SettingsEnableAutoProcess": "啟用自動全螢幕",

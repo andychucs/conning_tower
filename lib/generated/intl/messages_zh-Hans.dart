@@ -94,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("启用自动全屏"),
+        "SettingsLockDeviceOrientation":
+            MessageLookupByLibrary.simpleMessage("锁定屏幕方向"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("游戏画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),
