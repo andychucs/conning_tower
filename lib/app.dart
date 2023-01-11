@@ -26,6 +26,7 @@ class ConnTowerApp extends StatelessWidget {
             brightness: Brightness.light,
             textTheme:
                 CupertinoTextThemeData(primaryColor: CupertinoColors.label)),
+        primaryColor: CupertinoColors.activeBlue,
         colorScheme: ColorScheme.fromSeed(
           seedColor: CupertinoColors.activeBlue,
           surface: const Color(0xF0F9F9F9),
@@ -42,7 +43,7 @@ class ConnTowerApp extends StatelessWidget {
             brightness: Brightness.dark,
             textTheme: CupertinoTextThemeData(primaryColor: Colors.white)),
         brightness: Brightness.dark,
-        primaryColor: CupertinoColors.systemBackground,
+        primaryColor: CupertinoColors.activeOrange,
         // colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
         colorScheme: ColorScheme.fromSeed(
           seedColor: CupertinoColors.activeOrange,

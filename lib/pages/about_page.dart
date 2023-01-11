@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../generated/l10n.dart';
 
@@ -16,7 +17,7 @@ class AboutPage extends StatelessWidget {
         headerSliverBuilder: (context, bool innerBoxIsScrolled) {
       return [
         CupertinoSliverNavigationBar(
-          largeTitle: Text(S.current.AboutButton),
+          largeTitle: Text(S.current.AboutButton.replaceAll('\n', '')),
         ),
       ];
     },
@@ -41,15 +42,19 @@ class AboutPage extends StatelessWidget {
                               child: Image.asset('assets/images/logo.png'),
                             ),
                           ),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           Expanded(
                             child: SizedBox(
                               height: 200,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
+                                  AutoSizeText(
                                     packageInfo.appName,
                                     style: const TextStyle(fontSize: 36),
+                                    maxLines: 1,
                                   ),
                                   Text(
                                     'version: ${packageInfo.version}',

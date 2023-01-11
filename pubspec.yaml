@@ -46,6 +46,7 @@ dependencies:
   package_info_plus: ^3.0.2
   sentry_flutter: ^6.18.1
   settings_ui: ^2.0.2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
