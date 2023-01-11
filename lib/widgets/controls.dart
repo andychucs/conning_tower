@@ -289,7 +289,7 @@ class Controls extends StatelessWidget {
   Future<void> _onAdjustWindow(InAppWebViewController controller) async {
     if (gameLoadCompleted) {
       if(Platform.isIOS){
-        await autoAdjustWindow(controller);
+        await autoAdjustWindowV2(controller);
       }else{
         await autoAdjustWindowV2(controller);
       }
