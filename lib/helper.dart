@@ -74,8 +74,8 @@ Future<bool> autoAdjustWindowV2(
     gs.transformOrigin = 'center top';
     if (!_.kancolleFit) {
         const k = () => {
-            const w = document.documentElement.clientWidth,
-                h = document.documentElement.clientHeight;
+            const w = html.clientWidth,
+                h = _.innerHeight;
             w / h < 1 / .6 ? gs.transform = 'scale(' + w / gw + ')' : gs.transform = 'scale(' + h / gh + ')';
             w < gw ? gs.left = '-' + (gw - w) / 2 + 'px' : gs.left = '0'
         };
