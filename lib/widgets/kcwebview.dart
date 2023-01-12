@@ -63,7 +63,7 @@ class KCWebViewState extends State<KCWebView> {
       onLoadStop: (controller,uri){
         if(Platform.isIOS){
           if(uri!.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')){
-            controller.evaluateJavascript(source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+            controller.injectJavascriptFileFromAsset(assetFilePath: httpRedirectJS);
           }else if(uri.host == 'osapi.dmm.com'){
             Fluttertoast.showToast(
                 msg: S.current.KCViewFuncMsgAutoGameRedirect);
@@ -90,53 +90,9 @@ class KCWebViewState extends State<KCWebView> {
         }
       },
       onZoomScaleChanged: (controller,oldScale,newScale) async {
-        // var ScrollY = await controller.getScrollY();
-        // debugPrint("ScrollY:$ScrollY");
-        // await controller.evaluateJavascript(
-        //     source: '''document.getElementById("spacing_top").style.display = "none";''');
-        // await controller.evaluateJavascript(
-        //     source: '''document.getElementById("sectionWrap").style.display = "none";''');
-        // controller.scrollBy(x: 0, y: 0 - ScrollY!);
-
 if(controller.getUrl().toString().contains('osapi.dmm.com') && Platform.isIOS  ){
-  await controller.evaluateJavascript(source: '''
-((\$, _) => {
-    const html = \$.documentElement,
-        gf = \$.getElementById('flashWrap');
-    if (!gf) return;
-    const gs = gf.style,
-        gw = gf.offsetWidth,
-        gh = gw * .6;
-    let vp = \$.querySelector('meta[name=viewport]'),
-        t = 0;
-    vp || (vp = \$.createElement('meta'), vp.name = 'viewport', \$.querySelector('head').appendChild(vp));
-    vp.content = 'width=' + gw;
-    'orientation' in _ && html.webkitRequestFullscreen && html.webkitRequestFullscreen();
-    html.style.overflow = 'hidden';\$.body.style.cssText = 'min-width:0;padding:0;margin:0;overflow:hidden;margin:0';
-    gs.position = 'fixed';
-    gs.marginRight = 'auto';
-    gs.marginLeft = 'auto';
-    gs.top = '0px';
-    gs.right = '0';
-    gs.zIndex = '100';
-    gs.transformOrigin = 'center top';
-    if (!_.kancolleFit) {
-        const k = () => {
-            const w = html.clientWidth,
-                h = _.innerHeight;
-            w / h < 1 / .6 ? gs.transform = 'scale(' + w / gw + ')' : gs.transform = 'scale(' + h / gh + ')';
-            w < gw ? gs.left = '-' + (gw - w) / 2 + 'px' : gs.left = '0'
-        };
-       
-        _.kancolleFit = k
-    }
-    kancolleFit()
-
-    document.getElementById('sectionWrap').style.display = 'none';
-})(document, window)
-''');
+  await controller.injectJavascriptFileFromAsset(assetFilePath: autoScaleIOSJS);
 }
-
       },
       onCreateWindow: (controller,uri){
         return true as Future<bool>;

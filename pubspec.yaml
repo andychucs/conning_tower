@@ -78,6 +78,13 @@ flutter:
     - assets/images/logo.png
     - assets/images/defaultAvatarImage.png
     - assets/config/sentry
+    - assets/js/httpRedirect.js
+    - assets/js/autoScaleAndroid.js
+    - assets/js/autoScaleIOS.js
+    - assets/js/muteKancolle.js
+    - assets/js/unMuteKancolle.js
+
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

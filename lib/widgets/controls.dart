@@ -274,7 +274,7 @@ class Controls extends StatelessWidget {
         // May be HTTPS or HTTP
         allowNavi = true;
         await controller
-            .evaluateJavascript(source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+            .injectJavascriptFileFromAsset(assetFilePath: httpRedirectJS);
         inKancolleWindow = true;
       }
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);

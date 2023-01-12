@@ -6,3 +6,8 @@ const String kSafariUA =
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15";
 const String kChromeUA =
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36";
+const String httpRedirectJS = "assets/js/httpRedirect.js";
+const String autoScaleAndroidJS = "assets/js/autoScaleAndroid.js";
+const String autoScaleIOSJS = "assets/js/autoScaleIOS.js";
+const String muteKancolleJS = "assets/js/muteKancolle.js";
+const String unMuteKancolleJS = "assets/js/unMuteKancolle.js";

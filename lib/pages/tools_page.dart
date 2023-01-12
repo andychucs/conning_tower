@@ -30,8 +30,7 @@ class ToolsPage extends StatelessWidget {
         // May be HTTPS or HTTP
         allowNavi = true;
         if (Platform.isIOS) {
-          await controller.evaluateJavascript(
-              source: '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+          await controller.injectJavascriptFileFromAsset(assetFilePath: httpRedirectJS);
         }
         inKancolleWindow = true;
       }
@@ -89,15 +88,12 @@ class ToolsPage extends StatelessWidget {
   }
 
   Future<void> _onMuteGame(InAppWebViewController controller) async {
-    await controller.evaluateJavascript(source: '''document.cookie=
-    "kcs_options=vol_bgm%3D0%3Bvol_se%3D0%3Bvol_voice%3D0%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"
-	''');
+    await controller.injectJavascriptFileFromAsset(assetFilePath: muteKancolleJS);
     Fluttertoast.showToast(msg: S.current.MsgMuteGame);
   }
 
   Future<void> _onUnmuteGame(InAppWebViewController controller) async {
-    await controller.evaluateJavascript(source: '''	document.cookie=
-    "kcs_options=vol_bgm%3D30%3Bvol_se%3D40%3Bvol_voice%3D60%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"''');
+    await controller.injectJavascriptFileFromAsset(assetFilePath: unMuteKancolleJS);
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
   void _onBottomUp() {
