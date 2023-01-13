@@ -29,6 +29,7 @@ enum ConFunc {
   navi2About,
   navi2Tool,
   navi2Settings,
+  navi2GameInfo
 }
 
 class Controls extends StatelessWidget {
@@ -45,15 +46,16 @@ class Controls extends StatelessWidget {
   final Map funcMap = {
     0: ConFunc.loadHome,
     // 1: ConFunc.httpRedirect,
-    1: ConFunc.navi2Tool,
+    1: ConFunc.navi2GameInfo,
+    2: ConFunc.navi2Tool,
     // 2: ConFunc.bottomUp,
-    2: ConFunc.refresh,
+    3: ConFunc.refresh,
     // 4: ConFunc.scrollUp,
     // 5: ConFunc.scrollDown,
-    3: ConFunc.goBack,
-    4: ConFunc.goForward,
-    5: ConFunc.navi2Settings,
-    6: ConFunc.navi2About,
+    4: ConFunc.goBack,
+    5: ConFunc.goForward,
+    6: ConFunc.navi2Settings,
+    7: ConFunc.navi2About,
     // 1: ConFunc.adjustWindow,
     // 8: ConFunc.clearCookies,
     // 9: ConFunc.clearCache
@@ -61,9 +63,10 @@ class Controls extends StatelessWidget {
 
   final Map naviItems = {
     0: 0, //loadHome
-    1: 1, //navi2Tool
-    2: 5, //navi2Settings
-    3: 6, //navi2About
+    1: 2, //navi2Tool
+    2: 6, //navi2Settings
+    3: 7, //navi2About
+    4: 1, //navi2GameInfo
   };
 
   @override
@@ -88,6 +91,10 @@ class Controls extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.home),
                 label: S.of(context).AppHome,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.graph_square),
+                label: "GameInfo",
               ),
               BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.game_controller),
@@ -136,6 +143,10 @@ class Controls extends StatelessWidget {
               label: Text(
                 S.of(context).AppHome,
               ),
+            ),
+            NavigationRailDestination(
+              icon: const Icon(CupertinoIcons.graph_square),
+              label: Text("GameInfo"),
             ),
             NavigationRailDestination(
               icon: const Icon(CupertinoIcons.game_controller),
@@ -191,6 +202,10 @@ class Controls extends StatelessWidget {
         break;
       case ConFunc.navi2Settings:
         selectedIndex = 2;
+        notifyParent();
+        break;
+      case ConFunc.navi2GameInfo:
+        selectedIndex = 4;
         notifyParent();
         break;
       case ConFunc.loadHome:

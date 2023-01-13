@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:conning_tower/pages/about_page.dart';
 import 'package:conning_tower/pages/settings_page.dart';
 import 'package:conning_tower/pages/tools_page.dart';
+import 'package:conning_tower/pages/gameinfo_page.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/fade_indexed_stack.dart';
@@ -190,6 +191,11 @@ class HomePageState extends State<HomePage> {
                   ),
                   AboutPage(
                     packageInfo: _packageInfo,
+                  ),
+                  GameInfoPage(
+                    reloadConfig: () {
+                      _loadConfig();
+                    },
                   ),
                 ],
               ),
