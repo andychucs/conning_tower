@@ -8,17 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:conning_tower/kc/injection.dart';
 import '../generated/l10n.dart';
 
 class KCWebView extends StatefulWidget {
   const KCWebView(this.webViewController, {super.key});
 
   final Completer<InAppWebViewController> webViewController;
-
   @override
   State<StatefulWidget> createState() => KCWebViewState();
-
 
 }
 
@@ -32,7 +30,7 @@ class KCWebViewState extends State<KCWebView> {
     javaScriptCanOpenWindowsAutomatically: true,
     //Android intercept kancolle API
     useShouldInterceptRequest: true,
-    isElementFullscreenEnabled: false
+    isElementFullscreenEnabled: false,
   );
 
   @override
@@ -48,7 +46,7 @@ class KCWebViewState extends State<KCWebView> {
         if(Platform.isAndroid){ //Listen Kancolle API
           WebMessageListener kcListener= WebMessageListener(jsObjectName: "kcMessage",
               onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
-                // kancolleMessageHandle(message!);
+                kancolleMessageHandle(message!);
               }
           );
           controller.addWebMessageListener(kcListener);
@@ -101,10 +99,10 @@ if(controller.getUrl().toString().contains('osapi.dmm.com') && Platform.isIOS  )
           controller,
           WebResourceRequest request,
           ) async {
-        // if (request.url.path.contains("/kcs2/js/main.js")) {
-        //   Future<WebResourceResponse?> customResponse = interceptRequest(request);
-        //   return customResponse;
-        // }
+        if (request.url.path.contains("/kcs2/js/main.js")) {
+          Future<WebResourceResponse?> customResponse = interceptRequest(request);
+          return customResponse;
+        }
         return null;
       },
     ),);
