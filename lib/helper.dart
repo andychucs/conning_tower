@@ -16,9 +16,9 @@ Future<bool> autoAdjustWindow(
     int getWebviewSizeCount = 0;
     do {
       kWebviewHeight = await controller
-          .runJavaScriptReturningResult('''window.innerHeight;''') as double;
+          .runJavascriptReturningResult('''window.innerHeight;''') as double;
       kWebviewWidth = await controller
-          .runJavaScriptReturningResult('''window.innerWidth;''') as double;
+          .runJavascriptReturningResult('''window.innerWidth;''') as double;
       if (kWebviewHeight == 0.0 || kWebviewWidth == 0.0) {
         await Future.delayed(const Duration(seconds: 2));
       } else {
@@ -35,17 +35,17 @@ Future<bool> autoAdjustWindow(
       print("autoAdjustWindow fail");
       return false;
     }
-    await controller.runJavaScript(
+    await controller.runJavascript(
         '''document.getElementById("spacing_top").style.display = "none";''');
-    await controller.runJavaScript(
+    await controller.runJavascript(
         '''document.getElementById("sectionWrap").style.display = "none";''');
 
     if (Platform.isIOS) {
-      await controller.runJavaScript(
+      await controller.runJavascript(
           //Scale to correct size(ios webkit)
           '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
     } else if (Platform.isAndroid) {
-      await controller.runJavaScript(//Scale to correct size(android chrome)
+      await controller.runJavascript(//Scale to correct size(android chrome)
           '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
     }
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
@@ -78,7 +78,7 @@ Future<bool> autoAdjustWindowV2(
   //Adjust Kancolle window
   if (inKancolleWindow && !autoAdjusted) {
     if (Platform.isIOS) {
-      await controller.runJavaScript('''
+      await controller.runJavascript('''
 ((\$, _) => {
     const html = \$.documentElement,
         gf = \$.getElementById('flashWrap');
@@ -118,7 +118,7 @@ Future<bool> autoAdjustWindowV2(
 })(document, window)
 ''');
     } else if (Platform.isAndroid) {
-      await controller.runJavaScript('''
+      await controller.runJavascript('''
 ((\$, _) => {
     const html =\$.documentElement,
         gf = \$.getElementById('game_frame');
