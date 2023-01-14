@@ -142,7 +142,7 @@ const String kHome = """
 </head>
 <body>
 <div class="form-group">
-    <input id="url" class="form-field" type="text" value="$kGameUrl/">
+    <input id="url" class="form-field" type="text" value="$kGameUrl">
     <span onclick="const url = document.getElementById('url').value;window.open(url, '_blank');">⏎</span>
 </div>
 </body>
