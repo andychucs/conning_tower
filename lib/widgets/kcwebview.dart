@@ -33,6 +33,7 @@ class KCWebViewState extends State<KCWebView> {
     defaultUA = kSafariUA;
     if (Platform.isAndroid) {
       defaultUA = kChromeUA;
+      WebView.platform = SurfaceAndroidWebView();
     } else if (Platform.isIOS) {
       defaultUA = kSafariUA;
     }
