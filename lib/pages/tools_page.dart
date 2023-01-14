@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -13,16 +14,22 @@ import '../helper.dart';
 import '../widgets/dailog.dart';
 import 'home.dart';
 
-class ToolsPage extends StatelessWidget {
+class ToolsPage extends StatefulWidget {
   ToolsPage(this._webViewControllerFuture, CookieManager? cookieManager,
-      {Key? key, required this.notifyParent})
+      {Key? key, required this.notifyParent, required this.reloadConfig})
       : cookieManager = cookieManager ?? CookieManager(),
         super(key: key);
 
   final Function() notifyParent;
   final Future<WebViewController> _webViewControllerFuture;
   late final CookieManager cookieManager;
+  final Function() reloadConfig;
 
+  @override
+  State<ToolsPage> createState() => _ToolsPageState();
+}
+
+class _ToolsPageState extends State<ToolsPage> {
   Future<void> _onHttpRedirect(WebViewController controller) async {
     if (!inKancolleWindow) {
       String? currentUrl = await controller.currentUrl();
@@ -68,7 +75,7 @@ class ToolsPage extends StatelessWidget {
               msg: S.current.AppClearCookie, isNormal: true);
         });
     if (value ?? false) {
-      final bool hadCookies = await cookieManager.clearCookies();
+      final bool hadCookies = await widget.cookieManager.clearCookies();
       String message = S.current.AppLeftSideControlsLogoutSuccess;
       if (!hadCookies) {
         message = S.current.AppLeftSideControlsLogoutFailed;
@@ -79,7 +86,7 @@ class ToolsPage extends StatelessWidget {
 
   Future<void> _onAdjustWindow(WebViewController controller) async {
     if (gameLoadCompleted) {
-      await autoAdjustWindowV2(controller);
+      await autoAdjustWindowV2(controller, force: true);
     } else {
       Fluttertoast.showToast(
           msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
@@ -99,19 +106,10 @@ class ToolsPage extends StatelessWidget {
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
-  void _onBottomUp() {
-    if (bottomPadding) {
-      bottomPadding = false;
-    } else {
-      bottomPadding = true;
-    }
-    notifyParent();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _webViewControllerFuture,
+      future: widget._webViewControllerFuture,
       builder:
           (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
         final WebViewController? controller = snapshot.data;
@@ -190,12 +188,19 @@ class ToolsPage extends StatelessWidget {
                         _onAdjustWindow(controller!);
                       },
                     ),
-                    SettingsTile.navigation(
+                    SettingsTile.switchTile(
+                      initialValue: bottomPadding,
                       leading: const Icon(CupertinoIcons.rectangle_dock),
                       title: Text(S.of(context).AppBottomSafe),
-                      onPressed: (context) {
+                      onToggle: (value) async {
                         HapticFeedback.heavyImpact();
-                        _onBottomUp();
+                        setState(() {
+                          bottomPadding = value;
+                        });
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setBool('bottomPadding', value);
+                        widget.reloadConfig();
+                        widget.notifyParent();
                       },
                     ),
                   ],

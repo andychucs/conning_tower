@@ -7,12 +7,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'constants.dart';
 import 'generated/l10n.dart';
 
-
-Future<bool> autoAdjustWindowV2(
-  WebViewController controller,
-) async {
+Future<bool> autoAdjustWindowV2(WebViewController controller,
+    {bool force = false}) async {
   //Adjust Kancolle window
-  if (inKancolleWindow && !autoAdjusted) {
+  if ((inKancolleWindow && !autoAdjusted) || (force && inKancolleWindow)) {
     if (Platform.isIOS) {
       await controller.runJavascript('''
 ((\$, _) => {

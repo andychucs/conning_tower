@@ -94,6 +94,8 @@ class HomePageState extends State<HomePage> {
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
       enableAutoProcess = _enableAutoProcess;
+      bottomPadding = (prefs.getBool('bottomPadding') ?? false);
+
       // home = Uri.parse(prefs.getString('homeUrl') ?? kGameUrl);
     });
   }
@@ -140,7 +142,7 @@ class HomePageState extends State<HomePage> {
           : null,
       body: SafeArea(
         top: false,
-        right: false,
+        right: selectedIndex == 0 ? true : false,
         bottom: false,
         child: Row(
           children: <Widget>[
@@ -171,7 +173,7 @@ class HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(
                       bottom: bottomPadding ? deviceWidth / 18 : 0.0,
                     ),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     width: double.infinity,
                     height: deviceWidth,
                     child: KCWebView(_controller),
@@ -181,6 +183,9 @@ class HomePageState extends State<HomePage> {
                     widget.cookieManager,
                     notifyParent: () {
                       setState(() {});
+                    },
+                    reloadConfig: () {
+                      _loadConfig();
                     },
                   ),
                   SettingsPage(
