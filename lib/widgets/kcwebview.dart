@@ -53,7 +53,7 @@ class KCWebViewState extends State<KCWebView> {
           return AspectRatio(
             aspectRatio: 5 / 3,
             child: WebView(
-              initialUrl: home.toString(),
+              initialUrl: 'data:text/html;base64,$kHomeBase64',
               userAgent: defaultUA,
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {

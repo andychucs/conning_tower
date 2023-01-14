@@ -306,7 +306,7 @@ class Controls extends StatelessWidget {
         });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadUrl(home.toString());
+      await controller.loadUrl('data:text/html;base64,$kHomeBase64');
     }
   }
 
