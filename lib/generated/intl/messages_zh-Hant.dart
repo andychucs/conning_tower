@@ -95,6 +95,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("啟用自動全螢幕"),
+        "SettingsHomeLoad":
+            MessageLookupByLibrary.simpleMessage("啟動時自動打開「艦これ」"),
+        "SettingsHomeSave": MessageLookupByLibrary.simpleMessage("將當前網頁設置為主頁"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("鎖定屏幕方向"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),

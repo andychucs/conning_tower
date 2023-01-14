@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:conning_tower/pages/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:validators/validators.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'constants.dart';
@@ -10,7 +11,8 @@ import 'generated/l10n.dart';
 Future<bool> autoAdjustWindowV2(WebViewController controller,
     {bool force = false}) async {
   //Adjust Kancolle window
-  if ((inKancolleWindow && !autoAdjusted) || (force && inKancolleWindow)) {
+  if ((inKancolleWindow && !autoAdjusted && enableAutoProcess) ||
+      (force && inKancolleWindow)) {
     if (Platform.isIOS) {
       await controller.runJavascript('''
 ((\$, _) => {
@@ -112,4 +114,19 @@ getResizeScale(double height, double width) {
     }
     return scale;
   }
+}
+
+String getHomeUrl() {
+  String homeUrl = 'data:text/html;base64,$kHomeBase64';
+  if (enableAutLoadKC) {
+    homeUrl = kGameUrl;
+  } else if (isURL(customHomeUrl)) {
+    homeUrl = customHomeUrl;
+  }
+  // else if (customHomeBase64Url.isNotEmpty){
+  //   debugPrint('getHomeUrl:$customHomeBase64Url');
+  //   customHomeBase64 = base64Encode(const Utf8Encoder().convert(kHome.replaceAll(kGameUrl, customHomeBase64Url)));
+  //   homeUrl = customHomeBase64;
+  // }
+  return homeUrl;
 }

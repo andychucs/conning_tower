@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -280,20 +281,40 @@ class S {
     );
   }
 
-  /// `Reset App`
+  /// `Reset app`
   String get SettingsReset {
     return Intl.message(
-      'Reset App',
+      'Reset app',
       name: 'SettingsReset',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enable Auto Fullscreen`
+  /// `Make app auto open KanColle`
+  String get SettingsHomeLoad {
+    return Intl.message(
+      'Make app auto open KanColle',
+      name: 'SettingsHomeLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make current web page as home`
+  String get SettingsHomeSave {
+    return Intl.message(
+      'Make current web page as home',
+      name: 'SettingsHomeSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable auto fullscreen`
   String get SettingsEnableAutoProcess {
     return Intl.message(
-      'Enable Auto Fullscreen',
+      'Enable auto fullscreen',
       name: 'SettingsEnableAutoProcess',
       desc: '',
       args: [],

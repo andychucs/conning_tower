@@ -50,10 +50,11 @@ class KCWebViewState extends State<KCWebView> {
         builder:
             (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
           final WebViewController? controller = snapshot.data;
+          String homeUrl = getHomeUrl();
           return AspectRatio(
             aspectRatio: 5 / 3,
             child: WebView(
-              initialUrl: 'data:text/html;base64,$kHomeBase64',
+              initialUrl: homeUrl,
               userAgent: defaultUA,
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {

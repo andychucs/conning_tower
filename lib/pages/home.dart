@@ -29,6 +29,10 @@ late double kWebviewWidth;
 late int selectedIndex;
 late Uri home;
 late bool enableAutoProcess;
+late String customHomeBase64;
+// late String customHomeBase64Url;
+late bool enableAutLoadKC;
+late String customHomeUrl;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -65,6 +69,10 @@ class HomePageState extends State<HomePage> {
     allowNavi = true;
     bottomPadding = false;
     selectedIndex = 0;
+    enableAutLoadKC = false;
+    customHomeUrl = '';
+    customHomeBase64 = '';
+    // customHomeBase64Url = '';
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _loadConfig();
@@ -95,8 +103,9 @@ class HomePageState extends State<HomePage> {
       _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
       enableAutoProcess = _enableAutoProcess;
       bottomPadding = (prefs.getBool('bottomPadding') ?? false);
-
-      // home = Uri.parse(prefs.getString('homeUrl') ?? kGameUrl);
+      enableAutLoadKC = (prefs.getBool('enableAutLoadKC') ?? false);
+      customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
+      // customHomeBase64Url = (prefs.getString('customHomeBase64Url') ?? '');
     });
   }
 

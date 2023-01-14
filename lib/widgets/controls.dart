@@ -8,7 +8,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../constants.dart';
 import '../generated/l10n.dart';
 import '../helper.dart';
 import '../pages/home.dart';
@@ -270,7 +269,8 @@ class Controls extends StatelessWidget {
   Future<void> _onHttpRedirect(WebViewController controller) async {
     if (!inKancolleWindow) {
       String? currentUrl = await controller.currentUrl();
-      if (currentUrl.toString().endsWith(kGameUrl)) {
+      Uri uri = Uri.parse(currentUrl!);
+      if (uri.path.startsWith(home.path)) {
         // May be HTTPS or HTTP
         allowNavi = true;
         if (Platform.isIOS) {
@@ -306,7 +306,8 @@ class Controls extends StatelessWidget {
         });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadUrl('data:text/html;base64,$kHomeBase64');
+      String homeUrl = getHomeUrl();
+      await controller.loadUrl(homeUrl);
     }
   }
 

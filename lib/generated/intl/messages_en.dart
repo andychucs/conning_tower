@@ -98,10 +98,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "The game will be unmuted after refreshing."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
-            MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
+            MessageLookupByLibrary.simpleMessage("Enable auto fullscreen"),
+        "SettingsHomeLoad":
+            MessageLookupByLibrary.simpleMessage("Make app auto open KanColle"),
+        "SettingsHomeSave": MessageLookupByLibrary.simpleMessage(
+            "Make current web page as home"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("Lock screen orientation"),
-        "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
+        "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset app"),
         "ToolTitleGameScreen":
             MessageLookupByLibrary.simpleMessage("Game Screen"),
         "ToolTitleGameSound":
