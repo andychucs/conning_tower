@@ -14,13 +14,13 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
-        headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-      return [
-        CupertinoSliverNavigationBar(
-          largeTitle: Text(S.current.AboutButton.replaceAll('\n', '')),
-        ),
-      ];
-    },
+      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+        return [
+          CupertinoSliverNavigationBar(
+            largeTitle: Text(S.current.AboutButton.replaceAll('\n', '')),
+          ),
+        ];
+      },
       body: SafeArea(
         top: false,
         bottom: false,
@@ -49,7 +49,8 @@ class AboutPage extends StatelessWidget {
                             child: SizedBox(
                               height: 200,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   AutoSizeText(
                                     packageInfo.appName,
@@ -81,8 +82,8 @@ class AboutPage extends StatelessWidget {
                                     ),
                                   ),
                                   InkWell(
-                                    onTap: () => launchUrl(
-                                        Uri.parse('https://twitter.com/conntower')),
+                                    onTap: () => launchUrl(Uri.parse(
+                                        'https://twitter.com/conntower')),
                                     child: const Text(
                                       'Twitter',
                                       style: TextStyle(
@@ -108,7 +109,8 @@ class AboutPage extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: 30,
-                      child: Text('Contributors', style: TextStyle(fontSize: 24)),
+                      child:
+                          Text('Contributors', style: TextStyle(fontSize: 24)),
                     ),
                   ],
                 ),
@@ -129,14 +131,16 @@ class AboutPage extends StatelessWidget {
                               leading: FadeInImage(
                                   height: 50,
                                   width: 50,
-                                  fadeInDuration: const Duration(milliseconds: 500),
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 500),
                                   fadeInCurve: Curves.easeInExpo,
                                   fadeOutCurve: Curves.easeOutExpo,
                                   placeholder: const AssetImage(
                                       "assets/images/defaultAvatarImage.png"),
                                   image: const NetworkImage(
                                       'https://avatars.githubusercontent.com/u/24852023?v=4'),
-                                  imageErrorBuilder: (context, error, stackTrace) {
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
                                     return Container(
                                         child: Image.asset(
                                             "assets/images/defaultAvatarImage.png"));
@@ -168,14 +172,16 @@ class AboutPage extends StatelessWidget {
                               leading: FadeInImage(
                                   height: 50,
                                   width: 50,
-                                  fadeInDuration: const Duration(milliseconds: 500),
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 500),
                                   fadeInCurve: Curves.easeInExpo,
                                   fadeOutCurve: Curves.easeOutExpo,
                                   placeholder: const AssetImage(
                                       "assets/images/defaultAvatarImage.png"),
                                   image: const NetworkImage(
                                       'https://avatars.githubusercontent.com/u/91370281?v=4'),
-                                  imageErrorBuilder: (context, error, stackTrace) {
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
                                     return Container(
                                         child: Image.asset(
                                             "assets/images/defaultAvatarImage.png"));
@@ -183,8 +189,8 @@ class AboutPage extends StatelessWidget {
                                   fit: BoxFit.cover),
                               title: const Text('Angus'),
                               subtitle: InkWell(
-                                onTap: () => launchUrl(
-                                    Uri.parse('https://github.com/anguslaw63631')),
+                                onTap: () => launchUrl(Uri.parse(
+                                    'https://github.com/anguslaw63631')),
                                 child: const Text(
                                   '@anguslaw63631',
                                   style: TextStyle(
@@ -207,14 +213,16 @@ class AboutPage extends StatelessWidget {
                               leading: FadeInImage(
                                   height: 50,
                                   width: 50,
-                                  fadeInDuration: const Duration(milliseconds: 500),
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 500),
                                   fadeInCurve: Curves.easeInExpo,
                                   fadeOutCurve: Curves.easeOutExpo,
                                   placeholder: const AssetImage(
                                       "assets/images/defaultAvatarImage.png"),
                                   image: const NetworkImage(
                                       'https://avatars.githubusercontent.com/u/59718878?v=4'),
-                                  imageErrorBuilder: (context, error, stackTrace) {
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
                                     return Container(
                                         child: Image.asset(
                                             "assets/images/defaultAvatarImage.png"));
@@ -222,8 +230,8 @@ class AboutPage extends StatelessWidget {
                                   fit: BoxFit.cover),
                               title: const Text('lovetwice1012'),
                               subtitle: InkWell(
-                                onTap: () => launchUrl(
-                                    Uri.parse('https://github.com/lovetwice1012')),
+                                onTap: () => launchUrl(Uri.parse(
+                                    'https://github.com/lovetwice1012')),
                                 child: const Text(
                                   '@lovetwice1012',
                                   style: TextStyle(

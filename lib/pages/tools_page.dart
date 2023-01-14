@@ -106,7 +106,6 @@ class _ToolsPageState extends State<ToolsPage> {
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

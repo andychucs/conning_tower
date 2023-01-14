@@ -59,24 +59,34 @@ class SettingsPageState extends State<SettingsPage> {
                 //   onPressed: (context) {
                 //   },
                 // ),
-                SettingsTile.switchTile(initialValue: lockDeviceOrientation, onToggle: (value) {
-                  HapticFeedback.heavyImpact();
-                  setState(() {
-                    lockDeviceOrientation = value;
-                  });
-                  if (value) {
-                    Orientation orientation = MediaQuery.of(context).orientation;
-                    if (orientation == Orientation.landscape){
-                      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+                SettingsTile.switchTile(
+                  initialValue: lockDeviceOrientation,
+                  onToggle: (value) {
+                    HapticFeedback.heavyImpact();
+                    setState(() {
+                      lockDeviceOrientation = value;
+                    });
+                    if (value) {
+                      Orientation orientation =
+                          MediaQuery.of(context).orientation;
+                      if (orientation == Orientation.landscape) {
+                        SystemChrome.setPreferredOrientations([
+                          DeviceOrientation.landscapeLeft,
+                          DeviceOrientation.landscapeRight
+                        ]);
+                      } else {
+                        SystemChrome.setPreferredOrientations(
+                            [DeviceOrientation.portraitUp]);
+                      }
                     } else {
-                      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                      SystemChrome.setPreferredOrientations(
+                          DeviceOrientation.values);
                     }
-                  } else {
-                    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-                  }
-                },
+                  },
                   title: Text(S.of(context).SettingsLockDeviceOrientation),
-                  leading: Icon(lockDeviceOrientation ? CupertinoIcons.lock_rotation : CupertinoIcons.lock_rotation_open),
+                  leading: Icon(lockDeviceOrientation
+                      ? CupertinoIcons.lock_rotation
+                      : CupertinoIcons.lock_rotation_open),
                 ),
                 SettingsTile.switchTile(
                   onToggle: (value) async {

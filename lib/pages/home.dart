@@ -184,7 +184,7 @@ class HomePageState extends State<HomePage> {
                     notifyParent: () {
                       setState(() {});
                     },
-                    reloadConfig: (){
+                    reloadConfig: () {
                       _loadConfig();
                     },
                   ),
