@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:validators/validators.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../constants.dart';
 import '../generated/l10n.dart';
 import '../helper.dart';
 import '../widgets/dailog.dart';
@@ -34,7 +33,8 @@ class _ToolsPageState extends State<ToolsPage> {
   Future<void> _onHttpRedirect(WebViewController controller) async {
     if (!inKancolleWindow) {
       String? currentUrl = await controller.currentUrl();
-      if (currentUrl.toString().endsWith(kGameUrl)) {
+      Uri uri = Uri.parse(currentUrl!);
+      if (uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')) {
         // May be HTTPS or HTTP
         allowNavi = true;
         if (Platform.isIOS) {
