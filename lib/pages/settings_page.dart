@@ -16,7 +16,8 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
-  bool lockDeviceOrientation = false;
+  bool lockDeviceOrientationSwitchValue = false;
+  bool enableAutLoadKCSwitchValue = false;
 
   @override
   void initState() {
@@ -29,6 +30,8 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
+      // lockDeviceOrientationSwitchValue = (prefs.getBool('lockDeviceOrientation') ?? false);
+      enableAutLoadKCSwitchValue = (prefs.getBool('enableAutLoadKC') ?? false);
     });
   }
 
@@ -51,20 +54,28 @@ class SettingsPageState extends State<SettingsPage> {
             SettingsSection(
               title: Text(S.of(context).AppName),
               tiles: <SettingsTile>[
-                // SettingsTile.navigation(
-                //   leading: const Icon(
-                //     CupertinoIcons.home,
-                //   ),
-                //   title: Text(S.of(context).AppHome),
-                //   onPressed: (context) {
-                //   },
-                // ),
                 SettingsTile.switchTile(
-                  initialValue: lockDeviceOrientation,
+                  initialValue: enableAutLoadKCSwitchValue,
+                  leading: const Icon(
+                    CupertinoIcons.home,
+                  ),
+                  title: Text(S.of(context).SettingsHomeLoad),
+                  onToggle: (value) async {
+                    HapticFeedback.heavyImpact();
+                    setState(() {
+                      enableAutLoadKCSwitchValue = value;
+                    });
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool('enableAutLoadKC', value);
+                    widget.reloadConfig();
+                  },
+                ),
+                SettingsTile.switchTile(
+                  initialValue: lockDeviceOrientationSwitchValue,
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
                     setState(() {
-                      lockDeviceOrientation = value;
+                      lockDeviceOrientationSwitchValue = value;
                     });
                     if (value) {
                       Orientation orientation =
@@ -84,7 +95,7 @@ class SettingsPageState extends State<SettingsPage> {
                     }
                   },
                   title: Text(S.of(context).SettingsLockDeviceOrientation),
-                  leading: Icon(lockDeviceOrientation
+                  leading: Icon(lockDeviceOrientationSwitchValue
                       ? CupertinoIcons.lock_rotation
                       : CupertinoIcons.lock_rotation_open),
                 ),

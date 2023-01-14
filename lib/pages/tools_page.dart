@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:validators/validators.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -106,6 +107,21 @@ class _ToolsPageState extends State<ToolsPage> {
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
+  Future<void> _onHomeSave(WebViewController controller) async {
+    final String? curUrl = await controller.currentUrl();
+    if (isURL(curUrl)) {
+      final prefs = await SharedPreferences.getInstance();
+      if (curUrl == customHomeUrl) {
+        prefs.setString('customHomeUrl', '');
+      } else {
+        prefs.setString('customHomeUrl', curUrl!);
+      }
+      // prefs.setString('customHomeBase64Url', curUrl!);
+      // customHomeBase64Url = curUrl;
+      widget.reloadConfig();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -129,6 +145,17 @@ class _ToolsPageState extends State<ToolsPage> {
                 SettingsSection(
                   title: Text(S.of(context).ToolTitleWeb),
                   tiles: [
+                    SettingsTile.navigation(
+                      // trailing: Icon(customHomeUrl.isEmpty ? CupertinoIcons.star : CupertinoIcons.star_fill),
+                      title: Text(S.of(context).SettingsHomeSave),
+                      leading: Icon(customHomeUrl.isEmpty
+                          ? CupertinoIcons.star
+                          : CupertinoIcons.star_fill),
+                      onPressed: (context) {
+                        HapticFeedback.heavyImpact();
+                        _onHomeSave(controller!);
+                      },
+                    ),
                     SettingsTile.navigation(
                       leading:
                           const Icon(CupertinoIcons.rectangle_expand_vertical),
