@@ -32,13 +32,13 @@ enum ConFunc {
 }
 
 class Controls extends StatelessWidget {
-  Controls(this.controller, WebViewCookieManager? cookieManager,
+  Controls(this._webViewControllerFuture, CookieManager? cookieManager,
       {Key? key, required this.notifyParent, required this.orientation})
-      : cookieManager = cookieManager ?? WebViewCookieManager(),
+      : cookieManager = cookieManager ?? CookieManager(),
         super(key: key);
   final Function() notifyParent;
-  final WebViewController controller;
-  late final WebViewCookieManager cookieManager;
+  final Future<WebViewController> _webViewControllerFuture;
+  late final CookieManager cookieManager;
   final Orientation orientation;
 
   final Map funcMap = {
@@ -67,108 +67,114 @@ class Controls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (orientation == Orientation.portrait) {
-      return BottomNavigationBar(
-        showSelectedLabels: true,
-        // showUnselectedLabels: true,
-        currentIndex: naviItems[selectedIndex],
-        unselectedItemColor: CupertinoColors.inactiveGray,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: ((value) async {
-          _onTap(value, context);
-        }),
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.home),
-            label: S.of(context).AppHome,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.game_controller),
-            label: S.of(context).ToolsButton,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.refresh,
-              color: CupertinoColors.destructiveRed,
-            ),
-            label: S.of(context).AppRefresh,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.back),
-            label: S.of(context).AppBack,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(CupertinoIcons.forward),
-            label: S.of(context).AppForward,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.settings,
-            ),
-            label: S.of(context).SettingsButton,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              CupertinoIcons.info,
-            ),
-            label: S.of(context).AboutButton.replaceAll('\n', ''),
-          ),
-        ],
-      );
-    }
-    return NavigationRail(
-      labelType: NavigationRailLabelType.all,
-      selectedIndex: naviItems[selectedIndex],
-      groupAlignment: 0,
-      onDestinationSelected: (int index) async {
-        _onTap(index, context);
-      },
-      destinations: [
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.home),
-          label: Text(
-            S.of(context).AppHome,
-          ),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.game_controller),
-          label: Text(S.of(context).ToolsButton),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(
-            CupertinoIcons.refresh,
-            color: CupertinoColors.destructiveRed,
-          ),
-          label: Text(S.of(context).AppRefresh),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.back),
-          label: Text(S.of(context).AppBack),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(CupertinoIcons.forward),
-          label: Text(S.of(context).AppForward),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(
-            CupertinoIcons.settings,
-          ),
-          label: Text(S.of(context).SettingsButton),
-        ),
-        NavigationRailDestination(
-          icon: const Icon(
-            CupertinoIcons.info,
-          ),
-          label: Text(
-            S.of(context).AboutButton,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    );
+    return FutureBuilder(
+        future: _webViewControllerFuture,
+        builder:
+            (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
+          final WebViewController? controller = snapshot.data;
+          if (orientation == Orientation.portrait) {
+            return BottomNavigationBar(
+              showSelectedLabels: true,
+              // showUnselectedLabels: true,
+              currentIndex: naviItems[selectedIndex],
+              unselectedItemColor: CupertinoColors.inactiveGray,
+              selectedItemColor: Theme.of(context).primaryColor,
+              onTap: ((value) async {
+                _onTap(controller!, value, context);
+              }),
+              items: [
+                BottomNavigationBarItem(
+                  icon: const Icon(CupertinoIcons.home),
+                  label: S.of(context).AppHome,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(CupertinoIcons.game_controller),
+                  label: S.of(context).ToolsButton,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    CupertinoIcons.refresh,
+                    color: CupertinoColors.destructiveRed,
+                  ),
+                  label: S.of(context).AppRefresh,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(CupertinoIcons.back),
+                  label: S.of(context).AppBack,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(CupertinoIcons.forward),
+                  label: S.of(context).AppForward,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    CupertinoIcons.settings,
+                  ),
+                  label: S.of(context).SettingsButton,
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    CupertinoIcons.info,
+                  ),
+                  label: S.of(context).AboutButton.replaceAll('\n', ''),
+                ),
+              ],
+            );
+          }
+          return NavigationRail(
+            labelType: NavigationRailLabelType.all,
+            selectedIndex: naviItems[selectedIndex],
+            groupAlignment: 0,
+            onDestinationSelected: (int index) async {
+              _onTap(controller!, index, context);
+            },
+            destinations: [
+              NavigationRailDestination(
+                icon: const Icon(CupertinoIcons.home),
+                label: Text(
+                  S.of(context).AppHome,
+                ),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(CupertinoIcons.game_controller),
+                label: Text(S.of(context).ToolsButton),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(
+                  CupertinoIcons.refresh,
+                  color: CupertinoColors.destructiveRed,
+                ),
+                label: Text(S.of(context).AppRefresh),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(CupertinoIcons.back),
+                label: Text(S.of(context).AppBack),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(CupertinoIcons.forward),
+                label: Text(S.of(context).AppForward),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(
+                  CupertinoIcons.settings,
+                ),
+                label: Text(S.of(context).SettingsButton),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(
+                  CupertinoIcons.info,
+                ),
+                label: Text(
+                  S.of(context).AboutButton,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          );
+        });
   }
 
-  void _onTap(int value, BuildContext context) {
+  void _onTap(WebViewController controller, int value, BuildContext context) {
     HapticFeedback.heavyImpact();
     var func = funcMap[value];
     switch (func) {
@@ -268,7 +274,7 @@ class Controls extends StatelessWidget {
         // May be HTTPS or HTTP
         allowNavi = true;
         if (Platform.isIOS) {
-          await controller.runJavaScript(
+          await controller.runJavascript(
               '''window.open("http:"+gadgetInfo.URL,'_blank');''');
         }
         inKancolleWindow = true;
@@ -300,7 +306,7 @@ class Controls extends StatelessWidget {
         });
     if (value ?? false) {
       allowNavi = true;
-      await controller.loadRequest(home);
+      await controller.loadUrl(home.toString());
     }
   }
 
