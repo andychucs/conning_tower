@@ -290,7 +290,7 @@ class Controls extends StatelessWidget {
 
   Future<void> _onAdjustWindow(WebViewController controller) async {
     if (gameLoadCompleted) {
-      await autoAdjustWindowV2(controller);
+      await autoAdjustWindowV2(controller, force: true);
     } else {
       Fluttertoast.showToast(
           msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);

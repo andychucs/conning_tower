@@ -9,10 +9,9 @@ import 'generated/l10n.dart';
 
 
 Future<bool> autoAdjustWindowV2(
-  WebViewController controller,
-) async {
+  WebViewController controller, {bool force = false}) async {
   //Adjust Kancolle window
-  if (inKancolleWindow && !autoAdjusted) {
+  if ((inKancolleWindow && !autoAdjusted) || force) {
     if (Platform.isIOS) {
       await controller.runJavascript('''
 ((\$, _) => {
