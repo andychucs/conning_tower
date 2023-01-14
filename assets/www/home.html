@@ -1,20 +1,8 @@
-import 'dart:convert';
-
-const kKancolleHeight = 720;
-const kKancolleWidth = 1200;
-const kKancollePixel = kKancolleHeight * kKancolleWidth;
-const String kGameUrl =
-    'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
-const String kSafariUA =
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15";
-const String kChromeUA =
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36";
-const String kHome = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <style>
+    <style>
         :root {
             --input-color: #99a3ba;
             --input-border: #cdd9ed;
@@ -142,11 +130,8 @@ const String kHome = """
 </head>
 <body>
 <div class="form-group">
-    <input id="url" class="form-field" type="text" value="$kGameUrl">
+    <input id="url" class="form-field" type="text" value="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/">
     <span onclick="const url = document.getElementById('url').value;window.open(url, '_blank');">⏎</span>
 </div>
 </body>
 </html>
-""";
-
-final String kHomeBase64 = base64Encode(const Utf8Encoder().convert(kHome));
