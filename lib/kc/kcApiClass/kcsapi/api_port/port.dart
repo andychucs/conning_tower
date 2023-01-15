@@ -1,30 +1,5 @@
 class KcPortClass {
   KcPortClass({
-    required this.apiResult,
-    required this.apiResultMsg,
-    required this.apiData,
-  });
-  late final int apiResult;
-  late final String apiResultMsg;
-  late final ApiData apiData;
-
-  KcPortClass.fromJson(Map<String, dynamic> json){
-    apiResult = json['api_result'];
-    apiResultMsg = json['api_result_msg'];
-    apiData = ApiData.fromJson(json['api_data']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['api_result'] = apiResult;
-    _data['api_result_msg'] = apiResultMsg;
-    _data['api_data'] = apiData.toJson();
-    return _data;
-  }
-}
-
-class ApiData {
-  ApiData({
     required this.apiMaterial,
     required this.apiDeckPort,
     required this.apiNdock,
@@ -45,7 +20,7 @@ class ApiData {
   late final int apiParallelQuestCount;
   late final int apiDestShipSlot;
 
-  ApiData.fromJson(Map<String, dynamic> json){
+  KcPortClass.fromJson(Map<String, dynamic> json){
     apiMaterial = List.from(json['api_material']).map((e)=>ApiMaterial.fromJson(e)).toList();
     apiDeckPort = List.from(json['api_deck_port']).map((e)=>ApiDeckPort.fromJson(e)).toList();
     apiNdock = List.from(json['api_ndock']).map((e)=>ApiNdock.fromJson(e)).toList();

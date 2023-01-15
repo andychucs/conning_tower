@@ -23,26 +23,22 @@ function KcapiToFlutter(data) {
 ''';
 
 
-void kancolleMessageHandle(String message){
-  String responseURL;
+void kancolleRawMessageHandle(String message){
+  String responseURL,readyState,jsonString;
   if(true){
     const start = "conning_tower_responseURL:";
     const end = "conning_tower_readyState:";
     final startIndex = message.indexOf(start);
     final endIndex = message.indexOf(end, startIndex + start.length);
-    String responseURL2 = message.substring(startIndex + start.length, endIndex);
-    print("responseURL:");
-    print(responseURL2);
-    responseURL = responseURL2;
+    String result = message.substring(startIndex + start.length, endIndex);
+    responseURL = result;
   }
   if(true){
     const start = "conning_tower_readyState:";
     const end = "conning_tower_responseText:";
     final startIndex = message.indexOf(start);
     final endIndex = message.indexOf(end, startIndex + start.length);
-    String readyState = message.substring(startIndex + start.length, endIndex);
-    print("readyState:");
-    print(readyState);
+    readyState = message.substring(startIndex + start.length, endIndex);
   }
   if(true){
     const start = "conning_tower_responseText:";
@@ -50,10 +46,10 @@ void kancolleMessageHandle(String message){
     final startIndex = message.indexOf(start);
     final endIndex = message.indexOf(end, startIndex + start.length);
     String responseText = message.substring(startIndex + start.length, endIndex);
-    String result = responseText.replaceAll('svdata=', '');
-    print("KC JSON:");
-    print(json.decode(result));
-    kcJsonToDb(responseURL,result);
+    jsonString = responseText.replaceAll('svdata=', '');
+  }
+  if(readyState.contains("4")){
+    kcDataHandler(responseURL,jsonString);
   }
 }
 

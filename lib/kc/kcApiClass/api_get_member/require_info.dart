@@ -1,125 +1,90 @@
 class KcRequireInfo {
-  ApiBasic? apiBasic;
-  List<ApiSlotItem>? apiSlotItem;
-  ApiUnsetslot? apiUnsetslot;
-  List<ApiKdock>? apiKdock;
-  List<ApiUseitem>? apiUseitem;
-  List<ApiFurniture>? apiFurniture;
-  List<int>? apiExtraSupply;
-  ApiOssSetting? apiOssSetting;
-  int? apiSkinId;
-  int? apiPositionId;
+  KcRequireInfo({
+    required this.apiBasic,
+    required this.apiSlotItem,
+    required this.apiUnsetslot,
+    required this.apiKdock,
+    required this.apiUseitem,
+    required this.apiFurniture,
+    required this.apiExtraSupply,
+    required this.apiOssSetting,
+    required this.apiSkinId,
+    required this.apiPositionId,
+  });
+  late final ApiBasic apiBasic;
+  late final List<ApiSlotItem> apiSlotItem;
+  late final ApiUnsetslot apiUnsetslot;
+  late final List<ApiKdock> apiKdock;
+  late final List<ApiUseitem> apiUseitem;
+  late final List<ApiFurniture> apiFurniture;
+  late final List<int> apiExtraSupply;
+  late final ApiOssSetting apiOssSetting;
+  late final int apiSkinId;
+  late final int apiPositionId;
 
-  KcRequireInfo(
-      {this.apiBasic,
-        this.apiSlotItem,
-        this.apiUnsetslot,
-        this.apiKdock,
-        this.apiUseitem,
-        this.apiFurniture,
-        this.apiExtraSupply,
-        this.apiOssSetting,
-        this.apiSkinId,
-        this.apiPositionId});
-
-  KcRequireInfo.fromJson(Map<String, dynamic> json) {
-    apiBasic = json['api_basic'] != null
-        ? new ApiBasic.fromJson(json['api_basic'])
-        : null;
-    if (json['api_slot_item'] != null) {
-      apiSlotItem = <ApiSlotItem>[];
-      json['api_slot_item'].forEach((v) {
-        apiSlotItem!.add(new ApiSlotItem.fromJson(v));
-      });
-    }
-    apiUnsetslot = json['api_unsetslot'] != null
-        ? new ApiUnsetslot.fromJson(json['api_unsetslot'])
-        : null;
-    if (json['api_kdock'] != null) {
-      apiKdock = <ApiKdock>[];
-      json['api_kdock'].forEach((v) {
-        apiKdock!.add(new ApiKdock.fromJson(v));
-      });
-    }
-    if (json['api_useitem'] != null) {
-      apiUseitem = <ApiUseitem>[];
-      json['api_useitem'].forEach((v) {
-        apiUseitem!.add(new ApiUseitem.fromJson(v));
-      });
-    }
-    if (json['api_furniture'] != null) {
-      apiFurniture = <ApiFurniture>[];
-      json['api_furniture'].forEach((v) {
-        apiFurniture!.add(new ApiFurniture.fromJson(v));
-      });
-    }
-    apiExtraSupply = json['api_extra_supply'].cast<int>();
-    apiOssSetting = json['api_oss_setting'] != null
-        ? new ApiOssSetting.fromJson(json['api_oss_setting'])
-        : null;
+  KcRequireInfo.fromJson(Map<String, dynamic> json){
+    apiBasic = ApiBasic.fromJson(json['api_basic']);
+    apiSlotItem = List.from(json['api_slot_item']).map((e)=>ApiSlotItem.fromJson(e)).toList();
+    apiUnsetslot = ApiUnsetslot.fromJson(json['api_unsetslot']);
+    apiKdock = List.from(json['api_kdock']).map((e)=>ApiKdock.fromJson(e)).toList();
+    apiUseitem = List.from(json['api_useitem']).map((e)=>ApiUseitem.fromJson(e)).toList();
+    apiFurniture = List.from(json['api_furniture']).map((e)=>ApiFurniture.fromJson(e)).toList();
+    apiExtraSupply = List.castFrom<dynamic, int>(json['api_extra_supply']);
+    apiOssSetting = ApiOssSetting.fromJson(json['api_oss_setting']);
     apiSkinId = json['api_skin_id'];
     apiPositionId = json['api_position_id'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.apiBasic != null) {
-      data['api_basic'] = this.apiBasic!.toJson();
-    }
-    if (this.apiSlotItem != null) {
-      data['api_slot_item'] = this.apiSlotItem!.map((v) => v.toJson()).toList();
-    }
-    if (this.apiUnsetslot != null) {
-      data['api_unsetslot'] = this.apiUnsetslot!.toJson();
-    }
-    if (this.apiKdock != null) {
-      data['api_kdock'] = this.apiKdock!.map((v) => v.toJson()).toList();
-    }
-    if (this.apiUseitem != null) {
-      data['api_useitem'] = this.apiUseitem!.map((v) => v.toJson()).toList();
-    }
-    if (this.apiFurniture != null) {
-      data['api_furniture'] =
-          this.apiFurniture!.map((v) => v.toJson()).toList();
-    }
-    data['api_extra_supply'] = this.apiExtraSupply;
-    if (this.apiOssSetting != null) {
-      data['api_oss_setting'] = this.apiOssSetting!.toJson();
-    }
-    data['api_skin_id'] = this.apiSkinId;
-    data['api_position_id'] = this.apiPositionId;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_basic'] = apiBasic.toJson();
+    _data['api_slot_item'] = apiSlotItem.map((e)=>e.toJson()).toList();
+    _data['api_unsetslot'] = apiUnsetslot.toJson();
+    _data['api_kdock'] = apiKdock.map((e)=>e.toJson()).toList();
+    _data['api_useitem'] = apiUseitem.map((e)=>e.toJson()).toList();
+    _data['api_furniture'] = apiFurniture.map((e)=>e.toJson()).toList();
+    _data['api_extra_supply'] = apiExtraSupply;
+    _data['api_oss_setting'] = apiOssSetting.toJson();
+    _data['api_skin_id'] = apiSkinId;
+    _data['api_position_id'] = apiPositionId;
+    return _data;
   }
 }
 
 class ApiBasic {
-  int? apiMemberId;
-  int? apiFirstflag;
+  ApiBasic({
+    required this.apiMemberId,
+    required this.apiFirstflag,
+  });
+  late final int apiMemberId;
+  late final int apiFirstflag;
 
-  ApiBasic({this.apiMemberId, this.apiFirstflag});
-
-  ApiBasic.fromJson(Map<String, dynamic> json) {
+  ApiBasic.fromJson(Map<String, dynamic> json){
     apiMemberId = json['api_member_id'];
     apiFirstflag = json['api_firstflag'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_member_id'] = this.apiMemberId;
-    data['api_firstflag'] = this.apiFirstflag;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_member_id'] = apiMemberId;
+    _data['api_firstflag'] = apiFirstflag;
+    return _data;
   }
 }
 
 class ApiSlotItem {
-  int? apiId;
-  int? apiSlotitemId;
-  int? apiLocked;
-  int? apiLevel;
+  ApiSlotItem({
+    required this.apiId,
+    required this.apiSlotitemId,
+    required this.apiLocked,
+    required this.apiLevel,
+  });
+  late final int apiId;
+  late final int apiSlotitemId;
+  late final int apiLocked;
+  late final int apiLevel;
 
-  ApiSlotItem({this.apiId, this.apiSlotitemId, this.apiLocked, this.apiLevel});
-
-  ApiSlotItem.fromJson(Map<String, dynamic> json) {
+  ApiSlotItem.fromJson(Map<String, dynamic> json){
     apiId = json['api_id'];
     apiSlotitemId = json['api_slotitem_id'];
     apiLocked = json['api_locked'];
@@ -127,56 +92,57 @@ class ApiSlotItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_id'] = this.apiId;
-    data['api_slotitem_id'] = this.apiSlotitemId;
-    data['api_locked'] = this.apiLocked;
-    data['api_level'] = this.apiLevel;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_id'] = apiId;
+    _data['api_slotitem_id'] = apiSlotitemId;
+    _data['api_locked'] = apiLocked;
+    _data['api_level'] = apiLevel;
+    return _data;
   }
 }
 
 class ApiUnsetslot {
-  List<int>? apiSlottype23;
+  ApiUnsetslot({
+    required this.apiSlottype23,
+  });
+  late final List<int> apiSlottype23;
 
-  ApiUnsetslot({this.apiSlottype23});
-
-  ApiUnsetslot.fromJson(Map<String, dynamic> json) {
-    apiSlottype23 = json['api_slottype23'].cast<int>();
+  ApiUnsetslot.fromJson(Map<String, dynamic> json){
+    apiSlottype23 = List.castFrom<dynamic, int>(json['api_slottype23']);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_slottype23'] = this.apiSlottype23;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_slottype23'] = apiSlottype23;
+    return _data;
   }
 }
 
 class ApiKdock {
-  int? apiId;
-  int? apiState;
-  int? apiCreatedShipId;
-  int? apiCompleteTime;
-  String? apiCompleteTimeStr;
-  int? apiItem1;
-  int? apiItem2;
-  int? apiItem3;
-  int? apiItem4;
-  int? apiItem5;
+  ApiKdock({
+    required this.apiId,
+    required this.apiState,
+    required this.apiCreatedShipId,
+    required this.apiCompleteTime,
+    required this.apiCompleteTimeStr,
+    required this.apiItem1,
+    required this.apiItem2,
+    required this.apiItem3,
+    required this.apiItem4,
+    required this.apiItem5,
+  });
+  late final int apiId;
+  late final int apiState;
+  late final int apiCreatedShipId;
+  late final int apiCompleteTime;
+  late final String apiCompleteTimeStr;
+  late final int apiItem1;
+  late final int apiItem2;
+  late final int apiItem3;
+  late final int apiItem4;
+  late final int apiItem5;
 
-  ApiKdock(
-      {this.apiId,
-        this.apiState,
-        this.apiCreatedShipId,
-        this.apiCompleteTime,
-        this.apiCompleteTimeStr,
-        this.apiItem1,
-        this.apiItem2,
-        this.apiItem3,
-        this.apiItem4,
-        this.apiItem5});
-
-  ApiKdock.fromJson(Map<String, dynamic> json) {
+  ApiKdock.fromJson(Map<String, dynamic> json){
     apiId = json['api_id'];
     apiState = json['api_state'];
     apiCreatedShipId = json['api_created_ship_id'];
@@ -190,53 +156,55 @@ class ApiKdock {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_id'] = this.apiId;
-    data['api_state'] = this.apiState;
-    data['api_created_ship_id'] = this.apiCreatedShipId;
-    data['api_complete_time'] = this.apiCompleteTime;
-    data['api_complete_time_str'] = this.apiCompleteTimeStr;
-    data['api_item1'] = this.apiItem1;
-    data['api_item2'] = this.apiItem2;
-    data['api_item3'] = this.apiItem3;
-    data['api_item4'] = this.apiItem4;
-    data['api_item5'] = this.apiItem5;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_id'] = apiId;
+    _data['api_state'] = apiState;
+    _data['api_created_ship_id'] = apiCreatedShipId;
+    _data['api_complete_time'] = apiCompleteTime;
+    _data['api_complete_time_str'] = apiCompleteTimeStr;
+    _data['api_item1'] = apiItem1;
+    _data['api_item2'] = apiItem2;
+    _data['api_item3'] = apiItem3;
+    _data['api_item4'] = apiItem4;
+    _data['api_item5'] = apiItem5;
+    return _data;
   }
 }
 
 class ApiUseitem {
-  int? apiId;
-  int? apiCount;
+  ApiUseitem({
+    required this.apiId,
+    required this.apiCount,
+  });
+  late final int apiId;
+  late final int apiCount;
 
-  ApiUseitem({this.apiId, this.apiCount});
-
-  ApiUseitem.fromJson(Map<String, dynamic> json) {
+  ApiUseitem.fromJson(Map<String, dynamic> json){
     apiId = json['api_id'];
     apiCount = json['api_count'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_id'] = this.apiId;
-    data['api_count'] = this.apiCount;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_id'] = apiId;
+    _data['api_count'] = apiCount;
+    return _data;
   }
 }
 
 class ApiFurniture {
-  int? apiId;
-  int? apiFurnitureType;
-  int? apiFurnitureNo;
-  int? apiFurnitureId;
+  ApiFurniture({
+    required this.apiId,
+    required this.apiFurnitureType,
+    required this.apiFurnitureNo,
+    required this.apiFurnitureId,
+  });
+  late final int apiId;
+  late final int apiFurnitureType;
+  late final int apiFurnitureNo;
+  late final int apiFurnitureId;
 
-  ApiFurniture(
-      {this.apiId,
-        this.apiFurnitureType,
-        this.apiFurnitureNo,
-        this.apiFurnitureId});
-
-  ApiFurniture.fromJson(Map<String, dynamic> json) {
+  ApiFurniture.fromJson(Map<String, dynamic> json){
     apiId = json['api_id'];
     apiFurnitureType = json['api_furniture_type'];
     apiFurnitureNo = json['api_furniture_no'];
@@ -244,30 +212,32 @@ class ApiFurniture {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_id'] = this.apiId;
-    data['api_furniture_type'] = this.apiFurnitureType;
-    data['api_furniture_no'] = this.apiFurnitureNo;
-    data['api_furniture_id'] = this.apiFurnitureId;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_id'] = apiId;
+    _data['api_furniture_type'] = apiFurnitureType;
+    _data['api_furniture_no'] = apiFurnitureNo;
+    _data['api_furniture_id'] = apiFurnitureId;
+    return _data;
   }
 }
 
 class ApiOssSetting {
-  int? apiLanguageType;
-  List<int>? apiOssItems;
+  ApiOssSetting({
+    required this.apiLanguageType,
+    required this.apiOssItems,
+  });
+  late final int apiLanguageType;
+  late final List<int> apiOssItems;
 
-  ApiOssSetting({this.apiLanguageType, this.apiOssItems});
-
-  ApiOssSetting.fromJson(Map<String, dynamic> json) {
+  ApiOssSetting.fromJson(Map<String, dynamic> json){
     apiLanguageType = json['api_language_type'];
-    apiOssItems = json['api_oss_items'].cast<int>();
+    apiOssItems = List.castFrom<dynamic, int>(json['api_oss_items']);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_language_type'] = this.apiLanguageType;
-    data['api_oss_items'] = this.apiOssItems;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_language_type'] = apiLanguageType;
+    _data['api_oss_items'] = apiOssItems;
+    return _data;
   }
 }

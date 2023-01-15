@@ -1,42 +1,37 @@
 class KcMapStartClass {
-  List<ApiCellData>? apiCellData;
-  int? apiRashinFlg;
-  int? apiRashinId;
-  int? apiMapareaId;
-  int? apiMapinfoNo;
-  int? apiNo;
-  int? apiColorNo;
-  int? apiEventId;
-  int? apiEventKind;
-  int? apiNext;
-  int? apiBosscellNo;
-  int? apiBosscomp;
-  ApiAirsearch? apiAirsearch;
-  int? apiFromNo;
+  KcMapStartClass({
+    required this.apiCellData,
+    required this.apiRashinFlg,
+    required this.apiRashinId,
+    required this.apiMapareaId,
+    required this.apiMapinfoNo,
+    required this.apiNo,
+    required this.apiColorNo,
+    required this.apiEventId,
+    required this.apiEventKind,
+    required this.apiNext,
+    required this.apiBosscellNo,
+    required this.apiBosscomp,
+    required this.apiAirsearch,
+    required this.apiFromNo,
+  });
+  late final List<ApiCellData> apiCellData;
+  late final int apiRashinFlg;
+  late final int apiRashinId;
+  late final int apiMapareaId;
+  late final int apiMapinfoNo;
+  late final int apiNo;
+  late final int apiColorNo;
+  late final int apiEventId;
+  late final int apiEventKind;
+  late final int apiNext;
+  late final int apiBosscellNo;
+  late final int apiBosscomp;
+  late final ApiAirsearch apiAirsearch;
+  late final int apiFromNo;
 
-  KcMapStartClass(
-      {this.apiCellData,
-        this.apiRashinFlg,
-        this.apiRashinId,
-        this.apiMapareaId,
-        this.apiMapinfoNo,
-        this.apiNo,
-        this.apiColorNo,
-        this.apiEventId,
-        this.apiEventKind,
-        this.apiNext,
-        this.apiBosscellNo,
-        this.apiBosscomp,
-        this.apiAirsearch,
-        this.apiFromNo});
-
-  KcMapStartClass.fromJson(Map<String, dynamic> json) {
-    if (json['api_cell_data'] != null) {
-      apiCellData = <ApiCellData>[];
-      json['api_cell_data'].forEach((v) {
-        apiCellData!.add(new ApiCellData.fromJson(v));
-      });
-    }
+  KcMapStartClass.fromJson(Map<String, dynamic> json){
+    apiCellData = List.from(json['api_cell_data']).map((e)=>ApiCellData.fromJson(e)).toList();
     apiRashinFlg = json['api_rashin_flg'];
     apiRashinId = json['api_rashin_id'];
     apiMapareaId = json['api_maparea_id'];
@@ -48,45 +43,43 @@ class KcMapStartClass {
     apiNext = json['api_next'];
     apiBosscellNo = json['api_bosscell_no'];
     apiBosscomp = json['api_bosscomp'];
-    apiAirsearch = json['api_airsearch'] != null
-        ? new ApiAirsearch.fromJson(json['api_airsearch'])
-        : null;
+    apiAirsearch = ApiAirsearch.fromJson(json['api_airsearch']);
     apiFromNo = json['api_from_no'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.apiCellData != null) {
-      data['api_cell_data'] = this.apiCellData!.map((v) => v.toJson()).toList();
-    }
-    data['api_rashin_flg'] = this.apiRashinFlg;
-    data['api_rashin_id'] = this.apiRashinId;
-    data['api_maparea_id'] = this.apiMapareaId;
-    data['api_mapinfo_no'] = this.apiMapinfoNo;
-    data['api_no'] = this.apiNo;
-    data['api_color_no'] = this.apiColorNo;
-    data['api_event_id'] = this.apiEventId;
-    data['api_event_kind'] = this.apiEventKind;
-    data['api_next'] = this.apiNext;
-    data['api_bosscell_no'] = this.apiBosscellNo;
-    data['api_bosscomp'] = this.apiBosscomp;
-    if (this.apiAirsearch != null) {
-      data['api_airsearch'] = this.apiAirsearch!.toJson();
-    }
-    data['api_from_no'] = this.apiFromNo;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_cell_data'] = apiCellData.map((e)=>e.toJson()).toList();
+    _data['api_rashin_flg'] = apiRashinFlg;
+    _data['api_rashin_id'] = apiRashinId;
+    _data['api_maparea_id'] = apiMapareaId;
+    _data['api_mapinfo_no'] = apiMapinfoNo;
+    _data['api_no'] = apiNo;
+    _data['api_color_no'] = apiColorNo;
+    _data['api_event_id'] = apiEventId;
+    _data['api_event_kind'] = apiEventKind;
+    _data['api_next'] = apiNext;
+    _data['api_bosscell_no'] = apiBosscellNo;
+    _data['api_bosscomp'] = apiBosscomp;
+    _data['api_airsearch'] = apiAirsearch.toJson();
+    _data['api_from_no'] = apiFromNo;
+    return _data;
   }
 }
 
 class ApiCellData {
-  int? apiId;
-  int? apiNo;
-  int? apiColorNo;
-  int? apiPassed;
+  ApiCellData({
+    required this.apiId,
+    required this.apiNo,
+    required this.apiColorNo,
+    required this.apiPassed,
+  });
+  late final int apiId;
+  late final int apiNo;
+  late final int apiColorNo;
+  late final int apiPassed;
 
-  ApiCellData({this.apiId, this.apiNo, this.apiColorNo, this.apiPassed});
-
-  ApiCellData.fromJson(Map<String, dynamic> json) {
+  ApiCellData.fromJson(Map<String, dynamic> json){
     apiId = json['api_id'];
     apiNo = json['api_no'];
     apiColorNo = json['api_color_no'];
@@ -94,30 +87,32 @@ class ApiCellData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_id'] = this.apiId;
-    data['api_no'] = this.apiNo;
-    data['api_color_no'] = this.apiColorNo;
-    data['api_passed'] = this.apiPassed;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_id'] = apiId;
+    _data['api_no'] = apiNo;
+    _data['api_color_no'] = apiColorNo;
+    _data['api_passed'] = apiPassed;
+    return _data;
   }
 }
 
 class ApiAirsearch {
-  int? apiPlaneType;
-  int? apiResult;
+  ApiAirsearch({
+    required this.apiPlaneType,
+    required this.apiResult,
+  });
+  late final int apiPlaneType;
+  late final int apiResult;
 
-  ApiAirsearch({this.apiPlaneType, this.apiResult});
-
-  ApiAirsearch.fromJson(Map<String, dynamic> json) {
+  ApiAirsearch.fromJson(Map<String, dynamic> json){
     apiPlaneType = json['api_plane_type'];
     apiResult = json['api_result'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_plane_type'] = this.apiPlaneType;
-    data['api_result'] = this.apiResult;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['api_plane_type'] = apiPlaneType;
+    _data['api_result'] = apiResult;
+    return _data;
   }
 }

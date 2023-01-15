@@ -46,7 +46,7 @@ class KCWebViewState extends State<KCWebView> {
         if(Platform.isAndroid){ //Listen Kancolle API
           WebMessageListener kcListener= WebMessageListener(jsObjectName: "kcMessage",
               onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
-                kancolleMessageHandle(message!);
+                kancolleRawMessageHandle(message!);
               }
           );
           controller.addWebMessageListener(kcListener);
