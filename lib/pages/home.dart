@@ -42,7 +42,7 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> with WidgetsBindingObserver{
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late double deviceWidth;
@@ -60,6 +60,7 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     gameLoadCompleted = false;
     inKancolleWindow = false;
     autoAdjusted = false;
@@ -86,6 +87,18 @@ class HomePageState extends State<HomePage> {
 
     _initPackageInfo();
     home = Uri.parse(kGameUrl);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didHaveMemoryPressure(){
+    super.didHaveMemoryPressure();
+    _showMyDialog("LOW MEMORY");
   }
 
   Future<void> _initPackageInfo() async {
