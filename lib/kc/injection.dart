@@ -3,6 +3,8 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'kcHandler.dart';
+
 const String interceptJS ='''
 
 var origOpen = XMLHttpRequest.prototype.open;
@@ -22,14 +24,16 @@ function KcapiToFlutter(data) {
 
 
 void kancolleMessageHandle(String message){
+  String responseURL;
   if(true){
     const start = "conning_tower_responseURL:";
     const end = "conning_tower_readyState:";
     final startIndex = message.indexOf(start);
     final endIndex = message.indexOf(end, startIndex + start.length);
-    String responseURL = message.substring(startIndex + start.length, endIndex);
+    String responseURL2 = message.substring(startIndex + start.length, endIndex);
     print("responseURL:");
-    print(responseURL);
+    print(responseURL2);
+    responseURL = responseURL2;
   }
   if(true){
     const start = "conning_tower_readyState:";
@@ -49,6 +53,7 @@ void kancolleMessageHandle(String message){
     String result = responseText.replaceAll('svdata=', '');
     print("KC JSON:");
     print(json.decode(result));
+    kcJsonToDb(responseURL,result);
   }
 }
 
