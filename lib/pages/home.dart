@@ -192,11 +192,7 @@ class HomePageState extends State<HomePage> {
                   AboutPage(
                     packageInfo: _packageInfo,
                   ),
-                  GameInfoPage(
-                    reloadConfig: () {
-                      _loadConfig();
-                    },
-                  ),
+                  GameInfoPage(),
                 ],
               ),
             ),
