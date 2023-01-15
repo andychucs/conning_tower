@@ -48,7 +48,6 @@ class HomePageState extends State<HomePage> {
   late double deviceWidth;
   bool _showNotify = true;
   bool _showIosNotify = true;
-  bool _enableAutoProcess = true;
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -72,6 +71,7 @@ class HomePageState extends State<HomePage> {
     enableAutLoadKC = false;
     customHomeUrl = '';
     customHomeBase64 = '';
+    enableAutoProcess = true;
     // customHomeBase64Url = '';
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -100,8 +100,7 @@ class HomePageState extends State<HomePage> {
     setState(() {
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
-      _enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
-      enableAutoProcess = _enableAutoProcess;
+      enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
       bottomPadding = (prefs.getBool('bottomPadding') ?? false);
       enableAutLoadKC = (prefs.getBool('enableAutLoadKC') ?? false);
       customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
