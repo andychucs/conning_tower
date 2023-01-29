@@ -48,6 +48,9 @@ dependencies:
   settings_ui: ^2.0.2
   auto_size_text: ^3.0.0
   validators: ^3.0.0
+  font_awesome_flutter: ^10.3.0
+  circular_menu:
+    path: plugins/circular_menu
 
 dev_dependencies:
   flutter_test:

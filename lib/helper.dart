@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:conning_tower/pages/home.dart';
+// import 'package:conning_tower/widgets/circle_menu.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:validators/validators.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -130,3 +131,34 @@ String getHomeUrl() {
   // }
   return homeUrl;
 }
+
+// double getFabPositionAngle(Enum position) {
+//   double angle = 0;
+//   switch (position) {
+//     case FabPosition.left:
+//       angle = 180;
+//       break;
+//     case FabPosition.right:
+//       angle = 0;
+//       break;
+//     case FabPosition.top:
+//       angle = 270;
+//       break;
+//     case FabPosition.bottom:
+//       angle = 90;
+//       break;
+//     case FabPosition.leftTop:
+//       angle = 225;
+//       break;
+//     case FabPosition.rightTop:
+//       angle = 315;
+//       break;
+//     case FabPosition.leftBottom:
+//       angle = 135;
+//       break;
+//     case FabPosition.rightBottom:
+//       angle = 45;
+//       break;
+//   }
+//   return angle;
+// }

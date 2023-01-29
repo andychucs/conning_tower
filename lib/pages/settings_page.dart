@@ -1,3 +1,4 @@
+import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -78,16 +79,22 @@ class SettingsPageState extends State<SettingsPage> {
                       lockDeviceOrientationSwitchValue = value;
                     });
                     if (value) {
-                      Orientation orientation =
-                          MediaQuery.of(context).orientation;
-                      if (orientation == Orientation.landscape) {
-                        SystemChrome.setPreferredOrientations([
-                          DeviceOrientation.landscapeLeft,
-                          DeviceOrientation.landscapeRight
-                        ]);
-                      } else {
+                      if (customDeviceOrientation == null) {
+                        Orientation orientation =
+                            MediaQuery.of(context).orientation;
+                        if (orientation == Orientation.landscape) {
+                          SystemChrome.setPreferredOrientations([
+                            DeviceOrientation.landscapeLeft,
+                            DeviceOrientation.landscapeRight
+                          ]);
+                        } else {
+                          SystemChrome.setPreferredOrientations(
+                              [DeviceOrientation.portraitUp]);
+                        }
+                      }
+                      else {
                         SystemChrome.setPreferredOrientations(
-                            [DeviceOrientation.portraitUp]);
+                            [customDeviceOrientation!]);
                       }
                     } else {
                       SystemChrome.setPreferredOrientations(

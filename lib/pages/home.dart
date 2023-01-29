@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/pages/about_page.dart';
 import 'package:conning_tower/pages/settings_page.dart';
 import 'package:conning_tower/pages/tools_page.dart';
@@ -33,6 +34,8 @@ late String customHomeBase64;
 // late String customHomeBase64Url;
 late bool enableAutLoadKC;
 late String customHomeUrl;
+DeviceOrientation? customDeviceOrientation;
+bool? lockDeviceOrientation;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -46,6 +49,7 @@ class HomePageState extends State<HomePage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   late double deviceWidth;
+  late Alignment fabAlignment;
   bool _showNotify = true;
   bool _showIosNotify = true;
   PackageInfo _packageInfo = PackageInfo(
@@ -59,7 +63,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    super.initState();
     gameLoadCompleted = false;
     inKancolleWindow = false;
     autoAdjusted = false;
@@ -86,6 +89,7 @@ class HomePageState extends State<HomePage> {
 
     _initPackageInfo();
     home = Uri.parse(kGameUrl);
+    super.initState();
   }
 
   Future<void> _initPackageInfo() async {
@@ -131,8 +135,10 @@ class HomePageState extends State<HomePage> {
     }
     var orientation = MediaQuery.of(context).orientation;
     if (orientation == Orientation.landscape) {
+      fabAlignment = const Alignment(1.0, 0.3);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     } else {
+      fabAlignment = const Alignment(1.0, 0.7);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
           overlays: SystemUiOverlay.values);
     }
@@ -152,62 +158,89 @@ class HomePageState extends State<HomePage> {
         top: false,
         right: selectedIndex == 0 ? true : false,
         bottom: false,
-        child: Row(
-          children: <Widget>[
-            if (orientation == Orientation.landscape)
-              SingleChildScrollView(
-                controller: ScrollController(),
-                scrollDirection: Axis.vertical,
-                child: IntrinsicHeight(
-                  child: Controls(
-                    _controller.future,
-                    widget.cookieManager,
-                    notifyParent: () {
-                      setState(() {});
-                    },
-                    orientation: orientation,
+        child: CircularMenu(
+          alignment: fabAlignment,
+          items: [CircularMenuItem(
+              icon: Icons.home,
+              color: Colors.green,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 0;
+                });
+              }),
+            CircularMenuItem(
+                icon: Icons.search,
+                color: Colors.blue,
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 1;
+                  });
+                }),
+            CircularMenuItem(
+                icon: Icons.settings,
+                color: Colors.orange,
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+                }),],
+          backgroundWidget: Row(
+            children: <Widget>[
+              if (orientation == Orientation.landscape)
+                SingleChildScrollView(
+                  controller: ScrollController(),
+                  scrollDirection: Axis.vertical,
+                  child: IntrinsicHeight(
+                    child: Controls(
+                      _controller.future,
+                      widget.cookieManager,
+                      notifyParent: () {
+                        setState(() {});
+                      },
+                      orientation: orientation,
+                    ),
                   ),
                 ),
-              ),
-            if (orientation == Orientation.landscape)
-              const VerticalDivider(thickness: 1, width: 1),
-            // This is the main content.
-            Expanded(
-              child: FadeIndexedStack(
-                index: selectedIndex,
-                duration: const Duration(milliseconds: 100),
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(
-                      bottom: bottomPadding ? deviceWidth / 18 : 0.0,
+              if (orientation == Orientation.landscape)
+                const VerticalDivider(thickness: 1, width: 1),
+              // This is the main content.
+              Expanded(
+                child: FadeIndexedStack(
+                  index: selectedIndex,
+                  duration: const Duration(milliseconds: 100),
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                        bottom: bottomPadding ? deviceWidth / 18 : 0.0,
+                      ),
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: deviceWidth,
+                      child: KCWebView(_controller),
                     ),
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    height: deviceWidth,
-                    child: KCWebView(_controller),
-                  ),
-                  ToolsPage(
-                    _controller.future,
-                    widget.cookieManager,
-                    notifyParent: () {
-                      setState(() {});
-                    },
-                    reloadConfig: () {
-                      _loadConfig();
-                    },
-                  ),
-                  SettingsPage(
-                    reloadConfig: () {
-                      _loadConfig();
-                    },
-                  ),
-                  AboutPage(
-                    packageInfo: _packageInfo,
-                  ),
-                ],
+                    ToolsPage(
+                      _controller.future,
+                      widget.cookieManager,
+                      notifyParent: () {
+                        setState(() {});
+                      },
+                      reloadConfig: () {
+                        _loadConfig();
+                      },
+                    ),
+                    SettingsPage(
+                      reloadConfig: () {
+                        _loadConfig();
+                      },
+                    ),
+                    AboutPage(
+                      packageInfo: _packageInfo,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
