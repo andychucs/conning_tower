@@ -159,8 +159,14 @@ class HomePageState extends State<HomePage> {
         right: selectedIndex == 0 ? true : false,
         bottom: false,
         child: CircularMenu(
+          toggleButtonBoxShadow: [],
           alignment: fabAlignment,
+          toggleButtonSize: 20,
+          showMenu: false,
+          animationDuration: Duration(milliseconds: 300),
           items: [CircularMenuItem(
+            boxShadow: [],
+              iconSize: 20,
               icon: Icons.home,
               color: Colors.green,
               onTap: () {
@@ -168,6 +174,42 @@ class HomePageState extends State<HomePage> {
                   selectedIndex = 0;
                 });
               }),
+            CircularMenuItem(
+                boxShadow: [],
+                icon: Icons.home,
+                color: Colors.green,
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                }),
+            CircularMenuItem(
+                boxShadow: [],
+                icon: Icons.home,
+                color: Colors.green,
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                }),
+            CircularMenuItem(
+                boxShadow: [],
+                icon: Icons.home,
+                color: Colors.green,
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                }),
+            CircularMenuItem(
+                boxShadow: [],
+                icon: Icons.home,
+                color: Colors.green,
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                }),
             CircularMenuItem(
                 icon: Icons.search,
                 color: Colors.blue,

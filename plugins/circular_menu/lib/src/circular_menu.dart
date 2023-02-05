@@ -8,6 +8,8 @@ class CircularMenu extends StatefulWidget {
   /// use global key to control animation anywhere in the code
   final GlobalKey<CircularMenuState>? key;
 
+  final bool showMenu;
+
   /// list of CircularMenuItem contains at least two items.
   final List<CircularMenuItem> items;
 
@@ -51,6 +53,7 @@ class CircularMenu extends StatefulWidget {
   /// [items] must not be null and it must contains two elements at least.
   CircularMenu({
     required this.items,
+    this.showMenu = true,
     this.alignment = Alignment.bottomCenter,
     this.radius = 100,
     this.backgroundWidget,
@@ -278,6 +281,7 @@ class CircularMenuState extends State<CircularMenu>
 
   @override
   Widget build(BuildContext context) {
+    if (widget.showMenu) {
     return Stack(
       children: <Widget>[
         widget.backgroundWidget ?? Container(),
@@ -285,6 +289,9 @@ class CircularMenuState extends State<CircularMenu>
         _buildMenuButton(context),
       ],
     );
+    } else {
+      return widget.backgroundWidget ?? Container();
+    }
   }
 
   @override
