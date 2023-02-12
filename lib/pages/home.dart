@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
+import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/about_page.dart';
 import 'package:conning_tower/pages/settings_page.dart';
 import 'package:conning_tower/pages/tools_page.dart';
@@ -31,10 +33,12 @@ late int selectedIndex;
 late Uri home;
 late bool enableAutoProcess;
 late String customHomeBase64;
-// late String customHomeBase64Url;
+late String customHomeBase64Url;
 late bool enableAutLoadKC;
 late String customHomeUrl;
-DeviceOrientation? customDeviceOrientation;
+late bool loadedDMM;
+late bool enableShowFAB;
+List<DeviceOrientation>? customDeviceOrientations;
 bool? lockDeviceOrientation;
 
 class HomePage extends StatefulWidget {
@@ -75,10 +79,13 @@ class HomePageState extends State<HomePage> {
     customHomeUrl = '';
     customHomeBase64 = '';
     enableAutoProcess = true;
-    // customHomeBase64Url = '';
+    customHomeBase64Url = '';
+    loadedDMM = false;
+    enableShowFAB = true;
+
+    _loadConfig();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _loadConfig();
       if (_showNotify) {
         await _showMyDialog(S.current.AppNotify);
       }
@@ -99,8 +106,8 @@ class HomePageState extends State<HomePage> {
     });
   }
 
-  Future<void> _loadConfig() async {
-    final prefs = await SharedPreferences.getInstance();
+  void _loadConfig() {
+    final prefs = localStorage;
     setState(() {
       _showNotify = (prefs.getBool('showNotify') ?? true);
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
@@ -108,7 +115,11 @@ class HomePageState extends State<HomePage> {
       bottomPadding = (prefs.getBool('bottomPadding') ?? false);
       enableAutLoadKC = (prefs.getBool('enableAutLoadKC') ?? false);
       customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
-      // customHomeBase64Url = (prefs.getString('customHomeBase64Url') ?? '');
+      customHomeBase64Url = (prefs.getString('customHomeBase64Url') ?? '');
+      loadedDMM = (prefs.getBool('loadedDMM') ?? false);
+      int customDeviceOrientationIndex = (prefs.getInt('customDeviceOrientation') ?? -1);
+      customDeviceOrientations = getDeviceOrientation(customDeviceOrientationIndex);
+      enableShowFAB = (prefs.getBool('enableShowFAB') ?? true);
     });
   }
 

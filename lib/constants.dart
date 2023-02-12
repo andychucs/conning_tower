@@ -5,6 +5,7 @@ const kKancolleWidth = 1200;
 const kKancollePixel = kKancolleHeight * kKancolleWidth;
 const String kGameUrl =
     'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/';
+const String kGoogle = 'https://www.google.com/';
 const String kSafariUA =
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15";
 const String kChromeUA =
@@ -142,7 +143,7 @@ const String kHome = """
 </head>
 <body>
 <div class="form-group">
-    <input id="url" class="form-field" type="text" value="$kGameUrl">
+    <input id="url" class="form-field" type="text" value="$kGoogle">
     <span onclick="const url = document.getElementById('url').value;window.open(url, '_blank');">⏎</span>
 </div>
 </body>

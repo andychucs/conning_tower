@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -130,6 +131,10 @@ class KCWebViewState extends State<KCWebView> {
               navigationDelegate: (NavigationRequest request) async {
                 print('allowing navigation to $request');
                 var uri = Uri.parse(request.url);
+                if (!loadedDMM && uri.host.endsWith('dmm.com')){
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('loadedDMM', true);
+                }
                 if (Platform.isIOS) {
                   if (uri.path.endsWith('/kcs2/index.php')) {
                     Fluttertoast.showToast(

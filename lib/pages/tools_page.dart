@@ -116,8 +116,8 @@ class _ToolsPageState extends State<ToolsPage> {
       } else {
         prefs.setString('customHomeUrl', curUrl!);
       }
-      // prefs.setString('customHomeBase64Url', curUrl!);
-      // customHomeBase64Url = curUrl;
+      prefs.setString('customHomeBase64Url', curUrl!);
+      customHomeBase64Url = curUrl;
       widget.reloadConfig();
     }
   }

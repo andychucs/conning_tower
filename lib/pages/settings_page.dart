@@ -31,7 +31,7 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
-      // lockDeviceOrientationSwitchValue = (prefs.getBool('lockDeviceOrientation') ?? false);
+      lockDeviceOrientationSwitchValue = (prefs.getBool('lockDeviceOrientation') ?? false);
       enableAutLoadKCSwitchValue = (prefs.getBool('enableAutLoadKC') ?? false);
     });
   }
@@ -78,8 +78,13 @@ class SettingsPageState extends State<SettingsPage> {
                     setState(() {
                       lockDeviceOrientationSwitchValue = value;
                     });
+                    () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.setBool('lockDeviceOrientation', value);
+                    };
                     if (value) {
-                      if (customDeviceOrientation == null) {
+
+                      if (customDeviceOrientations == null) {
                         Orientation orientation =
                             MediaQuery.of(context).orientation;
                         if (orientation == Orientation.landscape) {
@@ -88,13 +93,15 @@ class SettingsPageState extends State<SettingsPage> {
                             DeviceOrientation.landscapeRight
                           ]);
                         } else {
-                          SystemChrome.setPreferredOrientations(
-                              [DeviceOrientation.portraitUp]);
+                          SystemChrome.setPreferredOrientations([
+                            DeviceOrientation.portraitUp,
+                            DeviceOrientation.portraitDown
+                          ]);
                         }
-                      }
-                      else {
+                      } else {
                         SystemChrome.setPreferredOrientations(
-                            [customDeviceOrientation!]);
+                            customDeviceOrientations ??
+                                DeviceOrientation.values);
                       }
                     } else {
                       SystemChrome.setPreferredOrientations(
