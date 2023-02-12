@@ -173,9 +173,9 @@ class HomePageState extends State<HomePage> {
           toggleButtonBoxShadow: [],
           alignment: fabAlignment,
           toggleButtonSize: 20,
-          showMenu: false,
+          // showMenu: enableShowFAB,
           animationDuration: Duration(milliseconds: 300),
-          items: [CircularMenuItem(
+          items: enableShowFAB ? [CircularMenuItem(
             boxShadow: [],
               iconSize: 20,
               icon: Icons.home,
@@ -236,7 +236,7 @@ class HomePageState extends State<HomePage> {
                   setState(() {
                     selectedIndex = 2;
                   });
-                }),],
+                }),] : null,
           backgroundWidget: Row(
             children: <Widget>[
               if (orientation == Orientation.landscape)

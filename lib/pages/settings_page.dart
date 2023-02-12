@@ -127,6 +127,20 @@ class SettingsPageState extends State<SettingsPage> {
                   leading: const Icon(CupertinoIcons.fullscreen),
                   title: Text(S.of(context).SettingsEnableAutoProcess),
                 ),
+                SettingsTile.switchTile(
+                  onToggle: (value) async {
+                    HapticFeedback.heavyImpact();
+                    setState(() {
+                      enableShowFAB = value;
+                    });
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool('enableShowFAB', value);
+                    widget.reloadConfig();
+                  },
+                  initialValue: enableShowFAB,
+                  leading: const Icon(CupertinoIcons.pin),
+                  title: const Text('Show Floating Action Button'),
+                ),
                 SettingsTile.navigation(
                   leading: const Icon(
                     CupertinoIcons.refresh,
