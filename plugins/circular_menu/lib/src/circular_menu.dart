@@ -10,8 +10,8 @@ class CircularMenu extends StatefulWidget {
 
   final bool showMenu;
 
-  /// list of CircularMenuItem contains at least two items.
-  final List<CircularMenuItem> items;
+  /// list of CircularMenuItem contains at least two items. if items is null , will not show widgets of [CircularMenu].
+  final List<CircularMenuItem>? items;
 
   /// menu alignment
   final AlignmentGeometry alignment;
@@ -71,8 +71,9 @@ class CircularMenu extends StatefulWidget {
     this.key,
     this.startingAngleInRadian,
     this.endingAngleInRadian,
-  })  : assert(items.isNotEmpty, 'items can not be empty list'),
-        assert(items.length > 1, 'if you have one item no need to use a Menu'),
+  })  :
+        // assert(items.isNotEmpty, 'items can not be empty list'),
+        // assert(items.length > 1, 'if you have one item no need to use a Menu'),
         super(key: key);
 
   @override
@@ -114,7 +115,7 @@ class CircularMenuState extends State<CircularMenu>
           curve: widget.curve,
           reverseCurve: widget.reverseCurve),
     );
-    _itemsCount = widget.items.length;
+    _itemsCount = widget.items?.length ?? 0;
     super.initState();
   }
 
@@ -220,7 +221,8 @@ class CircularMenuState extends State<CircularMenu>
 
   List<Widget> _buildMenuItems() {
     List<Widget> items = [];
-    widget.items.asMap().forEach((index, item) {
+    if (widget.items == null) return items;
+    widget.items?.asMap().forEach((index, item) {
       items.add(
         Positioned.fill(
           child: Align(
@@ -252,7 +254,7 @@ class CircularMenuState extends State<CircularMenu>
     return Positioned.fill(
       child: Align(
         alignment: widget.alignment,
-        child: CircularMenuItem(
+        child: widget.items == null ? null : CircularMenuItem(
           icon: null,
           margin: widget.toggleButtonMargin,
           color: widget.toggleButtonColor ?? Theme.of(context).primaryColor,
