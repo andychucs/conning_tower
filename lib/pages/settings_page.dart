@@ -1,3 +1,4 @@
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +19,7 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
-  bool lockDeviceOrientationSwitchValue = customDeviceOrientationIndex == -1 ? false : true;
+  // bool lockDeviceOrientationSwitchValue = customDeviceOrientationIndex == -1 ? false : true;
   bool enableAutLoadKCSwitchValue = false;
 
   @override
@@ -32,7 +33,7 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
-      lockDeviceOrientationSwitchValue = (prefs.getBool('lockDeviceOrientation') ?? false);
+      lockDeviceOrientation = (prefs.getBool('lockDeviceOrientation') ?? false);
       enableAutLoadKCSwitchValue = (prefs.getBool('enableAutLoadKC') ?? false);
     });
   }
@@ -72,18 +73,18 @@ class SettingsPageState extends State<SettingsPage> {
                     widget.reloadConfig();
                   },
                 ),
-                SettingsTile.switchTile( //TODO: change to set unlock device orientation
-                  initialValue: lockDeviceOrientationSwitchValue,
+                SettingsTile.switchTile(
+                  initialValue: lockDeviceOrientation ?? false,
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
                     setState(() {
-                      lockDeviceOrientationSwitchValue = value;
+                      lockDeviceOrientation = value;
                     });
                     localStorage.setBool('lockDeviceOrientation', value);
 
                     if (value) {
 
-                      if (customDeviceOrientations == null) {
+                      if (customDeviceOrientations == DeviceOrientation.values || customDeviceOrientations == null) {
                         Orientation orientation =
                             MediaQuery.of(context).orientation;
                         if (orientation == Orientation.landscape) {
@@ -104,15 +105,18 @@ class SettingsPageState extends State<SettingsPage> {
                       }
                     } else {
                       localStorage.setInt('customDeviceOrientation', -1);
+                      localStorage.setBool('lockDeviceOrientation', false);
                       setState(() {
                         customDeviceOrientationIndex = -1;
                       });
                       SystemChrome.setPreferredOrientations(
                           DeviceOrientation.values);
                     }
+                    _loadConfig();
+                    widget.reloadConfig();
                   },
                   title: Text(S.of(context).SettingsLockDeviceOrientation),
-                  leading: Icon(lockDeviceOrientationSwitchValue
+                  leading: Icon(lockDeviceOrientation ?? false
                       ? CupertinoIcons.lock_rotation
                       : CupertinoIcons.lock_rotation_open),
                 ),

@@ -82,6 +82,7 @@ class HomePageState extends State<HomePage> {
     customHomeBase64Url = '';
     loadedDMM = false;
     enableHideFAB = false;
+    customDeviceOrientations = null;
 
     _loadConfig();
 
@@ -218,6 +219,7 @@ class HomePageState extends State<HomePage> {
                       boxShadow: const [],
                       icon: CupertinoIcons.device_phone_portrait,
                       onTap: () {
+                        lockDeviceOrientation = true;
                         localStorage.setBool('lockDeviceOrientation', true);
                         setState(() {
                           customDeviceOrientationIndex = 2;
