@@ -1,3 +1,4 @@
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
-  bool lockDeviceOrientationSwitchValue = false;
+  bool lockDeviceOrientationSwitchValue = customDeviceOrientationIndex == -1 ? false : true;
   bool enableAutLoadKCSwitchValue = false;
 
   @override
@@ -26,8 +27,8 @@ class SettingsPageState extends State<SettingsPage> {
     _loadConfig();
   }
 
-  Future<void> _loadConfig() async {
-    final prefs = await SharedPreferences.getInstance();
+  void _loadConfig() {
+    final prefs = localStorage;
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
@@ -71,17 +72,15 @@ class SettingsPageState extends State<SettingsPage> {
                     widget.reloadConfig();
                   },
                 ),
-                SettingsTile.switchTile(
+                SettingsTile.switchTile( //TODO: change to set unlock device orientation
                   initialValue: lockDeviceOrientationSwitchValue,
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
                     setState(() {
                       lockDeviceOrientationSwitchValue = value;
                     });
-                    () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('lockDeviceOrientation', value);
-                    };
+                    localStorage.setBool('lockDeviceOrientation', value);
+
                     if (value) {
 
                       if (customDeviceOrientations == null) {
@@ -104,6 +103,10 @@ class SettingsPageState extends State<SettingsPage> {
                                 DeviceOrientation.values);
                       }
                     } else {
+                      localStorage.setInt('customDeviceOrientation', -1);
+                      setState(() {
+                        customDeviceOrientationIndex = -1;
+                      });
                       SystemChrome.setPreferredOrientations(
                           DeviceOrientation.values);
                     }
@@ -119,8 +122,7 @@ class SettingsPageState extends State<SettingsPage> {
                     setState(() {
                       enableAutoProcessSwitchValue = value;
                     });
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.setBool('enableAutoProcess', value);
+                    localStorage.setBool('enableAutoProcess', value);
                     widget.reloadConfig();
                   },
                   initialValue: enableAutoProcessSwitchValue,
@@ -131,15 +133,14 @@ class SettingsPageState extends State<SettingsPage> {
                   onToggle: (value) async {
                     HapticFeedback.heavyImpact();
                     setState(() {
-                      enableShowFAB = value;
+                      enableHideFAB = value;
                     });
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.setBool('enableShowFAB', value);
+                    localStorage.setBool('enableHideFAB', value);
                     widget.reloadConfig();
                   },
-                  initialValue: enableShowFAB,
-                  leading: const Icon(CupertinoIcons.pin),
-                  title: const Text('Show Floating Action Button'),
+                  initialValue: enableHideFAB,
+                  leading: Icon(enableHideFAB ? CupertinoIcons.pin_slash : CupertinoIcons.pin),
+                  title: Text(S.of(context).SettingsHideFAB),
                 ),
                 SettingsTile.navigation(
                   leading: const Icon(
@@ -147,10 +148,9 @@ class SettingsPageState extends State<SettingsPage> {
                     color: CupertinoColors.destructiveRed,
                   ),
                   title: Text(S.of(context).SettingsReset),
-                  onPressed: (context) async {
+                  onPressed: (context) {
                     HapticFeedback.heavyImpact();
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.clear();
+                    localStorage.clear();
                     _loadConfig();
                     widget.reloadConfig();
                   },

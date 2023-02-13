@@ -15,7 +15,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -37,7 +36,8 @@ late String customHomeBase64Url;
 late bool enableAutLoadKC;
 late String customHomeUrl;
 late bool loadedDMM;
-late bool enableShowFAB;
+late bool enableHideFAB;
+late int customDeviceOrientationIndex;
 List<DeviceOrientation>? customDeviceOrientations;
 bool? lockDeviceOrientation;
 
@@ -81,9 +81,11 @@ class HomePageState extends State<HomePage> {
     enableAutoProcess = true;
     customHomeBase64Url = '';
     loadedDMM = false;
-    enableShowFAB = true;
+    enableHideFAB = false;
 
     _loadConfig();
+
+    SystemChrome.setPreferredOrientations(getDeviceOrientation(customDeviceOrientationIndex));
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (_showNotify) {
@@ -117,9 +119,11 @@ class HomePageState extends State<HomePage> {
       customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
       customHomeBase64Url = (prefs.getString('customHomeBase64Url') ?? '');
       loadedDMM = (prefs.getBool('loadedDMM') ?? false);
-      int customDeviceOrientationIndex = (prefs.getInt('customDeviceOrientation') ?? -1);
-      customDeviceOrientations = getDeviceOrientation(customDeviceOrientationIndex);
-      enableShowFAB = (prefs.getBool('enableShowFAB') ?? true);
+      customDeviceOrientationIndex =
+          (prefs.getInt('customDeviceOrientation') ?? -1);
+      customDeviceOrientations =
+          getDeviceOrientation(customDeviceOrientationIndex);
+      enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
     });
   }
 
@@ -144,6 +148,7 @@ class HomePageState extends State<HomePage> {
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
+    SystemChrome.setPreferredOrientations(getDeviceOrientation(customDeviceOrientationIndex));
     var orientation = MediaQuery.of(context).orientation;
     if (orientation == Orientation.landscape) {
       fabAlignment = const Alignment(1.0, 0.3);
@@ -172,71 +177,54 @@ class HomePageState extends State<HomePage> {
         child: CircularMenu(
           toggleButtonBoxShadow: [],
           alignment: fabAlignment,
-          toggleButtonSize: 20,
+          toggleButtonSize: 25,
+          radius: 85,
           // showMenu: enableShowFAB,
           animationDuration: Duration(milliseconds: 300),
-          items: enableShowFAB ? [CircularMenuItem(
-            boxShadow: [],
-              iconSize: 20,
-              icon: Icons.home,
-              color: Colors.green,
-              onTap: () {
-                setState(() {
-                  selectedIndex = 0;
-                });
-              }),
-            CircularMenuItem(
-                boxShadow: [],
-                icon: Icons.home,
-                color: Colors.green,
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 0;
-                  });
-                }),
-            CircularMenuItem(
-                boxShadow: [],
-                icon: Icons.home,
-                color: Colors.green,
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 0;
-                  });
-                }),
-            CircularMenuItem(
-                boxShadow: [],
-                icon: Icons.home,
-                color: Colors.green,
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 0;
-                  });
-                }),
-            CircularMenuItem(
-                boxShadow: [],
-                icon: Icons.home,
-                color: Colors.green,
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 0;
-                  });
-                }),
-            CircularMenuItem(
-                icon: Icons.search,
-                color: Colors.blue,
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 1;
-                  });
-                }),
-            CircularMenuItem(
-                icon: Icons.settings,
-                color: Colors.orange,
-                onTap: () {
-                  setState(() {
-                    selectedIndex = 2;
-                  });
-                }),] : null,
+          items: enableHideFAB
+              ? null
+              : [
+                  CircularMenuItem(
+                      boxShadow: const [],
+                      iconSize: 20,
+                      icon: CupertinoIcons.rectangle_dock,
+                      onTap: () {
+                        setState(() {
+                          HapticFeedback.heavyImpact();
+                          setState(() {
+                            bottomPadding = !bottomPadding;
+                          });
+                        });
+                      }),
+                  CircularMenuItem(
+                      boxShadow: const [],
+                      iconSize: 20,
+                      icon: CupertinoIcons.device_phone_landscape,
+                      onTap: () {
+                        lockDeviceOrientation = true;
+                        localStorage.setBool('lockDeviceOrientation', true);
+                        setState(() {
+                          if (customDeviceOrientationIndex != 0) {
+                            customDeviceOrientationIndex = 0;
+                            localStorage.setInt('customDeviceOrientation', 0);
+                          } else if (customDeviceOrientationIndex != 1) {
+                            customDeviceOrientationIndex = 1;
+                            localStorage.setInt('customDeviceOrientation', 1);
+                          }
+                        });
+                      }),
+                  CircularMenuItem(
+                    iconSize: 20,
+                      boxShadow: const [],
+                      icon: CupertinoIcons.device_phone_portrait,
+                      onTap: () {
+                        localStorage.setBool('lockDeviceOrientation', true);
+                        setState(() {
+                          customDeviceOrientationIndex = 2;
+                          localStorage.setInt('customDeviceOrientation', 2);
+                        });
+                      }),
+                ],
           backgroundWidget: Row(
             children: <Widget>[
               if (orientation == Orientation.landscape)

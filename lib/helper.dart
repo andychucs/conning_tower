@@ -138,10 +138,9 @@ String getHomeUrl() {
   return homeUrl;
 }
 
-List<DeviceOrientation>? getDeviceOrientation(int? index) {
-  if (index == -1) return null;
-  if (index == 0) return [DeviceOrientation.landscapeLeft];
-  if (index == 1) return [DeviceOrientation.landscapeRight];
+List<DeviceOrientation> getDeviceOrientation(int? index) {
+  if (index == 0) return [DeviceOrientation.landscapeRight];
+  if (index == 1) return [DeviceOrientation.landscapeLeft];
   if (index == 2) return [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
   return DeviceOrientation.values;
 }

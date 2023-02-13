@@ -56,6 +56,8 @@
   "@SettingsHomeSave": {},
   "SettingsEnableAutoProcess": "启用自动全屏",
   "@SettingsEnableAutoProcess": {},
+  "SettingsHideFAB": "隐藏浮动按钮",
+  "@SettingsHideFAB": {},
   "AppLeftSideControlsLoad": "加载URl：{url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView还没有准备好",

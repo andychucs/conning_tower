@@ -99,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("Enable auto fullscreen"),
+        "SettingsHideFAB":
+            MessageLookupByLibrary.simpleMessage("Hide floating action button"),
         "SettingsHomeLoad":
             MessageLookupByLibrary.simpleMessage("Make app auto open KanColle"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage(

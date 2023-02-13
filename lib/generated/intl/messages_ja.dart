@@ -96,6 +96,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("艦これの画面を自動的に全画面する"),
+        "SettingsHideFAB":
+            MessageLookupByLibrary.simpleMessage("フローティングボタンを隠す"),
         "SettingsHomeLoad":
             MessageLookupByLibrary.simpleMessage("「艦これ」をアプリのホームに設定する"),
         "SettingsHomeSave":

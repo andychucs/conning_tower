@@ -54,6 +54,8 @@
   "@SettingsHomeSave": {},
   "SettingsEnableAutoProcess": "Enable auto fullscreen",
   "@SettingsEnableAutoProcess": {},
+  "SettingsHideFAB": "Hide floating action button",
+  "@SettingsHideFAB": {},
   "AppLeftSideControlsLoad": "Load URL: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView not ready",
