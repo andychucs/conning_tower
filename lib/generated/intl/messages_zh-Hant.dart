@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(url) => "頁面開始載入 ${url}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("關於"),
         "AboutDescription": MessageLookupByLibrary.simpleMessage(

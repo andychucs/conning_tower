@@ -131,7 +131,7 @@ class KCWebViewState extends State<KCWebView> {
               navigationDelegate: (NavigationRequest request) async {
                 print('allowing navigation to $request');
                 var uri = Uri.parse(request.url);
-                if (!loadedDMM && uri.host.endsWith('dmm.com')){
+                if (!loadedDMM && uri.host.endsWith('dmm.com')) {
                   final prefs = await SharedPreferences.getInstance();
                   prefs.setBool('loadedDMM', true);
                 }

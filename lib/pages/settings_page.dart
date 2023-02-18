@@ -1,4 +1,3 @@
-import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +10,7 @@ import '../generated/l10n.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, required this.reloadConfig});
+
   final Function() reloadConfig;
 
   @override
@@ -19,7 +19,6 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
-  // bool lockDeviceOrientationSwitchValue = customDeviceOrientationIndex == -1 ? false : true;
   bool enableAutLoadKCSwitchValue = false;
 
   @override
@@ -33,7 +32,6 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
-      lockDeviceOrientation = (prefs.getBool('lockDeviceOrientation') ?? false);
       enableAutLoadKCSwitchValue = (prefs.getBool('enableAutLoadKC') ?? false);
     });
   }
@@ -77,35 +75,32 @@ class SettingsPageState extends State<SettingsPage> {
                   initialValue: lockDeviceOrientation ?? false,
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
-                    setState(() {
-                      lockDeviceOrientation = value;
-                    });
+                    lockDeviceOrientation = value;
                     localStorage.setBool('lockDeviceOrientation', value);
-
                     if (value) {
-
-                      if (customDeviceOrientations == DeviceOrientation.values || customDeviceOrientations == null) {
-                        Orientation orientation =
-                            MediaQuery.of(context).orientation;
-                        if (orientation == Orientation.landscape) {
-                          SystemChrome.setPreferredOrientations([
-                            DeviceOrientation.landscapeLeft,
-                            DeviceOrientation.landscapeRight
-                          ]);
-                        } else {
-                          SystemChrome.setPreferredOrientations([
-                            DeviceOrientation.portraitUp,
-                            DeviceOrientation.portraitDown
-                          ]);
-                        }
+                      Orientation orientation =
+                          MediaQuery.of(context).orientation;
+                      if (orientation == Orientation.landscape) {
+                        SystemChrome.setPreferredOrientations([
+                          DeviceOrientation.landscapeLeft,
+                          DeviceOrientation.landscapeRight
+                        ]);
+                        setState(() {
+                          customDeviceOrientationIndex = 3;
+                        });
+                        localStorage.setInt('customDeviceOrientation', 3);
                       } else {
-                        SystemChrome.setPreferredOrientations(
-                            customDeviceOrientations ??
-                                DeviceOrientation.values);
+                        SystemChrome.setPreferredOrientations([
+                          DeviceOrientation.portraitUp,
+                          DeviceOrientation.portraitDown
+                        ]);
+                        setState(() {
+                          customDeviceOrientationIndex = 2;
+                        });
+                        localStorage.setInt('customDeviceOrientation', 2);
                       }
                     } else {
                       localStorage.setInt('customDeviceOrientation', -1);
-                      localStorage.setBool('lockDeviceOrientation', false);
                       setState(() {
                         customDeviceOrientationIndex = -1;
                       });
@@ -143,7 +138,9 @@ class SettingsPageState extends State<SettingsPage> {
                     widget.reloadConfig();
                   },
                   initialValue: enableHideFAB,
-                  leading: Icon(enableHideFAB ? CupertinoIcons.pin_slash : CupertinoIcons.pin),
+                  leading: Icon(enableHideFAB
+                      ? CupertinoIcons.pin_slash
+                      : CupertinoIcons.pin),
                   title: Text(S.of(context).SettingsHideFAB),
                 ),
                 SettingsTile.navigation(

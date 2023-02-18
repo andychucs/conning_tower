@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:conning_tower/main.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -179,26 +178,18 @@ class Controls extends StatelessWidget {
     var func = funcMap[value];
     switch (func) {
       case ConFunc.navi2About:
-        enableHideFAB = true;
         selectedIndex = 3;
         notifyParent();
         break;
       case ConFunc.navi2Tool:
-        enableHideFAB = true;
         selectedIndex = 1;
         notifyParent();
         break;
       case ConFunc.navi2Settings:
-        enableHideFAB = true;
         selectedIndex = 2;
         notifyParent();
         break;
       case ConFunc.loadHome:
-        enableHideFAB = false;
-        if(localStorage.getBool('enableHideFAB') ?? false == true) {
-          enableHideFAB = true;
-          notifyParent();
-        }
         if (selectedIndex != 0) {
           selectedIndex = 0;
           notifyParent();

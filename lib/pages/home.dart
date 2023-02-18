@@ -38,7 +38,6 @@ late String customHomeUrl;
 late bool loadedDMM;
 late bool enableHideFAB;
 late int customDeviceOrientationIndex;
-List<DeviceOrientation>? customDeviceOrientations;
 bool? lockDeviceOrientation;
 
 class HomePage extends StatefulWidget {
@@ -82,11 +81,12 @@ class HomePageState extends State<HomePage> {
     customHomeBase64Url = '';
     loadedDMM = false;
     enableHideFAB = false;
-    customDeviceOrientations = null;
+    home = Uri.parse(kGameUrl);
 
     _loadConfig();
 
-    SystemChrome.setPreferredOrientations(getDeviceOrientation(customDeviceOrientationIndex));
+    SystemChrome.setPreferredOrientations(
+        getDeviceOrientation(customDeviceOrientationIndex));
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (_showNotify) {
@@ -98,7 +98,6 @@ class HomePageState extends State<HomePage> {
     });
 
     _initPackageInfo();
-    home = Uri.parse(kGameUrl);
     super.initState();
   }
 
@@ -122,9 +121,8 @@ class HomePageState extends State<HomePage> {
       loadedDMM = (prefs.getBool('loadedDMM') ?? false);
       customDeviceOrientationIndex =
           (prefs.getInt('customDeviceOrientation') ?? -1);
-      customDeviceOrientations =
-          getDeviceOrientation(customDeviceOrientationIndex);
       enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
+      lockDeviceOrientation = (prefs.getBool('lockDeviceOrientation') ?? false);
     });
   }
 
@@ -149,7 +147,8 @@ class HomePageState extends State<HomePage> {
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
-    SystemChrome.setPreferredOrientations(getDeviceOrientation(customDeviceOrientationIndex));
+    SystemChrome.setPreferredOrientations(
+        getDeviceOrientation(customDeviceOrientationIndex));
     var orientation = MediaQuery.of(context).orientation;
     if (orientation == Orientation.landscape) {
       fabAlignment = const Alignment(1.0, 0.3);
@@ -178,10 +177,10 @@ class HomePageState extends State<HomePage> {
         child: CircularMenu(
           toggleButtonBoxShadow: [],
           alignment: fabAlignment,
-          toggleButtonSize: 25,
-          radius: 85,
+          toggleButtonSize: 22,
+          radius: 72,
           // showMenu: enableShowFAB,
-          animationDuration: Duration(milliseconds: 300),
+          animationDuration: const Duration(milliseconds: 240),
           items: enableHideFAB
               ? null
               : [
@@ -215,7 +214,7 @@ class HomePageState extends State<HomePage> {
                         });
                       }),
                   CircularMenuItem(
-                    iconSize: 20,
+                      iconSize: 20,
                       boxShadow: const [],
                       icon: CupertinoIcons.device_phone_portrait,
                       onTap: () {
