@@ -79,6 +79,7 @@ class Controls extends StatelessWidget {
               unselectedItemColor: CupertinoColors.inactiveGray,
               selectedItemColor: Theme.of(context).primaryColor,
               onTap: ((value) async {
+                HapticFeedback.mediumImpact();
                 _onTap(controller!, value, context);
               }),
               items: [
@@ -125,6 +126,7 @@ class Controls extends StatelessWidget {
             selectedIndex: naviItems[selectedIndex],
             groupAlignment: 0,
             onDestinationSelected: (int index) async {
+              HapticFeedback.mediumImpact();
               _onTap(controller!, index, context);
             },
             destinations: [
@@ -174,7 +176,6 @@ class Controls extends StatelessWidget {
   }
 
   void _onTap(WebViewController controller, int value, BuildContext context) {
-    HapticFeedback.heavyImpact();
     var func = funcMap[value];
     switch (func) {
       case ConFunc.navi2About:
