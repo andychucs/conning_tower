@@ -48,6 +48,8 @@
   "@SettingsHomeSave": {},
   "SettingsEnableAutoProcess": "啟用自動全螢幕",
   "@SettingsEnableAutoProcess": {},
+  "SettingsHideFAB": "隱藏浮動操作按鈕",
+  "@SettingsHideFAB": {},
   "AppLeftSideControlsLoad": "載入網址: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebView還沒有準備好",
