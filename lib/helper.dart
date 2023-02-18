@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:conning_tower/pages/home.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:validators/validators.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -118,15 +121,61 @@ getResizeScale(double height, double width) {
 
 String getHomeUrl() {
   String homeUrl = 'data:text/html;base64,$kHomeBase64';
+
+  // If user never load dmm website, default home page show google. Might be helpful for app store review.
+  if (loadedDMM) {
+    homeUrl =
+        'data:text/html;base64,${base64Encode(const Utf8Encoder().convert(kHome.replaceAll(kGoogle, kGameUrl)))}';
+  }
+
   if (enableAutLoadKC) {
     homeUrl = kGameUrl;
   } else if (isURL(customHomeUrl)) {
     homeUrl = customHomeUrl;
+  } else if (customHomeBase64Url.isNotEmpty) {
+    debugPrint('getHomeUrl:$customHomeBase64Url');
+    customHomeBase64 = base64Encode(const Utf8Encoder()
+        .convert(kHome.replaceAll(kGoogle, customHomeBase64Url)));
+    homeUrl = 'data:text/html;base64,$customHomeBase64';
   }
-  // else if (customHomeBase64Url.isNotEmpty){
-  //   debugPrint('getHomeUrl:$customHomeBase64Url');
-  //   customHomeBase64 = base64Encode(const Utf8Encoder().convert(kHome.replaceAll(kGameUrl, customHomeBase64Url)));
-  //   homeUrl = customHomeBase64;
-  // }
   return homeUrl;
 }
+
+List<DeviceOrientation> getDeviceOrientation(int? index) {
+  if (index == 0) return [DeviceOrientation.landscapeRight];
+  if (index == 1) return [DeviceOrientation.landscapeLeft];
+  if (index == 2) return [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
+  if (index == 3) return [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft];
+  return DeviceOrientation.values;
+}
+
+// double getFabPositionAngle(Enum position) {
+//   double angle = 0;
+//   switch (position) {
+//     case FabPosition.left:
+//       angle = 180;
+//       break;
+//     case FabPosition.right:
+//       angle = 0;
+//       break;
+//     case FabPosition.top:
+//       angle = 270;
+//       break;
+//     case FabPosition.bottom:
+//       angle = 90;
+//       break;
+//     case FabPosition.leftTop:
+//       angle = 225;
+//       break;
+//     case FabPosition.rightTop:
+//       angle = 315;
+//       break;
+//     case FabPosition.leftBottom:
+//       angle = 135;
+//       break;
+//     case FabPosition.rightBottom:
+//       angle = 45;
+//       break;
+//   }
+//   return angle;
+// }

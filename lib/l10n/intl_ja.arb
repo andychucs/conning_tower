@@ -56,6 +56,8 @@
   "@SettingsHomeSave": {},
   "SettingsEnableAutoProcess": "艦これの画面を自動的に全画面する",
   "@SettingsEnableAutoProcess": {},
+  "SettingsHideFAB": "フローティングボタンを隠す",
+  "@SettingsHideFAB": {},
   "AppLeftSideControlsLoad": "URLをロード: {url}",
   "@AppLeftSideControlsLoad": {},
   "AppLeftSideControlsNotReady": "WebViewの準備がまだ整っていません",

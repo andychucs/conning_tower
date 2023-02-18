@@ -1,3 +1,5 @@
+import 'package:conning_tower/main.dart';
+import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,7 @@ import '../generated/l10n.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, required this.reloadConfig});
+
   final Function() reloadConfig;
 
   @override
@@ -16,7 +19,6 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
-  bool lockDeviceOrientationSwitchValue = false;
   bool enableAutLoadKCSwitchValue = false;
 
   @override
@@ -25,12 +27,11 @@ class SettingsPageState extends State<SettingsPage> {
     _loadConfig();
   }
 
-  Future<void> _loadConfig() async {
-    final prefs = await SharedPreferences.getInstance();
+  void _loadConfig() {
+    final prefs = localStorage;
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
-      // lockDeviceOrientationSwitchValue = (prefs.getBool('lockDeviceOrientation') ?? false);
       enableAutLoadKCSwitchValue = (prefs.getBool('enableAutLoadKC') ?? false);
     });
   }
@@ -71,12 +72,11 @@ class SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  initialValue: lockDeviceOrientationSwitchValue,
+                  initialValue: lockDeviceOrientation ?? false,
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
-                    setState(() {
-                      lockDeviceOrientationSwitchValue = value;
-                    });
+                    lockDeviceOrientation = value;
+                    localStorage.setBool('lockDeviceOrientation', value);
                     if (value) {
                       Orientation orientation =
                           MediaQuery.of(context).orientation;
@@ -85,17 +85,33 @@ class SettingsPageState extends State<SettingsPage> {
                           DeviceOrientation.landscapeLeft,
                           DeviceOrientation.landscapeRight
                         ]);
+                        setState(() {
+                          customDeviceOrientationIndex = 3;
+                        });
+                        localStorage.setInt('customDeviceOrientation', 3);
                       } else {
-                        SystemChrome.setPreferredOrientations(
-                            [DeviceOrientation.portraitUp]);
+                        SystemChrome.setPreferredOrientations([
+                          DeviceOrientation.portraitUp,
+                          DeviceOrientation.portraitDown
+                        ]);
+                        setState(() {
+                          customDeviceOrientationIndex = 2;
+                        });
+                        localStorage.setInt('customDeviceOrientation', 2);
                       }
                     } else {
+                      localStorage.setInt('customDeviceOrientation', -1);
+                      setState(() {
+                        customDeviceOrientationIndex = -1;
+                      });
                       SystemChrome.setPreferredOrientations(
                           DeviceOrientation.values);
                     }
+                    _loadConfig();
+                    widget.reloadConfig();
                   },
                   title: Text(S.of(context).SettingsLockDeviceOrientation),
-                  leading: Icon(lockDeviceOrientationSwitchValue
+                  leading: Icon(lockDeviceOrientation ?? false
                       ? CupertinoIcons.lock_rotation
                       : CupertinoIcons.lock_rotation_open),
                 ),
@@ -105,13 +121,27 @@ class SettingsPageState extends State<SettingsPage> {
                     setState(() {
                       enableAutoProcessSwitchValue = value;
                     });
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.setBool('enableAutoProcess', value);
+                    localStorage.setBool('enableAutoProcess', value);
                     widget.reloadConfig();
                   },
                   initialValue: enableAutoProcessSwitchValue,
                   leading: const Icon(CupertinoIcons.fullscreen),
                   title: Text(S.of(context).SettingsEnableAutoProcess),
+                ),
+                SettingsTile.switchTile(
+                  onToggle: (value) async {
+                    HapticFeedback.heavyImpact();
+                    setState(() {
+                      enableHideFAB = value;
+                    });
+                    localStorage.setBool('enableHideFAB', value);
+                    widget.reloadConfig();
+                  },
+                  initialValue: enableHideFAB,
+                  leading: Icon(enableHideFAB
+                      ? CupertinoIcons.pin_slash
+                      : CupertinoIcons.pin),
+                  title: Text(S.of(context).SettingsHideFAB),
                 ),
                 SettingsTile.navigation(
                   leading: const Icon(
@@ -119,10 +149,9 @@ class SettingsPageState extends State<SettingsPage> {
                     color: CupertinoColors.destructiveRed,
                   ),
                   title: Text(S.of(context).SettingsReset),
-                  onPressed: (context) async {
+                  onPressed: (context) {
                     HapticFeedback.heavyImpact();
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.clear();
+                    localStorage.clear();
                     _loadConfig();
                     widget.reloadConfig();
                   },

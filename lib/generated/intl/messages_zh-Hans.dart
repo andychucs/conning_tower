@@ -94,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("启用自动全屏"),
+        "SettingsHideFAB": MessageLookupByLibrary.simpleMessage("隐藏浮动按钮"),
         "SettingsHomeLoad":
             MessageLookupByLibrary.simpleMessage("启动时自动打开「艦これ」"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage("将当前网页设置为主页"),

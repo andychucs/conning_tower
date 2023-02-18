@@ -320,6 +320,16 @@ class S {
     );
   }
 
+  /// `Hide floating action button`
+  String get SettingsHideFAB {
+    return Intl.message(
+      'Hide floating action button',
+      name: 'SettingsHideFAB',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
   String AppLeftSideControlsLoad(Object url) {
     return Intl.message(
