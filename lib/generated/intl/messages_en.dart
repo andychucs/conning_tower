@@ -55,13 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Scroll down"),
         "AppLeftSideControlsScrollUp":
             MessageLookupByLibrary.simpleMessage("Scroll up"),
-        "AppName": MessageLookupByLibrary.simpleMessage("Bridge"),
+        "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command."),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP Redirect"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
         "AppResize":
-            MessageLookupByLibrary.simpleMessage("Resize to fit screen"),
+            MessageLookupByLibrary.simpleMessage("Resize to Fit Screen"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("Scroll Down"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up"),
         "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -98,16 +98,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "The game will be unmuted after refreshing."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
-            MessageLookupByLibrary.simpleMessage("Enable auto fullscreen"),
+            MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
         "SettingsHideFAB":
-            MessageLookupByLibrary.simpleMessage("Hide floating action button"),
-        "SettingsHomeLoad":
-            MessageLookupByLibrary.simpleMessage("Make app auto open KanColle"),
+            MessageLookupByLibrary.simpleMessage("Hide Floating Action Button"),
+        "SettingsHomeLoad": MessageLookupByLibrary.simpleMessage(
+            "Auto Open KanColle on Launch"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage(
-            "Make current web page as home"),
+            "Make Current Web Page as Home"),
         "SettingsLockDeviceOrientation":
-            MessageLookupByLibrary.simpleMessage("Lock screen orientation"),
-        "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset app"),
+            MessageLookupByLibrary.simpleMessage("Lock Screen Orientation"),
+        "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "ToolTitleGameScreen":
             MessageLookupByLibrary.simpleMessage("Game Screen"),
         "ToolTitleGameSound":

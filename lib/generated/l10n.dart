@@ -110,10 +110,10 @@ class S {
     );
   }
 
-  /// `Bridge`
+  /// `Conning Tower`
   String get AppName {
     return Intl.message(
-      'Bridge',
+      'Conning Tower',
       name: 'AppName',
       desc: '',
       args: [],
@@ -150,10 +150,10 @@ class S {
     );
   }
 
-  /// `Resize to fit screen`
+  /// `Resize to Fit Screen`
   String get AppResize {
     return Intl.message(
-      'Resize to fit screen',
+      'Resize to Fit Screen',
       name: 'AppResize',
       desc: '',
       args: [],
@@ -260,10 +260,10 @@ class S {
     );
   }
 
-  /// `Lock screen orientation`
+  /// `Lock Screen Orientation`
   String get SettingsLockDeviceOrientation {
     return Intl.message(
-      'Lock screen orientation',
+      'Lock Screen Orientation',
       name: 'SettingsLockDeviceOrientation',
       desc: '',
       args: [],
@@ -280,50 +280,50 @@ class S {
     );
   }
 
-  /// `Reset app`
+  /// `Reset App`
   String get SettingsReset {
     return Intl.message(
-      'Reset app',
+      'Reset App',
       name: 'SettingsReset',
       desc: '',
       args: [],
     );
   }
 
-  /// `Make app auto open KanColle`
+  /// `Auto Open KanColle on Launch`
   String get SettingsHomeLoad {
     return Intl.message(
-      'Make app auto open KanColle',
+      'Auto Open KanColle on Launch',
       name: 'SettingsHomeLoad',
       desc: '',
       args: [],
     );
   }
 
-  /// `Make current web page as home`
+  /// `Make Current Web Page as Home`
   String get SettingsHomeSave {
     return Intl.message(
-      'Make current web page as home',
+      'Make Current Web Page as Home',
       name: 'SettingsHomeSave',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enable auto fullscreen`
+  /// `Enable Auto Fullscreen`
   String get SettingsEnableAutoProcess {
     return Intl.message(
-      'Enable auto fullscreen',
+      'Enable Auto Fullscreen',
       name: 'SettingsEnableAutoProcess',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hide floating action button`
+  /// `Hide Floating Action Button`
   String get SettingsHideFAB {
     return Intl.message(
-      'Hide floating action button',
+      'Hide Floating Action Button',
       name: 'SettingsHideFAB',
       desc: '',
       args: [],
