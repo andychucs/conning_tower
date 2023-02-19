@@ -48,6 +48,8 @@
   "@SettingsButton": {},
   "SettingsLockDeviceOrientation": "锁定屏幕方向",
   "@SettingsLockDeviceOrientation": {},
+  "SettingsLockDeviceOrientationTip": "不适用于iPad",
+  "@SettingsLockDeviceOrientationTip": {},
   "SettingsReset": "重置",
   "@SettingsReset": {},
   "SettingsHomeLoad": "启动时自动打开「艦これ」",

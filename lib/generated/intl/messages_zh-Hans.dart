@@ -100,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage("将当前网页设置为主页"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("锁定屏幕方向"),
+        "SettingsLockDeviceOrientationTip":
+            MessageLookupByLibrary.simpleMessage("不适用于iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("游戏画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),

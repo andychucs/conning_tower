@@ -270,6 +270,16 @@ class S {
     );
   }
 
+  /// `Not Available for iPad`
+  String get SettingsLockDeviceOrientationTip {
+    return Intl.message(
+      'Not Available for iPad',
+      name: 'SettingsLockDeviceOrientationTip',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get SettingsButton {
     return Intl.message(

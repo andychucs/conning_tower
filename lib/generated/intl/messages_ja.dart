@@ -104,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("現在のWebページをホームに設定する"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("画面の方向を固定する"),
+        "SettingsLockDeviceOrientationTip":
+            MessageLookupByLibrary.simpleMessage("iPadでは使用不可"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("ゲームの画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),
