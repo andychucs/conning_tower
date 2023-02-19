@@ -179,6 +179,9 @@ class HomePageState extends State<HomePage> {
           alignment: fabAlignment,
           toggleButtonSize: 22,
           radius: 72,
+          toggleButtonOnPressed: (){
+            HapticFeedback.mediumImpact();
+          },
           // showMenu: enableShowFAB,
           animationDuration: const Duration(milliseconds: 240),
           items: enableHideFAB
@@ -189,18 +192,18 @@ class HomePageState extends State<HomePage> {
                       iconSize: 20,
                       icon: CupertinoIcons.rectangle_dock,
                       onTap: () {
-                        setState(() {
-                          HapticFeedback.heavyImpact();
+                        HapticFeedback.mediumImpact();
                           setState(() {
                             bottomPadding = !bottomPadding;
                           });
-                        });
+
                       }),
                   CircularMenuItem(
                       boxShadow: const [],
                       iconSize: 20,
                       icon: CupertinoIcons.device_phone_landscape,
                       onTap: () {
+                        HapticFeedback.mediumImpact();
                         lockDeviceOrientation = true;
                         localStorage.setBool('lockDeviceOrientation', true);
                         setState(() {
@@ -218,6 +221,7 @@ class HomePageState extends State<HomePage> {
                       boxShadow: const [],
                       icon: CupertinoIcons.device_phone_portrait,
                       onTap: () {
+                        HapticFeedback.mediumImpact();
                         lockDeviceOrientation = true;
                         localStorage.setBool('lockDeviceOrientation', true);
                         setState(() {
