@@ -107,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Make Current Web Page as Home"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("Lock Screen Orientation"),
+        "SettingsLockDeviceOrientationTip":
+            MessageLookupByLibrary.simpleMessage("Not Available for iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "ToolTitleGameScreen":
             MessageLookupByLibrary.simpleMessage("Game Screen"),

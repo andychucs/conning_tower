@@ -44,6 +44,8 @@
   "@GameUnmute": {},
   "SettingsLockDeviceOrientation": "Lock Screen Orientation",
   "@SettingsLockDeviceOrientation": {},
+  "SettingsLockDeviceOrientationTip": "Not Available for iPad",
+  "@SettingsLockDeviceOrientationTip": {},
   "SettingsButton": "Settings",
   "@SettingsButton": {},
   "SettingsReset": "Reset App",

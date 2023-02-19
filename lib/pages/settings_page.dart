@@ -73,6 +73,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
                 SettingsTile.switchTile(
                   initialValue: lockDeviceOrientation ?? false,
+                  description: Text(S.of(context).SettingsLockDeviceOrientationTip),
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
                     lockDeviceOrientation = value;
