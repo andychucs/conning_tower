@@ -273,20 +273,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
-  sentry:
-    dependency: transitive
-    description:
-      name: sentry
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.18.2"
-  sentry_flutter:
-    dependency: "direct main"
-    description:
-      name: sentry_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.18.2"
   settings_ui:
     dependency: "direct main"
     description:

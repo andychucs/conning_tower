@@ -44,7 +44,6 @@ dependencies:
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.7
   package_info_plus: ^3.0.2
-  sentry_flutter: ^6.18.1
   settings_ui: ^2.0.2
   auto_size_text: ^3.0.0
   validators: ^3.0.0

@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -83,8 +82,8 @@ class KCWebViewState extends State<KCWebView> {
                             })
                         .onError(
                           (error, stackTrace) => () async {
-                            await Sentry.captureMessage(
-                                'Error on 1st time run redirect');
+                            // await Sentry.captureMessage(
+                            //     'Error on 1st time run redirect');
                             Future.delayed(
                               const Duration(seconds: 1),
                               () async {
@@ -100,14 +99,15 @@ class KCWebViewState extends State<KCWebView> {
                                             inKancolleWindow = true;
                                           });
                                         })
-                                    .onError(
-                                      (error, stackTrace) => () async {
-                                        await Sentry.captureException(error,
-                                            stackTrace: stackTrace);
-                                        await Sentry.captureMessage(
-                                            'Error on 2nd time run redirect');
-                                      },
-                                    );
+                                    // .onError(
+                                    //   (error, stackTrace) => () async {
+                                    //     // await Sentry.captureException(error,
+                                    //     //     stackTrace: stackTrace);
+                                    //     // await Sentry.captureMessage(
+                                    //     //     'Error on 2nd time run redirect');
+                                    //   },
+                                    // )
+                                ;
                               },
                             );
                           },
