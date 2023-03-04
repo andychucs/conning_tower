@@ -35,6 +35,7 @@ late String customHomeBase64;
 late String customHomeBase64Url;
 late bool enableAutLoadKC;
 late String customHomeUrl;
+late String customUA;
 late bool loadedDMM;
 late bool enableHideFAB;
 late int customDeviceOrientationIndex;
@@ -77,6 +78,7 @@ class HomePageState extends State<HomePage> {
     enableAutLoadKC = false;
     customHomeUrl = '';
     customHomeBase64 = '';
+    customUA = '';
     enableAutoProcess = true;
     customHomeBase64Url = '';
     loadedDMM = false;
@@ -123,6 +125,7 @@ class HomePageState extends State<HomePage> {
           (prefs.getInt('customDeviceOrientation') ?? -1);
       enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
       lockDeviceOrientation = (prefs.getBool('lockDeviceOrientation') ?? false);
+      customUA = (prefs.getString('customUA') ?? '');
     });
   }
 

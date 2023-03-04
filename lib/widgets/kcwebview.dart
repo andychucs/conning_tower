@@ -55,7 +55,7 @@ class KCWebViewState extends State<KCWebView> {
             aspectRatio: 5 / 3,
             child: WebView(
               initialUrl: homeUrl,
-              userAgent: defaultUA,
+              userAgent: customUA.isNotEmpty ? customUA : defaultUA,
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {
                 widget.controller.complete(webViewController);
