@@ -70,11 +70,31 @@ class S {
     );
   }
 
-  /// `Game Screen`
+  /// `WebView Screen`
   String get ToolTitleGameScreen {
     return Intl.message(
-      'Game Screen',
+      'WebView Screen',
       name: 'ToolTitleGameScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit UserAgent`
+  String get ToolUASetting {
+    return Intl.message(
+      'Edit UserAgent',
+      name: 'ToolUASetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need Relaunch App to Active`
+  String get ToolUATip {
+    return Intl.message(
+      'Need Relaunch App to Active',
+      name: 'ToolUATip',
       desc: '',
       args: [],
     );
@@ -160,10 +180,10 @@ class S {
     );
   }
 
-  /// `Logout`
+  /// `Clear Cookie`
   String get AppClearCookie {
     return Intl.message(
-      'Logout',
+      'Clear Cookie',
       name: 'AppClearCookie',
       desc: '',
       args: [],
@@ -225,6 +245,26 @@ class S {
     return Intl.message(
       'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
       name: 'AboutDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contributors`
+  String get AboutContributors {
+    return Intl.message(
+      'Contributors',
+      name: 'AboutContributors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get AboutVersion {
+    return Intl.message(
+      'Version',
+      name: 'AboutVersion',
       desc: '',
       args: [],
     );

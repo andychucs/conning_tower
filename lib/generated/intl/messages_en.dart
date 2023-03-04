@@ -31,14 +31,17 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("About"),
+        "AboutContributors":
+            MessageLookupByLibrary.simpleMessage("Contributors"),
         "AboutDescription": MessageLookupByLibrary.simpleMessage(
             "Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser."),
+        "AboutVersion": MessageLookupByLibrary.simpleMessage("Version"),
         "AlertNotShowAgain":
             MessageLookupByLibrary.simpleMessage("Don\'t show again"),
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
-        "AppClearCookie": MessageLookupByLibrary.simpleMessage("Logout"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("Clear Cookie"),
         "AppForward": MessageLookupByLibrary.simpleMessage("Forward"),
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
         "AppLeftSideControlsClearCache":
@@ -111,10 +114,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not Available for iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "ToolTitleGameScreen":
-            MessageLookupByLibrary.simpleMessage("Game Screen"),
+            MessageLookupByLibrary.simpleMessage("WebView Screen"),
         "ToolTitleGameSound":
             MessageLookupByLibrary.simpleMessage("Game Sound"),
         "ToolTitleWeb": MessageLookupByLibrary.simpleMessage("Web"),
+        "ToolUASetting": MessageLookupByLibrary.simpleMessage("Edit UserAgent"),
+        "ToolUATip":
+            MessageLookupByLibrary.simpleMessage("Need Relaunch App to Active"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("Tools")
       };
 }
