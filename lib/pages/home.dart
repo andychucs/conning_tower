@@ -75,13 +75,13 @@ class HomePageState extends State<HomePage> {
     allowNavi = true;
     bottomPadding = false;
     selectedIndex = 0;
-    enableAutLoadKC = false;
+    enableAutLoadKC = true;
     customHomeUrl = '';
     customHomeBase64 = '';
     customUA = '';
     enableAutoProcess = true;
     customHomeBase64Url = '';
-    loadedDMM = false;
+    loadedDMM = true;
     enableHideFAB = false;
     home = Uri.parse(kGameUrl);
 
@@ -117,10 +117,10 @@ class HomePageState extends State<HomePage> {
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
       bottomPadding = (prefs.getBool('bottomPadding') ?? false);
-      enableAutLoadKC = (prefs.getBool('enableAutLoadKC') ?? false);
+      enableAutLoadKC = (prefs.getBool('enableAutLoadKC') ?? true);
       customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
       customHomeBase64Url = (prefs.getString('customHomeBase64Url') ?? '');
-      loadedDMM = (prefs.getBool('loadedDMM') ?? false);
+      loadedDMM = (prefs.getBool('loadedDMM') ?? true);
       customDeviceOrientationIndex =
           (prefs.getInt('customDeviceOrientation') ?? -1);
       enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
