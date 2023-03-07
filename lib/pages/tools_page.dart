@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:validators/validators.dart';
@@ -30,6 +33,14 @@ class ToolsPage extends StatefulWidget {
 }
 
 class _ToolsPageState extends State<ToolsPage> {
+  late TextEditingController _uaTextController;
+
+  @override
+  void initState() {
+    _uaTextController = TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
+    super.initState();
+}
+
   Future<void> _onHttpRedirect(WebViewController controller) async {
     if (!inKancolleWindow) {
       String? currentUrl = await controller.currentUrl();
@@ -122,6 +133,31 @@ class _ToolsPageState extends State<ToolsPage> {
     }
   }
 
+  Future _showDialogWithInput() async {
+    return showCupertinoDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text(S.current.ToolUATip),
+          content: CupertinoTextField(
+            controller: _uaTextController,
+          ),
+          actions: [
+            CupertinoDialogAction(child: Text(S.current.Cancel),
+            onPressed: (){
+              Navigator.of(context).pop(false);
+            },),
+            CupertinoDialogAction(child: const Text("OK"),
+            onPressed: (){
+              Navigator.of(context).pop(true);
+            },),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -145,6 +181,20 @@ class _ToolsPageState extends State<ToolsPage> {
                 SettingsSection(
                   title: Text(S.of(context).ToolTitleWeb),
                   tiles: [
+                    SettingsTile.navigation(
+                      title: Text(S.of(context).ToolUASetting),
+                      leading: const Icon(FontAwesomeIcons.safari),
+                      onPressed: (context) async {
+                        var value = _uaTextController.value;
+                        bool flag = await _showDialogWithInput();
+                        if(!flag) {
+                          _uaTextController.value = value;
+                        }else{
+                          customUA = _uaTextController.value.text;
+                          localStorage.setString("customUA", customUA);
+                        }
+                      },
+                    ),
                     SettingsTile.navigation(
                       // trailing: Icon(customHomeUrl.isEmpty ? CupertinoIcons.star : CupertinoIcons.star_fill),
                       title: Text(S.of(context).SettingsHomeSave),

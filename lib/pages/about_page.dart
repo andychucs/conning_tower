@@ -58,7 +58,7 @@ class AboutPage extends StatelessWidget {
                                     maxLines: 1,
                                   ),
                                   Text(
-                                    'version: ${packageInfo.version}',
+                                    '${S.of(context).AboutVersion}: ${packageInfo.version}',
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                   InkWell(
@@ -107,10 +107,10 @@ class AboutPage extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 30,
                       child:
-                          Text('Contributors', style: TextStyle(fontSize: 24)),
+                          Text(S.of(context).AboutContributors, style: TextStyle(fontSize: 24)),
                     ),
                   ],
                 ),

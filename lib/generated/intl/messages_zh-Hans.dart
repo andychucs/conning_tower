@@ -31,13 +31,15 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("关于"),
+        "AboutContributors": MessageLookupByLibrary.simpleMessage("贡献者"),
         "AboutDescription": MessageLookupByLibrary.simpleMessage(
             "舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。"),
+        "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再显示"),
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("清除缓存"),
-        "AppClearCookie": MessageLookupByLibrary.simpleMessage("退出登录"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("清除Cookie"),
         "AppForward": MessageLookupByLibrary.simpleMessage("前进"),
         "AppHome": MessageLookupByLibrary.simpleMessage("主页"),
         "AppLeftSideControlsClearCache":
@@ -103,8 +105,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不适用于iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
-        "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("游戏画面"),
+        "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("网页窗口"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),
+        "ToolUASetting": MessageLookupByLibrary.simpleMessage("修改UA"),
+        "ToolUATip": MessageLookupByLibrary.simpleMessage("设置后需重启应用"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
       };
 }

@@ -31,13 +31,15 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("本アプリ\nについて"),
+        "AboutContributors": MessageLookupByLibrary.simpleMessage("貢献者"),
         "AboutDescription": MessageLookupByLibrary.simpleMessage(
             "Conning TowerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。"),
+        "AboutVersion": MessageLookupByLibrary.simpleMessage("バージョン"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("再表示しない"),
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュを消去"),
-        "AppClearCookie": MessageLookupByLibrary.simpleMessage("ログアウト"),
+        "AppClearCookie": MessageLookupByLibrary.simpleMessage("Cookieを消去"),
         "AppForward": MessageLookupByLibrary.simpleMessage("前へ"),
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
         "AppLeftSideControlsClearCache":
@@ -107,8 +109,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("iPadでは使用不可"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
-        "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("ゲームの画面"),
+        "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),
+        "ToolUASetting": MessageLookupByLibrary.simpleMessage("UAを編集する"),
+        "ToolUATip": MessageLookupByLibrary.simpleMessage("アプリを再開するは必要です"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("ツール")
       };
 }

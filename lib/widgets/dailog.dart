@@ -38,9 +38,8 @@ class CustomAlertDialog extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-                foregroundColor: CupertinoColors.destructiveRed),
+          CupertinoDialogAction(
+            textStyle: const TextStyle(color: CupertinoColors.destructiveRed),
             onPressed: () => setConfig(context, () {
               Navigator.of(context).pop();
             }),
@@ -48,7 +47,7 @@ class CustomAlertDialog extends StatelessWidget {
                 ? S.of(context).Cancel
                 : S.of(context).AlertNotShowAgain),
           ),
-          TextButton(
+          CupertinoDialogAction(
             child: const Text('OK'),
             onPressed: () {
               Navigator.of(context).pop(true);
