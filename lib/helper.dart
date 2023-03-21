@@ -125,7 +125,7 @@ String getHomeUrl() {
   // If user never load dmm website, default home page show google. Might be helpful for app store review.
   if (loadedDMM) {
     homeUrl =
-        'data:text/html;base64,${base64Encode(const Utf8Encoder().convert(kHome.replaceAll(kGoogle, kGameUrl)))}';
+        'data:text/html;base64,${base64Encode(const Utf8Encoder().convert(kHome.replaceFirst("value=''>", "value='$kGameUrl'>")))}';
   }
 
   if (enableAutLoadKC) {
@@ -135,7 +135,7 @@ String getHomeUrl() {
   } else if (customHomeBase64Url.isNotEmpty) {
     debugPrint('getHomeUrl:$customHomeBase64Url');
     customHomeBase64 = base64Encode(const Utf8Encoder()
-        .convert(kHome.replaceAll(kGoogle, customHomeBase64Url)));
+        .convert(kHome.replaceFirst("value=''>", "value='$customHomeBase64Url'>")));
     homeUrl = 'data:text/html;base64,$customHomeBase64';
   }
   return homeUrl;

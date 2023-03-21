@@ -57,11 +57,11 @@
         }
 
         .form-group > span:first-child, .form-group .form-field:first-child {
-            border-radius: 6px 0 0 6px;
+            border-radius: 20px 20px 20px 20px;
         }
 
         .form-group > span:last-child, .form-group .form-field:last-child {
-            border-radius: 0 6px 6px 0;
+            border-radius: 20px 20px 20px 20px;
         }
 
         .form-group > span:not(:first-child), .form-group .form-field:not(:first-child) {
@@ -130,8 +130,33 @@
 </head>
 <body>
 <div class="form-group">
-    <input id="url" class="form-field" type="text" value="http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/">
-    <span onclick="const url = document.getElementById('url').value;window.open(url, '_blank');">⏎</span>
+    <input id="url" class="form-field" type="text" enterkeyhint="go" placeholder="🔍 Search or enter website name" value=''>
+<!--    <span onclick="go()">⏎</span>-->
+    <script>
+        const input = document.querySelector('#url');
+
+        function go() {
+            let url = document.getElementById('url').value;
+            const domainRegex = /^((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)$/;
+            if (domainRegex.test(url)) {
+                if(url.substring(0,7).toLowerCase() === "http://" || url.substring(0,8).toLowerCase() === "https://"){
+                    window.open(url, '_blank');
+                }else{
+                    url = "http://" + url;
+                    window.open(url, '_blank');
+                }
+            } else {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(url)}`;
+                window.open(searchUrl, '_blank');
+            }
+        }
+
+        input.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                go();
+            }
+        });
+    </script>
 </div>
 </body>
 </html>

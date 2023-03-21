@@ -15,7 +15,7 @@ const String kHome = """
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <style>
+    <style>
         :root {
             --input-color: #99a3ba;
             --input-border: #cdd9ed;
@@ -70,11 +70,11 @@ const String kHome = """
         }
 
         .form-group > span:first-child, .form-group .form-field:first-child {
-            border-radius: 6px 0 0 6px;
+            border-radius: 20px 20px 20px 20px;
         }
 
         .form-group > span:last-child, .form-group .form-field:last-child {
-            border-radius: 0 6px 6px 0;
+            border-radius: 20px 20px 20px 20px;
         }
 
         .form-group > span:not(:first-child), .form-group .form-field:not(:first-child) {
@@ -143,8 +143,32 @@ const String kHome = """
 </head>
 <body>
 <div class="form-group">
-    <input id="url" class="form-field" type="text" value="$kGoogle">
-    <span onclick="const url = document.getElementById('url').value;window.open(url, '_blank');">⏎</span>
+    <input id="url" class="form-field" type="text" enterkeyhint="go" placeholder="🔍 Search or enter website name" value=''>
+    <script>
+        const input = document.querySelector('#url');
+
+        function go() {
+            let url = document.getElementById('url').value;
+            const domainRegex = /^((https?:\\/\\/)?[\\w-]+(\\.[\\w-]+)+\\.?(:\\d+)?(\\/\\S*)?)\$/;
+            if (domainRegex.test(url)) {
+                if(url.substring(0,7).toLowerCase() === "http://" || url.substring(0,8).toLowerCase() === "https://"){
+                    window.open(url, '_blank');
+                }else{
+                    url = "http://" + url;
+                    window.open(url, '_blank');
+                }
+            } else {
+                const searchUrl = `https://www.google.com/search?q=\${encodeURIComponent(url)}`;
+                window.open(searchUrl, '_blank');
+            }
+        }
+
+        input.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                go();
+            }
+        });
+    </script>
 </div>
 </body>
 </html>
