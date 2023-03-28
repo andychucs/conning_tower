@@ -24,6 +24,12 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 
 Donwload :[Home Page](https://conntower.github.io/#/)
 
+APK for Android, IPA for for iOS/iPadOS need sideloading.
+
+## ConningTower for iOS
+
+ConningTower for iOS is a closed-source branch independent of the ConningTower open-source project. The two are not equal. ConningTower for iOS is not a third-party client of KanColle, it is a universal web game browser. While the ConningTower iOS version will make special adaptations to some web page windows, this application is not aimed at any specific website.
+
 [ConningTower for iOS](https://conntower.github.io/#/ios) is now on the AppStore.
 
 [![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/24852023/228246824-f238c38d-a48d-4f85-b4a4-45301f4ec022.svg)](https://apps.apple.com/app/conningtower/id6446080475)
