@@ -22,13 +22,12 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 
 ## 安装 Installation インスタレーション
 
-Donwload :[GitHub Releases](https://github.com/AndyZhuAZ/conning_tower/releases)
+Donwload :[Home Page](https://conntower.github.io/#/)
 
-No official app store, need sideloading.
+[ConningTower for iOS](https://conntower.github.io/#/ios) is now on the AppStore.
 
-ConningTower-vx.x.x-arch.apk for Android
+[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/24852023/228246824-f238c38d-a48d-4f85-b4a4-45301f4ec022.svg)](https://apps.apple.com/app/conningtower/id6446080475)
 
-ConningTower-vx.x.x.ipa for iOS/iPadOS, Validated sideloading tool [altstore.io](https://altstore.io/) 
 
 ## 本地化 地域化 Localization 
 
