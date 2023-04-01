@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:conning_tower/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -132,8 +133,7 @@ class KCWebViewState extends State<KCWebView> {
                 print('allowing navigation to $request');
                 var uri = Uri.parse(request.url);
                 if (!loadedDMM && uri.host.endsWith('dmm.com')) {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.setBool('loadedDMM', true);
+                  localStorage.setBool('loadedDMM', true);
                 }
                 if (Platform.isIOS) {
                   if (uri.path.endsWith('/kcs2/index.php')) {

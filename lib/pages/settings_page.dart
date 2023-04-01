@@ -66,8 +66,7 @@ class SettingsPageState extends State<SettingsPage> {
                     setState(() {
                       enableAutLoadKCSwitchValue = value;
                     });
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.setBool('enableAutLoadKC', value);
+                    localStorage.setBool('enableAutLoadKC', value);
                     widget.reloadConfig();
                   },
                 ),

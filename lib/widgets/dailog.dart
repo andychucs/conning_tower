@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:conning_tower/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +16,7 @@ class CustomAlertDialog extends StatelessWidget {
 
   Future<void> setConfig(BuildContext context, VoidCallback onSuccess) async {
     if (!isNormal) {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = localStorage;
       if (msg == S.current.AppNotify) {
         prefs.setBool('showNotify', false);
       }

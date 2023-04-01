@@ -121,7 +121,7 @@ class _ToolsPageState extends State<ToolsPage> {
   Future<void> _onHomeSave(WebViewController controller) async {
     final String? curUrl = await controller.currentUrl();
     if (isURL(curUrl)) {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = localStorage;
       if (curUrl == customHomeUrl) {
         prefs.setString('customHomeUrl', '');
       } else {
@@ -274,8 +274,7 @@ class _ToolsPageState extends State<ToolsPage> {
                         setState(() {
                           bottomPadding = value;
                         });
-                        final prefs = await SharedPreferences.getInstance();
-                        prefs.setBool('bottomPadding', value);
+                        localStorage.setBool('bottomPadding', value);
                         widget.reloadConfig();
                         widget.notifyParent();
                       },

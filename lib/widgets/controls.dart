@@ -343,8 +343,6 @@ class Controls extends StatelessWidget {
     if (value ?? false) {
       allowNavi = true;
       await controller.clearCache();
-      final prefs = await SharedPreferences.getInstance(); //temporarily
-      prefs.clear(); //temporarily
       Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
     }
   }
