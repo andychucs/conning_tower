@@ -132,9 +132,18 @@ class KCWebViewState extends State<KCWebView> {
               navigationDelegate: (NavigationRequest request) async {
                 print('allowing navigation to $request');
                 var uri = Uri.parse(request.url);
+
                 if (!loadedDMM && uri.host.endsWith('dmm.com')) {
                   localStorage.setBool('loadedDMM', true);
                 }
+
+                if (uri.path.startsWith(
+                    '/netgame/social/-/gadgets/=/app_id=854854') && !safeNavi && allowNavi) {
+                  beforeRedirect = true;
+                  inKancolleWindow = false;
+                  autoAdjusted = false;
+                }
+
                 if (Platform.isIOS) {
                   if (uri.path.endsWith('/kcs2/index.php')) {
                     Fluttertoast.showToast(
@@ -175,6 +184,7 @@ class KCWebViewState extends State<KCWebView> {
               onPageStarted: (String url) {
                 print('Page started loading: $url');
                 var uri = Uri.parse(url);
+                Fluttertoast.showToast(msg: S.current.KCViewFuncMsgPageStart(uri.host));
                 setState(() {
                   beforeRedirect = false;
                   if (uri.path.startsWith(
@@ -191,6 +201,8 @@ class KCWebViewState extends State<KCWebView> {
               },
               onPageFinished: (String url) async {
                 print('Page finished loading: $url');
+                // var uri = Uri.parse(url);
+                // Fluttertoast.showToast(msg: S.current.KCViewFuncMsgPageFinished(uri.host));
               },
             ),
           );
