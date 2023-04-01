@@ -133,15 +133,15 @@ class _ToolsPageState extends State<ToolsPage> {
     }
   }
 
-  Future _showDialogWithInput() async {
+  Future _showDialogWithInput(String title, TextEditingController controller) async {
     return showCupertinoDialog<bool>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: Text(S.current.ToolUATip),
+          title: Text(title),
           content: CupertinoTextField(
-            controller: _uaTextController,
+            controller: controller,
           ),
           actions: [
             CupertinoDialogAction(child: Text(S.current.Cancel),
@@ -186,7 +186,7 @@ class _ToolsPageState extends State<ToolsPage> {
                       leading: const Icon(FontAwesomeIcons.safari),
                       onPressed: (context) async {
                         var value = _uaTextController.value;
-                        bool flag = await _showDialogWithInput();
+                        bool flag = await _showDialogWithInput(S.current.ToolUATip, _uaTextController);
                         if(!flag) {
                           _uaTextController.value = value;
                         }else{
