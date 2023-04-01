@@ -28,7 +28,7 @@
   "@AppNotify": {},
   "AppRedirect": "HTTPリダイレクト",
   "@AppRedirect": {},
-  "AppRefresh": "リフレッシュ",
+  "AppRefresh": "リロード",
   "@AppRefresh": {},
   "AppResize": "画面に合わせてリサイズする",
   "@AppResize": {},
