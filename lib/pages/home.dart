@@ -21,6 +21,7 @@ import '../constants.dart';
 import '../generated/l10n.dart';
 
 late bool allowNavi;
+late bool safeNavi;
 late bool autoAdjusted;
 late bool bottomPadding;
 late bool gameLoadCompleted;
@@ -73,6 +74,7 @@ class HomePageState extends State<HomePage> {
     kWebviewHeight = 0.0;
     kWebviewWidth = 0.0;
     allowNavi = true;
+    safeNavi = false;
     bottomPadding = false;
     selectedIndex = 0;
     enableAutLoadKC = true;

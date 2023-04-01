@@ -246,6 +246,7 @@ class Controls extends StatelessWidget {
 
   Future<void> _onGoBack(WebViewController controller) async {
     allowNavi = true;
+    safeNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
     }
@@ -253,6 +254,7 @@ class Controls extends StatelessWidget {
 
   Future<void> _onGoForward(WebViewController controller) async {
     allowNavi = true;
+    safeNavi = true;
     if (await controller.canGoForward()) {
       await controller.goForward();
     }

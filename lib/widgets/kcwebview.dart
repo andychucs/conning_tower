@@ -178,7 +178,7 @@ class KCWebViewState extends State<KCWebView> {
                 setState(() {
                   beforeRedirect = false;
                   if (uri.path.startsWith(
-                      '/netgame/social/-/gadgets/=/app_id=854854')) {
+                      '/netgame/social/-/gadgets/=/app_id=854854') && !safeNavi) {
                     beforeRedirect = true;
                     inKancolleWindow = false;
                     autoAdjusted = false;
@@ -186,6 +186,7 @@ class KCWebViewState extends State<KCWebView> {
                     inKancolleWindow = true;
                     autoAdjusted = false;
                   }
+                  safeNavi = false;
                 });
               },
               onPageFinished: (String url) async {
