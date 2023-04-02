@@ -108,16 +108,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsHideFAB":
             MessageLookupByLibrary.simpleMessage("Hide Floating Action Button"),
         "SettingsHomeLoad": MessageLookupByLibrary.simpleMessage(
-            "Auto Open Search Bar URL on Launch"),
+            "Auto Open Homepage URL on Launch"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage(
-            "Make Current Web Page as Home"),
+            "Make Current Web Page as Homepage URL"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("Lock Screen Orientation"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("Not Available for iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
+        "ToolSaveHomeCancel":
+            MessageLookupByLibrary.simpleMessage("Homepage URL removed"),
+        "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("Invalid URL"),
+        "ToolSaveHomeSuccess":
+            MessageLookupByLibrary.simpleMessage("Homepage URL saved"),
         "ToolSearchBarURLSetting":
-            MessageLookupByLibrary.simpleMessage("Set Search Bar URL"),
+            MessageLookupByLibrary.simpleMessage("Edit Homepage URL"),
         "ToolTitleGameScreen":
             MessageLookupByLibrary.simpleMessage("WebView Screen"),
         "ToolTitleGameSound":

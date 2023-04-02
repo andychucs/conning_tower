@@ -194,11 +194,17 @@ class KCWebViewState extends State<KCWebView> {
               onPageFinished: (String url) async {
                 print('Page finished loading: $url');
                 if (url == homeUrl) {
+                  if (enableAutoLoadHomeUrl && customHomeUrl.isNotEmpty) {
+                    if (!customHomeUrl.startsWith("http://") && !customHomeUrl.startsWith("https://")) {
+                      await controller!.loadUrl("https://$customHomeUrl");
+                    }
+                    await controller!.loadUrl(customHomeUrl);
+                  }
                   await controller!.loadFlutterAsset('assets/www/home.html');
                 }
                 if (url.endsWith('assets/www/home.html')) {
                   await controller!.runJavascript(
-                      "input.value='$customHomeBase64Url';input.placeholder='🔍 ${S.of(context).AssetsHtmlSearchBarText}';goButton.textContent='${S.of(context).AssetsHtmlSearchBarGo}';");
+                      "input.value='$customHomeUrl';input.placeholder='🔍 ${S.of(context).AssetsHtmlSearchBarText}';goButton.textContent='${S.of(context).AssetsHtmlSearchBarGo}';");
                 }
                 // var uri = Uri.parse(url);
                 // Fluttertoast.showToast(msg: S.current.KCViewFuncMsgPageFinished(uri.host));

@@ -101,15 +101,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("启用自动全屏"),
         "SettingsHideFAB": MessageLookupByLibrary.simpleMessage("隐藏浮动按钮"),
         "SettingsHomeLoad":
-            MessageLookupByLibrary.simpleMessage("启动时自动打开搜索框默认URL"),
-        "SettingsHomeSave": MessageLookupByLibrary.simpleMessage("将当前网页设置为主页"),
+            MessageLookupByLibrary.simpleMessage("启动时自动打开主页URL"),
+        "SettingsHomeSave":
+            MessageLookupByLibrary.simpleMessage("将当前网页设置为主页URL"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("锁定屏幕方向"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不适用于iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
+        "ToolSaveHomeCancel": MessageLookupByLibrary.simpleMessage("主页URL已删除"),
+        "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("无效的URL"),
+        "ToolSaveHomeSuccess": MessageLookupByLibrary.simpleMessage("主页URL已保存"),
         "ToolSearchBarURLSetting":
-            MessageLookupByLibrary.simpleMessage("设置搜索框默认URL"),
+            MessageLookupByLibrary.simpleMessage("修改主页URL"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("网页窗口"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("修改UA"),

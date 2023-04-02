@@ -120,11 +120,41 @@ class S {
     );
   }
 
-  /// `Set Search Bar URL`
+  /// `Edit Homepage URL`
   String get ToolSearchBarURLSetting {
     return Intl.message(
-      'Set Search Bar URL',
+      'Edit Homepage URL',
       name: 'ToolSearchBarURLSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage URL saved`
+  String get ToolSaveHomeSuccess {
+    return Intl.message(
+      'Homepage URL saved',
+      name: 'ToolSaveHomeSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage URL removed`
+  String get ToolSaveHomeCancel {
+    return Intl.message(
+      'Homepage URL removed',
+      name: 'ToolSaveHomeCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid URL`
+  String get ToolSaveHomeFail {
+    return Intl.message(
+      'Invalid URL',
+      name: 'ToolSaveHomeFail',
       desc: '',
       args: [],
     );
@@ -370,20 +400,20 @@ class S {
     );
   }
 
-  /// `Auto Open Search Bar URL on Launch`
+  /// `Auto Open Homepage URL on Launch`
   String get SettingsHomeLoad {
     return Intl.message(
-      'Auto Open Search Bar URL on Launch',
+      'Auto Open Homepage URL on Launch',
       name: 'SettingsHomeLoad',
       desc: '',
       args: [],
     );
   }
 
-  /// `Make Current Web Page as Home`
+  /// `Make Current Web Page as Homepage URL`
   String get SettingsHomeSave {
     return Intl.message(
-      'Make Current Web Page as Home',
+      'Make Current Web Page as Homepage URL',
       name: 'SettingsHomeSave',
       desc: '',
       args: [],

@@ -104,16 +104,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsHideFAB":
             MessageLookupByLibrary.simpleMessage("フローティングボタンを隠す"),
         "SettingsHomeLoad":
-            MessageLookupByLibrary.simpleMessage("検索バーURLをアプリのホームに設定する"),
+            MessageLookupByLibrary.simpleMessage("自動的にホームページのURLがロードする"),
         "SettingsHomeSave":
-            MessageLookupByLibrary.simpleMessage("現在のWebページをホームに設定する"),
+            MessageLookupByLibrary.simpleMessage("現在のサイトをホームページURLに設定する"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("画面の方向を固定する"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("iPadでは使用不可"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
+        "ToolSaveHomeCancel":
+            MessageLookupByLibrary.simpleMessage("ホームページのURLが削除されました"),
+        "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("無効なURL"),
+        "ToolSaveHomeSuccess":
+            MessageLookupByLibrary.simpleMessage("ホームページのURLを保存しました"),
         "ToolSearchBarURLSetting":
-            MessageLookupByLibrary.simpleMessage("検索バーURLを設定する"),
+            MessageLookupByLibrary.simpleMessage("ホームページURLを編集する"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("UAを編集する"),

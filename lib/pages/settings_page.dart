@@ -18,7 +18,7 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
-  bool enableAutLoadSearchBarUrlSwitchValue = false;
+  bool enableAutoLoadHomeUrlSwitchValue = false;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
-      enableAutLoadSearchBarUrlSwitchValue = (prefs.getBool('enableAutLoadSearchBarUrl') ?? false);
+      enableAutoLoadHomeUrlSwitchValue = (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
     });
   }
 
@@ -55,7 +55,7 @@ class SettingsPageState extends State<SettingsPage> {
               title: Text(S.of(context).AppName),
               tiles: <SettingsTile>[
                 SettingsTile.switchTile(
-                  initialValue: enableAutLoadSearchBarUrlSwitchValue,
+                  initialValue: enableAutoLoadHomeUrlSwitchValue,
                   leading: const Icon(
                     CupertinoIcons.home,
                   ),
@@ -63,9 +63,9 @@ class SettingsPageState extends State<SettingsPage> {
                   onToggle: (value) async {
                     HapticFeedback.heavyImpact();
                     setState(() {
-                      enableAutLoadSearchBarUrlSwitchValue = value;
+                      enableAutoLoadHomeUrlSwitchValue = value;
                     });
-                    localStorage.setBool('enableAutLoadSearchBarUrl', value);
+                    localStorage.setBool('enableAutoLoadHomeUrl', value);
                     widget.reloadConfig();
                   },
                 ),
