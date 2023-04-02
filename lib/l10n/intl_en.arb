@@ -1,5 +1,9 @@
 {
   "@@locale": "en",
+  "AssetsHtmlSearchBarText": "Search or enter website name",
+  "@AssetsHtmlSearchBarText": {},
+  "AssetsHtmlSearchBarGo": "Go",
+  "@AssetsHtmlSearchBarGo": {},
   "ToolTitleWeb": "Web",
   "@ToolTitleWeb": {},
   "ToolTitleGameSound": "Game Sound",

@@ -50,6 +50,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Search or enter website name`
+  String get AssetsHtmlSearchBarText {
+    return Intl.message(
+      'Search or enter website name',
+      name: 'AssetsHtmlSearchBarText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go`
+  String get AssetsHtmlSearchBarGo {
+    return Intl.message(
+      'Go',
+      name: 'AssetsHtmlSearchBarGo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Web`
   String get ToolTitleWeb {
     return Intl.message(

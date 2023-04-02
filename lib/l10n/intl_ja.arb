@@ -1,5 +1,9 @@
 {
   "@@locale": "ja",
+  "AssetsHtmlSearchBarText": "ウェブサイト名を検索または入力してください",
+  "@AssetsHtmlSearchBarText": {},
+  "AssetsHtmlSearchBarGo": "移動",
+  "@AssetsHtmlSearchBarGo": {},
   "ToolTitleGameSound": "ゲームの音声",
   "@ToolTitleGameSound": {},
   "ToolTitleGameScreen": "画面",

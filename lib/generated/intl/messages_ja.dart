@@ -63,6 +63,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppResize": MessageLookupByLibrary.simpleMessage("画面に合わせてリサイズする"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール"),
+        "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("移動"),
+        "AssetsHtmlSearchBarText":
+            MessageLookupByLibrary.simpleMessage("ウェブサイト名を検索または入力してください"),
         "Cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),

@@ -63,6 +63,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸至适合屏幕"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动"),
+        "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("前往"),
+        "AssetsHtmlSearchBarText":
+            MessageLookupByLibrary.simpleMessage("搜索或输入网站名称"),
         "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),

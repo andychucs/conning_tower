@@ -50,7 +50,7 @@ class KCWebViewState extends State<KCWebView> {
         builder:
             (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
           final WebViewController? controller = snapshot.data;
-          String homeUrl = getHomeUrl();
+          String homeUrl = "data:text/html;base64,PGh0bWw+"; // <html>
           return AspectRatio(
             aspectRatio: 5 / 3,
             child: WebView(
@@ -174,8 +174,8 @@ class KCWebViewState extends State<KCWebView> {
               onPageStarted: (String url) {
                 print('Page started loading: $url');
                 var uri = Uri.parse(url);
-                Fluttertoast.showToast(
-                    msg: S.current.KCViewFuncMsgPageStart(uri.host));
+                // Fluttertoast.showToast(
+                //     msg: S.current.KCViewFuncMsgPageStart(uri.host));
                 setState(() {
                   beforeRedirect = false;
                   if (uri.path.startsWith(
@@ -193,6 +193,13 @@ class KCWebViewState extends State<KCWebView> {
               },
               onPageFinished: (String url) async {
                 print('Page finished loading: $url');
+                if (url == homeUrl) {
+                  await controller!.loadFlutterAsset('assets/www/home.html');
+                }
+                if (url.endsWith('assets/www/home.html')) {
+                  await controller!.runJavascript(
+                      "input.value='$customHomeBase64Url';input.placeholder='🔍 ${S.of(context).AssetsHtmlSearchBarText}';goButton.textContent='${S.of(context).AssetsHtmlSearchBarGo}';");
+                }
                 // var uri = Uri.parse(url);
                 // Fluttertoast.showToast(msg: S.current.KCViewFuncMsgPageFinished(uri.host));
               },

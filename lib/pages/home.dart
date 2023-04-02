@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
@@ -16,7 +15,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:validators/validators.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -34,7 +32,6 @@ late double kWebviewWidth;
 late int selectedIndex;
 late Uri home;
 late bool enableAutoProcess;
-late String customHomeBase64;
 late String customHomeBase64Url;
 late bool enableAutLoadSearchBarUrl;
 late String customHomeUrl;
@@ -81,7 +78,6 @@ class HomePageState extends State<HomePage> {
     selectedIndex = 0;
     enableAutLoadSearchBarUrl = false;
     customHomeUrl = '';
-    customHomeBase64 = '';
     customUA = '';
     enableAutoProcess = true;
     customHomeBase64Url = '';
@@ -90,13 +86,6 @@ class HomePageState extends State<HomePage> {
     home = Uri.parse(kGameUrl);
 
     _loadConfig();
-
-    if (isURL(customHomeBase64Url)) {
-      debugPrint('getHomeUrl:$customHomeBase64Url');
-      customHomeBase64 = base64Encode(const Utf8Encoder()
-          .convert(kHome.replaceFirst("value=''>", "value='$customHomeBase64Url'>")));
-      kHomeBase64 = customHomeBase64;
-    }
 
     SystemChrome.setPreferredOrientations(
         getDeviceOrientation(customDeviceOrientationIndex));

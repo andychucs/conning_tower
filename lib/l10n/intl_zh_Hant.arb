@@ -1,5 +1,9 @@
 {
   "@@locale": "zh-Hant",
+  "AssetsHtmlSearchBarText": "搜尋或輸入網站名稱",
+  "@AssetsHtmlSearchBarText": {},
+  "AssetsHtmlSearchBarGo": "前往",
+  "@AssetsHtmlSearchBarGo": {},
   "AppBack": "上一頁",
   "@AppBack": {},
   "AppForward": "下一頁",

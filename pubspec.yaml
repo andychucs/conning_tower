@@ -82,6 +82,8 @@ flutter:
     - assets/images/defaultAvatarImage.png
     - assets/config/sentry
     - assets/www/home.html
+    - assets/www/style.css
+    - assets/www/script.es6
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

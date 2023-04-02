@@ -118,7 +118,7 @@ getResizeScale(double height, double width) {
 }
 
 String getHomeUrl() {
-  String homeUrl = 'data:text/html;base64,$kHomeBase64';
+  String homeUrl = "data:text/html;base64,PGh0bWw+";
 
   if (enableAutLoadSearchBarUrl && customHomeBase64Url.isNotEmpty) {
     homeUrl = customHomeBase64Url;

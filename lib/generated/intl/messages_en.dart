@@ -67,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Resize to Fit Screen"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("Scroll Down"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("Scroll Up"),
+        "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("Go"),
+        "AssetsHtmlSearchBarText": MessageLookupByLibrary.simpleMessage(
+            "Search or enter website name"),
         "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
