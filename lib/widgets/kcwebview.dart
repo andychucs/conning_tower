@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -83,32 +82,21 @@ class KCWebViewState extends State<KCWebView> {
                             })
                         .onError(
                           (error, stackTrace) => () async {
-                            // await Sentry.captureMessage(
-                            //     'Error on 1st time run redirect');
                             Future.delayed(
                               const Duration(seconds: 1),
                               () async {
                                 await controller
-                                    .runJavascript(
-                                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
-                                    .whenComplete(() => () {
-                                          Fluttertoast.showToast(
-                                              msg: S.current
-                                                  .KCViewFuncMsgAutoGameRedirect);
-                                          debugPrint("HTTP Redirect success");
-                                          setState(() {
-                                            inKancolleWindow = true;
-                                          });
-                                        })
-                                    // .onError(
-                                    //   (error, stackTrace) => () async {
-                                    //     // await Sentry.captureException(error,
-                                    //     //     stackTrace: stackTrace);
-                                    //     // await Sentry.captureMessage(
-                                    //     //     'Error on 2nd time run redirect');
-                                    //   },
-                                    // )
-                                ;
+                                    .runJavascript('''window.open("http:"+gadgetInfo.URL,'_blank');''').whenComplete(
+                                        () => () {
+                                              Fluttertoast.showToast(
+                                                  msg: S.current
+                                                      .KCViewFuncMsgAutoGameRedirect);
+                                              debugPrint(
+                                                  "HTTP Redirect success");
+                                              setState(() {
+                                                inKancolleWindow = true;
+                                              });
+                                            });
                               },
                             );
                           },
@@ -138,7 +126,9 @@ class KCWebViewState extends State<KCWebView> {
                 }
 
                 if (uri.path.startsWith(
-                    '/netgame/social/-/gadgets/=/app_id=854854') && !safeNavi && allowNavi) {
+                        '/netgame/social/-/gadgets/=/app_id=854854') &&
+                    !safeNavi &&
+                    allowNavi) {
                   beforeRedirect = true;
                   inKancolleWindow = false;
                   autoAdjusted = false;
@@ -184,11 +174,13 @@ class KCWebViewState extends State<KCWebView> {
               onPageStarted: (String url) {
                 print('Page started loading: $url');
                 var uri = Uri.parse(url);
-                Fluttertoast.showToast(msg: S.current.KCViewFuncMsgPageStart(uri.host));
+                Fluttertoast.showToast(
+                    msg: S.current.KCViewFuncMsgPageStart(uri.host));
                 setState(() {
                   beforeRedirect = false;
                   if (uri.path.startsWith(
-                      '/netgame/social/-/gadgets/=/app_id=854854') && !safeNavi) {
+                          '/netgame/social/-/gadgets/=/app_id=854854') &&
+                      !safeNavi) {
                     beforeRedirect = true;
                     inKancolleWindow = false;
                     autoAdjusted = false;

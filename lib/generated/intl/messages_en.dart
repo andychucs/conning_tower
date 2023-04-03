@@ -105,7 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsHideFAB":
             MessageLookupByLibrary.simpleMessage("Hide Floating Action Button"),
         "SettingsHomeLoad": MessageLookupByLibrary.simpleMessage(
-            "Auto Open KanColle on Launch"),
+            "Auto Open Search Bar URL on Launch"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage(
             "Make Current Web Page as Home"),
         "SettingsLockDeviceOrientation":
@@ -113,6 +113,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("Not Available for iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
+        "ToolSearchBarURLSetting":
+            MessageLookupByLibrary.simpleMessage("Set Search Bar URL"),
         "ToolTitleGameScreen":
             MessageLookupByLibrary.simpleMessage("WebView Screen"),
         "ToolTitleGameSound":

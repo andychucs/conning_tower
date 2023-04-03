@@ -99,13 +99,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("啟用自動全螢幕"),
         "SettingsHideFAB": MessageLookupByLibrary.simpleMessage("隱藏浮動操作按鈕"),
         "SettingsHomeLoad":
-            MessageLookupByLibrary.simpleMessage("啟動時自動打開「艦これ」"),
+            MessageLookupByLibrary.simpleMessage("啟動時自動打開搜索框默認URL"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage("將當前網頁設置為主頁"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("鎖定屏幕方向"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不適用於iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
+        "ToolSearchBarURLSetting":
+            MessageLookupByLibrary.simpleMessage("設置搜索框默認URL"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("修改UA"),
         "ToolUATip": MessageLookupByLibrary.simpleMessage("設置後需重啟應用"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")

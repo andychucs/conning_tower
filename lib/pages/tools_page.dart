@@ -34,10 +34,13 @@ class ToolsPage extends StatefulWidget {
 
 class _ToolsPageState extends State<ToolsPage> {
   late TextEditingController _uaTextController;
+  late TextEditingController _urlTextController;
+
 
   @override
   void initState() {
     _uaTextController = TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
+    _urlTextController = TextEditingController(text: customHomeBase64Url.isNotEmpty ? customHomeBase64Url : '');
     super.initState();
 }
 
@@ -127,8 +130,8 @@ class _ToolsPageState extends State<ToolsPage> {
       } else {
         prefs.setString('customHomeUrl', curUrl!);
       }
-      prefs.setString('customHomeBase64Url', curUrl!);
-      customHomeBase64Url = curUrl;
+      // prefs.setString('customHomeBase64Url', curUrl!);
+      // customHomeBase64Url = curUrl;
       widget.reloadConfig();
     }
   }
@@ -195,6 +198,21 @@ class _ToolsPageState extends State<ToolsPage> {
                         }
                       },
                     ),
+                    SettingsTile.navigation(
+                      title: Text(S.of(context).ToolSearchBarURLSetting),
+                      leading: const Icon(CupertinoIcons.home),
+                      onPressed: (context) async {
+                        var value = _urlTextController.value;
+                        bool flag = await _showDialogWithInput(S.current.ToolUATip, _urlTextController);
+                        if(!flag) {
+                          _urlTextController.value = value;
+                        }else{
+                          customHomeBase64Url = _urlTextController.value.text;
+                          localStorage.setString("customHomeBase64Url", customHomeBase64Url);
+                        }
+                      },
+                    ),
+
                     SettingsTile.navigation(
                       // trailing: Icon(customHomeUrl.isEmpty ? CupertinoIcons.star : CupertinoIcons.star_fill),
                       title: Text(S.of(context).SettingsHomeSave),

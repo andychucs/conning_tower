@@ -100,6 +100,16 @@ class S {
     );
   }
 
+  /// `Set Search Bar URL`
+  String get ToolSearchBarURLSetting {
+    return Intl.message(
+      'Set Search Bar URL',
+      name: 'ToolSearchBarURLSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Back`
   String get AppBack {
     return Intl.message(
@@ -340,10 +350,10 @@ class S {
     );
   }
 
-  /// `Auto Open KanColle on Launch`
+  /// `Auto Open Search Bar URL on Launch`
   String get SettingsHomeLoad {
     return Intl.message(
-      'Auto Open KanColle on Launch',
+      'Auto Open Search Bar URL on Launch',
       name: 'SettingsHomeLoad',
       desc: '',
       args: [],

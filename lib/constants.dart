@@ -174,4 +174,4 @@ const String kHome = """
 </html>
 """;
 
-final String kHomeBase64 = base64Encode(const Utf8Encoder().convert(kHome));
+String kHomeBase64 = base64Encode(const Utf8Encoder().convert(kHome));

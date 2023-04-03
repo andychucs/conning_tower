@@ -59,7 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督、Conning Towerへようこそ。Conning Towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、「ツール-Web-HTTPリダイレクト」を押してください。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTPリダイレクト"),
-        "AppRefresh": MessageLookupByLibrary.simpleMessage("リフレッシュ"),
+        "AppRefresh": MessageLookupByLibrary.simpleMessage("リロード"),
         "AppResize": MessageLookupByLibrary.simpleMessage("画面に合わせてリサイズする"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール"),
@@ -75,9 +75,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgAutoGameRedirect":
             MessageLookupByLibrary.simpleMessage("ゲームウィンドウが読み込まれました！"),
         "KCViewFuncMsgGameNavi":
-            MessageLookupByLibrary.simpleMessage("艦これのロード中"),
+            MessageLookupByLibrary.simpleMessage("ゲームのロード中"),
         "KCViewFuncMsgGameNaviBlock":
-            MessageLookupByLibrary.simpleMessage("艦これのリフレッシュは遮断されました"),
+            MessageLookupByLibrary.simpleMessage("ゲームのリフレッシュは遮断されました"),
         "KCViewFuncMsgNavi": m1,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
@@ -97,11 +97,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("リフレッシュするとゲームの音声が元に復します。"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
-            MessageLookupByLibrary.simpleMessage("艦これの画面を自動的に全画面する"),
+            MessageLookupByLibrary.simpleMessage("ゲームの画面を自動的に全画面する"),
         "SettingsHideFAB":
             MessageLookupByLibrary.simpleMessage("フローティングボタンを隠す"),
         "SettingsHomeLoad":
-            MessageLookupByLibrary.simpleMessage("「艦これ」をアプリのホームに設定する"),
+            MessageLookupByLibrary.simpleMessage("検索バーURLをアプリのホームに設定する"),
         "SettingsHomeSave":
             MessageLookupByLibrary.simpleMessage("現在のWebページをホームに設定する"),
         "SettingsLockDeviceOrientation":
@@ -109,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("iPadでは使用不可"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
+        "ToolSearchBarURLSetting":
+            MessageLookupByLibrary.simpleMessage("検索バーURLを設定する"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("UAを編集する"),

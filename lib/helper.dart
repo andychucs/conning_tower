@@ -122,21 +122,13 @@ getResizeScale(double height, double width) {
 String getHomeUrl() {
   String homeUrl = 'data:text/html;base64,$kHomeBase64';
 
-  // If user never load dmm website, default home page show google. Might be helpful for app store review.
-  if (loadedDMM) {
-    homeUrl =
-        'data:text/html;base64,${base64Encode(const Utf8Encoder().convert(kHome.replaceFirst("value=''>", "value='$kGameUrl'>")))}';
-  }
-
-  if (enableAutLoadKC) {
-    homeUrl = kGameUrl;
+  if (enableAutLoadSearchBarUrl && customHomeBase64Url.isNotEmpty) {
+    homeUrl = customHomeBase64Url;
+    if (!homeUrl.startsWith("http://") && !homeUrl.startsWith("https://")) {
+      homeUrl = "https://$homeUrl";
+    }
   } else if (isURL(customHomeUrl)) {
     homeUrl = customHomeUrl;
-  } else if (customHomeBase64Url.isNotEmpty) {
-    debugPrint('getHomeUrl:$customHomeBase64Url');
-    customHomeBase64 = base64Encode(const Utf8Encoder()
-        .convert(kHome.replaceFirst("value=''>", "value='$customHomeBase64Url'>")));
-    homeUrl = 'data:text/html;base64,$customHomeBase64';
   }
   return homeUrl;
 }
