@@ -44,7 +44,7 @@ jobs:
         uses: ncipollo/release-action@v1.11.2
         with:
           allowUpdates: true
-          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          artifacts: "build/app/outputs/flutter-apk/*release.apk"
           token: ${{ secrets.ACTIONS_TOKEN }}
       - name: Telegram Message Notify
         uses: appleboy/telegram-action@v0.1.1
