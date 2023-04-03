@@ -18,6 +18,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
+import '../generated/l10n.dart';
 
 late bool allowNavi;
 late bool safeNavi;
