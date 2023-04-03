@@ -440,71 +440,81 @@ class S {
     );
   }
 
+  /// `Reload`
+  String get AppControlsReload {
+    return Intl.message(
+      'Reload',
+      name: 'AppControlsReload',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
-  String AppLeftSideControlsLoad(Object url) {
+  String AppControlsLoad(Object url) {
     return Intl.message(
       'Load URL: $url',
-      name: 'AppLeftSideControlsLoad',
+      name: 'AppControlsLoad',
       desc: '',
       args: [url],
     );
   }
 
   /// `WebView not ready`
-  String get AppLeftSideControlsNotReady {
+  String get AppControlsNotReady {
     return Intl.message(
       'WebView not ready',
-      name: 'AppLeftSideControlsNotReady',
+      name: 'AppControlsNotReady',
       desc: '',
       args: [],
     );
   }
 
   /// `Cookies are gone, website logout success`
-  String get AppLeftSideControlsLogoutSuccess {
+  String get AppControlsLogoutSuccess {
     return Intl.message(
       'Cookies are gone, website logout success',
-      name: 'AppLeftSideControlsLogoutSuccess',
+      name: 'AppControlsLogoutSuccess',
       desc: '',
       args: [],
     );
   }
 
   /// `There are no cookies. May not need logout.`
-  String get AppLeftSideControlsLogoutFailed {
+  String get AppControlsLogoutFailed {
     return Intl.message(
       'There are no cookies. May not need logout.',
-      name: 'AppLeftSideControlsLogoutFailed',
+      name: 'AppControlsLogoutFailed',
       desc: '',
       args: [],
     );
   }
 
   /// `Cache cleared.`
-  String get AppLeftSideControlsClearCache {
+  String get AppControlsClearCache {
     return Intl.message(
       'Cache cleared.',
-      name: 'AppLeftSideControlsClearCache',
+      name: 'AppControlsClearCache',
       desc: '',
       args: [],
     );
   }
 
   /// `Scroll down`
-  String get AppLeftSideControlsScrollDown {
+  String get AppControlsScrollDown {
     return Intl.message(
       'Scroll down',
-      name: 'AppLeftSideControlsScrollDown',
+      name: 'AppControlsScrollDown',
       desc: '',
       args: [],
     );
   }
 
   /// `Scroll up`
-  String get AppLeftSideControlsScrollUp {
+  String get AppControlsScrollUp {
     return Intl.message(
       'Scroll up',
-      name: 'AppLeftSideControlsScrollUp',
+      name: 'AppControlsScrollUp',
       desc: '',
       args: [],
     );

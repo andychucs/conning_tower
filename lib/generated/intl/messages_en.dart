@@ -42,22 +42,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("Clear Cookie"),
+        "AppControlsClearCache":
+            MessageLookupByLibrary.simpleMessage("Cache cleared."),
+        "AppControlsLoad": m0,
+        "AppControlsLogoutFailed": MessageLookupByLibrary.simpleMessage(
+            "There are no cookies. May not need logout."),
+        "AppControlsLogoutSuccess": MessageLookupByLibrary.simpleMessage(
+            "Cookies are gone, website logout success"),
+        "AppControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView not ready"),
+        "AppControlsReload": MessageLookupByLibrary.simpleMessage("Reload"),
+        "AppControlsScrollDown":
+            MessageLookupByLibrary.simpleMessage("Scroll down"),
+        "AppControlsScrollUp":
+            MessageLookupByLibrary.simpleMessage("Scroll up"),
         "AppForward": MessageLookupByLibrary.simpleMessage("Forward"),
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
-        "AppLeftSideControlsClearCache":
-            MessageLookupByLibrary.simpleMessage("Cache cleared."),
-        "AppLeftSideControlsLoad": m0,
-        "AppLeftSideControlsLogoutFailed": MessageLookupByLibrary.simpleMessage(
-            "There are no cookies. May not need logout."),
-        "AppLeftSideControlsLogoutSuccess":
-            MessageLookupByLibrary.simpleMessage(
-                "Cookies are gone, website logout success"),
-        "AppLeftSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView not ready"),
-        "AppLeftSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("Scroll down"),
-        "AppLeftSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("Scroll up"),
         "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command."),

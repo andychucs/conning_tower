@@ -83,7 +83,7 @@ class _ToolsPageState extends State<ToolsPage> {
     if (value ?? false) {
       allowNavi = true;
       await controller.clearCache();
-      Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
+      Fluttertoast.showToast(msg: S.current.AppControlsClearCache);
     }
   }
 
@@ -96,9 +96,9 @@ class _ToolsPageState extends State<ToolsPage> {
         });
     if (value ?? false) {
       final bool hadCookies = await widget.cookieManager.clearCookies();
-      String message = S.current.AppLeftSideControlsLogoutSuccess;
+      String message = S.current.AppControlsLogoutSuccess;
       if (!hadCookies) {
-        message = S.current.AppLeftSideControlsLogoutFailed;
+        message = S.current.AppControlsLogoutFailed;
       }
       Fluttertoast.showToast(msg: message);
     }

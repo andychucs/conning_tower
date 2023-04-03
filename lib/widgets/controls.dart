@@ -95,7 +95,7 @@ class Controls extends StatelessWidget {
                     CupertinoIcons.refresh,
                     color: CupertinoColors.destructiveRed,
                   ),
-                  label: S.of(context).AppRefresh,
+                  label: S.of(context).AppControlsReload,
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(CupertinoIcons.back),
@@ -144,7 +144,7 @@ class Controls extends StatelessWidget {
                   CupertinoIcons.refresh,
                   color: CupertinoColors.destructiveRed,
                 ),
-                label: Text(S.of(context).AppRefresh),
+                label: Text(S.of(context).AppControlsReload),
               ),
               NavigationRailDestination(
                 icon: const Icon(CupertinoIcons.back),
@@ -219,7 +219,7 @@ class Controls extends StatelessWidget {
         _onGoForward(controller);
         break;
       case ConFunc.refresh:
-        _onRefresh(context, controller);
+        _onReload(context, controller);
         break;
       case ConFunc.clearCookies:
         _onClearCookies(context);
@@ -230,12 +230,12 @@ class Controls extends StatelessWidget {
     }
   }
 
-  Future<void> _onRefresh(
+  Future<void> _onReload(
       BuildContext context, WebViewController controller) async {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(msg: S.current.AppRefresh, isNormal: true);
+          return CustomAlertDialog(msg: S.current.AppControlsReload, isNormal: true);
         });
     if (value ?? false) {
       allowNavi = true;
@@ -322,9 +322,9 @@ class Controls extends StatelessWidget {
         });
     if (value ?? false) {
       final bool hadCookies = await cookieManager.clearCookies();
-      String message = S.current.AppLeftSideControlsLogoutSuccess;
+      String message = S.current.AppControlsLogoutSuccess;
       if (!hadCookies) {
-        message = S.current.AppLeftSideControlsLogoutFailed;
+        message = S.current.AppControlsLogoutFailed;
       }
       Fluttertoast.showToast(msg: message);
     }
@@ -342,7 +342,7 @@ class Controls extends StatelessWidget {
     if (value ?? false) {
       allowNavi = true;
       await controller.clearCache();
-      Fluttertoast.showToast(msg: S.current.AppLeftSideControlsClearCache);
+      Fluttertoast.showToast(msg: S.current.AppControlsClearCache);
     }
   }
 }

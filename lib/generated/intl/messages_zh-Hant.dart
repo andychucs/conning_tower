@@ -40,21 +40,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("刪除緩存"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("刪除Cookie"),
+        "AppControlsClearCache": MessageLookupByLibrary.simpleMessage("已刪除緩存"),
+        "AppControlsLoad": m0,
+        "AppControlsLogoutFailed":
+            MessageLookupByLibrary.simpleMessage("未找到Cookie"),
+        "AppControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage("已成功刪除Cookie"),
+        "AppControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView還沒有準備好"),
+        "AppControlsReload": MessageLookupByLibrary.simpleMessage("重新整理"),
+        "AppControlsScrollDown": MessageLookupByLibrary.simpleMessage("向下捲動"),
+        "AppControlsScrollUp": MessageLookupByLibrary.simpleMessage("向上捲動"),
         "AppForward": MessageLookupByLibrary.simpleMessage("下一頁"),
         "AppHome": MessageLookupByLibrary.simpleMessage("主頁"),
-        "AppLeftSideControlsClearCache":
-            MessageLookupByLibrary.simpleMessage("已刪除緩存"),
-        "AppLeftSideControlsLoad": m0,
-        "AppLeftSideControlsLogoutFailed":
-            MessageLookupByLibrary.simpleMessage("未找到Cookie"),
-        "AppLeftSideControlsLogoutSuccess":
-            MessageLookupByLibrary.simpleMessage("已成功刪除Cookie"),
-        "AppLeftSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView還沒有準備好"),
-        "AppLeftSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("向下捲動"),
-        "AppLeftSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("向上捲動"),
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督，歡迎來到艦橋，艦橋會在Kancolle界面加載完成後自動調整屏幕尺寸到合適大小，如果長時間看到DMM GAMES的頂欄存在，請在你指揮艦隊前點擊「工具-Web-重定向」。"),

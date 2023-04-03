@@ -40,21 +40,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュを消去"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("Cookieを消去"),
+        "AppControlsClearCache":
+            MessageLookupByLibrary.simpleMessage("キャッシュを消去しました"),
+        "AppControlsLoad": m0,
+        "AppControlsLogoutFailed": MessageLookupByLibrary.simpleMessage(
+            "Cookieは見つかりません。すでにログアウトされている可能性があります。"),
+        "AppControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage("Cookieを消去しました。ログアウトに成功しました"),
+        "AppControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebViewの準備がまだ整っていません"),
+        "AppControlsReload": MessageLookupByLibrary.simpleMessage("リロード"),
+        "AppControlsScrollDown": MessageLookupByLibrary.simpleMessage("下スクロール"),
+        "AppControlsScrollUp": MessageLookupByLibrary.simpleMessage("上スクロール"),
         "AppForward": MessageLookupByLibrary.simpleMessage("前へ"),
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
-        "AppLeftSideControlsClearCache":
-            MessageLookupByLibrary.simpleMessage("キャッシュを消去しました"),
-        "AppLeftSideControlsLoad": m0,
-        "AppLeftSideControlsLogoutFailed": MessageLookupByLibrary.simpleMessage(
-            "Cookieは見つかりません。すでにログアウトされている可能性があります。"),
-        "AppLeftSideControlsLogoutSuccess":
-            MessageLookupByLibrary.simpleMessage("Cookieを消去しました。ログアウトに成功しました"),
-        "AppLeftSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebViewの準備がまだ整っていません"),
-        "AppLeftSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("下スクロール"),
-        "AppLeftSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("上スクロール"),
         "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督、Conning Towerへようこそ。Conning Towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、「ツール-Web-HTTPリダイレクト」を押してください。"),
