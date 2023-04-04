@@ -50,6 +50,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Search or enter website name`
+  String get AssetsHtmlSearchBarText {
+    return Intl.message(
+      'Search or enter website name',
+      name: 'AssetsHtmlSearchBarText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go`
+  String get AssetsHtmlSearchBarGo {
+    return Intl.message(
+      'Go',
+      name: 'AssetsHtmlSearchBarGo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Web`
   String get ToolTitleWeb {
     return Intl.message(
@@ -95,6 +115,46 @@ class S {
     return Intl.message(
       'Need Relaunch App to Active',
       name: 'ToolUATip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Homepage URL`
+  String get ToolSearchBarURLSetting {
+    return Intl.message(
+      'Edit Homepage URL',
+      name: 'ToolSearchBarURLSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage URL saved`
+  String get ToolSaveHomeSuccess {
+    return Intl.message(
+      'Homepage URL saved',
+      name: 'ToolSaveHomeSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage URL removed`
+  String get ToolSaveHomeCancel {
+    return Intl.message(
+      'Homepage URL removed',
+      name: 'ToolSaveHomeCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid URL`
+  String get ToolSaveHomeFail {
+    return Intl.message(
+      'Invalid URL',
+      name: 'ToolSaveHomeFail',
       desc: '',
       args: [],
     );
@@ -340,20 +400,20 @@ class S {
     );
   }
 
-  /// `Auto Open KanColle on Launch`
+  /// `Auto Open Homepage URL on Launch`
   String get SettingsHomeLoad {
     return Intl.message(
-      'Auto Open KanColle on Launch',
+      'Auto Open Homepage URL on Launch',
       name: 'SettingsHomeLoad',
       desc: '',
       args: [],
     );
   }
 
-  /// `Make Current Web Page as Home`
+  /// `Make Current Web Page as Homepage URL`
   String get SettingsHomeSave {
     return Intl.message(
-      'Make Current Web Page as Home',
+      'Make Current Web Page as Homepage URL',
       name: 'SettingsHomeSave',
       desc: '',
       args: [],
@@ -380,71 +440,81 @@ class S {
     );
   }
 
+  /// `Reload`
+  String get AppControlsReload {
+    return Intl.message(
+      'Reload',
+      name: 'AppControlsReload',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Load URL: {url}`
-  String AppLeftSideControlsLoad(Object url) {
+  String AppControlsLoad(Object url) {
     return Intl.message(
       'Load URL: $url',
-      name: 'AppLeftSideControlsLoad',
+      name: 'AppControlsLoad',
       desc: '',
       args: [url],
     );
   }
 
   /// `WebView not ready`
-  String get AppLeftSideControlsNotReady {
+  String get AppControlsNotReady {
     return Intl.message(
       'WebView not ready',
-      name: 'AppLeftSideControlsNotReady',
+      name: 'AppControlsNotReady',
       desc: '',
       args: [],
     );
   }
 
   /// `Cookies are gone, website logout success`
-  String get AppLeftSideControlsLogoutSuccess {
+  String get AppControlsLogoutSuccess {
     return Intl.message(
       'Cookies are gone, website logout success',
-      name: 'AppLeftSideControlsLogoutSuccess',
+      name: 'AppControlsLogoutSuccess',
       desc: '',
       args: [],
     );
   }
 
   /// `There are no cookies. May not need logout.`
-  String get AppLeftSideControlsLogoutFailed {
+  String get AppControlsLogoutFailed {
     return Intl.message(
       'There are no cookies. May not need logout.',
-      name: 'AppLeftSideControlsLogoutFailed',
+      name: 'AppControlsLogoutFailed',
       desc: '',
       args: [],
     );
   }
 
   /// `Cache cleared.`
-  String get AppLeftSideControlsClearCache {
+  String get AppControlsClearCache {
     return Intl.message(
       'Cache cleared.',
-      name: 'AppLeftSideControlsClearCache',
+      name: 'AppControlsClearCache',
       desc: '',
       args: [],
     );
   }
 
   /// `Scroll down`
-  String get AppLeftSideControlsScrollDown {
+  String get AppControlsScrollDown {
     return Intl.message(
       'Scroll down',
-      name: 'AppLeftSideControlsScrollDown',
+      name: 'AppControlsScrollDown',
       desc: '',
       args: [],
     );
   }
 
   /// `Scroll up`
-  String get AppLeftSideControlsScrollUp {
+  String get AppControlsScrollUp {
     return Intl.message(
       'Scroll up',
-      name: 'AppLeftSideControlsScrollUp',
+      name: 'AppControlsScrollUp',
       desc: '',
       args: [],
     );

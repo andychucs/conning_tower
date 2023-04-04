@@ -21,6 +21,7 @@ import '../constants.dart';
 import '../generated/l10n.dart';
 
 late bool allowNavi;
+late bool safeNavi;
 late bool autoAdjusted;
 late bool bottomPadding;
 late bool gameLoadCompleted;
@@ -31,9 +32,7 @@ late double kWebviewWidth;
 late int selectedIndex;
 late Uri home;
 late bool enableAutoProcess;
-late String customHomeBase64;
-late String customHomeBase64Url;
-late bool enableAutLoadKC;
+late bool enableAutoLoadHomeUrl;
 late String customHomeUrl;
 late String customUA;
 late bool loadedDMM;
@@ -73,14 +72,13 @@ class HomePageState extends State<HomePage> {
     kWebviewHeight = 0.0;
     kWebviewWidth = 0.0;
     allowNavi = true;
+    safeNavi = false;
     bottomPadding = false;
     selectedIndex = 0;
-    enableAutLoadKC = true;
+    enableAutoLoadHomeUrl = false;
     customHomeUrl = '';
-    customHomeBase64 = '';
     customUA = '';
     enableAutoProcess = true;
-    customHomeBase64Url = '';
     loadedDMM = true;
     enableHideFAB = false;
     home = Uri.parse(kGameUrl);
@@ -117,9 +115,8 @@ class HomePageState extends State<HomePage> {
       _showIosNotify = (prefs.getBool('showIosNotify') ?? true);
       enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
       bottomPadding = (prefs.getBool('bottomPadding') ?? false);
-      enableAutLoadKC = (prefs.getBool('enableAutLoadKC') ?? true);
+      enableAutoLoadHomeUrl = (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
       customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
-      customHomeBase64Url = (prefs.getString('customHomeBase64Url') ?? '');
       loadedDMM = (prefs.getBool('loadedDMM') ?? true);
       customDeviceOrientationIndex =
           (prefs.getInt('customDeviceOrientation') ?? -1);

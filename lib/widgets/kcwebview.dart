@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:conning_tower/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../constants.dart';
@@ -50,7 +50,7 @@ class KCWebViewState extends State<KCWebView> {
         builder:
             (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
           final WebViewController? controller = snapshot.data;
-          String homeUrl = getHomeUrl();
+          String homeUrl = "data:text/html;base64,PGh0bWw+"; // <html>
           return AspectRatio(
             aspectRatio: 5 / 3,
             child: WebView(
@@ -82,32 +82,21 @@ class KCWebViewState extends State<KCWebView> {
                             })
                         .onError(
                           (error, stackTrace) => () async {
-                            // await Sentry.captureMessage(
-                            //     'Error on 1st time run redirect');
                             Future.delayed(
                               const Duration(seconds: 1),
                               () async {
                                 await controller
-                                    .runJavascript(
-                                        '''window.open("http:"+gadgetInfo.URL,'_blank');''')
-                                    .whenComplete(() => () {
-                                          Fluttertoast.showToast(
-                                              msg: S.current
-                                                  .KCViewFuncMsgAutoGameRedirect);
-                                          debugPrint("HTTP Redirect success");
-                                          setState(() {
-                                            inKancolleWindow = true;
-                                          });
-                                        })
-                                    // .onError(
-                                    //   (error, stackTrace) => () async {
-                                    //     // await Sentry.captureException(error,
-                                    //     //     stackTrace: stackTrace);
-                                    //     // await Sentry.captureMessage(
-                                    //     //     'Error on 2nd time run redirect');
-                                    //   },
-                                    // )
-                                ;
+                                    .runJavascript('''window.open("http:"+gadgetInfo.URL,'_blank');''').whenComplete(
+                                        () => () {
+                                              Fluttertoast.showToast(
+                                                  msg: S.current
+                                                      .KCViewFuncMsgAutoGameRedirect);
+                                              debugPrint(
+                                                  "HTTP Redirect success");
+                                              setState(() {
+                                                inKancolleWindow = true;
+                                              });
+                                            });
                               },
                             );
                           },
@@ -131,10 +120,20 @@ class KCWebViewState extends State<KCWebView> {
               navigationDelegate: (NavigationRequest request) async {
                 print('allowing navigation to $request');
                 var uri = Uri.parse(request.url);
+
                 if (!loadedDMM && uri.host.endsWith('dmm.com')) {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.setBool('loadedDMM', true);
+                  localStorage.setBool('loadedDMM', true);
                 }
+
+                if (uri.path.startsWith(
+                        '/netgame/social/-/gadgets/=/app_id=854854') &&
+                    !safeNavi &&
+                    allowNavi) {
+                  beforeRedirect = true;
+                  inKancolleWindow = false;
+                  autoAdjusted = false;
+                }
+
                 if (Platform.isIOS) {
                   if (uri.path.endsWith('/kcs2/index.php')) {
                     Fluttertoast.showToast(
@@ -175,10 +174,13 @@ class KCWebViewState extends State<KCWebView> {
               onPageStarted: (String url) {
                 print('Page started loading: $url');
                 var uri = Uri.parse(url);
+                // Fluttertoast.showToast(
+                //     msg: S.current.KCViewFuncMsgPageStart(uri.host));
                 setState(() {
                   beforeRedirect = false;
                   if (uri.path.startsWith(
-                      '/netgame/social/-/gadgets/=/app_id=854854')) {
+                          '/netgame/social/-/gadgets/=/app_id=854854') &&
+                      !safeNavi) {
                     beforeRedirect = true;
                     inKancolleWindow = false;
                     autoAdjusted = false;
@@ -186,10 +188,26 @@ class KCWebViewState extends State<KCWebView> {
                     inKancolleWindow = true;
                     autoAdjusted = false;
                   }
+                  safeNavi = false;
                 });
               },
               onPageFinished: (String url) async {
                 print('Page finished loading: $url');
+                if (url == homeUrl) {
+                  if (enableAutoLoadHomeUrl && customHomeUrl.isNotEmpty) {
+                    if (!customHomeUrl.startsWith("http://") && !customHomeUrl.startsWith("https://")) {
+                      await controller!.loadUrl("https://$customHomeUrl");
+                    }
+                    await controller!.loadUrl(customHomeUrl);
+                  }
+                  await controller!.loadFlutterAsset('assets/www/home.html');
+                }
+                if (url.endsWith('assets/www/home.html')) {
+                  await controller!.runJavascript(
+                      "input.value='$customHomeUrl';input.placeholder='🔍 ${S.of(context).AssetsHtmlSearchBarText}';goButton.textContent='${S.of(context).AssetsHtmlSearchBarGo}';");
+                }
+                // var uri = Uri.parse(url);
+                // Fluttertoast.showToast(msg: S.current.KCViewFuncMsgPageFinished(uri.host));
               },
             ),
           );

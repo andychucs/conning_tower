@@ -58,7 +58,7 @@ class AboutPage extends StatelessWidget {
                                     maxLines: 1,
                                   ),
                                   Text(
-                                    '${S.of(context).AboutVersion}: ${packageInfo.version}',
+                                    '${S.of(context).AboutVersion}: ${packageInfo.version}(${packageInfo.buildNumber})',
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                   InkWell(

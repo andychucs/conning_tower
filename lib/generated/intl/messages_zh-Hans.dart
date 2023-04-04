@@ -40,21 +40,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("清除缓存"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("清除Cookie"),
+        "AppControlsClearCache": MessageLookupByLibrary.simpleMessage("缓存已删除"),
+        "AppControlsLoad": m0,
+        "AppControlsLogoutFailed":
+            MessageLookupByLibrary.simpleMessage("未发现Cookie，可能不需要退出登陆"),
+        "AppControlsLogoutSuccess":
+            MessageLookupByLibrary.simpleMessage("Cookie已清除，已退出网站登陆"),
+        "AppControlsNotReady":
+            MessageLookupByLibrary.simpleMessage("WebView还没有准备好"),
+        "AppControlsReload": MessageLookupByLibrary.simpleMessage("刷新"),
+        "AppControlsScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
+        "AppControlsScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动"),
         "AppForward": MessageLookupByLibrary.simpleMessage("前进"),
         "AppHome": MessageLookupByLibrary.simpleMessage("主页"),
-        "AppLeftSideControlsClearCache":
-            MessageLookupByLibrary.simpleMessage("缓存已删除"),
-        "AppLeftSideControlsLoad": m0,
-        "AppLeftSideControlsLogoutFailed":
-            MessageLookupByLibrary.simpleMessage("未发现Cookie，可能不需要退出登陆"),
-        "AppLeftSideControlsLogoutSuccess":
-            MessageLookupByLibrary.simpleMessage("Cookie已清除，已退出网站登陆"),
-        "AppLeftSideControlsNotReady":
-            MessageLookupByLibrary.simpleMessage("WebView还没有准备好"),
-        "AppLeftSideControlsScrollDown":
-            MessageLookupByLibrary.simpleMessage("向下滚动"),
-        "AppLeftSideControlsScrollUp":
-            MessageLookupByLibrary.simpleMessage("向上滚动"),
         "AppName": MessageLookupByLibrary.simpleMessage("舰桥"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
             "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成后自动调整屏幕尺寸到合适大小，如果长时间看到DMM GAMES的顶栏存在，请在你指挥舰队前点击「工具-Web-HTTP跳转」。"),
@@ -63,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸至适合屏幕"),
         "AppScrollDown": MessageLookupByLibrary.simpleMessage("向下滚动"),
         "AppScrollUp": MessageLookupByLibrary.simpleMessage("向上滚动"),
+        "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("前往"),
+        "AssetsHtmlSearchBarText":
+            MessageLookupByLibrary.simpleMessage("搜索或输入网站名称"),
         "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
@@ -98,13 +99,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("启用自动全屏"),
         "SettingsHideFAB": MessageLookupByLibrary.simpleMessage("隐藏浮动按钮"),
         "SettingsHomeLoad":
-            MessageLookupByLibrary.simpleMessage("启动时自动打开「艦これ」"),
-        "SettingsHomeSave": MessageLookupByLibrary.simpleMessage("将当前网页设置为主页"),
+            MessageLookupByLibrary.simpleMessage("启动时自动打开主页URL"),
+        "SettingsHomeSave":
+            MessageLookupByLibrary.simpleMessage("将当前网页设置为主页URL"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("锁定屏幕方向"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不适用于iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
+        "ToolSaveHomeCancel": MessageLookupByLibrary.simpleMessage("主页URL已删除"),
+        "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("无效的URL"),
+        "ToolSaveHomeSuccess": MessageLookupByLibrary.simpleMessage("主页URL已保存"),
+        "ToolSearchBarURLSetting":
+            MessageLookupByLibrary.simpleMessage("修改主页URL"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("网页窗口"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("修改UA"),
