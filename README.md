@@ -32,7 +32,11 @@ ConningTower for iOS is a closed-source branch independent of the ConningTower o
 
 [ConningTower for iOS](https://conntower.github.io/#/ios) is now on the AppStore.
 
-[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/24852023/228246824-f238c38d-a48d-4f85-b4a4-45301f4ec022.svg)](https://apps.apple.com/app/conningtower/id6446080475)
+Free version ConningTowerLite is a lightweight version of ConningTower for iOS. Runs more smoothly.
+
+Download ConningTowerLite for free.👇
+
+[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/24852023/228246824-f238c38d-a48d-4f85-b4a4-45301f4ec022.svg)](https://apps.apple.com/app/conningtowerlite/id6446118603)
 
 
 ## 本地化 地域化 Localization 
