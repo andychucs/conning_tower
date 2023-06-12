@@ -8,10 +8,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'webview_provider.g.dart';
+part 'webview_provider.freezed.dart';
+
+@freezed
+class WebControllerState with _$WebControllerState{
+  factory WebControllerState({
+    required InAppWebViewController? controller,
+    required bool isInit,
+    required WebUri currUrl,
+    required List<WebUri> currPageUrls,
+    required bool isScreenResize
+}) = _WebControllerState;
+}
 
 // controller provider by riverpod code generation, develop with run 'flutter pub run build_runner watch'
 @riverpod
