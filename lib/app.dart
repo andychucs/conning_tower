@@ -1,9 +1,8 @@
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'generated/l10n.dart';
 
 class ConnTowerApp extends StatelessWidget {
   const ConnTowerApp({super.key});

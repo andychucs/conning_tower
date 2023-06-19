@@ -6,3 +6,5 @@
   
 */
 CFBundleDisplayName = "Conning Tower";
+
+NSPhotoLibraryAddUsageDescription = "Save photos to the Photos album. Allow access?";

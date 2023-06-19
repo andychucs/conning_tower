@@ -7,9 +7,37 @@
 </head>
 <body>
 <div class="form-group">
-    <input id="url" class="form-field" type="text" enterkeyhint="go" placeholder="🔍" value=''>
+    <input id="url" class="form-field" type="url" list="defaultURLs" enterkeyhint="go" placeholder="🔍" value=''>
+    <datalist id="defaultURLs">
+        <option value="https://www.google.com/" label="Google"></option>
+    </datalist>
     <button id="navigate" class="form-field navigate-button" onclick="go()">GO</button>
-    <script src="script.es6"></script>
+    <script>
+        const input = document.querySelector('#url');
+        const goButton = document.querySelector('#navigate');
+
+        function go() {
+            let url = document.getElementById('url').value;
+            const domainRegex = /^((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)$/;
+            if (domainRegex.test(url)) {
+                if (url.substring(0, 7).toLowerCase() === "http://" || url.substring(0, 8).toLowerCase() === "https://") {
+                    window.open(url, '_blank');
+                } else {
+                    url = "http://" + url;
+                    window.open(url, '_blank');
+                }
+            } else {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(url)}`;
+                window.open(searchUrl, '_blank');
+            }
+        }
+
+        input.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                go();
+            }
+        });
+    </script>
 </div>
 </body>
 </html>

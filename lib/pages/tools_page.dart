@@ -1,64 +1,67 @@
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/providers/webview_provider.dart';
+import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:validators/validators.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-import '../generated/l10n.dart';
-import '../helper.dart';
-import '../widgets/dailog.dart';
-import 'home.dart';
-
-class ToolsPage extends StatefulWidget {
-  ToolsPage(this._webViewControllerFuture, CookieManager? cookieManager,
+class ToolsPage extends ConsumerStatefulWidget {
+  ToolsPage(CookieManager? cookieManager,
       {Key? key, required this.notifyParent, required this.reloadConfig})
-      : cookieManager = cookieManager ?? CookieManager(),
+      : cookieManager = cookieManager ?? CookieManager.instance(),
         super(key: key);
 
   final Function() notifyParent;
-  final Future<WebViewController> _webViewControllerFuture;
   late final CookieManager cookieManager;
   final Function() reloadConfig;
 
   @override
-  State<ToolsPage> createState() => _ToolsPageState();
+  ConsumerState<ToolsPage> createState() => _ToolsPageState();
 }
 
-class _ToolsPageState extends State<ToolsPage> {
+class _ToolsPageState extends ConsumerState<ToolsPage> {
   late TextEditingController _uaTextController;
   late TextEditingController _urlTextController;
 
   @override
   void initState() {
-    _uaTextController = TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
-    _urlTextController = TextEditingController(text: customHomeUrl.isNotEmpty ? customHomeUrl : '');
+    _uaTextController =
+        TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
+    _urlTextController = TextEditingController(
+        text: customHomeUrl.isNotEmpty ? customHomeUrl : '');
     super.initState();
   }
 
-  void _resetTextController(){
+  void _resetTextController() {
     setState(() {
-      _uaTextController = TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
-      _urlTextController = TextEditingController(text: customHomeUrl.isNotEmpty ? customHomeUrl : '');
+      _uaTextController = TextEditingController(
+          text: customUA.isNotEmpty ? customUA : kSafariUA);
+      _urlTextController = TextEditingController(
+          text: customHomeUrl.isNotEmpty ? customHomeUrl : '');
     });
   }
 
-  Future<void> _onHttpRedirect(WebViewController controller) async {
+  Future<void> _onHttpRedirect(InAppWebViewController controller) async {
     if (!inKancolleWindow) {
-      String? currentUrl = await controller.currentUrl();
-      Uri uri = Uri.parse(currentUrl!);
-      if (uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')) {
+      WebUri? currentUrl = await controller.getUrl();
+      if (currentUrl!.path.startsWith(home.path)) {
         // May be HTTPS or HTTP
-        allowNavi = true;
         if (Platform.isIOS) {
-          await controller.runJavascript(
-              '''window.open("http:"+gadgetInfo.URL,'_blank');''');
+          await controller.injectJavascriptFileFromAsset(
+              assetFilePath: httpRedirectJS);
         }
         inKancolleWindow = true;
       }
@@ -72,7 +75,7 @@ class _ToolsPageState extends State<ToolsPage> {
   }
 
   Future<void> _onClearCache(
-      BuildContext context, WebViewController controller) async {
+      BuildContext context, InAppWebViewController controller) async {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
@@ -81,7 +84,6 @@ class _ToolsPageState extends State<ToolsPage> {
               isNormal: true);
         });
     if (value ?? false) {
-      allowNavi = true;
       await controller.clearCache();
       Fluttertoast.showToast(msg: S.current.AppControlsClearCache);
     }
@@ -95,48 +97,49 @@ class _ToolsPageState extends State<ToolsPage> {
               msg: S.current.AppClearCookie, isNormal: true);
         });
     if (value ?? false) {
-      final bool hadCookies = await widget.cookieManager.clearCookies();
+      await widget.cookieManager.deleteAllCookies();
       String message = S.current.AppControlsLogoutSuccess;
-      if (!hadCookies) {
-        message = S.current.AppControlsLogoutFailed;
-      }
       Fluttertoast.showToast(msg: message);
     }
   }
 
-  Future<void> _onAdjustWindow(WebViewController controller) async {
+  Future<void> _onAdjustWindow(InAppWebViewController controller) async {
     if (gameLoadCompleted) {
-      await autoAdjustWindowV2(controller, force: true);
+      bool flag = await autoAdjustWindowV2(controller, force: true);
+      if (flag) {
+        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+      } else {
+        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+      }
     } else {
       Fluttertoast.showToast(
           msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
     }
   }
 
-  Future<void> _onMuteGame(WebViewController controller) async {
-    await controller.runJavascript('''document.cookie=
-    "kcs_options=vol_bgm%3D0%3Bvol_se%3D0%3Bvol_voice%3D0%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"
-	''');
+  Future<void> _onMuteGame(InAppWebViewController controller) async {
+    await controller.injectJavascriptFileFromAsset(
+        assetFilePath: muteKancolleJS);
     Fluttertoast.showToast(msg: S.current.MsgMuteGame);
   }
 
-  Future<void> _onUnmuteGame(WebViewController controller) async {
-    await controller.runJavascript('''	document.cookie=
-    "kcs_options=vol_bgm%3D30%3Bvol_se%3D40%3Bvol_voice%3D60%3Bv_be_left%3D1%3Bv_duty%3D1;expires=Thu, 1-Jan-2099 00:00:00 GMT;path=/;domain=dmm.com"''');
+  Future<void> _onUnmuteGame(InAppWebViewController controller) async {
+    await controller.injectJavascriptFileFromAsset(
+        assetFilePath: unMuteKancolleJS);
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
-  Future<void> _onHomeSave(WebViewController controller) async {
-    final String? curUrl = await controller.currentUrl();
-    if (isURL(curUrl)) {
+  Future<void> _onHomeSave(InAppWebViewController controller) async {
+    WebUri? currentUrl = await controller.getUrl();
+    if (isURL(currentUrl.toString())) {
       setState(() {
-        if (curUrl == customHomeUrl) {
+        if (currentUrl.toString() == customHomeUrl) {
           customHomeUrl = '';
           localStorage.setString('customHomeUrl', '');
           Fluttertoast.showToast(msg: S.current.ToolSaveHomeCancel);
         } else {
-          customHomeUrl = curUrl!;
-          localStorage.setString('customHomeUrl', curUrl);
+          customHomeUrl = currentUrl.toString();
+          localStorage.setString('customHomeUrl', currentUrl.toString());
           Fluttertoast.showToast(msg: S.current.ToolSaveHomeSuccess);
         }
       });
@@ -159,7 +162,7 @@ class _ToolsPageState extends State<ToolsPage> {
           ),
           actions: [
             CupertinoDialogAction(
-              child: Text(S.current.Cancel),
+              child: Text(S.current.TextCancel),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
@@ -178,15 +181,12 @@ class _ToolsPageState extends State<ToolsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: widget._webViewControllerFuture,
-      builder:
-          (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
-        final WebViewController? controller = snapshot.data;
-        return NestedScrollView(
+    final cp = ref.watch(webControllerProvider);
+    return NestedScrollView(
           headerSliverBuilder: (context, bool innerBoxIsScrolled) {
             return [
               CupertinoSliverNavigationBar(
+                transitionBetweenRoutes: false,
                 largeTitle: Text(S.current.ToolsButton),
               ),
             ];
@@ -221,12 +221,12 @@ class _ToolsPageState extends State<ToolsPage> {
                       onPressed: (context) async {
                         _resetTextController();
                         var value = _urlTextController.value;
-                        bool flag = await _showDialogWithInput(
-                            '', _urlTextController);
+                        bool flag =
+                            await _showDialogWithInput('', _urlTextController);
                         if (!flag) {
                           _urlTextController.value = value;
                         } else {
-                          setState((){
+                          setState(() {
                             customHomeUrl = _urlTextController.value.text;
                           });
                           localStorage.setString(
@@ -242,24 +242,27 @@ class _ToolsPageState extends State<ToolsPage> {
                           : CupertinoIcons.star_fill),
                       onPressed: (context) {
                         HapticFeedback.heavyImpact();
-                        _onHomeSave(controller!);
+                        if (!cp.isInit) return;
+                        _onHomeSave(cp.controller);
                       },
                     ),
                     SettingsTile.navigation(
-                      leading:
-                          const Icon(CupertinoIcons.rectangle_expand_vertical),
-                      title: Text(S.of(context).AppRedirect),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        _onHttpRedirect(controller!);
-                      },
-                    ),
+                        leading: const Icon(
+                            CupertinoIcons.rectangle_expand_vertical),
+                        title: Text(S.of(context).AppRedirect),
+                        onPressed: (context) {
+                          HapticFeedback.heavyImpact();
+                          if (!cp.isInit) return;
+                          _onHttpRedirect(cp.controller);
+                        },
+                      ),
                     SettingsTile.navigation(
                       leading: const Icon(CupertinoIcons.delete),
                       title: Text(S.of(context).AppClearCache),
                       onPressed: (context) {
                         HapticFeedback.heavyImpact();
-                        _onClearCache(context, controller!);
+                        if (!cp.isInit) return;
+                        _onClearCache(context, cp.controller);
                       },
                     ),
                     SettingsTile.navigation(
@@ -273,37 +276,40 @@ class _ToolsPageState extends State<ToolsPage> {
                   ],
                 ),
                 SettingsSection(
-                  title: Text(S.of(context).ToolTitleGameSound),
-                  tiles: [
-                    SettingsTile.navigation(
-                      leading: const Icon(CupertinoIcons.volume_down),
-                      title: Text(S.of(context).GameUnmute),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        _onUnmuteGame(controller!);
-                      },
-                    ),
-                    SettingsTile.navigation(
-                      leading: const Icon(CupertinoIcons.volume_off),
-                      title: Text(S.of(context).GameMute),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        _onMuteGame(controller!);
-                      },
-                    ),
-                  ],
-                ),
+                    title: Text(S.of(context).ToolTitleGameSound),
+                    tiles: [
+                      SettingsTile.navigation(
+                        leading: const Icon(CupertinoIcons.volume_down),
+                        title: Text(S.of(context).GameUnmute),
+                        onPressed: (context) {
+                          HapticFeedback.heavyImpact();
+                          if (!cp.isInit) return;
+                          _onUnmuteGame(cp.controller);
+                        },
+                      ),
+                      SettingsTile.navigation(
+                        leading: const Icon(CupertinoIcons.volume_off),
+                        title: Text(S.of(context).GameMute),
+                        onPressed: (context) {
+                          HapticFeedback.heavyImpact();
+                          if (!cp.isInit) return;
+                          _onMuteGame(cp.controller);
+                        },
+                      ),
+                    ],
+                  ),
                 SettingsSection(
                   title: Text(S.of(context).ToolTitleGameScreen),
                   tiles: [
                     SettingsTile.navigation(
-                      leading: const Icon(CupertinoIcons.fullscreen),
-                      title: Text(S.of(context).AppResize),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        _onAdjustWindow(controller!);
-                      },
-                    ),
+                        leading: const Icon(CupertinoIcons.fullscreen),
+                        title: Text(S.of(context).AppResize),
+                        onPressed: (context) {
+                          HapticFeedback.heavyImpact();
+                          if (!cp.isInit) return;
+                          _onAdjustWindow(cp.controller);
+                        },
+                      ),
                     SettingsTile.switchTile(
                       initialValue: bottomPadding,
                       leading: const Icon(CupertinoIcons.rectangle_dock),
@@ -320,11 +326,25 @@ class _ToolsPageState extends State<ToolsPage> {
                     ),
                   ],
                 ),
+                if(kIsOpenSource) SettingsSection(
+                  title: Text(S.of(context).ToolTitleUtilities),
+                  tiles: [
+                    SettingsTile.navigation(
+                        leading: const Icon(CupertinoIcons.square_list),
+                        title: const Text("Task Notification(Not available)"),
+                        onPressed: (context) {
+                          showCupertinoModalBottomSheet(
+                            expand: true,
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => ComplexModal(),
+                          );
+                        }),
+                  ],
+                ),
               ],
             ),
           ),
         );
-      },
-    );
   }
 }

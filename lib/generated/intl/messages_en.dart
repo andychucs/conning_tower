@@ -60,7 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppHome": MessageLookupByLibrary.simpleMessage("Home"),
         "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command."),
+            "Admiral, welcome to the bridge, the bridge will make the game interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command."),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP Redirect"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
         "AppResize":
@@ -70,7 +70,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("Go"),
         "AssetsHtmlSearchBarText": MessageLookupByLibrary.simpleMessage(
             "Search or enter website name"),
-        "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
         "FutureAutoAdjustWindowSuccess":
@@ -102,6 +101,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The game will be muted after refreshing."),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "The game will be unmuted after refreshing."),
+        "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
+            "Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("Enable Auto Fullscreen"),
@@ -116,6 +117,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("Not Available for iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
+        "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "TextNo": MessageLookupByLibrary.simpleMessage("No"),
+        "TextShouldClose":
+            MessageLookupByLibrary.simpleMessage("Should Close?"),
+        "TextYes": MessageLookupByLibrary.simpleMessage("Yes"),
         "ToolSaveHomeCancel":
             MessageLookupByLibrary.simpleMessage("Homepage URL removed"),
         "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("Invalid URL"),
@@ -127,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("WebView Screen"),
         "ToolTitleGameSound":
             MessageLookupByLibrary.simpleMessage("Game Sound"),
+        "ToolTitleUtilities": MessageLookupByLibrary.simpleMessage("Utilities"),
         "ToolTitleWeb": MessageLookupByLibrary.simpleMessage("Web"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("Edit UserAgent"),
         "ToolUATip":

@@ -56,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppHome": MessageLookupByLibrary.simpleMessage("ホーム"),
         "AppName": MessageLookupByLibrary.simpleMessage("Conning Tower"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督、Conning Towerへようこそ。Conning Towerは艦これの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、「ツール-Web-HTTPリダイレクト」を押してください。"),
+            "提督、Conning Towerへようこそ。Conning Towerはゲームの画面を自動的に全画面にします。もし画面が長時間DMM GAMESのトップバーから切り替わらなかった際は、「ツール-Web-HTTPリダイレクト」を押してください。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTPリダイレクト"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("リロード"),
         "AppResize": MessageLookupByLibrary.simpleMessage("画面に合わせてリサイズする"),
@@ -65,7 +65,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("開く"),
         "AssetsHtmlSearchBarText":
             MessageLookupByLibrary.simpleMessage("ウェブサイト名を検索または入力してください"),
-        "Cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
@@ -97,6 +96,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "ミュートします。変更を適用するにはリロードを行ってください。"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "ミュートを解除します。変更を適用するにはリロードを行ってください。"),
+        "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
+            "スクリーンショットの保存に失敗しました。写真へのアクセスを許可していただけますか？"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("ゲームの画面を自動的に全画面する"),
@@ -111,6 +112,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("iPadでは使用不可"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
+        "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
+        "TextShouldClose": MessageLookupByLibrary.simpleMessage("閉じてよろしいですか？"),
+        "TextYes": MessageLookupByLibrary.simpleMessage("はい"),
         "ToolSaveHomeCancel":
             MessageLookupByLibrary.simpleMessage("ホームページのURLが削除されました"),
         "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("無効なURL"),
@@ -120,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ホームページURLを編集する"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("画面"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("ゲームの音声"),
+        "ToolTitleUtilities": MessageLookupByLibrary.simpleMessage("ユーティリティ"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("UAを編集する"),
         "ToolUATip":
             MessageLookupByLibrary.simpleMessage("変更を適用するにはアプリを再起動してください"),

@@ -1,98 +1,82 @@
 import 'dart:io';
 
-import 'package:conning_tower/pages/home.dart';
+import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/main.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:validators/validators.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-import 'constants.dart';
-import 'generated/l10n.dart';
-
-Future<bool> autoAdjustWindowV2(WebViewController controller,
-    {bool force = false}) async {
+Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
+    {bool force = false, bool needToaste = false}) async {
   //Adjust Kancolle window
   if ((inKancolleWindow && !autoAdjusted && enableAutoProcess) ||
       (force && inKancolleWindow)) {
     if (Platform.isIOS) {
-      await controller.runJavascript('''
-((\$, _) => {
-    const html = \$.documentElement,
-        gf = \$.getElementById('flashWrap');
-    if (!gf) return;
-    const gs = gf.style,
-        gw = gf.offsetWidth,
-        gh = gw * .6;
-    let vp = \$.querySelector('meta[name=viewport]'),
-        t = 0;
-    vp || (vp = \$.createElement('meta'), vp.name = 'viewport', \$.querySelector('head').appendChild(vp));
-    vp.content = 'width=' + gw;
-    'orientation' in _ && html.webkitRequestFullscreen && html.webkitRequestFullscreen();
-    html.style.overflow = 'hidden';\$.body.style.cssText = 'min-width:0;padding:0;margin:0;overflow:hidden;margin:0';
-    gs.position = 'fixed';
-    gs.marginRight = 'auto';
-    gs.marginLeft = 'auto';
-    gs.top = '0px';
-    gs.right = '0';
-    gs.zIndex = '100';
-    gs.transformOrigin = 'center top';
-    if (!_.kancolleFit) {
-        const k = () => {
-            const w = html.clientWidth,
-                h = _.innerHeight;
-            w / h < 1 / .6 ? gs.transform = 'scale(' + w / gw + ')' : gs.transform = 'scale(' + h / gh + ')';
-            w < gw ? gs.left = '-' + (gw - w) / 2 + 'px' : gs.left = '0'
-        };
-        _.kancolleFit = k
-    }
-    kancolleFit()
-
-    document.getElementById('sectionWrap').style.display = 'none';
-})(document, window)
-''');
+      await controller.injectJavascriptFileFromAsset(
+          assetFilePath: autoScaleIOSJS);
     } else if (Platform.isAndroid) {
-      await controller.runJavascript('''
-((\$, _) => {
-    const html =\$.documentElement,
-        gf = \$.getElementById('game_frame');
-    if (!gf) return;
-    const gs = gf.style,
-        gw = gf.offsetWidth,
-        gh = gw * .6;
-    let vp = \$.querySelector('meta[name=viewport]'),
-        t = 0;
-    vp || (vp = \$.createElement('meta'), vp.name = 'viewport', \$.querySelector('head').appendChild(vp));
-    vp.content = 'width=' + gw;
-    'orientation' in _ && html.webkitRequestFullscreen && html.webkitRequestFullscreen();
-    html.style.overflow = 'hidden';\$.body.style.cssText = 'min-width:0;padding:0;margin:0;overflow:hidden;margin:0';\$.querySelector('.dmm-ntgnavi').style.display = 'none';\$.querySelector('.area-naviapp').style.display = 'none';
-    gs.position = 'fixed';
-    gs.marginRight = 'auto';
-    gs.marginLeft = 'auto';
-    gs.top = '-16px';
-    gs.right = '0';
-    gs.zIndex = '100';
-    gs.transformOrigin = 'center top';
-    if (!_.kancolleFit) {
-        const k = () => {
-            const w = html.clientWidth,
-                h = _.innerHeight;
-            w / h < 1 / .6 ? gs.transform = 'scale(' + w / gw + ')' : gs.transform = 'scale(' + h / gh + ')';
-            w < gw ? gs.left = '-' + (gw - w) / 2 + 'px' : gs.left = '0'
-        };
-        _.addEventListener('resize', () => {
-            clearTimeout(t);
-            t = setTimeout(k, 10)
-        });
-        _.kancolleFit = k
-    }
-    kancolleFit()
-})(document, window)
-''');
+      await controller.injectJavascriptFileFromAsset(
+          assetFilePath: autoScaleAndroidJS);
     }
     autoAdjusted = true;
+    print("Auto adjust success");
+    if(needToaste) Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+    return true;
+  }
+  print("autoAdjustWindow fail");
+  if(needToaste) Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+  return false;
+}
+
+@Deprecated("old solution")
+Future<bool> autoAdjustWindow(
+  InAppWebViewController controller,
+) async {
+  //Adjust Kancolle window
+  if (inKancolleWindow && !autoAdjusted) {
+    int getWebviewSizeCount = 0;
+    do {
+      kWebviewHeight = await controller
+          .evaluateJavascript(source: '''window.innerHeight;''') as double;
+      kWebviewWidth = await controller
+          .evaluateJavascript(source: '''window.innerWidth;''') as double;
+      if (kWebviewHeight == 0.0 || kWebviewWidth == 0.0) {
+        await Future.delayed(const Duration(seconds: 2));
+      } else {
+        getWebviewSizeCount = 99;
+      }
+      print("obtaining webview size");
+      getWebviewSizeCount++;
+    } while (getWebviewSizeCount < 5);
+    var resizeScale = 1.0;
+    if (kWebviewHeight != 0.0 && kWebviewWidth != 0.0) {
+      resizeScale = getResizeScale(kWebviewHeight, kWebviewWidth);
+      autoAdjusted = true;
+    } else {
+      print("autoAdjustWindow fail");
+      return false;
+    }
+    await controller.evaluateJavascript(
+        source:
+            '''document.getElementById("spacing_top").style.display = "none";''');
+    if (Platform.isIOS) {
+      await controller.evaluateJavascript(
+          //Scale to correct size(ios webkit)
+          source:
+              '''document.getElementById("htmlWrap").style.webkitTransform = "scale($resizeScale,$resizeScale)";''');
+    } else if (Platform.isAndroid) {
+      await controller.evaluateJavascript(
+          //Scale to correct size(android chrome)
+          source:
+              '''document.getElementById("htmlWrap").style.transform = "scale($resizeScale,$resizeScale)";''');
+    }
+    await Future.delayed(const Duration(seconds: 2));
+    await controller.evaluateJavascript(
+        source:
+            '''document.getElementById("sectionWrap").style.display = "none";''');
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
     print("Auto adjust success");
-    allowNavi = false;
     return true;
   }
   print("autoAdjustWindow fail");
@@ -118,7 +102,7 @@ getResizeScale(double height, double width) {
 }
 
 String getHomeUrl() {
-  String homeUrl = "data:text/html;base64,PGh0bWw+";
+  String homeUrl = "http://localhost:8080/";
 
   if (enableAutoLoadHomeUrl && customHomeUrl.isNotEmpty) {
     homeUrl = customHomeUrl;
@@ -132,38 +116,9 @@ String getHomeUrl() {
 List<DeviceOrientation> getDeviceOrientation(int? index) {
   if (index == 0) return [DeviceOrientation.landscapeRight];
   if (index == 1) return [DeviceOrientation.landscapeLeft];
-  if (index == 2) return [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
-  if (index == 3) return [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft];
+  if (index == 2)
+    return [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
+  if (index == 3)
+    return [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft];
   return DeviceOrientation.values;
 }
-
-// double getFabPositionAngle(Enum position) {
-//   double angle = 0;
-//   switch (position) {
-//     case FabPosition.left:
-//       angle = 180;
-//       break;
-//     case FabPosition.right:
-//       angle = 0;
-//       break;
-//     case FabPosition.top:
-//       angle = 270;
-//       break;
-//     case FabPosition.bottom:
-//       angle = 90;
-//       break;
-//     case FabPosition.leftTop:
-//       angle = 225;
-//       break;
-//     case FabPosition.rightTop:
-//       angle = 315;
-//       break;
-//     case FabPosition.leftBottom:
-//       angle = 135;
-//       break;
-//     case FabPosition.rightBottom:
-//       angle = 45;
-//       break;
-//   }
-//   return angle;
-// }
