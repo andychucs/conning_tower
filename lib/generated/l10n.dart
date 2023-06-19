@@ -50,111 +50,51 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Search or enter website name`
-  String get AssetsHtmlSearchBarText {
+  /// `About`
+  String get AboutButton {
     return Intl.message(
-      'Search or enter website name',
-      name: 'AssetsHtmlSearchBarText',
+      'About',
+      name: 'AboutButton',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go`
-  String get AssetsHtmlSearchBarGo {
+  /// `Contributors`
+  String get AboutContributors {
     return Intl.message(
-      'Go',
-      name: 'AssetsHtmlSearchBarGo',
+      'Contributors',
+      name: 'AboutContributors',
       desc: '',
       args: [],
     );
   }
 
-  /// `Web`
-  String get ToolTitleWeb {
+  /// `Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.`
+  String get AboutDescription {
     return Intl.message(
-      'Web',
-      name: 'ToolTitleWeb',
+      'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
+      name: 'AboutDescription',
       desc: '',
       args: [],
     );
   }
 
-  /// `Game Sound`
-  String get ToolTitleGameSound {
+  /// `Version`
+  String get AboutVersion {
     return Intl.message(
-      'Game Sound',
-      name: 'ToolTitleGameSound',
+      'Version',
+      name: 'AboutVersion',
       desc: '',
       args: [],
     );
   }
 
-  /// `WebView Screen`
-  String get ToolTitleGameScreen {
+  /// `Don't show again`
+  String get AlertNotShowAgain {
     return Intl.message(
-      'WebView Screen',
-      name: 'ToolTitleGameScreen',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Edit UserAgent`
-  String get ToolUASetting {
-    return Intl.message(
-      'Edit UserAgent',
-      name: 'ToolUASetting',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Need Relaunch App to Active`
-  String get ToolUATip {
-    return Intl.message(
-      'Need Relaunch App to Active',
-      name: 'ToolUATip',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Edit Homepage URL`
-  String get ToolSearchBarURLSetting {
-    return Intl.message(
-      'Edit Homepage URL',
-      name: 'ToolSearchBarURLSetting',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Homepage URL saved`
-  String get ToolSaveHomeSuccess {
-    return Intl.message(
-      'Homepage URL saved',
-      name: 'ToolSaveHomeSuccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Homepage URL removed`
-  String get ToolSaveHomeCancel {
-    return Intl.message(
-      'Homepage URL removed',
-      name: 'ToolSaveHomeCancel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Invalid URL`
-  String get ToolSaveHomeFail {
-    return Intl.message(
-      'Invalid URL',
-      name: 'ToolSaveHomeFail',
+      'Don\'t show again',
+      name: 'AlertNotShowAgain',
       desc: '',
       args: [],
     );
@@ -165,6 +105,116 @@ class S {
     return Intl.message(
       'Back',
       name: 'AppBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bottom-up`
+  String get AppBottomSafe {
+    return Intl.message(
+      'Bottom-up',
+      name: 'AppBottomSafe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear Cache`
+  String get AppClearCache {
+    return Intl.message(
+      'Clear Cache',
+      name: 'AppClearCache',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear Cookie`
+  String get AppClearCookie {
+    return Intl.message(
+      'Clear Cookie',
+      name: 'AppClearCookie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cache cleared.`
+  String get AppControlsClearCache {
+    return Intl.message(
+      'Cache cleared.',
+      name: 'AppControlsClearCache',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load URL: {url}`
+  String AppControlsLoad(Object url) {
+    return Intl.message(
+      'Load URL: $url',
+      name: 'AppControlsLoad',
+      desc: '',
+      args: [url],
+    );
+  }
+
+  /// `There are no cookies. May not need logout.`
+  String get AppControlsLogoutFailed {
+    return Intl.message(
+      'There are no cookies. May not need logout.',
+      name: 'AppControlsLogoutFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cookies are gone, website logout success`
+  String get AppControlsLogoutSuccess {
+    return Intl.message(
+      'Cookies are gone, website logout success',
+      name: 'AppControlsLogoutSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WebView not ready`
+  String get AppControlsNotReady {
+    return Intl.message(
+      'WebView not ready',
+      name: 'AppControlsNotReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload`
+  String get AppControlsReload {
+    return Intl.message(
+      'Reload',
+      name: 'AppControlsReload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scroll down`
+  String get AppControlsScrollDown {
+    return Intl.message(
+      'Scroll down',
+      name: 'AppControlsScrollDown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scroll up`
+  String get AppControlsScrollUp {
+    return Intl.message(
+      'Scroll up',
+      name: 'AppControlsScrollUp',
       desc: '',
       args: [],
     );
@@ -200,10 +250,10 @@ class S {
     );
   }
 
-  /// `Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the 'Tools-Web-HTTP Redirect' button before you command.`
+  /// `Admiral, welcome to the bridge, the bridge will make the game interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the 'Tools-Web-HTTP Redirect' button before you command.`
   String get AppNotify {
     return Intl.message(
-      'Admiral, welcome to the bridge, the bridge will make the Kancolle interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command.',
+      'Admiral, welcome to the bridge, the bridge will make the game interface automatically full screen, if you see the top bar of DMM GAMES for a long time, please click the \'Tools-Web-HTTP Redirect\' button before you command.',
       name: 'AppNotify',
       desc: '',
       args: [],
@@ -240,286 +290,6 @@ class S {
     );
   }
 
-  /// `Clear Cookie`
-  String get AppClearCookie {
-    return Intl.message(
-      'Clear Cookie',
-      name: 'AppClearCookie',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Clear Cache`
-  String get AppClearCache {
-    return Intl.message(
-      'Clear Cache',
-      name: 'AppClearCache',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Bottom-up`
-  String get AppBottomSafe {
-    return Intl.message(
-      'Bottom-up',
-      name: 'AppBottomSafe',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Don't show again`
-  String get AlertNotShowAgain {
-    return Intl.message(
-      'Don\'t show again',
-      name: 'AlertNotShowAgain',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cancel`
-  String get Cancel {
-    return Intl.message(
-      'Cancel',
-      name: 'Cancel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `About`
-  String get AboutButton {
-    return Intl.message(
-      'About',
-      name: 'AboutButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.`
-  String get AboutDescription {
-    return Intl.message(
-      'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
-      name: 'AboutDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Contributors`
-  String get AboutContributors {
-    return Intl.message(
-      'Contributors',
-      name: 'AboutContributors',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Version`
-  String get AboutVersion {
-    return Intl.message(
-      'Version',
-      name: 'AboutVersion',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tools`
-  String get ToolsButton {
-    return Intl.message(
-      'Tools',
-      name: 'ToolsButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Off`
-  String get GameMute {
-    return Intl.message(
-      'Off',
-      name: 'GameMute',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `On`
-  String get GameUnmute {
-    return Intl.message(
-      'On',
-      name: 'GameUnmute',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Lock Screen Orientation`
-  String get SettingsLockDeviceOrientation {
-    return Intl.message(
-      'Lock Screen Orientation',
-      name: 'SettingsLockDeviceOrientation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Not Available for iPad`
-  String get SettingsLockDeviceOrientationTip {
-    return Intl.message(
-      'Not Available for iPad',
-      name: 'SettingsLockDeviceOrientationTip',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Settings`
-  String get SettingsButton {
-    return Intl.message(
-      'Settings',
-      name: 'SettingsButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reset App`
-  String get SettingsReset {
-    return Intl.message(
-      'Reset App',
-      name: 'SettingsReset',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Auto Open Homepage URL on Launch`
-  String get SettingsHomeLoad {
-    return Intl.message(
-      'Auto Open Homepage URL on Launch',
-      name: 'SettingsHomeLoad',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Make Current Web Page as Homepage URL`
-  String get SettingsHomeSave {
-    return Intl.message(
-      'Make Current Web Page as Homepage URL',
-      name: 'SettingsHomeSave',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enable Auto Fullscreen`
-  String get SettingsEnableAutoProcess {
-    return Intl.message(
-      'Enable Auto Fullscreen',
-      name: 'SettingsEnableAutoProcess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hide Floating Action Button`
-  String get SettingsHideFAB {
-    return Intl.message(
-      'Hide Floating Action Button',
-      name: 'SettingsHideFAB',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reload`
-  String get AppControlsReload {
-    return Intl.message(
-      'Reload',
-      name: 'AppControlsReload',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Load URL: {url}`
-  String AppControlsLoad(Object url) {
-    return Intl.message(
-      'Load URL: $url',
-      name: 'AppControlsLoad',
-      desc: '',
-      args: [url],
-    );
-  }
-
-  /// `WebView not ready`
-  String get AppControlsNotReady {
-    return Intl.message(
-      'WebView not ready',
-      name: 'AppControlsNotReady',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cookies are gone, website logout success`
-  String get AppControlsLogoutSuccess {
-    return Intl.message(
-      'Cookies are gone, website logout success',
-      name: 'AppControlsLogoutSuccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `There are no cookies. May not need logout.`
-  String get AppControlsLogoutFailed {
-    return Intl.message(
-      'There are no cookies. May not need logout.',
-      name: 'AppControlsLogoutFailed',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cache cleared.`
-  String get AppControlsClearCache {
-    return Intl.message(
-      'Cache cleared.',
-      name: 'AppControlsClearCache',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Scroll down`
-  String get AppControlsScrollDown {
-    return Intl.message(
-      'Scroll down',
-      name: 'AppControlsScrollDown',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Scroll up`
-  String get AppControlsScrollUp {
-    return Intl.message(
-      'Scroll up',
-      name: 'AppControlsScrollUp',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Scroll Down`
   String get AppScrollDown {
     return Intl.message(
@@ -535,6 +305,26 @@ class S {
     return Intl.message(
       'Scroll Up',
       name: 'AppScrollUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go`
+  String get AssetsHtmlSearchBarGo {
+    return Intl.message(
+      'Go',
+      name: 'AssetsHtmlSearchBarGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search or enter website name`
+  String get AssetsHtmlSearchBarText {
+    return Intl.message(
+      'Search or enter website name',
+      name: 'AssetsHtmlSearchBarText',
       desc: '',
       args: [],
     );
@@ -560,11 +350,21 @@ class S {
     );
   }
 
-  /// `Loaded in game window!`
-  String get KCViewFuncMsgAutoGameRedirect {
+  /// `Off`
+  String get GameMute {
     return Intl.message(
-      'Loaded in game window!',
-      name: 'KCViewFuncMsgAutoGameRedirect',
+      'Off',
+      name: 'GameMute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On`
+  String get GameUnmute {
+    return Intl.message(
+      'On',
+      name: 'GameUnmute',
       desc: '',
       args: [],
     );
@@ -580,21 +380,11 @@ class S {
     );
   }
 
-  /// `Now navigation to {url}`
-  String KCViewFuncMsgNavi(Object url) {
+  /// `Loaded in game window!`
+  String get KCViewFuncMsgAutoGameRedirect {
     return Intl.message(
-      'Now navigation to $url',
-      name: 'KCViewFuncMsgNavi',
-      desc: '',
-      args: [url],
-    );
-  }
-
-  /// `Game load completed`
-  String get KCViewFuncMsgNaviGameLoadCompleted {
-    return Intl.message(
-      'Game load completed',
-      name: 'KCViewFuncMsgNaviGameLoadCompleted',
+      'Loaded in game window!',
+      name: 'KCViewFuncMsgAutoGameRedirect',
       desc: '',
       args: [],
     );
@@ -620,11 +410,21 @@ class S {
     );
   }
 
-  /// `Game not load complete yet`
-  String get KCViewFuncMsgNaviGameLoadNotCompleted {
+  /// `Now navigation to {url}`
+  String KCViewFuncMsgNavi(Object url) {
     return Intl.message(
-      'Game not load complete yet',
-      name: 'KCViewFuncMsgNaviGameLoadNotCompleted',
+      'Now navigation to $url',
+      name: 'KCViewFuncMsgNavi',
+      desc: '',
+      args: [url],
+    );
+  }
+
+  /// `Game load completed`
+  String get KCViewFuncMsgNaviGameLoadCompleted {
+    return Intl.message(
+      'Game load completed',
+      name: 'KCViewFuncMsgNaviGameLoadCompleted',
       desc: '',
       args: [],
     );
@@ -635,6 +435,16 @@ class S {
     return Intl.message(
       'Game load failed',
       name: 'KCViewFuncMsgNaviGameLoadFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game not load complete yet`
+  String get KCViewFuncMsgNaviGameLoadNotCompleted {
+    return Intl.message(
+      'Game not load complete yet',
+      name: 'KCViewFuncMsgNaviGameLoadNotCompleted',
       desc: '',
       args: [],
     );
@@ -695,6 +505,246 @@ class S {
     return Intl.message(
       'The game will be unmuted after refreshing.',
       name: 'MsgUnmuteGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings.`
+  String get ScreenshotFailDialog {
+    return Intl.message(
+      'Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings.',
+      name: 'ScreenshotFailDialog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get SettingsButton {
+    return Intl.message(
+      'Settings',
+      name: 'SettingsButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable Auto Fullscreen`
+  String get SettingsEnableAutoProcess {
+    return Intl.message(
+      'Enable Auto Fullscreen',
+      name: 'SettingsEnableAutoProcess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide Floating Action Button`
+  String get SettingsHideFAB {
+    return Intl.message(
+      'Hide Floating Action Button',
+      name: 'SettingsHideFAB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto Open Homepage URL on Launch`
+  String get SettingsHomeLoad {
+    return Intl.message(
+      'Auto Open Homepage URL on Launch',
+      name: 'SettingsHomeLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make Current Web Page as Homepage URL`
+  String get SettingsHomeSave {
+    return Intl.message(
+      'Make Current Web Page as Homepage URL',
+      name: 'SettingsHomeSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lock Screen Orientation`
+  String get SettingsLockDeviceOrientation {
+    return Intl.message(
+      'Lock Screen Orientation',
+      name: 'SettingsLockDeviceOrientation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Available for iPad`
+  String get SettingsLockDeviceOrientationTip {
+    return Intl.message(
+      'Not Available for iPad',
+      name: 'SettingsLockDeviceOrientationTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset App`
+  String get SettingsReset {
+    return Intl.message(
+      'Reset App',
+      name: 'SettingsReset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get TextCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'TextCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get TextNo {
+    return Intl.message(
+      'No',
+      name: 'TextNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Should Close?`
+  String get TextShouldClose {
+    return Intl.message(
+      'Should Close?',
+      name: 'TextShouldClose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get TextYes {
+    return Intl.message(
+      'Yes',
+      name: 'TextYes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage URL removed`
+  String get ToolSaveHomeCancel {
+    return Intl.message(
+      'Homepage URL removed',
+      name: 'ToolSaveHomeCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid URL`
+  String get ToolSaveHomeFail {
+    return Intl.message(
+      'Invalid URL',
+      name: 'ToolSaveHomeFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage URL saved`
+  String get ToolSaveHomeSuccess {
+    return Intl.message(
+      'Homepage URL saved',
+      name: 'ToolSaveHomeSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Homepage URL`
+  String get ToolSearchBarURLSetting {
+    return Intl.message(
+      'Edit Homepage URL',
+      name: 'ToolSearchBarURLSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WebView Screen`
+  String get ToolTitleGameScreen {
+    return Intl.message(
+      'WebView Screen',
+      name: 'ToolTitleGameScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game Sound`
+  String get ToolTitleGameSound {
+    return Intl.message(
+      'Game Sound',
+      name: 'ToolTitleGameSound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Utilities`
+  String get ToolTitleUtilities {
+    return Intl.message(
+      'Utilities',
+      name: 'ToolTitleUtilities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Web`
+  String get ToolTitleWeb {
+    return Intl.message(
+      'Web',
+      name: 'ToolTitleWeb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit UserAgent`
+  String get ToolUASetting {
+    return Intl.message(
+      'Edit UserAgent',
+      name: 'ToolUASetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need Relaunch App to Active`
+  String get ToolUATip {
+    return Intl.message(
+      'Need Relaunch App to Active',
+      name: 'ToolUATip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tools`
+  String get ToolsButton {
+    return Intl.message(
+      'Tools',
+      name: 'ToolsButton',
       desc: '',
       args: [],
     );

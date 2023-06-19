@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppHome": MessageLookupByLibrary.simpleMessage("主页"),
         "AppName": MessageLookupByLibrary.simpleMessage("舰桥"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督，欢迎来到舰桥，舰桥会在Kancolle界面加载完成后自动调整屏幕尺寸到合适大小，如果长时间看到DMM GAMES的顶栏存在，请在你指挥舰队前点击「工具-Web-HTTP跳转」。"),
+            "提督，欢迎来到舰桥，舰桥会在游戏界面加载完成后自动调整屏幕尺寸到合适大小，如果长时间看到DMM GAMES的顶栏存在，请在你指挥舰队前点击「工具-Web-HTTP跳转」。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("HTTP跳转"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("刷新"),
         "AppResize": MessageLookupByLibrary.simpleMessage("调整尺寸至适合屏幕"),
@@ -64,7 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("前往"),
         "AssetsHtmlSearchBarText":
             MessageLookupByLibrary.simpleMessage("搜索或输入网站名称"),
-        "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
         "FutureAutoAdjustWindowSuccess":
@@ -94,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏将静音"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏声音将打开"),
+        "ScreenshotFailDialog":
+            MessageLookupByLibrary.simpleMessage("截图保存失败，请在系统设置中允许舰桥访问照片"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("启用自动全屏"),
@@ -107,6 +108,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不适用于iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
+        "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "TextNo": MessageLookupByLibrary.simpleMessage("否"),
+        "TextShouldClose": MessageLookupByLibrary.simpleMessage("要关闭吗？"),
+        "TextYes": MessageLookupByLibrary.simpleMessage("是"),
         "ToolSaveHomeCancel": MessageLookupByLibrary.simpleMessage("主页URL已删除"),
         "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("无效的URL"),
         "ToolSaveHomeSuccess": MessageLookupByLibrary.simpleMessage("主页URL已保存"),
@@ -114,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("修改主页URL"),
         "ToolTitleGameScreen": MessageLookupByLibrary.simpleMessage("网页窗口"),
         "ToolTitleGameSound": MessageLookupByLibrary.simpleMessage("游戏声音"),
+        "ToolTitleUtilities": MessageLookupByLibrary.simpleMessage("实用工具"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("修改UA"),
         "ToolUATip": MessageLookupByLibrary.simpleMessage("设置后需重启应用"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")

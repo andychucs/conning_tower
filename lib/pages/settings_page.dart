@@ -1,11 +1,9 @@
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/home.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:settings_ui/settings_ui.dart';
-
-import '../generated/l10n.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, required this.reloadConfig});
@@ -31,7 +29,8 @@ class SettingsPageState extends State<SettingsPage> {
     setState(() {
       enableAutoProcessSwitchValue =
           (prefs.getBool('enableAutoProcess') ?? true);
-      enableAutoLoadHomeUrlSwitchValue = (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
+      enableAutoLoadHomeUrlSwitchValue =
+          (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
     });
   }
 
@@ -41,6 +40,7 @@ class SettingsPageState extends State<SettingsPage> {
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return [
           CupertinoSliverNavigationBar(
+            transitionBetweenRoutes: false,
             largeTitle: Text(S.current.SettingsButton),
           ),
         ];
@@ -71,7 +71,8 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
                 SettingsTile.switchTile(
                   initialValue: lockDeviceOrientation ?? false,
-                  description: Text(S.of(context).SettingsLockDeviceOrientationTip),
+                  description:
+                      Text(S.of(context).SettingsLockDeviceOrientationTip),
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
                     lockDeviceOrientation = value;
@@ -115,18 +116,20 @@ class SettingsPageState extends State<SettingsPage> {
                       : CupertinoIcons.lock_rotation_open),
                 ),
                 SettingsTile.switchTile(
-                  onToggle: (value) async {
-                    HapticFeedback.heavyImpact();
-                    setState(() {
-                      enableAutoProcessSwitchValue = value;
-                    });
-                    localStorage.setBool('enableAutoProcess', value);
-                    widget.reloadConfig();
-                  },
-                  initialValue: enableAutoProcessSwitchValue,
-                  leading: const Icon(CupertinoIcons.fullscreen),
-                  title: Text(S.of(context).SettingsEnableAutoProcess),
-                ),
+                    onToggle: (value) async {
+                      HapticFeedback.heavyImpact();
+                      setState(() {
+                        enableAutoProcessSwitchValue = value;
+                      });
+                      enableAutoProcess = value;
+                      localStorage.setBool('enableAutoProcess', value);
+                      debugPrint("enableAutoProcess:$enableAutoProcess");
+                      widget.reloadConfig();
+                    },
+                    initialValue: enableAutoProcessSwitchValue,
+                    leading: const Icon(CupertinoIcons.fullscreen),
+                    title: Text(S.of(context).SettingsEnableAutoProcess),
+                  ),
                 SettingsTile.switchTile(
                   onToggle: (value) async {
                     HapticFeedback.heavyImpact();

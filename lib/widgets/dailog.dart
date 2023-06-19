@@ -1,10 +1,9 @@
 import 'dart:io';
 
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../generated/l10n.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String msg;
@@ -44,11 +43,11 @@ class CustomAlertDialog extends StatelessWidget {
               Navigator.of(context).pop();
             }),
             child: Text(isNormal
-                ? S.of(context).Cancel
+                ? S.of(context).TextCancel
                 : S.of(context).AlertNotShowAgain),
           ),
           CupertinoDialogAction(
-            child: const Text('OK'),
+            child: Text(S.of(context).TextYes),
             onPressed: () {
               Navigator.of(context).pop(true);
             },
@@ -72,11 +71,11 @@ class CustomAlertDialog extends StatelessWidget {
             Navigator.of(context).pop();
           }),
           child: Text(isNormal
-              ? S.of(context).Cancel
+              ? S.of(context).TextCancel
               : S.of(context).AlertNotShowAgain),
         ),
         TextButton(
-          child: const Text('OK'),
+          child: Text(S.of(context).TextYes),
           onPressed: () {
             Navigator.of(context).pop(true);
           },

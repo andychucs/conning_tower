@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppHome": MessageLookupByLibrary.simpleMessage("主頁"),
         "AppName": MessageLookupByLibrary.simpleMessage("艦橋"),
         "AppNotify": MessageLookupByLibrary.simpleMessage(
-            "提督，歡迎來到艦橋，艦橋會在Kancolle界面加載完成後自動調整屏幕尺寸到合適大小，如果長時間看到DMM GAMES的頂欄存在，請在你指揮艦隊前點擊「工具-Web-重定向」。"),
+            "提督，歡迎來到艦橋，艦橋會在遊戲界面加載完成後自動調整屏幕尺寸到合適大小，如果長時間看到DMM GAMES的頂欄存在，請在你指揮艦隊前點擊「工具-Web-重定向」。"),
         "AppRedirect": MessageLookupByLibrary.simpleMessage("重定向"),
         "AppRefresh": MessageLookupByLibrary.simpleMessage("重新整理"),
         "AppResize": MessageLookupByLibrary.simpleMessage("調整大小至適合屏幕"),
@@ -64,7 +64,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "AssetsHtmlSearchBarGo": MessageLookupByLibrary.simpleMessage("前往"),
         "AssetsHtmlSearchBarText":
             MessageLookupByLibrary.simpleMessage("搜尋或輸入網站名稱"),
-        "Cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
@@ -95,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後靜音。"),
         "MsgUnmuteGame":
             MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後解除靜音。"),
+        "ScreenshotFailDialog":
+            MessageLookupByLibrary.simpleMessage("截圖保存失敗，請在系統設定中允許艦橋取用相片"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
         "SettingsEnableAutoProcess":
             MessageLookupByLibrary.simpleMessage("啟用自動全螢幕"),
@@ -108,11 +109,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不適用於iPad"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
+        "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "TextNo": MessageLookupByLibrary.simpleMessage("否"),
+        "TextShouldClose": MessageLookupByLibrary.simpleMessage("要關閉嗎？"),
+        "TextYes": MessageLookupByLibrary.simpleMessage("是"),
         "ToolSaveHomeCancel": MessageLookupByLibrary.simpleMessage("主頁URL已刪除"),
         "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("無效的URL"),
         "ToolSaveHomeSuccess": MessageLookupByLibrary.simpleMessage("主頁URL已保存"),
         "ToolSearchBarURLSetting":
             MessageLookupByLibrary.simpleMessage("修改主頁URL"),
+        "ToolTitleUtilities": MessageLookupByLibrary.simpleMessage("Utilities"),
         "ToolUASetting": MessageLookupByLibrary.simpleMessage("修改UA"),
         "ToolUATip": MessageLookupByLibrary.simpleMessage("設置後需重啟應用"),
         "ToolsButton": MessageLookupByLibrary.simpleMessage("工具")
