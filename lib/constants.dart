@@ -14,3 +14,4 @@ const String autoScaleIOSJS = "assets/js/autoScaleIOS.js";
 const String muteKancolleJS = "assets/js/muteKancolle.js";
 const String unMuteKancolleJS = "assets/js/unMuteKancolle.js";
 const bool kIsOpenSource = true;
+const int kMaxTaskNum = 64;
