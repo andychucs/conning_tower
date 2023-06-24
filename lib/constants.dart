@@ -14,3 +14,19 @@ const String autoScaleIOSJS = "assets/js/autoScaleIOS.js";
 const String muteKancolleJS = "assets/js/muteKancolle.js";
 const String unMuteKancolleJS = "assets/js/unMuteKancolle.js";
 const bool kIsOpenSource = true;
+const String kInterceptJS ='''
+
+var origOpen = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function() {
+    this.addEventListener('load', function() {
+        if (this.responseURL.includes('/kcsapi/')) {
+            KcapiToFlutter(this);
+        }
+    });
+    origOpen.apply(this, arguments);
+};
+function KcapiToFlutter(data) {
+    kcMessage.postMessage("conning_tower_responseURL:"+data.responseURL+"conning_tower_readyState:"+data.readyState+"conning_tower_responseText:"+data.responseText+"conning_tower_END");
+}
+
+''';
