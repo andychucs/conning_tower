@@ -4,6 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:yaml/yaml.dart';
 
+class ModalFit extends StatelessWidget {
+  final List<Widget> children;
+  const ModalFit({Key? key, required this.children}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+        child: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: children
+          ),
+        ));
+  }
+}
+
+
 class ComplexModal extends StatelessWidget {
   const ComplexModal({Key? key}) : super(key: key);
 

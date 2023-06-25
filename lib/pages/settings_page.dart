@@ -1,20 +1,25 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/pages/home.dart';
+import 'package:conning_tower/providers/device_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-class SettingsPage extends StatefulWidget {
+import '../widgets/modal_sheets.dart';
+
+class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key, required this.reloadConfig});
 
   final Function() reloadConfig;
 
   @override
-  State<SettingsPage> createState() => SettingsPageState();
+  ConsumerState<SettingsPage> createState() => SettingsPageState();
 }
 
-class SettingsPageState extends State<SettingsPage> {
+class SettingsPageState extends ConsumerState<SettingsPage> {
   bool enableAutoProcessSwitchValue = true;
   bool enableAutoLoadHomeUrlSwitchValue = false;
 
@@ -36,6 +41,7 @@ class SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceManager = ref.watch(deviceManagerProvider.notifier);
     return NestedScrollView(
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return [
@@ -70,66 +76,88 @@ class SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 SettingsTile.switchTile(
-                  initialValue: lockDeviceOrientation ?? false,
+                  initialValue: deviceManager.isCustomDeviceOrientation(),
                   description:
                       Text(S.of(context).SettingsLockDeviceOrientationTip),
                   onToggle: (value) {
                     HapticFeedback.heavyImpact();
-                    lockDeviceOrientation = value;
-                    localStorage.setBool('lockDeviceOrientation', value);
                     if (value) {
                       Orientation orientation =
                           MediaQuery.of(context).orientation;
                       if (orientation == Orientation.landscape) {
-                        SystemChrome.setPreferredOrientations([
-                          DeviceOrientation.landscapeLeft,
-                          DeviceOrientation.landscapeRight
-                        ]);
                         setState(() {
-                          customDeviceOrientationIndex = 3;
+                          deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscape);
                         });
-                        localStorage.setInt('customDeviceOrientation', 3);
                       } else {
-                        SystemChrome.setPreferredOrientations([
-                          DeviceOrientation.portraitUp,
-                          DeviceOrientation.portraitDown
-                        ]);
                         setState(() {
-                          customDeviceOrientationIndex = 2;
+                          deviceManager.customDeviceOrientation(CustomDeviceOrientation.portrait);
                         });
-                        localStorage.setInt('customDeviceOrientation', 2);
                       }
                     } else {
-                      localStorage.setInt('customDeviceOrientation', -1);
                       setState(() {
-                        customDeviceOrientationIndex = -1;
+                        deviceManager.customDeviceOrientation(CustomDeviceOrientation.all);
                       });
-                      SystemChrome.setPreferredOrientations(
-                          DeviceOrientation.values);
                     }
                     _loadConfig();
                     widget.reloadConfig();
                   },
                   title: Text(S.of(context).SettingsLockDeviceOrientation),
-                  leading: Icon(lockDeviceOrientation ?? false
+                  leading: Icon(deviceManager.isCustomDeviceOrientation()
                       ? CupertinoIcons.lock_rotation
                       : CupertinoIcons.lock_rotation_open),
                 ),
-                SettingsTile.switchTile(
-                    onToggle: (value) async {
-                      HapticFeedback.heavyImpact();
-                      setState(() {
-                        enableAutoProcessSwitchValue = value;
-                      });
-                      enableAutoProcess = value;
-                      localStorage.setBool('enableAutoProcess', value);
-                      debugPrint("enableAutoProcess:$enableAutoProcess");
-                      widget.reloadConfig();
-                    },
-                    initialValue: enableAutoProcessSwitchValue,
-                    leading: const Icon(CupertinoIcons.fullscreen),
-                    title: Text(S.of(context).SettingsEnableAutoProcess),
+                SettingsTile(
+                  title: Text("Change Device Orientation"),
+                  leading: Icon(CupertinoIcons.device_phone_landscape),
+                  onPressed: (context) => showCupertinoModalBottomSheet(
+                    expand: false,
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => ModalFit(
+                      children: <Widget>[
+                        ListTile(
+                          title: Text('Landscape Right'),
+                          leading: Icon(CupertinoIcons.rotate_right),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscapeRight);
+                          },
+                        ),
+                        ListTile(
+                          title: Text('Landscape Left'),
+                          leading: Icon(CupertinoIcons.rotate_left),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscapeLeft);
+                          },
+                        ),
+                        ListTile(
+                          title: Text('Portrait'),
+                          leading: Icon(CupertinoIcons.device_phone_portrait),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            deviceManager.customDeviceOrientation(CustomDeviceOrientation.portrait);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+                ),
+                SettingsTile.switchTile(
+                  onToggle: (value) async {
+                    HapticFeedback.heavyImpact();
+                    setState(() {
+                      enableAutoProcessSwitchValue = value;
+                    });
+                    enableAutoProcess = value;
+                    localStorage.setBool('enableAutoProcess', value);
+                    debugPrint("enableAutoProcess:$enableAutoProcess");
+                    widget.reloadConfig();
+                  },
+                  initialValue: enableAutoProcessSwitchValue,
+                  leading: const Icon(CupertinoIcons.fullscreen),
+                  title: Text(S.of(context).SettingsEnableAutoProcess),
+                ),
                 SettingsTile.switchTile(
                   onToggle: (value) async {
                     HapticFeedback.heavyImpact();

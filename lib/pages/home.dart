@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
-import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/about_page.dart';
 import 'package:conning_tower/pages/settings_page.dart';
 import 'package:conning_tower/pages/tools_page.dart';
+import 'package:conning_tower/providers/device_provider.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/fade_indexed_stack.dart';
@@ -19,7 +19,6 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-bool? lockDeviceOrientation;
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -72,10 +71,7 @@ class HomePageState extends ConsumerState<HomePage> {
       bottomPadding = (prefs.getBool('bottomPadding') ?? false);
       enableAutoLoadHomeUrl = (prefs.getBool('enableAutoLoadHomeUrl') ?? true);
       customHomeUrl = (prefs.getString('customHomeUrl') ?? kGameUrl);
-      customDeviceOrientationIndex =
-          (prefs.getInt('customDeviceOrientation') ?? -1);
       enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
-      lockDeviceOrientation = (prefs.getBool('lockDeviceOrientation') ?? false);
       customUA = (prefs.getString('customUA') ?? '');
     });
   }
@@ -84,6 +80,8 @@ class HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     // final inAppWebViewControllerState = ref.watch(webViewControllerProvider);
     final webController = ref.watch(webControllerProvider);
+    final deviceManager = ref.watch(deviceManagerProvider.notifier);
+    deviceManager.watchDeviceOrientation();
     if (Platform.isAndroid) {
       deviceWidth = MediaQuery.of(context).size.width;
     } else if (Platform.isIOS) {
@@ -91,8 +89,8 @@ class HomePageState extends ConsumerState<HomePage> {
     } else {
       deviceWidth = MediaQuery.of(context).size.width;
     }
-    SystemChrome.setPreferredOrientations(
-        getDeviceOrientation(customDeviceOrientationIndex));
+    // SystemChrome.setPreferredOrientations(
+    //     getDeviceOrientation(customDeviceOrientationIndex));
     var orientation = MediaQuery.of(context).orientation;
     if (orientation == Orientation.landscape) {
       fabAlignment = const Alignment(1.0, 0.3);
@@ -147,19 +145,11 @@ class HomePageState extends ConsumerState<HomePage> {
                     icon: CupertinoIcons.device_phone_landscape,
                     onTap: () {
                       HapticFeedback.mediumImpact();
-                      lockDeviceOrientation = true;
-                      localStorage.setBool('lockDeviceOrientation', true);
                       setState(() {
-                        if (customDeviceOrientationIndex != 0) {
-                          SystemChrome.setPreferredOrientations(
-                              getDeviceOrientation(-1));
-                          customDeviceOrientationIndex = 0;
-                          localStorage.setInt('customDeviceOrientation', 0);
-                        } else if (customDeviceOrientationIndex != 1) {
-                          SystemChrome.setPreferredOrientations(
-                              getDeviceOrientation(3));
-                          customDeviceOrientationIndex = 1;
-                          localStorage.setInt('customDeviceOrientation', 1);
+                        if (deviceManager.getOrientationIndex() != 0) {
+                          deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscapeRight);
+                        } else if (deviceManager.getOrientationIndex() != 1) {
+                          deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscapeLeft);
                         }
                       });
                     },
@@ -170,13 +160,8 @@ class HomePageState extends ConsumerState<HomePage> {
                     icon: CupertinoIcons.device_phone_portrait,
                     onTap: () {
                       HapticFeedback.mediumImpact();
-                      SystemChrome.setPreferredOrientations(
-                          getDeviceOrientation(-1));
-                      lockDeviceOrientation = true;
-                      localStorage.setBool('lockDeviceOrientation', true);
                       setState(() {
-                        customDeviceOrientationIndex = 2;
-                        localStorage.setInt('customDeviceOrientation', 2);
+                        deviceManager.customDeviceOrientation(CustomDeviceOrientation.portrait);
                       });
                     },
                   ),

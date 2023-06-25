@@ -25,7 +25,6 @@ late bool enableAutoLoadHomeUrl;
 late String customHomeUrl;
 late String customUA;
 late bool enableHideFAB;
-late int customDeviceOrientationIndex;
 late bool showControls;
 
 Future<void> main() async {

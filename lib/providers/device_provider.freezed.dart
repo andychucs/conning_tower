@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DeviceManagerState {
-  List<DeviceOrientation> get orientation => throw _privateConstructorUsedError;
+  List<DeviceOrientation> get orientations =>
+      throw _privateConstructorUsedError;
   int get orientationIndex => throw _privateConstructorUsedError;
   DeviceType? get deviceType => throw _privateConstructorUsedError;
 
@@ -32,7 +33,7 @@ abstract class $DeviceManagerStateCopyWith<$Res> {
       _$DeviceManagerStateCopyWithImpl<$Res, DeviceManagerState>;
   @useResult
   $Res call(
-      {List<DeviceOrientation> orientation,
+      {List<DeviceOrientation> orientations,
       int orientationIndex,
       DeviceType? deviceType});
 }
@@ -50,14 +51,14 @@ class _$DeviceManagerStateCopyWithImpl<$Res, $Val extends DeviceManagerState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orientation = null,
+    Object? orientations = null,
     Object? orientationIndex = null,
     Object? deviceType = freezed,
   }) {
     return _then(_value.copyWith(
-      orientation: null == orientation
-          ? _value.orientation
-          : orientation // ignore: cast_nullable_to_non_nullable
+      orientations: null == orientations
+          ? _value.orientations
+          : orientations // ignore: cast_nullable_to_non_nullable
               as List<DeviceOrientation>,
       orientationIndex: null == orientationIndex
           ? _value.orientationIndex
@@ -80,7 +81,7 @@ abstract class _$$_DeviceManagerStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<DeviceOrientation> orientation,
+      {List<DeviceOrientation> orientations,
       int orientationIndex,
       DeviceType? deviceType});
 }
@@ -96,14 +97,14 @@ class __$$_DeviceManagerStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orientation = null,
+    Object? orientations = null,
     Object? orientationIndex = null,
     Object? deviceType = freezed,
   }) {
     return _then(_$_DeviceManagerState(
-      orientation: null == orientation
-          ? _value._orientation
-          : orientation // ignore: cast_nullable_to_non_nullable
+      orientations: null == orientations
+          ? _value._orientations
+          : orientations // ignore: cast_nullable_to_non_nullable
               as List<DeviceOrientation>,
       orientationIndex: null == orientationIndex
           ? _value.orientationIndex
@@ -121,17 +122,17 @@ class __$$_DeviceManagerStateCopyWithImpl<$Res>
 
 class _$_DeviceManagerState implements _DeviceManagerState {
   _$_DeviceManagerState(
-      {required final List<DeviceOrientation> orientation,
+      {required final List<DeviceOrientation> orientations,
       required this.orientationIndex,
       required this.deviceType})
-      : _orientation = orientation;
+      : _orientations = orientations;
 
-  final List<DeviceOrientation> _orientation;
+  final List<DeviceOrientation> _orientations;
   @override
-  List<DeviceOrientation> get orientation {
-    if (_orientation is EqualUnmodifiableListView) return _orientation;
+  List<DeviceOrientation> get orientations {
+    if (_orientations is EqualUnmodifiableListView) return _orientations;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orientation);
+    return EqualUnmodifiableListView(_orientations);
   }
 
   @override
@@ -141,7 +142,7 @@ class _$_DeviceManagerState implements _DeviceManagerState {
 
   @override
   String toString() {
-    return 'DeviceManagerState(orientation: $orientation, orientationIndex: $orientationIndex, deviceType: $deviceType)';
+    return 'DeviceManagerState(orientations: $orientations, orientationIndex: $orientationIndex, deviceType: $deviceType)';
   }
 
   @override
@@ -150,7 +151,7 @@ class _$_DeviceManagerState implements _DeviceManagerState {
         (other.runtimeType == runtimeType &&
             other is _$_DeviceManagerState &&
             const DeepCollectionEquality()
-                .equals(other._orientation, _orientation) &&
+                .equals(other._orientations, _orientations) &&
             (identical(other.orientationIndex, orientationIndex) ||
                 other.orientationIndex == orientationIndex) &&
             (identical(other.deviceType, deviceType) ||
@@ -160,7 +161,7 @@ class _$_DeviceManagerState implements _DeviceManagerState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_orientation),
+      const DeepCollectionEquality().hash(_orientations),
       orientationIndex,
       deviceType);
 
@@ -174,12 +175,12 @@ class _$_DeviceManagerState implements _DeviceManagerState {
 
 abstract class _DeviceManagerState implements DeviceManagerState {
   factory _DeviceManagerState(
-      {required final List<DeviceOrientation> orientation,
+      {required final List<DeviceOrientation> orientations,
       required final int orientationIndex,
       required final DeviceType? deviceType}) = _$_DeviceManagerState;
 
   @override
-  List<DeviceOrientation> get orientation;
+  List<DeviceOrientation> get orientations;
   @override
   int get orientationIndex;
   @override
