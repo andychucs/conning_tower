@@ -1,24 +1,13 @@
-import 'package:flutter/services.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:conning_tower/main.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'device_provider.g.dart';
+
 part 'device_provider.freezed.dart';
 
-
-enum DeviceType {
-  iPhone,
-  iPad,
-  iPod,
-  mac,
-  windows,
-  android,
-  linux,
-  undefined
-}
+part 'device_provider.g.dart';
 
 enum CustomDeviceOrientation {
   landscape,
@@ -34,17 +23,17 @@ class DeviceManagerState with _$DeviceManagerState {
   factory DeviceManagerState({
     required List<DeviceOrientation> orientations,
     required int orientationIndex,
-    required DeviceType? deviceType,
   }) = _DeviceManagerState;
 }
 
 @riverpod
 class DeviceManager extends _$DeviceManager {
-
   @override
   DeviceManagerState build() {
     int index = (localStorage.getInt('customDeviceOrientation') ?? -1);
-    return DeviceManagerState(orientations: _getDeviceOrientation(index), deviceType: DeviceType.undefined, orientationIndex: index);
+    return DeviceManagerState(
+        orientations: _getDeviceOrientation(index),
+        orientationIndex: index);
   }
 
   bool isCustomDeviceOrientation() {
@@ -67,7 +56,8 @@ class DeviceManager extends _$DeviceManager {
 
   void setDeviceOrientationByIndex(int index) {
     state = state.copyWith(orientations: _getDeviceOrientation(index));
-    if (index == -1) { // Expand the optional range before adjusting the direction of the device to reduce error reporting
+    if (index == -1) {
+      // Expand the optional range before adjusting the direction of the device to reduce error reporting
       watchDeviceOrientation();
     }
   }
@@ -76,17 +66,23 @@ class DeviceManager extends _$DeviceManager {
     SystemChrome.setPreferredOrientations(state.orientations);
   }
 
-  void customDeviceOrientation(CustomDeviceOrientation customDeviceOrientation) {
+  void customDeviceOrientation(
+      CustomDeviceOrientation customDeviceOrientation) {
     setDeviceOrientationByIndex(-1);
     var orientations = DeviceOrientation.values;
     switch (customDeviceOrientation) {
-
       case CustomDeviceOrientation.landscape:
-        orientations = [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft];
+        orientations = [
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft
+        ];
         setOrientationIndex(3);
         break;
       case CustomDeviceOrientation.portrait:
-        orientations = [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
+        orientations = [
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown
+        ];
         setOrientationIndex(2);
         break;
       case CustomDeviceOrientation.landscapeLeft:
@@ -116,7 +112,10 @@ class DeviceManager extends _$DeviceManager {
     if (index == 2)
       return [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown];
     if (index == 3)
-      return [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft];
+      return [
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft
+      ];
     if (index == 4) return [DeviceOrientation.portraitUp];
     return DeviceOrientation.values;
   }

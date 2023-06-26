@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/about_page.dart';
@@ -18,7 +19,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -52,7 +52,7 @@ class HomePageState extends ConsumerState<HomePage> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
   }
@@ -139,32 +139,37 @@ class HomePageState extends ConsumerState<HomePage> {
                       });
                     },
                   ),
-                  CircularMenuItem(
-                    boxShadow: const [],
-                    iconSize: 20,
-                    icon: CupertinoIcons.device_phone_landscape,
-                    onTap: () {
-                      HapticFeedback.mediumImpact();
-                      setState(() {
-                        if (deviceManager.getOrientationIndex() != 0) {
-                          deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscapeRight);
-                        } else if (deviceManager.getOrientationIndex() != 1) {
-                          deviceManager.customDeviceOrientation(CustomDeviceOrientation.landscapeLeft);
-                        }
-                      });
-                    },
-                  ),
-                  CircularMenuItem(
-                    iconSize: 20,
-                    boxShadow: const [],
-                    icon: CupertinoIcons.device_phone_portrait,
-                    onTap: () {
-                      HapticFeedback.mediumImpact();
-                      setState(() {
-                        deviceManager.customDeviceOrientation(CustomDeviceOrientation.portrait);
-                      });
-                    },
-                  ),
+                  if (deviceType != DeviceType.iPad)
+                    CircularMenuItem(
+                      boxShadow: const [],
+                      iconSize: 20,
+                      icon: CupertinoIcons.device_phone_landscape,
+                      onTap: () {
+                        HapticFeedback.mediumImpact();
+                        setState(() {
+                          if (deviceManager.getOrientationIndex() != 0) {
+                            deviceManager.customDeviceOrientation(
+                                CustomDeviceOrientation.landscapeRight);
+                          } else if (deviceManager.getOrientationIndex() != 1) {
+                            deviceManager.customDeviceOrientation(
+                                CustomDeviceOrientation.landscapeLeft);
+                          }
+                        });
+                      },
+                    ),
+                  if (deviceType != DeviceType.iPad)
+                    CircularMenuItem(
+                      iconSize: 20,
+                      boxShadow: const [],
+                      icon: CupertinoIcons.device_phone_portrait,
+                      onTap: () {
+                        HapticFeedback.mediumImpact();
+                        setState(() {
+                          deviceManager.customDeviceOrientation(
+                              CustomDeviceOrientation.portrait);
+                        });
+                      },
+                    ),
                   CircularMenuItem(
                     iconSize: 20,
                     boxShadow: const [],

@@ -1,5 +1,6 @@
 import 'package:conning_tower/app.dart';
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,7 @@ late String customHomeUrl;
 late String customUA;
 late bool enableHideFAB;
 late bool showControls;
+late DeviceType deviceType;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +41,8 @@ Future<void> main() async {
   }
   WebView.debugLoggingSettings.enabled = false;
   localStorage = await SharedPreferences.getInstance();
+
+  deviceType = await getDeviceType();
 
   gameLoadCompleted = false;
   inKancolleWindow = false;

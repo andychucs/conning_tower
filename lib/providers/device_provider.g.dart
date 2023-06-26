@@ -6,7 +6,7 @@ part of 'device_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$deviceManagerHash() => r'89fa800945337756b4a36d7fadd8936fd259bea8';
+String _$deviceManagerHash() => r'8a1cecf67b0f5c5465ea337b4d6d19dc5017c780';
 
 /// See also [DeviceManager].
 @ProviderFor(DeviceManager)

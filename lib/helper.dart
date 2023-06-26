@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -121,4 +123,40 @@ List<DeviceOrientation> getDeviceOrientation(int? index) {
   if (index == 3)
     return [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft];
   return DeviceOrientation.values;
+}
+
+enum DeviceType {
+  iPhone,
+  iPad,
+  iPod,
+  mac,
+  windows,
+  android,
+  linux,
+  fuchsia,
+  undefined
+}
+
+Future<DeviceType> getDeviceType() async {
+  switch (defaultTargetPlatform) {
+    case TargetPlatform.android:
+      return DeviceType.android;
+    case TargetPlatform.fuchsia:
+      return DeviceType.fuchsia;
+    case TargetPlatform.iOS:
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      if (iosDeviceInfo.model.toLowerCase() == "ipad") {
+        return DeviceType.iPad;
+      } else if (iosDeviceInfo.model.toLowerCase() == "ipod touch") {
+        return DeviceType.iPod;
+      }
+      return DeviceType.iPhone;
+    case TargetPlatform.linux:
+      return DeviceType.linux;
+    case TargetPlatform.macOS:
+      return DeviceType.mac;
+    case TargetPlatform.windows:
+      return DeviceType.windows;
+  }
 }
