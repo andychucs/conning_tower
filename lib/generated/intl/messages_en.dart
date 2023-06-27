@@ -39,7 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "AlertNotShowAgain":
             MessageLookupByLibrary.simpleMessage("Don\'t show again"),
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
-        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("Bottom-up"),
+        "AppBottomSafe":
+            MessageLookupByLibrary.simpleMessage("Add Bottom Padding"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("Clear Cache"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("Clear Cookie"),
         "AppControlsClearCache":
@@ -112,11 +113,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Auto Open Homepage URL on Launch"),
         "SettingsHomeSave": MessageLookupByLibrary.simpleMessage(
             "Make Current Web Page as Homepage URL"),
+        "SettingsLandscapeLeft":
+            MessageLookupByLibrary.simpleMessage("Landscape Left"),
+        "SettingsLandscapeRight":
+            MessageLookupByLibrary.simpleMessage("Landscape Right"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("Lock Screen Orientation"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("Not Available for iPad"),
+        "SettingsPortrait": MessageLookupByLibrary.simpleMessage("Portrait"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
+        "SettingsScreenOrientation":
+            MessageLookupByLibrary.simpleMessage("Change Screen Orientation"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextShouldClose":

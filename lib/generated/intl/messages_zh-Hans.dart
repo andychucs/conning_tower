@@ -103,11 +103,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("启动时自动打开主页URL"),
         "SettingsHomeSave":
             MessageLookupByLibrary.simpleMessage("将当前网页设置为主页URL"),
+        "SettingsLandscapeLeft": MessageLookupByLibrary.simpleMessage("左横屏"),
+        "SettingsLandscapeRight": MessageLookupByLibrary.simpleMessage("右横屏"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("锁定屏幕方向"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("不适用于iPad"),
+        "SettingsPortrait": MessageLookupByLibrary.simpleMessage("竖屏"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
+        "SettingsScreenOrientation":
+            MessageLookupByLibrary.simpleMessage("屏幕方向设置"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("要关闭吗？"),

@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutVersion": MessageLookupByLibrary.simpleMessage("バージョン"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("再表示しない"),
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
-        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("ボトムアップ"),
+        "AppBottomSafe": MessageLookupByLibrary.simpleMessage("下部に余白を追加"),
         "AppClearCache": MessageLookupByLibrary.simpleMessage("キャッシュを消去"),
         "AppClearCookie": MessageLookupByLibrary.simpleMessage("Cookieを消去"),
         "AppControlsClearCache":
@@ -107,11 +107,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("自動的にホームページのURLがロードする"),
         "SettingsHomeSave":
             MessageLookupByLibrary.simpleMessage("現在のサイトをホームページURLに設定する"),
+        "SettingsLandscapeLeft": MessageLookupByLibrary.simpleMessage("横画面左"),
+        "SettingsLandscapeRight": MessageLookupByLibrary.simpleMessage("横画面右"),
         "SettingsLockDeviceOrientation":
             MessageLookupByLibrary.simpleMessage("画面の方向を固定する"),
         "SettingsLockDeviceOrientationTip":
             MessageLookupByLibrary.simpleMessage("iPadでは使用不可"),
+        "SettingsPortrait": MessageLookupByLibrary.simpleMessage("縦画面"),
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
+        "SettingsScreenOrientation":
+            MessageLookupByLibrary.simpleMessage("画面の向きを設定する"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("閉じてよろしいですか？"),

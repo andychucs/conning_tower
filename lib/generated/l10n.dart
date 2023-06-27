@@ -110,10 +110,10 @@ class S {
     );
   }
 
-  /// `Bottom-up`
+  /// `Add Bottom Padding`
   String get AppBottomSafe {
     return Intl.message(
-      'Bottom-up',
+      'Add Bottom Padding',
       name: 'AppBottomSafe',
       desc: '',
       args: [],
@@ -570,6 +570,26 @@ class S {
     );
   }
 
+  /// `Landscape Left`
+  String get SettingsLandscapeLeft {
+    return Intl.message(
+      'Landscape Left',
+      name: 'SettingsLandscapeLeft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Landscape Right`
+  String get SettingsLandscapeRight {
+    return Intl.message(
+      'Landscape Right',
+      name: 'SettingsLandscapeRight',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Lock Screen Orientation`
   String get SettingsLockDeviceOrientation {
     return Intl.message(
@@ -590,11 +610,31 @@ class S {
     );
   }
 
+  /// `Portrait`
+  String get SettingsPortrait {
+    return Intl.message(
+      'Portrait',
+      name: 'SettingsPortrait',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Reset App`
   String get SettingsReset {
     return Intl.message(
       'Reset App',
       name: 'SettingsReset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Screen Orientation`
+  String get SettingsScreenOrientation {
+    return Intl.message(
+      'Change Screen Orientation',
+      name: 'SettingsScreenOrientation',
       desc: '',
       args: [],
     );
