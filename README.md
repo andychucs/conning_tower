@@ -66,3 +66,19 @@ This project goal is use same UI and be able to sync player data on all platform
 ## Thanks
 
 HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.github.io/) by ![Twitter URL](https://img.shields.io/twitter/url?label=naayu1012&style=social&url=https%3A%2F%2Ftwitter.com%2Fnaayu1012)
+
+## Sponsors
+
+### Bronze Sponsors
+
+- None
+
+### Silver Sponsors
+
+- None
+
+### Gold Sponsors
+
+- None
+
+Support Project by [afdian](https://afdian.net/a/conntower)
