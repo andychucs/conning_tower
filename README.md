@@ -14,9 +14,9 @@
 ![Localizely language progress](https://img.shields.io/badge/日本語-100%25-brightgreen)
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow&style=social&url=https%3A%2F%2Ftwitter.com%2Fconntower)](https://twitter.com/conntower)
 
-Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
+Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser. Support iPhone and iPad, Mac(Apple Silicon) now.
 
-舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。
+舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。现已支持iPhone、iPad。
 
 Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。
 
