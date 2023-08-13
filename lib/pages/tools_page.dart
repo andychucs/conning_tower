@@ -340,6 +340,17 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                             builder: (context) => ComplexModal(),
                           );
                         }),
+                    SettingsTile.navigation(
+                        leading: const Icon(CupertinoIcons.square_list),
+                        title: const Text("Kancolle(Demo)"),
+                        onPressed: (context) {
+                          showCupertinoModalBottomSheet(
+                            expand: true,
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => KancolleDataModal(),
+                          );
+                        }),
                   ],
                 ),
               ],

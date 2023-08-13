@@ -65,6 +65,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
           webController.setController(controller);
           // ref.read(webViewControllerProvider.notifier).setController(controller);
           // urlController.setWebViewController(controller);
+          webController.onWebviewCreate();
         },
         onLoadStart: (controller, uri) async {
           print('Page started loading: $uri');
@@ -90,6 +91,12 @@ class AppWebViewState extends ConsumerState<AppWebView> {
         onContentSizeChanged: (controller, oldContentSize, newContentSize) {
           debugPrint("onContentSizeChanged $oldContentSize, $newContentSize");
           webController.onContentSizeChanged();
+        },
+        shouldInterceptRequest: (
+            controller,
+            WebResourceRequest request,
+            ) async {
+          return webController.onShouldInterceptRequest(request);
         },
       ),
     );

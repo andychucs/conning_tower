@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -34,6 +37,7 @@ class WebController extends _$WebController {
   WebUri currUrl = WebUri('');
   List<WebUri> currPageUrls = [];
   bool isScreenResize = false;
+  String kancolleData = '';
 
   @override
   WebController build() {
@@ -99,7 +103,6 @@ class WebController extends _$WebController {
       await closeLocalServer();
     }
 
-
     beforeRedirect = false;
     inKancolleWindow = false;
     if (uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')) {
@@ -121,7 +124,9 @@ class WebController extends _$WebController {
             "input.value='$customHomeUrl';input.placeholder='🔍 ${S.current.AssetsHtmlSearchBarText}';goButton.textContent='${S.current.AssetsHtmlSearchBarGo}';",
       );
     }
-    if ((uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854') && Platform.isAndroid) || (uri.host.startsWith("osapi.dmm.com") && Platform.isIOS)) {
+    if ((uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854') &&
+            Platform.isAndroid) ||
+        (uri.host.startsWith("osapi.dmm.com") && Platform.isIOS)) {
       inKancolleWindow = true;
       gameLoadCompleted = true;
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgNaviGameLoadCompleted);
@@ -192,6 +197,75 @@ class WebController extends _$WebController {
       }
       debugPrint('Image saved to gallery: $result');
     }
+  }
+
+  void _kancolleMessageHandle(String message) {
+    if (true) {
+      const start = "conning_tower_responseURL:";
+      const end = "conning_tower_readyState:";
+      final startIndex = message.indexOf(start);
+      final endIndex = message.indexOf(end, startIndex + start.length);
+      String responseURL =
+          message.substring(startIndex + start.length, endIndex);
+      print("responseURL:");
+      print(responseURL);
+    }
+    if (true) {
+      const start = "conning_tower_readyState:";
+      const end = "conning_tower_responseText:";
+      final startIndex = message.indexOf(start);
+      final endIndex = message.indexOf(end, startIndex + start.length);
+      String readyState =
+          message.substring(startIndex + start.length, endIndex);
+      print("readyState:");
+      print(readyState);
+    }
+    if (true) {
+      const start = "conning_tower_responseText:";
+      const end = "conning_tower_END";
+      final startIndex = message.indexOf(start);
+      final endIndex = message.indexOf(end, startIndex + start.length);
+      String responseText =
+          message.substring(startIndex + start.length, endIndex);
+      String result = responseText.replaceAll('svdata=', '');
+      kancolleData = jsonDecode(result).toString();
+      print("KC JSON:");
+      print(jsonDecode(result));
+    }
+  }
+
+  void onWebviewCreate() {
+    if (Platform.isAndroid) {
+      //Listen Kancolle API
+      WebMessageListener kcListener = WebMessageListener(
+          jsObjectName: "kcMessage",
+          onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+            _kancolleMessageHandle(message!);
+          });
+      controller.addWebMessageListener(kcListener);
+    }
+  }
+
+  Future<WebResourceResponse?>? onShouldInterceptRequest(
+      WebResourceRequest request) {
+    if (request.url.path.contains("/kcs2/js/main.js")) {
+      Future<WebResourceResponse?> customResponse = _interceptRequest(request);
+      return customResponse;
+    }
+    return null;
+  }
+
+  Future<WebResourceResponse?> _interceptRequest(
+      WebResourceRequest orgRequest) async {
+    var kcResponse =
+        await http.get(orgRequest.url, headers: orgRequest.headers);
+    return WebResourceResponse(
+        contentEncoding: 'gzip',
+        contentType: 'application/javascript',
+        data: convertStringToUint8List(kcResponse.body + kInterceptJS),
+        headers: kcResponse.headers,
+        reasonPhrase: kcResponse.reasonPhrase,
+        statusCode: kcResponse.statusCode);
   }
 }
 
