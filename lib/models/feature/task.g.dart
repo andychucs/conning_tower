@@ -21,3 +21,13 @@ Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'description': instance.description,
       'tag': instance.tag,
     };
+
+_$_Tasks _$$_TasksFromJson(Map<String, dynamic> json) => _$_Tasks(
+      items: (json['items'] as List<dynamic>)
+          .map((e) => Task.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_TasksToJson(_$_Tasks instance) => <String, dynamic>{
+      'items': instance.items,
+    };

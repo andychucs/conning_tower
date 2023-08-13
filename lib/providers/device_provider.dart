@@ -1,6 +1,8 @@
 import 'package:conning_tower/main.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,6 +19,10 @@ enum CustomDeviceOrientation {
   portraitUp,
   all
 }
+
+final themeProvider = StateProvider<ThemeMode>((ref) {
+  return ThemeMode.system;
+});
 
 @freezed
 class DeviceManagerState with _$DeviceManagerState {
@@ -103,6 +109,14 @@ class DeviceManager extends _$DeviceManager {
         break;
     }
 
+    setDeviceOrientation(orientations);
+  }
+
+  void customDeviceOrientationByIndex(
+      int index) {
+    setDeviceOrientationByIndex(-1);
+    var orientations = _getDeviceOrientation(index);
+    setOrientationIndex(index);
     setDeviceOrientation(orientations);
   }
 

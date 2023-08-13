@@ -7,56 +7,65 @@ import 'package:yaml/yaml.dart';
 
 import 'package:conning_tower/providers/webview_provider.dart';
 
-class KancolleDataModal extends ConsumerWidget {
+class KancolleDataModal extends ConsumerStatefulWidget {
   const KancolleDataModal({Key? key}) : super(key: key);
 
+
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cp = ref.watch(webControllerProvider);
+  ConsumerState<KancolleDataModal> createState() => _KancolleDataModalState();
+}
+
+class _KancolleDataModalState extends ConsumerState<KancolleDataModal> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+@override
+  Widget build(BuildContext context) {
+    final data = ref.watch(dataProvider);
     return Material(
         child: CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
               leading: Container(), middle: Text('Kancolle Data')),
-          child: SafeArea(child: SingleChildScrollView(child: Text(cp.kancolleData))),
+          child: SafeArea(child: SingleChildScrollView(child: Text(data))),
         ));
   }
 }
 
 class ModalFit extends StatelessWidget {
   final List<Widget> children;
+
   const ModalFit({Key? key, required this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: SafeArea(
-          top: false,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: children
-          ),
-        ));
+      child: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: children,
+        ),
+      ),
+    );
   }
 }
 
-
 class ComplexModal extends StatelessWidget {
-  const ComplexModal({Key? key}) : super(key: key);
+  final Widget child;
+
+  const ComplexModal({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String yamlString = '''
-task1:
-  id: 1
-  desc: task1 desc
-  timer: 01:00:00
-task2:
-  id: 2
-  desc: task2 desc
-  timer: 02:00:00
-''';
-    YamlMap yamlMap = loadYaml(yamlString);
-
     return Material(
       child: WillPopScope(
         onWillPop: () async {
@@ -84,58 +93,7 @@ task2:
                   ));
           return shouldClose;
         },
-        child: Navigator(
-          onGenerateRoute: (_) => MaterialPageRoute(
-            builder: (context) => Builder(
-              builder: (context) => CupertinoPageScaffold(
-                navigationBar: CupertinoNavigationBar(
-                    transitionBetweenRoutes: false,
-                    leading: Container(),
-                    middle: Text('Modal Page')),
-                child: SafeArea(
-                  bottom: false,
-                  child: ListView(
-                    shrinkWrap: true,
-                    controller: ModalScrollController.of(context),
-                    children: ListTile.divideTiles(
-                      context: context,
-                      tiles: List.generate(
-                          yamlMap.length,
-                          (index) => ListTile(
-                                title: Text(yamlMap.keys.elementAt(index)),
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          CupertinoPageScaffold(
-                                              navigationBar:
-                                                  CupertinoNavigationBar(
-                                                transitionBetweenRoutes: false,
-                                                middle: Text(yamlMap.keys
-                                                    .elementAt(index)),
-                                              ),
-                                              child: Stack(
-                                                fit: StackFit.expand,
-                                                children: <Widget>[
-                                                  Center(
-                                                      child: Text(
-                                                    yamlMap[yamlMap.keys
-                                                            .elementAt(
-                                                                index)]["desc"]
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ))
-                                                ],
-                                              ))));
-                                },
-                              )),
-                    ).toList(),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        child: child,
       ),
     );
   }

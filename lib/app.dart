@@ -1,15 +1,19 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/pages/home.dart';
+import 'package:conning_tower/providers/device_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class ConnTowerApp extends StatelessWidget {
+class ConnTowerApp extends ConsumerWidget {
   const ConnTowerApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -20,44 +24,53 @@ class ConnTowerApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       theme: ThemeData(
+        platform: TargetPlatform.iOS,
         brightness: Brightness.light,
-        cupertinoOverrideTheme: const CupertinoThemeData(
-            barBackgroundColor: Color(0xF0F9F9F9),
-            brightness: Brightness.light,
-            textTheme:
-                CupertinoTextThemeData(primaryColor: CupertinoColors.label)),
-        primaryColor: CupertinoColors.activeBlue,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: CupertinoColors.activeBlue,
-          surface: const Color(0xF0F9F9F9),
-          onSurface: CupertinoColors.label,
-          onBackground: CupertinoColors.label,
-          background: const Color(0xF0F9F9F9),
-          brightness: Brightness.light,
-        ),
+        primaryColor: CupertinoColors.systemBlue,
         dividerColor: CupertinoColors.secondarySystemFill,
+        scaffoldBackgroundColor: CupertinoColors.systemGroupedBackground,
+        navigationRailTheme: const NavigationRailThemeData(
+          backgroundColor: CupertinoColors.systemGroupedBackground,
+          indicatorColor: CupertinoColors.systemBlue,
+          selectedIconTheme: IconThemeData(color: CupertinoColors.systemBlue),
+          selectedLabelTextStyle: TextStyle(color: CupertinoColors.systemBlue),
+          unselectedIconTheme: IconThemeData(color: CupertinoColors.inactiveGray),
+          unselectedLabelTextStyle: TextStyle(color: CupertinoColors.inactiveGray),
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          unselectedItemColor: CupertinoColors.inactiveGray,
+          selectedItemColor: CupertinoColors.systemBlue,
+          backgroundColor: Color(0xF0F9F9F9),
+        ),
       ),
       darkTheme: ThemeData(
+        platform: TargetPlatform.iOS,
         cupertinoOverrideTheme: const CupertinoThemeData(
-            barBackgroundColor: Color(0xFF1b1b1b),
+            barBackgroundColor: Color(0xD8000000),
             brightness: Brightness.dark,
-            textTheme: CupertinoTextThemeData(primaryColor: Colors.white)),
-        brightness: Brightness.dark,
-        primaryColor: CupertinoColors.activeOrange,
-        // colorSchemeSeed: CupertinoColors.extraLightBackgroundGray,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: CupertinoColors.activeOrange,
-          surface: CupertinoColors.black,
-          onSurface: CupertinoColors.white,
-          onBackground: CupertinoColors.white,
-          background: CupertinoColors.black,
-          brightness: Brightness.dark,
+            textTheme: CupertinoTextThemeData(),
         ),
+        navigationRailTheme: const NavigationRailThemeData(
+          backgroundColor: CupertinoColors.black,
+          indicatorColor: CupertinoColors.systemBlue,
+          selectedIconTheme: IconThemeData(color: CupertinoColors.systemBlue),
+          selectedLabelTextStyle: TextStyle(color: CupertinoColors.systemBlue),
+          unselectedIconTheme: IconThemeData(color: CupertinoColors.inactiveGray),
+          unselectedLabelTextStyle: TextStyle(color: CupertinoColors.inactiveGray),
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          unselectedItemColor: CupertinoColors.inactiveGray,
+          selectedItemColor: CupertinoColors.systemBlue,
+          backgroundColor: Color(0xF0161616),
+              // Values extracted from navigation bar. For toolbar or tabbar the dark color is 0xF0161616.
+        ),
+        brightness: Brightness.dark,
+        primaryColor: CupertinoColors.systemBlue,
         scaffoldBackgroundColor: CupertinoColors.black,
         dialogBackgroundColor: CupertinoColors.black,
         dividerColor: CupertinoColors.systemFill,
       ),
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       onGenerateRoute: (_) => MaterialWithModalsPageRoute(
             builder: (_) => const HomePage(),),
     );

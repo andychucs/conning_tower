@@ -99,3 +99,29 @@ class CustomAlertDialog extends StatelessWidget {
 //   }
 //
 // }
+
+Future<T?> showAdaptiveDialog<T>(
+    context, {
+      required Text title,
+      required Widget content,
+      required List<Widget> actions,
+    }) {
+  return
+  Platform.isIOS || Platform.isMacOS
+      ? showCupertinoDialog<T>(
+    context: context,
+    builder: (BuildContext context) => CupertinoAlertDialog(
+      title: title,
+      content: content,
+      actions: actions,
+    ),
+  )
+      : showDialog<T>(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: title,
+      content: content,
+      actions: actions,
+    ),
+  );
+}

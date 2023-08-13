@@ -137,12 +137,19 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
 /// @nodoc
 @JsonSerializable()
 class _$_Task implements _Task {
-  const _$_Task(
+  _$_Task(
       {required this.id,
       required this.title,
       required this.time,
       required this.description,
-      required this.tag});
+      required this.tag})
+      : assert(id.length <= 3, 'id must have a maximum length of 3'),
+        assert(title.length <= 20, 'title must have a maximum length of 20'),
+        assert(RegExp(r'^\d{2}:[0-5]\d:[0-5]\d$').hasMatch(time),
+            'Invalid time format, maximum value is 99:59:59'),
+        assert(description.length <= 200,
+            'description must have a maximum length of 200'),
+        assert(tag.length <= 20, 'tag must have a maximum length of 20');
 
   factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
 
@@ -195,7 +202,7 @@ class _$_Task implements _Task {
 }
 
 abstract class _Task implements Task {
-  const factory _Task(
+  factory _Task(
       {required final String id,
       required final String title,
       required final String time,
@@ -217,4 +224,139 @@ abstract class _Task implements Task {
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;
+}
+
+Tasks _$TasksFromJson(Map<String, dynamic> json) {
+  return _Tasks.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Tasks {
+  List<Task> get items => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TasksCopyWith<Tasks> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TasksCopyWith<$Res> {
+  factory $TasksCopyWith(Tasks value, $Res Function(Tasks) then) =
+      _$TasksCopyWithImpl<$Res, Tasks>;
+  @useResult
+  $Res call({List<Task> items});
+}
+
+/// @nodoc
+class _$TasksCopyWithImpl<$Res, $Val extends Tasks>
+    implements $TasksCopyWith<$Res> {
+  _$TasksCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? items = null,
+  }) {
+    return _then(_value.copyWith(
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TasksCopyWith<$Res> implements $TasksCopyWith<$Res> {
+  factory _$$_TasksCopyWith(_$_Tasks value, $Res Function(_$_Tasks) then) =
+      __$$_TasksCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Task> items});
+}
+
+/// @nodoc
+class __$$_TasksCopyWithImpl<$Res> extends _$TasksCopyWithImpl<$Res, _$_Tasks>
+    implements _$$_TasksCopyWith<$Res> {
+  __$$_TasksCopyWithImpl(_$_Tasks _value, $Res Function(_$_Tasks) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? items = null,
+  }) {
+    return _then(_$_Tasks(
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Tasks implements _Tasks {
+  const _$_Tasks({required final List<Task> items}) : _items = items;
+
+  factory _$_Tasks.fromJson(Map<String, dynamic> json) =>
+      _$$_TasksFromJson(json);
+
+  final List<Task> _items;
+  @override
+  List<Task> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  String toString() {
+    return 'Tasks(items: $items)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Tasks &&
+            const DeepCollectionEquality().equals(other._items, _items));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TasksCopyWith<_$_Tasks> get copyWith =>
+      __$$_TasksCopyWithImpl<_$_Tasks>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TasksToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Tasks implements Tasks {
+  const factory _Tasks({required final List<Task> items}) = _$_Tasks;
+
+  factory _Tasks.fromJson(Map<String, dynamic> json) = _$_Tasks.fromJson;
+
+  @override
+  List<Task> get items;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TasksCopyWith<_$_Tasks> get copyWith =>
+      throw _privateConstructorUsedError;
 }

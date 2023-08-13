@@ -4,18 +4,23 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/pages/functional_layer.dart';
+import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
+import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/icons.dart';
+import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:settings_ui/settings_ui.dart';
 import 'package:validators/validators.dart';
 
 class ToolsPage extends ConsumerStatefulWidget {
@@ -57,7 +62,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
   Future<void> _onHttpRedirect(InAppWebViewController controller) async {
     if (!inKancolleWindow) {
       WebUri? currentUrl = await controller.getUrl();
-      if (currentUrl!.path.startsWith(home.path)) {
+      if (currentUrl!.path.startsWith(Uri.parse(kGameUrl).path)) {
         // May be HTTPS or HTTP
         if (Platform.isIOS) {
           await controller.injectJavascriptFileFromAsset(
@@ -149,213 +154,288 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
     }
   }
 
-  Future _showDialogWithInput(
-      String title, TextEditingController controller) async {
-    return showCupertinoDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text(title),
-          content: CupertinoTextField(
-            controller: controller,
-          ),
-          actions: [
-            CupertinoDialogAction(
-              child: Text(S.current.TextCancel),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-            ),
-            CupertinoDialogAction(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final cp = ref.watch(webControllerProvider);
-    return NestedScrollView(
-          headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-            return [
-              CupertinoSliverNavigationBar(
-                transitionBetweenRoutes: false,
-                largeTitle: Text(S.current.ToolsButton),
-              ),
-            ];
-          },
-          body: SafeArea(
-            top: false,
-            bottom: false,
-            child: SettingsList(
-              sections: [
-                SettingsSection(
-                  title: Text(S.of(context).ToolTitleWeb),
-                  tiles: [
-                    SettingsTile.navigation(
-                      title: Text(S.of(context).ToolUASetting),
-                      leading: const Icon(FontAwesomeIcons.safari),
-                      onPressed: (context) async {
-                        _resetTextController();
-                        var value = _uaTextController.value;
-                        bool flag = await _showDialogWithInput(
-                            S.current.ToolUATip, _uaTextController);
-                        if (!flag) {
-                          _uaTextController.value = value;
-                        } else {
-                          customUA = _uaTextController.value.text;
-                          localStorage.setString("customUA", customUA);
-                        }
+    return FunctionalPage(
+      title: S.current.ToolsButton,
+      children: [
+        CupertinoListSection.insetGrouped(
+          header: CupertinoListSectionDescription(S.of(context).ToolTitleWeb),
+          children: [
+            CupertinoListTile(
+              title: Text(S.of(context).ToolUASetting),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeBlue,
+                  icon: FontAwesomeIcons.safari),
+              onTap: () async {
+                _resetTextController();
+                await navigatorToCupertino(
+                    context,
+                    CupertinoListInputPage(
+                      textController: _uaTextController,
+                      title: S.of(context).ToolUASetting,
+                      onSubmit: (content) {
+                        customUA = content;
+                        localStorage.setString("customUA", customUA);
                       },
-                    ),
-                    SettingsTile.navigation(
-                      title: Text(S.of(context).ToolSearchBarURLSetting),
-                      leading: const Icon(CupertinoIcons.home),
-                      onPressed: (context) async {
-                        _resetTextController();
-                        var value = _urlTextController.value;
-                        bool flag =
-                            await _showDialogWithInput('', _urlTextController);
-                        if (!flag) {
-                          _urlTextController.value = value;
-                        } else {
-                          setState(() {
-                            customHomeUrl = _urlTextController.value.text;
-                          });
+                      previousPageTitle: S.current.ToolsButton,
+                    ));
+              },
+              trailing: const CupertinoListTileChevron(),
+            ),
+            CupertinoListTile(
+              title: Text(S.of(context).ToolSearchBarURLSetting),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeGreen,
+                  icon: CupertinoIcons.home),
+              onTap: () async {
+                _resetTextController();
+                await navigatorToCupertino(
+                    context,
+                    CupertinoListInputPage(
+                      title: S.of(context).ToolSearchBarURLSetting,
+                      textController: _urlTextController,
+                      onSubmit: (content) {
+                        if (isURL(content)) {
+                          customHomeUrl = content;
                           localStorage.setString(
                               "customHomeUrl", customHomeUrl);
                         }
                       },
-                    ),
-                    SettingsTile.navigation(
-                      // trailing: Icon(customHomeUrl.isEmpty ? CupertinoIcons.star : CupertinoIcons.star_fill),
-                      title: Text(S.of(context).SettingsHomeSave),
-                      leading: Icon(customHomeUrl.isEmpty
-                          ? CupertinoIcons.star
-                          : CupertinoIcons.star_fill),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        if (!cp.isInit) return;
-                        _onHomeSave(cp.controller);
-                      },
-                    ),
-                    SettingsTile.navigation(
-                        leading: const Icon(
-                            CupertinoIcons.rectangle_expand_vertical),
-                        title: Text(S.of(context).AppRedirect),
-                        onPressed: (context) {
-                          HapticFeedback.heavyImpact();
-                          if (!cp.isInit) return;
-                          _onHttpRedirect(cp.controller);
-                        },
-                      ),
-                    SettingsTile.navigation(
-                      leading: const Icon(CupertinoIcons.delete),
-                      title: Text(S.of(context).AppClearCache),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        if (!cp.isInit) return;
-                        _onClearCache(context, cp.controller);
-                      },
-                    ),
-                    SettingsTile.navigation(
-                      leading: const Icon(CupertinoIcons.square_arrow_left),
-                      title: Text(S.of(context).AppClearCookie),
-                      onPressed: (context) {
-                        HapticFeedback.heavyImpact();
-                        _onClearCookies(context);
-                      },
-                    ),
-                  ],
-                ),
-                SettingsSection(
-                    title: Text(S.of(context).ToolTitleGameSound),
-                    tiles: [
-                      SettingsTile.navigation(
-                        leading: const Icon(CupertinoIcons.volume_down),
-                        title: Text(S.of(context).GameUnmute),
-                        onPressed: (context) {
-                          HapticFeedback.heavyImpact();
-                          if (!cp.isInit) return;
-                          _onUnmuteGame(cp.controller);
-                        },
-                      ),
-                      SettingsTile.navigation(
-                        leading: const Icon(CupertinoIcons.volume_off),
-                        title: Text(S.of(context).GameMute),
-                        onPressed: (context) {
-                          HapticFeedback.heavyImpact();
-                          if (!cp.isInit) return;
-                          _onMuteGame(cp.controller);
-                        },
-                      ),
-                    ],
-                  ),
-                SettingsSection(
-                  title: Text(S.of(context).ToolTitleGameScreen),
-                  tiles: [
-                    SettingsTile.navigation(
-                        leading: const Icon(CupertinoIcons.fullscreen),
-                        title: Text(S.of(context).AppResize),
-                        onPressed: (context) {
-                          HapticFeedback.heavyImpact();
-                          if (!cp.isInit) return;
-                          _onAdjustWindow(cp.controller);
-                        },
-                      ),
-                    SettingsTile.switchTile(
-                      initialValue: bottomPadding,
-                      leading: const Icon(CupertinoIcons.rectangle_dock),
-                      title: Text(S.of(context).AppBottomSafe),
-                      onToggle: (value) async {
-                        HapticFeedback.heavyImpact();
-                        setState(() {
-                          bottomPadding = value;
-                        });
-                        localStorage.setBool('bottomPadding', value);
-                        widget.reloadConfig();
-                        widget.notifyParent();
-                      },
-                    ),
-                  ],
-                ),
-                if(kIsOpenSource) SettingsSection(
-                  title: Text(S.of(context).ToolTitleUtilities),
-                  tiles: [
-                    SettingsTile.navigation(
-                        leading: const Icon(CupertinoIcons.square_list),
-                        title: const Text("Task Notification(Not available)"),
-                        onPressed: (context) {
-                          showCupertinoModalBottomSheet(
-                            expand: true,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => ComplexModal(),
-                          );
-                        }),
-                    SettingsTile.navigation(
-                        leading: const Icon(CupertinoIcons.square_list),
-                        title: const Text("Kancolle(Demo)"),
-                        onPressed: (context) {
-                          showCupertinoModalBottomSheet(
-                            expand: true,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => KancolleDataModal(),
-                          );
-                        }),
-                  ],
-                ),
-              ],
+                      previousPageTitle: S.current.ToolsButton,
+                    ));
+              },
+              trailing: const CupertinoListTileChevron(),
             ),
+            CupertinoListTile(
+              title: Text(S.of(context).SettingsHomeSaveShort),
+              subtitle: Text(S.of(context).SettingsHomeSave),
+              leading: DummyIcon(
+                  color: CupertinoColors.activeOrange,
+                  icon: customHomeUrl.isEmpty
+                      ? CupertinoIcons.star
+                      : CupertinoIcons.star_fill),
+              onTap: () async {
+                HapticFeedback.heavyImpact();
+                if (!cp.isInit) return;
+                _onHomeSave(cp.controller);
+              },
+            ),
+            if (kIsOpenSource)
+              CupertinoListTile(
+                title: Text(S.of(context).AppRedirect),
+                leading: const DummyIcon(
+                    color: CupertinoColors.activeBlue,
+                    icon: CupertinoIcons.rectangle_expand_vertical),
+                onTap: () async {
+                  HapticFeedback.heavyImpact();
+                  if (!cp.isInit) return;
+                  _onHttpRedirect(cp.controller);
+                },
+              ),
+            CupertinoListTile(
+              title: Text(S.of(context).AppClearCache),
+              leading: const DummyIcon(
+                  color: CupertinoColors.destructiveRed,
+                  icon: CupertinoIcons.delete),
+              onTap: () async {
+                HapticFeedback.heavyImpact();
+                if (!cp.isInit) return;
+                _onClearCache(context, cp.controller);
+              },
+            ),
+            CupertinoListTile(
+              title: Text(S.of(context).AppClearCookie),
+              leading: const DummyIcon(
+                  color: CupertinoColors.destructiveRed,
+                  icon: CupertinoIcons.square_arrow_left),
+              onTap: () async {
+                HapticFeedback.heavyImpact();
+                _onClearCookies(context);
+              },
+            ),
+          ],
+        ),
+        if (kIsOpenSource)
+          CupertinoListSection.insetGrouped(
+              header: CupertinoListSectionDescription(
+                  S.of(context).ToolTitleGameSound),
+              children: [
+                CupertinoListTile(
+                  title: Text(S.of(context).GameUnmute),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeBlue,
+                      icon: CupertinoIcons.volume_down),
+                  onTap: () async {
+                    HapticFeedback.heavyImpact();
+                    if (!cp.isInit) return;
+                    _onUnmuteGame(cp.controller);
+                  },
+                ),
+                CupertinoListTile(
+                  title: Text(S.of(context).GameMute),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeOrange,
+                      icon: CupertinoIcons.volume_off),
+                  onTap: () async {
+                    HapticFeedback.heavyImpact();
+                    if (!cp.isInit) return;
+                    _onMuteGame(cp.controller);
+                  },
+                ),
+              ]),
+        CupertinoListSection.insetGrouped(
+            header: CupertinoListSectionDescription(
+                S.of(context).ToolTitleGameScreen),
+            children: [
+              if (kIsOpenSource)
+                CupertinoListTile(
+                  title: Text(S.of(context).AppResize),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeBlue,
+                      icon: CupertinoIcons.fullscreen),
+                  onTap: () async {
+                    HapticFeedback.heavyImpact();
+                    if (!cp.isInit) return;
+                    _onAdjustWindow(cp.controller);
+                  },
+                ),
+              CupertinoListTile(
+                title: Text(S.of(context).AppBottomSafe),
+                leading: const DummyIcon(
+                    color: CupertinoColors.activeOrange,
+                    icon: CupertinoIcons.rectangle_dock),
+                trailing: CupertinoSwitch(
+                    value: bottomPadding,
+                    onChanged: (value) async {
+                      HapticFeedback.heavyImpact();
+                      setState(() {
+                        bottomPadding = value;
+                      });
+                      localStorage.setBool('bottomPadding', value);
+                      widget.reloadConfig();
+                      widget.notifyParent();
+                    }),
+              ),
+            ]),
+        CupertinoListSection.insetGrouped(
+          header:
+              CupertinoListSectionDescription(S.of(context).ToolTitleUtilities),
+          children: [
+            CupertinoListTile(
+              title: Text(S.of(context).TaskReminders),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeBlue,
+                  icon: CupertinoIcons.square_list),
+              onTap: () async {
+                showCupertinoModalBottomSheet(
+                  useRootNavigator: true,
+                  expand: true,
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => const TasksSheet(),
+                );
+              },
+              trailing: const CupertinoListTileChevron(),
+            ),
+            CupertinoListTile(
+              title: Text(S.of(context).AppNotificationManagement),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeGreen,
+                  icon: CupertinoIcons.app_badge),
+              onTap: () async {
+                flutterLocalNotificationsPlugin
+                    .pendingNotificationRequests()
+                    .then((value) {
+                  navigatorToCupertino(
+                      context,
+                      NotificationManagement(
+                        list: value,
+                        previousPageTitle: S.current.ToolsButton,
+                      ));
+                });
+              },
+              trailing: const CupertinoListTileChevron(),
+            ),
+            CupertinoListTile(
+                leading: const Icon(CupertinoIcons.square_list),
+                title: const Text("Kancolle Data"),
+                trailing: const CupertinoListTileChevron(),
+                onTap: () =>
+                  showCupertinoModalBottomSheet(
+                    expand: true,
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => KancolleDataModal(),
+                  )),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class NotificationManagement extends StatelessWidget {
+  const NotificationManagement({
+    super.key,
+    required this.list,
+    required this.previousPageTitle,
+  });
+
+  final List<PendingNotificationRequest> list;
+  final String previousPageTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoActionPage(
+        title: S.of(context).AppNotificationManagement,
+        previousPageTitle: previousPageTitle,
+        child: ListView(children: [
+          CupertinoListSection.insetGrouped(
+            children: [
+              CupertinoListTile(
+                leading: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.activeGreen,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Icon(
+                    CupertinoIcons.app_badge,
+                    color: CupertinoColors.white,
+                  ),
+                ),
+                title: Text(S.of(context).PendingNotificationCount),
+                additionalInfo: Text('${list.length}'),
+              ),
+              CupertinoListTile(
+                title: Text(
+                  S.of(context).ClearAllPendingNotifications,
+                  style: const TextStyle(color: CupertinoColors.activeBlue),
+                ),
+                onTap: () {
+                  notification.cancelAllNotifications();
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
           ),
-        );
+          CupertinoListSection.insetGrouped(
+            header: list.isNotEmpty
+                ? CupertinoListSectionDescription(
+                    S.of(context).PendingNotifications)
+                : Container(),
+            children: list.isNotEmpty
+                ? List.generate(list.length, (index) {
+                    return CupertinoListTile(
+                      title:
+                          Text(list[index].title ?? list[index].id.toString()),
+                    );
+                  })
+                : [],
+          ),
+        ]));
   }
 }

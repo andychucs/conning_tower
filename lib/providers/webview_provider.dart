@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -18,6 +19,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'webview_provider.g.dart';
 part 'webview_provider.freezed.dart';
 
+final gameUrlPath = Uri.parse(kGameUrl).path;
+
+final dataProvider = StateProvider<String>((ref) {
+  return '';
+});
+
 @freezed
 class WebControllerState with _$WebControllerState{
   factory WebControllerState({
@@ -37,7 +44,6 @@ class WebController extends _$WebController {
   WebUri currUrl = WebUri('');
   List<WebUri> currPageUrls = [];
   bool isScreenResize = false;
-  String kancolleData = '';
 
   @override
   WebController build() {
@@ -97,7 +103,7 @@ class WebController extends _$WebController {
   Future<void> onLoadStart(WebUri uri) async {
     state.setCurrUrl(uri);
     state.clearCurrPageUrls();
-    if (uri.rawValue.startsWith("http://localhost:8080")) {
+    if (uri.rawValue.startsWith(kLocalHomeUrl)) {
       await startLocalServer();
     } else {
       await closeLocalServer();
@@ -105,10 +111,10 @@ class WebController extends _$WebController {
 
     beforeRedirect = false;
     inKancolleWindow = false;
-    if (uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854')) {
+    if (uri.path.startsWith(gameUrlPath)) {
       beforeRedirect = true;
       autoAdjusted = false;
-    } else if (uri.host == 'osapi.dmm.com') {
+    } else if (uri.host == kDMMOSAPIDomain) {
       inKancolleWindow = true;
       autoAdjusted = false;
     }
@@ -118,15 +124,16 @@ class WebController extends _$WebController {
     if (safeNavi) {
       safeNavi = false;
     }
-    if (uri.rawValue.startsWith("http://localhost:8080")) {
+    print(onLoadStop);
+    print(uri);
+    if (uri.rawValue.startsWith(kLocalHomeUrl)) {
+      debugPrint(customHomeUrl);
       await controller.evaluateJavascript(
         source:
             "input.value='$customHomeUrl';input.placeholder='🔍 ${S.current.AssetsHtmlSearchBarText}';goButton.textContent='${S.current.AssetsHtmlSearchBarGo}';",
       );
     }
-    if ((uri.path.startsWith('/netgame/social/-/gadgets/=/app_id=854854') &&
-            Platform.isAndroid) ||
-        (uri.host.startsWith("osapi.dmm.com") && Platform.isIOS)) {
+    if ((uri.path.startsWith(gameUrlPath) && Platform.isAndroid) || (uri.host.startsWith(kDMMOSAPIDomain) && Platform.isIOS)) {
       inKancolleWindow = true;
       gameLoadCompleted = true;
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgNaviGameLoadCompleted);
@@ -140,9 +147,9 @@ class WebController extends _$WebController {
     debugPrint("currentUrl: ${state.currUrl}");
     debugPrint("responseUrls: ${state.currPageUrls}");
     if (Platform.isAndroid) return;
-    if (!(currUrl.path.startsWith(home.path) ||
-        currUrl.host.startsWith("osapi.dmm.com"))) {
-      debugPrint("currUrl.path: ${currUrl.path} home.path: ${home.path}");
+    if (!(currUrl.path.startsWith(Uri.parse(kGameUrl).path) ||
+        currUrl.host.startsWith(kDMMOSAPIDomain))) {
+      debugPrint("currUrl.path: ${currUrl.path} home.path: ${Uri.parse(kGameUrl).path}");
       return;
     }
     debugPrint(
@@ -150,7 +157,7 @@ class WebController extends _$WebController {
     if (!safeNavi && enableAutoProcess && state.currPageUrls.isNotEmpty) {
       debugPrint("latest responseUrl: ${state.currPageUrls.last}");
       for (final url in currPageUrls.reversed) {
-        if (url.host == "osapi.dmm.com" && currUrl.path.startsWith(home.path)) {
+        if (url.host == kDMMOSAPIDomain && currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
           await Future.delayed(const Duration(seconds: 1));
           // Delay to allow time for Webview to load previous page
           if (url.scheme == 'https') {
@@ -171,7 +178,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> onContentSizeChanged() async {
-    if (state.currUrl.host == 'osapi.dmm.com' && Platform.isIOS) {
+    if (state.currUrl.host == kDMMOSAPIDomain && Platform.isIOS) {
       await screenResize();
     }
   }
@@ -191,7 +198,7 @@ class WebController extends _$WebController {
       final result =
           await ImageGallerySaver.saveImage(imageBytes, quality: 100);
       if (result['isSuccess']) {
-        Fluttertoast.showToast(msg: "📸️");
+        Fluttertoast.showToast(msg: S.current.ScreenshotSuccessDialog);
       } else {
         Fluttertoast.showToast(msg: S.current.ScreenshotFailDialog);
       }
@@ -228,9 +235,8 @@ class WebController extends _$WebController {
       String responseText =
           message.substring(startIndex + start.length, endIndex);
       String result = responseText.replaceAll('svdata=', '');
-      kancolleData = jsonDecode(result).toString();
-      print("KC JSON:");
-      print(jsonDecode(result));
+      ref.read(dataProvider.notifier).update((state) => result);
+      debugPrint(result);
     }
   }
 
@@ -292,7 +298,7 @@ class UrlController with ChangeNotifier {
     debugPrint("currentUrl: $currentUrl");
     if (!safeNavi && responseUrls.isNotEmpty) {
       debugPrint("latest responseUrl: $responseUrls");
-      if (currentUrl == "http://localhost:8080/") {
+      if (currentUrl == kLocalHomeUrl) {
         final urlToLoad = "https://www.google.com";
         notifyListeners();
         await Future.delayed(Duration(

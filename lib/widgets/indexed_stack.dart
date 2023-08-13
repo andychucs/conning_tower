@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class FadeIndexedStack extends StatefulWidget {
+class IndexedStackWithCupertinoPageTransition extends StatefulWidget {
   final int index;
   final List<Widget> children;
   final Duration duration;
@@ -8,7 +8,7 @@ class FadeIndexedStack extends StatefulWidget {
   final TextDirection? textDirection;
   final StackFit sizing;
 
-  const FadeIndexedStack({
+  const IndexedStackWithCupertinoPageTransition({
     super.key,
     required this.index,
     required this.children,
@@ -21,16 +21,16 @@ class FadeIndexedStack extends StatefulWidget {
   });
 
   @override
-  FadeIndexedStackState createState() => FadeIndexedStackState();
+  IndexedStackWithCupertinoPageTransitionState createState() => IndexedStackWithCupertinoPageTransitionState();
 }
 
-class FadeIndexedStackState extends State<FadeIndexedStack>
+class IndexedStackWithCupertinoPageTransitionState extends State<IndexedStackWithCupertinoPageTransition>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller =
       AnimationController(vsync: this, duration: widget.duration);
 
   @override
-  void didUpdateWidget(FadeIndexedStack oldWidget) {
+  void didUpdateWidget(IndexedStackWithCupertinoPageTransition oldWidget) {
     if (widget.index != oldWidget.index) {
       _controller.forward(from: 0.0);
     }
@@ -51,8 +51,10 @@ class FadeIndexedStackState extends State<FadeIndexedStack>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _controller,
+    return CupertinoFullscreenDialogTransition(
+      primaryRouteAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(_controller),
+      secondaryRouteAnimation: Tween<double>(begin: 0.0, end: 0.0).animate(_controller),
+      linearTransition: true,
       child: IndexedStack(
         index: widget.index,
         alignment: widget.alignment,

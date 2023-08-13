@@ -71,10 +71,20 @@ class S {
   }
 
   /// `Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.`
-  String get AboutDescription {
+  String get AboutDescriptionOpen {
     return Intl.message(
       'Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.',
-      name: 'AboutDescription',
+      name: 'AboutDescriptionOpen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ConningTower for iOS is a browser designed specifically for playing browser games. It lets you customize your screen and stay in landscape mode with desktop view at all times.`
+  String get AboutDescriptionStore {
+    return Intl.message(
+      'ConningTower for iOS is a browser designed specifically for playing browser games. It lets you customize your screen and stay in landscape mode with desktop view at all times.',
+      name: 'AboutDescriptionStore',
       desc: '',
       args: [],
     );
@@ -85,6 +95,16 @@ class S {
     return Intl.message(
       'Version',
       name: 'AboutVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Data Source`
+  String get AddDataSource {
+    return Intl.message(
+      'Add Data Source',
+      name: 'AddDataSource',
       desc: '',
       args: [],
     );
@@ -145,6 +165,16 @@ class S {
     return Intl.message(
       'Cache cleared.',
       name: 'AppControlsClearCache',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide Sidebar`
+  String get AppControlsHide {
+    return Intl.message(
+      'Hide Sidebar',
+      name: 'AppControlsHide',
       desc: '',
       args: [],
     );
@@ -220,6 +250,16 @@ class S {
     );
   }
 
+  /// `Show Sidebar`
+  String get AppControlsShow {
+    return Intl.message(
+      'Show Sidebar',
+      name: 'AppControlsShow',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Forward`
   String get AppForward {
     return Intl.message(
@@ -240,11 +280,91 @@ class S {
     );
   }
 
+  /// `Clean Layout`
+  String get AppLayoutClean {
+    return Intl.message(
+      'Clean Layout',
+      name: 'AppLayoutClean',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Joystick and Floating Action Button`
+  String get AppLayoutJoystickAndFAB {
+    return Intl.message(
+      'Joystick and Floating Action Button',
+      name: 'AppLayoutJoystickAndFAB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Multi-Function Button and Floating Action Button`
+  String get AppLayoutMultiFunctionAndFAB {
+    return Intl.message(
+      'Multi-Function Button and Floating Action Button',
+      name: 'AppLayoutMultiFunctionAndFAB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Multi-Function Button`
+  String get AppLayoutMultiFunctionButton {
+    return Intl.message(
+      'Multi-Function Button',
+      name: 'AppLayoutMultiFunctionButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only Floating Action Button`
+  String get AppLayoutOnlyFAB {
+    return Intl.message(
+      'Only Floating Action Button',
+      name: 'AppLayoutOnlyFAB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only Joystick`
+  String get AppLayoutOnlyJoystick {
+    return Intl.message(
+      'Only Joystick',
+      name: 'AppLayoutOnlyJoystick',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Layout Setting`
+  String get AppLayoutSetting {
+    return Intl.message(
+      'App Layout Setting',
+      name: 'AppLayoutSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Conning Tower`
   String get AppName {
     return Intl.message(
       'Conning Tower',
       name: 'AppName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Management`
+  String get AppNotificationManagement {
+    return Intl.message(
+      'Notification Management',
+      name: 'AppNotificationManagement',
       desc: '',
       args: [],
     );
@@ -310,6 +430,16 @@ class S {
     );
   }
 
+  /// `Rate on App Store`
+  String get AppStoreRating {
+    return Intl.message(
+      'Rate on App Store',
+      name: 'AppStoreRating',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Go`
   String get AssetsHtmlSearchBarGo {
     return Intl.message(
@@ -325,6 +455,46 @@ class S {
     return Intl.message(
       'Search or enter website name',
       name: 'AssetsHtmlSearchBarText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear All Pending Notifications`
+  String get ClearAllPendingNotifications {
+    return Intl.message(
+      'Clear All Pending Notifications',
+      name: 'ClearAllPendingNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Theme`
+  String get DarkTheme {
+    return Intl.message(
+      'Dark Theme',
+      name: 'DarkTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `https://conntower.github.io/docs/en/new`
+  String get DocsNewUrl {
+    return Intl.message(
+      'https://conntower.github.io/docs/en/new',
+      name: 'DocsNewUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field cannot be empty.`
+  String get EmptyFieldError {
+    return Intl.message(
+      'Field cannot be empty.',
+      name: 'EmptyFieldError',
       desc: '',
       args: [],
     );
@@ -365,6 +535,46 @@ class S {
     return Intl.message(
       'On',
       name: 'GameUnmute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid JSON format.`
+  String get InvalidJsonError {
+    return Intl.message(
+      'Invalid JSON format.',
+      name: 'InvalidJsonError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid URL.`
+  String get InvalidUrlError {
+    return Intl.message(
+      'Invalid URL.',
+      name: 'InvalidUrlError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid YAML format.`
+  String get InvalidYamlError {
+    return Intl.message(
+      'Invalid YAML format.',
+      name: 'InvalidYamlError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `JSON Example:`
+  String get JsonExample {
+    return Intl.message(
+      'JSON Example:',
+      name: 'JsonExample',
       desc: '',
       args: [],
     );
@@ -480,6 +690,16 @@ class S {
     );
   }
 
+  /// `Light Theme`
+  String get LightTheme {
+    return Intl.message(
+      'Light Theme',
+      name: 'LightTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click 'Tools-Web-HTTP Redirect' button.`
   String get MsgIOSNote {
     return Intl.message(
@@ -510,11 +730,41 @@ class S {
     );
   }
 
+  /// `Pending Notifications Count`
+  String get PendingNotificationCount {
+    return Intl.message(
+      'Pending Notifications Count',
+      name: 'PendingNotificationCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending Notifications`
+  String get PendingNotifications {
+    return Intl.message(
+      'Pending Notifications',
+      name: 'PendingNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings.`
   String get ScreenshotFailDialog {
     return Intl.message(
       'Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings.',
       name: 'ScreenshotFailDialog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Screenshot saved.`
+  String get ScreenshotSuccessDialog {
+    return Intl.message(
+      'Screenshot saved.',
+      name: 'ScreenshotSuccessDialog',
       desc: '',
       args: [],
     );
@@ -560,11 +810,41 @@ class S {
     );
   }
 
+  /// `Auto Load`
+  String get SettingsHomeLoadShort {
+    return Intl.message(
+      'Auto Load',
+      name: 'SettingsHomeLoadShort',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Make Current Web Page as Homepage URL`
   String get SettingsHomeSave {
     return Intl.message(
       'Make Current Web Page as Homepage URL',
       name: 'SettingsHomeSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homepage`
+  String get SettingsHomeSaveShort {
+    return Intl.message(
+      'Homepage',
+      name: 'SettingsHomeSaveShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Landscape`
+  String get SettingsLandscape {
+    return Intl.message(
+      'Landscape',
+      name: 'SettingsLandscape',
       desc: '',
       args: [],
     );
@@ -640,11 +920,121 @@ class S {
     );
   }
 
+  /// `System Theme`
+  String get SystemTheme {
+    return Intl.message(
+      'System Theme',
+      name: 'SystemTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Screenshot`
+  String get TakeScreenshot {
+    return Intl.message(
+      'Screenshot',
+      name: 'TakeScreenshot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{taskTitle} has been completed.`
+  String TaskCompleted(Object taskTitle) {
+    return Intl.message(
+      '$taskTitle has been completed.',
+      name: 'TaskCompleted',
+      desc: '',
+      args: [taskTitle],
+    );
+  }
+
+  /// `Task Not Added`
+  String get TaskNotAdded {
+    return Intl.message(
+      'Task Not Added',
+      name: 'TaskNotAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Task Notification Added Successfully`
+  String get TaskNotificationAdded {
+    return Intl.message(
+      'Task Notification Added Successfully',
+      name: 'TaskNotificationAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tasks Timer`
+  String get TaskPageTitle {
+    return Intl.message(
+      'Tasks Timer',
+      name: 'TaskPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Task Reminders`
+  String get TaskReminders {
+    return Intl.message(
+      'Task Reminders',
+      name: 'TaskReminders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The Task Reminders feature allows you to add and manage task reminders.\n\n- To add a data source, click the Add data source button in the top right corner and enter a valid URL or YAML/JSON content.\n\n- To save changes, click the Save button.\n\n- Added tasks will be displayed in the list.\n\n- Double clicking on a task will add a reminder notification for that task.\n\n- Clicking on a task to enter the task information page where you can view detailed information.\n\n- In the task information page, click the Up-Arrow button in the top right corner to pin the task at the top of the task list.\n\n- If you encounter any issues, please contact our support team.\n\nEnjoy using it!`
+  String get TaskRemindersHelpContent {
+    return Intl.message(
+      'The Task Reminders feature allows you to add and manage task reminders.\n\n- To add a data source, click the Add data source button in the top right corner and enter a valid URL or YAML/JSON content.\n\n- To save changes, click the Save button.\n\n- Added tasks will be displayed in the list.\n\n- Double clicking on a task will add a reminder notification for that task.\n\n- Clicking on a task to enter the task information page where you can view detailed information.\n\n- In the task information page, click the Up-Arrow button in the top right corner to pin the task at the top of the task list.\n\n- If you encounter any issues, please contact our support team.\n\nEnjoy using it!',
+      name: 'TaskRemindersHelpContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `request tasks number over limit.`
+  String get TasksNumOverLimit {
+    return Intl.message(
+      'request tasks number over limit.',
+      name: 'TasksNumOverLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancel`
   String get TextCancel {
     return Intl.message(
       'Cancel',
       name: 'TextCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help`
+  String get TextHelp {
+    return Intl.message(
+      'Help',
+      name: 'TextHelp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID`
+  String get TextId {
+    return Intl.message(
+      'ID',
+      name: 'TextId',
       desc: '',
       args: [],
     );
@@ -660,6 +1050,16 @@ class S {
     );
   }
 
+  /// `Save`
+  String get TextSave {
+    return Intl.message(
+      'Save',
+      name: 'TextSave',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Should Close?`
   String get TextShouldClose {
     return Intl.message(
@@ -670,11 +1070,51 @@ class S {
     );
   }
 
+  /// `Tag`
+  String get TextTag {
+    return Intl.message(
+      'Tag',
+      name: 'TextTag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get TextTime {
+    return Intl.message(
+      'Time',
+      name: 'TextTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get TextTitle {
+    return Intl.message(
+      'Title',
+      name: 'TextTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Yes`
   String get TextYes {
     return Intl.message(
       'Yes',
       name: 'TextYes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get Theme {
+    return Intl.message(
+      'Theme',
+      name: 'Theme',
       desc: '',
       args: [],
     );
@@ -785,6 +1225,66 @@ class S {
     return Intl.message(
       'Tools',
       name: 'ToolsButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `URL Example:`
+  String get UrlExample {
+    return Intl.message(
+      'URL Example:',
+      name: 'UrlExample',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The response from the URL request must be in JSON format and have a structure consistent with the example response above.`
+  String get UrlRequestFormat {
+    return Intl.message(
+      'The response from the URL request must be in JSON format and have a structure consistent with the example response above.',
+      name: 'UrlRequestFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Software version update found, please check the version update document.`
+  String get VersionUpdateContent {
+    return Intl.message(
+      'Software version update found, please check the version update document.',
+      name: 'VersionUpdateContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click here to view`
+  String get VersionUpdateLinkText {
+    return Intl.message(
+      'Click here to view',
+      name: 'VersionUpdateLinkText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version Update`
+  String get VersionUpdateTitle {
+    return Intl.message(
+      'Version Update',
+      name: 'VersionUpdateTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `YAML Example:`
+  String get YamlExample {
+    return Intl.message(
+      'YAML Example:',
+      name: 'YamlExample',
       desc: '',
       args: [],
     );

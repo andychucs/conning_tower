@@ -1,7 +1,7 @@
-import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/providers/navigator_provider.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 enum ConFunc {
   adjustWindow,
@@ -29,7 +28,7 @@ enum ConFunc {
   navi2Settings,
 }
 
-class Controls extends ConsumerWidget {
+class Controls extends ConsumerStatefulWidget {
   Controls(CookieManager? cookieManager,
       {Key? key, required this.notifyParent, required this.orientation})
       : cookieManager = cookieManager ?? CookieManager.instance(),
@@ -37,6 +36,13 @@ class Controls extends ConsumerWidget {
   final Function() notifyParent;
   late final CookieManager cookieManager;
   final Orientation orientation;
+
+  @override
+  ConsumerState<Controls> createState() => _ControlsState();
+}
+
+class _ControlsState extends ConsumerState<Controls> {
+  int _selectedIndex = 0;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -55,27 +61,29 @@ class Controls extends ConsumerWidget {
     // 9: ConFunc.clearCache
   };
 
-  final Map naviItems = {
-    0: 0, //loadHome
-    1: 1, //navi2Tool
-    2: 5, //navi2Settings
-    3: 6, //navi2About
-  };
+  void _onItemTapped(int index) {
+    setState(() {
+      if (![2,3,4].contains(index)) {
+        _selectedIndex = index;
+      }
+    });
+  }
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
+@override
+  Widget build(BuildContext context) {
     final cp = ref.watch(webControllerProvider);
-    if (orientation == Orientation.portrait) {
+    final flnp = ref.watch(functionLayerNavigatorProvider);
+
+    if (widget.orientation == Orientation.portrait) {
       return BottomNavigationBar(
-        showSelectedLabels: true,
-        // showUnselectedLabels: true,
-        currentIndex: naviItems[selectedIndex],
-        unselectedItemColor: CupertinoColors.inactiveGray,
-        selectedItemColor: Theme.of(context).primaryColor,
+        showSelectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
         onTap: ((value) async {
           HapticFeedback.mediumImpact();
           if (!cp.isInit) return;
-          _onTap(value, context, cp.controller);
+          _onTap(value, context, cp.controller, flnp);
         }),
         items: [
           BottomNavigationBarItem(
@@ -118,12 +126,12 @@ class Controls extends ConsumerWidget {
     }
     return NavigationRail(
       labelType: NavigationRailLabelType.all,
-      selectedIndex: naviItems[selectedIndex],
+      selectedIndex: _selectedIndex,
       groupAlignment: 0,
       onDestinationSelected: (int index) async {
         HapticFeedback.mediumImpact();
         if (!cp.isInit) return;
-        _onTap(index, context, cp.controller);
+        _onTap(index, context, cp.controller, flnp);
       },
       destinations: [
         NavigationRailDestination(
@@ -171,37 +179,36 @@ class Controls extends ConsumerWidget {
   }
 
   void _onTap(
-      int value, BuildContext context, InAppWebViewController controller) {
+    int value,
+    BuildContext context,
+    InAppWebViewController controller,
+    FunctionLayerNavigator navigator,
+  ) {
+    _onItemTapped(value);
     var func = funcMap[value];
     switch (func) {
       case ConFunc.navi2About:
-        selectedIndex = 3;
-        notifyParent();
+        selectedIndex = 1;
+        widget.notifyParent();
+        navigator.changeIndex(2);
         break;
       case ConFunc.navi2Tool:
         selectedIndex = 1;
-        notifyParent();
+        widget.notifyParent();
+        navigator.changeIndex(0);
         break;
       case ConFunc.navi2Settings:
-        selectedIndex = 2;
-        notifyParent();
+        selectedIndex = 1;
+        widget.notifyParent();
+        navigator.changeIndex(1);
         break;
       case ConFunc.loadHome:
         if (selectedIndex != 0) {
           selectedIndex = 0;
-          notifyParent();
+          widget.notifyParent();
         } else {
           _onLoadHome(context, controller);
         }
-        break;
-      case ConFunc.adjustWindow:
-        _onAdjustWindow(controller);
-        break;
-      case ConFunc.httpRedirect:
-        _onHttpRedirect(controller);
-        break;
-      case ConFunc.bottomUp:
-        _onBottomUp();
         break;
       case ConFunc.scrollUp:
         controller.scrollBy(x: 1, y: 0);
@@ -217,12 +224,6 @@ class Controls extends ConsumerWidget {
         break;
       case ConFunc.refresh:
         _onReload(context, controller);
-        break;
-      case ConFunc.clearCookies:
-        _onClearCookies(context);
-        break;
-      case ConFunc.clearCache:
-        _onClearCache(context, controller);
         break;
     }
   }
@@ -255,45 +256,6 @@ class Controls extends ConsumerWidget {
     }
   }
 
-  @Deprecated("Remove this func in Controls widget")
-  void _onBottomUp() {
-    if (bottomPadding) {
-      bottomPadding = false;
-    } else {
-      bottomPadding = true;
-    }
-    notifyParent();
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onHttpRedirect(InAppWebViewController controller) async {
-    if (!inKancolleWindow) {
-      WebUri? currentUrl = await controller.getUrl();
-      if (currentUrl!.path.startsWith(home.path)) {
-        // May be HTTPS or HTTP
-        await controller.injectJavascriptFileFromAsset(
-            assetFilePath: httpRedirectJS);
-        inKancolleWindow = true;
-      }
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
-      print("HTTP Redirect success");
-    } else {
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
-      print("HTTP Redirect fail");
-    }
-    print("inKancolleWindow: $inKancolleWindow");
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onAdjustWindow(InAppWebViewController controller) async {
-    if (gameLoadCompleted) {
-      await autoAdjustWindowV2(controller, force: true);
-    } else {
-      Fluttertoast.showToast(
-          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
-    }
-  }
-
   Future<void> _onLoadHome(
       BuildContext context, InAppWebViewController controller) async {
     bool? value = await showDialog(
@@ -305,37 +267,6 @@ class Controls extends ConsumerWidget {
       String homeUrl = getHomeUrl();
       safeNavi = false;
       await controller.loadUrl(urlRequest: URLRequest(url: WebUri(homeUrl)));
-    }
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onClearCookies(BuildContext context) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCookie, isNormal: true);
-        });
-    if (value ?? false) {
-      await cookieManager.deleteAllCookies();
-      String message = S.current.AppControlsLogoutSuccess;
-      Fluttertoast.showToast(msg: message);
-    }
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onClearCache(
-      BuildContext context, InAppWebViewController controller) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCache.replaceAll('\n', ''),
-              isNormal: true);
-        });
-    if (value ?? false) {
-      await controller.clearCache();
-      Fluttertoast.showToast(msg: S.current.AppControlsClearCache);
     }
   }
 }
