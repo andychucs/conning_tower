@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'kdock.freezed.dart';
 part 'kdock.g.dart';
 
