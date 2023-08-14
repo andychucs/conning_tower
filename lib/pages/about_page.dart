@@ -13,10 +13,7 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum Availability { loading, available, unavailable }
-
 class AboutPage extends StatefulWidget {
-
   const AboutPage({super.key});
 
   @override
@@ -25,27 +22,18 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   final InAppReview _inAppReview = InAppReview.instance;
-  Availability _availability = Availability.loading;
-  late PackageInfo _packageInfo;
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+    installerStore: 'Unknown',
+  );
   @override
   void initState() {
     super.initState();
-
-    (<T>(T? o) => o!)(WidgetsBinding.instance).addPostFrameCallback((_) async {
-      _initPackageInfo();
-
-      try {
-        final isAvailable = await _inAppReview.isAvailable();
-
-        setState(() {
-          _availability = isAvailable && !Platform.isAndroid
-              ? Availability.available
-              : Availability.unavailable;
-        });
-      } catch (_) {
-        setState(() => _availability = Availability.unavailable);
-      }
-    });
+    _initPackageInfo();
   }
 
   Future<void> _initPackageInfo() async {
@@ -54,7 +42,6 @@ class _AboutPageState extends State<AboutPage> {
       _packageInfo = info;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +87,9 @@ class _AboutPageState extends State<AboutPage> {
                           icon: CupertinoIcons.heart),
                       trailing: const CupertinoListTileChevron(),
                       onTap: () async {
-                        if (_availability == Availability.available) {
+                        if (await _inAppReview.isAvailable()) {
                           _inAppReview.requestReview();
-                      }
+                        }
                       },
                     ),
                     CupertinoListTile(
@@ -111,8 +98,7 @@ class _AboutPageState extends State<AboutPage> {
                           color: CupertinoColors.black,
                           icon: FontAwesomeIcons.xTwitter),
                       trailing: const CupertinoListTileChevron(),
-                      onTap: () =>
-                          launchUrl(Uri.parse(kXUrl)),
+                      onTap: () => launchUrl(Uri.parse(kXUrl)),
                     ),
                     if (kIsOpenSource)
                       CupertinoListTile(
@@ -129,8 +115,7 @@ class _AboutPageState extends State<AboutPage> {
                           color: CupertinoColors.activeOrange,
                           icon: CupertinoIcons.doc),
                       trailing: const CupertinoListTileChevron(),
-                      onTap: () => launchUrl(
-                          Uri.parse(kDocsUrl)),
+                      onTap: () => launchUrl(Uri.parse(kDocsUrl)),
                     )
                   ],
                 ),
@@ -194,20 +179,25 @@ class _AboutPageState extends State<AboutPage> {
                   ],
                 ),
                 CupertinoListSection.insetGrouped(
-                    header: const CupertinoListSectionDescription("ConningTower makes use of the following libraries:",
+                    header: const CupertinoListSectionDescription(
+                      "ConningTower makes use of the following libraries:",
                     ),
-                    footer: const CupertinoListSectionDescription('For license requirements, packages from pub.dev will not be listed here.'),
+                    footer: const CupertinoListSectionDescription(
+                        'For license requirements, packages from pub.dev will not be listed here.'),
                     children: [
                       CupertinoListTile(
                         title: const Text("Libraries"),
                         trailing: const CupertinoListTileChevron(),
-                        onTap: () => navigatorToCupertino(context,
-                            SingleChildFunctionalPage(child: CupertinoPageScaffold(
-                              navigationBar: CupertinoNavigationBar(
-                                middle: const Text('Libraries'),
-                                previousPageTitle: S.of(context).AboutButton,
-                              ),
-                                child: const LibsInfo()))),
+                        onTap: () => navigatorToCupertino(
+                            context,
+                            SingleChildFunctionalPage(
+                                child: CupertinoPageScaffold(
+                                    navigationBar: CupertinoNavigationBar(
+                                      middle: const Text('Libraries'),
+                                      previousPageTitle:
+                                          S.of(context).AboutButton,
+                                    ),
+                                    child: const LibsInfo()))),
                       )
                     ])
               ],
