@@ -76,15 +76,15 @@ class _FunctionalLayerHomeState extends ConsumerState<FunctionalLayerHome> {
     navigator.init(context, () => setState(() {}));
     index = navigator.index;
     switch (index) {
-      case 0:
+      case 1:
         return ToolsPage(widget.cookieManager,
             notifyParent: widget.notifyParent,
             reloadConfig: widget.reloadConfig);
-      case 1:
+      case 2:
         return SettingsPage(
             notifyParent: widget.notifyParent,
             reloadConfig: widget.reloadConfig);
-      case 2:
+      case 3:
         return AboutPage();
       default:
         return ToolsPage(widget.cookieManager,

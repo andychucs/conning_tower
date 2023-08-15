@@ -61,6 +61,13 @@ class _ControlsState extends ConsumerState<Controls> {
     // 9: ConFunc.clearCache
   };
 
+  final Map naviItems = {
+    0: 0, //loadHome
+    1: 1, //navi2Tool
+    2: 5, //navi2Settings
+    3: 6, //navi2About
+  };
+
   void _onItemTapped(int index) {
     setState(() {
       if (![2,3,4].contains(index)) {
@@ -73,6 +80,8 @@ class _ControlsState extends ConsumerState<Controls> {
   Widget build(BuildContext context) {
     final cp = ref.watch(webControllerProvider);
     final flnp = ref.watch(functionLayerNavigatorProvider);
+
+    _selectedIndex = naviItems[flnp.index];
 
     if (widget.orientation == Orientation.portrait) {
       return BottomNavigationBar(
@@ -190,21 +199,22 @@ class _ControlsState extends ConsumerState<Controls> {
       case ConFunc.navi2About:
         selectedIndex = 1;
         widget.notifyParent();
-        navigator.changeIndex(2);
+        navigator.changeIndex(3);
         break;
       case ConFunc.navi2Tool:
         selectedIndex = 1;
         widget.notifyParent();
-        navigator.changeIndex(0);
+        navigator.changeIndex(1);
         break;
       case ConFunc.navi2Settings:
         selectedIndex = 1;
         widget.notifyParent();
-        navigator.changeIndex(1);
+        navigator.changeIndex(2);
         break;
       case ConFunc.loadHome:
         if (selectedIndex != 0) {
           selectedIndex = 0;
+          navigator.changeIndex(0);
           widget.notifyParent();
         } else {
           _onLoadHome(context, controller);

@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
@@ -193,6 +192,7 @@ class _AboutPageState extends State<AboutPage> {
                             SingleChildFunctionalPage(
                                 child: CupertinoPageScaffold(
                                     navigationBar: CupertinoNavigationBar(
+                                      backgroundColor: CupertinoColors.systemGroupedBackground,
                                       middle: const Text('Libraries'),
                                       previousPageTitle:
                                           S.of(context).AboutButton,

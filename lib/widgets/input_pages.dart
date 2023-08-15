@@ -65,13 +65,16 @@ class CupertinoListInputPage extends StatelessWidget {
     super.key,
     required this.textController,
     required this.title,
-    required this.onSubmit, required this.previousPageTitle,
+    required this.onSubmit,
+    required this.previousPageTitle,
+    this.description = '',
   });
 
   final TextEditingController textController;
   final String title;
   final String previousPageTitle;
   final Function(String) onSubmit;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +88,7 @@ class CupertinoListInputPage extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: CupertinoListSection.insetGrouped(
+          footer: description.isNotEmpty ? CupertinoListSectionDescription(description) : null,
           children: [
             CupertinoListTile(
               title: CupertinoTextField.borderless(

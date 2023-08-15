@@ -180,6 +180,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                         localStorage.setString("customUA", customUA);
                       },
                       previousPageTitle: S.current.ToolsButton,
+                      description: S.current.ToolUATip,
                     ));
               },
               trailing: const CupertinoListTileChevron(),
