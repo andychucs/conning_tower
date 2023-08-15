@@ -119,7 +119,7 @@ class _ControlsState extends ConsumerState<Controls> {
             icon: const Icon(
               CupertinoIcons.info,
             ),
-            label: S.of(context).AboutButton.replaceAll('\n', ''),
+            label: S.of(context).AboutButton,
           ),
         ],
       );

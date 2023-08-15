@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "AboutButton": MessageLookupByLibrary.simpleMessage("本アプリ\nについて"),
+        "AboutButton": MessageLookupByLibrary.simpleMessage("情報"),
         "AboutContributors": MessageLookupByLibrary.simpleMessage("貢献者"),
         "AboutDescriptionOpen": MessageLookupByLibrary.simpleMessage(
             "Conning Towerはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。"),

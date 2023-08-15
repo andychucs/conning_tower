@@ -49,7 +49,7 @@ class _AboutPageState extends State<AboutPage> {
       child: CustomScrollView(
         slivers: <Widget>[
           CupertinoSliverNavigationBar(
-            largeTitle: Text(S.current.AboutButton.replaceAll('\n', '')),
+            largeTitle: Text(S.current.AboutButton),
             backgroundColor: CupertinoColors.systemGroupedBackground,
             border: null,
           ),
