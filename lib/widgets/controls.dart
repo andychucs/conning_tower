@@ -1,3 +1,4 @@
+import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
@@ -276,6 +277,9 @@ class _ControlsState extends ConsumerState<Controls> {
     if (value ?? false) {
       String homeUrl = getHomeUrl();
       safeNavi = false;
+      if (homeUrl == kLocalHomeUrl) {
+        await ref.read(webControllerProvider.notifier).startLocalServer();
+      }
       await controller.loadUrl(urlRequest: URLRequest(url: WebUri(homeUrl)));
     }
   }
