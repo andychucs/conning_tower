@@ -23,15 +23,22 @@ void main() {
         app_main.enableAutoLoadHomeUrl = false;
         app_main.customHomeUrl = '';
         var url = getHomeUrl();
-
-        expect(url, kLocalHomeUrl);
+        if (kIsOpenSource) {
+          expect(url, kGameUrl);
+        } else {
+          expect(url, kLocalHomeUrl);
+        }
       });
 
       test("home url when auto load enabled", () {
         app_main.enableAutoLoadHomeUrl = true;
         app_main.customHomeUrl = '';
         var url = getHomeUrl();
-        expect(url, kLocalHomeUrl);
+        if (kIsOpenSource) {
+          expect(url, kGameUrl);
+        } else {
+          expect(url, kLocalHomeUrl);
+        }
       });
 
       test("home url when custom url provided", () {
@@ -59,7 +66,11 @@ void main() {
         app_main.enableAutoLoadHomeUrl = false;
         app_main.customHomeUrl = 'example.com';
         var url = getHomeUrl();
-        expect(url, kLocalHomeUrl);
+        if (kIsOpenSource) {
+          expect(url, kGameUrl);
+        } else {
+          expect(url, kLocalHomeUrl);
+        }
       });
     });
 
