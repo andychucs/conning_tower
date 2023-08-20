@@ -33,7 +33,7 @@ late bool showDashboardInHome; //Canary Deployment
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb) {
+  if (!kIsWeb && !kIsOpenSource) {
     // start the localhost server
     await localhostServer.start();
   }

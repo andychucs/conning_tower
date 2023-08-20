@@ -111,7 +111,9 @@ getResizeScale(double height, double width) {
 
 String getHomeUrl() {
   String homeUrl = kLocalHomeUrl;
-
+  if (kIsOpenSource) {
+    homeUrl = kGameUrl;
+  }
   if (enableAutoLoadHomeUrl && customHomeUrl.isNotEmpty) {
     homeUrl = customHomeUrl;
     if (!homeUrl.startsWith("http://") && !homeUrl.startsWith("https://")) {

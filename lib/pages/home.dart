@@ -118,7 +118,7 @@ class HomePageState extends ConsumerState<HomePage> {
       enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
       customUA = (prefs.getString('customUA') ?? '');
       appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
-          AppLayout.values.indexOf(AppLayout.bothFABJoystick)];
+          AppLayout.values.indexOf(AppLayout.onlyFAB)];
       showDashboardInHome = localStorage.getBool('showDashboardInHome') ?? false;
     });
   }
