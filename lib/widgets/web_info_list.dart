@@ -1,7 +1,5 @@
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/dashboard/web_info.dart';
-import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,11 +42,10 @@ class _WebInfoState extends ConsumerState<WebInfoList> {
         CupertinoListTile(title: Text(webInfo.cookies[index].toString())),
       );
     });
-    return FunctionalPage(
-      title: S.of(context).WebInfo,
-      children: [CupertinoListSection.insetGrouped(
+    return SingleChildScrollView(
+      child: CupertinoListSection.insetGrouped(
         children: webInfos,
-      ),]
+      ),
     );
   }
 }

@@ -23,37 +23,35 @@ class _CupertinoPickerViewState extends State<CupertinoPickerView> {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        return CupertinoPageScaffold(
-          child: SafeArea(
-            bottom: false,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: widget.wideStyle ? 4 : 7,
-                  child: CupertinoGroupedSection(
-                    child: CupertinoPicker(
-                      useMagnifier: true,
-                      itemExtent: widget.wideStyle ? 50 : 40,
-                      onSelectedItemChanged: (int value) {
-                        setState(() {
-                          if (deviceType == DeviceType.iPad)SystemSound.play(SystemSoundType.click);
-                          HapticFeedback.lightImpact();
-                          _selectIndex = value;
-                        });
-                      },
-                      children: widget.items,
-                    ),
+        return SafeArea(
+          bottom: false,
+          child: Row(
+            children: [
+              Expanded(
+                flex: widget.wideStyle ? 4 : 7,
+                child: CupertinoGroupedSection(
+                  child: CupertinoPicker(
+                    useMagnifier: true,
+                    itemExtent: widget.wideStyle ? 50 : 40,
+                    onSelectedItemChanged: (int value) {
+                      setState(() {
+                        if (deviceType == DeviceType.iPad)SystemSound.play(SystemSoundType.click);
+                        HapticFeedback.lightImpact();
+                        _selectIndex = value;
+                      });
+                    },
+                    children: widget.items,
                   ),
                 ),
-                // const VerticalDivider(width: 1,),
-                Expanded(
-                  flex: 20,
-                  child: CupertinoGroupedSection(
-                    child: widget.children[_selectIndex],
-                  ),
+              ),
+              // const VerticalDivider(width: 1,),
+              Expanded(
+                flex: 20,
+                child: CupertinoGroupedSection(
+                  child: widget.children[_selectIndex],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       }

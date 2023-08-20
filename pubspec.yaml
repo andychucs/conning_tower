@@ -46,7 +46,6 @@ dependencies:
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.7
   package_info_plus: ^4.0.2
-  settings_ui: ^2.0.2
   auto_size_text: ^3.0.0
   validators: ^3.0.0
   font_awesome_flutter:
@@ -70,7 +69,6 @@ dependencies:
   in_app_review: ^2.0.6
   easy_debounce: ^2.0.3
   popover: ^0.2.8+2
-  expandable_page_view: ^1.0.17
   photo_manager: ^2.7.1
   share_plus: ^7.1.0
 
@@ -109,6 +107,7 @@ flutter:
     - assets/www/
     - assets/js/
     - assets/libs-info/
+    - assets/resources/json/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

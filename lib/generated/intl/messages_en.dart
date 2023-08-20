@@ -152,6 +152,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "To display photos in the app, please allow access."),
         "PhotoAlbumPermissionReminder": MessageLookupByLibrary.simpleMessage(
             "If photos are not displayed, please open the access permission in system settings."),
+        "PhotoAlbumPermissionRequest":
+            MessageLookupByLibrary.simpleMessage("Open System Settings"),
         "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
             "Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings."),
         "ScreenshotSuccessDialog":

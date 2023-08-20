@@ -54,5 +54,7 @@
 	<false/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Save photos to the Photos album. Allow access?</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 </dict>
 </plist>

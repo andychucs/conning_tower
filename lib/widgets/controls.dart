@@ -171,14 +171,14 @@ class _ControlsState extends ConsumerState<Controls> {
             _compact = !_compact;
           });
         },
-        onLongPress: () {
-          HapticFeedback.mediumImpact();
-          showPopoverPage(
-              context,
-              Dashboard(
-                notifyParent: widget.notifyParent,
-              )); //Canary Deployment
-        },
+        // onLongPress: () {
+        //   HapticFeedback.mediumImpact();
+        //   showPopoverPage(
+        //       context,
+        //       Dashboard(
+        //         notifyParent: widget.notifyParent,
+        //       )); //Canary Deployment
+        // },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           child: Icon(

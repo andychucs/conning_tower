@@ -298,6 +298,9 @@ class HomePageState extends ConsumerState<HomePage> {
     };
 
     return OrientationBuilder(builder: (context, orientation) {
+      bool enableBottomPadding = bottomPadding;
+      double bottomPaddingHeight =
+          MediaQuery.of(context).padding.bottom;
       if (orientation == Orientation.landscape) {
         fabAlignment = const Alignment(1.0, 0.3);
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
@@ -327,7 +330,7 @@ class HomePageState extends ConsumerState<HomePage> {
               : null,
           body: SafeArea(
             top: false,
-            bottom: orientation == Orientation.portrait ? false : bottomPadding,
+            bottom: false,
             child: CircularMenu(
               toggleButtonBoxShadow: const [],
               alignment: fabAlignment,
@@ -407,6 +410,11 @@ class HomePageState extends ConsumerState<HomePage> {
                       double parentAspectRatio = box.maxWidth / box.maxHeight;
                       double childWidth = box.maxWidth;
                       double childHeight = box.maxHeight;
+                      if (enableBottomPadding) {
+                        parentAspectRatio = box.maxWidth /
+                            (box.maxHeight - bottomPaddingHeight);
+                        childHeight = box.maxHeight - bottomPaddingHeight;
+                      }
                       if (parentAspectRatio > aspectRatio) {
                         // 如果父元素的长宽比大于子元素的长宽比，则通过高度计算宽度
                         childWidth = childHeight * aspectRatio;
@@ -415,6 +423,22 @@ class HomePageState extends ConsumerState<HomePage> {
                         childHeight = childWidth / aspectRatio;
                       }
                       double dashboardHeight = box.maxHeight - childHeight;
+                      if (enableBottomPadding) {
+                        dashboardHeight =
+                            box.maxHeight - bottomPaddingHeight - childHeight;
+                      }
+
+                      debugPrint("dashboardHeight $dashboardHeight");
+                      bool enableDashboard = dashboardHeight >= 146;
+                      //  10.5 inch iPad Air (3rd): 201
+                      //  10.5 inch iPad Pro && 11 inch iPad Pro : 151
+                      //  12.9 inch iPad Pro: 2XX
+                      //  10.9 inch iPad Air (5th): 146.2
+
+                      if (parentAspectRatio < aspectRatio &&
+                          !showDashboardInHome) {
+                        enableBottomPadding = false;
+                      }
                       return IndexedStackWithCupertinoPageTransition(
                         index: useStack ? selectedIndex : 0,
                         duration: const Duration(milliseconds: 300),
@@ -426,20 +450,19 @@ class HomePageState extends ConsumerState<HomePage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                if (dashboardHeight >= 80 &&
-                                    showDashboardInHome)
+                                if (enableDashboard && showDashboardInHome)
                                   Expanded(
                                       child: Dashboard(
                                           isWebInfo: false,
                                           notifyParent: () => setState(() {}))),
-                                SizedBox(
-                                  height: childHeight,
-                                  width: childWidth,
-                                  child: AppWebView(),
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: enableBottomPadding ? bottomPaddingHeight : 0),
+                                  child: SizedBox(
+                                    height: childHeight,
+                                    width: childWidth,
+                                    child: const AppWebView(),
+                                  ),
                                 ),
-                                if (dashboardHeight >= 80 &&
-                                    showDashboardInHome)
-                                  SizedBox(height: 20,),
                               ],
                             ),
                           ),

@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("如需在應用內顯示照片請允許訪問。"),
         "PhotoAlbumPermissionReminder":
             MessageLookupByLibrary.simpleMessage("如果照片無法顯示，請在系統設定中打開讀取權限。"),
+        "PhotoAlbumPermissionRequest":
+            MessageLookupByLibrary.simpleMessage("點此打開系統設定"),
         "ScreenshotFailDialog":
             MessageLookupByLibrary.simpleMessage("截圖保存失敗，請在系統設定中允許艦橋取用相片"),
         "ScreenshotSuccessDialog":

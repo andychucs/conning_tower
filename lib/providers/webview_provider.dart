@@ -203,7 +203,7 @@ class WebController extends _$WebController {
     }
   }
 
-  void saveScreenShot() async {
+  Future<void> saveScreenShot() async {
     Uint8List? imageBytes = await state.controller.takeScreenshot();
     if (imageBytes != null) {
       final result =

@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "アプリ内で写真を表示するには、アクセスを許可してください。"),
         "PhotoAlbumPermissionReminder": MessageLookupByLibrary.simpleMessage(
             "写真が表示されない場合、システム設定でアクセス権限を開いてください。"),
+        "PhotoAlbumPermissionRequest":
+            MessageLookupByLibrary.simpleMessage("システム設定へ"),
         "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
             "スクリーンショットの保存に失敗しました。写真へのアクセスを許可していただけますか？"),
         "ScreenshotSuccessDialog":
