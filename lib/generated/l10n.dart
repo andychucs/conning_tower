@@ -50,6 +50,66 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Album`
+  String get PhotoAlbum {
+    return Intl.message(
+      'Album',
+      name: 'PhotoAlbum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Web Info`
+  String get WebInfo {
+    return Intl.message(
+      'Web Info',
+      name: 'WebInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Dashboard on Homepage`
+  String get DashboardSetting {
+    return Intl.message(
+      'Show Dashboard on Homepage',
+      name: 'DashboardSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status Code`
+  String get StatusCode {
+    return Intl.message(
+      'Status Code',
+      name: 'StatusCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If photos are not displayed, please open the access permission in system settings.`
+  String get PhotoAlbumPermissionReminder {
+    return Intl.message(
+      'If photos are not displayed, please open the access permission in system settings.',
+      name: 'PhotoAlbumPermissionReminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To display photos in the app, please allow access.`
+  String get PhotoAlbumPermissionDescription {
+    return Intl.message(
+      'To display photos in the app, please allow access.',
+      name: 'PhotoAlbumPermissionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `About`
   String get AboutButton {
     return Intl.message(

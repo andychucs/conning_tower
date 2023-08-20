@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ClearAllPendingNotifications":
             MessageLookupByLibrary.simpleMessage("清除所有等待中的通知"),
         "DarkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
+        "DashboardSetting":
+            MessageLookupByLibrary.simpleMessage("在主页显示 Dashboard"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hans/new"),
         "EmptyFieldError": MessageLookupByLibrary.simpleMessage("输入框不能为空。"),
@@ -127,6 +129,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知数量"),
         "PendingNotifications": MessageLookupByLibrary.simpleMessage("等待中的通知"),
+        "PhotoAlbum": MessageLookupByLibrary.simpleMessage("相册"),
+        "PhotoAlbumPermissionDescription":
+            MessageLookupByLibrary.simpleMessage("如需在应用内显示照片请允许访问。"),
+        "PhotoAlbumPermissionReminder":
+            MessageLookupByLibrary.simpleMessage("如果照片无法显示，请在系统设置中打开读取权限。"),
         "ScreenshotFailDialog":
             MessageLookupByLibrary.simpleMessage("截图保存失败，请在系统设置中允许舰桥访问照片"),
         "ScreenshotSuccessDialog":
@@ -152,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("屏幕方向设置"),
+        "StatusCode": MessageLookupByLibrary.simpleMessage("状态码"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截图"),
         "TaskCompleted": m4,
@@ -192,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("发现软件版本已更新，请查看版本更新文档。"),
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("点击此处查看"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("版本更新"),
+        "WebInfo": MessageLookupByLibrary.simpleMessage("网页信息"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML示例：")
       };
 }

@@ -2,7 +2,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/pages/functional_layer.dart';
+import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/providers/device_provider.dart';
 import 'package:conning_tower/providers/task_provider.dart';
 import 'package:conning_tower/widgets/icons.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage(
@@ -185,12 +186,18 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                         selected: select,
                         onItemSelected: (index) {
                           select = index;
+                          if (kIsOpenSource) {
+                            if (layouts[select].name.toLowerCase().contains("joystick")) {
+                              Fluttertoast.showToast(msg: "Not available");
+                              return;
+                            }
+                          }
+                          setState(() {
+                            appLayout = layouts[select];
+                            localStorage.setInt('appLayout', select);
+                          });
+                          widget.notifyParent();
                         }));
-
-                setState(() {
-                  appLayout = layouts[select];
-                  localStorage.setInt('appLayout', select);
-                });
                 debugPrint(appLayout.name);
               },
             ),
@@ -218,13 +225,28 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                         selected: select,
                         onItemSelected: (index) {
                           select = index;
+                          ref.read(themeProvider.notifier).update((state) => modes[select]);
+                          widget.notifyParent();
                         }));
 
-                setState(() {
-                  ref.read(themeProvider.notifier).update((state) => modes[select]);
-                  widget.notifyParent();
-                });
               },
+            ),
+            CupertinoListTile(
+              title: Text(S.of(context).DashboardSetting),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeBlue,
+                  icon: CupertinoIcons.slider_horizontal_below_rectangle),
+              trailing: CupertinoSwitch(
+                value: showDashboardInHome,
+                onChanged: (value) async {
+                  setState(() {
+                    showDashboardInHome = !showDashboardInHome;
+                  });
+                  localStorage.setBool('showDashboardInHome', value);
+                  widget.notifyParent();
+                  widget.reloadConfig();
+                },
+              ),
             ),
             CupertinoListTile(
               title: Text(

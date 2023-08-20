@@ -91,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ClearAllPendingNotifications":
             MessageLookupByLibrary.simpleMessage("保留中のすべての通知をクリア"),
         "DarkTheme": MessageLookupByLibrary.simpleMessage("ダークテーマ"),
+        "DashboardSetting":
+            MessageLookupByLibrary.simpleMessage("ホームページでダッシュボードを表示"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/ja/new"),
         "EmptyFieldError":
@@ -136,6 +138,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("保留中の通知の数"),
         "PendingNotifications": MessageLookupByLibrary.simpleMessage("保留中の通知"),
+        "PhotoAlbum": MessageLookupByLibrary.simpleMessage("アルバム"),
+        "PhotoAlbumPermissionDescription": MessageLookupByLibrary.simpleMessage(
+            "アプリ内で写真を表示するには、アクセスを許可してください。"),
+        "PhotoAlbumPermissionReminder": MessageLookupByLibrary.simpleMessage(
+            "写真が表示されない場合、システム設定でアクセス権限を開いてください。"),
         "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
             "スクリーンショットの保存に失敗しました。写真へのアクセスを許可していただけますか？"),
         "ScreenshotSuccessDialog":
@@ -162,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("画面の向きを設定する"),
+        "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
         "TaskCompleted": m4,
@@ -207,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "VersionUpdateLinkText":
             MessageLookupByLibrary.simpleMessage("ここをクリックして表示"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("バージョン更新"),
+        "WebInfo": MessageLookupByLibrary.simpleMessage("Web情報"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML例：")
       };
 }

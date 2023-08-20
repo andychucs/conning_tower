@@ -17,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 
-version: 1.7.1+1
+version: 1.7.2+1
 
 
 
@@ -68,6 +68,11 @@ dependencies:
   timezone: ^0.9.2
   flutter_timezone: ^1.0.7
   in_app_review: ^2.0.6
+  easy_debounce: ^2.0.3
+  popover: ^0.2.8+2
+  expandable_page_view: ^1.0.17
+  photo_manager: ^2.7.1
+  share_plus: ^7.1.0
 
 dev_dependencies:
   flutter_test:

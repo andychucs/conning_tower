@@ -19,6 +19,7 @@ mixin _$DeviceManagerState {
   List<DeviceOrientation> get orientations =>
       throw _privateConstructorUsedError;
   int get orientationIndex => throw _privateConstructorUsedError;
+  Size get size => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeviceManagerStateCopyWith<DeviceManagerState> get copyWith =>
@@ -31,7 +32,8 @@ abstract class $DeviceManagerStateCopyWith<$Res> {
           DeviceManagerState value, $Res Function(DeviceManagerState) then) =
       _$DeviceManagerStateCopyWithImpl<$Res, DeviceManagerState>;
   @useResult
-  $Res call({List<DeviceOrientation> orientations, int orientationIndex});
+  $Res call(
+      {List<DeviceOrientation> orientations, int orientationIndex, Size size});
 }
 
 /// @nodoc
@@ -49,6 +51,7 @@ class _$DeviceManagerStateCopyWithImpl<$Res, $Val extends DeviceManagerState>
   $Res call({
     Object? orientations = null,
     Object? orientationIndex = null,
+    Object? size = null,
   }) {
     return _then(_value.copyWith(
       orientations: null == orientations
@@ -59,6 +62,10 @@ class _$DeviceManagerStateCopyWithImpl<$Res, $Val extends DeviceManagerState>
           ? _value.orientationIndex
           : orientationIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as Size,
     ) as $Val);
   }
 }
@@ -71,7 +78,8 @@ abstract class _$$_DeviceManagerStateCopyWith<$Res>
       __$$_DeviceManagerStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<DeviceOrientation> orientations, int orientationIndex});
+  $Res call(
+      {List<DeviceOrientation> orientations, int orientationIndex, Size size});
 }
 
 /// @nodoc
@@ -87,6 +95,7 @@ class __$$_DeviceManagerStateCopyWithImpl<$Res>
   $Res call({
     Object? orientations = null,
     Object? orientationIndex = null,
+    Object? size = null,
   }) {
     return _then(_$_DeviceManagerState(
       orientations: null == orientations
@@ -97,6 +106,10 @@ class __$$_DeviceManagerStateCopyWithImpl<$Res>
           ? _value.orientationIndex
           : orientationIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as Size,
     ));
   }
 }
@@ -108,7 +121,8 @@ class _$_DeviceManagerState
     implements _DeviceManagerState {
   _$_DeviceManagerState(
       {required final List<DeviceOrientation> orientations,
-      required this.orientationIndex})
+      required this.orientationIndex,
+      required this.size})
       : _orientations = orientations;
 
   final List<DeviceOrientation> _orientations;
@@ -121,10 +135,12 @@ class _$_DeviceManagerState
 
   @override
   final int orientationIndex;
+  @override
+  final Size size;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeviceManagerState(orientations: $orientations, orientationIndex: $orientationIndex)';
+    return 'DeviceManagerState(orientations: $orientations, orientationIndex: $orientationIndex, size: $size)';
   }
 
   @override
@@ -133,7 +149,8 @@ class _$_DeviceManagerState
     properties
       ..add(DiagnosticsProperty('type', 'DeviceManagerState'))
       ..add(DiagnosticsProperty('orientations', orientations))
-      ..add(DiagnosticsProperty('orientationIndex', orientationIndex));
+      ..add(DiagnosticsProperty('orientationIndex', orientationIndex))
+      ..add(DiagnosticsProperty('size', size));
   }
 
   @override
@@ -144,12 +161,16 @@ class _$_DeviceManagerState
             const DeepCollectionEquality()
                 .equals(other._orientations, _orientations) &&
             (identical(other.orientationIndex, orientationIndex) ||
-                other.orientationIndex == orientationIndex));
+                other.orientationIndex == orientationIndex) &&
+            (identical(other.size, size) || other.size == size));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_orientations), orientationIndex);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_orientations),
+      orientationIndex,
+      size);
 
   @JsonKey(ignore: true)
   @override
@@ -162,12 +183,15 @@ class _$_DeviceManagerState
 abstract class _DeviceManagerState implements DeviceManagerState {
   factory _DeviceManagerState(
       {required final List<DeviceOrientation> orientations,
-      required final int orientationIndex}) = _$_DeviceManagerState;
+      required final int orientationIndex,
+      required final Size size}) = _$_DeviceManagerState;
 
   @override
   List<DeviceOrientation> get orientations;
   @override
   int get orientationIndex;
+  @override
+  Size get size;
   @override
   @JsonKey(ignore: true)
   _$$_DeviceManagerStateCopyWith<_$_DeviceManagerState> get copyWith =>

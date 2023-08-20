@@ -1,44 +1,6 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:yaml/yaml.dart';
-
-import 'package:conning_tower/providers/webview_provider.dart';
-
-class KancolleDataModal extends ConsumerStatefulWidget {
-  const KancolleDataModal({Key? key}) : super(key: key);
-
-
-
-  @override
-  ConsumerState<KancolleDataModal> createState() => _KancolleDataModalState();
-}
-
-class _KancolleDataModalState extends ConsumerState<KancolleDataModal> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-@override
-  Widget build(BuildContext context) {
-    final data = ref.watch(dataProvider);
-    return Material(
-        child: CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-              leading: Container(), middle: Text('Kancolle Data')),
-          child: SafeArea(child: SingleChildScrollView(child: Text(data))),
-        ));
-  }
-}
 
 class ModalFit extends StatelessWidget {
   final List<Widget> children;

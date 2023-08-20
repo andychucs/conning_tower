@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences localStorage;
-final InAppLocalhostServer localhostServer = InAppLocalhostServer(
+final InAppLocalhostServer localhostServer = InAppLocalhostServer(port: 8686,
     documentRoot: 'assets/www', directoryIndex: 'home.html');
 late bool safeNavi;
 late bool autoAdjusted;
@@ -29,6 +29,7 @@ late bool enableHideFAB;
 late bool showControls;
 late DeviceType deviceType;
 late AppLayout appLayout;
+late bool showDashboardInHome; //Canary Deployment
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +54,7 @@ Future<void> init() async {
   localStorage = await SharedPreferences.getInstance();
 
   deviceType = await getDeviceType();
-  appLayout = AppLayout.bothFABJoystick;
+  appLayout = AppLayout.onlyFAB;
 
   gameLoadCompleted = false;
   inKancolleWindow = false;
@@ -69,4 +70,5 @@ Future<void> init() async {
   enableAutoProcess = true;
   enableHideFAB = false;
   showControls = true;
+  showDashboardInHome = true;
 }

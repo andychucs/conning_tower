@@ -99,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ClearAllPendingNotifications": MessageLookupByLibrary.simpleMessage(
             "Clear All Pending Notifications"),
         "DarkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
+        "DashboardSetting":
+            MessageLookupByLibrary.simpleMessage("Show Dashboard on Homepage"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/en/new"),
         "EmptyFieldError":
@@ -145,6 +147,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pending Notifications Count"),
         "PendingNotifications":
             MessageLookupByLibrary.simpleMessage("Pending Notifications"),
+        "PhotoAlbum": MessageLookupByLibrary.simpleMessage("Album"),
+        "PhotoAlbumPermissionDescription": MessageLookupByLibrary.simpleMessage(
+            "To display photos in the app, please allow access."),
+        "PhotoAlbumPermissionReminder": MessageLookupByLibrary.simpleMessage(
+            "If photos are not displayed, please open the access permission in system settings."),
         "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
             "Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings."),
         "ScreenshotSuccessDialog":
@@ -175,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("Change Screen Orientation"),
+        "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
         "TaskCompleted": m4,
@@ -225,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Click here to view"),
         "VersionUpdateTitle":
             MessageLookupByLibrary.simpleMessage("Version Update"),
+        "WebInfo": MessageLookupByLibrary.simpleMessage("Web Info"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML Example:")
       };
 }

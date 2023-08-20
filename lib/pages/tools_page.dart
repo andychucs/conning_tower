@@ -4,14 +4,13 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/pages/functional_layer.dart';
+import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
-import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,13 +24,17 @@ import 'package:validators/validators.dart';
 
 class ToolsPage extends ConsumerStatefulWidget {
   ToolsPage(CookieManager? cookieManager,
-      {Key? key, required this.notifyParent, required this.reloadConfig})
+      {Key? key,
+      required this.notifyParent,
+      required this.reloadConfig,
+      this.isWideStyle = false})
       : cookieManager = cookieManager ?? CookieManager.instance(),
         super(key: key);
 
   final Function() notifyParent;
   late final CookieManager cookieManager;
   final Function() reloadConfig;
+  final bool isWideStyle;
 
   @override
   ConsumerState<ToolsPage> createState() => _ToolsPageState();
@@ -331,7 +334,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                   icon: CupertinoIcons.square_list),
               onTap: () async {
                 showCupertinoModalBottomSheet(
-                  useRootNavigator: true,
+                  useRootNavigator: widget.isWideStyle ? false : true,
                   expand: true,
                   context: context,
                   backgroundColor: Colors.transparent,
@@ -359,17 +362,6 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
               },
               trailing: const CupertinoListTileChevron(),
             ),
-            CupertinoListTile(
-                leading: const Icon(CupertinoIcons.square_list),
-                title: const Text("Kancolle Data"),
-                trailing: const CupertinoListTileChevron(),
-                onTap: () =>
-                  showCupertinoModalBottomSheet(
-                    expand: true,
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => KancolleDataModal(),
-                  )),
           ],
         ),
       ],

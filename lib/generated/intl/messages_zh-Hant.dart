@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ClearAllPendingNotifications":
             MessageLookupByLibrary.simpleMessage("清除所有等待中的通知"),
         "DarkTheme": MessageLookupByLibrary.simpleMessage("深色主題"),
+        "DashboardSetting":
+            MessageLookupByLibrary.simpleMessage("在主頁顯示 Dashboard"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hant/new"),
         "EmptyFieldError": MessageLookupByLibrary.simpleMessage("輸入框不能為空。"),
@@ -128,6 +130,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知數量"),
         "PendingNotifications": MessageLookupByLibrary.simpleMessage("等待中的通知"),
+        "PhotoAlbum": MessageLookupByLibrary.simpleMessage("相簿"),
+        "PhotoAlbumPermissionDescription":
+            MessageLookupByLibrary.simpleMessage("如需在應用內顯示照片請允許訪問。"),
+        "PhotoAlbumPermissionReminder":
+            MessageLookupByLibrary.simpleMessage("如果照片無法顯示，請在系統設定中打開讀取權限。"),
         "ScreenshotFailDialog":
             MessageLookupByLibrary.simpleMessage("截圖保存失敗，請在系統設定中允許艦橋取用相片"),
         "ScreenshotSuccessDialog":
@@ -153,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("屏幕方向設置"),
+        "StatusCode": MessageLookupByLibrary.simpleMessage("狀態碼"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),
         "TaskCompleted": m4,
@@ -191,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("發現軟體版本已更新，請查看版本更新文檔。"),
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("點擊此處查看"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("版本更新"),
+        "WebInfo": MessageLookupByLibrary.simpleMessage("網頁資訊"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML範例：")
       };
 }

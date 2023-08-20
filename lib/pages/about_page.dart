@@ -2,24 +2,27 @@
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
-import 'package:conning_tower/pages/functional_layer.dart';
+import 'package:conning_tower/main.dart';
+import 'package:conning_tower/routes/functional_layer.dart';
+import 'package:conning_tower/providers/device_provider.dart';
 import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
-import 'package:conning_tower/widgets/libs_info.dart';
+import 'package:conning_tower/pages/libs_info.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AboutPage extends StatefulWidget {
+class AboutPage extends ConsumerStatefulWidget {
   const AboutPage({super.key});
 
   @override
-  State<AboutPage> createState() => _AboutPageState();
+  ConsumerState<AboutPage> createState() => _AboutPageState();
 }
 
-class _AboutPageState extends State<AboutPage> {
+class _AboutPageState extends ConsumerState<AboutPage> {
   final InAppReview _inAppReview = InAppReview.instance;
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
@@ -179,6 +182,20 @@ class _AboutPageState extends State<AboutPage> {
                 ),
                 CupertinoListSection.insetGrouped(
                     header: const CupertinoListSectionDescription(
+                      "Device Info:",
+                    ),
+                    children: [
+                      CupertinoListTile(
+                        title: const Text("Screen Size"),
+                        additionalInfo: Text("W:${ref.read(deviceManagerProvider).size.width} H:${ref.read(deviceManagerProvider).size.height}"),
+                      ),
+                      CupertinoListTile(
+                        title: const Text("Device Type"),
+                        additionalInfo: Text(deviceType.name),
+                      ),
+                    ]),
+                CupertinoListSection.insetGrouped(
+                    header: const CupertinoListSectionDescription(
                       "ConningTower makes use of the following libraries:",
                     ),
                     footer: const CupertinoListSectionDescription(
@@ -189,17 +206,17 @@ class _AboutPageState extends State<AboutPage> {
                         trailing: const CupertinoListTileChevron(),
                         onTap: () => navigatorToCupertino(
                             context,
-                            SingleChildFunctionalPage(
-                                child: CupertinoPageScaffold(
-                                    navigationBar: CupertinoNavigationBar(
-                                      backgroundColor: CupertinoColors.systemGroupedBackground,
-                                      middle: const Text('Libraries'),
-                                      previousPageTitle:
-                                          S.of(context).AboutButton,
-                                    ),
-                                    child: const LibsInfo()))),
+                            CupertinoPageScaffold(
+                                navigationBar: CupertinoNavigationBar(
+                                  backgroundColor: CupertinoColors.systemGroupedBackground,
+                                  middle: const Text('Libraries'),
+                                  previousPageTitle:
+                                      S.of(context).AboutButton,
+                                ),
+                                child: const LibsInfo())),
                       )
-                    ])
+                    ]),
+
               ],
             ),
           ),

@@ -8,3 +8,5 @@
 CFBundleDisplayName = "舰桥";
 
 NSPhotoLibraryAddUsageDescription = "将图片保存至相册中，是否允许访问?";
+
+NSPhotoLibraryUsageDescription = "如需在应用内显示照片请允许访问。";

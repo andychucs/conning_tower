@@ -33,7 +33,7 @@ const bool kIsOpenSource = true;
 const kKancolleHeight = 720;
 const kKancollePixel = kKancolleHeight * kKancolleWidth;
 const kKancolleWidth = 1200;
-const String kLocalHomeUrl = "http://localhost:8080";
+const String kLocalHomeUrl = "http://localhost:8686";
 const int kMaxPinedTaskNum = 10;
 const int kMaxTaskNum = 64;
 const String kSafariUA =
@@ -47,7 +47,7 @@ const String kTaskChannelName = "ConningTower Task Channel";
 
 const String kTaskJsonExample =
     "https://github.com/conntower/data/blob/main/json/CT_tasks.json";
-const String kTaskUrlExample =
+const String kTaskUrlExample = kIsOpenSource ? "https://andychucs.github.io/kcdata/json/CT_tasks.json" :
     "https://conntower.github.io/data/json/CT_tasks.json";
 const String kTaskYamlExample =
     "https://github.com/conntower/data/blob/main/yaml/CT_tasks.yaml";

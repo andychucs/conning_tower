@@ -1,11 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
+import 'package:conning_tower/models/feature/dashboard/web_info.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -26,14 +28,13 @@ final dataProvider = StateProvider<String>((ref) {
 });
 
 @freezed
-class WebControllerState with _$WebControllerState{
-  factory WebControllerState({
-    required InAppWebViewController? controller,
-    required bool isInit,
-    required WebUri currUrl,
-    required List<WebUri> currPageUrls,
-    required bool isScreenResize
-}) = _WebControllerState;
+class WebControllerState with _$WebControllerState {
+  factory WebControllerState(
+      {required InAppWebViewController? controller,
+      required bool isInit,
+      required WebUri currUrl,
+      required List<WebUri> currPageUrls,
+      required bool isScreenResize}) = _WebControllerState;
 }
 
 // controller provider by riverpod code generation, develop with run 'flutter pub run build_runner watch'
@@ -44,6 +45,7 @@ class WebController extends _$WebController {
   WebUri currUrl = WebUri('');
   List<WebUri> currPageUrls = [];
   bool isScreenResize = false;
+  CookieManager cookieManager = CookieManager.instance();
 
   @override
   WebController build() {
@@ -86,6 +88,9 @@ class WebController extends _$WebController {
     }
     debugPrint(currentUrl.toString());
     debugPrint(response.response.toString());
+    ref.read(webInfoProvider.notifier).update((state) => state.copyWith(
+        url: currentUrl.rawValue,
+        statusCode: response.response?.statusCode ?? 100));
   }
 
   Future<void> startLocalServer() async {
@@ -121,19 +126,22 @@ class WebController extends _$WebController {
   }
 
   Future<void> onLoadStop(WebUri uri) async {
+    var cookies = await cookieManager.getCookies(url: uri);
+    ref
+        .read(webInfoProvider.notifier)
+        .update((state) => state.copyWith(url: uri.rawValue, cookies: cookies));
+
     if (safeNavi) {
       safeNavi = false;
     }
-    print(onLoadStop);
-    print(uri);
     if (uri.rawValue.startsWith(kLocalHomeUrl)) {
-      debugPrint(customHomeUrl);
       await controller.evaluateJavascript(
         source:
             "input.value='$customHomeUrl';input.placeholder='🔍 ${S.current.AssetsHtmlSearchBarText}';goButton.textContent='${S.current.AssetsHtmlSearchBarGo}';",
       );
     }
-    if ((uri.path.startsWith(gameUrlPath) && Platform.isAndroid) || (uri.host.startsWith(kDMMOSAPIDomain) && Platform.isIOS)) {
+    if ((uri.path.startsWith(gameUrlPath) && Platform.isAndroid) ||
+        (uri.host.startsWith(kDMMOSAPIDomain) && Platform.isIOS)) {
       inKancolleWindow = true;
       gameLoadCompleted = true;
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgNaviGameLoadCompleted);
@@ -149,7 +157,8 @@ class WebController extends _$WebController {
     if (Platform.isAndroid) return;
     if (!(currUrl.path.startsWith(Uri.parse(kGameUrl).path) ||
         currUrl.host.startsWith(kDMMOSAPIDomain))) {
-      debugPrint("currUrl.path: ${currUrl.path} home.path: ${Uri.parse(kGameUrl).path}");
+      debugPrint(
+          "currUrl.path: ${currUrl.path} home.path: ${Uri.parse(kGameUrl).path}");
       return;
     }
     debugPrint(
@@ -157,7 +166,8 @@ class WebController extends _$WebController {
     if (!safeNavi && enableAutoProcess && state.currPageUrls.isNotEmpty) {
       debugPrint("latest responseUrl: ${state.currPageUrls.last}");
       for (final url in currPageUrls.reversed) {
-        if (url.host == kDMMOSAPIDomain && currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
+        if (url.host == kDMMOSAPIDomain &&
+            currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
           await Future.delayed(const Duration(seconds: 1));
           // Delay to allow time for Webview to load previous page
           if (url.scheme == 'https') {
@@ -179,13 +189,14 @@ class WebController extends _$WebController {
 
   Future<void> onContentSizeChanged() async {
     if (state.currUrl.host == kDMMOSAPIDomain && Platform.isIOS) {
-      await screenResize();
+      EasyDebounce.debounce('resize-debounce',
+          const Duration(milliseconds: 800), () => screenResize());
     }
   }
 
   Future<void> screenResize() async {
     if (!state.isScreenResize) {
-      await Future.delayed(const Duration(seconds: 1));
+      print("screenResize");
       state.isScreenResize = true;
       await autoAdjustWindowV2(controller);
       state.isScreenResize = false;
@@ -207,12 +218,13 @@ class WebController extends _$WebController {
   }
 
   void _kancolleMessageHandle(String message) {
+    String responseURL = '';
     if (true) {
       const start = "conning_tower_responseURL:";
       const end = "conning_tower_readyState:";
       final startIndex = message.indexOf(start);
       final endIndex = message.indexOf(end, startIndex + start.length);
-      String responseURL =
+      responseURL =
           message.substring(startIndex + start.length, endIndex);
       print("responseURL:");
       print(responseURL);
@@ -235,7 +247,8 @@ class WebController extends _$WebController {
       String responseText =
           message.substring(startIndex + start.length, endIndex);
       String result = responseText.replaceAll('svdata=', '');
-      ref.read(dataProvider.notifier).update((state) => result);
+      // ref.read(dataProvider.notifier).update((state) => result);
+      ref.read(kancolleDataProvider).parse(responseURL, result);
       debugPrint(result);
     }
   }

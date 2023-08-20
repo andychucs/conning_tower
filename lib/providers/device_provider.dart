@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-
 part 'device_provider.freezed.dart';
 
 part 'device_provider.g.dart';
@@ -26,10 +25,10 @@ final themeProvider = StateProvider<ThemeMode>((ref) {
 
 @freezed
 class DeviceManagerState with _$DeviceManagerState {
-  factory DeviceManagerState({
-    required List<DeviceOrientation> orientations,
-    required int orientationIndex,
-  }) = _DeviceManagerState;
+  factory DeviceManagerState(
+      {required List<DeviceOrientation> orientations,
+      required int orientationIndex,
+      required Size size}) = _DeviceManagerState;
 }
 
 @riverpod
@@ -39,7 +38,12 @@ class DeviceManager extends _$DeviceManager {
     int index = (localStorage.getInt('customDeviceOrientation') ?? -1);
     return DeviceManagerState(
         orientations: _getDeviceOrientation(index),
-        orientationIndex: index);
+        orientationIndex: index,
+        size: const Size(0, 0));
+  }
+
+  void setSize(Size size) {
+    state = state.copyWith(size: size);
   }
 
   bool isCustomDeviceOrientation() {
@@ -112,8 +116,7 @@ class DeviceManager extends _$DeviceManager {
     setDeviceOrientation(orientations);
   }
 
-  void customDeviceOrientationByIndex(
-      int index) {
+  void customDeviceOrientationByIndex(int index) {
     setDeviceOrientationByIndex(-1);
     var orientations = _getDeviceOrientation(index);
     setOrientationIndex(index);

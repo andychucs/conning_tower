@@ -8,3 +8,5 @@
 CFBundleDisplayName = "Conning Tower";
 
 NSPhotoLibraryAddUsageDescription = "写真をライブラリに保存します。アクセスを許可しますか？";
+
+NSPhotoLibraryUsageDescription = "アプリ内で写真を表示するには、アクセスを許可してください。";

@@ -2,14 +2,20 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/pages/about_page.dart';
+import 'package:conning_tower/pages/settings_page.dart';
+import 'package:conning_tower/pages/tools_page.dart';
 import 'package:conning_tower/providers/navigator_provider.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
 import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/pages/dashboard.dart';
+import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:popover/popover.dart';
 
 enum ConFunc {
   adjustWindow,
@@ -31,12 +37,19 @@ enum ConFunc {
 
 class Controls extends ConsumerStatefulWidget {
   Controls(CookieManager? cookieManager,
-      {Key? key, required this.notifyParent, required this.orientation})
-      : cookieManager = cookieManager ?? CookieManager.instance(),
-        super(key: key);
+      {super.key,
+      required this.notifyParent,
+      required this.orientation,
+      required this.functionMap,
+      this.isWideStyle = false,
+      this.enableJoystick = false})
+      : cookieManager = cookieManager ?? CookieManager.instance();
   final Function() notifyParent;
   late final CookieManager cookieManager;
   final Orientation orientation;
+  final bool isWideStyle;
+  final bool enableJoystick;
+  final Map<FunctionName, Function> functionMap;
 
   @override
   ConsumerState<Controls> createState() => _ControlsState();
@@ -44,6 +57,7 @@ class Controls extends ConsumerStatefulWidget {
 
 class _ControlsState extends ConsumerState<Controls> {
   int _selectedIndex = 0;
+  bool _compact = true;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -71,18 +85,19 @@ class _ControlsState extends ConsumerState<Controls> {
 
   void _onItemTapped(int index) {
     setState(() {
-      if (![2,3,4].contains(index)) {
+      if (![2, 3, 4].contains(index)) {
         _selectedIndex = index;
       }
     });
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     final cp = ref.watch(webControllerProvider);
     final flnp = ref.watch(functionLayerNavigatorProvider);
 
     _selectedIndex = naviItems[flnp.index];
+    if (selectedIndex == 0) _selectedIndex = 0;
 
     if (widget.orientation == Orientation.portrait) {
       return BottomNavigationBar(
@@ -135,14 +150,45 @@ class _ControlsState extends ConsumerState<Controls> {
       );
     }
     return NavigationRail(
-      labelType: NavigationRailLabelType.all,
-      selectedIndex: _selectedIndex,
+      minWidth: _compact ? 56 : 72,
+      labelType:
+          _compact ? NavigationRailLabelType.none : NavigationRailLabelType.all,
+      selectedIndex: widget.isWideStyle ? 0 : _selectedIndex,
       groupAlignment: 0,
       onDestinationSelected: (int index) async {
         HapticFeedback.mediumImpact();
         if (!cp.isInit) return;
-        _onTap(index, context, cp.controller, flnp);
+        if (widget.isWideStyle) {
+          _onTapPopover(index, context, cp.controller);
+        } else {
+          _onTap(index, context, cp.controller, flnp);
+        }
       },
+      trailing: GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          setState(() {
+            _compact = !_compact;
+          });
+        },
+        onLongPress: () {
+          HapticFeedback.mediumImpact();
+          showPopoverPage(
+              context,
+              Dashboard(
+                notifyParent: widget.notifyParent,
+              )); //Canary Deployment
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Icon(
+            _compact
+                ? CupertinoIcons.list_bullet_below_rectangle
+                : CupertinoIcons.list_bullet,
+            color: CupertinoColors.activeBlue,
+          ),
+        ),
+      ),
       destinations: [
         NavigationRailDestination(
           icon: const Icon(CupertinoIcons.home),
@@ -237,6 +283,81 @@ class _ControlsState extends ConsumerState<Controls> {
         _onReload(context, controller);
         break;
     }
+  }
+
+  void _onTapPopover(
+    int value,
+    BuildContext context,
+    InAppWebViewController controller,
+  ) {
+    _onItemTapped(value);
+    var func = funcMap[value];
+    switch (func) {
+      case ConFunc.navi2About:
+        showPopoverPage(context, const AboutPage());
+        break;
+      case ConFunc.navi2Tool:
+        showPopoverPage(
+            context,
+            ToolsPage(
+              widget.cookieManager,
+              notifyParent: widget.notifyParent,
+              reloadConfig: _loadConfig,
+              isWideStyle: true,
+            ));
+        break;
+      case ConFunc.navi2Settings:
+        showPopoverPage(
+            context,
+            SettingsPage(
+                reloadConfig: _loadConfig, notifyParent: widget.notifyParent));
+        break;
+      case ConFunc.loadHome:
+        _onLoadHome(context, controller);
+        break;
+      case ConFunc.scrollUp:
+        controller.scrollBy(x: 1, y: 0);
+        break;
+      case ConFunc.scrollDown:
+        controller.scrollBy(x: 0, y: 1);
+        break;
+      case ConFunc.goBack:
+        _onGoBack(controller);
+        break;
+      case ConFunc.goForward:
+        _onGoForward(controller);
+        break;
+      case ConFunc.refresh:
+        _onReload(context, controller);
+        break;
+    }
+  }
+
+  void _loadConfig() {
+    final prefs = localStorage;
+    setState(() {
+      enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
+      bottomPadding = (prefs.getBool('bottomPadding') ?? false);
+      enableAutoLoadHomeUrl = (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
+      customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
+      enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
+      customUA = (prefs.getString('customUA') ?? '');
+      appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
+          AppLayout.values.indexOf(AppLayout.bothFABJoystick)];
+    });
+  }
+
+  void showPopoverPage(BuildContext context, Widget child) {
+    showPopover(
+      context: context,
+      bodyBuilder: (context) => LocalNavigator(child: child),
+      onPop: () => print('Popover was popped!'),
+      direction: PopoverDirection.left,
+      width: 500,
+      height: double.infinity,
+      arrowHeight: 0,
+      arrowWidth: 0,
+    );
   }
 
   Future<void> _onReload(
