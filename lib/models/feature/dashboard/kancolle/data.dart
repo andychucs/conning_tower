@@ -52,7 +52,7 @@ class KancolleData {
             squads.add(Squad(id: id, name: data.apiName));
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
-          queue.executeOperation(id, Operation(id: data.apiMission[1], title: "遠征", endTime: endDatetime));
+          queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
         }
       }
     }
@@ -66,7 +66,7 @@ class KancolleData {
             squads.add(Squad(id: id, name: data.apiName));
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
-          queue.executeOperation(id, Operation(id: data.apiMission[1], title: "遠征", endTime: endDatetime));
+          queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
         }
       }
 

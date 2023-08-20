@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/models/data/kcanotify/gamedata/expedition_entity.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 part 'operation_queue.freezed.dart';
 
@@ -12,7 +17,15 @@ class OperationQueue with _$OperationQueue {
   factory OperationQueue({required Map<int, Operation> map}) =
       _OperationQueue;
 
-  void executeOperation(int squad, Operation operation) {
+  Future<void> executeOperation(int squad, Operation operation) async {
+    // if (operation.title == operation.id.toString()) {
+    //   var source = await rootBundle.loadString('assets/resources/json/expedition.json');
+    //   for (var json in jsonDecode(source)) {
+    //     var expedition = ExpeditionEntity.fromJson(json);
+    //
+    //   }
+    //   operation = operation.copyWith(title: );
+    // }
     map[squad] = operation;
   }
 
