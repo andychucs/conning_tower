@@ -20,6 +20,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
   @override
   Widget build(BuildContext context) {
     final taskUtil = ref.watch(taskUtilProvider);
+    Tasks latestTasks = ref.read(tasksStateProvider);
 
     return Material(
       child: taskUtil.when(
@@ -53,6 +54,11 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                         color: Theme.of(context).primaryColor,
                       ),
                       onTap: () {
+                        if (kIsOpenSource) {
+                          ref.read(taskUtilProvider.notifier).onDownloadData();
+                          return;
+                        }
+
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => CupertinoPageScaffold(

@@ -23,7 +23,6 @@ part 'task_provider.freezed.dart';
 
 part 'task_provider.g.dart';
 
-Tasks latestTasks = const Tasks(items: []);
 bool isFirstOpen = true;
 
 @freezed
@@ -52,7 +51,10 @@ class TaskUtil extends _$TaskUtil {
 
       debugPrint(contents);
 
-      latestTasks = Tasks.fromJson(jsonDecode(contents));
+
+      Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
+
+      ref.read(tasksStateProvider.notifier).update((state) => latestTasks);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -65,6 +67,8 @@ class TaskUtil extends _$TaskUtil {
     if (!directory.existsSync()) {
       directory.createSync(recursive: true);
     }
+
+    Tasks latestTasks = ref.read(tasksStateProvider);
 
     await file.writeAsString(jsonEncode(latestTasks.toJson()));
   }
@@ -86,6 +90,7 @@ class TaskUtil extends _$TaskUtil {
         await notification.requestPermissions();
         isFirstOpen = false;
       }
+      Tasks latestTasks = ref.read(tasksStateProvider);
       if (latestTasks.items.isNotEmpty) {
         taskUtilState = TaskUtilState(
             source: "runtime",
@@ -157,7 +162,7 @@ class TaskUtil extends _$TaskUtil {
             var tasks = Tasks.fromJson(tasksJson);
 
             if (tasks.items.length <= kMaxTaskNum) {
-              latestTasks = tasks;
+              ref.read(tasksStateProvider.notifier).update((state) => tasks);
             } else {
               Fluttertoast.showToast(msg: S.current.TasksNumOverLimit);
             }
@@ -194,7 +199,8 @@ class TaskUtil extends _$TaskUtil {
           await Future.delayed(const Duration(
               milliseconds:
                   100)); // When it must be async, the TasksSheet will be rebuilt after loading is completed
-          latestTasks = Tasks.fromJson(jsonDecode(content));
+          Tasks latestTasks = Tasks.fromJson(jsonDecode(content));
+          ref.read(tasksStateProvider.notifier).update((state) => latestTasks);
           return _fetchTaskUtilState();
         });
         debugPrint(state.toString());
@@ -208,7 +214,8 @@ class TaskUtil extends _$TaskUtil {
           // latestTasks = emptyTasks();
           await Future.delayed(const Duration(
               milliseconds: 100)); // 必须为非同步时，完成loading才会重新构建TasksSheet
-          latestTasks = parseYaml(content);
+          Tasks latestTasks = parseYaml(content);
+          ref.read(tasksStateProvider.notifier).update((state) => latestTasks);
           return _fetchTaskUtilState();
         });
         debugPrint(state.toString());
@@ -294,6 +301,7 @@ class TaskUtil extends _$TaskUtil {
       await Future.delayed(const Duration(
           milliseconds:
               50)); // When it must be async, the TasksSheet will be rebuilt after loading is completed
+      Tasks latestTasks = ref.read(tasksStateProvider);
       if (latestTasks.items.contains(task)) {
         debugPrint(latestTasks.toString());
         var items = latestTasks.items.toList();
@@ -320,5 +328,9 @@ class TaskUtil extends _$TaskUtil {
     } else {
       Fluttertoast.showToast(msg: S.current.EmptyFieldError);
     }
+  }
+
+  void onDownloadData() {
+    setTasksUrl(kTaskUrlExample);
   }
 }
