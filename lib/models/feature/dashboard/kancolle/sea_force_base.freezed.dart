@@ -16,7 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SeaForceBase {
-  int get level => throw _privateConstructorUsedError;
+  int get oil => throw _privateConstructorUsedError;
+  set oil(int value) => throw _privateConstructorUsedError;
+  int get ammo => throw _privateConstructorUsedError;
+  set ammo(int value) => throw _privateConstructorUsedError;
+  int get steel => throw _privateConstructorUsedError;
+  set steel(int value) => throw _privateConstructorUsedError;
+  int get bauxite => throw _privateConstructorUsedError;
+  set bauxite(int value) => throw _privateConstructorUsedError;
+  int get instantRepairs => throw _privateConstructorUsedError;
+  set instantRepairs(int value) => throw _privateConstructorUsedError;
+  int get developmentMaterials => throw _privateConstructorUsedError;
+  set developmentMaterials(int value) => throw _privateConstructorUsedError;
+  int get improvementMaterials => throw _privateConstructorUsedError;
+  set improvementMaterials(int value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SeaForceBaseCopyWith<SeaForceBase> get copyWith =>
@@ -29,7 +42,14 @@ abstract class $SeaForceBaseCopyWith<$Res> {
           SeaForceBase value, $Res Function(SeaForceBase) then) =
       _$SeaForceBaseCopyWithImpl<$Res, SeaForceBase>;
   @useResult
-  $Res call({int level});
+  $Res call(
+      {int oil,
+      int ammo,
+      int steel,
+      int bauxite,
+      int instantRepairs,
+      int developmentMaterials,
+      int improvementMaterials});
 }
 
 /// @nodoc
@@ -45,12 +65,42 @@ class _$SeaForceBaseCopyWithImpl<$Res, $Val extends SeaForceBase>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? level = null,
+    Object? oil = null,
+    Object? ammo = null,
+    Object? steel = null,
+    Object? bauxite = null,
+    Object? instantRepairs = null,
+    Object? developmentMaterials = null,
+    Object? improvementMaterials = null,
   }) {
     return _then(_value.copyWith(
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      oil: null == oil
+          ? _value.oil
+          : oil // ignore: cast_nullable_to_non_nullable
+              as int,
+      ammo: null == ammo
+          ? _value.ammo
+          : ammo // ignore: cast_nullable_to_non_nullable
+              as int,
+      steel: null == steel
+          ? _value.steel
+          : steel // ignore: cast_nullable_to_non_nullable
+              as int,
+      bauxite: null == bauxite
+          ? _value.bauxite
+          : bauxite // ignore: cast_nullable_to_non_nullable
+              as int,
+      instantRepairs: null == instantRepairs
+          ? _value.instantRepairs
+          : instantRepairs // ignore: cast_nullable_to_non_nullable
+              as int,
+      developmentMaterials: null == developmentMaterials
+          ? _value.developmentMaterials
+          : developmentMaterials // ignore: cast_nullable_to_non_nullable
+              as int,
+      improvementMaterials: null == improvementMaterials
+          ? _value.improvementMaterials
+          : improvementMaterials // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -64,7 +114,14 @@ abstract class _$$_SeaForceBaseCopyWith<$Res>
       __$$_SeaForceBaseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int level});
+  $Res call(
+      {int oil,
+      int ammo,
+      int steel,
+      int bauxite,
+      int instantRepairs,
+      int developmentMaterials,
+      int improvementMaterials});
 }
 
 /// @nodoc
@@ -78,12 +135,42 @@ class __$$_SeaForceBaseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? level = null,
+    Object? oil = null,
+    Object? ammo = null,
+    Object? steel = null,
+    Object? bauxite = null,
+    Object? instantRepairs = null,
+    Object? developmentMaterials = null,
+    Object? improvementMaterials = null,
   }) {
     return _then(_$_SeaForceBase(
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      oil: null == oil
+          ? _value.oil
+          : oil // ignore: cast_nullable_to_non_nullable
+              as int,
+      ammo: null == ammo
+          ? _value.ammo
+          : ammo // ignore: cast_nullable_to_non_nullable
+              as int,
+      steel: null == steel
+          ? _value.steel
+          : steel // ignore: cast_nullable_to_non_nullable
+              as int,
+      bauxite: null == bauxite
+          ? _value.bauxite
+          : bauxite // ignore: cast_nullable_to_non_nullable
+              as int,
+      instantRepairs: null == instantRepairs
+          ? _value.instantRepairs
+          : instantRepairs // ignore: cast_nullable_to_non_nullable
+              as int,
+      developmentMaterials: null == developmentMaterials
+          ? _value.developmentMaterials
+          : developmentMaterials // ignore: cast_nullable_to_non_nullable
+              as int,
+      improvementMaterials: null == improvementMaterials
+          ? _value.improvementMaterials
+          : improvementMaterials // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -91,27 +178,36 @@ class __$$_SeaForceBaseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SeaForceBase implements _SeaForceBase {
-  const _$_SeaForceBase({required this.level});
+class _$_SeaForceBase extends _SeaForceBase {
+  _$_SeaForceBase(
+      {required this.oil,
+      required this.ammo,
+      required this.steel,
+      required this.bauxite,
+      required this.instantRepairs,
+      required this.developmentMaterials,
+      required this.improvementMaterials})
+      : super._();
 
   @override
-  final int level;
+  int oil;
+  @override
+  int ammo;
+  @override
+  int steel;
+  @override
+  int bauxite;
+  @override
+  int instantRepairs;
+  @override
+  int developmentMaterials;
+  @override
+  int improvementMaterials;
 
   @override
   String toString() {
-    return 'SeaForceBase(level: $level)';
+    return 'SeaForceBase(oil: $oil, ammo: $ammo, steel: $steel, bauxite: $bauxite, instantRepairs: $instantRepairs, developmentMaterials: $developmentMaterials, improvementMaterials: $improvementMaterials)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SeaForceBase &&
-            (identical(other.level, level) || other.level == level));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, level);
 
   @JsonKey(ignore: true)
   @override
@@ -120,11 +216,38 @@ class _$_SeaForceBase implements _SeaForceBase {
       __$$_SeaForceBaseCopyWithImpl<_$_SeaForceBase>(this, _$identity);
 }
 
-abstract class _SeaForceBase implements SeaForceBase {
-  const factory _SeaForceBase({required final int level}) = _$_SeaForceBase;
+abstract class _SeaForceBase extends SeaForceBase {
+  factory _SeaForceBase(
+      {required int oil,
+      required int ammo,
+      required int steel,
+      required int bauxite,
+      required int instantRepairs,
+      required int developmentMaterials,
+      required int improvementMaterials}) = _$_SeaForceBase;
+  _SeaForceBase._() : super._();
 
   @override
-  int get level;
+  int get oil;
+  set oil(int value);
+  @override
+  int get ammo;
+  set ammo(int value);
+  @override
+  int get steel;
+  set steel(int value);
+  @override
+  int get bauxite;
+  set bauxite(int value);
+  @override
+  int get instantRepairs;
+  set instantRepairs(int value);
+  @override
+  int get developmentMaterials;
+  set developmentMaterials(int value);
+  @override
+  int get improvementMaterials;
+  set improvementMaterials(int value);
   @override
   @JsonKey(ignore: true)
   _$$_SeaForceBaseCopyWith<_$_SeaForceBase> get copyWith =>

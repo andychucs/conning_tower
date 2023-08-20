@@ -8,6 +8,7 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -74,6 +75,9 @@ class KancolleData {
       }
     });
   }
+
+  final SeaForceBase seaForceBase = SeaForceBase(oil: 0, ammo: 0, steel: 0, bauxite: 0, instantRepairs: 0, developmentMaterials: 0, improvementMaterials: 0);
+
 
   void parse(String source, String data) {
     String path = source.split("kcsapi").last;
@@ -142,6 +146,7 @@ class KancolleData {
       }
       Map<int, Ship> shipsMap =
           Map.fromIterable(allShips, key: (item) => item.uid);
+      seaForceBase.updateMaterial(model.apiData.apiMaterial);
       for (var data in model.apiData.apiDeckPort) {
         int id = data.apiId;
 
