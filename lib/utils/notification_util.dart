@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:conning_tower/models/feature/task.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -76,6 +77,10 @@ class NotificationUtil {
 
   Future<void> cancelAllNotifications() async {
     await flutterLocalNotificationsPlugin.cancelAll();
+  }
+
+  Future<void> cancelTaskNotification(String id) async {
+    await flutterLocalNotificationsPlugin.cancel(id.hashCode);
   }
 
 }

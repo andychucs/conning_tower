@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'kcsapi/kcsapi.dart';
 
 class DataModelAdapter {
@@ -12,7 +14,8 @@ class DataModelAdapter {
               ReqMissionStartEntity.fromJson(json),
           GetMemberDeckEntity.source: (json) =>
               GetMemberDeckEntity.fromJson(json),
-          PortEntity.source: (json) => PortEntity.fromJson(json)
+          PortEntity.source: (json) => PortEntity.fromJson(json),
+    ReqMissionReturnInstructionEntity.source: (json) => ReqMissionReturnInstructionEntity.fromJson(json)
         };
 
   dynamic parseData(String source, Map<String, dynamic> json) {

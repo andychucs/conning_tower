@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
-import 'package:conning_tower/models/data/kcsapi/get/get.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/data/kcsapi/req/mission/mission.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -18,22 +16,24 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
 class KancolleData {
   final OperationQueue queue = OperationQueue(map: {
     2: Operation(
-      id: 100,
+      id: 999,
       title: 'PLACEHOLDER',
       endTime: DateTime.now(),
     ),
     3: Operation(
-      id: 100,
+      id: 999,
       title: 'PLACEHOLDER',
       endTime: DateTime.now(),
     ),
     4: Operation(
-      id: 100,
+      id: 999,
       title: 'PLACEHOLDER',
       endTime: DateTime.now(),
     ),
   });
   final List<Squad> squads = [Squad(id: 1, name: '第1艦隊')];
+
+  int operationCancel = 999;
 
   void parse(String url, String source) {
     String path = url.split("kcsapi").last;
@@ -52,13 +52,27 @@ class KancolleData {
             squads.add(Squad(id: id, name: data.apiName));
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
-          queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+          if (data.apiMission[1] != 0) {
+            queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+          }
         }
       }
     }
 
+    if (model is ReqMissionReturnInstructionEntity) {
+      var data = model.apiData;
+
+      queue.map.forEach((key, value) {
+        if (value.id == data.apiMission[1]) {
+          tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
+          queue.executeOperation(key, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+          operationCancel = data.apiMission[1];
+        }
+      });
+    }
+
     if (model is PortEntity) {
-      print(model);
+      // print(model);
       for (var data in model.apiData.apiDeckPort) {
         int id = data.apiId;
         if (id > 1) {
@@ -66,7 +80,10 @@ class KancolleData {
             squads.add(Squad(id: id, name: data.apiName));
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
-          queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+          print(data);
+          if (data.apiMission[1] != 0) {
+            queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+          }
         }
       }
 

@@ -422,6 +422,7 @@ class NotificationManagement extends StatelessWidget {
                 : Container(),
             children: list.isNotEmpty
                 ? List.generate(list.length, (index) {
+
                     return CupertinoListTile(
                       title:
                           Text(list[index].title ?? list[index].id.toString()),

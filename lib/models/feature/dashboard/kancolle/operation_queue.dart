@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/data/mission.dart';
 import 'package:conning_tower/models/data/kcanotify/gamedata/expedition_entity.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:flutter/services.dart';
@@ -18,14 +19,8 @@ class OperationQueue with _$OperationQueue {
       _OperationQueue;
 
   Future<void> executeOperation(int squad, Operation operation) async {
-    // if (operation.title == operation.id.toString()) {
-    //   var source = await rootBundle.loadString('assets/resources/json/expedition.json');
-    //   for (var json in jsonDecode(source)) {
-    //     var expedition = ExpeditionEntity.fromJson(json);
-    //
-    //   }
-    //   operation = operation.copyWith(title: );
-    // }
+    String taskId = missionToTask[operation.id];
+    operation = operation.copyWith(title: taskId);
     map[squad] = operation;
   }
 

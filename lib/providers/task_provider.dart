@@ -255,6 +255,22 @@ class TaskUtil extends _$TaskUtil {
     await setNotification(task);
   }
 
+  Future<void> setNotificationExclusive(Task task) async {
+    debugPrint("call setNotificationExclusive:$task");
+    String timeString = task.time;
+    if (timeString == kZeroTime) return;
+    flutterLocalNotificationsPlugin
+        .pendingNotificationRequests()
+        .then((value) {
+          for (var item in value) {
+            if (item.id == task.id.hashCode) {
+              return;
+            }
+          }
+          setNotification(task);
+    });
+  }
+
   Future<void> setNotification(Task task) async {
     String timeString = task.time;
     if (timeString == kZeroTime) return;

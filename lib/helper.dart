@@ -199,3 +199,12 @@ Future<dynamic> navigatorToCupertino<T>(BuildContext context, Widget content,
     builder: (_) => content,
   ));
 }
+
+Duration parseTimeToDuration(String timeStr) {
+  List<String> parts = timeStr.split(':');
+  int hours = int.parse(parts[0]);
+  int minutes = int.parse(parts[1]);
+  int seconds = int.parse(parts[2]);
+
+  return Duration(hours: hours, minutes: minutes, seconds: seconds);
+}
