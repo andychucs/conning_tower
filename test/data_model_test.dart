@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
-import 'package:conning_tower/models/data/kancolle/map_area.dart';
-import 'package:conning_tower/models/data/kancolle/map_data.dart';
-import 'package:conning_tower/models/data/kancolle/ship.dart';
-import 'package:conning_tower/models/data/kancolle/shiptype.dart';
-import 'package:conning_tower/models/data/kancolle/slotitem.dart';
+import 'package:conning_tower/models/data/kcwiki/map_area.dart';
+import 'package:conning_tower/models/data/kcwiki/map_data.dart';
+import 'package:conning_tower/models/data/kcwiki/ship.dart';
+import 'package:conning_tower/models/data/kcwiki/shiptype.dart';
+import 'package:conning_tower/models/data/kcwiki/slotitem.dart';
 import 'package:conning_tower/models/data/kcsapi/api_response.dart';
-import 'package:conning_tower/models/data/kancolle/useitem.dart';
+import 'package:conning_tower/models/data/kcwiki/useitem.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main(){
