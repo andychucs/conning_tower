@@ -3,6 +3,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/task_provider.dart';
+import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/texts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -109,9 +110,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                             Task task = tasks[index];
                             return GestureDetector(
                               onDoubleTap: () {
-                                ref
-                                    .read(taskUtilProvider.notifier)
-                                    .setNotification(task);
+                                notification.setNotification(task);
                               },
                               child: CupertinoListTile.notched(
                                 leading: Text(task.id),

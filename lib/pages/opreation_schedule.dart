@@ -72,33 +72,33 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    final kancolleData = ref.watch(kancolleDataProvider);
-    final queueMap = kancolleData.queue.map;
-    final squads = kancolleData.squads;
-    if (kancolleData.operationCancel != 999) {
-      notification.cancelTaskNotification(missionToTask[kancolleData.operationCancel]);
-      kancolleData.operationCancel = 999;
+    final queueMap = ref.watch(kancolleDataProvider.select((data) => data.queue.map));
+    final squads = ref.watch(kancolleDataProvider.select((data) => data.squads));
+    final operationCancel = ref.watch(kancolleDataProvider.select((data) => data.operationCancel));
+    if (operationCancel != 999) {
+      notification.cancelTaskNotification(missionToTask[operationCancel]);
+      ref.watch(kancolleDataProvider).operationCancel = 999;
     }
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth >= 500) {
-        return GridView.extent(
-            shrinkWrap: true,
-            maxCrossAxisExtent: 500,
-            scrollDirection: Axis.vertical,
-            childAspectRatio: 2 / 1,
-            children: List.generate(3, (index) {
-              final squad = queueMap.keys.elementAt(index);
-              final operation = queueMap[squad]!;
-              return CupertinoListSection.insetGrouped(
-                  header: CupertinoListSectionDescription(squads[squad].name),
-                  children: [
-                    CupertinoListTile(
-                      title: Text('${operation.title}'),
-                      additionalInfo: Text('${remainingTimes[squad]}'),
-                    ),
-                  ]);
-            }));
-      }
+      // if (constraints.maxWidth >= 500) {
+      //   return GridView.extent(
+      //       shrinkWrap: true,
+      //       maxCrossAxisExtent: 500,
+      //       scrollDirection: Axis.vertical,
+      //       childAspectRatio: 2 / 1,
+      //       children: List.generate(3, (index) {
+      //         final squad = queueMap.keys.elementAt(index);
+      //         final operation = queueMap[squad]!;
+      //         return CupertinoListSection.insetGrouped(
+      //             header: CupertinoListSectionDescription(squads[squad].name),
+      //             children: [
+      //               CupertinoListTile(
+      //                 title: Text('${operation.title}'),
+      //                 additionalInfo: Text('${remainingTimes[squad]}'),
+      //               ),
+      //             ]);
+      //       }));
+      // }
 
       return Container(
         alignment: Alignment.center,
@@ -111,33 +111,34 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
             final squad = index + 2;
             final operation = queueMap[squad]!;
             var squadName = '-';
-            var missionName = operation.title;
-            var missionCode = missionName.length > 2 ? operation.id : '-';
-            if (squads.length >= squad) {
-              // print(squads);
-              // print(squad);
-              squadName = squads[squad-1].name;
-            }
-            final tasks = ref.read(tasksStateProvider);
-            if (tasks.items.isNotEmpty) {
-              for (var task in tasks.items) {
-                if (task.id == operation.title) {
-                  missionName = task.title;
-                  EasyThrottle.throttle("set-notification", const Duration(minutes: 1), () {
-                    ref.read(taskUtilProvider.notifier).setNotificationExclusive(task.copyWith(time: remainingTimes[squad]!));
-                  });
+            var missionName = '--';
+            var missionCode = '-';
+            // print(missionCode);
+            // print(operation);
+
+            if (operation.id < 999) {
+              missionCode = operation.code;
+              if (squads.length >= squad) {
+                squadName = squads[squad-1].name;
+              }
+              final tasks = ref.read(tasksStateProvider);
+              if (tasks.items.isNotEmpty) {
+                for (var task in tasks.items) {
+                  if (task.id == operation.code) {
+                    missionName = task.title;
+                    EasyThrottle.throttle("set-notification", const Duration(minutes: 1), () {
+                      notification.setNotificationExclusive(task.copyWith(time: remainingTimes[squad]!));
+                    });
+                  }
                 }
               }
-            }
-            if (missionName == 'PLACEHOLDER') {
-              missionName = '-';
             }
             return CupertinoListSection.insetGrouped(
                 margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                 footer: CupertinoListSectionDescription(squadName),
                 children: [
                   CupertinoListTile(
-                    leading: Text(missionCode.toString()),
+                    leading: Text(missionCode),
                     title: Text(missionName),
                     additionalInfo: Text('${remainingTimes[squad]}'),
                   ),

@@ -23,10 +23,6 @@ part 'webview_provider.freezed.dart';
 
 final gameUrlPath = Uri.parse(kGameUrl).path;
 
-final dataProvider = StateProvider<String>((ref) {
-  return '';
-});
-
 @freezed
 class WebControllerState with _$WebControllerState {
   factory WebControllerState(
@@ -249,8 +245,7 @@ class WebController extends _$WebController {
       String responseText =
           message.substring(startIndex + start.length, endIndex);
       String result = responseText.replaceAll('svdata=', '');
-      // ref.read(dataProvider.notifier).update((state) => result);
-      ref.read(kancolleDataProvider).parse(responseURL, result);
+      ref.watch(rawDataProvider.notifier).update((state) => RawData(source: responseURL, data: result));
       debugPrint(result);
     }
   }

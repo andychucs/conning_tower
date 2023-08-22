@@ -9,6 +9,18 @@ import 'operation_queue.dart';
 
 import 'fleet.dart';
 
+
+final rawDataProvider = StateProvider<RawData>((ref) {
+  return RawData(source: '', data: '');
+});
+
+class RawData {
+  late String source;
+  late String data;
+
+  RawData({required this.source, required this.data});
+}
+
 final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   return KancolleData();
 });
@@ -17,17 +29,17 @@ class KancolleData {
   final OperationQueue queue = OperationQueue(map: {
     2: Operation(
       id: 999,
-      title: 'PLACEHOLDER',
+      code: '--',
       endTime: DateTime.now(),
     ),
     3: Operation(
       id: 999,
-      title: 'PLACEHOLDER',
+      code: '--',
       endTime: DateTime.now(),
     ),
     4: Operation(
       id: 999,
-      title: 'PLACEHOLDER',
+      code: '--',
       endTime: DateTime.now(),
     ),
   });
@@ -35,9 +47,9 @@ class KancolleData {
 
   int operationCancel = 999;
 
-  void parse(String url, String source) {
-    String path = url.split("kcsapi").last;
-    dynamic model = DataModelAdapter().parseData(path, jsonDecode(source));
+  void parse(String source, String data) {
+    String path = source.split("kcsapi").last;
+    dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
     if (model is ReqMissionStartEntity) {
       print("MissionStart");
@@ -53,7 +65,7 @@ class KancolleData {
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
           if (data.apiMission[1] != 0) {
-            queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+            queue.executeOperation(id, Operation(id: data.apiMission[1], code: data.apiMission[1].toString(), endTime: endDatetime));
           }
         }
       }
@@ -65,7 +77,7 @@ class KancolleData {
       queue.map.forEach((key, value) {
         if (value.id == data.apiMission[1]) {
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
-          queue.executeOperation(key, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+          queue.executeOperation(key, Operation(id: data.apiMission[1], code: data.apiMission[1].toString(), endTime: endDatetime));
           operationCancel = data.apiMission[1];
         }
       });
@@ -82,7 +94,7 @@ class KancolleData {
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, data.apiMission[2]);
           print(data);
           if (data.apiMission[1] != 0) {
-            queue.executeOperation(id, Operation(id: data.apiMission[1], title: data.apiMission[1].toString(), endTime: endDatetime));
+            queue.executeOperation(id, Operation(id: data.apiMission[1], code: data.apiMission[1].toString(), endTime: endDatetime));
           }
         }
       }

@@ -127,7 +127,7 @@ abstract class _OperationQueue extends OperationQueue {
 /// @nodoc
 mixin _$Operation {
   int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
   DateTime get endTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -140,7 +140,7 @@ abstract class $OperationCopyWith<$Res> {
   factory $OperationCopyWith(Operation value, $Res Function(Operation) then) =
       _$OperationCopyWithImpl<$Res, Operation>;
   @useResult
-  $Res call({int id, String title, DateTime endTime});
+  $Res call({int id, String code, DateTime endTime});
 }
 
 /// @nodoc
@@ -157,7 +157,7 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? code = null,
     Object? endTime = null,
   }) {
     return _then(_value.copyWith(
@@ -165,9 +165,9 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
       endTime: null == endTime
           ? _value.endTime
@@ -184,7 +184,7 @@ abstract class _$$_OperationCopyWith<$Res> implements $OperationCopyWith<$Res> {
       __$$_OperationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, DateTime endTime});
+  $Res call({int id, String code, DateTime endTime});
 }
 
 /// @nodoc
@@ -199,7 +199,7 @@ class __$$_OperationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? code = null,
     Object? endTime = null,
   }) {
     return _then(_$_Operation(
@@ -207,9 +207,9 @@ class __$$_OperationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
       endTime: null == endTime
           ? _value.endTime
@@ -222,19 +222,18 @@ class __$$_OperationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Operation implements _Operation {
-  _$_Operation({required this.id, required this.title, required this.endTime})
-      : assert(title.length <= 20, 'title must have a maximum length of 20');
+  _$_Operation({required this.id, required this.code, required this.endTime});
 
   @override
   final int id;
   @override
-  final String title;
+  final String code;
   @override
   final DateTime endTime;
 
   @override
   String toString() {
-    return 'Operation(id: $id, title: $title, endTime: $endTime)';
+    return 'Operation(id: $id, code: $code, endTime: $endTime)';
   }
 
   @override
@@ -243,12 +242,12 @@ class _$_Operation implements _Operation {
         (other.runtimeType == runtimeType &&
             other is _$_Operation &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.code, code) || other.code == code) &&
             (identical(other.endTime, endTime) || other.endTime == endTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, endTime);
+  int get hashCode => Object.hash(runtimeType, id, code, endTime);
 
   @JsonKey(ignore: true)
   @override
@@ -260,13 +259,13 @@ class _$_Operation implements _Operation {
 abstract class _Operation implements Operation {
   factory _Operation(
       {required final int id,
-      required final String title,
+      required final String code,
       required final DateTime endTime}) = _$_Operation;
 
   @override
   int get id;
   @override
-  String get title;
+  String get code;
   @override
   DateTime get endTime;
   @override

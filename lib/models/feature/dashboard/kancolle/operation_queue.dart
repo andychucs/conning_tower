@@ -20,7 +20,7 @@ class OperationQueue with _$OperationQueue {
 
   Future<void> executeOperation(int squad, Operation operation) async {
     String taskId = missionToTask[operation.id];
-    operation = operation.copyWith(title: taskId);
+    operation = operation.copyWith(code: taskId);
     map[squad] = operation;
   }
 
@@ -36,16 +36,15 @@ class OperationQueue with _$OperationQueue {
     );
     map[squad] = Operation(
         id: 100,
-        title: task.title,
+        code: task.id,
         endTime: DateTime.now().add(duration));
   }
 }
 
 @freezed
 class Operation with _$Operation {
-  @Assert('title.length <= 20', 'title must have a maximum length of 20')
   factory Operation(
       {required int id,
-      required String title,
+      required String code,
       required DateTime endTime}) = _Operation;
 }

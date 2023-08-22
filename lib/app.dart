@@ -13,6 +13,10 @@ class ConnTowerApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
+    Size size = MediaQuery.of(context).size;
+    Future(() {
+      ref.watch(deviceManagerProvider.notifier).setSize(size);
+    });
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

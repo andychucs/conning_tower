@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
+import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/device_provider.dart';
@@ -143,6 +148,28 @@ class HomePageState extends ConsumerState<HomePage> {
     FunctionName.showTaskPage: CupertinoIcons.square_list
   };
 
+  Future<File> get _localJsonFile async {
+    final path = await localPath;
+    return File('$path/providers/task/tasks.json');
+  }
+
+  Future<void> loadLocalTasks() async {
+    try {
+      final file = await _localJsonFile;
+
+      String contents = await file.readAsString();
+
+      debugPrint(contents);
+
+
+      Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
+
+      ref.watch(tasksStateProvider.notifier).update((state) => latestTasks);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // final webController = ref.watch(webControllerProvider.notifier);
@@ -150,8 +177,12 @@ class HomePageState extends ConsumerState<HomePage> {
     deviceManager.setPreferredDeviceOrientation();
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
-    Future(() {
-      deviceManager.setSize(size);
+
+    loadLocalTasks();
+
+    ref.listen(rawDataProvider, (previous,RawData next) {
+      debugPrint('listen.rawDataProvider');
+      ref.watch(kancolleDataProvider).parse(next.source, next.data);
     });
 
     final Map<FunctionName, Function> functionMap = {

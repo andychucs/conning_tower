@@ -1,4 +1,5 @@
 import 'package:conning_tower/main.dart';
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +44,9 @@ class DeviceManager extends _$DeviceManager {
   }
 
   void setSize(Size size) {
-    state = state.copyWith(size: size);
+    EasyThrottle.throttle("set-size", const Duration(seconds: 1), () {
+      state = state.copyWith(size: size);
+    });
   }
 
   bool isCustomDeviceOrientation() {
