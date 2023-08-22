@@ -41,7 +41,7 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
       images.addAll(albumImages);
     }
     bytes = await _fetchBytes();
-    setState(() {});
+    if (mounted)  setState(() {});
   }
 
   Future<List<Uint8List>> _fetchBytes() async {
