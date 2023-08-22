@@ -31,7 +31,6 @@ class AppWebViewState extends ConsumerState<AppWebView> {
   void initState() {
     beforeRedirect = false;
     super.initState();
-    // ref.read(urlProvider);
   }
 
   InAppWebViewSettings webViewSetting = InAppWebViewSettings(
@@ -50,6 +49,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
     String homeUrl = getHomeUrl();
     // final urlController = ref.watch(urlProvider);
     final webController = ref.watch(webControllerProvider);
+    debugPrint("rebuild web");
     // final inAppWebViewControllerState = ref.watch(webViewControllerProvider);
     return AspectRatio(
       aspectRatio: 5 / 3,

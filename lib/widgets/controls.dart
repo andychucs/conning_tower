@@ -8,7 +8,6 @@ import 'package:conning_tower/pages/tools_page.dart';
 import 'package:conning_tower/providers/navigator_provider.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
 import 'package:conning_tower/widgets/dailog.dart';
-import 'package:conning_tower/pages/dashboard.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +92,11 @@ class _ControlsState extends ConsumerState<Controls> {
 
   @override
   Widget build(BuildContext context) {
-    final cp = ref.watch(webControllerProvider);
+    bool isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
+    if(!isInit) {
+      return const CupertinoActivityIndicator();
+    }
+    InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
     final flnp = ref.watch(functionLayerNavigatorProvider);
 
     _selectedIndex = naviItems[flnp.index];
@@ -107,8 +110,8 @@ class _ControlsState extends ConsumerState<Controls> {
         currentIndex: _selectedIndex,
         onTap: ((value) async {
           HapticFeedback.mediumImpact();
-          if (!cp.isInit) return;
-          _onTap(value, context, cp.controller, flnp);
+          if (!isInit) return;
+          _onTap(value, context, controller, flnp);
         }),
         items: [
           BottomNavigationBarItem(
@@ -157,11 +160,11 @@ class _ControlsState extends ConsumerState<Controls> {
       groupAlignment: 0,
       onDestinationSelected: (int index) async {
         HapticFeedback.mediumImpact();
-        if (!cp.isInit) return;
+        if (!isInit) return;
         if (widget.isWideStyle) {
-          _onTapPopover(index, context, cp.controller);
+          _onTapPopover(index, context, controller);
         } else {
-          _onTap(index, context, cp.controller, flnp);
+          _onTap(index, context, controller, flnp);
         }
       },
       trailing: GestureDetector(

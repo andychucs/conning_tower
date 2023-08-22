@@ -47,8 +47,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final deviceManager = ref.watch(deviceManagerProvider.notifier);
-    deviceManager.watchDeviceOrientation();
-    var themeMode = ref.watch(themeProvider);
 
     return FunctionalPage(
       title: S.current.SettingsButton,
@@ -209,6 +207,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               trailing: const CupertinoListTileChevron(),
               onTap: () async {
                 List<ThemeMode> modes = ThemeMode.values;
+                ThemeMode themeMode = ref.watch(themeProvider);
                 int select = modes.indexOf(themeMode);
                 Map<ThemeMode, String> themeName = {
                   ThemeMode.system: S.of(context).SystemTheme,

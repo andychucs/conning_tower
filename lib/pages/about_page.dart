@@ -47,6 +47,8 @@ class _AboutPageState extends ConsumerState<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = ref.watch(deviceManagerProvider.select((manager) => manager.size));
+    
     return SingleChildFunctionalPage(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -187,7 +189,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                     children: [
                       CupertinoListTile(
                         title: const Text("Screen Size"),
-                        additionalInfo: Text("W:${ref.read(deviceManagerProvider).size.width} H:${ref.read(deviceManagerProvider).size.height}"),
+                        additionalInfo: Text("W:${size.width} H:${size.height}"),
                       ),
                       CupertinoListTile(
                         title: const Text("Device Type"),

@@ -195,6 +195,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> screenResize() async {
+    if (!state.isInit) return;
     if (!state.isScreenResize) {
       print("screenResize");
       state.isScreenResize = true;
@@ -204,6 +205,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> saveScreenShot() async {
+    if (!state.isInit) return;
     Uint8List? imageBytes = await state.controller.takeScreenshot();
     if (imageBytes != null) {
       final result =

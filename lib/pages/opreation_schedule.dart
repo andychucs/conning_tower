@@ -1,11 +1,7 @@
 import 'dart:async';
 
-import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/data/mission.dart';
-import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/task_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
@@ -60,16 +56,6 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
         // 更新任务的剩余时间
         remainingTimes[squad] = remainingTimeString;
       });
-
-      // if (remainingTimes[1] == kZeroTime) {
-      //   operationQueue.executeOperation(
-      //       1,
-      //       Operation(
-      //           id: "1",
-      //           title: "New Op",
-      //           endTime: DateTime.now().add(Duration(minutes: 1))));
-      // }
-
       setState(() {}); // 触发重建以更新UI
     });
   }
@@ -124,9 +110,9 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
           itemBuilder: (context, index) {
             final squad = index + 2;
             final operation = queueMap[squad]!;
-            var squadName = '';
+            var squadName = '-';
             var missionName = operation.title;
-            var missionCode = missionName.length > 2 ? operation.id : missionName;
+            var missionCode = missionName.length > 2 ? operation.id : '-';
             if (squads.length >= squad) {
               // print(squads);
               // print(squad);
@@ -142,6 +128,9 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
                   });
                 }
               }
+            }
+            if (missionName == 'PLACEHOLDER') {
+              missionName = '-';
             }
             return CupertinoListSection.insetGrouped(
                 margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),

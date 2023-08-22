@@ -1,6 +1,7 @@
 import 'package:conning_tower/app.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/utils/logger.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stack_trace/stack_trace.dart';
 
 late SharedPreferences localStorage;
 final InAppLocalhostServer localhostServer = InAppLocalhostServer(port: 8686,
@@ -46,8 +48,25 @@ Future<void> main() async {
 
   await init();
 
-  SystemChrome.setPreferredOrientations(DeviceOrientation.values)
-      .then((value) => runApp(const ProviderScope(child: ConnTowerApp())));
+  SystemChrome.setPreferredOrientations(DeviceOrientation.values).then(
+    (value) => runApp(
+      ProviderScope(
+        observers: [Logger()],
+        child: const ConnTowerApp(),
+      ),
+    ),
+  );
+
+  FlutterError.demangleStackTrace = (StackTrace stack) {
+    // Trace and Chain are classes in package:stack_trace
+    if (stack is Trace) {
+      return stack.vmTrace;
+    }
+    if (stack is Chain) {
+      return stack.toTrace().vmTrace;
+    }
+    return stack;
+  };
 }
 
 Future<void> init() async {

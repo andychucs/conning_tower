@@ -68,11 +68,11 @@ class DeviceManager extends _$DeviceManager {
     state = state.copyWith(orientations: _getDeviceOrientation(index));
     if (index == -1) {
       // Expand the optional range before adjusting the direction of the device to reduce error reporting
-      watchDeviceOrientation();
+      setPreferredDeviceOrientation();
     }
   }
 
-  void watchDeviceOrientation() {
+  void setPreferredDeviceOrientation() {
     SystemChrome.setPreferredOrientations(state.orientations);
   }
 

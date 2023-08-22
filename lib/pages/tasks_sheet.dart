@@ -20,7 +20,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
   @override
   Widget build(BuildContext context) {
     final taskUtil = ref.watch(taskUtilProvider);
-    Tasks latestTasks = ref.read(tasksStateProvider);
+    Tasks latestTasks = ref.watch(tasksStateProvider);
 
     return Material(
       child: taskUtil.when(
@@ -77,7 +77,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                                     Navigator.of(context).pop();
                                     setState(() {
                                       ref
-                                          .watch(taskUtilProvider.notifier)
+                                          .read(taskUtilProvider.notifier)
                                           .onSaveSource(tasksUtilState);
                                     });
                                   },
@@ -110,7 +110,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                             return GestureDetector(
                               onDoubleTap: () {
                                 ref
-                                    .watch(taskUtilProvider.notifier)
+                                    .read(taskUtilProvider.notifier)
                                     .setNotification(task);
                               },
                               child: CupertinoListTile.notched(
@@ -138,7 +138,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                                               setState(() {
                                                 Navigator.of(context).pop();
                                                 ref
-                                                    .watch(taskUtilProvider
+                                                    .read(taskUtilProvider
                                                         .notifier)
                                                     .onPinTask(task);
                                               });

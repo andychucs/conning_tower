@@ -77,11 +77,8 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
               children: [
                 ImageOverButton(
                   onTap: () async {
-                    final webController = ref.watch(webControllerProvider);
-                    if (webController.isInit) {
-                      await webController.saveScreenShot();
-                      await _fetchImages();
-                    }
+                    ref.read(webControllerProvider.notifier).saveScreenShot();
+                    await _fetchImages();
                   }, child: const Icon(CupertinoIcons.camera_viewfinder),
                 ),
                 ImageOverButton(

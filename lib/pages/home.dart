@@ -145,9 +145,9 @@ class HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final webController = ref.watch(webControllerProvider);
+    // final webController = ref.watch(webControllerProvider.notifier);
     final deviceManager = ref.watch(deviceManagerProvider.notifier);
-    deviceManager.watchDeviceOrientation();
+    deviceManager.setPreferredDeviceOrientation();
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
     Future(() {
@@ -174,9 +174,7 @@ class HomePageState extends ConsumerState<HomePage> {
         });
       },
       FunctionName.screenShot: () {
-        if (webController.isInit) {
-          webController.saveScreenShot();
-        }
+        ref.read(webControllerProvider.notifier).saveScreenShot();
       },
       FunctionName.screenManger: () {
         if (deviceType == DeviceType.iPad) {
@@ -190,12 +188,9 @@ class HomePageState extends ConsumerState<HomePage> {
                   ListTile(
                     title: Text(S.of(context).TakeScreenshot),
                     leading: const Icon(CupertinoIcons.camera_viewfinder),
-                    onTap: () async {
+                    onTap: () {
                       Navigator.of(context).pop();
-                      await Future.delayed(const Duration(milliseconds: 500));
-                      if (webController.isInit) {
-                        webController.saveScreenShot();
-                      }
+                      ref.read(webControllerProvider.notifier).saveScreenShot();
                     },
                     trailing: const CupertinoListTileChevron(),
                   ),
@@ -226,12 +221,9 @@ class HomePageState extends ConsumerState<HomePage> {
                 ListTile(
                   title: Text(S.of(context).TakeScreenshot),
                   leading: const Icon(CupertinoIcons.camera_viewfinder),
-                  onTap: () async {
+                  onTap: () {
                     Navigator.of(context).pop();
-                    await Future.delayed(const Duration(milliseconds: 500));
-                    if (webController.isInit) {
-                      webController.saveScreenShot();
-                    }
+                    ref.read(webControllerProvider.notifier).saveScreenShot();
                   },
                   trailing: const CupertinoListTileChevron(),
                 ),
@@ -364,9 +356,7 @@ class HomePageState extends ConsumerState<HomePage> {
                   icon: CupertinoIcons.camera_viewfinder,
                   onTap: () async {
                     HapticFeedback.mediumImpact();
-                    if (webController.isInit) {
-                      webController.saveScreenShot();
-                    }
+                    ref.read(webControllerProvider.notifier).saveScreenShot();
                   },
                 ),
                 CircularMenuItem(
