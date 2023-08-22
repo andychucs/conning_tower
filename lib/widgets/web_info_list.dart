@@ -21,6 +21,9 @@ class _WebInfoState extends ConsumerState<WebInfoList> {
 
     List<Widget> webInfos = [
       CupertinoListTile(
+        title: Text(Uri.parse(webInfo.url).host),
+      ),
+      CupertinoListTile(
         title: Text(S.of(context).StatusCode),
         additionalInfo: Text('${webInfo.statusCode}'),
         trailing: Icon(CupertinoIcons.wifi,
@@ -32,9 +35,6 @@ class _WebInfoState extends ConsumerState<WebInfoList> {
                     : CupertinoColors.systemYellow
                 : CupertinoColors.destructiveRed),
       ),
-      CupertinoListTile(
-        title: Text(webInfo.url),
-      ),
     ];
 
     List.generate(webInfo.cookies.length, (index) {
@@ -45,6 +45,7 @@ class _WebInfoState extends ConsumerState<WebInfoList> {
     return SingleChildScrollView(
       child: CupertinoListSection.insetGrouped(
         children: webInfos,
+        footer: Text(webInfo.url),
       ),
     );
   }

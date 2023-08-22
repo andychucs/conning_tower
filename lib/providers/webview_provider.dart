@@ -126,10 +126,10 @@ class WebController extends _$WebController {
   }
 
   Future<void> onLoadStop(WebUri uri) async {
-    var cookies = await cookieManager.getCookies(url: uri);
-    ref
-        .read(webInfoProvider.notifier)
-        .update((state) => state.copyWith(url: uri.rawValue, cookies: cookies));
+    // var cookies = await cookieManager.getCookies(url: uri);
+    // ref
+    //     .read(webInfoProvider.notifier)
+    //     .update((state) => state.copyWith(url: uri.rawValue, cookies: cookies));
 
     if (safeNavi) {
       safeNavi = false;
