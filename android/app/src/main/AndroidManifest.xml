@@ -43,6 +43,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+                android:name="com.conntower.conningtower.task.default_notification_icon"
+                android:resource="@drawable/ic_notification" />
         <service
             android:name="com.conntower.conning_tower.ForegroundService"
             android:exported="false"
