@@ -182,26 +182,23 @@ class HomePageState extends ConsumerState<HomePage> {
 
     loadLocalTasks();
 
-    if (Platform.isAndroid) {
-      ref.listen(rawDataProvider, (previous, RawData next) {
-        debugPrint('listen.rawDataProvider');
-        ref.watch(kancolleDataProvider).parse(next.source, next.data);
-      });
+    ref.listen(rawDataProvider, (previous, RawData next) {
+      debugPrint('listen.rawDataProvider');
+      ref.watch(kancolleDataProvider).parse(next.source, next.data);
+    });
 
-      ref.listen(kancolleDataProvider, (previous, KancolleData next) {
-        if (next.operationCancel != 999) {
-            notification.cancelTaskNotification(missionIdToCode[next.operationCancel]);
-            next.operationCancel = 999;
-        }
+    ref.listen(kancolleDataProvider, (previous, KancolleData next) {
+      if (next.operationCancel != 999) {
+        notification
+            .cancelTaskNotification(missionIdToCode[next.operationCancel]);
+        next.operationCancel = 999;
+      }
 
-        if (previous != next) {
-          print("listen change");
-        }
-        print("listen kancolleDataProvider");
-
-      });
-
-    }
+      if (previous != next) {
+        print("listen change");
+      }
+      print("listen kancolleDataProvider");
+    });
 
     final Map<FunctionName, Function> functionMap = {
       FunctionName.showTaskPage: () async {

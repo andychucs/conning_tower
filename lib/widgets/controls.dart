@@ -93,10 +93,7 @@ class _ControlsState extends ConsumerState<Controls> {
   @override
   Widget build(BuildContext context) {
     bool isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
-    if(!isInit) {
-      return const CupertinoActivityIndicator();
-    }
-    InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
+    late InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
     final flnp = ref.watch(functionLayerNavigatorProvider);
 
     _selectedIndex = naviItems[flnp.index];

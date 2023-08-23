@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:conning_tower/data/mission.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/utils/notification_util.dart';
