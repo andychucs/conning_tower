@@ -3,6 +3,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/data/mission.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:timezone/timezone.dart';
 
 part 'operation_queue.freezed.dart';
 
@@ -33,7 +34,7 @@ class OperationQueue with _$OperationQueue {
     map[squad] = Operation(
         id: 100,
         code: task.id,
-        endTime: DateTime.now().add(duration));
+        endTime: TZDateTime.now(local).add(duration));
   }
 }
 
@@ -42,5 +43,5 @@ class Operation with _$Operation {
   factory Operation(
       {required int id,
       required String code,
-      required DateTime endTime}) = _Operation;
+      required TZDateTime endTime}) = _Operation;
 }

@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
-import 'package:conning_tower/data/mission.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
@@ -14,7 +13,6 @@ import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/device_provider.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
-import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/pages/dashboard.dart';
 import 'package:conning_tower/widgets/dailog.dart';
@@ -181,21 +179,25 @@ class HomePageState extends ConsumerState<HomePage> {
 
     ref.listen(rawDataProvider, (previous, RawData next) {
       debugPrint('listen.rawDataProvider');
-      ref.watch(kancolleDataProvider).parse(next.source, next.data);
+      ref.watch(kancolleDataProvider.notifier).update((state) => state.parseWith(next.source, next.data));
     });
 
-    ref.listen(kancolleDataProvider, (previous, KancolleData next) {
-      if (next.operationCancel != 999) {
-        notification
-            .cancelTaskNotification(missionIdToCode[next.operationCancel]);
-        next.operationCancel = 999;
-      }
-
-      if (previous != next) {
-        print("listen change");
-      }
-      print("listen kancolleDataProvider");
-    });
+    // ref.listen(kancolleDataProvider, (KancolleData? previous, KancolleData next) {
+    //   print("listen kancolleDataProvider");
+    //   if (next.operationCancel != 999) {
+    //     notification
+    //         .cancelTaskNotification(missionIdToCode[next.operationCancel]);
+    //     next.operationCancel = 999;
+    //   }
+    //   print(previous?.queue);
+    //   print(next.queue);
+    //
+    //   if (previous?.queue.map[2]?.endTime != next.queue.map[2]?.endTime) {
+    //       print("listen change");
+    //       print(previous?.queue.map[2]?.endTime);
+    //   }
+    //
+    // });
 
     final Map<FunctionName, Function> functionMap = {
       FunctionName.showTaskPage: () async {

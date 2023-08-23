@@ -128,7 +128,7 @@ abstract class _OperationQueue extends OperationQueue {
 mixin _$Operation {
   int get id => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
-  DateTime get endTime => throw _privateConstructorUsedError;
+  TZDateTime get endTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OperationCopyWith<Operation> get copyWith =>
@@ -140,7 +140,7 @@ abstract class $OperationCopyWith<$Res> {
   factory $OperationCopyWith(Operation value, $Res Function(Operation) then) =
       _$OperationCopyWithImpl<$Res, Operation>;
   @useResult
-  $Res call({int id, String code, DateTime endTime});
+  $Res call({int id, String code, TZDateTime endTime});
 }
 
 /// @nodoc
@@ -172,7 +172,7 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
       endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as TZDateTime,
     ) as $Val);
   }
 }
@@ -184,7 +184,7 @@ abstract class _$$_OperationCopyWith<$Res> implements $OperationCopyWith<$Res> {
       __$$_OperationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String code, DateTime endTime});
+  $Res call({int id, String code, TZDateTime endTime});
 }
 
 /// @nodoc
@@ -214,7 +214,7 @@ class __$$_OperationCopyWithImpl<$Res>
       endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as TZDateTime,
     ));
   }
 }
@@ -229,7 +229,7 @@ class _$_Operation implements _Operation {
   @override
   final String code;
   @override
-  final DateTime endTime;
+  final TZDateTime endTime;
 
   @override
   String toString() {
@@ -260,14 +260,14 @@ abstract class _Operation implements Operation {
   factory _Operation(
       {required final int id,
       required final String code,
-      required final DateTime endTime}) = _$_Operation;
+      required final TZDateTime endTime}) = _$_Operation;
 
   @override
   int get id;
   @override
   String get code;
   @override
-  DateTime get endTime;
+  TZDateTime get endTime;
   @override
   @JsonKey(ignore: true)
   _$$_OperationCopyWith<_$_Operation> get copyWith =>

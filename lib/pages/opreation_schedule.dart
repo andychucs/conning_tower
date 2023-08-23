@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/task.dart';
-import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
-import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -52,11 +50,6 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
       final queueMap =
       ref.watch(kancolleDataProvider.select((data) => data.queue.map));
       queueMap.forEach((squad, operation) {
-        EasyThrottle.throttle(
-            "set-notification", const Duration(minutes: 1), () {
-          notification
-              .setNotificationExclusive(widget.taskMap[operation.code]!);
-        });
 
         final remainingTime = operation.endTime.difference(DateTime.now());
 

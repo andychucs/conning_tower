@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -101,6 +102,58 @@ class NotificationUtil {
       }
       setNotification(task,feedBack: false);
     });
+  }
+
+  Future<void> setNotificationWithOperation(Operation operation, {bool feedBack = true}) async {
+    if (operation.endTime.isBefore(tz.TZDateTime.now(tz.local))) return;
+
+    String notificationTitle = S.current.TaskCompleted(operation.code);
+
+    var notificationDetails = const NotificationDetails(
+      android: AndroidNotificationDetails(
+        kTaskChannelId,
+        kTaskChannelName,
+        channelDescription: kTaskChannelDescription,
+      ),
+    );
+
+    await notification.zonedScheduleAlarmClockNotification(
+        operation.code.hashCode,
+        notificationTitle,
+        '',
+        operation.endTime,
+        notificationDetails);
+    if (feedBack) {
+      HapticFeedback.lightImpact();
+      Fluttertoast.showToast(msg: S.current.TaskNotificationAdded);
+    }
+  }
+
+  Future<void> setNotificationWithEndTime(Task task, tz.TZDateTime endTime, {bool feedBack = true}) async {
+    if (endTime.isBefore(tz.TZDateTime.now(tz.local))) return;
+    // set the title and content of the notification
+    String notificationTitle = S.current.TaskCompleted(task.title);
+    String notificationBody = "";
+
+    // create notification details
+    var notificationDetails = const NotificationDetails(
+      android: AndroidNotificationDetails(
+        kTaskChannelId,
+        kTaskChannelName,
+        channelDescription: kTaskChannelDescription,
+      ),
+    );
+
+    await notification.zonedScheduleAlarmClockNotification(
+        task.id.hashCode,
+        notificationTitle,
+        notificationBody,
+        endTime,
+        notificationDetails);
+    if (feedBack) {
+      HapticFeedback.lightImpact();
+      Fluttertoast.showToast(msg: S.current.TaskNotificationAdded);
+    }
   }
 
   Future<void> setNotification(Task task, {bool feedBack = true}) async {
