@@ -1,4 +1,5 @@
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/widgets/dailog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -32,27 +33,25 @@ class ComplexModal extends StatelessWidget {
       child: WillPopScope(
         onWillPop: () async {
           bool shouldClose = true;
-          await showCupertinoDialog(
-              context: context,
-              builder: (context) => CupertinoAlertDialog(
-                    title: Text(S.of(context).TextShouldClose),
-                    actions: <Widget>[
-                      CupertinoButton(
-                        child: Text(S.current.TextNo),
-                        onPressed: () {
-                          shouldClose = false;
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      CupertinoButton(
-                        child: Text(S.current.TextYes),
-                        onPressed: () {
-                          shouldClose = true;
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ));
+          await showAdaptiveDialog(context,
+              title: Text(S.of(context).TextShouldClose),
+              content: null,
+              actions: [
+                AdaptiveDialogAction(
+                  child: Text(S.current.TextNo),
+                  onPressed: () {
+                    shouldClose = false;
+                    Navigator.of(context).pop();
+                  },
+                ),
+                AdaptiveDialogAction(
+                  child: Text(S.current.TextYes),
+                  onPressed: () {
+                    shouldClose = true;
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ]);
           return shouldClose;
         },
         child: child,

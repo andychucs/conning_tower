@@ -17,6 +17,7 @@ import 'package:conning_tower/providers/webview_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/pages/dashboard.dart';
+import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/indexed_stack.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
@@ -88,30 +89,26 @@ class HomePageState extends ConsumerState<HomePage> {
 
   Future<void> showNewVersionInfo() async {
     if (showNewVersion) {
-      await showCupertinoDialog(
-          context: context,
-          builder: (context) {
-            return CupertinoAlertDialog(
-              title: Text(S.current.VersionUpdateTitle),
-              content: Column(
-                children: [
-                  Text(S.current.VersionUpdateContent),
-                  textLink(S.of(context).DocsNewUrl,
-                      S.of(context).VersionUpdateLinkText),
-                ],
-              ),
-              actions: [
-                CupertinoDialogAction(
-                  child: Text(S.of(context).TextYes),
-                  onPressed: () {
-                    var version = _packageInfo.version;
-                    localStorage.setString("preVersion", version);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          });
+      await showAdaptiveDialog(context,
+          title: Text(S.current.VersionUpdateTitle),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(S.current.VersionUpdateContent),
+              textLink(S.of(context).DocsNewUrl,
+                  S.of(context).VersionUpdateLinkText),
+            ],
+          ),
+          actions: [
+            AdaptiveDialogAction(
+              child: Text(S.of(context).TextYes),
+              onPressed: () {
+                var version = _packageInfo.version;
+                localStorage.setString("preVersion", version);
+                Navigator.of(context).pop();
+              },
+            )
+          ]);
     }
   }
 
