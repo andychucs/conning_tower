@@ -51,7 +51,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         WebInfoList(notifyParent: widget.notifyParent)
       ];
 
-      if (kIsOpenSource) children.add(const OperationSchedule());
+      if (kIsOpenSource) children.add(const OperationPage());
 
 
       return CupertinoPickerView(

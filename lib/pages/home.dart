@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/data/mission.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
@@ -13,6 +14,7 @@ import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/device_provider.dart';
 import 'package:conning_tower/providers/webview_provider.dart';
+import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/pages/dashboard.dart';
 import 'package:conning_tower/widgets/indexed_stack.dart';
@@ -124,7 +126,8 @@ class HomePageState extends ConsumerState<HomePage> {
       customUA = (prefs.getString('customUA') ?? '');
       appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
           AppLayout.values.indexOf(AppLayout.onlyFAB)];
-      showDashboardInHome = localStorage.getBool('showDashboardInHome') ?? false;
+      showDashboardInHome =
+          localStorage.getBool('showDashboardInHome') ?? false;
     });
   }
 
@@ -161,7 +164,6 @@ class HomePageState extends ConsumerState<HomePage> {
 
       debugPrint(contents);
 
-
       Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
 
       ref.watch(tasksStateProvider.notifier).update((state) => latestTasks);
@@ -180,10 +182,26 @@ class HomePageState extends ConsumerState<HomePage> {
 
     loadLocalTasks();
 
-    ref.listen(rawDataProvider, (previous,RawData next) {
-      debugPrint('listen.rawDataProvider');
-      ref.watch(kancolleDataProvider).parse(next.source, next.data);
-    });
+    if (Platform.isAndroid) {
+      ref.listen(rawDataProvider, (previous, RawData next) {
+        debugPrint('listen.rawDataProvider');
+        ref.watch(kancolleDataProvider).parse(next.source, next.data);
+      });
+
+      ref.listen(kancolleDataProvider, (previous, KancolleData next) {
+        if (next.operationCancel != 999) {
+            notification.cancelTaskNotification(missionIdToCode[next.operationCancel]);
+            next.operationCancel = 999;
+        }
+
+        if (previous != next) {
+          print("listen change");
+        }
+        print("listen kancolleDataProvider");
+
+      });
+
+    }
 
     final Map<FunctionName, Function> functionMap = {
       FunctionName.showTaskPage: () async {
@@ -322,8 +340,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
     return OrientationBuilder(builder: (context, orientation) {
       bool enableBottomPadding = bottomPadding;
-      double bottomPaddingHeight =
-          MediaQuery.of(context).padding.bottom;
+      double bottomPaddingHeight = MediaQuery.of(context).padding.bottom;
       if (orientation == Orientation.landscape) {
         fabAlignment = const Alignment(1.0, 0.3);
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
@@ -477,7 +494,10 @@ class HomePageState extends ConsumerState<HomePage> {
                                           isWebInfo: false,
                                           notifyParent: () => setState(() {}))),
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: enableBottomPadding ? bottomPaddingHeight : 0),
+                                  padding: EdgeInsets.only(
+                                      bottom: enableBottomPadding
+                                          ? bottomPaddingHeight
+                                          : 0),
                                   child: SizedBox(
                                     height: childHeight,
                                     width: childWidth,
