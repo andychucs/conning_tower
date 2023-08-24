@@ -1,6 +1,6 @@
 import json
 
-dart_file = 'const Map missionToTask = {'
+dart_file = 'const Map missionIdToCode = {'
 
 if __name__ == '__main__':
     with open('../assets/resources/json/expedition.json') as f:
