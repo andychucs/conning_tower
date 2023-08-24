@@ -15,7 +15,7 @@ class OperationQueue with _$OperationQueue {
   factory OperationQueue({required Map<int, Operation> map}) =
       _OperationQueue;
 
-  Future<void> executeOperation(int squad, Operation operation) async {
+  void executeOperation(int squad, Operation operation) {
     String taskId = missionIdToCode[operation.id];
     operation = operation.copyWith(code: taskId);
     map[squad] = operation;

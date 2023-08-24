@@ -1,6 +1,6 @@
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -23,7 +23,7 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
       endTime: tz.TZDateTime.now(tz.local),
     ),
   });
-  final List<Squad> squads = [Squad(id: 1, name: '第1艦隊')];
+  final List<Squad> squads = [];
 
   return KancolleData(
       queue: queue, squads: squads, operationCancel: 999, ref: ref);

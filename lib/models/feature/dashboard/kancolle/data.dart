@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
@@ -10,8 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'operation_queue.dart';
-
-import 'fleet.dart';
 
 class KancolleData {
   final OperationQueue queue;
@@ -80,7 +80,7 @@ class KancolleData {
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
     if (model is ReqMissionStartEntity) {
-      print("MissionStart");
+      log("MissionStart");
     }
 
     if (model is GetMemberDeckEntity) {
@@ -89,7 +89,11 @@ class KancolleData {
         int id = data.apiId;
         if (id > 1) {
           if (squads.length < id) {
-            squads.add(Squad(id: id, name: data.apiName));
+            squads.add(Squad(
+                id: id,
+                name: data.apiName,
+                operation: data.apiMission[1],
+                ships: []));
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
               tz.local, data.apiMission[2]);
@@ -124,16 +128,33 @@ class KancolleData {
     }
 
     if (model is PortEntity) {
-      // print(model);
+      List<Ship> allShips = [];
+      for (var data in model.apiData.apiShip) {
+        Ship ship = Ship(
+            uid: data.apiId,
+            shipId: data.apiShipId,
+            name: "Ship ${data.apiShipId}",
+            level: data.apiLv,
+            exp: data.apiExp,
+            nowHP: data.apiNowhp,
+            maxHP: data.apiMaxhp);
+        allShips.add(ship);
+      }
+      Map<int, Ship> shipsMap =
+          Map.fromIterable(allShips, key: (item) => item.uid);
       for (var data in model.apiData.apiDeckPort) {
         int id = data.apiId;
+
+        List<Ship> ships = [for (int uid in data.apiShip) shipsMap[uid]!];
+
+        squads[id] = Squad(
+            id: id,
+            name: data.apiName,
+            operation: data.apiMission[1],
+            ships: ships);
         if (id > 1) {
-          if (squads.length < id) {
-            squads.add(Squad(id: id, name: data.apiName));
-          }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
               tz.local, data.apiMission[2]);
-          // print(data);
           if (data.apiMission[1] != 0) {
             queue.executeOperation(
                 id,

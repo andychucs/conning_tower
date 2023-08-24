@@ -11,11 +11,3 @@ class Fleet with _$Fleet {
 
 }
 
-@freezed
-class Squad with _$Squad {
-  factory Squad({
-    required int id,
-    required String name,
-  }) = _Squad;
-
-}
