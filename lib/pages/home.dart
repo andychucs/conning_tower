@@ -8,6 +8,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
@@ -30,6 +31,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -185,25 +187,50 @@ class HomePageState extends ConsumerState<HomePage> {
       debugPrint('listen.rawDataProvider');
       log(next.source);
       log(next.data);
-      ref.watch(kancolleDataProvider.notifier).update((state) => state.parseWith(next.source, next.data));
+      ref
+          .watch(kancolleDataProvider.notifier)
+          .update((state) => state.parseWith(next.source, next.data));
     });
 
-    // ref.listen(kancolleDataProvider, (KancolleData? previous, KancolleData next) {
-    //   print("listen kancolleDataProvider");
-    //   if (next.operationCancel != 999) {
-    //     notification
-    //         .cancelTaskNotification(missionIdToCode[next.operationCancel]);
-    //     next.operationCancel = 999;
-    //   }
-    //   print(previous?.queue);
-    //   print(next.queue);
-    //
-    //   if (previous?.queue.map[2]?.endTime != next.queue.map[2]?.endTime) {
-    //       print("listen change");
-    //       print(previous?.queue.map[2]?.endTime);
-    //   }
-    //
-    // });
+    ref.listen(kancolleDataProvider,
+        (KancolleData? previous, KancolleData next) {
+      print("listen kancolleDataProvider");
+      for (var squad in next.squads) {
+        for (var ship in squad.ships) {
+          if (ship.damaged()) {
+            HapticFeedback.heavyImpact();
+            Fluttertoast.showToast(msg: "${squad.name}-${ship.name} 大破");
+            showAdaptiveDialog(context,
+                title: Text("${squad.name}-${ship.name} 大破"),
+                content: null,
+                actions: [
+                  AdaptiveDialogAction(
+                    child: Text(S.of(context).TextYes),
+                    color: CupertinoColors.destructiveRed,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]);
+            log("${squad.name}-${ship.name} 大破");
+            break;
+          }
+        }
+      }
+
+      // if (next.operationCancel != 999) {
+      //   notification
+      //       .cancelTaskNotification(missionIdToCode[next.operationCancel]);
+      //   next.operationCancel = 999;
+      // }
+      // print(previous?.queue);
+      // print(next.queue);
+      //
+      // if (previous?.queue.map[2]?.endTime != next.queue.map[2]?.endTime) {
+      //     print("listen change");
+      //     print(previous?.queue.map[2]?.endTime);
+      // }
+    });
 
     final Map<FunctionName, Function> functionMap = {
       FunctionName.showTaskPage: () async {

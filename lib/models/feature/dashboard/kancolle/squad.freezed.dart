@@ -17,9 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Squad {
   int get id => throw _privateConstructorUsedError;
+  set id(int value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
   int get operation => throw _privateConstructorUsedError;
+  set operation(int value) => throw _privateConstructorUsedError;
   List<Ship> get ships => throw _privateConstructorUsedError;
+  set ships(List<Ship> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SquadCopyWith<Squad> get copyWith => throw _privateConstructorUsedError;
@@ -109,7 +113,7 @@ class __$$_SquadCopyWithImpl<$Res> extends _$SquadCopyWithImpl<$Res, _$_Squad>
           : operation // ignore: cast_nullable_to_non_nullable
               as int,
       ships: null == ships
-          ? _value._ships
+          ? _value.ships
           : ships // ignore: cast_nullable_to_non_nullable
               as List<Ship>,
     ));
@@ -123,43 +127,21 @@ class _$_Squad implements _Squad {
       {required this.id,
       required this.name,
       required this.operation,
-      required final List<Ship> ships})
-      : _ships = ships;
+      required this.ships});
 
   @override
-  final int id;
+  int id;
   @override
-  final String name;
+  String name;
   @override
-  final int operation;
-  final List<Ship> _ships;
+  int operation;
   @override
-  List<Ship> get ships {
-    if (_ships is EqualUnmodifiableListView) return _ships;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ships);
-  }
+  List<Ship> ships;
 
   @override
   String toString() {
     return 'Squad(id: $id, name: $name, operation: $operation, ships: $ships)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Squad &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.operation, operation) ||
-                other.operation == operation) &&
-            const DeepCollectionEquality().equals(other._ships, _ships));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, operation,
-      const DeepCollectionEquality().hash(_ships));
 
   @JsonKey(ignore: true)
   @override
@@ -170,19 +152,23 @@ class _$_Squad implements _Squad {
 
 abstract class _Squad implements Squad {
   factory _Squad(
-      {required final int id,
-      required final String name,
-      required final int operation,
-      required final List<Ship> ships}) = _$_Squad;
+      {required int id,
+      required String name,
+      required int operation,
+      required List<Ship> ships}) = _$_Squad;
 
   @override
   int get id;
+  set id(int value);
   @override
   String get name;
+  set name(String value);
   @override
   int get operation;
+  set operation(int value);
   @override
   List<Ship> get ships;
+  set ships(List<Ship> value);
   @override
   @JsonKey(ignore: true)
   _$$_SquadCopyWith<_$_Squad> get copyWith =>

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,9 @@ class PortInfo extends ConsumerStatefulWidget {
 class _PortInfoState extends ConsumerState<PortInfo> {
   @override
   Widget build(BuildContext context) {
+    final baseInfo =
+        ref.watch(kancolleDataProvider.select((value) => value.seaForceBase));
+
     return CustomScrollView(
       slivers: <Widget>[
         SliverPadding(
@@ -30,11 +34,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFF068D46),
+                    color: const Color.fromRGBO(32, 89, 29, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.oil}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -47,11 +51,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFF7D9A06),
+                    color: const Color.fromRGBO(126, 102, 54, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.ammo}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -64,11 +68,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFFBEBEBE),
+                    color: Color.fromRGBO(181, 180, 180, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.steel}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -81,11 +85,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFFFFCF4F),
+                    color: Color.fromRGBO(219, 150, 102, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.bauxite}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -98,11 +102,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFF7BEE1D),
+                    color: Color.fromRGBO(195, 212, 75, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.instantRepairs}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -115,11 +119,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFFE3E3E3),
+                    color: Color.fromRGBO(56, 126, 132, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.developmentMaterials}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -132,11 +136,11 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
-                    color: Color(0xFF1DEEB6),
+                    color: Color.fromRGBO(186, 186, 186, 1.0),
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "20000000",
+                  "${baseInfo.improvementMaterials}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -157,6 +161,7 @@ class InfoBox extends StatelessWidget {
     required this.top,
     required this.bottom,
   });
+
   final Widget top;
   final Widget bottom;
 

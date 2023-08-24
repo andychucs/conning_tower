@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'squad.freezed.dart';
 
-@freezed
+@unfreezed
 class Squad with _$Squad {
   factory Squad({
     required int id,

@@ -165,7 +165,7 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
 
 /// @nodoc
 
-class _$_Ship implements _Ship {
+class _$_Ship extends _Ship {
   const _$_Ship(
       {required this.uid,
       required this.shipId,
@@ -174,7 +174,8 @@ class _$_Ship implements _Ship {
       required final List<int> exp,
       required this.nowHP,
       required this.maxHP})
-      : _exp = exp;
+      : _exp = exp,
+        super._();
 
   @override
   final int uid;
@@ -228,7 +229,7 @@ class _$_Ship implements _Ship {
       __$$_ShipCopyWithImpl<_$_Ship>(this, _$identity);
 }
 
-abstract class _Ship implements Ship {
+abstract class _Ship extends Ship {
   const factory _Ship(
       {required final int uid,
       required final int shipId,
@@ -237,6 +238,7 @@ abstract class _Ship implements Ship {
       required final List<int> exp,
       required final int nowHP,
       required final int maxHP}) = _$_Ship;
+  const _Ship._() : super._();
 
   @override
   int get uid;
