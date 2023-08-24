@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

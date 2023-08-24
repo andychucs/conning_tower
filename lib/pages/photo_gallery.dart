@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/providers/webview_provider.dart';
+import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_manager/photo_manager.dart';

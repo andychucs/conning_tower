@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'task.freezed.dart';
 
@@ -32,7 +31,3 @@ class Tasks with _$Tasks {
   factory Tasks.fromJson(Map<String, dynamic> json) => _$TasksFromJson(json);
 
 }
-
-final tasksStateProvider = StateProvider<Tasks>((ref) {
-  return Tasks(items: []);
-});

@@ -1,6 +1,7 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/pages/home.dart';
-import 'package:conning_tower/providers/device_provider.dart';
+import 'package:conning_tower/providers/generatable/device_provider.dart';
+import 'package:conning_tower/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

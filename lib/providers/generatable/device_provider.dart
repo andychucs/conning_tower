@@ -20,10 +20,6 @@ enum CustomDeviceOrientation {
   all
 }
 
-final themeProvider = StateProvider<ThemeMode>((ref) {
-  return ThemeMode.system;
-});
-
 @freezed
 class DeviceManagerState with _$DeviceManagerState {
   factory DeviceManagerState(

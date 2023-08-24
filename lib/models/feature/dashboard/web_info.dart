@@ -1,5 +1,4 @@
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'web_info.freezed.dart';
@@ -13,7 +12,3 @@ class WebInfo with _$WebInfo {
     required int statusCode
 }) = _WebInfo;
 }
-
-final webInfoProvider = StateProvider<WebInfo>((ref) {
-  return WebInfo(url: '', cookies: [], statusCode: 100);
-});

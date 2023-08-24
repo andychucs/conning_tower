@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -11,41 +12,6 @@ import 'package:timezone/timezone.dart' as tz;
 import 'operation_queue.dart';
 
 import 'fleet.dart';
-
-final rawDataProvider = StateProvider<RawData>((ref) {
-  return RawData(source: '', data: '');
-});
-
-class RawData {
-  late String source;
-  late String data;
-
-  RawData({required this.source, required this.data});
-}
-
-final kancolleDataProvider = StateProvider<KancolleData>((ref) {
-  final OperationQueue queue = OperationQueue(map: {
-    2: Operation(
-      id: 999,
-      code: '--',
-      endTime: tz.TZDateTime.now(tz.local),
-    ),
-    3: Operation(
-      id: 999,
-      code: '--',
-      endTime: tz.TZDateTime.now(tz.local),
-    ),
-    4: Operation(
-      id: 999,
-      code: '--',
-      endTime: tz.TZDateTime.now(tz.local),
-    ),
-  });
-  final List<Squad> squads = [Squad(id: 1, name: '第1艦隊')];
-
-  return KancolleData(
-      queue: queue, squads: squads, operationCancel: 999, ref: ref);
-});
 
 class KancolleData {
   final OperationQueue queue;

@@ -1,5 +1,5 @@
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/models/feature/dashboard/web_info.dart';
+import 'package:conning_tower/providers/web_info_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

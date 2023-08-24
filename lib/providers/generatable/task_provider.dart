@@ -6,6 +6,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +15,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:validators/validators.dart';
 import 'package:yaml/yaml.dart';
 
-import '../utils/notification_util.dart';
+import 'package:conning_tower/utils/notification_util.dart';
 
 part 'task_provider.freezed.dart';
 

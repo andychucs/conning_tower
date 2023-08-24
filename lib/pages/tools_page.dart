@@ -6,7 +6,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
-import 'package:conning_tower/providers/webview_provider.dart';
+import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/icons.dart';
