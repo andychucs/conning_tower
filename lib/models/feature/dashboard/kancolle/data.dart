@@ -118,7 +118,7 @@ class KancolleData {
     }
 
     if (model is GetMemberDeckEntity) {
-      print(model);
+      // print(model);
       for (var data in model.apiData) {
         int id = data.apiId;
         if (id > 1) {
@@ -167,7 +167,7 @@ class KancolleData {
           }
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
               tz.local, data.apiMission[2]);
-          print(data);
+          // print(data);
           if (data.apiMission[1] != 0) {
             queue.executeOperation(
                 id,

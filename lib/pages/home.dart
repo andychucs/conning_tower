@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
@@ -157,7 +158,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
       String contents = await file.readAsString();
 
-      debugPrint(contents);
+      // debugPrint(contents);
 
       Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
 
@@ -179,6 +180,8 @@ class HomePageState extends ConsumerState<HomePage> {
 
     ref.listen(rawDataProvider, (previous, RawData next) {
       debugPrint('listen.rawDataProvider');
+      log(next.source);
+      log(next.data);
       ref.watch(kancolleDataProvider.notifier).update((state) => state.parseWith(next.source, next.data));
     });
 

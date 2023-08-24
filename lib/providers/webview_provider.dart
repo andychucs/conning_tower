@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
@@ -193,7 +194,7 @@ class WebController extends _$WebController {
   Future<void> screenResize() async {
     if (!state.isInit) return;
     if (!state.isScreenResize) {
-      print("screenResize");
+      log("screenResize");
       state.isScreenResize = true;
       await autoAdjustWindowV2(controller);
       state.isScreenResize = false;
@@ -224,8 +225,8 @@ class WebController extends _$WebController {
       final endIndex = message.indexOf(end, startIndex + start.length);
       responseURL =
           message.substring(startIndex + start.length, endIndex);
-      print("responseURL:");
-      print(responseURL);
+      // print("responseURL:");
+      // print(responseURL);
     }
     if (true) {
       const start = "conning_tower_readyState:";
@@ -234,8 +235,8 @@ class WebController extends _$WebController {
       final endIndex = message.indexOf(end, startIndex + start.length);
       String readyState =
           message.substring(startIndex + start.length, endIndex);
-      print("readyState:");
-      print(readyState);
+      log("readyState:");
+      log(readyState);
     }
     if (true) {
       const start = "conning_tower_responseText:";
@@ -246,7 +247,7 @@ class WebController extends _$WebController {
           message.substring(startIndex + start.length, endIndex);
       String result = responseText.replaceAll('svdata=', '');
       ref.watch(rawDataProvider.notifier).update((state) => RawData(source: responseURL, data: result));
-      debugPrint(result);
+      // debugPrint(result);
     }
   }
 
