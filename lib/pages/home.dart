@@ -493,7 +493,6 @@ class HomePageState extends ConsumerState<HomePage> {
                                 if (enableDashboard && showDashboardInHome)
                                   Expanded(
                                       child: Dashboard(
-                                          isWebInfo: false,
                                           notifyParent: () => setState(() {}))),
                                 Padding(
                                   padding: EdgeInsets.only(

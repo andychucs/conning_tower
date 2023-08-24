@@ -6,9 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class WebInfoList extends ConsumerStatefulWidget {
   const WebInfoList({
     super.key,
-    required this.notifyParent,
   });
-  final VoidCallback notifyParent;
 
   @override
   ConsumerState<WebInfoList> createState() => _WebInfoState();

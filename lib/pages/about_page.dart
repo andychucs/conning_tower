@@ -79,6 +79,10 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                       title: Text(S.of(context).AboutVersion),
                       additionalInfo: Text(
                           '${_packageInfo.version}(${_packageInfo.buildNumber})'),
+                    ),
+                    const CupertinoListTile(
+                      title: Text("Channel"),
+                      additionalInfo: Text(kIsOpenSource ? "GitHub" : "AppStore"),
                     )
                   ],
                 ),

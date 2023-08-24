@@ -10,9 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
   const Dashboard(
-      {super.key, required this.notifyParent, this.isWebInfo = true});
+      {super.key, required this.notifyParent});
 
-  final bool isWebInfo;
   final VoidCallback notifyParent;
 
   @override
@@ -26,16 +25,15 @@ class _DashboardState extends ConsumerState<Dashboard> {
       // debugPrint(
       //     "dashboard space: W:${constraints.maxWidth} H:${constraints.maxHeight}");
 
-      if (widget.isWebInfo) {
-        return WebInfoList(notifyParent: widget.notifyParent,);
-      }
       List<String> titles = [
         S.of(context).PhotoAlbum,
         S.of(context).WebInfo,
-        "Port"
       ];
 
-      if (kIsOpenSource) titles.add("遠征艦隊");
+      if (kIsOpenSource) {
+        titles.add("艦隊本部");
+        titles.add("遠征");
+      }
 
       List<Widget> items = <Widget>[
         for (var i in titles)
@@ -51,11 +49,13 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
       List<Widget> children = [
         const PhotoGallery(),
-        WebInfoList(notifyParent: widget.notifyParent),
-        PortInfo()
+        const WebInfoList(),
       ];
 
-      if (kIsOpenSource) children.add(const OperationPage());
+      if (kIsOpenSource) {
+        children.add(const PortInfo());
+        children.add(const OperationPage());
+      }
 
 
       return CupertinoPickerView(
