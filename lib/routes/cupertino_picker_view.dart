@@ -47,9 +47,7 @@ class _CupertinoPickerViewState extends State<CupertinoPickerView> {
               // const VerticalDivider(width: 1,),
               Expanded(
                 flex: 20,
-                child: CupertinoGroupedSection(
-                  child: widget.children[_selectIndex],
-                ),
+                child: widget.children[_selectIndex],
               ),
             ],
           ),

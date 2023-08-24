@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
+import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -68,72 +69,74 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
   @override
   Widget build(BuildContext context) {
     if (bytes.isNotEmpty) {
-      return Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ImageOverButton(
-                  onTap: () async {
-                    ref.read(webControllerProvider.notifier).saveScreenShot();
-                    await _fetchImages();
-                  }, child: const Icon(CupertinoIcons.camera_viewfinder),
-                ),
-                ImageOverButton(
-                  onTap: () async {
-                    await _fetchImages();
-                  }, child: const Icon(CupertinoIcons.refresh),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: images.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Stack(children: [
-                      Image.memory(
-                        bytes[index],
-                        fit: BoxFit.cover,
-                        height: double.infinity,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Builder(builder: (context) {
-                            return GestureDetector(
-                              onTap: () async {
-                                _shareImage(
-                                    await images[index].originBytes as Uint8List,
-                                    context);
-                              },
-                              child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  color: CupertinoDynamicColor.resolve(
-                                      CupertinoColors.systemGroupedBackground,
-                                      context),
-                                  child: Icon(CupertinoIcons.share)),
-                            );
-                          }),
-                        ),
-                      ),
-                    ]),
+      return CupertinoGroupedSection(
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ImageOverButton(
+                    onTap: () async {
+                      ref.read(webControllerProvider.notifier).saveScreenShot();
+                      await _fetchImages();
+                    }, child: const Icon(CupertinoIcons.camera_viewfinder),
                   ),
-                );
-              },
+                  ImageOverButton(
+                    onTap: () async {
+                      await _fetchImages();
+                    }, child: const Icon(CupertinoIcons.refresh),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: images.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Stack(children: [
+                        Image.memory(
+                          bytes[index],
+                          fit: BoxFit.cover,
+                          height: double.infinity,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Builder(builder: (context) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  _shareImage(
+                                      await images[index].originBytes as Uint8List,
+                                      context);
+                                },
+                                child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    color: CupertinoDynamicColor.resolve(
+                                        CupertinoColors.systemGroupedBackground,
+                                        context),
+                                    child: Icon(CupertinoIcons.share)),
+                              );
+                            }),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       );
     } else {
       return Center(

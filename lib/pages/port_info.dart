@@ -1,7 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PortInfo extends ConsumerStatefulWidget {
   const PortInfo({super.key});
@@ -16,65 +17,171 @@ class _PortInfoState extends ConsumerState<PortInfo> {
     return CustomScrollView(
       slivers: <Widget>[
         SliverPadding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
           sliver: SliverGrid.count(
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
             crossAxisCount: 2,
+            childAspectRatio: 1.618,
             children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.green[100],
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Flex(
-                    direction: Axis.vertical,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Icon(FontAwesomeIcons.oilWell),
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text("2000"),
-                        ),
-                      ),
-                    ],
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFF068D46),
                   ),
                 ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.green[200],
-                child: const Text('Heed not the rabble'),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFF7D9A06),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.green[300],
-                child: const Text('Sound of screams but the'),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFFBEBEBE),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.green[400],
-                child: const Text('Who scream'),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFFFFCF4F),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.green[500],
-                child: const Text('Revolution is coming...'),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFF7BEE1D),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.green[600],
-                child: const Text('Revolution, they...'),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFFE3E3E3),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Color(0xFF1DEEB6),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "20000000",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class InfoBox extends StatelessWidget {
+  const InfoBox({
+    super.key,
+    required this.top,
+    required this.bottom,
+  });
+  final Widget top;
+  final Widget bottom;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoGroupedSection(
+      padding: EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: top,
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: bottom,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

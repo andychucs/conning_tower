@@ -113,7 +113,7 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
               missionName = widget.taskMap[operation.code]?.title;
             }
             return CupertinoListSection.insetGrouped(
-                margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                margin: EdgeInsetsDirectional.only(top: 5.0, bottom: 5.0, end: 10.0, start: 5.0),
                 footer: CupertinoListSectionDescription(squadName),
                 children: [
                   CupertinoListTile(
