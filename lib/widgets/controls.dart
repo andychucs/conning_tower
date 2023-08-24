@@ -57,6 +57,7 @@ class Controls extends ConsumerStatefulWidget {
 class _ControlsState extends ConsumerState<Controls> {
   int _selectedIndex = 0;
   bool _compact = true;
+  bool _isInit = false;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -92,7 +93,7 @@ class _ControlsState extends ConsumerState<Controls> {
 
   @override
   Widget build(BuildContext context) {
-    bool isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
+    _isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
     late InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
     final flnp = ref.watch(functionLayerNavigatorProvider);
 
@@ -107,7 +108,6 @@ class _ControlsState extends ConsumerState<Controls> {
         currentIndex: _selectedIndex,
         onTap: ((value) async {
           HapticFeedback.mediumImpact();
-          if (!isInit) return;
           _onTap(value, context, controller, flnp);
         }),
         items: [
@@ -157,7 +157,6 @@ class _ControlsState extends ConsumerState<Controls> {
       groupAlignment: 0,
       onDestinationSelected: (int index) async {
         HapticFeedback.mediumImpact();
-        if (!isInit) return;
         if (widget.isWideStyle) {
           _onTapPopover(index, context, controller);
         } else {
@@ -268,9 +267,11 @@ class _ControlsState extends ConsumerState<Controls> {
         }
         break;
       case ConFunc.scrollUp:
+        if (!_isInit) return;
         controller.scrollBy(x: 1, y: 0);
         break;
       case ConFunc.scrollDown:
+        if (!_isInit) return;
         controller.scrollBy(x: 0, y: 1);
         break;
       case ConFunc.goBack:
@@ -316,9 +317,11 @@ class _ControlsState extends ConsumerState<Controls> {
         _onLoadHome(context, controller);
         break;
       case ConFunc.scrollUp:
+        if (!_isInit) return;
         controller.scrollBy(x: 1, y: 0);
         break;
       case ConFunc.scrollDown:
+        if (!_isInit) return;
         controller.scrollBy(x: 0, y: 1);
         break;
       case ConFunc.goBack:
@@ -362,12 +365,12 @@ class _ControlsState extends ConsumerState<Controls> {
 
   Future<void> _onReload(
       BuildContext context, InAppWebViewController controller) async {
+    if (!_isInit) return;
     safeNavi = false;
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppControlsReload, isNormal: true);
+          return AdaptiveDialogWithBool(msg: S.current.AppControlsReload);
         });
     if (value ?? false) {
       await controller.reload();
@@ -375,6 +378,7 @@ class _ControlsState extends ConsumerState<Controls> {
   }
 
   Future<void> _onGoBack(InAppWebViewController controller) async {
+    if (!_isInit) return;
     safeNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
@@ -382,6 +386,7 @@ class _ControlsState extends ConsumerState<Controls> {
   }
 
   Future<void> _onGoForward(InAppWebViewController controller) async {
+    if (!_isInit) return;
     safeNavi = true;
     if (await controller.canGoForward()) {
       await controller.goForward();
@@ -393,7 +398,7 @@ class _ControlsState extends ConsumerState<Controls> {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(msg: S.current.AppHome, isNormal: true);
+          return AdaptiveDialogWithBool(msg: S.current.AppHome);
         });
     if (value ?? false) {
       String homeUrl = getHomeUrl();
