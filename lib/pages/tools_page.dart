@@ -43,6 +43,7 @@ class ToolsPage extends ConsumerStatefulWidget {
 class _ToolsPageState extends ConsumerState<ToolsPage> {
   late TextEditingController _uaTextController;
   late TextEditingController _urlTextController;
+  late InAppWebViewController controller;
 
   @override
   void initState() {
@@ -159,11 +160,12 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
-    if(!isInit) {
-      return const CupertinoActivityIndicator();
+    bool isInit =
+        ref.watch(webControllerProvider.select((value) => value.isInit));
+    if (isInit) {
+      controller =
+          ref.watch(webControllerProvider.select((value) => value.controller));
     }
-    InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
 
     return FunctionalPage(
       title: S.current.ToolsButton,
@@ -227,6 +229,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       : CupertinoIcons.star_fill),
               onTap: () async {
                 HapticFeedback.heavyImpact();
+                if (!isInit) return;
                 _onHomeSave(controller);
               },
             ),
@@ -238,6 +241,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                     icon: CupertinoIcons.rectangle_expand_vertical),
                 onTap: () async {
                   HapticFeedback.heavyImpact();
+                  if (!isInit) return;
                   _onHttpRedirect(controller);
                 },
               ),
@@ -248,6 +252,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                   icon: CupertinoIcons.delete),
               onTap: () async {
                 HapticFeedback.heavyImpact();
+                if (!isInit) return;
                 _onClearCache(context, controller);
               },
             ),
@@ -275,6 +280,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       icon: CupertinoIcons.volume_down),
                   onTap: () async {
                     HapticFeedback.heavyImpact();
+                    if (!isInit) return;
                     _onUnmuteGame(controller);
                   },
                 ),
@@ -285,6 +291,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       icon: CupertinoIcons.volume_off),
                   onTap: () async {
                     HapticFeedback.heavyImpact();
+                    if (!isInit) return;
                     _onMuteGame(controller);
                   },
                 ),
@@ -301,6 +308,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       icon: CupertinoIcons.fullscreen),
                   onTap: () async {
                     HapticFeedback.heavyImpact();
+                    if (!isInit) return;
                     _onAdjustWindow(controller);
                   },
                 ),
@@ -421,7 +429,6 @@ class NotificationManagement extends StatelessWidget {
                 : Container(),
             children: list.isNotEmpty
                 ? List.generate(list.length, (index) {
-
                     return CupertinoListTile(
                       title:
                           Text(list[index].title ?? list[index].id.toString()),
