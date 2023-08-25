@@ -6,7 +6,6 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-
 final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   final OperationQueue queue = OperationQueue(map: {
     2: Operation(
@@ -26,7 +25,7 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
     ),
   });
   final List<Squad> squads = [];
-  final seaForceBase = SeaForceBase(
+  const resource = SeaForceBaseResource(
       oil: 0,
       ammo: 0,
       steel: 0,
@@ -34,8 +33,13 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
       instantRepairs: 0,
       developmentMaterials: 0,
       improvementMaterials: 0);
+  final seaForceBase = SeaForceBase(resource: resource);
   final fleet = Fleet(ships: [], items: []);
 
   return KancolleData(
-      queue: queue, squads: squads, ref: ref, seaForceBase: seaForceBase, fleet: fleet);
+      queue: queue,
+      squads: squads,
+      ref: ref,
+      seaForceBase: seaForceBase,
+      fleet: fleet);
 });

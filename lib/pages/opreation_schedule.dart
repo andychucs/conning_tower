@@ -103,13 +103,12 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
             var missionCode = '-';
             // print(missionCode);
             // print(operation);
+            if (squads.length >= squad) {
+              squadName = squads[squad - 1].name;
+            }
 
             if (operation.id < 999) {
               missionCode = operation.code;
-              if (squads.length >= squad) {
-                squadName = squads[squad - 1].name;
-              }
-
               missionName = widget.taskMap[operation.code]?.title;
             }
             return CupertinoListSection.insetGrouped(

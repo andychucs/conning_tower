@@ -10,6 +10,32 @@ class SeaForceBase with _$SeaForceBase {
   const SeaForceBase._();
 
   factory SeaForceBase({
+    required SeaForceBaseResource resource,
+  }) = _SeaForceBase;
+
+  void updateMaterial(List<PortApiDataApiMaterialEntity> updatedMaterial) {
+    var oil = updatedMaterial[0].apiValue;
+    var ammo = updatedMaterial[1].apiValue;
+    var steel = updatedMaterial[2].apiValue;
+    var bauxite = updatedMaterial[3].apiValue;
+    var instantRepairs = updatedMaterial[4].apiValue;
+    var developmentMaterials = updatedMaterial[5].apiValue;
+    var improvementMaterials = updatedMaterial[6].apiValue;
+    resource = resource.copyWith(
+        oil: oil,
+        ammo: ammo,
+        steel: steel,
+        bauxite: bauxite,
+        instantRepairs: instantRepairs,
+        developmentMaterials: developmentMaterials,
+        improvementMaterials: improvementMaterials);
+    log(toString());
+  }
+}
+
+@freezed
+class SeaForceBaseResource with _$SeaForceBaseResource {
+  const factory SeaForceBaseResource({
     required int oil,
     required int ammo,
     required int steel,
@@ -17,16 +43,5 @@ class SeaForceBase with _$SeaForceBase {
     required int instantRepairs,
     required int developmentMaterials,
     required int improvementMaterials,
-  }) = _SeaForceBase;
-
-  void updateMaterial(List<PortApiDataApiMaterialEntity> updatedMaterial) {
-    oil = updatedMaterial[0].apiValue;
-    ammo = updatedMaterial[1].apiValue;
-    steel = updatedMaterial[2].apiValue;
-    bauxite = updatedMaterial[3].apiValue;
-    instantRepairs = updatedMaterial[4].apiValue;
-    developmentMaterials = updatedMaterial[5].apiValue;
-    improvementMaterials = updatedMaterial[6].apiValue;
-    log(toString());
-  }
+  }) = _SeaForceBaseResource;
 }

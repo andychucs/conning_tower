@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,8 +16,8 @@ class PortInfo extends ConsumerStatefulWidget {
 class _PortInfoState extends ConsumerState<PortInfo> {
   @override
   Widget build(BuildContext context) {
-    final baseInfo =
-        ref.watch(kancolleDataProvider.select((value) => value.seaForceBase));
+    final resourceInfo =
+        ref.watch(kancolleDataProvider.select((value) => value.seaForceBase.resource));
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -38,7 +39,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.oil}",
+                  "${resourceInfo.oil}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -55,7 +56,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.ammo}",
+                  "${resourceInfo.ammo}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -72,7 +73,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.steel}",
+                  "${resourceInfo.steel}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -89,7 +90,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.bauxite}",
+                  "${resourceInfo.bauxite}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -106,7 +107,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.instantRepairs}",
+                  "${resourceInfo.instantRepairs}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -123,7 +124,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.developmentMaterials}",
+                  "${resourceInfo.developmentMaterials}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
@@ -140,7 +141,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   ),
                 ),
                 bottom: AutoSizeText(
-                  "${baseInfo.improvementMaterials}",
+                  "${resourceInfo.improvementMaterials}",
                   style: TextStyle(fontSize: 30),
                   minFontSize: 18,
                   maxLines: 1,
