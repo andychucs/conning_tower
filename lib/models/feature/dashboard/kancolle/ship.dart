@@ -17,8 +17,7 @@ class Ship with _$Ship {
       required int maxHP}) = _Ship;
 
   bool damaged() {
-    var damagedHP = maxHP * 0.25;
-    if (nowHP < damagedHP) {
+    if (nowHP <= maxHP * 0.25) {
       return true;
     } else {
       return false;
