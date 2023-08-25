@@ -11,6 +11,7 @@ import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
@@ -197,41 +198,26 @@ class HomePageState extends ConsumerState<HomePage> {
     ref.listen(kancolleDataProvider,
         (KancolleData? previous, KancolleData next) {
       print("listen kancolleDataProvider");
-      for (var squad in next.squads) {
-        for (var ship in squad.ships) {
-          if (ship.damaged()) {
-            HapticFeedback.heavyImpact();
-            Fluttertoast.showToast(msg: "${squad.name}-${ship.name} 大破");
-            showAdaptiveDialog(context,
-                title: Text("${squad.name}-${ship.name} 大破"),
-                content: null,
-                actions: [
-                  AdaptiveDialogAction(
-                    child: Text(S.of(context).TextYes),
-                    color: CupertinoColors.destructiveRed,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ]);
-            log("${squad.name}-${ship.name} 大破");
-            break;
-          }
-        }
-      }
+    });
 
-      // if (next.operationCancel != 999) {
-      //   notification
-      //       .cancelTaskNotification(missionIdToCode[next.operationCancel]);
-      //   next.operationCancel = 999;
-      // }
-      // print(previous?.queue);
-      // print(next.queue);
-      //
-      // if (previous?.queue.map[2]?.endTime != next.queue.map[2]?.endTime) {
-      //     print("listen change");
-      //     print(previous?.queue.map[2]?.endTime);
-      // }
+    ref.listen(alertStateProvider, (previous, Map<String, String> next) {
+      log(next.toString());
+      if (next.isNotEmpty) {
+        HapticFeedback.heavyImpact();
+        showAdaptiveDialog(context,
+            title: Text(next["title"]!),
+            content: Text(next["content"]!),
+            actions: [
+              AdaptiveDialogAction(
+                color: CupertinoColors.destructiveRed,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(S.of(context).TextYes),
+              )
+            ]);
+      }
+      next.clear();
     });
 
     final Map<FunctionName, Function> functionMap = {

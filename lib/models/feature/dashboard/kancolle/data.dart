@@ -8,8 +8,11 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.d
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:conning_tower/widgets/dailog.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -112,7 +115,27 @@ class KancolleData {
       parse(source, data);
     }
 
+    if (_shouldAlertSource(source)) addAlert();
+
     return newData;
+  }
+
+  void addAlert() {
+    var sb = StringBuffer();
+    for (var squad in squads) {
+      for (var ship in squad.ships) {
+        if (ship.damaged()) {
+          sb.write("${squad.name}-${ship.name} 大破\n");
+          log("${squad.name}-${ship.name} 大破");
+          // break;
+        }
+      }
+    }
+    if (sb.isNotEmpty) {
+      ref
+          .watch(alertStateProvider.notifier)
+          .update((state) => {"title": "大破", "content": sb.toString()});
+    }
   }
 
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
@@ -197,6 +220,11 @@ class KancolleData {
       PortEntity.source,
       ReqMissionReturnInstructionEntity.source
     ].contains(source.split("kcsapi").last);
+  }
+
+  bool _shouldAlertSource(String source) {
+    return [ReqMapNextEntity.source, ReqMapStartEntity.source]
+        .contains(source.split("kcsapi").last);
   }
 
   void _setNotification(
