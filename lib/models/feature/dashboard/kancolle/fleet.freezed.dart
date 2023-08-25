@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Fleet {
-  int get count => throw _privateConstructorUsedError;
-  set count(int value) => throw _privateConstructorUsedError;
+  List<Ship> get ships => throw _privateConstructorUsedError;
+  set ships(List<Ship> value) => throw _privateConstructorUsedError;
+  List<dynamic> get items => throw _privateConstructorUsedError;
+  set items(List<dynamic> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FleetCopyWith<Fleet> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +30,7 @@ abstract class $FleetCopyWith<$Res> {
   factory $FleetCopyWith(Fleet value, $Res Function(Fleet) then) =
       _$FleetCopyWithImpl<$Res, Fleet>;
   @useResult
-  $Res call({int count});
+  $Res call({List<Ship> ships, List<dynamic> items});
 }
 
 /// @nodoc
@@ -44,13 +46,18 @@ class _$FleetCopyWithImpl<$Res, $Val extends Fleet>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = null,
+    Object? ships = null,
+    Object? items = null,
   }) {
     return _then(_value.copyWith(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      ships: null == ships
+          ? _value.ships
+          : ships // ignore: cast_nullable_to_non_nullable
+              as List<Ship>,
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ) as $Val);
   }
 }
@@ -61,7 +68,7 @@ abstract class _$$_FleetCopyWith<$Res> implements $FleetCopyWith<$Res> {
       __$$_FleetCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int count});
+  $Res call({List<Ship> ships, List<dynamic> items});
 }
 
 /// @nodoc
@@ -73,13 +80,18 @@ class __$$_FleetCopyWithImpl<$Res> extends _$FleetCopyWithImpl<$Res, _$_Fleet>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = null,
+    Object? ships = null,
+    Object? items = null,
   }) {
     return _then(_$_Fleet(
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      ships: null == ships
+          ? _value.ships
+          : ships // ignore: cast_nullable_to_non_nullable
+              as List<Ship>,
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -87,14 +99,16 @@ class __$$_FleetCopyWithImpl<$Res> extends _$FleetCopyWithImpl<$Res, _$_Fleet>
 /// @nodoc
 
 class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
-  _$_Fleet({required this.count});
+  _$_Fleet({required this.ships, required this.items});
 
   @override
-  int count;
+  List<Ship> ships;
+  @override
+  List<dynamic> items;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Fleet(count: $count)';
+    return 'Fleet(ships: $ships, items: $items)';
   }
 
   @override
@@ -102,7 +116,8 @@ class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Fleet'))
-      ..add(DiagnosticsProperty('count', count));
+      ..add(DiagnosticsProperty('ships', ships))
+      ..add(DiagnosticsProperty('items', items));
   }
 
   @JsonKey(ignore: true)
@@ -113,11 +128,15 @@ class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
 }
 
 abstract class _Fleet implements Fleet {
-  factory _Fleet({required int count}) = _$_Fleet;
+  factory _Fleet({required List<Ship> ships, required List<dynamic> items}) =
+      _$_Fleet;
 
   @override
-  int get count;
-  set count(int value);
+  List<Ship> get ships;
+  set ships(List<Ship> value);
+  @override
+  List<dynamic> get items;
+  set items(List<dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$_FleetCopyWith<_$_Fleet> get copyWith =>

@@ -1,4 +1,5 @@
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
@@ -33,7 +34,8 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
       instantRepairs: 0,
       developmentMaterials: 0,
       improvementMaterials: 0);
+  final fleet = Fleet(ships: [], items: []);
 
   return KancolleData(
-      queue: queue, squads: squads, operationCancel: 999, ref: ref, seaForceBase: seaForceBase);
+      queue: queue, squads: squads, operationCancel: 999, ref: ref, seaForceBase: seaForceBase, fleet: fleet);
 });

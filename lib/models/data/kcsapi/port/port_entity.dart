@@ -1,3 +1,4 @@
+import 'package:conning_tower/models/data/kcsapi/deck_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'port_entity.freezed.dart';
@@ -68,7 +69,7 @@ class PortApiDataApiMaterialEntity with _$PortApiDataApiMaterialEntity {
 }
 
 @unfreezed
-class PortApiDataApiDeckPortEntity with _$PortApiDataApiDeckPortEntity {
+class PortApiDataApiDeckPortEntity with _$PortApiDataApiDeckPortEntity implements DeckData{
   factory PortApiDataApiDeckPortEntity({
     @JsonKey(name: 'api_member_id') required int apiMemberId,
     @JsonKey(name: 'api_id') required int apiId,

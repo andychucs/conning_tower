@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
@@ -18,14 +19,16 @@ class KancolleData {
   final OperationQueue queue;
   final List<Squad> squads;
   int operationCancel;
-  final Ref ref;
   final SeaForceBase seaForceBase;
+  final Fleet fleet;
+  final Ref ref;
 
   KancolleData(
       {required this.queue,
       required this.squads,
       required this.operationCancel,
       required this.seaForceBase,
+      required this.fleet,
       required this.ref});
 
   KancolleData copyWith(
@@ -33,12 +36,14 @@ class KancolleData {
       List<Squad>? squads,
       int? operationCancel,
       SeaForceBase? seaForceBase,
+      Fleet? fleet,
       Ref? ref}) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
       operationCancel: operationCancel ?? this.operationCancel,
       seaForceBase: seaForceBase ?? this.seaForceBase,
+      fleet: fleet ?? this.fleet,
       ref: ref ?? this.ref,
     );
   }
@@ -46,15 +51,26 @@ class KancolleData {
   KancolleData parseWith(String source, String data) {
     KancolleData newData = copyWith();
 
-    Map<int, tz.TZDateTime> endTimeMap = {
-      for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
-    };
-
-    parse(source, data);
-
-    setNotification(endTimeMap, newData);
+    if (operationSource(source)) {
+      Map<int, tz.TZDateTime> endTimeMap = {
+        for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
+      };
+      parse(source, data);
+      setNotification(endTimeMap, newData);
+    } else {
+      parse(source, data);
+    }
 
     return newData;
+  }
+
+  bool operationSource(String source) {
+    // startup, start operation, stop operation should notify
+    return [
+      GetMemberDeckEntity.source,
+      PortEntity.source,
+      ReqMissionReturnInstructionEntity.source
+    ].contains(source.split("kcsapi").last);
   }
 
   void setNotification(
@@ -89,27 +105,10 @@ class KancolleData {
     }
 
     if (model is GetMemberDeckEntity) {
-      // print(model);
       for (var data in model.apiData) {
         int id = data.apiId;
         if (id > 1) {
-          // if (squads.length < id) {
-          //   squads.add(Squad(
-          //       id: id,
-          //       name: data.apiName,
-          //       operation: data.apiMission[1],
-          //       ships: []));
-          // }
-          tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
-              tz.local, data.apiMission[2]);
-          if (data.apiMission[1] != 0) {
-            queue.executeOperation(
-                id,
-                Operation(
-                    id: data.apiMission[1],
-                    code: data.apiMission[1].toString(),
-                    endTime: endDatetime));
-          }
+          updateOperationQueue(data, id);
         }
       }
     }
@@ -134,25 +133,86 @@ class KancolleData {
 
     if (model is GetMemberShipDeckEntity) {
       int index = model.apiData.apiDeckData.first.apiId - 1; // 单舰队
-      squads[index].ships.clear();
-      for (var data in model.apiData.apiShipData) {
-        Ship ship = Ship(
-            uid: data.apiId,
-            shipId: data.apiShipId,
-            name: "Ship ${data.apiShipId}",
-            level: data.apiLv,
-            exp: data.apiExp,
-            nowHP: data.apiNowhp,
-            maxHP: data.apiMaxhp);
-        log(ship.toString());
-        log(ship.damaged().toString());
-        squads[index].ships.add(ship);
-      }
+      updateSquadShips(index, model.apiData.apiShipData);
     }
 
     if (model is PortEntity) {
+      updateFleetShips(model.apiData.apiShip);
+
+      seaForceBase.updateMaterial(model.apiData.apiMaterial);
+
+      for (var data in model.apiData.apiDeckPort) {
+        int id = data.apiId;
+        updateSquads(data, id);
+        log(squads.last.toString());
+        if (id > 1) {
+          updateOperationQueue(data, id);
+        }
+      }
+    }
+  }
+
+  void updateOperationQueue(DeckData data, int id) {
+    if (data.apiMission[1] != 0) {
+      tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
+          tz.local, data.apiMission[2]);
+      queue.executeOperation(
+          id,
+          Operation(
+              id: data.apiMission[1],
+              code: data.apiMission[1].toString(),
+              endTime: endDatetime));
+    }
+  }
+
+  void updateSquads(PortApiDataApiDeckPortEntity data, int id) {
+    Map<int, Ship> shipsMap =
+    Map.fromIterable(fleet.ships, key: (item) => item.uid);
+    List<Ship> ships = [
+      for (int uid in data.apiShip)
+        if (uid != -1) shipsMap[uid]!
+    ];
+    if (id > squads.length) {
+      squads.add(Squad(
+        id: id,
+        name: data.apiName,
+        operation: data.apiMission[1],
+        ships: ships,
+      ));
+    } else {
+      squads[id - 1] = Squad(
+        id: id,
+        name: data.apiName,
+        operation: data.apiMission[1],
+        ships: ships,
+      );
+    }
+  }
+
+  void updateSquadShips(
+      int index, List<GetMemberShipDeckApiDataApiShipDataEntity> apiShipData) {
+    Squad squad = squads[index].copyWith();
+    squad.ships.clear();
+    for (var data in apiShipData) {
+      Ship ship = Ship(
+          uid: data.apiId,
+          shipId: data.apiShipId,
+          name: "Ship ${data.apiShipId}",
+          level: data.apiLv,
+          exp: data.apiExp,
+          nowHP: data.apiNowhp,
+          maxHP: data.apiMaxhp);
+      log(ship.toString());
+      log(ship.damaged().toString());
+      squad.ships.add(ship);
+    }
+    squads[index] = squad;
+  }
+
+  void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
+    if (apiShip.length > fleet.ships.length) {
       List<Ship> allShips = [];
-      for (var data in model.apiData.apiShip) {
+      for (var data in apiShip) {
         Ship ship = Ship(
             uid: data.apiId,
             shipId: data.apiShipId,
@@ -163,47 +223,7 @@ class KancolleData {
             maxHP: data.apiMaxhp);
         allShips.add(ship);
       }
-      Map<int, Ship> shipsMap =
-          Map.fromIterable(allShips, key: (item) => item.uid);
-
-      seaForceBase.updateMaterial(model.apiData.apiMaterial);
-
-      for (var data in model.apiData.apiDeckPort) {
-        int id = data.apiId;
-        List<Ship> ships = [
-          for (int uid in data.apiShip)
-            if (uid != -1) shipsMap[uid]!
-        ];
-        if (id > squads.length) {
-          squads.add(Squad(
-            id: id,
-            name: data.apiName,
-            operation: data.apiMission[1],
-            ships: ships,
-          ));
-          log(squads[id - 1].toString());
-        } else {
-          squads[id - 1] = Squad(
-            id: id,
-            name: data.apiName,
-            operation: data.apiMission[1],
-            ships: ships,
-          );
-          log(squads[id - 1].toString());
-        }
-        if (id > 1) {
-          tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
-              tz.local, data.apiMission[2]);
-          if (data.apiMission[1] != 0) {
-            queue.executeOperation(
-                id,
-                Operation(
-                    id: data.apiMission[1],
-                    code: data.apiMission[1].toString(),
-                    endTime: endDatetime));
-          }
-        }
-      }
+      fleet.ships = allShips;
     }
   }
 }

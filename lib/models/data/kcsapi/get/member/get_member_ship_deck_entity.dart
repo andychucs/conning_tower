@@ -1,3 +1,4 @@
+import 'package:conning_tower/models/data/kcsapi/deck_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'get_member_ship_deck_entity.freezed.dart';
@@ -76,7 +77,7 @@ class GetMemberShipDeckApiDataApiShipDataEntity
 
 @unfreezed
 class GetMemberShipDeckApiDataApiDeckDataEntity
-    with _$GetMemberShipDeckApiDataApiDeckDataEntity {
+    with _$GetMemberShipDeckApiDataApiDeckDataEntity implements DeckData{
   factory GetMemberShipDeckApiDataApiDeckDataEntity({
     @JsonKey(name: 'api_member_id') required int apiMemberId,
     @JsonKey(name: 'api_id') required int apiId,
