@@ -51,12 +51,12 @@ class KancolleData {
   KancolleData parseWith(String source, String data) {
     KancolleData newData = copyWith();
 
-    if (operationSource(source)) {
+    if (_operationSource(source)) {
       Map<int, tz.TZDateTime> endTimeMap = {
         for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
       };
       parse(source, data);
-      setNotification(endTimeMap, newData);
+      _setNotification(endTimeMap, newData);
     } else {
       parse(source, data);
     }
@@ -64,7 +64,7 @@ class KancolleData {
     return newData;
   }
 
-  bool operationSource(String source) {
+  bool _operationSource(String source) {
     // startup, start operation, stop operation should notify
     return [
       GetMemberDeckEntity.source,
@@ -73,7 +73,7 @@ class KancolleData {
     ].contains(source.split("kcsapi").last);
   }
 
-  void setNotification(
+  void _setNotification(
       Map<int, tz.TZDateTime> endTimeMap, KancolleData newData) {
     endTimeMap.forEach((key, value) {
       Operation operation = newData.queue.map[key]!;
