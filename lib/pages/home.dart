@@ -158,6 +158,8 @@ class HomePageState extends ConsumerState<HomePage> {
   }
 
   Future<void> loadLocalTasks() async {
+    if (ref.watch(tasksStateProvider).items.isNotEmpty) return;
+
     try {
       final file = await _localJsonFile;
 
