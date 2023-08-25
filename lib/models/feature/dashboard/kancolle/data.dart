@@ -18,7 +18,6 @@ import 'operation_queue.dart';
 class KancolleData {
   final OperationQueue queue;
   final List<Squad> squads;
-  int operationCancel;
   final SeaForceBase seaForceBase;
   final Fleet fleet;
   final Ref ref;
@@ -26,7 +25,6 @@ class KancolleData {
   KancolleData(
       {required this.queue,
       required this.squads,
-      required this.operationCancel,
       required this.seaForceBase,
       required this.fleet,
       required this.ref});
@@ -34,14 +32,12 @@ class KancolleData {
   KancolleData copyWith(
       {OperationQueue? queue,
       List<Squad>? squads,
-      int? operationCancel,
       SeaForceBase? seaForceBase,
       Fleet? fleet,
       Ref? ref}) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
-      operationCancel: operationCancel ?? this.operationCancel,
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
       ref: ref ?? this.ref,
@@ -78,7 +74,6 @@ class KancolleData {
                   id: data.apiMission[1],
                   code: data.apiMission[1].toString(),
                   endTime: endDatetime));
-          operationCancel = data.apiMission[1];
         }
       });
     }

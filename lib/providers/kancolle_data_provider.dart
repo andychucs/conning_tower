@@ -37,5 +37,5 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   final fleet = Fleet(ships: [], items: []);
 
   return KancolleData(
-      queue: queue, squads: squads, operationCancel: 999, ref: ref, seaForceBase: seaForceBase, fleet: fleet);
+      queue: queue, squads: squads, ref: ref, seaForceBase: seaForceBase, fleet: fleet);
 });
