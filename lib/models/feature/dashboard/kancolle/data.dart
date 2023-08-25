@@ -48,54 +48,6 @@ class KancolleData {
     );
   }
 
-  KancolleData parseWith(String source, String data) {
-    KancolleData newData = copyWith();
-
-    if (_operationSource(source)) {
-      Map<int, tz.TZDateTime> endTimeMap = {
-        for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
-      };
-      parse(source, data);
-      _setNotification(endTimeMap, newData);
-    } else {
-      parse(source, data);
-    }
-
-    return newData;
-  }
-
-  bool _operationSource(String source) {
-    // startup, start operation, stop operation should notify
-    return [
-      GetMemberDeckEntity.source,
-      PortEntity.source,
-      ReqMissionReturnInstructionEntity.source
-    ].contains(source.split("kcsapi").last);
-  }
-
-  void _setNotification(
-      Map<int, tz.TZDateTime> endTimeMap, KancolleData newData) {
-    endTimeMap.forEach((key, value) {
-      Operation operation = newData.queue.map[key]!;
-      if (!value.isAtSameMomentAs(operation.endTime)) {
-        Map<String, Task> taskMap = Map.fromIterable(
-            ref.watch(tasksStateProvider).items,
-            key: (task) => task.id);
-
-        log("before:$value");
-        log("after:${operation.endTime}");
-        log("End time change ${operation.code}");
-
-        if (taskMap.containsKey(operation.code)) {
-          notification.setNotificationWithEndTime(
-              taskMap[operation.code]!, operation.endTime);
-        } else {
-          notification.setNotificationWithOperation(operation);
-        }
-      }
-    });
-  }
-
   void parse(String source, String data) {
     String path = source.split("kcsapi").last;
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
@@ -152,6 +104,40 @@ class KancolleData {
     }
   }
 
+  KancolleData parseWith(String source, String data) {
+    KancolleData newData = copyWith();
+
+    if (_operationSource(source)) {
+      Map<int, tz.TZDateTime> endTimeMap = {
+        for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
+      };
+      parse(source, data);
+      _setNotification(endTimeMap, newData);
+    } else {
+      parse(source, data);
+    }
+
+    return newData;
+  }
+
+  void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
+    if (apiShip.length > fleet.ships.length) {
+      List<Ship> allShips = [];
+      for (var data in apiShip) {
+        Ship ship = Ship(
+            uid: data.apiId,
+            shipId: data.apiShipId,
+            name: "Ship ${data.apiShipId}",
+            level: data.apiLv,
+            exp: data.apiExp,
+            nowHP: data.apiNowhp,
+            maxHP: data.apiMaxhp);
+        allShips.add(ship);
+      }
+      fleet.ships = allShips;
+    }
+  }
+
   void updateOperationQueue(DeckData data, int id) {
     if (data.apiMission[1] != 0) {
       tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
@@ -167,7 +153,7 @@ class KancolleData {
 
   void updateSquads(PortApiDataApiDeckPortEntity data, int id) {
     Map<int, Ship> shipsMap =
-    Map.fromIterable(fleet.ships, key: (item) => item.uid);
+        Map.fromIterable(fleet.ships, key: (item) => item.uid);
     List<Ship> ships = [
       for (int uid in data.apiShip)
         if (uid != -1) shipsMap[uid]!
@@ -209,21 +195,35 @@ class KancolleData {
     squads[index] = squad;
   }
 
-  void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
-    if (apiShip.length > fleet.ships.length) {
-      List<Ship> allShips = [];
-      for (var data in apiShip) {
-        Ship ship = Ship(
-            uid: data.apiId,
-            shipId: data.apiShipId,
-            name: "Ship ${data.apiShipId}",
-            level: data.apiLv,
-            exp: data.apiExp,
-            nowHP: data.apiNowhp,
-            maxHP: data.apiMaxhp);
-        allShips.add(ship);
+  bool _operationSource(String source) {
+    // startup, start operation, stop operation should notify
+    return [
+      GetMemberDeckEntity.source,
+      PortEntity.source,
+      ReqMissionReturnInstructionEntity.source
+    ].contains(source.split("kcsapi").last);
+  }
+
+  void _setNotification(
+      Map<int, tz.TZDateTime> endTimeMap, KancolleData newData) {
+    endTimeMap.forEach((key, value) {
+      Operation operation = newData.queue.map[key]!;
+      if (!value.isAtSameMomentAs(operation.endTime)) {
+        Map<String, Task> taskMap = Map.fromIterable(
+            ref.watch(tasksStateProvider).items,
+            key: (task) => task.id);
+
+        log("before:$value");
+        log("after:${operation.endTime}");
+        log("End time change ${operation.code}");
+
+        if (taskMap.containsKey(operation.code)) {
+          notification.setNotificationWithEndTime(
+              taskMap[operation.code]!, operation.endTime);
+        } else {
+          notification.setNotificationWithOperation(operation);
+        }
       }
-      fleet.ships = allShips;
-    }
+    });
   }
 }

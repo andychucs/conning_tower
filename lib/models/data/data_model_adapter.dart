@@ -1,4 +1,3 @@
-
 import 'kcsapi/kcsapi.dart';
 
 class DataModelAdapter {
