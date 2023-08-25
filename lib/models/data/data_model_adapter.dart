@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'kcsapi/kcsapi.dart';
 
 class DataModelAdapter {
