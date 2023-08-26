@@ -8,10 +8,12 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
@@ -23,6 +25,7 @@ import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/pages/dashboard.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/indexed_stack.dart';
+import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
 import 'package:conning_tower/widgets/texts.dart';
@@ -129,6 +132,7 @@ class HomePageState extends ConsumerState<HomePage> {
           AppLayout.values.indexOf(AppLayout.onlyFAB)];
       showDashboardInHome =
           localStorage.getBool('showDashboardInHome') ?? false;
+      useKancolleListener = localStorage.getBool("useKancolleListener") ?? false;
     });
   }
 
@@ -152,38 +156,12 @@ class HomePageState extends ConsumerState<HomePage> {
     FunctionName.showTaskPage: CupertinoIcons.square_list
   };
 
-  Future<File> get _localJsonFile async {
-    final path = await localPath;
-    return File('$path/providers/task/tasks.json');
-  }
+  void enableListener(WidgetRef ref, BuildContext context) {
 
-  Future<void> loadLocalTasks() async {
-    if (ref.watch(tasksStateProvider).items.isNotEmpty) return;
-
-    try {
-      final file = await _localJsonFile;
-
-      String contents = await file.readAsString();
-
-      // debugPrint(contents);
-
-      Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
-
-      ref.watch(tasksStateProvider.notifier).update((state) => latestTasks);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // final webController = ref.watch(webControllerProvider.notifier);
-    final deviceManager = ref.watch(deviceManagerProvider.notifier);
-    deviceManager.setPreferredDeviceOrientation();
-    Size size = MediaQuery.of(context).size;
-    bool useStack = size.width <= 1024;
-
-    loadLocalTasks();
+    ref.listen(kcwikiDataStateProvider, (previous,AsyncValue<KcwikiData> next) {
+      log("kcwiki Loading:${next.isLoading}");
+      ref.watch(kancolleDataProvider.notifier).update((state) => state.copyWith(kcwikiData: next.value));
+    });
 
     ref.listen(rawDataProvider, (previous, RawData next) {
       debugPrint('listen.rawDataProvider');
@@ -195,9 +173,9 @@ class HomePageState extends ConsumerState<HomePage> {
     });
 
     ref.listen(kancolleDataProvider,
-        (KancolleData? previous, KancolleData next) {
-      print("listen kancolleDataProvider");
-    });
+            (KancolleData? previous, KancolleData next) {
+          print("listen kancolleDataProvider");
+        });
 
     ref.listen(alertStateProvider, (previous, Map<String, String> next) {
       log(next.toString());
@@ -218,6 +196,20 @@ class HomePageState extends ConsumerState<HomePage> {
       }
       next.clear();
     });
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final webController = ref.watch(webControllerProvider.notifier);
+    final deviceManager = ref.watch(deviceManagerProvider.notifier);
+    deviceManager.setPreferredDeviceOrientation();
+    Size size = MediaQuery.of(context).size;
+    bool useStack = size.width <= 1024;
+
+    if (useKancolleListener) {
+      enableListener(ref, context);
+    }
 
     final Map<FunctionName, Function> functionMap = {
       FunctionName.showTaskPage: () async {

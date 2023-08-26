@@ -21,25 +21,25 @@ Ship _$ShipFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Ship {
   int get id => throw _privateConstructorUsedError;
-  int get sortNo => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get yomi => throw _privateConstructorUsedError;
-  int get stype => throw _privateConstructorUsedError;
-  int get ctype => throw _privateConstructorUsedError;
-  int get cnum => throw _privateConstructorUsedError;
-  int get backs => throw _privateConstructorUsedError;
-  int get afterLv => throw _privateConstructorUsedError;
-  int get afterShipId => throw _privateConstructorUsedError;
-  String get getMes => throw _privateConstructorUsedError;
-  int get voiceF => throw _privateConstructorUsedError;
+  int? get sortNo => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get yomi => throw _privateConstructorUsedError;
+  int? get stype => throw _privateConstructorUsedError;
+  int? get ctype => throw _privateConstructorUsedError;
+  int? get cnum => throw _privateConstructorUsedError;
+  int? get backs => throw _privateConstructorUsedError;
+  int? get afterLv => throw _privateConstructorUsedError;
+  int? get afterShipId => throw _privateConstructorUsedError;
+  String? get getMes => throw _privateConstructorUsedError;
+  int? get voiceF => throw _privateConstructorUsedError;
   String get filename => throw _privateConstructorUsedError;
   List<String> get fileVersion => throw _privateConstructorUsedError;
-  List<int> get bookTableId => throw _privateConstructorUsedError;
-  String get bookSinfo => throw _privateConstructorUsedError;
+  List<int>? get bookTableId => throw _privateConstructorUsedError;
+  String? get bookSinfo => throw _privateConstructorUsedError;
   ShipStats get stats => throw _privateConstructorUsedError;
   ShipGraph get graph => throw _privateConstructorUsedError;
-  String get wikiId => throw _privateConstructorUsedError;
-  String get chineseName => throw _privateConstructorUsedError;
+  String? get wikiId => throw _privateConstructorUsedError;
+  String? get chineseName => throw _privateConstructorUsedError;
   bool get canDrop => throw _privateConstructorUsedError;
   bool get canConstruct => throw _privateConstructorUsedError;
 
@@ -55,25 +55,25 @@ abstract class $ShipCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int sortNo,
-      String name,
-      String yomi,
-      int stype,
-      int ctype,
-      int cnum,
-      int backs,
-      int afterLv,
-      int afterShipId,
-      String getMes,
-      int voiceF,
+      int? sortNo,
+      String? name,
+      String? yomi,
+      int? stype,
+      int? ctype,
+      int? cnum,
+      int? backs,
+      int? afterLv,
+      int? afterShipId,
+      String? getMes,
+      int? voiceF,
       String filename,
       List<String> fileVersion,
-      List<int> bookTableId,
-      String bookSinfo,
+      List<int>? bookTableId,
+      String? bookSinfo,
       ShipStats stats,
       ShipGraph graph,
-      String wikiId,
-      String chineseName,
+      String? wikiId,
+      String? chineseName,
       bool canDrop,
       bool canConstruct});
 
@@ -95,25 +95,25 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
   @override
   $Res call({
     Object? id = null,
-    Object? sortNo = null,
-    Object? name = null,
-    Object? yomi = null,
-    Object? stype = null,
-    Object? ctype = null,
-    Object? cnum = null,
-    Object? backs = null,
-    Object? afterLv = null,
-    Object? afterShipId = null,
-    Object? getMes = null,
-    Object? voiceF = null,
+    Object? sortNo = freezed,
+    Object? name = freezed,
+    Object? yomi = freezed,
+    Object? stype = freezed,
+    Object? ctype = freezed,
+    Object? cnum = freezed,
+    Object? backs = freezed,
+    Object? afterLv = freezed,
+    Object? afterShipId = freezed,
+    Object? getMes = freezed,
+    Object? voiceF = freezed,
     Object? filename = null,
     Object? fileVersion = null,
-    Object? bookTableId = null,
-    Object? bookSinfo = null,
+    Object? bookTableId = freezed,
+    Object? bookSinfo = freezed,
     Object? stats = null,
     Object? graph = null,
-    Object? wikiId = null,
-    Object? chineseName = null,
+    Object? wikiId = freezed,
+    Object? chineseName = freezed,
     Object? canDrop = null,
     Object? canConstruct = null,
   }) {
@@ -122,50 +122,50 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      sortNo: null == sortNo
+      sortNo: freezed == sortNo
           ? _value.sortNo
           : sortNo // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      yomi: null == yomi
+              as String?,
+      yomi: freezed == yomi
           ? _value.yomi
           : yomi // ignore: cast_nullable_to_non_nullable
-              as String,
-      stype: null == stype
+              as String?,
+      stype: freezed == stype
           ? _value.stype
           : stype // ignore: cast_nullable_to_non_nullable
-              as int,
-      ctype: null == ctype
+              as int?,
+      ctype: freezed == ctype
           ? _value.ctype
           : ctype // ignore: cast_nullable_to_non_nullable
-              as int,
-      cnum: null == cnum
+              as int?,
+      cnum: freezed == cnum
           ? _value.cnum
           : cnum // ignore: cast_nullable_to_non_nullable
-              as int,
-      backs: null == backs
+              as int?,
+      backs: freezed == backs
           ? _value.backs
           : backs // ignore: cast_nullable_to_non_nullable
-              as int,
-      afterLv: null == afterLv
+              as int?,
+      afterLv: freezed == afterLv
           ? _value.afterLv
           : afterLv // ignore: cast_nullable_to_non_nullable
-              as int,
-      afterShipId: null == afterShipId
+              as int?,
+      afterShipId: freezed == afterShipId
           ? _value.afterShipId
           : afterShipId // ignore: cast_nullable_to_non_nullable
-              as int,
-      getMes: null == getMes
+              as int?,
+      getMes: freezed == getMes
           ? _value.getMes
           : getMes // ignore: cast_nullable_to_non_nullable
-              as String,
-      voiceF: null == voiceF
+              as String?,
+      voiceF: freezed == voiceF
           ? _value.voiceF
           : voiceF // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       filename: null == filename
           ? _value.filename
           : filename // ignore: cast_nullable_to_non_nullable
@@ -174,14 +174,14 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
           ? _value.fileVersion
           : fileVersion // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      bookTableId: null == bookTableId
+      bookTableId: freezed == bookTableId
           ? _value.bookTableId
           : bookTableId // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      bookSinfo: null == bookSinfo
+              as List<int>?,
+      bookSinfo: freezed == bookSinfo
           ? _value.bookSinfo
           : bookSinfo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       stats: null == stats
           ? _value.stats
           : stats // ignore: cast_nullable_to_non_nullable
@@ -190,14 +190,14 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
           ? _value.graph
           : graph // ignore: cast_nullable_to_non_nullable
               as ShipGraph,
-      wikiId: null == wikiId
+      wikiId: freezed == wikiId
           ? _value.wikiId
           : wikiId // ignore: cast_nullable_to_non_nullable
-              as String,
-      chineseName: null == chineseName
+              as String?,
+      chineseName: freezed == chineseName
           ? _value.chineseName
           : chineseName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       canDrop: null == canDrop
           ? _value.canDrop
           : canDrop // ignore: cast_nullable_to_non_nullable
@@ -234,25 +234,25 @@ abstract class _$$_ShipCopyWith<$Res> implements $ShipCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int sortNo,
-      String name,
-      String yomi,
-      int stype,
-      int ctype,
-      int cnum,
-      int backs,
-      int afterLv,
-      int afterShipId,
-      String getMes,
-      int voiceF,
+      int? sortNo,
+      String? name,
+      String? yomi,
+      int? stype,
+      int? ctype,
+      int? cnum,
+      int? backs,
+      int? afterLv,
+      int? afterShipId,
+      String? getMes,
+      int? voiceF,
       String filename,
       List<String> fileVersion,
-      List<int> bookTableId,
-      String bookSinfo,
+      List<int>? bookTableId,
+      String? bookSinfo,
       ShipStats stats,
       ShipGraph graph,
-      String wikiId,
-      String chineseName,
+      String? wikiId,
+      String? chineseName,
       bool canDrop,
       bool canConstruct});
 
@@ -272,25 +272,25 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
   @override
   $Res call({
     Object? id = null,
-    Object? sortNo = null,
-    Object? name = null,
-    Object? yomi = null,
-    Object? stype = null,
-    Object? ctype = null,
-    Object? cnum = null,
-    Object? backs = null,
-    Object? afterLv = null,
-    Object? afterShipId = null,
-    Object? getMes = null,
-    Object? voiceF = null,
+    Object? sortNo = freezed,
+    Object? name = freezed,
+    Object? yomi = freezed,
+    Object? stype = freezed,
+    Object? ctype = freezed,
+    Object? cnum = freezed,
+    Object? backs = freezed,
+    Object? afterLv = freezed,
+    Object? afterShipId = freezed,
+    Object? getMes = freezed,
+    Object? voiceF = freezed,
     Object? filename = null,
     Object? fileVersion = null,
-    Object? bookTableId = null,
-    Object? bookSinfo = null,
+    Object? bookTableId = freezed,
+    Object? bookSinfo = freezed,
     Object? stats = null,
     Object? graph = null,
-    Object? wikiId = null,
-    Object? chineseName = null,
+    Object? wikiId = freezed,
+    Object? chineseName = freezed,
     Object? canDrop = null,
     Object? canConstruct = null,
   }) {
@@ -299,50 +299,50 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      sortNo: null == sortNo
+      sortNo: freezed == sortNo
           ? _value.sortNo
           : sortNo // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      yomi: null == yomi
+              as String?,
+      yomi: freezed == yomi
           ? _value.yomi
           : yomi // ignore: cast_nullable_to_non_nullable
-              as String,
-      stype: null == stype
+              as String?,
+      stype: freezed == stype
           ? _value.stype
           : stype // ignore: cast_nullable_to_non_nullable
-              as int,
-      ctype: null == ctype
+              as int?,
+      ctype: freezed == ctype
           ? _value.ctype
           : ctype // ignore: cast_nullable_to_non_nullable
-              as int,
-      cnum: null == cnum
+              as int?,
+      cnum: freezed == cnum
           ? _value.cnum
           : cnum // ignore: cast_nullable_to_non_nullable
-              as int,
-      backs: null == backs
+              as int?,
+      backs: freezed == backs
           ? _value.backs
           : backs // ignore: cast_nullable_to_non_nullable
-              as int,
-      afterLv: null == afterLv
+              as int?,
+      afterLv: freezed == afterLv
           ? _value.afterLv
           : afterLv // ignore: cast_nullable_to_non_nullable
-              as int,
-      afterShipId: null == afterShipId
+              as int?,
+      afterShipId: freezed == afterShipId
           ? _value.afterShipId
           : afterShipId // ignore: cast_nullable_to_non_nullable
-              as int,
-      getMes: null == getMes
+              as int?,
+      getMes: freezed == getMes
           ? _value.getMes
           : getMes // ignore: cast_nullable_to_non_nullable
-              as String,
-      voiceF: null == voiceF
+              as String?,
+      voiceF: freezed == voiceF
           ? _value.voiceF
           : voiceF // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       filename: null == filename
           ? _value.filename
           : filename // ignore: cast_nullable_to_non_nullable
@@ -351,14 +351,14 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
           ? _value._fileVersion
           : fileVersion // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      bookTableId: null == bookTableId
+      bookTableId: freezed == bookTableId
           ? _value._bookTableId
           : bookTableId // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      bookSinfo: null == bookSinfo
+              as List<int>?,
+      bookSinfo: freezed == bookSinfo
           ? _value.bookSinfo
           : bookSinfo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       stats: null == stats
           ? _value.stats
           : stats // ignore: cast_nullable_to_non_nullable
@@ -367,14 +367,14 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
           ? _value.graph
           : graph // ignore: cast_nullable_to_non_nullable
               as ShipGraph,
-      wikiId: null == wikiId
+      wikiId: freezed == wikiId
           ? _value.wikiId
           : wikiId // ignore: cast_nullable_to_non_nullable
-              as String,
-      chineseName: null == chineseName
+              as String?,
+      chineseName: freezed == chineseName
           ? _value.chineseName
           : chineseName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       canDrop: null == canDrop
           ? _value.canDrop
           : canDrop // ignore: cast_nullable_to_non_nullable
@@ -392,25 +392,25 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
 class _$_Ship implements _Ship {
   _$_Ship(
       {required this.id,
-      required this.sortNo,
-      required this.name,
-      required this.yomi,
-      required this.stype,
-      required this.ctype,
-      required this.cnum,
-      required this.backs,
-      required this.afterLv,
-      required this.afterShipId,
-      required this.getMes,
-      required this.voiceF,
+      this.sortNo,
+      this.name,
+      this.yomi,
+      this.stype,
+      this.ctype,
+      this.cnum,
+      this.backs,
+      this.afterLv,
+      this.afterShipId,
+      this.getMes,
+      this.voiceF,
       required this.filename,
       required final List<String> fileVersion,
-      required final List<int> bookTableId,
-      required this.bookSinfo,
+      final List<int>? bookTableId,
+      this.bookSinfo,
       required this.stats,
       required this.graph,
-      required this.wikiId,
-      required this.chineseName,
+      this.wikiId,
+      this.chineseName,
       required this.canDrop,
       required this.canConstruct})
       : _fileVersion = fileVersion,
@@ -421,27 +421,27 @@ class _$_Ship implements _Ship {
   @override
   final int id;
   @override
-  final int sortNo;
+  final int? sortNo;
   @override
-  final String name;
+  final String? name;
   @override
-  final String yomi;
+  final String? yomi;
   @override
-  final int stype;
+  final int? stype;
   @override
-  final int ctype;
+  final int? ctype;
   @override
-  final int cnum;
+  final int? cnum;
   @override
-  final int backs;
+  final int? backs;
   @override
-  final int afterLv;
+  final int? afterLv;
   @override
-  final int afterShipId;
+  final int? afterShipId;
   @override
-  final String getMes;
+  final String? getMes;
   @override
-  final int voiceF;
+  final int? voiceF;
   @override
   final String filename;
   final List<String> _fileVersion;
@@ -452,24 +452,26 @@ class _$_Ship implements _Ship {
     return EqualUnmodifiableListView(_fileVersion);
   }
 
-  final List<int> _bookTableId;
+  final List<int>? _bookTableId;
   @override
-  List<int> get bookTableId {
+  List<int>? get bookTableId {
+    final value = _bookTableId;
+    if (value == null) return null;
     if (_bookTableId is EqualUnmodifiableListView) return _bookTableId;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bookTableId);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String bookSinfo;
+  final String? bookSinfo;
   @override
   final ShipStats stats;
   @override
   final ShipGraph graph;
   @override
-  final String wikiId;
+  final String? wikiId;
   @override
-  final String chineseName;
+  final String? chineseName;
   @override
   final bool canDrop;
   @override
@@ -561,25 +563,25 @@ class _$_Ship implements _Ship {
 abstract class _Ship implements Ship {
   factory _Ship(
       {required final int id,
-      required final int sortNo,
-      required final String name,
-      required final String yomi,
-      required final int stype,
-      required final int ctype,
-      required final int cnum,
-      required final int backs,
-      required final int afterLv,
-      required final int afterShipId,
-      required final String getMes,
-      required final int voiceF,
+      final int? sortNo,
+      final String? name,
+      final String? yomi,
+      final int? stype,
+      final int? ctype,
+      final int? cnum,
+      final int? backs,
+      final int? afterLv,
+      final int? afterShipId,
+      final String? getMes,
+      final int? voiceF,
       required final String filename,
       required final List<String> fileVersion,
-      required final List<int> bookTableId,
-      required final String bookSinfo,
+      final List<int>? bookTableId,
+      final String? bookSinfo,
       required final ShipStats stats,
       required final ShipGraph graph,
-      required final String wikiId,
-      required final String chineseName,
+      final String? wikiId,
+      final String? chineseName,
       required final bool canDrop,
       required final bool canConstruct}) = _$_Ship;
 
@@ -588,43 +590,43 @@ abstract class _Ship implements Ship {
   @override
   int get id;
   @override
-  int get sortNo;
+  int? get sortNo;
   @override
-  String get name;
+  String? get name;
   @override
-  String get yomi;
+  String? get yomi;
   @override
-  int get stype;
+  int? get stype;
   @override
-  int get ctype;
+  int? get ctype;
   @override
-  int get cnum;
+  int? get cnum;
   @override
-  int get backs;
+  int? get backs;
   @override
-  int get afterLv;
+  int? get afterLv;
   @override
-  int get afterShipId;
+  int? get afterShipId;
   @override
-  String get getMes;
+  String? get getMes;
   @override
-  int get voiceF;
+  int? get voiceF;
   @override
   String get filename;
   @override
   List<String> get fileVersion;
   @override
-  List<int> get bookTableId;
+  List<int>? get bookTableId;
   @override
-  String get bookSinfo;
+  String? get bookSinfo;
   @override
   ShipStats get stats;
   @override
   ShipGraph get graph;
   @override
-  String get wikiId;
+  String? get wikiId;
   @override
-  String get chineseName;
+  String? get chineseName;
   @override
   bool get canDrop;
   @override
@@ -640,25 +642,25 @@ ShipStats _$ShipStatsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShipStats {
-  List<int> get taik => throw _privateConstructorUsedError;
-  List<int> get souk => throw _privateConstructorUsedError;
-  List<int> get houg => throw _privateConstructorUsedError;
-  List<int> get raig => throw _privateConstructorUsedError;
-  List<int> get tyku => throw _privateConstructorUsedError;
-  List<int> get luck => throw _privateConstructorUsedError;
-  int get soku => throw _privateConstructorUsedError;
-  int get leng => throw _privateConstructorUsedError;
-  int get kaih => throw _privateConstructorUsedError;
-  int get tais => throw _privateConstructorUsedError;
-  int get slotNum => throw _privateConstructorUsedError;
-  List<int> get maxEq => throw _privateConstructorUsedError;
-  int get afterFuel => throw _privateConstructorUsedError;
-  int get afterBull => throw _privateConstructorUsedError;
-  int get fuelMax => throw _privateConstructorUsedError;
-  int get bullMax => throw _privateConstructorUsedError;
-  List<int> get broken => throw _privateConstructorUsedError;
-  List<int> get powUp => throw _privateConstructorUsedError;
-  int get buildTime => throw _privateConstructorUsedError;
+  List<int>? get taik => throw _privateConstructorUsedError;
+  List<int>? get souk => throw _privateConstructorUsedError;
+  List<int>? get houg => throw _privateConstructorUsedError;
+  List<int>? get raig => throw _privateConstructorUsedError;
+  List<int>? get tyku => throw _privateConstructorUsedError;
+  List<int>? get luck => throw _privateConstructorUsedError;
+  int? get soku => throw _privateConstructorUsedError;
+  int? get leng => throw _privateConstructorUsedError;
+  int? get kaih => throw _privateConstructorUsedError;
+  int? get tais => throw _privateConstructorUsedError;
+  int? get slotNum => throw _privateConstructorUsedError;
+  List<int>? get maxEq => throw _privateConstructorUsedError;
+  int? get afterFuel => throw _privateConstructorUsedError;
+  int? get afterBull => throw _privateConstructorUsedError;
+  int? get fuelMax => throw _privateConstructorUsedError;
+  int? get bullMax => throw _privateConstructorUsedError;
+  List<int>? get broken => throw _privateConstructorUsedError;
+  List<int>? get powUp => throw _privateConstructorUsedError;
+  int? get buildTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -672,25 +674,25 @@ abstract class $ShipStatsCopyWith<$Res> {
       _$ShipStatsCopyWithImpl<$Res, ShipStats>;
   @useResult
   $Res call(
-      {List<int> taik,
-      List<int> souk,
-      List<int> houg,
-      List<int> raig,
-      List<int> tyku,
-      List<int> luck,
-      int soku,
-      int leng,
-      int kaih,
-      int tais,
-      int slotNum,
-      List<int> maxEq,
-      int afterFuel,
-      int afterBull,
-      int fuelMax,
-      int bullMax,
-      List<int> broken,
-      List<int> powUp,
-      int buildTime});
+      {List<int>? taik,
+      List<int>? souk,
+      List<int>? houg,
+      List<int>? raig,
+      List<int>? tyku,
+      List<int>? luck,
+      int? soku,
+      int? leng,
+      int? kaih,
+      int? tais,
+      int? slotNum,
+      List<int>? maxEq,
+      int? afterFuel,
+      int? afterBull,
+      int? fuelMax,
+      int? bullMax,
+      List<int>? broken,
+      List<int>? powUp,
+      int? buildTime});
 }
 
 /// @nodoc
@@ -706,103 +708,103 @@ class _$ShipStatsCopyWithImpl<$Res, $Val extends ShipStats>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taik = null,
-    Object? souk = null,
-    Object? houg = null,
-    Object? raig = null,
-    Object? tyku = null,
-    Object? luck = null,
-    Object? soku = null,
-    Object? leng = null,
-    Object? kaih = null,
-    Object? tais = null,
-    Object? slotNum = null,
-    Object? maxEq = null,
-    Object? afterFuel = null,
-    Object? afterBull = null,
-    Object? fuelMax = null,
-    Object? bullMax = null,
-    Object? broken = null,
-    Object? powUp = null,
-    Object? buildTime = null,
+    Object? taik = freezed,
+    Object? souk = freezed,
+    Object? houg = freezed,
+    Object? raig = freezed,
+    Object? tyku = freezed,
+    Object? luck = freezed,
+    Object? soku = freezed,
+    Object? leng = freezed,
+    Object? kaih = freezed,
+    Object? tais = freezed,
+    Object? slotNum = freezed,
+    Object? maxEq = freezed,
+    Object? afterFuel = freezed,
+    Object? afterBull = freezed,
+    Object? fuelMax = freezed,
+    Object? bullMax = freezed,
+    Object? broken = freezed,
+    Object? powUp = freezed,
+    Object? buildTime = freezed,
   }) {
     return _then(_value.copyWith(
-      taik: null == taik
+      taik: freezed == taik
           ? _value.taik
           : taik // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      souk: null == souk
+              as List<int>?,
+      souk: freezed == souk
           ? _value.souk
           : souk // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      houg: null == houg
+              as List<int>?,
+      houg: freezed == houg
           ? _value.houg
           : houg // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      raig: null == raig
+              as List<int>?,
+      raig: freezed == raig
           ? _value.raig
           : raig // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      tyku: null == tyku
+              as List<int>?,
+      tyku: freezed == tyku
           ? _value.tyku
           : tyku // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      luck: null == luck
+              as List<int>?,
+      luck: freezed == luck
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      soku: null == soku
+              as List<int>?,
+      soku: freezed == soku
           ? _value.soku
           : soku // ignore: cast_nullable_to_non_nullable
-              as int,
-      leng: null == leng
+              as int?,
+      leng: freezed == leng
           ? _value.leng
           : leng // ignore: cast_nullable_to_non_nullable
-              as int,
-      kaih: null == kaih
+              as int?,
+      kaih: freezed == kaih
           ? _value.kaih
           : kaih // ignore: cast_nullable_to_non_nullable
-              as int,
-      tais: null == tais
+              as int?,
+      tais: freezed == tais
           ? _value.tais
           : tais // ignore: cast_nullable_to_non_nullable
-              as int,
-      slotNum: null == slotNum
+              as int?,
+      slotNum: freezed == slotNum
           ? _value.slotNum
           : slotNum // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxEq: null == maxEq
+              as int?,
+      maxEq: freezed == maxEq
           ? _value.maxEq
           : maxEq // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      afterFuel: null == afterFuel
+              as List<int>?,
+      afterFuel: freezed == afterFuel
           ? _value.afterFuel
           : afterFuel // ignore: cast_nullable_to_non_nullable
-              as int,
-      afterBull: null == afterBull
+              as int?,
+      afterBull: freezed == afterBull
           ? _value.afterBull
           : afterBull // ignore: cast_nullable_to_non_nullable
-              as int,
-      fuelMax: null == fuelMax
+              as int?,
+      fuelMax: freezed == fuelMax
           ? _value.fuelMax
           : fuelMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      bullMax: null == bullMax
+              as int?,
+      bullMax: freezed == bullMax
           ? _value.bullMax
           : bullMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      broken: null == broken
+              as int?,
+      broken: freezed == broken
           ? _value.broken
           : broken // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      powUp: null == powUp
+              as List<int>?,
+      powUp: freezed == powUp
           ? _value.powUp
           : powUp // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      buildTime: null == buildTime
+              as List<int>?,
+      buildTime: freezed == buildTime
           ? _value.buildTime
           : buildTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -815,25 +817,25 @@ abstract class _$$_ShipStatsCopyWith<$Res> implements $ShipStatsCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<int> taik,
-      List<int> souk,
-      List<int> houg,
-      List<int> raig,
-      List<int> tyku,
-      List<int> luck,
-      int soku,
-      int leng,
-      int kaih,
-      int tais,
-      int slotNum,
-      List<int> maxEq,
-      int afterFuel,
-      int afterBull,
-      int fuelMax,
-      int bullMax,
-      List<int> broken,
-      List<int> powUp,
-      int buildTime});
+      {List<int>? taik,
+      List<int>? souk,
+      List<int>? houg,
+      List<int>? raig,
+      List<int>? tyku,
+      List<int>? luck,
+      int? soku,
+      int? leng,
+      int? kaih,
+      int? tais,
+      int? slotNum,
+      List<int>? maxEq,
+      int? afterFuel,
+      int? afterBull,
+      int? fuelMax,
+      int? bullMax,
+      List<int>? broken,
+      List<int>? powUp,
+      int? buildTime});
 }
 
 /// @nodoc
@@ -847,103 +849,103 @@ class __$$_ShipStatsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taik = null,
-    Object? souk = null,
-    Object? houg = null,
-    Object? raig = null,
-    Object? tyku = null,
-    Object? luck = null,
-    Object? soku = null,
-    Object? leng = null,
-    Object? kaih = null,
-    Object? tais = null,
-    Object? slotNum = null,
-    Object? maxEq = null,
-    Object? afterFuel = null,
-    Object? afterBull = null,
-    Object? fuelMax = null,
-    Object? bullMax = null,
-    Object? broken = null,
-    Object? powUp = null,
-    Object? buildTime = null,
+    Object? taik = freezed,
+    Object? souk = freezed,
+    Object? houg = freezed,
+    Object? raig = freezed,
+    Object? tyku = freezed,
+    Object? luck = freezed,
+    Object? soku = freezed,
+    Object? leng = freezed,
+    Object? kaih = freezed,
+    Object? tais = freezed,
+    Object? slotNum = freezed,
+    Object? maxEq = freezed,
+    Object? afterFuel = freezed,
+    Object? afterBull = freezed,
+    Object? fuelMax = freezed,
+    Object? bullMax = freezed,
+    Object? broken = freezed,
+    Object? powUp = freezed,
+    Object? buildTime = freezed,
   }) {
     return _then(_$_ShipStats(
-      taik: null == taik
+      taik: freezed == taik
           ? _value._taik
           : taik // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      souk: null == souk
+              as List<int>?,
+      souk: freezed == souk
           ? _value._souk
           : souk // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      houg: null == houg
+              as List<int>?,
+      houg: freezed == houg
           ? _value._houg
           : houg // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      raig: null == raig
+              as List<int>?,
+      raig: freezed == raig
           ? _value._raig
           : raig // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      tyku: null == tyku
+              as List<int>?,
+      tyku: freezed == tyku
           ? _value._tyku
           : tyku // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      luck: null == luck
+              as List<int>?,
+      luck: freezed == luck
           ? _value._luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      soku: null == soku
+              as List<int>?,
+      soku: freezed == soku
           ? _value.soku
           : soku // ignore: cast_nullable_to_non_nullable
-              as int,
-      leng: null == leng
+              as int?,
+      leng: freezed == leng
           ? _value.leng
           : leng // ignore: cast_nullable_to_non_nullable
-              as int,
-      kaih: null == kaih
+              as int?,
+      kaih: freezed == kaih
           ? _value.kaih
           : kaih // ignore: cast_nullable_to_non_nullable
-              as int,
-      tais: null == tais
+              as int?,
+      tais: freezed == tais
           ? _value.tais
           : tais // ignore: cast_nullable_to_non_nullable
-              as int,
-      slotNum: null == slotNum
+              as int?,
+      slotNum: freezed == slotNum
           ? _value.slotNum
           : slotNum // ignore: cast_nullable_to_non_nullable
-              as int,
-      maxEq: null == maxEq
+              as int?,
+      maxEq: freezed == maxEq
           ? _value._maxEq
           : maxEq // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      afterFuel: null == afterFuel
+              as List<int>?,
+      afterFuel: freezed == afterFuel
           ? _value.afterFuel
           : afterFuel // ignore: cast_nullable_to_non_nullable
-              as int,
-      afterBull: null == afterBull
+              as int?,
+      afterBull: freezed == afterBull
           ? _value.afterBull
           : afterBull // ignore: cast_nullable_to_non_nullable
-              as int,
-      fuelMax: null == fuelMax
+              as int?,
+      fuelMax: freezed == fuelMax
           ? _value.fuelMax
           : fuelMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      bullMax: null == bullMax
+              as int?,
+      bullMax: freezed == bullMax
           ? _value.bullMax
           : bullMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      broken: null == broken
+              as int?,
+      broken: freezed == broken
           ? _value._broken
           : broken // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      powUp: null == powUp
+              as List<int>?,
+      powUp: freezed == powUp
           ? _value._powUp
           : powUp // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      buildTime: null == buildTime
+              as List<int>?,
+      buildTime: freezed == buildTime
           ? _value.buildTime
           : buildTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -952,25 +954,25 @@ class __$$_ShipStatsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ShipStats implements _ShipStats {
   _$_ShipStats(
-      {required final List<int> taik,
-      required final List<int> souk,
-      required final List<int> houg,
-      required final List<int> raig,
-      required final List<int> tyku,
-      required final List<int> luck,
-      required this.soku,
-      required this.leng,
-      required this.kaih,
-      required this.tais,
-      required this.slotNum,
-      required final List<int> maxEq,
-      required this.afterFuel,
-      required this.afterBull,
-      required this.fuelMax,
-      required this.bullMax,
-      required final List<int> broken,
-      required final List<int> powUp,
-      required this.buildTime})
+      {final List<int>? taik,
+      final List<int>? souk,
+      final List<int>? houg,
+      final List<int>? raig,
+      final List<int>? tyku,
+      final List<int>? luck,
+      this.soku,
+      this.leng,
+      this.kaih,
+      this.tais,
+      this.slotNum,
+      final List<int>? maxEq,
+      this.afterFuel,
+      this.afterBull,
+      this.fuelMax,
+      this.bullMax,
+      final List<int>? broken,
+      final List<int>? powUp,
+      this.buildTime})
       : _taik = taik,
         _souk = souk,
         _houg = houg,
@@ -984,98 +986,116 @@ class _$_ShipStats implements _ShipStats {
   factory _$_ShipStats.fromJson(Map<String, dynamic> json) =>
       _$$_ShipStatsFromJson(json);
 
-  final List<int> _taik;
+  final List<int>? _taik;
   @override
-  List<int> get taik {
+  List<int>? get taik {
+    final value = _taik;
+    if (value == null) return null;
     if (_taik is EqualUnmodifiableListView) return _taik;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_taik);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _souk;
+  final List<int>? _souk;
   @override
-  List<int> get souk {
+  List<int>? get souk {
+    final value = _souk;
+    if (value == null) return null;
     if (_souk is EqualUnmodifiableListView) return _souk;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_souk);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _houg;
+  final List<int>? _houg;
   @override
-  List<int> get houg {
+  List<int>? get houg {
+    final value = _houg;
+    if (value == null) return null;
     if (_houg is EqualUnmodifiableListView) return _houg;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_houg);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _raig;
+  final List<int>? _raig;
   @override
-  List<int> get raig {
+  List<int>? get raig {
+    final value = _raig;
+    if (value == null) return null;
     if (_raig is EqualUnmodifiableListView) return _raig;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_raig);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _tyku;
+  final List<int>? _tyku;
   @override
-  List<int> get tyku {
+  List<int>? get tyku {
+    final value = _tyku;
+    if (value == null) return null;
     if (_tyku is EqualUnmodifiableListView) return _tyku;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tyku);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _luck;
+  final List<int>? _luck;
   @override
-  List<int> get luck {
+  List<int>? get luck {
+    final value = _luck;
+    if (value == null) return null;
     if (_luck is EqualUnmodifiableListView) return _luck;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_luck);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int soku;
+  final int? soku;
   @override
-  final int leng;
+  final int? leng;
   @override
-  final int kaih;
+  final int? kaih;
   @override
-  final int tais;
+  final int? tais;
   @override
-  final int slotNum;
-  final List<int> _maxEq;
+  final int? slotNum;
+  final List<int>? _maxEq;
   @override
-  List<int> get maxEq {
+  List<int>? get maxEq {
+    final value = _maxEq;
+    if (value == null) return null;
     if (_maxEq is EqualUnmodifiableListView) return _maxEq;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_maxEq);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int afterFuel;
+  final int? afterFuel;
   @override
-  final int afterBull;
+  final int? afterBull;
   @override
-  final int fuelMax;
+  final int? fuelMax;
   @override
-  final int bullMax;
-  final List<int> _broken;
+  final int? bullMax;
+  final List<int>? _broken;
   @override
-  List<int> get broken {
+  List<int>? get broken {
+    final value = _broken;
+    if (value == null) return null;
     if (_broken is EqualUnmodifiableListView) return _broken;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_broken);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _powUp;
+  final List<int>? _powUp;
   @override
-  List<int> get powUp {
+  List<int>? get powUp {
+    final value = _powUp;
+    if (value == null) return null;
     if (_powUp is EqualUnmodifiableListView) return _powUp;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_powUp);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int buildTime;
+  final int? buildTime;
 
   @override
   String toString() {
@@ -1152,67 +1172,67 @@ class _$_ShipStats implements _ShipStats {
 
 abstract class _ShipStats implements ShipStats {
   factory _ShipStats(
-      {required final List<int> taik,
-      required final List<int> souk,
-      required final List<int> houg,
-      required final List<int> raig,
-      required final List<int> tyku,
-      required final List<int> luck,
-      required final int soku,
-      required final int leng,
-      required final int kaih,
-      required final int tais,
-      required final int slotNum,
-      required final List<int> maxEq,
-      required final int afterFuel,
-      required final int afterBull,
-      required final int fuelMax,
-      required final int bullMax,
-      required final List<int> broken,
-      required final List<int> powUp,
-      required final int buildTime}) = _$_ShipStats;
+      {final List<int>? taik,
+      final List<int>? souk,
+      final List<int>? houg,
+      final List<int>? raig,
+      final List<int>? tyku,
+      final List<int>? luck,
+      final int? soku,
+      final int? leng,
+      final int? kaih,
+      final int? tais,
+      final int? slotNum,
+      final List<int>? maxEq,
+      final int? afterFuel,
+      final int? afterBull,
+      final int? fuelMax,
+      final int? bullMax,
+      final List<int>? broken,
+      final List<int>? powUp,
+      final int? buildTime}) = _$_ShipStats;
 
   factory _ShipStats.fromJson(Map<String, dynamic> json) =
       _$_ShipStats.fromJson;
 
   @override
-  List<int> get taik;
+  List<int>? get taik;
   @override
-  List<int> get souk;
+  List<int>? get souk;
   @override
-  List<int> get houg;
+  List<int>? get houg;
   @override
-  List<int> get raig;
+  List<int>? get raig;
   @override
-  List<int> get tyku;
+  List<int>? get tyku;
   @override
-  List<int> get luck;
+  List<int>? get luck;
   @override
-  int get soku;
+  int? get soku;
   @override
-  int get leng;
+  int? get leng;
   @override
-  int get kaih;
+  int? get kaih;
   @override
-  int get tais;
+  int? get tais;
   @override
-  int get slotNum;
+  int? get slotNum;
   @override
-  List<int> get maxEq;
+  List<int>? get maxEq;
   @override
-  int get afterFuel;
+  int? get afterFuel;
   @override
-  int get afterBull;
+  int? get afterBull;
   @override
-  int get fuelMax;
+  int? get fuelMax;
   @override
-  int get bullMax;
+  int? get bullMax;
   @override
-  List<int> get broken;
+  List<int>? get broken;
   @override
-  List<int> get powUp;
+  List<int>? get powUp;
   @override
-  int get buildTime;
+  int? get buildTime;
   @override
   @JsonKey(ignore: true)
   _$$_ShipStatsCopyWith<_$_ShipStats> get copyWith =>
@@ -1225,21 +1245,21 @@ ShipGraph _$ShipGraphFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShipGraph {
-  List<int> get bokoN => throw _privateConstructorUsedError;
-  List<int> get bokoD => throw _privateConstructorUsedError;
-  List<int> get kaisyuN => throw _privateConstructorUsedError;
-  List<int> get kaisyuD => throw _privateConstructorUsedError;
-  List<int> get kaizoN => throw _privateConstructorUsedError;
-  List<int> get kaizoD => throw _privateConstructorUsedError;
-  List<int> get mapN => throw _privateConstructorUsedError;
-  List<int> get mapD => throw _privateConstructorUsedError;
-  List<int> get ensyufN => throw _privateConstructorUsedError;
-  List<int> get ensyufD => throw _privateConstructorUsedError;
-  List<int> get ensyueN => throw _privateConstructorUsedError;
-  List<int> get battleN => throw _privateConstructorUsedError;
-  List<int> get battleD => throw _privateConstructorUsedError;
-  List<int> get wedA => throw _privateConstructorUsedError;
-  List<int> get wedB => throw _privateConstructorUsedError;
+  List<int>? get bokoN => throw _privateConstructorUsedError;
+  List<int>? get bokoD => throw _privateConstructorUsedError;
+  List<int>? get kaisyuN => throw _privateConstructorUsedError;
+  List<int>? get kaisyuD => throw _privateConstructorUsedError;
+  List<int>? get kaizoN => throw _privateConstructorUsedError;
+  List<int>? get kaizoD => throw _privateConstructorUsedError;
+  List<int>? get mapN => throw _privateConstructorUsedError;
+  List<int>? get mapD => throw _privateConstructorUsedError;
+  List<int>? get ensyufN => throw _privateConstructorUsedError;
+  List<int>? get ensyufD => throw _privateConstructorUsedError;
+  List<int>? get ensyueN => throw _privateConstructorUsedError;
+  List<int>? get battleN => throw _privateConstructorUsedError;
+  List<int>? get battleD => throw _privateConstructorUsedError;
+  List<int>? get wedA => throw _privateConstructorUsedError;
+  List<int>? get wedB => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1253,21 +1273,21 @@ abstract class $ShipGraphCopyWith<$Res> {
       _$ShipGraphCopyWithImpl<$Res, ShipGraph>;
   @useResult
   $Res call(
-      {List<int> bokoN,
-      List<int> bokoD,
-      List<int> kaisyuN,
-      List<int> kaisyuD,
-      List<int> kaizoN,
-      List<int> kaizoD,
-      List<int> mapN,
-      List<int> mapD,
-      List<int> ensyufN,
-      List<int> ensyufD,
-      List<int> ensyueN,
-      List<int> battleN,
-      List<int> battleD,
-      List<int> wedA,
-      List<int> wedB});
+      {List<int>? bokoN,
+      List<int>? bokoD,
+      List<int>? kaisyuN,
+      List<int>? kaisyuD,
+      List<int>? kaizoN,
+      List<int>? kaizoD,
+      List<int>? mapN,
+      List<int>? mapD,
+      List<int>? ensyufN,
+      List<int>? ensyufD,
+      List<int>? ensyueN,
+      List<int>? battleN,
+      List<int>? battleD,
+      List<int>? wedA,
+      List<int>? wedB});
 }
 
 /// @nodoc
@@ -1283,83 +1303,83 @@ class _$ShipGraphCopyWithImpl<$Res, $Val extends ShipGraph>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bokoN = null,
-    Object? bokoD = null,
-    Object? kaisyuN = null,
-    Object? kaisyuD = null,
-    Object? kaizoN = null,
-    Object? kaizoD = null,
-    Object? mapN = null,
-    Object? mapD = null,
-    Object? ensyufN = null,
-    Object? ensyufD = null,
-    Object? ensyueN = null,
-    Object? battleN = null,
-    Object? battleD = null,
-    Object? wedA = null,
-    Object? wedB = null,
+    Object? bokoN = freezed,
+    Object? bokoD = freezed,
+    Object? kaisyuN = freezed,
+    Object? kaisyuD = freezed,
+    Object? kaizoN = freezed,
+    Object? kaizoD = freezed,
+    Object? mapN = freezed,
+    Object? mapD = freezed,
+    Object? ensyufN = freezed,
+    Object? ensyufD = freezed,
+    Object? ensyueN = freezed,
+    Object? battleN = freezed,
+    Object? battleD = freezed,
+    Object? wedA = freezed,
+    Object? wedB = freezed,
   }) {
     return _then(_value.copyWith(
-      bokoN: null == bokoN
+      bokoN: freezed == bokoN
           ? _value.bokoN
           : bokoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      bokoD: null == bokoD
+              as List<int>?,
+      bokoD: freezed == bokoD
           ? _value.bokoD
           : bokoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaisyuN: null == kaisyuN
+              as List<int>?,
+      kaisyuN: freezed == kaisyuN
           ? _value.kaisyuN
           : kaisyuN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaisyuD: null == kaisyuD
+              as List<int>?,
+      kaisyuD: freezed == kaisyuD
           ? _value.kaisyuD
           : kaisyuD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaizoN: null == kaizoN
+              as List<int>?,
+      kaizoN: freezed == kaizoN
           ? _value.kaizoN
           : kaizoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaizoD: null == kaizoD
+              as List<int>?,
+      kaizoD: freezed == kaizoD
           ? _value.kaizoD
           : kaizoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      mapN: null == mapN
+              as List<int>?,
+      mapN: freezed == mapN
           ? _value.mapN
           : mapN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      mapD: null == mapD
+              as List<int>?,
+      mapD: freezed == mapD
           ? _value.mapD
           : mapD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      ensyufN: null == ensyufN
+              as List<int>?,
+      ensyufN: freezed == ensyufN
           ? _value.ensyufN
           : ensyufN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      ensyufD: null == ensyufD
+              as List<int>?,
+      ensyufD: freezed == ensyufD
           ? _value.ensyufD
           : ensyufD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      ensyueN: null == ensyueN
+              as List<int>?,
+      ensyueN: freezed == ensyueN
           ? _value.ensyueN
           : ensyueN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      battleN: null == battleN
+              as List<int>?,
+      battleN: freezed == battleN
           ? _value.battleN
           : battleN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      battleD: null == battleD
+              as List<int>?,
+      battleD: freezed == battleD
           ? _value.battleD
           : battleD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      wedA: null == wedA
+              as List<int>?,
+      wedA: freezed == wedA
           ? _value.wedA
           : wedA // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      wedB: null == wedB
+              as List<int>?,
+      wedB: freezed == wedB
           ? _value.wedB
           : wedB // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
     ) as $Val);
   }
 }
@@ -1372,21 +1392,21 @@ abstract class _$$_ShipGraphCopyWith<$Res> implements $ShipGraphCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<int> bokoN,
-      List<int> bokoD,
-      List<int> kaisyuN,
-      List<int> kaisyuD,
-      List<int> kaizoN,
-      List<int> kaizoD,
-      List<int> mapN,
-      List<int> mapD,
-      List<int> ensyufN,
-      List<int> ensyufD,
-      List<int> ensyueN,
-      List<int> battleN,
-      List<int> battleD,
-      List<int> wedA,
-      List<int> wedB});
+      {List<int>? bokoN,
+      List<int>? bokoD,
+      List<int>? kaisyuN,
+      List<int>? kaisyuD,
+      List<int>? kaizoN,
+      List<int>? kaizoD,
+      List<int>? mapN,
+      List<int>? mapD,
+      List<int>? ensyufN,
+      List<int>? ensyufD,
+      List<int>? ensyueN,
+      List<int>? battleN,
+      List<int>? battleD,
+      List<int>? wedA,
+      List<int>? wedB});
 }
 
 /// @nodoc
@@ -1400,83 +1420,83 @@ class __$$_ShipGraphCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bokoN = null,
-    Object? bokoD = null,
-    Object? kaisyuN = null,
-    Object? kaisyuD = null,
-    Object? kaizoN = null,
-    Object? kaizoD = null,
-    Object? mapN = null,
-    Object? mapD = null,
-    Object? ensyufN = null,
-    Object? ensyufD = null,
-    Object? ensyueN = null,
-    Object? battleN = null,
-    Object? battleD = null,
-    Object? wedA = null,
-    Object? wedB = null,
+    Object? bokoN = freezed,
+    Object? bokoD = freezed,
+    Object? kaisyuN = freezed,
+    Object? kaisyuD = freezed,
+    Object? kaizoN = freezed,
+    Object? kaizoD = freezed,
+    Object? mapN = freezed,
+    Object? mapD = freezed,
+    Object? ensyufN = freezed,
+    Object? ensyufD = freezed,
+    Object? ensyueN = freezed,
+    Object? battleN = freezed,
+    Object? battleD = freezed,
+    Object? wedA = freezed,
+    Object? wedB = freezed,
   }) {
     return _then(_$_ShipGraph(
-      bokoN: null == bokoN
+      bokoN: freezed == bokoN
           ? _value._bokoN
           : bokoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      bokoD: null == bokoD
+              as List<int>?,
+      bokoD: freezed == bokoD
           ? _value._bokoD
           : bokoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaisyuN: null == kaisyuN
+              as List<int>?,
+      kaisyuN: freezed == kaisyuN
           ? _value._kaisyuN
           : kaisyuN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaisyuD: null == kaisyuD
+              as List<int>?,
+      kaisyuD: freezed == kaisyuD
           ? _value._kaisyuD
           : kaisyuD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaizoN: null == kaizoN
+              as List<int>?,
+      kaizoN: freezed == kaizoN
           ? _value._kaizoN
           : kaizoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      kaizoD: null == kaizoD
+              as List<int>?,
+      kaizoD: freezed == kaizoD
           ? _value._kaizoD
           : kaizoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      mapN: null == mapN
+              as List<int>?,
+      mapN: freezed == mapN
           ? _value._mapN
           : mapN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      mapD: null == mapD
+              as List<int>?,
+      mapD: freezed == mapD
           ? _value._mapD
           : mapD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      ensyufN: null == ensyufN
+              as List<int>?,
+      ensyufN: freezed == ensyufN
           ? _value._ensyufN
           : ensyufN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      ensyufD: null == ensyufD
+              as List<int>?,
+      ensyufD: freezed == ensyufD
           ? _value._ensyufD
           : ensyufD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      ensyueN: null == ensyueN
+              as List<int>?,
+      ensyueN: freezed == ensyueN
           ? _value._ensyueN
           : ensyueN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      battleN: null == battleN
+              as List<int>?,
+      battleN: freezed == battleN
           ? _value._battleN
           : battleN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      battleD: null == battleD
+              as List<int>?,
+      battleD: freezed == battleD
           ? _value._battleD
           : battleD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      wedA: null == wedA
+              as List<int>?,
+      wedA: freezed == wedA
           ? _value._wedA
           : wedA // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      wedB: null == wedB
+              as List<int>?,
+      wedB: freezed == wedB
           ? _value._wedB
           : wedB // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
     ));
   }
 }
@@ -1485,21 +1505,21 @@ class __$$_ShipGraphCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ShipGraph implements _ShipGraph {
   _$_ShipGraph(
-      {required final List<int> bokoN,
-      required final List<int> bokoD,
-      required final List<int> kaisyuN,
-      required final List<int> kaisyuD,
-      required final List<int> kaizoN,
-      required final List<int> kaizoD,
-      required final List<int> mapN,
-      required final List<int> mapD,
-      required final List<int> ensyufN,
-      required final List<int> ensyufD,
-      required final List<int> ensyueN,
-      required final List<int> battleN,
-      required final List<int> battleD,
-      required final List<int> wedA,
-      required final List<int> wedB})
+      {final List<int>? bokoN,
+      final List<int>? bokoD,
+      final List<int>? kaisyuN,
+      final List<int>? kaisyuD,
+      final List<int>? kaizoN,
+      final List<int>? kaizoD,
+      final List<int>? mapN,
+      final List<int>? mapD,
+      final List<int>? ensyufN,
+      final List<int>? ensyufD,
+      final List<int>? ensyueN,
+      final List<int>? battleN,
+      final List<int>? battleD,
+      final List<int>? wedA,
+      final List<int>? wedB})
       : _bokoN = bokoN,
         _bokoD = bokoD,
         _kaisyuN = kaisyuN,
@@ -1519,124 +1539,154 @@ class _$_ShipGraph implements _ShipGraph {
   factory _$_ShipGraph.fromJson(Map<String, dynamic> json) =>
       _$$_ShipGraphFromJson(json);
 
-  final List<int> _bokoN;
+  final List<int>? _bokoN;
   @override
-  List<int> get bokoN {
+  List<int>? get bokoN {
+    final value = _bokoN;
+    if (value == null) return null;
     if (_bokoN is EqualUnmodifiableListView) return _bokoN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bokoN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _bokoD;
+  final List<int>? _bokoD;
   @override
-  List<int> get bokoD {
+  List<int>? get bokoD {
+    final value = _bokoD;
+    if (value == null) return null;
     if (_bokoD is EqualUnmodifiableListView) return _bokoD;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bokoD);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _kaisyuN;
+  final List<int>? _kaisyuN;
   @override
-  List<int> get kaisyuN {
+  List<int>? get kaisyuN {
+    final value = _kaisyuN;
+    if (value == null) return null;
     if (_kaisyuN is EqualUnmodifiableListView) return _kaisyuN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_kaisyuN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _kaisyuD;
+  final List<int>? _kaisyuD;
   @override
-  List<int> get kaisyuD {
+  List<int>? get kaisyuD {
+    final value = _kaisyuD;
+    if (value == null) return null;
     if (_kaisyuD is EqualUnmodifiableListView) return _kaisyuD;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_kaisyuD);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _kaizoN;
+  final List<int>? _kaizoN;
   @override
-  List<int> get kaizoN {
+  List<int>? get kaizoN {
+    final value = _kaizoN;
+    if (value == null) return null;
     if (_kaizoN is EqualUnmodifiableListView) return _kaizoN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_kaizoN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _kaizoD;
+  final List<int>? _kaizoD;
   @override
-  List<int> get kaizoD {
+  List<int>? get kaizoD {
+    final value = _kaizoD;
+    if (value == null) return null;
     if (_kaizoD is EqualUnmodifiableListView) return _kaizoD;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_kaizoD);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _mapN;
+  final List<int>? _mapN;
   @override
-  List<int> get mapN {
+  List<int>? get mapN {
+    final value = _mapN;
+    if (value == null) return null;
     if (_mapN is EqualUnmodifiableListView) return _mapN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mapN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _mapD;
+  final List<int>? _mapD;
   @override
-  List<int> get mapD {
+  List<int>? get mapD {
+    final value = _mapD;
+    if (value == null) return null;
     if (_mapD is EqualUnmodifiableListView) return _mapD;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mapD);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _ensyufN;
+  final List<int>? _ensyufN;
   @override
-  List<int> get ensyufN {
+  List<int>? get ensyufN {
+    final value = _ensyufN;
+    if (value == null) return null;
     if (_ensyufN is EqualUnmodifiableListView) return _ensyufN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ensyufN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _ensyufD;
+  final List<int>? _ensyufD;
   @override
-  List<int> get ensyufD {
+  List<int>? get ensyufD {
+    final value = _ensyufD;
+    if (value == null) return null;
     if (_ensyufD is EqualUnmodifiableListView) return _ensyufD;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ensyufD);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _ensyueN;
+  final List<int>? _ensyueN;
   @override
-  List<int> get ensyueN {
+  List<int>? get ensyueN {
+    final value = _ensyueN;
+    if (value == null) return null;
     if (_ensyueN is EqualUnmodifiableListView) return _ensyueN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ensyueN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _battleN;
+  final List<int>? _battleN;
   @override
-  List<int> get battleN {
+  List<int>? get battleN {
+    final value = _battleN;
+    if (value == null) return null;
     if (_battleN is EqualUnmodifiableListView) return _battleN;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_battleN);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _battleD;
+  final List<int>? _battleD;
   @override
-  List<int> get battleD {
+  List<int>? get battleD {
+    final value = _battleD;
+    if (value == null) return null;
     if (_battleD is EqualUnmodifiableListView) return _battleD;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_battleD);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _wedA;
+  final List<int>? _wedA;
   @override
-  List<int> get wedA {
+  List<int>? get wedA {
+    final value = _wedA;
+    if (value == null) return null;
     if (_wedA is EqualUnmodifiableListView) return _wedA;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_wedA);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<int> _wedB;
+  final List<int>? _wedB;
   @override
-  List<int> get wedB {
+  List<int>? get wedB {
+    final value = _wedB;
+    if (value == null) return null;
     if (_wedB is EqualUnmodifiableListView) return _wedB;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_wedB);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -1702,55 +1752,55 @@ class _$_ShipGraph implements _ShipGraph {
 
 abstract class _ShipGraph implements ShipGraph {
   factory _ShipGraph(
-      {required final List<int> bokoN,
-      required final List<int> bokoD,
-      required final List<int> kaisyuN,
-      required final List<int> kaisyuD,
-      required final List<int> kaizoN,
-      required final List<int> kaizoD,
-      required final List<int> mapN,
-      required final List<int> mapD,
-      required final List<int> ensyufN,
-      required final List<int> ensyufD,
-      required final List<int> ensyueN,
-      required final List<int> battleN,
-      required final List<int> battleD,
-      required final List<int> wedA,
-      required final List<int> wedB}) = _$_ShipGraph;
+      {final List<int>? bokoN,
+      final List<int>? bokoD,
+      final List<int>? kaisyuN,
+      final List<int>? kaisyuD,
+      final List<int>? kaizoN,
+      final List<int>? kaizoD,
+      final List<int>? mapN,
+      final List<int>? mapD,
+      final List<int>? ensyufN,
+      final List<int>? ensyufD,
+      final List<int>? ensyueN,
+      final List<int>? battleN,
+      final List<int>? battleD,
+      final List<int>? wedA,
+      final List<int>? wedB}) = _$_ShipGraph;
 
   factory _ShipGraph.fromJson(Map<String, dynamic> json) =
       _$_ShipGraph.fromJson;
 
   @override
-  List<int> get bokoN;
+  List<int>? get bokoN;
   @override
-  List<int> get bokoD;
+  List<int>? get bokoD;
   @override
-  List<int> get kaisyuN;
+  List<int>? get kaisyuN;
   @override
-  List<int> get kaisyuD;
+  List<int>? get kaisyuD;
   @override
-  List<int> get kaizoN;
+  List<int>? get kaizoN;
   @override
-  List<int> get kaizoD;
+  List<int>? get kaizoD;
   @override
-  List<int> get mapN;
+  List<int>? get mapN;
   @override
-  List<int> get mapD;
+  List<int>? get mapD;
   @override
-  List<int> get ensyufN;
+  List<int>? get ensyufN;
   @override
-  List<int> get ensyufD;
+  List<int>? get ensyufD;
   @override
-  List<int> get ensyueN;
+  List<int>? get ensyueN;
   @override
-  List<int> get battleN;
+  List<int>? get battleN;
   @override
-  List<int> get battleD;
+  List<int>? get battleD;
   @override
-  List<int> get wedA;
+  List<int>? get wedA;
   @override
-  List<int> get wedB;
+  List<int>? get wedB;
   @override
   @JsonKey(ignore: true)
   _$$_ShipGraphCopyWith<_$_ShipGraph> get copyWith =>

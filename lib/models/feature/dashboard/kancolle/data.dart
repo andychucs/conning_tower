@@ -3,12 +3,14 @@ import 'dart:developer';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +23,7 @@ class KancolleData {
   final List<Squad> squads;
   final SeaForceBase seaForceBase;
   final Fleet fleet;
+  final KcwikiData kcwikiData;
   final Ref ref;
 
   KancolleData(
@@ -28,6 +31,7 @@ class KancolleData {
       required this.squads,
       required this.seaForceBase,
       required this.fleet,
+      required this.kcwikiData,
       required this.ref});
 
   KancolleData copyWith(
@@ -35,12 +39,14 @@ class KancolleData {
       List<Squad>? squads,
       SeaForceBase? seaForceBase,
       Fleet? fleet,
+      KcwikiData? kcwikiData,
       Ref? ref}) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
+      kcwikiData: kcwikiData ?? this.kcwikiData,
       ref: ref ?? this.ref,
     );
   }
@@ -151,10 +157,16 @@ class KancolleData {
     if (apiShip.length > fleet.ships.length) {
       List<Ship> allShips = [];
       for (var data in apiShip) {
+        late String shipName;
+        try {
+          shipName = kcwikiData.ships.firstWhere((element) => element.id == data.apiShipId).name ?? "Ship No.${data.apiShipId}";
+        } catch (e) {
+          shipName = "Ship No.${data.apiShipId}";
+        }
         Ship ship = Ship(
             uid: data.apiId,
             shipId: data.apiShipId,
-            name: "Ship ${data.apiShipId}",
+            name: shipName,
             level: data.apiLv,
             exp: data.apiExp,
             nowHP: data.apiNowhp,
@@ -207,10 +219,16 @@ class KancolleData {
     Squad squad = squads[index].copyWith();
     squad.ships.clear();
     for (var data in apiShipData) {
+      late String shipName;
+      try {
+        shipName = kcwikiData.ships.firstWhere((element) => element.id == data.apiShipId).name ?? "Ship No.${data.apiShipId}";
+      } catch (e) {
+        shipName = "Ship No.${data.apiShipId}";
+      }
       Ship ship = Ship(
           uid: data.apiId,
           shipId: data.apiShipId,
-          name: "Ship ${data.apiShipId}",
+          name: shipName,
           level: data.apiLv,
           exp: data.apiExp,
           nowHP: data.apiNowhp,

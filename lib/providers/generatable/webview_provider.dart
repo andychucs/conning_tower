@@ -266,7 +266,7 @@ class WebController extends _$WebController {
 
   Future<WebResourceResponse?>? onShouldInterceptRequest(
       WebResourceRequest request) {
-    if (request.url.path.contains("/kcs2/js/main.js")) {
+    if (useKancolleListener && request.url.path.contains("/kcs2/js/main.js")) {
       Future<WebResourceResponse?> customResponse = _interceptRequest(request);
       return customResponse;
     }

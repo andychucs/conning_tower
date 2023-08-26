@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'webview_provider.dart';
+part of 'kcwiki_data_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$webControllerHash() => r'2340432596f021b95425e5f931c4a02d347ff881';
+String _$kcwikiDataStateHash() => r'7cb7f153a7a8ce930fd2d620d89c9b0504ad2f93';
 
-/// See also [WebController].
-@ProviderFor(WebController)
-final webControllerProvider =
-    AutoDisposeNotifierProvider<WebController, WebController>.internal(
-  WebController.new,
-  name: r'webControllerProvider',
+/// See also [KcwikiDataState].
+@ProviderFor(KcwikiDataState)
+final kcwikiDataStateProvider =
+    AutoDisposeAsyncNotifierProvider<KcwikiDataState, KcwikiData>.internal(
+  KcwikiDataState.new,
+  name: r'kcwikiDataStateProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$webControllerHash,
+      : _$kcwikiDataStateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$WebController = AutoDisposeNotifier<WebController>;
+typedef _$KcwikiDataState = AutoDisposeAsyncNotifier<KcwikiData>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

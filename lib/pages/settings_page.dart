@@ -2,6 +2,8 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/pages/kancolle_listen_settings.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/theme_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
@@ -232,6 +234,20 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               },
             ),
             CupertinoListTile(
+              title: Text("Kancolle"),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeBlue,
+                  icon: Icons.directions_boat_filled_outlined),
+              trailing: const CupertinoListTileChevron(),
+              onTap: () async {
+                await navigatorToCupertino(
+                    context,
+                  KancollelistenSettings()
+                    );
+
+              },
+            ),
+            CupertinoListTile(
               title: Text(S.of(context).DashboardSetting),
               leading: const DummyIcon(
                   color: CupertinoColors.activeBlue,
@@ -259,6 +275,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                 HapticFeedback.heavyImpact();
                 localStorage.clear();
                 ref.watch(taskUtilProvider.notifier).deleteLocalTasks();
+                ref.watch(kcwikiDataStateProvider.notifier).deleteLocalFile();
                 _loadConfig();
                 widget.reloadConfig();
               },

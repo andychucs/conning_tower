@@ -32,6 +32,7 @@ late bool showControls;
 late DeviceType deviceType;
 late AppLayout appLayout;
 late bool showDashboardInHome; //Canary Deployment
+late bool useKancolleListener;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -90,4 +91,5 @@ Future<void> init() async {
   enableHideFAB = false;
   showControls = true;
   showDashboardInHome = true;
+  useKancolleListener = false;
 }
