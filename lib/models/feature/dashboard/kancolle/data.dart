@@ -102,19 +102,30 @@ class KancolleData {
 
   KancolleData parseWith(String source, String data) {
     KancolleData newData = copyWith();
+    try {
+      if (_operationSource(source)) {
+        Map<int, tz.TZDateTime> endTimeMap = {
+          for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
+        };
+        parse(source, data);
+        _setNotification(endTimeMap, newData);
+      } else {
+        parse(source, data);
+      }
 
-    if (_operationSource(source)) {
-      Map<int, tz.TZDateTime> endTimeMap = {
-        for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
-      };
-      parse(source, data);
-      _setNotification(endTimeMap, newData);
-    } else {
-      parse(source, data);
+      if (_shouldAlertSource(source)) addAlert();
+    } catch (e,s) {
+      String errorMsg = e.toString();
+      String st = '';
+      if (s.toString().contains('\n')) {
+        st = s.toString().split('\n').first;
+      }
+      errorMsg = '$errorMsg\n$st\nsource:$source\ndata:$data';
+      log(s.toString());
+      ref
+          .watch(alertStateProvider.notifier)
+          .update((state) => {"title": "Error", "content": errorMsg});
     }
-
-    if (_shouldAlertSource(source)) addAlert();
-
     return newData;
   }
 

@@ -205,7 +205,7 @@ class HomePageState extends ConsumerState<HomePage> {
         HapticFeedback.heavyImpact();
         showAdaptiveDialog(context,
             title: Text(next["title"]!),
-            content: Text(next["content"]!),
+            content: SelectableText(next["content"]!),
             actions: [
               AdaptiveDialogAction(
                 color: CupertinoColors.destructiveRed,
