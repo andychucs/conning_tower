@@ -230,21 +230,17 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                           ref.read(themeProvider.notifier).update((state) => modes[select]);
                           widget.notifyParent();
                         }));
-
               },
             ),
             CupertinoListTile(
-              title: Text("Kancolle"),
+              title: Text(S.of(context).KanColleDataListener),
               leading: const DummyIcon(
-                  color: CupertinoColors.activeBlue,
-                  icon: Icons.directions_boat_filled_outlined),
+                  color: CupertinoColors.activeBlue, icon: Icons.anchor),
               trailing: const CupertinoListTileChevron(),
+              subtitle: const Text("Only on Android"),
               onTap: () async {
                 await navigatorToCupertino(
-                    context,
-                  KancollelistenSettings()
-                    );
-
+                    context, const KancollelistenSettings());
               },
             ),
             CupertinoListTile(

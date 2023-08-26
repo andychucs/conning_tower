@@ -490,6 +490,16 @@ class S {
     );
   }
 
+  /// `To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.`
+  String get DataDownloadGuide {
+    return Intl.message(
+      'To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.',
+      name: 'DataDownloadGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `https://conntower.github.io/docs/en/new`
   String get DocsNewUrl {
     return Intl.message(
@@ -500,11 +510,51 @@ class S {
     );
   }
 
+  /// `Download Fleet Data`
+  String get DownloadFleetData {
+    return Intl.message(
+      'Download Fleet Data',
+      name: 'DownloadFleetData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download Expedition Data`
+  String get DownloadOperationData {
+    return Intl.message(
+      'Download Expedition Data',
+      name: 'DownloadOperationData',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Field cannot be empty.`
   String get EmptyFieldError {
     return Intl.message(
       'Field cannot be empty.',
       name: 'EmptyFieldError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get Error {
+    return Intl.message(
+      'Error',
+      name: 'Error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fleet Data`
+  String get FleetData {
+    return Intl.message(
+      'Fleet Data',
+      name: 'FleetData',
       desc: '',
       args: [],
     );
@@ -700,6 +750,16 @@ class S {
     );
   }
 
+  /// `KanColle Data Listener`
+  String get KanColleDataListener {
+    return Intl.message(
+      'KanColle Data Listener',
+      name: 'KanColleDataListener',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Light Theme`
   String get LightTheme {
     return Intl.message(
@@ -735,6 +795,16 @@ class S {
     return Intl.message(
       'The game will be unmuted after refreshing.',
       name: 'MsgUnmuteGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expedition Data`
+  String get OperationData {
+    return Intl.message(
+      'Expedition Data',
+      name: 'OperationData',
       desc: '',
       args: [],
     );
@@ -965,6 +1035,16 @@ class S {
     return Intl.message(
       'Change Screen Orientation',
       name: 'SettingsScreenOrientation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ship Data`
+  String get ShipData {
+    return Intl.message(
+      'Ship Data',
+      name: 'ShipData',
       desc: '',
       args: [],
     );
@@ -1335,6 +1415,16 @@ class S {
     return Intl.message(
       'Version Update',
       name: 'VersionUpdateTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weapon Data`
+  String get WeaponData {
+    return Intl.message(
+      'Weapon Data',
+      name: 'WeaponData',
       desc: '',
       args: [],
     );

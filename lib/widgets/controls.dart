@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -354,7 +356,7 @@ class _ControlsState extends ConsumerState<Controls> {
     showPopover(
       context: context,
       bodyBuilder: (context) => LocalNavigator(child: child),
-      onPop: () => print('Popover was popped!'),
+      onPop: () => log('Popover was popped!'),
       direction: PopoverDirection.left,
       width: 500,
       height: double.infinity,

@@ -93,10 +93,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "DarkTheme": MessageLookupByLibrary.simpleMessage("ダークテーマ"),
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("ホームページでダッシュボードを表示"),
+        "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
+            "艦これデータリスナー機能を使用するには、設定→艦これデータリスナーに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/ja/new"),
+        "DownloadFleetData":
+            MessageLookupByLibrary.simpleMessage("艦隊データをダウンロード"),
+        "DownloadOperationData":
+            MessageLookupByLibrary.simpleMessage("遠征データをダウンロード"),
         "EmptyFieldError":
             MessageLookupByLibrary.simpleMessage("フィールドは空にできません。"),
+        "Error": MessageLookupByLibrary.simpleMessage("エラー発生"),
+        "FleetData": MessageLookupByLibrary.simpleMessage("艦隊データ"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
@@ -128,6 +136,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
         "KCViewFuncMsgPageStart": m3,
+        "KanColleDataListener":
+            MessageLookupByLibrary.simpleMessage("艦これデータリスナー"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、「ツール-Web-HTTPリダイレクト」を押すことでプレイ可能な状態になります。"),
@@ -135,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ミュートします。変更を適用するにはリロードを行ってください。"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "ミュートを解除します。変更を適用するにはリロードを行ってください。"),
+        "OperationData": MessageLookupByLibrary.simpleMessage("遠征データ"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("保留中の通知の数"),
         "PendingNotifications": MessageLookupByLibrary.simpleMessage("保留中の通知"),
@@ -171,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("画面の向きを設定する"),
+        "ShipData": MessageLookupByLibrary.simpleMessage("艦船データ"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
@@ -217,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "VersionUpdateLinkText":
             MessageLookupByLibrary.simpleMessage("ここをクリックして表示"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("バージョン更新"),
+        "WeaponData": MessageLookupByLibrary.simpleMessage("装備データ"),
         "WebInfo": MessageLookupByLibrary.simpleMessage("Web情報"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML例：")
       };

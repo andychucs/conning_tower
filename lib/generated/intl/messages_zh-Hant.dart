@@ -89,9 +89,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "DarkTheme": MessageLookupByLibrary.simpleMessage("深色主題"),
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("在主頁顯示 Dashboard"),
+        "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
+            "如需使用KanColle數據監聽功能，為保證功能可用務必前往設定-KanColle數據監聽中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hant/new"),
+        "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下載艦隊資料"),
+        "DownloadOperationData": MessageLookupByLibrary.simpleMessage("下載遠征資料"),
         "EmptyFieldError": MessageLookupByLibrary.simpleMessage("輸入框不能為空。"),
+        "Error": MessageLookupByLibrary.simpleMessage("發生錯誤"),
+        "FleetData": MessageLookupByLibrary.simpleMessage("艦隊資料"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
@@ -121,12 +127,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
         "KCViewFuncMsgPageStart": m3,
+        "KanColleDataListener":
+            MessageLookupByLibrary.simpleMessage("KanColle資料監聽"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("淺色主題"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊「工具-Web-重定向」。"),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後靜音。"),
         "MsgUnmuteGame":
             MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後解除靜音。"),
+        "OperationData": MessageLookupByLibrary.simpleMessage("遠征資料"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知數量"),
         "PendingNotifications": MessageLookupByLibrary.simpleMessage("等待中的通知"),
@@ -162,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("屏幕方向設置"),
+        "ShipData": MessageLookupByLibrary.simpleMessage("艦艇資料"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("狀態碼"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),
@@ -201,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("發現軟體版本已更新，請查看版本更新文檔。"),
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("點擊此處查看"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("版本更新"),
+        "WeaponData": MessageLookupByLibrary.simpleMessage("裝備資料"),
         "WebInfo": MessageLookupByLibrary.simpleMessage("網頁資訊"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML範例：")
       };

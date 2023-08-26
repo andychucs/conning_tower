@@ -97,14 +97,14 @@ class AppWebViewState extends ConsumerState<AppWebView> {
               return webController.onShouldInterceptRequest(request);
             },
             onReceivedHttpError: (controller , request, response) {
-              print("error");
-              print(request);
-              print(response);
+              // print("error");
+              // print(request);
+              // print(response);
             },
             onReceivedError: (controller , request, response) {
-              print("error");
-              print(request);
-              print(response);
+              // print("error");
+              // print(request);
+              // print(response);
             },
           );
         }

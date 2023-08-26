@@ -1,12 +1,13 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
+import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:conning_tower/widgets/dailog.dart';
 import 'package:conning_tower/widgets/icons.dart';
@@ -75,12 +76,12 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
         inKancolleWindow = true;
       }
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
-      print("HTTP Redirect success");
+      log("HTTP Redirect success");
     } else {
       Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
-      print("HTTP Redirect fail");
+      log("HTTP Redirect fail");
     }
-    print("inKancolleWindow: $inKancolleWindow");
+    log("inKancolleWindow: $inKancolleWindow");
   }
 
   Future<void> _onClearCache(
@@ -88,9 +89,9 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCache.replaceAll('\n', ''),
-              isNormal: true);
+          return AdaptiveDialogWithBool(
+            msg: S.current.AppClearCache,
+          );
         });
     if (value ?? false) {
       await controller.clearCache();
@@ -102,8 +103,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCookie, isNormal: true);
+          return AdaptiveDialogWithBool(msg: S.current.AppClearCookie);
         });
     if (value ?? false) {
       await widget.cookieManager.deleteAllCookies();

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
@@ -25,12 +26,12 @@ Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
           assetFilePath: autoScaleAndroidJS);
     }
     autoAdjusted = true;
-    print("Auto adjust success");
+    log("Auto adjust success");
     if (needToaste)
       Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
     return true;
   }
-  print("autoAdjustWindow fail");
+  log("autoAdjustWindow fail");
   if (needToaste)
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
   return false;
@@ -53,7 +54,7 @@ Future<bool> autoAdjustWindow(
       } else {
         getWebviewSizeCount = 99;
       }
-      print("obtaining webview size");
+      log("obtaining webview size");
       getWebviewSizeCount++;
     } while (getWebviewSizeCount < 5);
     var resizeScale = 1.0;
@@ -61,7 +62,7 @@ Future<bool> autoAdjustWindow(
       resizeScale = getResizeScale(kWebviewHeight, kWebviewWidth);
       autoAdjusted = true;
     } else {
-      print("autoAdjustWindow fail");
+      log("autoAdjustWindow fail");
       return false;
     }
     await controller.evaluateJavascript(
@@ -83,10 +84,10 @@ Future<bool> autoAdjustWindow(
         source:
             '''document.getElementById("sectionWrap").style.display = "none";''');
     Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
-    print("Auto adjust success");
+    log("Auto adjust success");
     return true;
   }
-  print("autoAdjustWindow fail");
+  log("autoAdjustWindow fail");
   return false;
 }
 

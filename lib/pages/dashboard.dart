@@ -31,7 +31,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
       ];
 
       if (kIsOpenSource) {
-        titles.add("艦隊本部");
+        titles.add("提督室");
         titles.add("遠征");
       }
 

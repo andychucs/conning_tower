@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
@@ -21,14 +20,15 @@ class _KancollelistenSettingsState
   @override
   Widget build(BuildContext context) {
     return CupertinoActionPage(
-        title: "Listen",
-        previousPageTitle: '',
+        title: S.of(context).KanColleDataListener,
+        previousPageTitle: S.of(context).SettingsButton,
         child: ListView(
           children: [
             CupertinoListSection.insetGrouped(
               children: [
                 CupertinoListTile(
-                  title: Text("enable"),
+                  title: Text(S.of(context).KanColleDataListener),
+                  subtitle: Text(S.of(context).ToolUATip),
                   trailing: CupertinoSwitch(
                     value: useKancolleListener,
                     onChanged: (value) async {
@@ -42,25 +42,27 @@ class _KancollelistenSettingsState
                   ),
                 ),
                 CupertinoListTile(
-                  title: Text("Dowload Ship Info"),
+                  title: Text(S.of(context).DownloadFleetData),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
-                        ShipInfoPage(
-                            title: "Dowload Ship Info",
-                            previousPageTitle: "Listen"));
+                        FleetInfoPage(
+                            title: S.of(context).DownloadFleetData,
+                            previousPageTitle:
+                                S.of(context).KanColleDataListener));
                   },
                 ),
                 CupertinoListTile(
-                  title: Text("Dowload Ship Info"),
+                  title: Text(S.of(context).DownloadOperationData),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
                         TaskInfoPage(
-                            title: "Dowload Task Info",
-                            previousPageTitle: "Listen"));
+                            title: S.of(context).OperationData,
+                            previousPageTitle:
+                                S.of(context).KanColleDataListener));
                   },
                 ),
               ],
@@ -70,8 +72,8 @@ class _KancollelistenSettingsState
   }
 }
 
-class ShipInfoPage extends ConsumerWidget {
-  const ShipInfoPage({
+class FleetInfoPage extends ConsumerWidget {
+  const FleetInfoPage({
     super.key,
     required this.title,
     required this.previousPageTitle,
@@ -91,7 +93,9 @@ class ShipInfoPage extends ConsumerWidget {
         middle: Text(title),
         previousPageTitle: previousPageTitle,
         trailing: GestureDetector(
-          onTap: () => ref.watch(kcwikiDataStateProvider.notifier).fetchData(),
+          onTap: () async {
+            await ref.watch(kcwikiDataStateProvider.notifier).fetchData();
+          },
           child: Icon(CupertinoIcons.refresh),
         ),
       ),
@@ -104,10 +108,10 @@ class ShipInfoPage extends ConsumerWidget {
                   CupertinoListSection.insetGrouped(
                     children: [
                       CupertinoListTile(
-                        title: Text("Ship"),
+                        title: Text(S.of(context).ShipData),
                         additionalInfo: kcwikiData.when(
                           data: (data) => Text("${data.ships.length}"),
-                          error: (e, s) => Text("error"),
+                          error: (e, s) => Text(S.of(context).Error),
                           loading: () => CupertinoActivityIndicator(),
                         ),
                         trailing: const CupertinoListTileChevron(),
@@ -116,17 +120,23 @@ class ShipInfoPage extends ConsumerWidget {
                             navigatorToCupertino(
                                 context,
                                 CupertinoActionPage(
-                                    title: "title",
-                                    previousPageTitle: "previousPageTitle",
+                                    title: S.of(context).ShipData,
+                                    previousPageTitle: S.of(context).FleetData,
                                     child: ListView(children: [
                                       CupertinoListSection.insetGrouped(
                                         children: List.generate(
                                             kcwikiData.value!.ships.length,
                                             (index) => CupertinoListTile(
-                                                  title: Text(
-                                                      "${kcwikiData.value!.ships[index].name}"),
+                                                  title: Text(kcwikiData.value!
+                                                      .ships[index].name),
                                                   subtitle: Text(
                                                       "ID: ${kcwikiData.value!.ships[index].id}"),
+                                                  additionalInfo: Text(
+                                                      kcwikiData
+                                                              .value!
+                                                              .ships[index]
+                                                              .stypeName ??
+                                                          ''),
                                                 )),
                                       )
                                     ])));
@@ -171,25 +181,35 @@ class TaskInfoPage extends ConsumerWidget {
         child: SafeArea(
           bottom: false,
           child: taskUtil.when(
-              data: (data) => CustomScrollView(
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          CupertinoListSection.insetGrouped(
-                            children: List.generate(
-                                data.tasks.items.length,
-                                (index) => CupertinoListTile(
-                                      leading: Text(data.tasks.items[index].id),
-                                      title:
-                                          Text(data.tasks.items[index].title),
-                                      additionalInfo:
-                                          Text(data.tasks.items[index].time),
-                                    )),
-                          ),
-                        ]),
-                      )
-                    ],
-                  ),
+              data: (data) {
+                var items = data.tasks.items;
+                if (items.isEmpty) {
+                  return Center(
+                    child: CupertinoButton(
+                      child: Text(S.of(context).DownloadOperationData),
+                      onPressed: () =>
+                          ref.watch(taskUtilProvider.notifier).onDownloadData(),
+                    ),
+                  );
+                }
+                return CustomScrollView(
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        CupertinoListSection.insetGrouped(
+                          children: List.generate(
+                              items.length,
+                              (index) => CupertinoListTile(
+                                    leading: Text(items[index].id),
+                                    title: Text(items[index].title),
+                                    additionalInfo: Text(items[index].time),
+                                  )),
+                        ),
+                      ]),
+                    )
+                  ],
+                );
+              },
               error: (Object error, StackTrace stackTrace) => Center(
                     child: Text(error.toString()),
                   ),

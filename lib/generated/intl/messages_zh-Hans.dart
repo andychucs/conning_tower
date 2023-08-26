@@ -89,9 +89,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "DarkTheme": MessageLookupByLibrary.simpleMessage("深色主题"),
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("在主页显示 Dashboard"),
+        "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
+            "如需使用KanColle数据监听功能，为保证功能可用务必前往设置-KanColle数据监听中下载数据并打开开关（如果没有打开），如遇异常请在设置中重置应用数据。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hans/new"),
+        "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下载舰队数据"),
+        "DownloadOperationData": MessageLookupByLibrary.simpleMessage("下载远征数据"),
         "EmptyFieldError": MessageLookupByLibrary.simpleMessage("输入框不能为空。"),
+        "Error": MessageLookupByLibrary.simpleMessage("发生错误"),
+        "FleetData": MessageLookupByLibrary.simpleMessage("舰队数据"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
         "FutureAutoAdjustWindowSuccess":
@@ -121,11 +127,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
         "KCViewFuncMsgPageStart": m3,
+        "KanColleDataListener":
+            MessageLookupByLibrary.simpleMessage("KanColle数据监听"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏将静音"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏声音将打开"),
+        "OperationData": MessageLookupByLibrary.simpleMessage("远征数据"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知数量"),
         "PendingNotifications": MessageLookupByLibrary.simpleMessage("等待中的通知"),
@@ -161,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重置"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("屏幕方向设置"),
+        "ShipData": MessageLookupByLibrary.simpleMessage("舰船数据"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("状态码"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截图"),
@@ -202,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("发现软件版本已更新，请查看版本更新文档。"),
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("点击此处查看"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("版本更新"),
+        "WeaponData": MessageLookupByLibrary.simpleMessage("装备数据"),
         "WebInfo": MessageLookupByLibrary.simpleMessage("网页信息"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML示例：")
       };

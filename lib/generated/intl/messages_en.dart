@@ -101,10 +101,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "DarkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("Show Dashboard on Homepage"),
+        "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
+            "To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings."),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/en/new"),
+        "DownloadFleetData":
+            MessageLookupByLibrary.simpleMessage("Download Fleet Data"),
+        "DownloadOperationData":
+            MessageLookupByLibrary.simpleMessage("Download Expedition Data"),
         "EmptyFieldError":
             MessageLookupByLibrary.simpleMessage("Field cannot be empty."),
+        "Error": MessageLookupByLibrary.simpleMessage("Error"),
+        "FleetData": MessageLookupByLibrary.simpleMessage("Fleet Data"),
         "FutureAutoAdjustWindowFail":
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
         "FutureAutoAdjustWindowSuccess":
@@ -136,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),
         "KCViewFuncMsgPageStart": m3,
+        "KanColleDataListener":
+            MessageLookupByLibrary.simpleMessage("KanColle Data Listener"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click \'Tools-Web-HTTP Redirect\' button."),
@@ -143,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The game will be muted after refreshing."),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "The game will be unmuted after refreshing."),
+        "OperationData":
+            MessageLookupByLibrary.simpleMessage("Expedition Data"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("Pending Notifications Count"),
         "PendingNotifications":
@@ -184,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("Change Screen Orientation"),
+        "ShipData": MessageLookupByLibrary.simpleMessage("Ship Data"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
@@ -235,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Click here to view"),
         "VersionUpdateTitle":
             MessageLookupByLibrary.simpleMessage("Version Update"),
+        "WeaponData": MessageLookupByLibrary.simpleMessage("Weapon Data"),
         "WebInfo": MessageLookupByLibrary.simpleMessage("Web Info"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML Example:")
       };
