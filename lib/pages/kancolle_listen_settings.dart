@@ -48,7 +48,7 @@ class _KancollelistenSettingsState
                     navigatorToCupertino(
                         context,
                         FleetInfoPage(
-                            title: S.of(context).DownloadFleetData,
+                            title: S.of(context).FleetData,
                             previousPageTitle:
                                 S.of(context).KanColleDataListener));
                   },
