@@ -362,7 +362,7 @@ class HomePageState extends ConsumerState<HomePage> {
           });
         },
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: orientation == Orientation.portrait,
           bottomNavigationBar: orientation == Orientation.portrait
               ? Controls(
                   widget.cookieManager,
