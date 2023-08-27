@@ -54,7 +54,7 @@ const String kTaskYamlExample =
 const String kZeroTime = "00:00:00";
 const String muteKancolleJS = "assets/js/muteKancolle.js";
 const String unMuteKancolleJS = "assets/js/unMuteKancolle.js";
-const String kKcwikiShipsUrl = "https://kcwikizh.github.io/kcdata/ship/all.json";
+const String kKcwikiShipsUrl = "https://kcwikizh.github.io/kcdata/ship/ship.json";
 const String kKcwikiShipsApi = "https://api.kcwiki.org/ships";
 
 enum DeviceType {

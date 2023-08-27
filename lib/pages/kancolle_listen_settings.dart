@@ -1,6 +1,7 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
@@ -96,7 +97,7 @@ class FleetInfoPage extends ConsumerWidget {
           onTap: () async {
             await ref.watch(kcwikiDataStateProvider.notifier).fetchData();
           },
-          child: Icon(CupertinoIcons.refresh),
+          child: const Icon(CupertinoIcons.refresh),
         ),
       ),
       child: SafeArea(
@@ -112,34 +113,14 @@ class FleetInfoPage extends ConsumerWidget {
                         additionalInfo: kcwikiData.when(
                           data: (data) => Text("${data.ships.length}"),
                           error: (e, s) => Text(S.of(context).Error),
-                          loading: () => CupertinoActivityIndicator(),
+                          loading: () => const CupertinoActivityIndicator(),
                         ),
                         trailing: const CupertinoListTileChevron(),
                         onTap: () {
                           if (kcwikiData.hasValue) {
+                            final ships = kcwikiData.value!.ships;
                             navigatorToCupertino(
-                                context,
-                                CupertinoActionPage(
-                                    title: S.of(context).ShipData,
-                                    previousPageTitle: S.of(context).FleetData,
-                                    child: ListView(children: [
-                                      CupertinoListSection.insetGrouped(
-                                        children: List.generate(
-                                            kcwikiData.value!.ships.length,
-                                            (index) => CupertinoListTile(
-                                                  title: Text(kcwikiData.value!
-                                                      .ships[index].name),
-                                                  subtitle: Text(
-                                                      "ID: ${kcwikiData.value!.ships[index].id}"),
-                                                  additionalInfo: Text(
-                                                      kcwikiData
-                                                              .value!
-                                                              .ships[index]
-                                                              .stypeName ??
-                                                          ''),
-                                                )),
-                                      )
-                                    ])));
+                                context, ShipDataItemsList(ships: ships));
                           }
                         },
                       ),
@@ -150,6 +131,61 @@ class FleetInfoPage extends ConsumerWidget {
             ],
           )),
     );
+  }
+}
+
+class ShipDataItemsList extends StatefulWidget {
+  const ShipDataItemsList({
+    super.key,
+    required this.ships,
+  });
+
+  final List<Ship> ships;
+
+  @override
+  State<ShipDataItemsList> createState() => _ShipDataItemsListState();
+}
+
+class _ShipDataItemsListState extends State<ShipDataItemsList> {
+  String searchText = "";
+
+  @override
+  Widget build(BuildContext context) {
+    var ships = [...widget.ships];
+    if (searchText.isNotEmpty) {
+      ships = ships
+          .where((ship) =>
+              ship.name!.toLowerCase().contains(searchText.toLowerCase()) ||
+              ship.yomi!.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
+    }
+    return CupertinoActionPage(
+        title: S.of(context).ShipData,
+        previousPageTitle: S.of(context).FleetData,
+        child: ListView(children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+            child: CupertinoSearchTextField(
+              onChanged: (text) {
+                setState(() {
+                  searchText = text;
+                });
+              },
+            ),
+          ),
+          CupertinoListSection.insetGrouped(
+            children: ships.isNotEmpty
+                ? List.generate(
+                    ships.length,
+                    (index) => CupertinoListTile(
+                          title: Text(ships[index].name!),
+                          subtitle:
+                              Text("改造Lv: ${ships[index].afterLv ?? "-"}"),
+                          additionalInfo: Text(ships[index].yomi ?? ''),
+                        ))
+                : [const CupertinoListTile(title: Text("N/A"))],
+          )
+        ]));
   }
 }
 
@@ -175,7 +211,7 @@ class TaskInfoPage extends ConsumerWidget {
           previousPageTitle: previousPageTitle,
           trailing: GestureDetector(
             onTap: () => ref.watch(taskUtilProvider.notifier).onDownloadData(),
-            child: Icon(CupertinoIcons.refresh),
+            child: const Icon(CupertinoIcons.refresh),
           ),
         ),
         child: SafeArea(

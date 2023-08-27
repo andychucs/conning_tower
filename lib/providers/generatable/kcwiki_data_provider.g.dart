@@ -6,7 +6,7 @@ part of 'kcwiki_data_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$kcwikiDataStateHash() => r'81249b31ea64f53ed8a0a47e0acdefcd1ba9b2d8';
+String _$kcwikiDataStateHash() => r'b20e18b3ebe14bc88483e57fb03132fcb39f7429';
 
 /// See also [KcwikiDataState].
 @ProviderFor(KcwikiDataState)

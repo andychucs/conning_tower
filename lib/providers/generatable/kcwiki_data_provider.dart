@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/data/kcwiki/api/kcwiki_api_ship_entity.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -37,13 +39,14 @@ class KcwikiDataState extends _$KcwikiDataState {
   }
 
   Future<KcwikiData> _fetchData() async {
-    final json = await http.get(Uri.parse(kKcwikiShipsApi));
+    final json = await http.get(Uri.parse(kKcwikiShipsUrl));
     final shipsJson = jsonDecode(json.body) as List<dynamic>;
-    List<KcwikiApiShipEntity> ships = shipsJson.map((json) {
-      return KcwikiApiShipEntity.fromJson(json);
+    List<Ship> ships = shipsJson.map((json) {
+      return Ship.fromJson(json);
     }).toList();
-    ships.removeWhere((element) => element.sortNo == null);
-    ships.removeWhere((element) => element.sortNo == 0);
+    log(ships.where((element) => element.sortNo == null).toString() + "no sort");
+    // ships.removeWhere((element) => element.sortNo == null);
+    // ships.removeWhere((element) => element.sortNo == 0);
     ships.sort((a, b) => a.sortNo!.compareTo(b.sortNo!));
     KcwikiData kcwikiData = KcwikiData(ships: ships);
     _saveLocalData(kcwikiData);

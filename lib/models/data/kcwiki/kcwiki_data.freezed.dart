@@ -20,7 +20,7 @@ KcwikiData _$KcwikiDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KcwikiData {
-  List<KcwikiApiShipEntity> get ships => throw _privateConstructorUsedError;
+  List<Ship> get ships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $KcwikiDataCopyWith<$Res> {
           KcwikiData value, $Res Function(KcwikiData) then) =
       _$KcwikiDataCopyWithImpl<$Res, KcwikiData>;
   @useResult
-  $Res call({List<KcwikiApiShipEntity> ships});
+  $Res call({List<Ship> ships});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$KcwikiDataCopyWithImpl<$Res, $Val extends KcwikiData>
       ships: null == ships
           ? _value.ships
           : ships // ignore: cast_nullable_to_non_nullable
-              as List<KcwikiApiShipEntity>,
+              as List<Ship>,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$_KcwikiDataCopyWith<$Res>
       __$$_KcwikiDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<KcwikiApiShipEntity> ships});
+  $Res call({List<Ship> ships});
 }
 
 /// @nodoc
@@ -89,7 +89,7 @@ class __$$_KcwikiDataCopyWithImpl<$Res>
       ships: null == ships
           ? _value._ships
           : ships // ignore: cast_nullable_to_non_nullable
-              as List<KcwikiApiShipEntity>,
+              as List<Ship>,
     ));
   }
 }
@@ -97,15 +97,14 @@ class __$$_KcwikiDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_KcwikiData with DiagnosticableTreeMixin implements _KcwikiData {
-  const _$_KcwikiData({required final List<KcwikiApiShipEntity> ships})
-      : _ships = ships;
+  const _$_KcwikiData({required final List<Ship> ships}) : _ships = ships;
 
   factory _$_KcwikiData.fromJson(Map<String, dynamic> json) =>
       _$$_KcwikiDataFromJson(json);
 
-  final List<KcwikiApiShipEntity> _ships;
+  final List<Ship> _ships;
   @override
-  List<KcwikiApiShipEntity> get ships {
+  List<Ship> get ships {
     if (_ships is EqualUnmodifiableListView) return _ships;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_ships);
@@ -152,14 +151,13 @@ class _$_KcwikiData with DiagnosticableTreeMixin implements _KcwikiData {
 }
 
 abstract class _KcwikiData implements KcwikiData {
-  const factory _KcwikiData({required final List<KcwikiApiShipEntity> ships}) =
-      _$_KcwikiData;
+  const factory _KcwikiData({required final List<Ship> ships}) = _$_KcwikiData;
 
   factory _KcwikiData.fromJson(Map<String, dynamic> json) =
       _$_KcwikiData.fromJson;
 
   @override
-  List<KcwikiApiShipEntity> get ships;
+  List<Ship> get ships;
   @override
   @JsonKey(ignore: true)
   _$$_KcwikiDataCopyWith<_$_KcwikiData> get copyWith =>

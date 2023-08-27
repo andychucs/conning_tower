@@ -9,7 +9,7 @@ part of 'kcwiki_data.dart';
 _$_KcwikiData _$$_KcwikiDataFromJson(Map<String, dynamic> json) =>
     _$_KcwikiData(
       ships: (json['ships'] as List<dynamic>)
-          .map((e) => KcwikiApiShipEntity.fromJson(e as Map<String, dynamic>))
+          .map((e) => Ship.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
