@@ -1,5 +1,4 @@
-![banner](https://user-images.githubusercontent.com/24852023/210078092-6d08f037-8ba1-4959-a2ac-b07436db855f.png)
-
+![‎banner](https://github.com/andychucs/conning_tower/assets/24852023/eaf1b185-be29-474f-865b-00d8be7414ad)
 
 # Conning Tower	
 
@@ -24,7 +23,7 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 
 Donwload :[Home Page](https://conntower.github.io/#/)
 
-APK for Android, IPA for for iOS/iPadOS need sideloading.
+APK for Android, IPA for for iOS/iPadOS/macOS(as iPad) need sideloading.
 
 ## ConningTower for iOS
 
@@ -81,4 +80,4 @@ HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.
 
 - None
 
-Support Project by [afdian](https://afdian.net/a/conntower)
+<!--- Support Project by [afdian](https://afdian.net/a/conntower) --> 
