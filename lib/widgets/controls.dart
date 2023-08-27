@@ -1,15 +1,22 @@
+import 'dart:developer';
+
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/providers/webview_provider.dart';
+import 'package:conning_tower/pages/about_page.dart';
+import 'package:conning_tower/pages/settings_page.dart';
+import 'package:conning_tower/pages/tools_page.dart';
+import 'package:conning_tower/providers/generatable/navigator_provider.dart';
+import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:popover/popover.dart';
 
 enum ConFunc {
   adjustWindow,
@@ -29,14 +36,30 @@ enum ConFunc {
   navi2Settings,
 }
 
-class Controls extends ConsumerWidget {
+class Controls extends ConsumerStatefulWidget {
   Controls(CookieManager? cookieManager,
-      {Key? key, required this.notifyParent, required this.orientation})
-      : cookieManager = cookieManager ?? CookieManager.instance(),
-        super(key: key);
+      {super.key,
+      required this.notifyParent,
+      required this.orientation,
+      required this.functionMap,
+      this.isWideStyle = false,
+      this.enableJoystick = false})
+      : cookieManager = cookieManager ?? CookieManager.instance();
   final Function() notifyParent;
   late final CookieManager cookieManager;
   final Orientation orientation;
+  final bool isWideStyle;
+  final bool enableJoystick;
+  final Map<FunctionName, Function> functionMap;
+
+  @override
+  ConsumerState<Controls> createState() => _ControlsState();
+}
+
+class _ControlsState extends ConsumerState<Controls> {
+  int _selectedIndex = 0;
+  bool _compact = true;
+  bool _isInit = false;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -62,20 +85,32 @@ class Controls extends ConsumerWidget {
     3: 6, //navi2About
   };
 
+  void _onItemTapped(int index) {
+    setState(() {
+      if (![2, 3, 4].contains(index)) {
+        _selectedIndex = index;
+      }
+    });
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cp = ref.watch(webControllerProvider);
-    if (orientation == Orientation.portrait) {
+  Widget build(BuildContext context) {
+    _isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
+    late InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
+    final flnp = ref.watch(functionLayerNavigatorProvider);
+
+    _selectedIndex = naviItems[flnp.index];
+    if (selectedIndex == 0) _selectedIndex = 0;
+
+    if (widget.orientation == Orientation.portrait) {
       return BottomNavigationBar(
-        showSelectedLabels: true,
-        // showUnselectedLabels: true,
-        currentIndex: naviItems[selectedIndex],
-        unselectedItemColor: CupertinoColors.inactiveGray,
-        selectedItemColor: Theme.of(context).primaryColor,
+        showSelectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: false,
+        currentIndex: _selectedIndex,
         onTap: ((value) async {
           HapticFeedback.mediumImpact();
-          if (!cp.isInit) return;
-          _onTap(value, context, cp.controller);
+          _onTap(value, context, controller, flnp);
         }),
         items: [
           BottomNavigationBarItem(
@@ -111,20 +146,50 @@ class Controls extends ConsumerWidget {
             icon: const Icon(
               CupertinoIcons.info,
             ),
-            label: S.of(context).AboutButton.replaceAll('\n', ''),
+            label: S.of(context).AboutButton,
           ),
         ],
       );
     }
     return NavigationRail(
-      labelType: NavigationRailLabelType.all,
-      selectedIndex: naviItems[selectedIndex],
+      minWidth: _compact ? 56 : 72,
+      labelType:
+          _compact ? NavigationRailLabelType.none : NavigationRailLabelType.all,
+      selectedIndex: widget.isWideStyle ? 0 : _selectedIndex,
       groupAlignment: 0,
       onDestinationSelected: (int index) async {
         HapticFeedback.mediumImpact();
-        if (!cp.isInit) return;
-        _onTap(index, context, cp.controller);
+        if (widget.isWideStyle) {
+          _onTapPopover(index, context, controller);
+        } else {
+          _onTap(index, context, controller, flnp);
+        }
       },
+      trailing: GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          setState(() {
+            _compact = !_compact;
+          });
+        },
+        // onLongPress: () {
+        //   HapticFeedback.mediumImpact();
+        //   showPopoverPage(
+        //       context,
+        //       Dashboard(
+        //         notifyParent: widget.notifyParent,
+        //       )); //Canary Deployment
+        // },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Icon(
+            _compact
+                ? CupertinoIcons.list_bullet_below_rectangle
+                : CupertinoIcons.list_bullet,
+            color: CupertinoColors.activeBlue,
+          ),
+        ),
+      ),
       destinations: [
         NavigationRailDestination(
           icon: const Icon(CupertinoIcons.home),
@@ -171,42 +236,44 @@ class Controls extends ConsumerWidget {
   }
 
   void _onTap(
-      int value, BuildContext context, InAppWebViewController controller) {
+    int value,
+    BuildContext context,
+    InAppWebViewController controller,
+    FunctionLayerNavigator navigator,
+  ) {
+    _onItemTapped(value);
     var func = funcMap[value];
     switch (func) {
       case ConFunc.navi2About:
-        selectedIndex = 3;
-        notifyParent();
+        selectedIndex = 1;
+        widget.notifyParent();
+        navigator.changeIndex(3);
         break;
       case ConFunc.navi2Tool:
         selectedIndex = 1;
-        notifyParent();
+        widget.notifyParent();
+        navigator.changeIndex(1);
         break;
       case ConFunc.navi2Settings:
-        selectedIndex = 2;
-        notifyParent();
+        selectedIndex = 1;
+        widget.notifyParent();
+        navigator.changeIndex(2);
         break;
       case ConFunc.loadHome:
         if (selectedIndex != 0) {
           selectedIndex = 0;
-          notifyParent();
+          navigator.changeIndex(0);
+          widget.notifyParent();
         } else {
           _onLoadHome(context, controller);
         }
         break;
-      case ConFunc.adjustWindow:
-        _onAdjustWindow(controller);
-        break;
-      case ConFunc.httpRedirect:
-        _onHttpRedirect(controller);
-        break;
-      case ConFunc.bottomUp:
-        _onBottomUp();
-        break;
       case ConFunc.scrollUp:
+        if (!_isInit) return;
         controller.scrollBy(x: 1, y: 0);
         break;
       case ConFunc.scrollDown:
+        if (!_isInit) return;
         controller.scrollBy(x: 0, y: 1);
         break;
       case ConFunc.goBack:
@@ -218,23 +285,94 @@ class Controls extends ConsumerWidget {
       case ConFunc.refresh:
         _onReload(context, controller);
         break;
-      case ConFunc.clearCookies:
-        _onClearCookies(context);
+    }
+  }
+
+  void _onTapPopover(
+    int value,
+    BuildContext context,
+    InAppWebViewController controller,
+  ) {
+    _onItemTapped(value);
+    var func = funcMap[value];
+    switch (func) {
+      case ConFunc.navi2About:
+        showPopoverPage(context, const AboutPage());
         break;
-      case ConFunc.clearCache:
-        _onClearCache(context, controller);
+      case ConFunc.navi2Tool:
+        showPopoverPage(
+            context,
+            ToolsPage(
+              widget.cookieManager,
+              notifyParent: widget.notifyParent,
+              reloadConfig: _loadConfig,
+              isWideStyle: true,
+            ));
+        break;
+      case ConFunc.navi2Settings:
+        showPopoverPage(
+            context,
+            SettingsPage(
+                reloadConfig: _loadConfig, notifyParent: widget.notifyParent));
+        break;
+      case ConFunc.loadHome:
+        _onLoadHome(context, controller);
+        break;
+      case ConFunc.scrollUp:
+        if (!_isInit) return;
+        controller.scrollBy(x: 1, y: 0);
+        break;
+      case ConFunc.scrollDown:
+        if (!_isInit) return;
+        controller.scrollBy(x: 0, y: 1);
+        break;
+      case ConFunc.goBack:
+        _onGoBack(controller);
+        break;
+      case ConFunc.goForward:
+        _onGoForward(controller);
+        break;
+      case ConFunc.refresh:
+        _onReload(context, controller);
         break;
     }
   }
 
+  void _loadConfig() {
+    final prefs = localStorage;
+    setState(() {
+      enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
+      bottomPadding = (prefs.getBool('bottomPadding') ?? false);
+      enableAutoLoadHomeUrl = (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
+      customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
+      enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
+      customUA = (prefs.getString('customUA') ?? '');
+      appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
+          AppLayout.values.indexOf(AppLayout.onlyFAB)];
+    });
+  }
+
+  void showPopoverPage(BuildContext context, Widget child) {
+    showPopover(
+      context: context,
+      bodyBuilder: (context) => LocalNavigator(child: child),
+      onPop: () => log('Popover was popped!'),
+      direction: PopoverDirection.left,
+      width: 500,
+      height: double.infinity,
+      arrowHeight: 0,
+      arrowWidth: 0,
+    );
+  }
+
   Future<void> _onReload(
       BuildContext context, InAppWebViewController controller) async {
+    if (!_isInit) return;
     safeNavi = false;
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppControlsReload, isNormal: true);
+          return AdaptiveDialogWithBool(msg: S.current.AppControlsReload);
         });
     if (value ?? false) {
       await controller.reload();
@@ -242,6 +380,7 @@ class Controls extends ConsumerWidget {
   }
 
   Future<void> _onGoBack(InAppWebViewController controller) async {
+    if (!_isInit) return;
     safeNavi = true;
     if (await controller.canGoBack()) {
       await controller.goBack();
@@ -249,48 +388,10 @@ class Controls extends ConsumerWidget {
   }
 
   Future<void> _onGoForward(InAppWebViewController controller) async {
+    if (!_isInit) return;
     safeNavi = true;
     if (await controller.canGoForward()) {
       await controller.goForward();
-    }
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  void _onBottomUp() {
-    if (bottomPadding) {
-      bottomPadding = false;
-    } else {
-      bottomPadding = true;
-    }
-    notifyParent();
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onHttpRedirect(InAppWebViewController controller) async {
-    if (!inKancolleWindow) {
-      WebUri? currentUrl = await controller.getUrl();
-      if (currentUrl!.path.startsWith(home.path)) {
-        // May be HTTPS or HTTP
-        await controller.injectJavascriptFileFromAsset(
-            assetFilePath: httpRedirectJS);
-        inKancolleWindow = true;
-      }
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
-      print("HTTP Redirect success");
-    } else {
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
-      print("HTTP Redirect fail");
-    }
-    print("inKancolleWindow: $inKancolleWindow");
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onAdjustWindow(InAppWebViewController controller) async {
-    if (gameLoadCompleted) {
-      await autoAdjustWindowV2(controller, force: true);
-    } else {
-      Fluttertoast.showToast(
-          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
     }
   }
 
@@ -299,43 +400,15 @@ class Controls extends ConsumerWidget {
     bool? value = await showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog(msg: S.current.AppHome, isNormal: true);
+          return AdaptiveDialogWithBool(msg: S.current.AppHome);
         });
     if (value ?? false) {
       String homeUrl = getHomeUrl();
       safeNavi = false;
+      if (homeUrl == kLocalHomeUrl) {
+        await ref.read(webControllerProvider.notifier).startLocalServer();
+      }
       await controller.loadUrl(urlRequest: URLRequest(url: WebUri(homeUrl)));
-    }
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onClearCookies(BuildContext context) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCookie, isNormal: true);
-        });
-    if (value ?? false) {
-      await cookieManager.deleteAllCookies();
-      String message = S.current.AppControlsLogoutSuccess;
-      Fluttertoast.showToast(msg: message);
-    }
-  }
-
-  @Deprecated("Remove this func in Controls widget")
-  Future<void> _onClearCache(
-      BuildContext context, InAppWebViewController controller) async {
-    bool? value = await showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog(
-              msg: S.current.AppClearCache.replaceAll('\n', ''),
-              isNormal: true);
-        });
-    if (value ?? false) {
-      await controller.clearCache();
-      Fluttertoast.showToast(msg: S.current.AppControlsClearCache);
     }
   }
 }

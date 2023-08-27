@@ -1,14 +1,18 @@
 import 'package:conning_tower/app.dart';
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/utils/logger.dart';
+import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stack_trace/stack_trace.dart';
 
 late SharedPreferences localStorage;
-final InAppLocalhostServer localhostServer = InAppLocalhostServer(
+final InAppLocalhostServer localhostServer = InAppLocalhostServer(port: 8686,
     documentRoot: 'assets/www', directoryIndex: 'home.html');
 late bool safeNavi;
 late bool autoAdjusted;
@@ -19,18 +23,20 @@ late bool beforeRedirect;
 late double kWebviewHeight;
 late double kWebviewWidth;
 late int selectedIndex;
-late Uri home;
 late bool enableAutoProcess;
 late bool enableAutoLoadHomeUrl;
 late String customHomeUrl;
 late String customUA;
 late bool enableHideFAB;
-late int customDeviceOrientationIndex;
 late bool showControls;
+late DeviceType deviceType;
+late AppLayout appLayout;
+late bool showDashboardInHome; //Canary Deployment
+late bool useKancolleListener;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb) {
+  if (!kIsWeb && !kIsOpenSource) {
     // start the localhost server
     await localhostServer.start();
   }
@@ -39,7 +45,36 @@ Future<void> main() async {
     await InAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
   WebView.debugLoggingSettings.enabled = false;
+  await notification.init();
+
+  await init();
+
+  SystemChrome.setPreferredOrientations(DeviceOrientation.values).then(
+    (value) => runApp(
+      ProviderScope(
+        observers: [Logger()],
+        child: const ConnTowerApp(),
+      ),
+    ),
+  );
+
+  FlutterError.demangleStackTrace = (StackTrace stack) {
+    // Trace and Chain are classes in package:stack_trace
+    if (stack is Trace) {
+      return stack.vmTrace;
+    }
+    if (stack is Chain) {
+      return stack.toTrace().vmTrace;
+    }
+    return stack;
+  };
+}
+
+Future<void> init() async {
   localStorage = await SharedPreferences.getInstance();
+
+  deviceType = await getDeviceType();
+  appLayout = AppLayout.onlyFAB;
 
   gameLoadCompleted = false;
   inKancolleWindow = false;
@@ -55,7 +90,6 @@ Future<void> main() async {
   enableAutoProcess = true;
   enableHideFAB = false;
   showControls = true;
-
-  SystemChrome.setPreferredOrientations(DeviceOrientation.values)
-      .then((value) => runApp(const ProviderScope(child: ConnTowerApp())));
+  showDashboardInHome = true;
+  useKancolleListener = false;
 }

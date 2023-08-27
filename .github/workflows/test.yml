@@ -27,7 +27,7 @@ jobs:
           distribution: temurin
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.10.2'
+          flutter-version: '3.10.5'
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting

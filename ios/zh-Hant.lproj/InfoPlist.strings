@@ -8,3 +8,5 @@
 CFBundleDisplayName = "艦橋";
 
 NSPhotoLibraryAddUsageDescription = "將圖片保存至相片庫中，是否允許訪問?";
+
+NSPhotoLibraryUsageDescription = "如需在應用內顯示照片請允許訪問。";
