@@ -1,5 +1,4 @@
-![banner](https://user-images.githubusercontent.com/24852023/210078092-6d08f037-8ba1-4959-a2ac-b07436db855f.png)
-
+![‎banner](https://github.com/andychucs/conning_tower/assets/24852023/eaf1b185-be29-474f-865b-00d8be7414ad)
 
 # Conning Tower	
 
@@ -14,9 +13,9 @@
 ![Localizely language progress](https://img.shields.io/badge/日本語-100%25-brightgreen)
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow&style=social&url=https%3A%2F%2Ftwitter.com%2Fconntower)](https://twitter.com/conntower)
 
-Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
+Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser. Support iPhone and iPad, Mac(Apple Silicon) now.
 
-舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。
+舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。现已支持iPhone、iPad。
 
 Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。
 
@@ -24,7 +23,7 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 
 Donwload :[Home Page](https://conntower.github.io/#/)
 
-APK for Android, IPA for for iOS/iPadOS need sideloading.
+APK for Android, IPA for for iOS/iPadOS/macOS(as iPad) need sideloading.
 
 ## ConningTower for iOS
 
@@ -66,3 +65,19 @@ This project goal is use same UI and be able to sync player data on all platform
 ## Thanks
 
 HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.github.io/) by ![Twitter URL](https://img.shields.io/twitter/url?label=naayu1012&style=social&url=https%3A%2F%2Ftwitter.com%2Fnaayu1012)
+
+## Sponsors
+
+### Bronze Sponsors
+
+- None
+
+### Silver Sponsors
+
+- None
+
+### Gold Sponsors
+
+- None
+
+<!--- Support Project by [afdian](https://afdian.net/a/conntower) --> 
