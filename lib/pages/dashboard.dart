@@ -4,7 +4,7 @@ import 'package:conning_tower/pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/photo_gallery.dart';
 import 'package:conning_tower/pages/port_info.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
-import 'package:conning_tower/widgets/web_info_list.dart';
+import 'package:conning_tower/pages/web_info_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
