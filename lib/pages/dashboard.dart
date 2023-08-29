@@ -9,8 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
-  const Dashboard(
-      {super.key, required this.notifyParent});
+  const Dashboard({super.key, required this.notifyParent});
 
   final VoidCallback notifyParent;
 
@@ -57,12 +56,26 @@ class _DashboardState extends ConsumerState<Dashboard> {
         children.add(const OperationPage());
       }
 
-
       return CupertinoPickerView(
         items: items,
         wideStyle: constraints.maxWidth >= 500,
         children: children,
       );
     });
+  }
+}
+
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key, required this.notifyParent});
+  final VoidCallback notifyParent;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+        navigationBar: const CupertinoNavigationBar(
+          backgroundColor: CupertinoColors.systemGroupedBackground,
+          border: null,
+        ),
+        child: Dashboard(notifyParent: notifyParent));
   }
 }

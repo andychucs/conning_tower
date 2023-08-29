@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
@@ -209,6 +210,10 @@ class HomePageState extends ConsumerState<HomePage> {
     }
 
     final Map<FunctionName, Function> functionMap = {
+      FunctionName.naviDashboard: () {
+        navigatorToCupertino(
+            context, DashboardPage(notifyParent: () => setState(() {})));
+      },
       FunctionName.showTaskPage: () async {
         showCupertinoModalBottomSheet(
           expand: true,

@@ -78,6 +78,7 @@ enum FunctionName {
   landscapeRight,
   landscapeLeft,
   portrait,
+  naviDashboard,
   none
 }
 
