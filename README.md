@@ -25,18 +25,13 @@ Donwload :[Home Page](https://conntower.github.io/#/)
 
 APK for Android, IPA for for iOS/iPadOS/macOS(as iPad) need sideloading.
 
-## ConningTower for iOS
-
-ConningTower for iOS is a closed-source branch independent of the ConningTower open-source project. The two are not equal. ConningTower for iOS is not a third-party client of KanColle, it is a universal web game browser. While the ConningTower iOS version will make special adaptations to some web page windows, this application is not aimed at any specific website.
-
-[ConningTower for iOS](https://conntower.github.io/#/ios) is now on the AppStore.
-
-Free version ConningTowerLite is a lightweight version of ConningTower for iOS. Runs more smoothly.
-
-Download ConningTowerLite for free.👇
-
-[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/24852023/228246824-f238c38d-a48d-4f85-b4a4-45301f4ec022.svg)](https://apps.apple.com/app/conningtowerlite/id6446118603)
-
+|  Device   | Require  |
+|  ----  | ----  |
+| iPhone  | Requires iOS 11.0 or later. |
+| iPad  | Requires iPadOS 11.0 or later. |
+| iPod touch | Requires iOS 11.0 or later.|
+| Mac | Requires macOS 11.0 or later and a Mac with Apple M1 chip or later. |
+| Android | Requires Android 4.4 (API level 19) or later. |
 
 ## 本地化 地域化 Localization 
 
