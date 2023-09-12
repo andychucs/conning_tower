@@ -5,11 +5,78 @@ import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/texts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+class TaskDashboard extends ConsumerStatefulWidget {
+  const TaskDashboard({super.key});
+
+  @override
+  ConsumerState<TaskDashboard> createState() => _TaskDashboardState();
+}
+
+class _TaskDashboardState extends ConsumerState<TaskDashboard> {
+  late bool localLoad;
+
+  @override
+  void initState() {
+    localLoad = false;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Tasks latestTasks = ref.watch(tasksStateProvider);
+    if (!localLoad) {
+      localLoad = true;
+      ref.watch(taskUtilProvider.notifier).loadLocalTasks();
+    }
+
+    if (latestTasks.items.isNotEmpty) {
+      return SingleChildScrollView(
+        child: CupertinoListSection.insetGrouped(
+          header: CupertinoListSectionDescription(
+              S.of(context).TaskPageOperationTip),
+          children: List.generate(latestTasks.items.length, (index) {
+            var task = latestTasks.items[index];
+            return CupertinoListTile(
+              title: Text(task.title),
+              additionalInfo: Text(task.time),
+              onTap: () {
+                notification.setNotification(task);
+              },
+            );
+          }),
+        ),
+      );
+    }
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(S.of(context).TaskNotAdded),
+          CupertinoButton(
+            color: CupertinoColors.activeBlue,
+            onPressed: () {
+              showCupertinoModalBottomSheet(
+                expand: true,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => const TasksSheet(),
+              );
+            },
+            child: Text(S.of(context).TaskReminders),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class TasksSheet extends ConsumerStatefulWidget {
   const TasksSheet({Key? key}) : super(key: key);

@@ -3,6 +3,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/photo_gallery.dart';
 import 'package:conning_tower/pages/port_info.dart';
+import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
 import 'package:conning_tower/pages/web_info_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +28,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
       List<String> titles = [
         S.of(context).PhotoAlbum,
         S.of(context).WebInfo,
+        S.of(context).TaskDashboardTitle
       ];
 
       if (kIsOpenSource) {
@@ -49,6 +51,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
       List<Widget> children = [
         const PhotoGallery(),
         const WebInfoList(),
+        const TaskDashboard()
       ];
 
       if (kIsOpenSource) {

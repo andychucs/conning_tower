@@ -176,9 +176,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任務"),
         "TaskNotificationAdded":
             MessageLookupByLibrary.simpleMessage("任務通知添加成功"),
+        "TaskPageOperationTip":
+            MessageLookupByLibrary.simpleMessage("如需新增以下任務的推送通知，請點擊該項目"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

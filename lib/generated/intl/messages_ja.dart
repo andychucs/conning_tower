@@ -187,9 +187,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("タスク"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("タスクが追加されていません"),
         "TaskNotificationAdded":
             MessageLookupByLibrary.simpleMessage("タスク通知が追加されました"),
+        "TaskPageOperationTip": MessageLookupByLibrary.simpleMessage(
+            "以下のタスクの通知を追加する場合は、このアイテムをタップしてください"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("タスクタイマー"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("タスクリマインダー"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

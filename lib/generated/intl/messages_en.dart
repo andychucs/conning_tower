@@ -201,9 +201,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("Tasks"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("Task Not Added"),
         "TaskNotificationAdded": MessageLookupByLibrary.simpleMessage(
             "Task Notification Added Successfully"),
+        "TaskPageOperationTip": MessageLookupByLibrary.simpleMessage(
+            "To enable push notifications for the following tasks, please tap this item"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("Tasks Timer"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("Task Reminders"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

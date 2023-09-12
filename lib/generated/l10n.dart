@@ -1090,6 +1090,16 @@ class S {
     );
   }
 
+  /// `Tasks`
+  String get TaskDashboardTitle {
+    return Intl.message(
+      'Tasks',
+      name: 'TaskDashboardTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Task Not Added`
   String get TaskNotAdded {
     return Intl.message(
@@ -1105,6 +1115,16 @@ class S {
     return Intl.message(
       'Task Notification Added Successfully',
       name: 'TaskNotificationAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To enable push notifications for the following tasks, please tap this item`
+  String get TaskPageOperationTip {
+    return Intl.message(
+      'To enable push notifications for the following tasks, please tap this item',
+      name: 'TaskPageOperationTip',
       desc: '',
       args: [],
     );

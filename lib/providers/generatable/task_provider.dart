@@ -41,7 +41,7 @@ class TaskUtil extends _$TaskUtil {
     return _fetchTaskUtilState();
   }
 
-  Future<void> _loadLocalTasks() async {
+  Future<void> loadLocalTasks() async {
     try {
       final file = await _localJsonFile;
 
@@ -84,7 +84,7 @@ class TaskUtil extends _$TaskUtil {
     TaskUtilState taskUtilState = baseTaskUtilState("default", url);
     try {
       if (isFirstOpen) {
-        await _loadLocalTasks();
+        await loadLocalTasks();
         await notification.requestPermissions();
         isFirstOpen = false;
       }
