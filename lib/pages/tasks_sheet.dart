@@ -91,16 +91,17 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
     final taskUtil = ref.watch(taskUtilProvider);
     Tasks latestTasks = ref.watch(tasksStateProvider);
 
-    return Material(
-      child: taskUtil.when(
+    return Scaffold(
+      backgroundColor: CupertinoColors.systemGroupedBackground,
+      body: taskUtil.when(
         data: (tasksUtilState) {
           var tasks = tasksUtilState.tasks.items;
           final brightness = MediaQuery.platformBrightnessOf(context);
           return Navigator(
-            onGenerateRoute: (_) => MaterialPageRoute(
+            onGenerateRoute: (_) => CupertinoPageRoute(
               builder: (context) => Builder(
                 builder: (context) => CupertinoPageScaffold(
-                  backgroundColor: brightness == Brightness.dark ? Theme.of(context).scaffoldBackgroundColor : CupertinoColors.systemGroupedBackground,
+                  backgroundColor: CupertinoColors.systemGroupedBackground,
                   navigationBar: CupertinoNavigationBar(
                     transitionBetweenRoutes: false,
                     leading: GestureDetector(
@@ -110,7 +111,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                       ),
                       onTap: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
                             builder: (context) => const TaskReminderHelp(),
                           ),
                         );
@@ -129,9 +130,9 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                         }
 
                         Navigator.of(context).push(
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
                             builder: (context) => CupertinoPageScaffold(
-                              backgroundColor: brightness == Brightness.dark ? Theme.of(context).scaffoldBackgroundColor : CupertinoColors.systemGroupedBackground,
+                              backgroundColor: CupertinoColors.systemGroupedBackground,
                               navigationBar: CupertinoNavigationBar(
                                 transitionBetweenRoutes: false,
                                 middle: Text(S.of(context).AddDataSource),
@@ -165,7 +166,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                     child: SingleChildScrollView(
                       controller: ModalScrollController.of(context),
                       child: CupertinoListSection.insetGrouped(
-                        backgroundColor: brightness == Brightness.dark ? Theme.of(context).scaffoldBackgroundColor : CupertinoColors.systemGroupedBackground,
+                        backgroundColor: CupertinoColors.systemGroupedBackground,
                         footer: const SizedBox(
                           height: 20,
                         ),
@@ -187,16 +188,17 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                                 trailing: const CupertinoListTileChevron(),
                                 onTap: () {
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(
+                                    CupertinoPageRoute(
                                       builder: (context) =>
                                           CupertinoPageScaffold(
-                                            backgroundColor: brightness == Brightness.dark ? Theme.of(context).scaffoldBackgroundColor : CupertinoColors.systemGroupedBackground,
+                                        backgroundColor: CupertinoColors.systemGroupedBackground,
                                         navigationBar: CupertinoNavigationBar(
                                           transitionBetweenRoutes: false,
                                           middle: Text(task.title),
                                           trailing: GestureDetector(
                                             child: GestureDetector(
-                                              child: Icon(CupertinoIcons.arrow_up_to_line,
+                                              child: Icon(
+                                                CupertinoIcons.arrow_up_to_line,
                                                 color: Theme.of(context)
                                                     .primaryColor,
                                               ),
@@ -292,9 +294,8 @@ class TaskReminderHelp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.platformBrightnessOf(context);
     return CupertinoPageScaffold(
-      backgroundColor: brightness == Brightness.dark ? Theme.of(context).scaffoldBackgroundColor : CupertinoColors.systemGroupedBackground,
+      backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(
         transitionBetweenRoutes: false,
         middle: Text(S.of(context).TextHelp),
@@ -319,12 +320,9 @@ class TaskInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.platformBrightnessOf(context);
-
     return SafeArea(
       bottom: false,
       child: CupertinoListSection.insetGrouped(
-        backgroundColor: brightness == Brightness.dark ? Theme.of(context).scaffoldBackgroundColor : CupertinoColors.systemGroupedBackground,
         footer: Padding(
           padding: const EdgeInsets.all(16.0),
           child: AutoSizeText(

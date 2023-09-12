@@ -99,7 +99,7 @@ class HomePageState extends ConsumerState<HomePage> {
               Text(S.current.VersionUpdateContent),
               textLink(S.of(context).DocsNewUrl,
                   S.of(context).VersionUpdateLinkText),
-              Text(S.of(context).DataDownloadGuide)
+              if (kIsOpenSource) Text(S.of(context).DataDownloadGuide)
             ],
           ),
           actions: [
