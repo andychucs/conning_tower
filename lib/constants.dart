@@ -71,7 +71,7 @@ enum DeviceType {
 
 enum FunctionName {
   screenShot,
-  screenManger,
+  toolBox,
   hideControls,
   bottomPadding,
   showTaskPage,

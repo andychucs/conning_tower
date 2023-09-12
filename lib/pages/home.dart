@@ -211,8 +211,8 @@ class HomePageState extends ConsumerState<HomePage> {
 
     final Map<FunctionName, Function> functionMap = {
       FunctionName.naviDashboard: () {
-        navigatorToCupertino(
-            context, DashboardPage(notifyParent: () => setState(() {})));
+        navigatorToCupertino(context,
+            Scaffold(body: DashboardPage(notifyParent: () => setState(() {}))));
       },
       FunctionName.showTaskPage: () async {
         showCupertinoModalBottomSheet(
@@ -235,113 +235,81 @@ class HomePageState extends ConsumerState<HomePage> {
       FunctionName.screenShot: () {
         ref.read(webControllerProvider.notifier).saveScreenShot();
       },
-      FunctionName.screenManger: () {
-        if (deviceType == DeviceType.iPad) {
-          setState(() {
-            showCupertinoModalBottomSheet(
-              expand: false,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => ModalFit(
-                children: <Widget>[
-                  ListTile(
-                    title: Text(S.of(context).TakeScreenshot),
-                    leading: const Icon(CupertinoIcons.camera_viewfinder),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      ref.read(webControllerProvider.notifier).saveScreenShot();
-                    },
-                    trailing: const CupertinoListTileChevron(),
-                  ),
-                  ListTile(
-                    title: Text(S.of(context).AppBottomSafe),
-                    leading: const Icon(CupertinoIcons.rectangle_dock),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      setState(() {
-                        bottomPadding = !bottomPadding;
-                      });
-                    },
-                    trailing: bottomPadding
-                        ? const Icon(CupertinoIcons.checkmark_alt)
-                        : null,
-                  ),
-                ],
-              ),
-            );
-          });
-        } else {
-          showCupertinoModalBottomSheet(
-            expand: false,
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (context) => ModalFit(
-              children: <Widget>[
-                ListTile(
-                  title: Text(S.of(context).TakeScreenshot),
-                  leading: const Icon(CupertinoIcons.camera_viewfinder),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    ref.read(webControllerProvider.notifier).saveScreenShot();
-                  },
-                  trailing: const CupertinoListTileChevron(),
-                ),
-                ListTile(
-                  title: Text(S.of(context).AppBottomSafe),
-                  leading: const Icon(CupertinoIcons.rectangle_dock),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    setState(() {
-                      bottomPadding = !bottomPadding;
-                    });
-                  },
-                  trailing: bottomPadding
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-                ListTile(
-                  title: Text(S.of(context).SettingsLandscapeRight),
-                  leading: const Icon(CupertinoIcons.device_phone_landscape),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    deviceManager.customDeviceOrientation(
-                        CustomDeviceOrientation.landscapeRight);
-                  },
-                  trailing: deviceManager.getOrientationIndex() == 0
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-                ListTile(
-                  title: Text(S.of(context).SettingsLandscapeLeft),
-                  leading: Transform.flip(
-                    flipX: true,
-                    child: const Icon(CupertinoIcons.device_phone_landscape),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    deviceManager.customDeviceOrientation(
-                        CustomDeviceOrientation.landscapeLeft);
-                  },
-                  trailing: deviceManager.getOrientationIndex() == 1
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-                ListTile(
-                  title: Text(S.of(context).SettingsPortrait),
-                  leading: const Icon(CupertinoIcons.device_phone_portrait),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    deviceManager.customDeviceOrientation(
-                        CustomDeviceOrientation.portrait);
-                  },
-                  trailing: deviceManager.getOrientationIndex() == 2
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-              ],
+      FunctionName.toolBox: () {
+        List<Widget> items = [
+          ListTile(
+            title: Text(S.of(context).TakeScreenshot),
+            leading: const Icon(CupertinoIcons.camera_viewfinder),
+            onTap: () {
+              Navigator.of(context).pop();
+              ref.read(webControllerProvider.notifier).saveScreenShot();
+            },
+            trailing: const CupertinoListTileChevron(),
+          ),
+          ListTile(
+            title: Text(S.of(context).AppBottomSafe),
+            leading: const Icon(CupertinoIcons.rectangle_dock),
+            onTap: () {
+              Navigator.of(context).pop();
+              setState(() {
+                bottomPadding = !bottomPadding;
+              });
+            },
+            trailing:
+                bottomPadding ? const Icon(CupertinoIcons.checkmark_alt) : null,
+          ),
+        ];
+        if (deviceType != DeviceType.iPad) {
+          items.addAll([
+            ListTile(
+              title: Text(S.of(context).SettingsLandscapeRight),
+              leading: const Icon(CupertinoIcons.device_phone_landscape),
+              onTap: () {
+                Navigator.of(context).pop();
+                deviceManager.customDeviceOrientation(
+                    CustomDeviceOrientation.landscapeRight);
+              },
+              trailing: deviceManager.getOrientationIndex() == 0
+                  ? const Icon(CupertinoIcons.checkmark_alt)
+                  : null,
             ),
-          );
+            ListTile(
+              title: Text(S.of(context).SettingsLandscapeLeft),
+              leading: Transform.flip(
+                flipX: true,
+                child: const Icon(CupertinoIcons.device_phone_landscape),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                deviceManager.customDeviceOrientation(
+                    CustomDeviceOrientation.landscapeLeft);
+              },
+              trailing: deviceManager.getOrientationIndex() == 1
+                  ? const Icon(CupertinoIcons.checkmark_alt)
+                  : null,
+            ),
+            ListTile(
+              title: Text(S.of(context).SettingsPortrait),
+              leading: const Icon(CupertinoIcons.device_phone_portrait),
+              onTap: () {
+                Navigator.of(context).pop();
+                deviceManager
+                    .customDeviceOrientation(CustomDeviceOrientation.portrait);
+              },
+              trailing: deviceManager.getOrientationIndex() == 2
+                  ? const Icon(CupertinoIcons.checkmark_alt)
+                  : null,
+            ),
+          ]);
         }
+        showCupertinoModalBottomSheet(
+          expand: false,
+          context: context,
+          backgroundColor: Colors.transparent,
+          builder: (context) => ModalFit(
+            children: items,
+          ),
+        );
       },
       FunctionName.none: () {
         debugPrint("null function");
@@ -404,7 +372,7 @@ class HomePageState extends ConsumerState<HomePage> {
                     if (deviceType == DeviceType.iPad) {
                       functionMap[FunctionName.bottomPadding]!();
                     } else {
-                      functionMap[FunctionName.screenManger]!();
+                      functionMap[FunctionName.toolBox]!();
                     }
                   },
                 ),
@@ -439,6 +407,14 @@ class HomePageState extends ConsumerState<HomePage> {
                     onTap: () {
                       HapticFeedback.mediumImpact();
                       functionMap[FunctionName.showTaskPage]!();
+                    }),
+                CircularMenuItem(
+                    iconSize: 20,
+                    boxShadow: const [],
+                    icon: CupertinoIcons.slider_horizontal_below_rectangle,
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      functionMap[FunctionName.naviDashboard]!();
                     })
               ],
               backgroundWidget: Row(
