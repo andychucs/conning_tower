@@ -328,13 +328,7 @@ class HomePageState extends ConsumerState<HomePage> {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
             overlays: SystemUiOverlay.values);
       }
-      return GestureDetector(
-        onLongPress: () {
-          setState(() {
-            showControls = true;
-          });
-        },
-        child: Scaffold(
+      return  Scaffold(
           resizeToAvoidBottomInset: orientation == Orientation.portrait,
           bottomNavigationBar: orientation == Orientation.portrait
               ? Controls(
@@ -452,58 +446,57 @@ class HomePageState extends ConsumerState<HomePage> {
                             box.maxHeight - bottomPaddingHeight - childHeight;
                       }
 
-                      debugPrint("dashboardHeight $dashboardHeight");
-                      bool enableDashboard = dashboardHeight >= 146;
-                      //  10.5 inch iPad Air (3rd): 201
-                      //  10.5 inch iPad Pro && 11 inch iPad Pro : 151
-                      //  12.9 inch iPad Pro: 2XX
-                      //  10.9 inch iPad Air (5th): 146.2
+                    debugPrint("dashboardHeight $dashboardHeight");
+                    bool enableDashboard = dashboardHeight >= 146;
+                    //  10.5 inch iPad Air (3rd): 201
+                    //  10.5 inch iPad Pro && 11 inch iPad Pro : 151
+                    //  12.9 inch iPad Pro: 2XX
+                    //  10.9 inch iPad Air (5th): 146.2
 
-                      if (parentAspectRatio < aspectRatio &&
-                          !showDashboardInHome) {
-                        enableBottomPadding = false;
-                      }
-                      return IndexedStackWithCupertinoPageTransition(
-                        index: useStack ? selectedIndex : 0,
-                        duration: const Duration(milliseconds: 300),
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (enableDashboard && showDashboardInHome)
-                                  Expanded(
-                                      child: Dashboard(
-                                          notifyParent: () => setState(() {}))),
-                                Padding(
-                                  padding: EdgeInsets.only(
+                    if (parentAspectRatio < aspectRatio &&
+                        !showDashboardInHome) {
+                      enableBottomPadding = false;
+                    }
+                    return IndexedStackWithCupertinoPageTransition(
+                      index: useStack ? selectedIndex : 0,
+                      duration: const Duration(milliseconds: 300),
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (enableDashboard && showDashboardInHome)
+                                Expanded(
+                                    child: Dashboard(
+                                        notifyParent: () => setState(() {}))),
+                              Padding(
+                                padding: EdgeInsets.only(
                                       bottom: enableBottomPadding
                                           ? bottomPaddingHeight
                                           : 0),
-                                  child: SizedBox(
-                                    height: childHeight,
-                                    width: childWidth,
-                                    child: const AppWebView(),
-                                  ),
+                                child: SizedBox(
+                                  height: childHeight,
+                                  width: childWidth,
+                                  child: const AppWebView(),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          if (useStack)
-                            FunctionalLayer(
-                              cookieManager: widget.cookieManager,
-                              notifyParent: () => setState(() {}),
-                              reloadConfig: () => _loadConfig(),
-                            ),
-                        ],
-                      );
-                    }),
-                  ),
-                ],
-              ),
+                        ),
+                        if (useStack)
+                          FunctionalLayer(
+                            cookieManager: widget.cookieManager,
+                            notifyParent: () => setState(() {}),
+                            reloadConfig: () => _loadConfig(),
+                          ),
+                      ],
+                    );
+                  }),
+                ),
+              ],
             ),
           ),
         ),

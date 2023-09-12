@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shake/shake.dart';
 
 class AppWebView extends ConsumerStatefulWidget {
   const AppWebView({super.key});
@@ -31,6 +32,16 @@ class AppWebViewState extends ConsumerState<AppWebView> {
   void initState() {
     beforeRedirect = false;
     super.initState();
+    ShakeDetector detector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        showControls = true;
+      },
+      minimumShakeCount: 2,
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      shakeThresholdGravity: 2.7,
+    );
+    detector.startListening();
   }
 
   InAppWebViewSettings webViewSetting = InAppWebViewSettings(
