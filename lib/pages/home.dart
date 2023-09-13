@@ -32,6 +32,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shake/shake.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -65,6 +66,19 @@ class HomePageState extends ConsumerState<HomePage> {
       await Future.delayed(const Duration(seconds: 1));
       await showNewVersionInfo();
     });
+
+    ShakeDetector detector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        setState(() {
+          showControls = true;
+        });
+      },
+      minimumShakeCount: 2,
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      shakeThresholdGravity: 2.7,
+    );
+    detector.startListening();
   }
 
   @override
