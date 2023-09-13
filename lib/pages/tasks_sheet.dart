@@ -96,7 +96,6 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
       body: taskUtil.when(
         data: (tasksUtilState) {
           var tasks = tasksUtilState.tasks.items;
-          final brightness = MediaQuery.platformBrightnessOf(context);
           return Navigator(
             onGenerateRoute: (_) => CupertinoPageRoute(
               builder: (context) => Builder(

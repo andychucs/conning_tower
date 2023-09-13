@@ -110,6 +110,26 @@ class S {
     );
   }
 
+  /// `Advanced Game Support`
+  String get AdvancedGameSupport {
+    return Intl.message(
+      'Advanced Game Support',
+      name: 'AdvancedGameSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our team does not operate any games. This feature is based on publicly available data, third-party libraries, and web runtime environments, and its accuracy cannot be guaranteed. If you have games or features you would like us to support, please feel free to contact technical support.`
+  String get AdvancedGameSupportDescription {
+    return Intl.message(
+      'Our team does not operate any games. This feature is based on publicly available data, third-party libraries, and web runtime environments, and its accuracy cannot be guaranteed. If you have games or features you would like us to support, please feel free to contact technical support.',
+      name: 'AdvancedGameSupportDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Don't show again`
   String get AlertNotShowAgain {
     return Intl.message(
@@ -580,6 +600,16 @@ class S {
     );
   }
 
+  /// `Game`
+  String get Game {
+    return Intl.message(
+      'Game',
+      name: 'Game',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Off`
   String get GameMute {
     return Intl.message(
@@ -750,10 +780,10 @@ class S {
     );
   }
 
-  /// `KanColle Data Listener`
+  /// `Data Listener`
   String get KanColleDataListener {
     return Intl.message(
-      'KanColle Data Listener',
+      'Data Listener',
       name: 'KanColleDataListener',
       desc: '',
       args: [],

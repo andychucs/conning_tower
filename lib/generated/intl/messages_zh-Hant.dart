@@ -40,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "艦橋是一款為瀏覽器遊戲設計的瀏覽器，可以定制您的屏幕並保持橫向桌面視圖。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加數據源"),
+        "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高級遊戲支援"),
+        "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
+            "本團隊未運營任何遊戲，該功能基於公開數據和第三方庫、web運行環境實現，不能保證準確性。如果你有想要我們支援的遊戲及功能，歡迎聯繫技術支援。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再顯示"),
         "AppBack": MessageLookupByLibrary.simpleMessage("上一頁"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
@@ -102,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全螢幕成功"),
+        "Game": MessageLookupByLibrary.simpleMessage("遊戲"),
         "GameMute": MessageLookupByLibrary.simpleMessage("遊戲靜音"),
         "GameUnmute": MessageLookupByLibrary.simpleMessage("遊戲解除靜音"),
         "InvalidJsonError": MessageLookupByLibrary.simpleMessage("無效的JSON格式。"),
@@ -127,8 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
         "KCViewFuncMsgPageStart": m3,
-        "KanColleDataListener":
-            MessageLookupByLibrary.simpleMessage("KanColle資料監聽"),
+        "KanColleDataListener": MessageLookupByLibrary.simpleMessage("資料監聽"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("淺色主題"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊「工具-Web-重定向」。"),

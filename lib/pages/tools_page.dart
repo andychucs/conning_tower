@@ -5,6 +5,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/pages/kancolle_listen_settings.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
@@ -366,6 +367,45 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                         previousPageTitle: S.current.ToolsButton,
                       ));
                 });
+              },
+              trailing: const CupertinoListTileChevron(),
+            ),
+            CupertinoListTile(
+              title: Text(S.of(context).AdvancedGameSupport),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeOrange,
+                  icon: CupertinoIcons.game_controller),
+              onTap: () {
+                navigatorToCupertino(
+                    context,
+                    CupertinoActionPage(
+                        title: S.of(context).AdvancedGameSupport,
+                        child: ListView(
+                          children: [
+                            CupertinoListSection.insetGrouped(
+                              footer: CupertinoListSectionDescription(
+                                  S.of(context).AdvancedGameSupportDescription),
+                              children: [
+                                CupertinoListTile(
+                                    title: Text(
+                                        S.of(context).Game)),
+                                if (loadedDMM || kIsOpenSource)
+                                  CupertinoListTile(
+                                    title: Text("KC"),
+                                    leading: const DummyIcon(
+                                        color: CupertinoColors.activeBlue,
+                                        icon: Icons.anchor),
+                                    trailing: const CupertinoListTileChevron(),
+                                    onTap: () async {
+                                      await navigatorToCupertino(context,
+                                          const KancollelistenSettings());
+                                    },
+                                  ),
+                              ],
+                            )
+                          ],
+                        ),
+                        previousPageTitle: S.of(context).ToolsButton));
               },
               trailing: const CupertinoListTileChevron(),
             ),

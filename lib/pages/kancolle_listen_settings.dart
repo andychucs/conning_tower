@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
@@ -21,19 +23,23 @@ class _KancollelistenSettingsState
   @override
   Widget build(BuildContext context) {
     return CupertinoActionPage(
-        title: S.of(context).KanColleDataListener,
-        previousPageTitle: S.of(context).SettingsButton,
+        title: 'KC',
+        previousPageTitle: S.of(context).AdvancedGameSupport,
         child: ListView(
           children: [
             CupertinoListSection.insetGrouped(
+              footer: CupertinoListSectionDescription(S.of(context).ToolUATip),
               children: [
                 CupertinoListTile(
                   title: Text(S.of(context).KanColleDataListener),
-                  subtitle: Text(S.of(context).ToolUATip),
+                  subtitle: const Text("Only on Android"),
                   trailing: CupertinoSwitch(
                     value: useKancolleListener,
                     onChanged: (value) async {
                       HapticFeedback.heavyImpact();
+                      if (Platform.isIOS) {
+                        return;
+                      }
                       setState(() {
                         useKancolleListener = value;
                       });
@@ -43,27 +49,25 @@ class _KancollelistenSettingsState
                   ),
                 ),
                 CupertinoListTile(
-                  title: Text(S.of(context).DownloadFleetData),
+                  title: Text(S.of(context).FleetData),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
                         FleetInfoPage(
                             title: S.of(context).FleetData,
-                            previousPageTitle:
-                                S.of(context).KanColleDataListener));
+                            previousPageTitle: 'KC'));
                   },
                 ),
                 CupertinoListTile(
-                  title: Text(S.of(context).DownloadOperationData),
+                  title: Text(S.of(context).OperationData),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
                         TaskInfoPage(
                             title: S.of(context).OperationData,
-                            previousPageTitle:
-                                S.of(context).KanColleDataListener));
+                            previousPageTitle:'KC'));
                   },
                 ),
               ],
