@@ -92,7 +92,7 @@
   "@DarkTheme": {},
   "DashboardSetting": "ホームページでダッシュボードを表示",
   "@DashboardSetting": {},
-  "DataDownloadGuide": "艦これデータリスナー機能を使用するには、設定→艦これデータリスナーに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。",
+  "DataDownloadGuide": "艦これデータリスナー機能を使用するには、ツール→高度なゲームサポートに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。",
   "@DataDownloadGuide": {},
   "DocsNewUrl": "https://conntower.github.io/docs/ja/new",
   "@DocsNewUrl": {},

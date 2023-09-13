@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("在主頁顯示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
-            "如需使用KanColle數據監聽功能，為保證功能可用務必前往設定-KanColle數據監聽中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
+            "如需使用KanColle數據監聽功能，為保證功能可用務必前往工具-高級遊戲支援中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hant/new"),
         "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下載艦隊資料"),

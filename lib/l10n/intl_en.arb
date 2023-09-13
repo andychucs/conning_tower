@@ -92,7 +92,7 @@
   "@DarkTheme": {},
   "DashboardSetting": "Show Dashboard on Homepage",
   "@DashboardSetting": {},
-  "DataDownloadGuide": "To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.",
+  "DataDownloadGuide": "To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.",
   "@DataDownloadGuide": {},
   "DocsNewUrl": "https://conntower.github.io/docs/en/new",
   "@DocsNewUrl": {},

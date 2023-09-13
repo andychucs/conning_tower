@@ -380,6 +380,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                     context,
                     CupertinoActionPage(
                         title: S.of(context).AdvancedGameSupport,
+                        previousPageTitle: S.of(context).ToolsButton,
                         child: ListView(
                           children: [
                             CupertinoListSection.insetGrouped(
@@ -404,8 +405,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                               ],
                             )
                           ],
-                        ),
-                        previousPageTitle: S.of(context).ToolsButton));
+                        )));
               },
               trailing: const CupertinoListTileChevron(),
             ),

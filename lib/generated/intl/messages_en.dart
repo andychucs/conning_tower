@@ -106,7 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("Show Dashboard on Homepage"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
-            "To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings."),
+            "To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings."),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/en/new"),
         "DownloadFleetData":
