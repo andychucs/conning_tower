@@ -232,7 +232,8 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               },
             ),
             CupertinoListTile(
-              title: Text(S.of(context).DashboardSetting),
+              title: const Text('Dashboard'),
+              subtitle: Text(S.of(context).DashboardSetting),
               leading: const DummyIcon(
                   color: CupertinoColors.activeBlue,
                   icon: CupertinoIcons.slider_horizontal_below_rectangle),

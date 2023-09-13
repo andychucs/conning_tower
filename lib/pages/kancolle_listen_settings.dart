@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
@@ -214,7 +215,7 @@ class TaskInfoPage extends ConsumerWidget {
           middle: Text(title),
           previousPageTitle: previousPageTitle,
           trailing: GestureDetector(
-            onTap: () => ref.watch(taskUtilProvider.notifier).onDownloadData(),
+            onTap: () => ref.watch(taskUtilProvider.notifier).onDownloadData(url: kTaskUrlKC),
             child: const Icon(CupertinoIcons.refresh),
           ),
         ),
@@ -228,7 +229,7 @@ class TaskInfoPage extends ConsumerWidget {
                     child: CupertinoButton(
                       child: Text(S.of(context).DownloadOperationData),
                       onPressed: () =>
-                          ref.watch(taskUtilProvider.notifier).onDownloadData(),
+                          ref.watch(taskUtilProvider.notifier).onDownloadData(url: kTaskUrlKC),
                     ),
                   );
                 }

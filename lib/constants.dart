@@ -49,6 +49,7 @@ const String kTaskJsonExample =
     "https://github.com/conntower/data/blob/main/json/CT_tasks.json";
 const String kTaskUrlExample = kIsOpenSource ? "https://andychucs.github.io/kcdata/json/CT_tasks.json" :
     "https://conntower.github.io/data/json/CT_tasks.json";
+const String kTaskUrlKC = "https://andychucs.github.io/kcdata/json/CT_tasks.json";
 const String kTaskYamlExample =
     "https://github.com/conntower/data/blob/main/yaml/CT_tasks.yaml";
 const String kZeroTime = "00:00:00";

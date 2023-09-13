@@ -49,7 +49,6 @@ class TaskUtil extends _$TaskUtil {
 
       debugPrint(contents);
 
-
       Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
 
       ref.read(tasksStateProvider.notifier).update((state) => latestTasks);
@@ -239,7 +238,6 @@ class TaskUtil extends _$TaskUtil {
     return Tasks(items: tasks);
   }
 
-
   Future<void> onPinTask(Task task) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
@@ -255,6 +253,7 @@ class TaskUtil extends _$TaskUtil {
         latestTasks = latestTasks.copyWith(items: items);
         debugPrint("after remove");
         debugPrint(latestTasks.toString());
+        ref.watch(tasksStateProvider.notifier).update((state) => latestTasks);
       }
       return _fetchTaskUtilState();
     });
@@ -275,7 +274,7 @@ class TaskUtil extends _$TaskUtil {
     }
   }
 
-  void onDownloadData() {
-    setTasksUrl(kTaskUrlExample);
+  void onDownloadData({String url = kTaskUrlExample}) {
+    setTasksUrl(url);
   }
 }
