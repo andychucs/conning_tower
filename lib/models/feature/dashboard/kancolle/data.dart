@@ -85,6 +85,13 @@ class KancolleData {
     }
 
     if (model is GetMemberShipDeckEntity) {
+      if (model.apiData.apiDeckData.length > 1) {
+        for (var squad in model.apiData.apiDeckData) {
+          int index = squad.apiId - 1;
+          var ships = model.apiData.apiShipData.where((element) => squad.apiShip.contains(element.apiId)).toList();
+          updateSquadShips(index, ships);
+        }
+      }
       int index = model.apiData.apiDeckData.first.apiId - 1; // 单舰队
       updateSquadShips(index, model.apiData.apiShipData);
     }
