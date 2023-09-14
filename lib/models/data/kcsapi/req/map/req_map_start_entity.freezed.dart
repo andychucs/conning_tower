@@ -281,10 +281,22 @@ mixin _$ReqMapStartApiDataEntity {
   set apiAirsearch(ReqMapStartApiDataApiAirsearchEntity value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_e_deck_info')
-  List<ReqMapStartApiDataApiEDeckInfoEntity> get apiEDeckInfo =>
+  List<ReqMapStartApiDataApiEDeckInfoEntity>? get apiEDeckInfo =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_e_deck_info')
-  set apiEDeckInfo(List<ReqMapStartApiDataApiEDeckInfoEntity> value) =>
+  set apiEDeckInfo(List<ReqMapStartApiDataApiEDeckInfoEntity>? value) =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_eventmap')
+  ReqMapStartApiDataApiEventmapEntity? get apiEventmap =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_eventmap')
+  set apiEventmap(ReqMapStartApiDataApiEventmapEntity? value) =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_select_route')
+  ReqMapStartApiDataApiSelectRouteEntity? get apiSelectRoute =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_select_route')
+  set apiSelectRoute(ReqMapStartApiDataApiSelectRouteEntity? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_limit_state')
   int get apiLimitState => throw _privateConstructorUsedError;
@@ -324,11 +336,17 @@ abstract class $ReqMapStartApiDataEntityCopyWith<$Res> {
       @JsonKey(name: 'api_airsearch')
       ReqMapStartApiDataApiAirsearchEntity apiAirsearch,
       @JsonKey(name: 'api_e_deck_info')
-      List<ReqMapStartApiDataApiEDeckInfoEntity> apiEDeckInfo,
+      List<ReqMapStartApiDataApiEDeckInfoEntity>? apiEDeckInfo,
+      @JsonKey(name: 'api_eventmap')
+      ReqMapStartApiDataApiEventmapEntity? apiEventmap,
+      @JsonKey(name: 'api_select_route')
+      ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute,
       @JsonKey(name: 'api_limit_state') int apiLimitState,
       @JsonKey(name: 'api_from_no') int apiFromNo});
 
   $ReqMapStartApiDataApiAirsearchEntityCopyWith<$Res> get apiAirsearch;
+  $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res>? get apiEventmap;
+  $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res>? get apiSelectRoute;
 }
 
 /// @nodoc
@@ -358,7 +376,9 @@ class _$ReqMapStartApiDataEntityCopyWithImpl<$Res,
     Object? apiBosscellNo = null,
     Object? apiBosscomp = null,
     Object? apiAirsearch = null,
-    Object? apiEDeckInfo = null,
+    Object? apiEDeckInfo = freezed,
+    Object? apiEventmap = freezed,
+    Object? apiSelectRoute = freezed,
     Object? apiLimitState = null,
     Object? apiFromNo = null,
   }) {
@@ -415,10 +435,18 @@ class _$ReqMapStartApiDataEntityCopyWithImpl<$Res,
           ? _value.apiAirsearch
           : apiAirsearch // ignore: cast_nullable_to_non_nullable
               as ReqMapStartApiDataApiAirsearchEntity,
-      apiEDeckInfo: null == apiEDeckInfo
+      apiEDeckInfo: freezed == apiEDeckInfo
           ? _value.apiEDeckInfo
           : apiEDeckInfo // ignore: cast_nullable_to_non_nullable
-              as List<ReqMapStartApiDataApiEDeckInfoEntity>,
+              as List<ReqMapStartApiDataApiEDeckInfoEntity>?,
+      apiEventmap: freezed == apiEventmap
+          ? _value.apiEventmap
+          : apiEventmap // ignore: cast_nullable_to_non_nullable
+              as ReqMapStartApiDataApiEventmapEntity?,
+      apiSelectRoute: freezed == apiSelectRoute
+          ? _value.apiSelectRoute
+          : apiSelectRoute // ignore: cast_nullable_to_non_nullable
+              as ReqMapStartApiDataApiSelectRouteEntity?,
       apiLimitState: null == apiLimitState
           ? _value.apiLimitState
           : apiLimitState // ignore: cast_nullable_to_non_nullable
@@ -436,6 +464,32 @@ class _$ReqMapStartApiDataEntityCopyWithImpl<$Res,
     return $ReqMapStartApiDataApiAirsearchEntityCopyWith<$Res>(
         _value.apiAirsearch, (value) {
       return _then(_value.copyWith(apiAirsearch: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res>? get apiEventmap {
+    if (_value.apiEventmap == null) {
+      return null;
+    }
+
+    return $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res>(
+        _value.apiEventmap!, (value) {
+      return _then(_value.copyWith(apiEventmap: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res>? get apiSelectRoute {
+    if (_value.apiSelectRoute == null) {
+      return null;
+    }
+
+    return $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res>(
+        _value.apiSelectRoute!, (value) {
+      return _then(_value.copyWith(apiSelectRoute: value) as $Val);
     });
   }
 }
@@ -466,12 +520,20 @@ abstract class _$$_ReqMapStartApiDataEntityCopyWith<$Res>
       @JsonKey(name: 'api_airsearch')
       ReqMapStartApiDataApiAirsearchEntity apiAirsearch,
       @JsonKey(name: 'api_e_deck_info')
-      List<ReqMapStartApiDataApiEDeckInfoEntity> apiEDeckInfo,
+      List<ReqMapStartApiDataApiEDeckInfoEntity>? apiEDeckInfo,
+      @JsonKey(name: 'api_eventmap')
+      ReqMapStartApiDataApiEventmapEntity? apiEventmap,
+      @JsonKey(name: 'api_select_route')
+      ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute,
       @JsonKey(name: 'api_limit_state') int apiLimitState,
       @JsonKey(name: 'api_from_no') int apiFromNo});
 
   @override
   $ReqMapStartApiDataApiAirsearchEntityCopyWith<$Res> get apiAirsearch;
+  @override
+  $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res>? get apiEventmap;
+  @override
+  $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res>? get apiSelectRoute;
 }
 
 /// @nodoc
@@ -499,7 +561,9 @@ class __$$_ReqMapStartApiDataEntityCopyWithImpl<$Res>
     Object? apiBosscellNo = null,
     Object? apiBosscomp = null,
     Object? apiAirsearch = null,
-    Object? apiEDeckInfo = null,
+    Object? apiEDeckInfo = freezed,
+    Object? apiEventmap = freezed,
+    Object? apiSelectRoute = freezed,
     Object? apiLimitState = null,
     Object? apiFromNo = null,
   }) {
@@ -556,10 +620,18 @@ class __$$_ReqMapStartApiDataEntityCopyWithImpl<$Res>
           ? _value.apiAirsearch
           : apiAirsearch // ignore: cast_nullable_to_non_nullable
               as ReqMapStartApiDataApiAirsearchEntity,
-      apiEDeckInfo: null == apiEDeckInfo
+      apiEDeckInfo: freezed == apiEDeckInfo
           ? _value.apiEDeckInfo
           : apiEDeckInfo // ignore: cast_nullable_to_non_nullable
-              as List<ReqMapStartApiDataApiEDeckInfoEntity>,
+              as List<ReqMapStartApiDataApiEDeckInfoEntity>?,
+      apiEventmap: freezed == apiEventmap
+          ? _value.apiEventmap
+          : apiEventmap // ignore: cast_nullable_to_non_nullable
+              as ReqMapStartApiDataApiEventmapEntity?,
+      apiSelectRoute: freezed == apiSelectRoute
+          ? _value.apiSelectRoute
+          : apiSelectRoute // ignore: cast_nullable_to_non_nullable
+              as ReqMapStartApiDataApiSelectRouteEntity?,
       apiLimitState: null == apiLimitState
           ? _value.apiLimitState
           : apiLimitState // ignore: cast_nullable_to_non_nullable
@@ -589,7 +661,9 @@ class _$_ReqMapStartApiDataEntity implements _ReqMapStartApiDataEntity {
       @JsonKey(name: 'api_bosscell_no') required this.apiBosscellNo,
       @JsonKey(name: 'api_bosscomp') required this.apiBosscomp,
       @JsonKey(name: 'api_airsearch') required this.apiAirsearch,
-      @JsonKey(name: 'api_e_deck_info') required this.apiEDeckInfo,
+      @JsonKey(name: 'api_e_deck_info') this.apiEDeckInfo,
+      @JsonKey(name: 'api_eventmap') this.apiEventmap,
+      @JsonKey(name: 'api_select_route') this.apiSelectRoute,
       @JsonKey(name: 'api_limit_state') required this.apiLimitState,
       @JsonKey(name: 'api_from_no') required this.apiFromNo});
 
@@ -637,7 +711,13 @@ class _$_ReqMapStartApiDataEntity implements _ReqMapStartApiDataEntity {
   ReqMapStartApiDataApiAirsearchEntity apiAirsearch;
   @override
   @JsonKey(name: 'api_e_deck_info')
-  List<ReqMapStartApiDataApiEDeckInfoEntity> apiEDeckInfo;
+  List<ReqMapStartApiDataApiEDeckInfoEntity>? apiEDeckInfo;
+  @override
+  @JsonKey(name: 'api_eventmap')
+  ReqMapStartApiDataApiEventmapEntity? apiEventmap;
+  @override
+  @JsonKey(name: 'api_select_route')
+  ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute;
   @override
   @JsonKey(name: 'api_limit_state')
   int apiLimitState;
@@ -647,7 +727,7 @@ class _$_ReqMapStartApiDataEntity implements _ReqMapStartApiDataEntity {
 
   @override
   String toString() {
-    return 'ReqMapStartApiDataEntity(apiCellData: $apiCellData, apiRashinFlg: $apiRashinFlg, apiRashinId: $apiRashinId, apiMapareaId: $apiMapareaId, apiMapinfoNo: $apiMapinfoNo, apiNo: $apiNo, apiColorNo: $apiColorNo, apiEventId: $apiEventId, apiEventKind: $apiEventKind, apiNext: $apiNext, apiBosscellNo: $apiBosscellNo, apiBosscomp: $apiBosscomp, apiAirsearch: $apiAirsearch, apiEDeckInfo: $apiEDeckInfo, apiLimitState: $apiLimitState, apiFromNo: $apiFromNo)';
+    return 'ReqMapStartApiDataEntity(apiCellData: $apiCellData, apiRashinFlg: $apiRashinFlg, apiRashinId: $apiRashinId, apiMapareaId: $apiMapareaId, apiMapinfoNo: $apiMapinfoNo, apiNo: $apiNo, apiColorNo: $apiColorNo, apiEventId: $apiEventId, apiEventKind: $apiEventKind, apiNext: $apiNext, apiBosscellNo: $apiBosscellNo, apiBosscomp: $apiBosscomp, apiAirsearch: $apiAirsearch, apiEDeckInfo: $apiEDeckInfo, apiEventmap: $apiEventmap, apiSelectRoute: $apiSelectRoute, apiLimitState: $apiLimitState, apiFromNo: $apiFromNo)';
   }
 
   @JsonKey(ignore: true)
@@ -683,7 +763,11 @@ abstract class _ReqMapStartApiDataEntity implements ReqMapStartApiDataEntity {
           @JsonKey(name: 'api_airsearch')
           required ReqMapStartApiDataApiAirsearchEntity apiAirsearch,
           @JsonKey(name: 'api_e_deck_info')
-          required List<ReqMapStartApiDataApiEDeckInfoEntity> apiEDeckInfo,
+          List<ReqMapStartApiDataApiEDeckInfoEntity>? apiEDeckInfo,
+          @JsonKey(name: 'api_eventmap')
+          ReqMapStartApiDataApiEventmapEntity? apiEventmap,
+          @JsonKey(name: 'api_select_route')
+          ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute,
           @JsonKey(name: 'api_limit_state') required int apiLimitState,
           @JsonKey(name: 'api_from_no') required int apiFromNo}) =
       _$_ReqMapStartApiDataEntity;
@@ -758,9 +842,19 @@ abstract class _ReqMapStartApiDataEntity implements ReqMapStartApiDataEntity {
   set apiAirsearch(ReqMapStartApiDataApiAirsearchEntity value);
   @override
   @JsonKey(name: 'api_e_deck_info')
-  List<ReqMapStartApiDataApiEDeckInfoEntity> get apiEDeckInfo;
+  List<ReqMapStartApiDataApiEDeckInfoEntity>? get apiEDeckInfo;
   @JsonKey(name: 'api_e_deck_info')
-  set apiEDeckInfo(List<ReqMapStartApiDataApiEDeckInfoEntity> value);
+  set apiEDeckInfo(List<ReqMapStartApiDataApiEDeckInfoEntity>? value);
+  @override
+  @JsonKey(name: 'api_eventmap')
+  ReqMapStartApiDataApiEventmapEntity? get apiEventmap;
+  @JsonKey(name: 'api_eventmap')
+  set apiEventmap(ReqMapStartApiDataApiEventmapEntity? value);
+  @override
+  @JsonKey(name: 'api_select_route')
+  ReqMapStartApiDataApiSelectRouteEntity? get apiSelectRoute;
+  @JsonKey(name: 'api_select_route')
+  set apiSelectRoute(ReqMapStartApiDataApiSelectRouteEntity? value);
   @override
   @JsonKey(name: 'api_limit_state')
   int get apiLimitState;
@@ -1357,5 +1451,359 @@ abstract class _ReqMapStartApiDataApiEDeckInfoEntity
   @JsonKey(ignore: true)
   _$$_ReqMapStartApiDataApiEDeckInfoEntityCopyWith<
           _$_ReqMapStartApiDataApiEDeckInfoEntity>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ReqMapStartApiDataApiEventmapEntity
+    _$ReqMapStartApiDataApiEventmapEntityFromJson(Map<String, dynamic> json) {
+  return _ReqMapStartApiDataApiEventmapEntity.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ReqMapStartApiDataApiEventmapEntity {
+  @JsonKey(name: 'api_max_maphp')
+  int get apiMaxMaphp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_max_maphp')
+  set apiMaxMaphp(int value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_now_maphp')
+  int get apiNowMaphp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_now_maphp')
+  set apiNowMaphp(int value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_dmg')
+  int get apiDmg => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_dmg')
+  set apiDmg(int value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReqMapStartApiDataApiEventmapEntityCopyWith<
+          ReqMapStartApiDataApiEventmapEntity>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res> {
+  factory $ReqMapStartApiDataApiEventmapEntityCopyWith(
+          ReqMapStartApiDataApiEventmapEntity value,
+          $Res Function(ReqMapStartApiDataApiEventmapEntity) then) =
+      _$ReqMapStartApiDataApiEventmapEntityCopyWithImpl<$Res,
+          ReqMapStartApiDataApiEventmapEntity>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'api_max_maphp') int apiMaxMaphp,
+      @JsonKey(name: 'api_now_maphp') int apiNowMaphp,
+      @JsonKey(name: 'api_dmg') int apiDmg});
+}
+
+/// @nodoc
+class _$ReqMapStartApiDataApiEventmapEntityCopyWithImpl<$Res,
+        $Val extends ReqMapStartApiDataApiEventmapEntity>
+    implements $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res> {
+  _$ReqMapStartApiDataApiEventmapEntityCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiMaxMaphp = null,
+    Object? apiNowMaphp = null,
+    Object? apiDmg = null,
+  }) {
+    return _then(_value.copyWith(
+      apiMaxMaphp: null == apiMaxMaphp
+          ? _value.apiMaxMaphp
+          : apiMaxMaphp // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiNowMaphp: null == apiNowMaphp
+          ? _value.apiNowMaphp
+          : apiNowMaphp // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiDmg: null == apiDmg
+          ? _value.apiDmg
+          : apiDmg // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReqMapStartApiDataApiEventmapEntityCopyWith<$Res>
+    implements $ReqMapStartApiDataApiEventmapEntityCopyWith<$Res> {
+  factory _$$_ReqMapStartApiDataApiEventmapEntityCopyWith(
+          _$_ReqMapStartApiDataApiEventmapEntity value,
+          $Res Function(_$_ReqMapStartApiDataApiEventmapEntity) then) =
+      __$$_ReqMapStartApiDataApiEventmapEntityCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'api_max_maphp') int apiMaxMaphp,
+      @JsonKey(name: 'api_now_maphp') int apiNowMaphp,
+      @JsonKey(name: 'api_dmg') int apiDmg});
+}
+
+/// @nodoc
+class __$$_ReqMapStartApiDataApiEventmapEntityCopyWithImpl<$Res>
+    extends _$ReqMapStartApiDataApiEventmapEntityCopyWithImpl<$Res,
+        _$_ReqMapStartApiDataApiEventmapEntity>
+    implements _$$_ReqMapStartApiDataApiEventmapEntityCopyWith<$Res> {
+  __$$_ReqMapStartApiDataApiEventmapEntityCopyWithImpl(
+      _$_ReqMapStartApiDataApiEventmapEntity _value,
+      $Res Function(_$_ReqMapStartApiDataApiEventmapEntity) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiMaxMaphp = null,
+    Object? apiNowMaphp = null,
+    Object? apiDmg = null,
+  }) {
+    return _then(_$_ReqMapStartApiDataApiEventmapEntity(
+      apiMaxMaphp: null == apiMaxMaphp
+          ? _value.apiMaxMaphp
+          : apiMaxMaphp // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiNowMaphp: null == apiNowMaphp
+          ? _value.apiNowMaphp
+          : apiNowMaphp // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiDmg: null == apiDmg
+          ? _value.apiDmg
+          : apiDmg // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ReqMapStartApiDataApiEventmapEntity
+    implements _ReqMapStartApiDataApiEventmapEntity {
+  _$_ReqMapStartApiDataApiEventmapEntity(
+      {@JsonKey(name: 'api_max_maphp') required this.apiMaxMaphp,
+      @JsonKey(name: 'api_now_maphp') required this.apiNowMaphp,
+      @JsonKey(name: 'api_dmg') required this.apiDmg});
+
+  factory _$_ReqMapStartApiDataApiEventmapEntity.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_ReqMapStartApiDataApiEventmapEntityFromJson(json);
+
+  @override
+  @JsonKey(name: 'api_max_maphp')
+  int apiMaxMaphp;
+  @override
+  @JsonKey(name: 'api_now_maphp')
+  int apiNowMaphp;
+  @override
+  @JsonKey(name: 'api_dmg')
+  int apiDmg;
+
+  @override
+  String toString() {
+    return 'ReqMapStartApiDataApiEventmapEntity(apiMaxMaphp: $apiMaxMaphp, apiNowMaphp: $apiNowMaphp, apiDmg: $apiDmg)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReqMapStartApiDataApiEventmapEntityCopyWith<
+          _$_ReqMapStartApiDataApiEventmapEntity>
+      get copyWith => __$$_ReqMapStartApiDataApiEventmapEntityCopyWithImpl<
+          _$_ReqMapStartApiDataApiEventmapEntity>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReqMapStartApiDataApiEventmapEntityToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ReqMapStartApiDataApiEventmapEntity
+    implements ReqMapStartApiDataApiEventmapEntity {
+  factory _ReqMapStartApiDataApiEventmapEntity(
+          {@JsonKey(name: 'api_max_maphp') required int apiMaxMaphp,
+          @JsonKey(name: 'api_now_maphp') required int apiNowMaphp,
+          @JsonKey(name: 'api_dmg') required int apiDmg}) =
+      _$_ReqMapStartApiDataApiEventmapEntity;
+
+  factory _ReqMapStartApiDataApiEventmapEntity.fromJson(
+          Map<String, dynamic> json) =
+      _$_ReqMapStartApiDataApiEventmapEntity.fromJson;
+
+  @override
+  @JsonKey(name: 'api_max_maphp')
+  int get apiMaxMaphp;
+  @JsonKey(name: 'api_max_maphp')
+  set apiMaxMaphp(int value);
+  @override
+  @JsonKey(name: 'api_now_maphp')
+  int get apiNowMaphp;
+  @JsonKey(name: 'api_now_maphp')
+  set apiNowMaphp(int value);
+  @override
+  @JsonKey(name: 'api_dmg')
+  int get apiDmg;
+  @JsonKey(name: 'api_dmg')
+  set apiDmg(int value);
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReqMapStartApiDataApiEventmapEntityCopyWith<
+          _$_ReqMapStartApiDataApiEventmapEntity>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ReqMapStartApiDataApiSelectRouteEntity
+    _$ReqMapStartApiDataApiSelectRouteEntityFromJson(
+        Map<String, dynamic> json) {
+  return _ReqMapStartApiDataApiSelectRouteEntity.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ReqMapStartApiDataApiSelectRouteEntity {
+  @JsonKey(name: 'api_select_cells')
+  List<int> get apiSelectCells => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_select_cells')
+  set apiSelectCells(List<int> value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReqMapStartApiDataApiSelectRouteEntityCopyWith<
+          ReqMapStartApiDataApiSelectRouteEntity>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res> {
+  factory $ReqMapStartApiDataApiSelectRouteEntityCopyWith(
+          ReqMapStartApiDataApiSelectRouteEntity value,
+          $Res Function(ReqMapStartApiDataApiSelectRouteEntity) then) =
+      _$ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl<$Res,
+          ReqMapStartApiDataApiSelectRouteEntity>;
+  @useResult
+  $Res call({@JsonKey(name: 'api_select_cells') List<int> apiSelectCells});
+}
+
+/// @nodoc
+class _$ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl<$Res,
+        $Val extends ReqMapStartApiDataApiSelectRouteEntity>
+    implements $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res> {
+  _$ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiSelectCells = null,
+  }) {
+    return _then(_value.copyWith(
+      apiSelectCells: null == apiSelectCells
+          ? _value.apiSelectCells
+          : apiSelectCells // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res>
+    implements $ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res> {
+  factory _$$_ReqMapStartApiDataApiSelectRouteEntityCopyWith(
+          _$_ReqMapStartApiDataApiSelectRouteEntity value,
+          $Res Function(_$_ReqMapStartApiDataApiSelectRouteEntity) then) =
+      __$$_ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: 'api_select_cells') List<int> apiSelectCells});
+}
+
+/// @nodoc
+class __$$_ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl<$Res>
+    extends _$ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl<$Res,
+        _$_ReqMapStartApiDataApiSelectRouteEntity>
+    implements _$$_ReqMapStartApiDataApiSelectRouteEntityCopyWith<$Res> {
+  __$$_ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl(
+      _$_ReqMapStartApiDataApiSelectRouteEntity _value,
+      $Res Function(_$_ReqMapStartApiDataApiSelectRouteEntity) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiSelectCells = null,
+  }) {
+    return _then(_$_ReqMapStartApiDataApiSelectRouteEntity(
+      apiSelectCells: null == apiSelectCells
+          ? _value.apiSelectCells
+          : apiSelectCells // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ReqMapStartApiDataApiSelectRouteEntity
+    implements _ReqMapStartApiDataApiSelectRouteEntity {
+  _$_ReqMapStartApiDataApiSelectRouteEntity(
+      {@JsonKey(name: 'api_select_cells') required this.apiSelectCells});
+
+  factory _$_ReqMapStartApiDataApiSelectRouteEntity.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_ReqMapStartApiDataApiSelectRouteEntityFromJson(json);
+
+  @override
+  @JsonKey(name: 'api_select_cells')
+  List<int> apiSelectCells;
+
+  @override
+  String toString() {
+    return 'ReqMapStartApiDataApiSelectRouteEntity(apiSelectCells: $apiSelectCells)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReqMapStartApiDataApiSelectRouteEntityCopyWith<
+          _$_ReqMapStartApiDataApiSelectRouteEntity>
+      get copyWith => __$$_ReqMapStartApiDataApiSelectRouteEntityCopyWithImpl<
+          _$_ReqMapStartApiDataApiSelectRouteEntity>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReqMapStartApiDataApiSelectRouteEntityToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ReqMapStartApiDataApiSelectRouteEntity
+    implements ReqMapStartApiDataApiSelectRouteEntity {
+  factory _ReqMapStartApiDataApiSelectRouteEntity(
+          {@JsonKey(name: 'api_select_cells')
+          required List<int> apiSelectCells}) =
+      _$_ReqMapStartApiDataApiSelectRouteEntity;
+
+  factory _ReqMapStartApiDataApiSelectRouteEntity.fromJson(
+          Map<String, dynamic> json) =
+      _$_ReqMapStartApiDataApiSelectRouteEntity.fromJson;
+
+  @override
+  @JsonKey(name: 'api_select_cells')
+  List<int> get apiSelectCells;
+  @JsonKey(name: 'api_select_cells')
+  set apiSelectCells(List<int> value);
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReqMapStartApiDataApiSelectRouteEntityCopyWith<
+          _$_ReqMapStartApiDataApiSelectRouteEntity>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -42,10 +42,18 @@ _$_ReqMapStartApiDataEntity _$$_ReqMapStartApiDataEntityFromJson(
       apiBosscomp: json['api_bosscomp'] as int,
       apiAirsearch: ReqMapStartApiDataApiAirsearchEntity.fromJson(
           json['api_airsearch'] as Map<String, dynamic>),
-      apiEDeckInfo: (json['api_e_deck_info'] as List<dynamic>)
-          .map((e) => ReqMapStartApiDataApiEDeckInfoEntity.fromJson(
+      apiEDeckInfo: (json['api_e_deck_info'] as List<dynamic>?)
+          ?.map((e) => ReqMapStartApiDataApiEDeckInfoEntity.fromJson(
               e as Map<String, dynamic>))
           .toList(),
+      apiEventmap: json['api_eventmap'] == null
+          ? null
+          : ReqMapStartApiDataApiEventmapEntity.fromJson(
+              json['api_eventmap'] as Map<String, dynamic>),
+      apiSelectRoute: json['api_select_route'] == null
+          ? null
+          : ReqMapStartApiDataApiSelectRouteEntity.fromJson(
+              json['api_select_route'] as Map<String, dynamic>),
       apiLimitState: json['api_limit_state'] as int,
       apiFromNo: json['api_from_no'] as int,
     );
@@ -67,6 +75,8 @@ Map<String, dynamic> _$$_ReqMapStartApiDataEntityToJson(
       'api_bosscomp': instance.apiBosscomp,
       'api_airsearch': instance.apiAirsearch,
       'api_e_deck_info': instance.apiEDeckInfo,
+      'api_eventmap': instance.apiEventmap,
+      'api_select_route': instance.apiSelectRoute,
       'api_limit_state': instance.apiLimitState,
       'api_from_no': instance.apiFromNo,
     };
@@ -120,4 +130,36 @@ Map<String, dynamic> _$$_ReqMapStartApiDataApiEDeckInfoEntityToJson(
     <String, dynamic>{
       'api_kind': instance.apiKind,
       'api_ship_ids': instance.apiShipIds,
+    };
+
+_$_ReqMapStartApiDataApiEventmapEntity
+    _$$_ReqMapStartApiDataApiEventmapEntityFromJson(
+            Map<String, dynamic> json) =>
+        _$_ReqMapStartApiDataApiEventmapEntity(
+          apiMaxMaphp: json['api_max_maphp'] as int,
+          apiNowMaphp: json['api_now_maphp'] as int,
+          apiDmg: json['api_dmg'] as int,
+        );
+
+Map<String, dynamic> _$$_ReqMapStartApiDataApiEventmapEntityToJson(
+        _$_ReqMapStartApiDataApiEventmapEntity instance) =>
+    <String, dynamic>{
+      'api_max_maphp': instance.apiMaxMaphp,
+      'api_now_maphp': instance.apiNowMaphp,
+      'api_dmg': instance.apiDmg,
+    };
+
+_$_ReqMapStartApiDataApiSelectRouteEntity
+    _$$_ReqMapStartApiDataApiSelectRouteEntityFromJson(
+            Map<String, dynamic> json) =>
+        _$_ReqMapStartApiDataApiSelectRouteEntity(
+          apiSelectCells: (json['api_select_cells'] as List<dynamic>)
+              .map((e) => e as int)
+              .toList(),
+        );
+
+Map<String, dynamic> _$$_ReqMapStartApiDataApiSelectRouteEntityToJson(
+        _$_ReqMapStartApiDataApiSelectRouteEntity instance) =>
+    <String, dynamic>{
+      'api_select_cells': instance.apiSelectCells,
     };
