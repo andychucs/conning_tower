@@ -282,10 +282,10 @@ mixin _$ReqMapNextApiDataEntity {
   set apiAirsearch(ReqMapNextApiDataApiAirsearchEntity value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_e_deck_info')
-  List<ReqMapNextApiDataApiEDeckInfoEntity> get apiEDeckInfo =>
+  List<ReqMapNextApiDataApiEDeckInfoEntity>? get apiEDeckInfo =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_e_deck_info')
-  set apiEDeckInfo(List<ReqMapNextApiDataApiEDeckInfoEntity> value) =>
+  set apiEDeckInfo(List<ReqMapNextApiDataApiEDeckInfoEntity>? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_limit_state')
   int get apiLimitState => throw _privateConstructorUsedError;
@@ -325,7 +325,7 @@ abstract class $ReqMapNextApiDataEntityCopyWith<$Res> {
       @JsonKey(name: 'api_airsearch')
       ReqMapNextApiDataApiAirsearchEntity apiAirsearch,
       @JsonKey(name: 'api_e_deck_info')
-      List<ReqMapNextApiDataApiEDeckInfoEntity> apiEDeckInfo,
+      List<ReqMapNextApiDataApiEDeckInfoEntity>? apiEDeckInfo,
       @JsonKey(name: 'api_limit_state') int apiLimitState,
       @JsonKey(name: 'api_ration_flag') int? apiRationFlag});
 
@@ -360,7 +360,7 @@ class _$ReqMapNextApiDataEntityCopyWithImpl<$Res,
     Object? apiCommentKind = null,
     Object? apiProductionKind = null,
     Object? apiAirsearch = null,
-    Object? apiEDeckInfo = null,
+    Object? apiEDeckInfo = freezed,
     Object? apiLimitState = null,
     Object? apiRationFlag = freezed,
   }) {
@@ -421,10 +421,10 @@ class _$ReqMapNextApiDataEntityCopyWithImpl<$Res,
           ? _value.apiAirsearch
           : apiAirsearch // ignore: cast_nullable_to_non_nullable
               as ReqMapNextApiDataApiAirsearchEntity,
-      apiEDeckInfo: null == apiEDeckInfo
+      apiEDeckInfo: freezed == apiEDeckInfo
           ? _value.apiEDeckInfo
           : apiEDeckInfo // ignore: cast_nullable_to_non_nullable
-              as List<ReqMapNextApiDataApiEDeckInfoEntity>,
+              as List<ReqMapNextApiDataApiEDeckInfoEntity>?,
       apiLimitState: null == apiLimitState
           ? _value.apiLimitState
           : apiLimitState // ignore: cast_nullable_to_non_nullable
@@ -471,7 +471,7 @@ abstract class _$$_ReqMapNextApiDataEntityCopyWith<$Res>
       @JsonKey(name: 'api_airsearch')
       ReqMapNextApiDataApiAirsearchEntity apiAirsearch,
       @JsonKey(name: 'api_e_deck_info')
-      List<ReqMapNextApiDataApiEDeckInfoEntity> apiEDeckInfo,
+      List<ReqMapNextApiDataApiEDeckInfoEntity>? apiEDeckInfo,
       @JsonKey(name: 'api_limit_state') int apiLimitState,
       @JsonKey(name: 'api_ration_flag') int? apiRationFlag});
 
@@ -505,7 +505,7 @@ class __$$_ReqMapNextApiDataEntityCopyWithImpl<$Res>
     Object? apiCommentKind = null,
     Object? apiProductionKind = null,
     Object? apiAirsearch = null,
-    Object? apiEDeckInfo = null,
+    Object? apiEDeckInfo = freezed,
     Object? apiLimitState = null,
     Object? apiRationFlag = freezed,
   }) {
@@ -566,10 +566,10 @@ class __$$_ReqMapNextApiDataEntityCopyWithImpl<$Res>
           ? _value.apiAirsearch
           : apiAirsearch // ignore: cast_nullable_to_non_nullable
               as ReqMapNextApiDataApiAirsearchEntity,
-      apiEDeckInfo: null == apiEDeckInfo
+      apiEDeckInfo: freezed == apiEDeckInfo
           ? _value.apiEDeckInfo
           : apiEDeckInfo // ignore: cast_nullable_to_non_nullable
-              as List<ReqMapNextApiDataApiEDeckInfoEntity>,
+              as List<ReqMapNextApiDataApiEDeckInfoEntity>?,
       apiLimitState: null == apiLimitState
           ? _value.apiLimitState
           : apiLimitState // ignore: cast_nullable_to_non_nullable
@@ -600,7 +600,7 @@ class _$_ReqMapNextApiDataEntity implements _ReqMapNextApiDataEntity {
       @JsonKey(name: 'api_comment_kind') required this.apiCommentKind,
       @JsonKey(name: 'api_production_kind') required this.apiProductionKind,
       @JsonKey(name: 'api_airsearch') required this.apiAirsearch,
-      @JsonKey(name: 'api_e_deck_info') required this.apiEDeckInfo,
+      @JsonKey(name: 'api_e_deck_info') this.apiEDeckInfo,
       @JsonKey(name: 'api_limit_state') required this.apiLimitState,
       @JsonKey(name: 'api_ration_flag') this.apiRationFlag});
 
@@ -651,7 +651,7 @@ class _$_ReqMapNextApiDataEntity implements _ReqMapNextApiDataEntity {
   ReqMapNextApiDataApiAirsearchEntity apiAirsearch;
   @override
   @JsonKey(name: 'api_e_deck_info')
-  List<ReqMapNextApiDataApiEDeckInfoEntity> apiEDeckInfo;
+  List<ReqMapNextApiDataApiEDeckInfoEntity>? apiEDeckInfo;
   @override
   @JsonKey(name: 'api_limit_state')
   int apiLimitState;
@@ -698,7 +698,7 @@ abstract class _ReqMapNextApiDataEntity implements ReqMapNextApiDataEntity {
           @JsonKey(name: 'api_airsearch')
           required ReqMapNextApiDataApiAirsearchEntity apiAirsearch,
           @JsonKey(name: 'api_e_deck_info')
-          required List<ReqMapNextApiDataApiEDeckInfoEntity> apiEDeckInfo,
+          List<ReqMapNextApiDataApiEDeckInfoEntity>? apiEDeckInfo,
           @JsonKey(name: 'api_limit_state') required int apiLimitState,
           @JsonKey(name: 'api_ration_flag') int? apiRationFlag}) =
       _$_ReqMapNextApiDataEntity;
@@ -778,9 +778,9 @@ abstract class _ReqMapNextApiDataEntity implements ReqMapNextApiDataEntity {
   set apiAirsearch(ReqMapNextApiDataApiAirsearchEntity value);
   @override
   @JsonKey(name: 'api_e_deck_info')
-  List<ReqMapNextApiDataApiEDeckInfoEntity> get apiEDeckInfo;
+  List<ReqMapNextApiDataApiEDeckInfoEntity>? get apiEDeckInfo;
   @JsonKey(name: 'api_e_deck_info')
-  set apiEDeckInfo(List<ReqMapNextApiDataApiEDeckInfoEntity> value);
+  set apiEDeckInfo(List<ReqMapNextApiDataApiEDeckInfoEntity>? value);
   @override
   @JsonKey(name: 'api_limit_state')
   int get apiLimitState;

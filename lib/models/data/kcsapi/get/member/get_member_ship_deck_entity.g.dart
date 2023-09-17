@@ -103,6 +103,8 @@ _$_GetMemberShipDeckApiDataApiShipDataEntity
           apiLocked: json['api_locked'] as int,
           apiLockedEquip: json['api_locked_equip'] as int,
           apiSallyArea: json['api_sally_area'] as int,
+          apiSlotitemEx: json['api_slotitem_ex'] as int?,
+          apiSlotitemLevel: json['api_slotitem_level'] as int?,
         );
 
 Map<String, dynamic> _$$_GetMemberShipDeckApiDataApiShipDataEntityToJson(
@@ -140,6 +142,8 @@ Map<String, dynamic> _$$_GetMemberShipDeckApiDataApiShipDataEntityToJson(
       'api_locked': instance.apiLocked,
       'api_locked_equip': instance.apiLockedEquip,
       'api_sally_area': instance.apiSallyArea,
+      'api_slotitem_ex': instance.apiSlotitemEx,
+      'api_slotitem_level': instance.apiSlotitemLevel,
     };
 
 _$_GetMemberShipDeckApiDataApiDeckDataEntity

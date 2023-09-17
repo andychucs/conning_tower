@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
@@ -85,15 +86,20 @@ class KancolleData {
     }
 
     if (model is GetMemberShipDeckEntity) {
-      if (model.apiData.apiDeckData.length > 1) {
-        for (var squad in model.apiData.apiDeckData) {
-          int index = squad.apiId - 1;
-          var ships = model.apiData.apiShipData.where((element) => squad.apiShip.contains(element.apiId)).toList();
-          updateSquadShips(index, ships);
+      for (var squad in model.apiData.apiDeckData) {
+        int index = squad.apiId - 1;
+        List<ShipData> ships = [];
+        for (var shipsId in squad.apiShip) {
+          if (shipsId != -1) {
+            ships.add(model.apiData.apiShipData
+              .firstWhere((element) => element.apiId == shipsId));
+          }
         }
+        // var ships = model.apiData.apiShipData
+        //     .where((element) => squad.apiShip.contains(element.apiId))
+        //     .toList();
+        updateSquadShips(index, ships);
       }
-      int index = model.apiData.apiDeckData.first.apiId - 1; // 单舰队
-      updateSquadShips(index, model.apiData.apiShipData);
     }
 
     if (model is PortEntity) {
@@ -104,7 +110,6 @@ class KancolleData {
       for (var data in model.apiData.apiDeckPort) {
         int id = data.apiId;
         updateSquads(data, id);
-        log(squads.last.toString());
         if (id > 1) {
           updateOperationQueue(data, id);
         }
@@ -126,7 +131,7 @@ class KancolleData {
       }
 
       if (_shouldAlertSource(source)) addAlert();
-    } catch (e,s) {
+    } catch (e, s) {
       String errorMsg = e.toString();
       String st = '';
       if (s.toString().contains('\n')) {
@@ -160,27 +165,21 @@ class KancolleData {
   }
 
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
-    if (apiShip.length > fleet.ships.length) {
-      List<Ship> allShips = [];
-      for (var data in apiShip) {
-        late String shipName;
-        try {
-          shipName = kcwikiData.ships.firstWhere((element) => element.id == data.apiShipId).name ?? "Ship No.${data.apiShipId}";
-        } catch (e) {
-          shipName = "Ship No.${data.apiShipId}";
-        }
-        Ship ship = Ship(
-            uid: data.apiId,
-            shipId: data.apiShipId,
-            name: shipName,
-            level: data.apiLv,
-            exp: data.apiExp,
-            nowHP: data.apiNowhp,
-            maxHP: data.apiMaxhp);
-        allShips.add(ship);
+    List<Ship> allShips = [];
+    for (var data in apiShip) {
+      late String shipName;
+      try {
+        shipName = kcwikiData.ships
+                .firstWhere((element) => element.id == data.apiShipId)
+                .name ??
+            "Ship No.${data.apiShipId}";
+      } catch (e) {
+        log(e.toString());
+        shipName = "Ship No.${data.apiShipId}";
       }
-      fleet.ships = allShips;
+      allShips.add(Ship.fromApi(data, shipName));
     }
+    fleet.ships = allShips;
   }
 
   void updateOperationQueue(DeckData data, int id) {
@@ -203,42 +202,34 @@ class KancolleData {
       for (int uid in data.apiShip)
         if (uid != -1) shipsMap[uid]!
     ];
+    var squad = Squad(
+      id: id,
+      name: data.apiName,
+      operation: data.apiMission[1],
+      ships: ships,
+    );
+    log(squad.toString());
     if (id > squads.length) {
-      squads.add(Squad(
-        id: id,
-        name: data.apiName,
-        operation: data.apiMission[1],
-        ships: ships,
-      ));
+      squads.add(squad);
     } else {
-      squads[id - 1] = Squad(
-        id: id,
-        name: data.apiName,
-        operation: data.apiMission[1],
-        ships: ships,
-      );
+      squads[id - 1] = squad;
     }
   }
 
-  void updateSquadShips(
-      int index, List<GetMemberShipDeckApiDataApiShipDataEntity> apiShipData) {
+  void updateSquadShips(int index, List<ShipData> apiShipData) {
     Squad squad = squads[index].copyWith();
     squad.ships.clear();
     for (var data in apiShipData) {
       late String shipName;
       try {
-        shipName = kcwikiData.ships.firstWhere((element) => element.id == data.apiShipId).name ?? "Ship No.${data.apiShipId}";
+        shipName = kcwikiData.ships
+                .firstWhere((element) => element.id == data.apiShipId)
+                .name ??
+            "Ship No.${data.apiShipId}";
       } catch (e) {
         shipName = "Ship No.${data.apiShipId}";
       }
-      Ship ship = Ship(
-          uid: data.apiId,
-          shipId: data.apiShipId,
-          name: shipName,
-          level: data.apiLv,
-          exp: data.apiExp,
-          nowHP: data.apiNowhp,
-          maxHP: data.apiMaxhp);
+      Ship ship = Ship.fromApi(data, shipName);
       log(ship.toString());
       log(ship.damaged().toString());
       squad.ships.add(ship);
