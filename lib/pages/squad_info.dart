@@ -120,6 +120,10 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
             additionalInfo: Text('${_selectedShip.scout?[0]}/${_selectedShip.scout?[1]}'),
           ),
           CupertinoListTile(
+            title: Text("射程"),
+            additionalInfo: Text(_selectedShip.attackRangeLevel),
+          ),
+          CupertinoListTile(
             title: Text("運"),
             additionalInfo: Text('${_selectedShip.luck?[0]}/${_selectedShip.luck?[1]}'),
           ),

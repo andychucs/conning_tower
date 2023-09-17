@@ -23,8 +23,9 @@ mixin _$Ship {
   List<int> get exp => throw _privateConstructorUsedError;
   int get nowHP => throw _privateConstructorUsedError;
   int get maxHP => throw _privateConstructorUsedError;
-  int? get speed => throw _privateConstructorUsedError; // required int apiLeng,
-// required List<int> apiSlot,
+  int? get speed => throw _privateConstructorUsedError;
+  int? get attackRange =>
+      throw _privateConstructorUsedError; // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,
@@ -63,6 +64,7 @@ abstract class $ShipCopyWith<$Res> {
       int nowHP,
       int maxHP,
       int? speed,
+      int? attackRange,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -95,6 +97,7 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
     Object? nowHP = null,
     Object? maxHP = null,
     Object? speed = freezed,
+    Object? attackRange = freezed,
     Object? condition = freezed,
     Object? attack = freezed,
     Object? attackT = freezed,
@@ -137,6 +140,10 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
       speed: freezed == speed
           ? _value.speed
           : speed // ignore: cast_nullable_to_non_nullable
+              as int?,
+      attackRange: freezed == attackRange
+          ? _value.attackRange
+          : attackRange // ignore: cast_nullable_to_non_nullable
               as int?,
       condition: freezed == condition
           ? _value.condition
@@ -193,6 +200,7 @@ abstract class _$$_ShipCopyWith<$Res> implements $ShipCopyWith<$Res> {
       int nowHP,
       int maxHP,
       int? speed,
+      int? attackRange,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -221,6 +229,7 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
     Object? nowHP = null,
     Object? maxHP = null,
     Object? speed = freezed,
+    Object? attackRange = freezed,
     Object? condition = freezed,
     Object? attack = freezed,
     Object? attackT = freezed,
@@ -263,6 +272,10 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
       speed: freezed == speed
           ? _value.speed
           : speed // ignore: cast_nullable_to_non_nullable
+              as int?,
+      attackRange: freezed == attackRange
+          ? _value.attackRange
+          : attackRange // ignore: cast_nullable_to_non_nullable
               as int?,
       condition: freezed == condition
           ? _value.condition
@@ -316,6 +329,7 @@ class _$_Ship extends _Ship {
       required this.nowHP,
       required this.maxHP,
       this.speed,
+      this.attackRange,
       this.condition,
       final List<int>? attack,
       final List<int>? attackT,
@@ -359,7 +373,8 @@ class _$_Ship extends _Ship {
   final int maxHP;
   @override
   final int? speed;
-// required int apiLeng,
+  @override
+  final int? attackRange;
 // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
@@ -455,7 +470,7 @@ class _$_Ship extends _Ship {
 
   @override
   String toString() {
-    return 'Ship(uid: $uid, shipId: $shipId, name: $name, level: $level, exp: $exp, nowHP: $nowHP, maxHP: $maxHP, speed: $speed, condition: $condition, attack: $attack, attackT: $attackT, antiAircraft: $antiAircraft, armor: $armor, evasion: $evasion, antiSubmarine: $antiSubmarine, scout: $scout, luck: $luck)';
+    return 'Ship(uid: $uid, shipId: $shipId, name: $name, level: $level, exp: $exp, nowHP: $nowHP, maxHP: $maxHP, speed: $speed, attackRange: $attackRange, condition: $condition, attack: $attack, attackT: $attackT, antiAircraft: $antiAircraft, armor: $armor, evasion: $evasion, antiSubmarine: $antiSubmarine, scout: $scout, luck: $luck)';
   }
 
   @override
@@ -471,6 +486,8 @@ class _$_Ship extends _Ship {
             (identical(other.nowHP, nowHP) || other.nowHP == nowHP) &&
             (identical(other.maxHP, maxHP) || other.maxHP == maxHP) &&
             (identical(other.speed, speed) || other.speed == speed) &&
+            (identical(other.attackRange, attackRange) ||
+                other.attackRange == attackRange) &&
             (identical(other.condition, condition) ||
                 other.condition == condition) &&
             const DeepCollectionEquality().equals(other._attack, _attack) &&
@@ -496,6 +513,7 @@ class _$_Ship extends _Ship {
       nowHP,
       maxHP,
       speed,
+      attackRange,
       condition,
       const DeepCollectionEquality().hash(_attack),
       const DeepCollectionEquality().hash(_attackT),
@@ -523,6 +541,7 @@ abstract class _Ship extends Ship {
       required final int nowHP,
       required final int maxHP,
       final int? speed,
+      final int? attackRange,
       final int? condition,
       final List<int>? attack,
       final List<int>? attackT,
@@ -550,8 +569,9 @@ abstract class _Ship extends Ship {
   int get maxHP;
   @override
   int? get speed;
-  @override // required int apiLeng,
-// required List<int> apiSlot,
+  @override
+  int? get attackRange;
+  @override // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,

@@ -19,7 +19,7 @@ class Ship with _$Ship {
     required int nowHP,
     required int maxHP,
     int? speed,
-    // required int apiLeng,
+    int? attackRange,
     // required List<int> apiSlot,
     // required List<int> apiOnslot,
     // required int apiSlotEx,
@@ -77,6 +77,16 @@ class Ship with _$Ship {
     return 'N/A';
   }
 
+  String get attackRangeLevel {
+    if (attackRange == 5) return "超長+";
+    if (attackRange == 4) return "超長";
+    if (attackRange == 3) return "長";
+    if (attackRange == 2) return "中";
+    if (attackRange == 1) return "短";
+    if (attackRange == 0) return "無";
+    return 'N/A';
+  }
+
   factory Ship.fromApi(ShipData data, String shipName) {
     return Ship(
         uid: data.apiId,
@@ -96,6 +106,7 @@ class Ship with _$Ship {
         evasion: data.apiKaihi,
         antiSubmarine: data.apiTaisen,
         scout: data.apiSakuteki,
-        luck: data.apiLucky);
+        luck: data.apiLucky,
+        attackRange: data.apiLeng);
   }
 }
