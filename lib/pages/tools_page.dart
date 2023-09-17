@@ -390,7 +390,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                                 CupertinoListTile(
                                     title: Text(
                                         S.of(context).Game)),
-                                if (loadedDMM || kIsOpenSource)
+                                if (kIsOpenSource)
                                   CupertinoListTile(
                                     title: Text("KC"),
                                     leading: const DummyIcon(
