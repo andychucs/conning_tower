@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
@@ -14,6 +15,11 @@ class OperationPage extends ConsumerWidget {
     Map<String, Task> taskMap = Map.fromIterable(
         ref.read(tasksStateProvider).items,
         key: (task) => task.id);
+    if (taskMap.isEmpty) {
+      Future((){
+        ref.watch(taskUtilProvider.notifier).loadLocalTasks();
+      });
+    }
     return OperationSchedule(taskMap: taskMap);
   }
 }

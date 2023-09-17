@@ -7,6 +7,7 @@ import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
+import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -68,7 +69,7 @@ class _KancollelistenSettingsState
                         context,
                         TaskInfoPage(
                             title: S.of(context).OperationData,
-                            previousPageTitle:'KC'));
+                            previousPageTitle: 'KC'));
                   },
                 ),
               ],
@@ -116,7 +117,12 @@ class FleetInfoPage extends ConsumerWidget {
                       CupertinoListTile(
                         title: Text(S.of(context).ShipData),
                         additionalInfo: kcwikiData.when(
-                          data: (data) => Text("${data.ships.length}"),
+                          data: (data) {
+                            Future((){
+                              ref.watch(kancolleDataProvider.notifier).update((state) => state.copyWith(kcwikiData: data));
+                            });
+                            return Text("${data.ships.length}");
+                          },
                           error: (e, s) => Text(S.of(context).Error),
                           loading: () => const CupertinoActivityIndicator(),
                         ),
@@ -215,7 +221,9 @@ class TaskInfoPage extends ConsumerWidget {
           middle: Text(title),
           previousPageTitle: previousPageTitle,
           trailing: GestureDetector(
-            onTap: () => ref.watch(taskUtilProvider.notifier).onDownloadData(url: kTaskUrlKC),
+            onTap: () => ref
+                .watch(taskUtilProvider.notifier)
+                .onDownloadData(url: kTaskUrlKC),
             child: const Icon(CupertinoIcons.refresh),
           ),
         ),
@@ -228,8 +236,9 @@ class TaskInfoPage extends ConsumerWidget {
                   return Center(
                     child: CupertinoButton(
                       child: Text(S.of(context).DownloadOperationData),
-                      onPressed: () =>
-                          ref.watch(taskUtilProvider.notifier).onDownloadData(url: kTaskUrlKC),
+                      onPressed: () => ref
+                          .watch(taskUtilProvider.notifier)
+                          .onDownloadData(url: kTaskUrlKC),
                     ),
                   );
                 }
