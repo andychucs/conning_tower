@@ -3,6 +3,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/photo_gallery.dart';
 import 'package:conning_tower/pages/port_info.dart';
+import 'package:conning_tower/pages/squad_info.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
 import 'package:conning_tower/pages/web_info_list.dart';
@@ -27,13 +28,15 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
       List<String> titles = [
         S.of(context).PhotoAlbum,
-        S.of(context).WebInfo,
-        S.of(context).TaskDashboardTitle
+        S.of(context).WebInfo
       ];
 
       if (kIsOpenSource) {
         titles.add("提督室");
         titles.add("遠征");
+        titles.add("艦隊");
+      } else {
+        titles.add(S.of(context).TaskDashboardTitle);
       }
 
       List<Widget> items = <Widget>[
@@ -50,13 +53,15 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
       List<Widget> children = [
         const PhotoGallery(),
-        const WebInfoList(),
-        const TaskDashboard()
+        const WebInfoList()
       ];
 
       if (kIsOpenSource) {
         children.add(const PortInfo());
         children.add(const OperationPage());
+        children.add(const SquadInfo());
+      } else {
+        children.add(const TaskDashboard());
       }
 
       return CupertinoPickerView(
