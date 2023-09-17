@@ -41,14 +41,13 @@ class TaskUtil extends _$TaskUtil {
     return _fetchTaskUtilState();
   }
 
-  Future<void> _loadLocalTasks() async {
+  Future<void> loadLocalTasks() async {
     try {
       final file = await _localJsonFile;
 
       String contents = await file.readAsString();
 
       debugPrint(contents);
-
 
       Tasks latestTasks = Tasks.fromJson(jsonDecode(contents));
 
@@ -84,7 +83,7 @@ class TaskUtil extends _$TaskUtil {
     TaskUtilState taskUtilState = baseTaskUtilState("default", url);
     try {
       if (isFirstOpen) {
-        await _loadLocalTasks();
+        await loadLocalTasks();
         await notification.requestPermissions();
         isFirstOpen = false;
       }
@@ -239,7 +238,6 @@ class TaskUtil extends _$TaskUtil {
     return Tasks(items: tasks);
   }
 
-
   Future<void> onPinTask(Task task) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
@@ -255,6 +253,7 @@ class TaskUtil extends _$TaskUtil {
         latestTasks = latestTasks.copyWith(items: items);
         debugPrint("after remove");
         debugPrint(latestTasks.toString());
+        ref.watch(tasksStateProvider.notifier).update((state) => latestTasks);
       }
       return _fetchTaskUtilState();
     });
@@ -275,7 +274,7 @@ class TaskUtil extends _$TaskUtil {
     }
   }
 
-  void onDownloadData() {
-    setTasksUrl(kTaskUrlExample);
+  void onDownloadData({String url = kTaskUrlExample}) {
+    setTasksUrl(url);
   }
 }

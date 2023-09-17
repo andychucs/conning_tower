@@ -40,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "艦橋是一款為瀏覽器遊戲設計的瀏覽器，可以定制您的屏幕並保持橫向桌面視圖。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加數據源"),
+        "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高級遊戲支援"),
+        "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
+            "本團隊未運營任何遊戲，該功能基於公開數據和第三方庫、web運行環境實現，不能保證準確性。如果你有想要我們支援的遊戲及功能，歡迎聯繫技術支援。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再顯示"),
         "AppBack": MessageLookupByLibrary.simpleMessage("上一頁"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
@@ -90,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("在主頁顯示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
-            "如需使用KanColle數據監聽功能，為保證功能可用務必前往設定-KanColle數據監聽中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
+            "如需使用KanColle數據監聽功能，為保證功能可用務必前往工具-高級遊戲支援中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hant/new"),
         "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下載艦隊資料"),
@@ -102,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全螢幕失敗"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全螢幕成功"),
+        "Game": MessageLookupByLibrary.simpleMessage("遊戲"),
         "GameMute": MessageLookupByLibrary.simpleMessage("遊戲靜音"),
         "GameUnmute": MessageLookupByLibrary.simpleMessage("遊戲解除靜音"),
         "InvalidJsonError": MessageLookupByLibrary.simpleMessage("無效的JSON格式。"),
@@ -127,8 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
         "KCViewFuncMsgPageStart": m3,
-        "KanColleDataListener":
-            MessageLookupByLibrary.simpleMessage("KanColle資料監聽"),
+        "KanColleDataListener": MessageLookupByLibrary.simpleMessage("資料監聽"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("淺色主題"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊「工具-Web-重定向」。"),
@@ -176,9 +179,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任務"),
         "TaskNotificationAdded":
             MessageLookupByLibrary.simpleMessage("任務通知添加成功"),
+        "TaskPageOperationTip":
+            MessageLookupByLibrary.simpleMessage("如需新增以下任務的推送通知，請點擊該項目"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

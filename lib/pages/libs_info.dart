@@ -25,6 +25,9 @@ class LibsInfoState extends State<LibsInfo> {
     for (final String filePath in yamlFilePaths) {
       final String yamlString = await rootBundle.loadString(filePath);
       YamlMap yamlMap = loadYaml(yamlString);
+      if (yamlMap.containsKey('used')) {
+        if (!yamlMap['used']) continue;
+      }
       yamlFilesList.add(yamlMap);
     }
     return yamlFilesList;

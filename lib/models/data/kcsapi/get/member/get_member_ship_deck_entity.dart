@@ -1,4 +1,5 @@
 import 'package:conning_tower/models/data/kcsapi/deck_data.dart';
+import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'get_member_ship_deck_entity.freezed.dart';
@@ -34,7 +35,7 @@ class GetMemberShipDeckApiDataEntity with _$GetMemberShipDeckApiDataEntity {
 
 @unfreezed
 class GetMemberShipDeckApiDataApiShipDataEntity
-    with _$GetMemberShipDeckApiDataApiShipDataEntity {
+    with _$GetMemberShipDeckApiDataApiShipDataEntity implements ShipData{
   factory GetMemberShipDeckApiDataApiShipDataEntity({
     @JsonKey(name: 'api_id') required int apiId,
     @JsonKey(name: 'api_sortno') required int apiSortno,
@@ -68,6 +69,8 @@ class GetMemberShipDeckApiDataApiShipDataEntity
     @JsonKey(name: 'api_locked') required int apiLocked,
     @JsonKey(name: 'api_locked_equip') required int apiLockedEquip,
     @JsonKey(name: 'api_sally_area') required int apiSallyArea,
+    @JsonKey(name: 'api_slotitem_ex') int? apiSlotitemEx,
+    @JsonKey(name: 'api_slotitem_level') int? apiSlotitemLevel,
   }) = _GetMemberShipDeckApiDataApiShipDataEntity;
 
   factory GetMemberShipDeckApiDataApiShipDataEntity.fromJson(

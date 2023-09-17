@@ -3,14 +3,15 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/photo_gallery.dart';
 import 'package:conning_tower/pages/port_info.dart';
+import 'package:conning_tower/pages/squad_info.dart';
+import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
-import 'package:conning_tower/widgets/web_info_list.dart';
+import 'package:conning_tower/pages/web_info_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
-  const Dashboard(
-      {super.key, required this.notifyParent});
+  const Dashboard({super.key, required this.notifyParent});
 
   final VoidCallback notifyParent;
 
@@ -27,12 +28,15 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
       List<String> titles = [
         S.of(context).PhotoAlbum,
-        S.of(context).WebInfo,
+        S.of(context).WebInfo
       ];
 
       if (kIsOpenSource) {
         titles.add("提督室");
         titles.add("遠征");
+        titles.add("艦隊");
+      } else {
+        titles.add(S.of(context).TaskDashboardTitle);
       }
 
       List<Widget> items = <Widget>[
@@ -49,14 +53,16 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
       List<Widget> children = [
         const PhotoGallery(),
-        const WebInfoList(),
+        const WebInfoList()
       ];
 
       if (kIsOpenSource) {
         children.add(const PortInfo());
         children.add(const OperationPage());
+        children.add(const SquadInfo());
+      } else {
+        children.add(const TaskDashboard());
       }
-
 
       return CupertinoPickerView(
         items: items,
@@ -64,5 +70,20 @@ class _DashboardState extends ConsumerState<Dashboard> {
         children: children,
       );
     });
+  }
+}
+
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key, required this.notifyParent});
+  final VoidCallback notifyParent;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+        navigationBar: const CupertinoNavigationBar(
+          backgroundColor: CupertinoColors.systemGroupedBackground,
+          border: null,
+        ),
+        child: Dashboard(notifyParent: notifyParent));
   }
 }

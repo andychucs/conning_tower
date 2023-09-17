@@ -40,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "舰桥是一款可定制屏幕并保持电脑模式横向画面使用的网页游戏专用浏览器。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加数据源"),
+        "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高级游戏支持"),
+        "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
+            "本团队未运营任何游戏，该功能基于公开数据和第三方库、web运行环境实现，不能保证准确性。如果你有想要我们支持的游戏及功能，欢迎联系技术支持。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("不再显示"),
         "AppBack": MessageLookupByLibrary.simpleMessage("返回"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("底部上移"),
@@ -90,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("在主页显示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
-            "如需使用KanColle数据监听功能，为保证功能可用务必前往设置-KanColle数据监听中下载数据并打开开关（如果没有打开），如遇异常请在设置中重置应用数据。"),
+            "如需使用KanColle数据监听功能，为保证功能可用务必前往工具-高级游戏支持中下载数据并打开开关（如果没有打开），如遇异常请在设置中重置应用数据。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hans/new"),
         "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下载舰队数据"),
@@ -102,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("屏幕调整失败"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("屏幕调整完毕"),
+        "Game": MessageLookupByLibrary.simpleMessage("游戏"),
         "GameMute": MessageLookupByLibrary.simpleMessage("关闭"),
         "GameUnmute": MessageLookupByLibrary.simpleMessage("打开"),
         "InvalidJsonError": MessageLookupByLibrary.simpleMessage("无效的JSON格式。"),
@@ -127,8 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
         "KCViewFuncMsgPageStart": m3,
-        "KanColleDataListener":
-            MessageLookupByLibrary.simpleMessage("KanColle数据监听"),
+        "KanColleDataListener": MessageLookupByLibrary.simpleMessage("数据监听"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),
@@ -175,9 +178,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截图"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任务提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任务"),
         "TaskNotificationAdded":
             MessageLookupByLibrary.simpleMessage("任务通知添加成功"),
+        "TaskPageOperationTip":
+            MessageLookupByLibrary.simpleMessage("如需添加以下任务的推送通知请点按该条目"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("任务提醒"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("任务提醒"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

@@ -71,6 +71,7 @@ dependencies:
   popover: ^0.2.8+2
   photo_manager: ^2.7.1
   share_plus: ^7.1.0
+  shake: ^2.2.0
 
 dev_dependencies:
   flutter_test:

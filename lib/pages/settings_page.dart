@@ -2,7 +2,6 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/pages/kancolle_listen_settings.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/theme_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
@@ -233,18 +232,8 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               },
             ),
             CupertinoListTile(
-              title: Text(S.of(context).KanColleDataListener),
-              leading: const DummyIcon(
-                  color: CupertinoColors.activeBlue, icon: Icons.anchor),
-              trailing: const CupertinoListTileChevron(),
-              subtitle: const Text("Only on Android"),
-              onTap: () async {
-                await navigatorToCupertino(
-                    context, const KancollelistenSettings());
-              },
-            ),
-            CupertinoListTile(
-              title: Text(S.of(context).DashboardSetting),
+              title: const Text('Dashboard'),
+              subtitle: Text(S.of(context).DashboardSetting),
               leading: const DummyIcon(
                   color: CupertinoColors.activeBlue,
                   icon: CupertinoIcons.slider_horizontal_below_rectangle),

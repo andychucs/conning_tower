@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
+import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -151,7 +152,15 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
               },
               child: Text(S.of(context).PhotoAlbumPermissionRequest),
             ),
-            Text(S.of(context).PhotoAlbumPermissionReminder),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(S.of(context).PhotoAlbumPermissionReminder,
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.normal,
+                    color: CupertinoDynamicColor.resolve(kHeaderFooterColor, context))),
+            ),
           ],
         ),
       );

@@ -1,9 +1,13 @@
+import 'dart:io';
+
+import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
+import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -21,19 +25,23 @@ class _KancollelistenSettingsState
   @override
   Widget build(BuildContext context) {
     return CupertinoActionPage(
-        title: S.of(context).KanColleDataListener,
-        previousPageTitle: S.of(context).SettingsButton,
+        title: 'KC',
+        previousPageTitle: S.of(context).AdvancedGameSupport,
         child: ListView(
           children: [
             CupertinoListSection.insetGrouped(
+              footer: CupertinoListSectionDescription(S.of(context).ToolUATip),
               children: [
                 CupertinoListTile(
                   title: Text(S.of(context).KanColleDataListener),
-                  subtitle: Text(S.of(context).ToolUATip),
+                  subtitle: const Text("Only on Android"),
                   trailing: CupertinoSwitch(
                     value: useKancolleListener,
                     onChanged: (value) async {
                       HapticFeedback.heavyImpact();
+                      if (Platform.isIOS) {
+                        return;
+                      }
                       setState(() {
                         useKancolleListener = value;
                       });
@@ -43,27 +51,25 @@ class _KancollelistenSettingsState
                   ),
                 ),
                 CupertinoListTile(
-                  title: Text(S.of(context).DownloadFleetData),
+                  title: Text(S.of(context).FleetData),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
                         FleetInfoPage(
                             title: S.of(context).FleetData,
-                            previousPageTitle:
-                                S.of(context).KanColleDataListener));
+                            previousPageTitle: 'KC'));
                   },
                 ),
                 CupertinoListTile(
-                  title: Text(S.of(context).DownloadOperationData),
+                  title: Text(S.of(context).OperationData),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
                         TaskInfoPage(
                             title: S.of(context).OperationData,
-                            previousPageTitle:
-                                S.of(context).KanColleDataListener));
+                            previousPageTitle: 'KC'));
                   },
                 ),
               ],
@@ -111,7 +117,12 @@ class FleetInfoPage extends ConsumerWidget {
                       CupertinoListTile(
                         title: Text(S.of(context).ShipData),
                         additionalInfo: kcwikiData.when(
-                          data: (data) => Text("${data.ships.length}"),
+                          data: (data) {
+                            Future((){
+                              ref.watch(kancolleDataProvider.notifier).update((state) => state.copyWith(kcwikiData: data));
+                            });
+                            return Text("${data.ships.length}");
+                          },
                           error: (e, s) => Text(S.of(context).Error),
                           loading: () => const CupertinoActivityIndicator(),
                         ),
@@ -210,7 +221,9 @@ class TaskInfoPage extends ConsumerWidget {
           middle: Text(title),
           previousPageTitle: previousPageTitle,
           trailing: GestureDetector(
-            onTap: () => ref.watch(taskUtilProvider.notifier).onDownloadData(),
+            onTap: () => ref
+                .watch(taskUtilProvider.notifier)
+                .onDownloadData(url: kTaskUrlKC),
             child: const Icon(CupertinoIcons.refresh),
           ),
         ),
@@ -223,8 +236,9 @@ class TaskInfoPage extends ConsumerWidget {
                   return Center(
                     child: CupertinoButton(
                       child: Text(S.of(context).DownloadOperationData),
-                      onPressed: () =>
-                          ref.watch(taskUtilProvider.notifier).onDownloadData(),
+                      onPressed: () => ref
+                          .watch(taskUtilProvider.notifier)
+                          .onDownloadData(url: kTaskUrlKC),
                     ),
                   );
                 }

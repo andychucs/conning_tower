@@ -9,7 +9,7 @@
         t = 0;
     vp || (vp = $.createElement('meta'), vp.name = 'viewport', $.querySelector('head').appendChild(vp));
     vp.content = 'width=' + gw;
-    'orientation' in _ && html.webkitRequestFullscreen && html.webkitRequestFullscreen();
+    // 'orientation' in _ && html.webkitRequestFullscreen && html.webkitRequestFullscreen();
     html.style.overflow = 'hidden';$.body.style.cssText = 'min-width:0;padding:0;margin:0;overflow:hidden;margin:0';$.querySelector('.dmm-ntgnavi').style.display = 'none';$.querySelector('.area-naviapp').style.display = 'none';
     gs.position = 'fixed';
     gs.marginRight = 'auto';

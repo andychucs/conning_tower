@@ -37,7 +37,7 @@ class ReqMapNextApiDataEntity with _$ReqMapNextApiDataEntity {
     @JsonKey(name: 'api_airsearch')
     required ReqMapNextApiDataApiAirsearchEntity apiAirsearch,
     @JsonKey(name: 'api_e_deck_info')
-    required List<ReqMapNextApiDataApiEDeckInfoEntity> apiEDeckInfo,
+    List<ReqMapNextApiDataApiEDeckInfoEntity>? apiEDeckInfo,
     @JsonKey(name: 'api_limit_state') required int apiLimitState,
     @JsonKey(name: 'api_ration_flag') int? apiRationFlag,  // may not in response
   }) = _ReqMapNextApiDataEntity;

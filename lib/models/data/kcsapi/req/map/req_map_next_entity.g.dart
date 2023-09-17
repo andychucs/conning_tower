@@ -39,8 +39,8 @@ _$_ReqMapNextApiDataEntity _$$_ReqMapNextApiDataEntityFromJson(
       apiProductionKind: json['api_production_kind'] as int,
       apiAirsearch: ReqMapNextApiDataApiAirsearchEntity.fromJson(
           json['api_airsearch'] as Map<String, dynamic>),
-      apiEDeckInfo: (json['api_e_deck_info'] as List<dynamic>)
-          .map((e) => ReqMapNextApiDataApiEDeckInfoEntity.fromJson(
+      apiEDeckInfo: (json['api_e_deck_info'] as List<dynamic>?)
+          ?.map((e) => ReqMapNextApiDataApiEDeckInfoEntity.fromJson(
               e as Map<String, dynamic>))
           .toList(),
       apiLimitState: json['api_limit_state'] as int,

@@ -28,11 +28,11 @@ class _CupertinoPickerViewState extends State<CupertinoPickerView> {
           child: Row(
             children: [
               Expanded(
-                flex: widget.wideStyle ? 4 : 7,
+                flex: widget.wideStyle ? 5 : 7,
                 child: CupertinoGroupedSection(
                   child: CupertinoPicker(
                     useMagnifier: true,
-                    itemExtent: widget.wideStyle ? 50 : 40,
+                    itemExtent: widget.wideStyle ? 45 : 40,
                     onSelectedItemChanged: (int value) {
                       setState(() {
                         if (deviceType == DeviceType.iPad)SystemSound.play(SystemSoundType.click);

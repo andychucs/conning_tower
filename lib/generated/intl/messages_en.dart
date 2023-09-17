@@ -42,6 +42,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutVersion": MessageLookupByLibrary.simpleMessage("Version"),
         "AddDataSource":
             MessageLookupByLibrary.simpleMessage("Add Data Source"),
+        "AdvancedGameSupport":
+            MessageLookupByLibrary.simpleMessage("Advanced Game Support"),
+        "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
+            "Our team does not operate any games. This feature is based on publicly available data, third-party libraries, and web runtime environments, and its accuracy cannot be guaranteed. If you have games or features you would like us to support, please feel free to contact technical support."),
         "AlertNotShowAgain":
             MessageLookupByLibrary.simpleMessage("Don\'t show again"),
         "AppBack": MessageLookupByLibrary.simpleMessage("Back"),
@@ -102,7 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("Show Dashboard on Homepage"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
-            "To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings."),
+            "To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings."),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/en/new"),
         "DownloadFleetData":
@@ -117,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fullscreen fail"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("Fullscreen success"),
+        "Game": MessageLookupByLibrary.simpleMessage("Game"),
         "GameMute": MessageLookupByLibrary.simpleMessage("Off"),
         "GameUnmute": MessageLookupByLibrary.simpleMessage("On"),
         "InvalidJsonError":
@@ -145,7 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("is game origin url"),
         "KCViewFuncMsgPageStart": m3,
         "KanColleDataListener":
-            MessageLookupByLibrary.simpleMessage("KanColle Data Listener"),
+            MessageLookupByLibrary.simpleMessage("Data Listener"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click \'Tools-Web-HTTP Redirect\' button."),
@@ -201,9 +206,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("Tasks"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("Task Not Added"),
         "TaskNotificationAdded": MessageLookupByLibrary.simpleMessage(
             "Task Notification Added Successfully"),
+        "TaskPageOperationTip": MessageLookupByLibrary.simpleMessage(
+            "To enable push notifications for the following tasks, please tap this item"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("Tasks Timer"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("Task Reminders"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

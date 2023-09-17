@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
@@ -31,6 +32,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shake/shake.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -64,6 +66,19 @@ class HomePageState extends ConsumerState<HomePage> {
       await Future.delayed(const Duration(seconds: 1));
       await showNewVersionInfo();
     });
+
+    ShakeDetector detector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        setState(() {
+          showControls = true;
+        });
+      },
+      minimumShakeCount: 2,
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      shakeThresholdGravity: 2.7,
+    );
+    detector.startListening();
   }
 
   @override
@@ -98,7 +113,7 @@ class HomePageState extends ConsumerState<HomePage> {
               Text(S.current.VersionUpdateContent),
               textLink(S.of(context).DocsNewUrl,
                   S.of(context).VersionUpdateLinkText),
-              Text(S.of(context).DataDownloadGuide)
+              if (kIsOpenSource) Text(S.of(context).DataDownloadGuide)
             ],
           ),
           actions: [
@@ -209,6 +224,10 @@ class HomePageState extends ConsumerState<HomePage> {
     }
 
     final Map<FunctionName, Function> functionMap = {
+      FunctionName.naviDashboard: () {
+        navigatorToCupertino(context,
+            Scaffold(body: DashboardPage(notifyParent: () => setState(() {}))));
+      },
       FunctionName.showTaskPage: () async {
         showCupertinoModalBottomSheet(
           expand: true,
@@ -230,113 +249,81 @@ class HomePageState extends ConsumerState<HomePage> {
       FunctionName.screenShot: () {
         ref.read(webControllerProvider.notifier).saveScreenShot();
       },
-      FunctionName.screenManger: () {
-        if (deviceType == DeviceType.iPad) {
-          setState(() {
-            showCupertinoModalBottomSheet(
-              expand: false,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => ModalFit(
-                children: <Widget>[
-                  ListTile(
-                    title: Text(S.of(context).TakeScreenshot),
-                    leading: const Icon(CupertinoIcons.camera_viewfinder),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      ref.read(webControllerProvider.notifier).saveScreenShot();
-                    },
-                    trailing: const CupertinoListTileChevron(),
-                  ),
-                  ListTile(
-                    title: Text(S.of(context).AppBottomSafe),
-                    leading: const Icon(CupertinoIcons.rectangle_dock),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      setState(() {
-                        bottomPadding = !bottomPadding;
-                      });
-                    },
-                    trailing: bottomPadding
-                        ? const Icon(CupertinoIcons.checkmark_alt)
-                        : null,
-                  ),
-                ],
-              ),
-            );
-          });
-        } else {
-          showCupertinoModalBottomSheet(
-            expand: false,
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (context) => ModalFit(
-              children: <Widget>[
-                ListTile(
-                  title: Text(S.of(context).TakeScreenshot),
-                  leading: const Icon(CupertinoIcons.camera_viewfinder),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    ref.read(webControllerProvider.notifier).saveScreenShot();
-                  },
-                  trailing: const CupertinoListTileChevron(),
-                ),
-                ListTile(
-                  title: Text(S.of(context).AppBottomSafe),
-                  leading: const Icon(CupertinoIcons.rectangle_dock),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    setState(() {
-                      bottomPadding = !bottomPadding;
-                    });
-                  },
-                  trailing: bottomPadding
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-                ListTile(
-                  title: Text(S.of(context).SettingsLandscapeRight),
-                  leading: const Icon(CupertinoIcons.device_phone_landscape),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    deviceManager.customDeviceOrientation(
-                        CustomDeviceOrientation.landscapeRight);
-                  },
-                  trailing: deviceManager.getOrientationIndex() == 0
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-                ListTile(
-                  title: Text(S.of(context).SettingsLandscapeLeft),
-                  leading: Transform.flip(
-                    flipX: true,
-                    child: const Icon(CupertinoIcons.device_phone_landscape),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    deviceManager.customDeviceOrientation(
-                        CustomDeviceOrientation.landscapeLeft);
-                  },
-                  trailing: deviceManager.getOrientationIndex() == 1
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-                ListTile(
-                  title: Text(S.of(context).SettingsPortrait),
-                  leading: const Icon(CupertinoIcons.device_phone_portrait),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    deviceManager.customDeviceOrientation(
-                        CustomDeviceOrientation.portrait);
-                  },
-                  trailing: deviceManager.getOrientationIndex() == 2
-                      ? const Icon(CupertinoIcons.checkmark_alt)
-                      : null,
-                ),
-              ],
+      FunctionName.toolBox: () {
+        List<Widget> items = [
+          ListTile(
+            title: Text(S.of(context).TakeScreenshot),
+            leading: const Icon(CupertinoIcons.camera_viewfinder),
+            onTap: () {
+              Navigator.of(context).pop();
+              ref.read(webControllerProvider.notifier).saveScreenShot();
+            },
+            trailing: const CupertinoListTileChevron(),
+          ),
+          ListTile(
+            title: Text(S.of(context).AppBottomSafe),
+            leading: const Icon(CupertinoIcons.rectangle_dock),
+            onTap: () {
+              Navigator.of(context).pop();
+              setState(() {
+                bottomPadding = !bottomPadding;
+              });
+            },
+            trailing:
+                bottomPadding ? const Icon(CupertinoIcons.checkmark_alt) : null,
+          ),
+        ];
+        if (deviceType != DeviceType.iPad) {
+          items.addAll([
+            ListTile(
+              title: Text(S.of(context).SettingsLandscapeRight),
+              leading: const Icon(CupertinoIcons.device_phone_landscape),
+              onTap: () {
+                Navigator.of(context).pop();
+                deviceManager.customDeviceOrientation(
+                    CustomDeviceOrientation.landscapeRight);
+              },
+              trailing: deviceManager.getOrientationIndex() == 0
+                  ? const Icon(CupertinoIcons.checkmark_alt)
+                  : null,
             ),
-          );
+            ListTile(
+              title: Text(S.of(context).SettingsLandscapeLeft),
+              leading: Transform.flip(
+                flipX: true,
+                child: const Icon(CupertinoIcons.device_phone_landscape),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                deviceManager.customDeviceOrientation(
+                    CustomDeviceOrientation.landscapeLeft);
+              },
+              trailing: deviceManager.getOrientationIndex() == 1
+                  ? const Icon(CupertinoIcons.checkmark_alt)
+                  : null,
+            ),
+            ListTile(
+              title: Text(S.of(context).SettingsPortrait),
+              leading: const Icon(CupertinoIcons.device_phone_portrait),
+              onTap: () {
+                Navigator.of(context).pop();
+                deviceManager
+                    .customDeviceOrientation(CustomDeviceOrientation.portrait);
+              },
+              trailing: deviceManager.getOrientationIndex() == 2
+                  ? const Icon(CupertinoIcons.checkmark_alt)
+                  : null,
+            ),
+          ]);
         }
+        showCupertinoModalBottomSheet(
+          expand: false,
+          context: context,
+          backgroundColor: Colors.transparent,
+          builder: (context) => ModalFit(
+            children: items,
+          ),
+        );
       },
       FunctionName.none: () {
         debugPrint("null function");
@@ -355,13 +342,7 @@ class HomePageState extends ConsumerState<HomePage> {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
             overlays: SystemUiOverlay.values);
       }
-      return GestureDetector(
-        onLongPress: () {
-          setState(() {
-            showControls = true;
-          });
-        },
-        child: Scaffold(
+      return  Scaffold(
           resizeToAvoidBottomInset: orientation == Orientation.portrait,
           bottomNavigationBar: orientation == Orientation.portrait
               ? Controls(
@@ -399,7 +380,7 @@ class HomePageState extends ConsumerState<HomePage> {
                     if (deviceType == DeviceType.iPad) {
                       functionMap[FunctionName.bottomPadding]!();
                     } else {
-                      functionMap[FunctionName.screenManger]!();
+                      functionMap[FunctionName.toolBox]!();
                     }
                   },
                 ),
@@ -434,6 +415,14 @@ class HomePageState extends ConsumerState<HomePage> {
                     onTap: () {
                       HapticFeedback.mediumImpact();
                       functionMap[FunctionName.showTaskPage]!();
+                    }),
+                CircularMenuItem(
+                    iconSize: 20,
+                    boxShadow: const [],
+                    icon: CupertinoIcons.slider_horizontal_below_rectangle,
+                    onTap: () {
+                      HapticFeedback.mediumImpact();
+                      functionMap[FunctionName.naviDashboard]!();
                     })
               ],
               backgroundWidget: Row(
@@ -471,58 +460,57 @@ class HomePageState extends ConsumerState<HomePage> {
                             box.maxHeight - bottomPaddingHeight - childHeight;
                       }
 
-                      debugPrint("dashboardHeight $dashboardHeight");
-                      bool enableDashboard = dashboardHeight >= 146;
-                      //  10.5 inch iPad Air (3rd): 201
-                      //  10.5 inch iPad Pro && 11 inch iPad Pro : 151
-                      //  12.9 inch iPad Pro: 2XX
-                      //  10.9 inch iPad Air (5th): 146.2
+                    debugPrint("dashboardHeight $dashboardHeight");
+                    bool enableDashboard = dashboardHeight >= 146;
+                    //  10.5 inch iPad Air (3rd): 201
+                    //  10.5 inch iPad Pro && 11 inch iPad Pro : 151
+                    //  12.9 inch iPad Pro: 2XX
+                    //  10.9 inch iPad Air (5th): 146.2
 
-                      if (parentAspectRatio < aspectRatio &&
-                          !showDashboardInHome) {
-                        enableBottomPadding = false;
-                      }
-                      return IndexedStackWithCupertinoPageTransition(
-                        index: useStack ? selectedIndex : 0,
-                        duration: const Duration(milliseconds: 300),
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (enableDashboard && showDashboardInHome)
-                                  Expanded(
-                                      child: Dashboard(
-                                          notifyParent: () => setState(() {}))),
-                                Padding(
-                                  padding: EdgeInsets.only(
+                    if (parentAspectRatio < aspectRatio &&
+                        !showDashboardInHome) {
+                      enableBottomPadding = false;
+                    }
+                    return IndexedStackWithCupertinoPageTransition(
+                      index: useStack ? selectedIndex : 0,
+                      duration: const Duration(milliseconds: 300),
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (enableDashboard && showDashboardInHome)
+                                Expanded(
+                                    child: Dashboard(
+                                        notifyParent: () => setState(() {}))),
+                              Padding(
+                                padding: EdgeInsets.only(
                                       bottom: enableBottomPadding
                                           ? bottomPaddingHeight
                                           : 0),
-                                  child: SizedBox(
-                                    height: childHeight,
-                                    width: childWidth,
-                                    child: const AppWebView(),
-                                  ),
+                                child: SizedBox(
+                                  height: childHeight,
+                                  width: childWidth,
+                                  child: const AppWebView(),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          if (useStack)
-                            FunctionalLayer(
-                              cookieManager: widget.cookieManager,
-                              notifyParent: () => setState(() {}),
-                              reloadConfig: () => _loadConfig(),
-                            ),
-                        ],
-                      );
-                    }),
-                  ),
-                ],
-              ),
+                        ),
+                        if (useStack)
+                          FunctionalLayer(
+                            cookieManager: widget.cookieManager,
+                            notifyParent: () => setState(() {}),
+                            reloadConfig: () => _loadConfig(),
+                          ),
+                      ],
+                    );
+                  }),
+                ),
+              ],
             ),
           ),
         ),

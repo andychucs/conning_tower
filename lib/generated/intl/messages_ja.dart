@@ -40,6 +40,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "「ConningTower for iOS」は、ブラウザゲーム専用のブラウザで、画面をカスタマイズして、デスクトップビューで常に横向き画面を保持することができます。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("バージョン"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("データソースを追加"),
+        "AdvancedGameSupport":
+            MessageLookupByLibrary.simpleMessage("高度なゲームサポート"),
+        "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
+            "当チームはゲームの運営を行っておらず、この機能は公開データおよびサードパーティライブラリ、Web実行環境に基づいています。正確性を保証するものではありません。サポートしてほしいゲームや機能がある場合、技術サポートにご連絡いただければ幸いです。"),
         "AlertNotShowAgain": MessageLookupByLibrary.simpleMessage("再表示しない"),
         "AppBack": MessageLookupByLibrary.simpleMessage("戻る"),
         "AppBottomSafe": MessageLookupByLibrary.simpleMessage("下部に余白を追加"),
@@ -94,7 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "DashboardSetting":
             MessageLookupByLibrary.simpleMessage("ホームページでダッシュボードを表示"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
-            "艦これデータリスナー機能を使用するには、設定→艦これデータリスナーに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。"),
+            "艦これデータリスナー機能を使用するには、ツール→高度なゲームサポートに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/ja/new"),
         "DownloadFleetData":
@@ -109,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("全画面表示に失敗しました"),
         "FutureAutoAdjustWindowSuccess":
             MessageLookupByLibrary.simpleMessage("全画面表示に成功しました"),
+        "Game": MessageLookupByLibrary.simpleMessage("ゲーム"),
         "GameMute": MessageLookupByLibrary.simpleMessage("ミュート"),
         "GameUnmute": MessageLookupByLibrary.simpleMessage("ミュート解除"),
         "InvalidJsonError":
@@ -136,8 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
         "KCViewFuncMsgPageStart": m3,
-        "KanColleDataListener":
-            MessageLookupByLibrary.simpleMessage("艦これデータリスナー"),
+        "KanColleDataListener": MessageLookupByLibrary.simpleMessage("データリスナー"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、「ツール-Web-HTTPリダイレクト」を押すことでプレイ可能な状態になります。"),
@@ -187,9 +191,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
         "TaskCompleted": m4,
+        "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("タスク"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("タスクが追加されていません"),
         "TaskNotificationAdded":
             MessageLookupByLibrary.simpleMessage("タスク通知が追加されました"),
+        "TaskPageOperationTip": MessageLookupByLibrary.simpleMessage(
+            "以下のタスクの通知を追加する場合は、このアイテムをタップしてください"),
         "TaskPageTitle": MessageLookupByLibrary.simpleMessage("タスクタイマー"),
         "TaskReminders": MessageLookupByLibrary.simpleMessage("タスクリマインダー"),
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(

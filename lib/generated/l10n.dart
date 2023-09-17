@@ -110,6 +110,26 @@ class S {
     );
   }
 
+  /// `Advanced Game Support`
+  String get AdvancedGameSupport {
+    return Intl.message(
+      'Advanced Game Support',
+      name: 'AdvancedGameSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our team does not operate any games. This feature is based on publicly available data, third-party libraries, and web runtime environments, and its accuracy cannot be guaranteed. If you have games or features you would like us to support, please feel free to contact technical support.`
+  String get AdvancedGameSupportDescription {
+    return Intl.message(
+      'Our team does not operate any games. This feature is based on publicly available data, third-party libraries, and web runtime environments, and its accuracy cannot be guaranteed. If you have games or features you would like us to support, please feel free to contact technical support.',
+      name: 'AdvancedGameSupportDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Don't show again`
   String get AlertNotShowAgain {
     return Intl.message(
@@ -490,10 +510,10 @@ class S {
     );
   }
 
-  /// `To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.`
+  /// `To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.`
   String get DataDownloadGuide {
     return Intl.message(
-      'To use the KanColle Data Listener feature, go to Settings → KanColle Data Listener, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.',
+      'To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.',
       name: 'DataDownloadGuide',
       desc: '',
       args: [],
@@ -575,6 +595,16 @@ class S {
     return Intl.message(
       'Fullscreen success',
       name: 'FutureAutoAdjustWindowSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game`
+  String get Game {
+    return Intl.message(
+      'Game',
+      name: 'Game',
       desc: '',
       args: [],
     );
@@ -750,10 +780,10 @@ class S {
     );
   }
 
-  /// `KanColle Data Listener`
+  /// `Data Listener`
   String get KanColleDataListener {
     return Intl.message(
-      'KanColle Data Listener',
+      'Data Listener',
       name: 'KanColleDataListener',
       desc: '',
       args: [],
@@ -1090,6 +1120,16 @@ class S {
     );
   }
 
+  /// `Tasks`
+  String get TaskDashboardTitle {
+    return Intl.message(
+      'Tasks',
+      name: 'TaskDashboardTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Task Not Added`
   String get TaskNotAdded {
     return Intl.message(
@@ -1105,6 +1145,16 @@ class S {
     return Intl.message(
       'Task Notification Added Successfully',
       name: 'TaskNotificationAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To enable push notifications for the following tasks, please tap this item`
+  String get TaskPageOperationTip {
+    return Intl.message(
+      'To enable push notifications for the following tasks, please tap this item',
+      name: 'TaskPageOperationTip',
       desc: '',
       args: [],
     );
