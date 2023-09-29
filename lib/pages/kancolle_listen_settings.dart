@@ -7,6 +7,7 @@ import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
+import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,17 +35,14 @@ class _KancollelistenSettingsState
               children: [
                 CupertinoListTile(
                   title: Text(S.of(context).KanColleDataListener),
-                  subtitle: const Text("Only on Android"),
                   trailing: CupertinoSwitch(
                     value: useKancolleListener,
                     onChanged: (value) async {
                       HapticFeedback.heavyImpact();
-                      if (Platform.isIOS) {
-                        return;
-                      }
                       setState(() {
                         useKancolleListener = value;
                       });
+                      ref.watch(webControllerProvider).manageKCUserScript(value);
                       localStorage.setBool('useKancolleListener', value);
                       debugPrint("useKancolleListener:$useKancolleListener");
                     },

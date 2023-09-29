@@ -1,5 +1,5 @@
-import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/photo_gallery.dart';
 import 'package:conning_tower/pages/port_info.dart';
@@ -31,7 +31,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         S.of(context).WebInfo
       ];
 
-      if (kIsOpenSource) {
+      if (useKancolleListener) {
         titles.add("提督室");
         titles.add("遠征");
         titles.add("艦隊");
@@ -56,7 +56,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         const WebInfoList()
       ];
 
-      if (kIsOpenSource) {
+      if (useKancolleListener) {
         children.add(const PortInfo());
         children.add(const OperationPage());
         children.add(const SquadInfo());
