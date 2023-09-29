@@ -33,7 +33,7 @@ class ComplexModal extends StatelessWidget {
       child: WillPopScope(
         onWillPop: () async {
           bool shouldClose = true;
-          await showAdaptiveDialog(context,
+          await customShowAdaptiveDialog(context,
               title: Text(S.of(context).TextShouldClose),
               content: null,
               actions: [

@@ -105,7 +105,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
   Future<void> showNewVersionInfo() async {
     if (showNewVersion) {
-      await showAdaptiveDialog(context,
+      await customShowAdaptiveDialog(context,
           title: Text(S.current.VersionUpdateTitle),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -194,7 +194,7 @@ class HomePageState extends ConsumerState<HomePage> {
       log(next.toString());
       if (next.isNotEmpty) {
         HapticFeedback.heavyImpact();
-        showAdaptiveDialog(context,
+        customShowAdaptiveDialog(context,
             title: Text(next["title"]!),
             content: SelectableText(next["content"]!),
             actions: [

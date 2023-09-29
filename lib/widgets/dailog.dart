@@ -133,7 +133,7 @@ class AdaptiveDialog extends StatelessWidget {
   }
 }
 
-Future<T?> showAdaptiveDialog<T>(
+Future<T?> customShowAdaptiveDialog<T>(
   context, {
   required Text title,
   required Widget? content,
