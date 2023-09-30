@@ -144,31 +144,33 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
       );
     }
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        automaticallyImplyLeading: false,
-        transitionBetweenRoutes: false,
-        backgroundColor: Colors.transparent,
-        border: null,
-        middle: CupertinoSlidingSegmentedControl(
-          groupValue: _selectedSegment,
-          onValueChanged: (int? value) {
-            if (value != null) {
-              setState(() {
-                _selectedSegment = value;
-                _showShipInfo = false;
-              });
-            }
-          },
-          children: segments,
-        ),
-      ),
-      child: SafeArea(
-        child: CustomScrollView(slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate([body]),
+    return SafeArea(
+      child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
+          transitionBetweenRoutes: false,
+          backgroundColor: Colors.transparent,
+          border: null,
+          middle: CupertinoSlidingSegmentedControl(
+            groupValue: _selectedSegment,
+            onValueChanged: (int? value) {
+              if (value != null) {
+                setState(() {
+                  _selectedSegment = value;
+                  _showShipInfo = false;
+                });
+              }
+            },
+            children: segments,
           ),
-        ]),
+        ),
+        child: SafeArea(
+          child: CustomScrollView(slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate([body]),
+            ),
+          ]),
+        ),
       ),
     );
   }
