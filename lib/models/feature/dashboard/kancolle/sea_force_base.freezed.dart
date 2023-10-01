@@ -144,6 +144,7 @@ mixin _$SeaForceBaseResource {
   int get ammo => throw _privateConstructorUsedError;
   int get steel => throw _privateConstructorUsedError;
   int get bauxite => throw _privateConstructorUsedError;
+  int get instantCreateShip => throw _privateConstructorUsedError;
   int get instantRepairs => throw _privateConstructorUsedError;
   int get developmentMaterials => throw _privateConstructorUsedError;
   int get improvementMaterials => throw _privateConstructorUsedError;
@@ -164,6 +165,7 @@ abstract class $SeaForceBaseResourceCopyWith<$Res> {
       int ammo,
       int steel,
       int bauxite,
+      int instantCreateShip,
       int instantRepairs,
       int developmentMaterials,
       int improvementMaterials});
@@ -187,6 +189,7 @@ class _$SeaForceBaseResourceCopyWithImpl<$Res,
     Object? ammo = null,
     Object? steel = null,
     Object? bauxite = null,
+    Object? instantCreateShip = null,
     Object? instantRepairs = null,
     Object? developmentMaterials = null,
     Object? improvementMaterials = null,
@@ -207,6 +210,10 @@ class _$SeaForceBaseResourceCopyWithImpl<$Res,
       bauxite: null == bauxite
           ? _value.bauxite
           : bauxite // ignore: cast_nullable_to_non_nullable
+              as int,
+      instantCreateShip: null == instantCreateShip
+          ? _value.instantCreateShip
+          : instantCreateShip // ignore: cast_nullable_to_non_nullable
               as int,
       instantRepairs: null == instantRepairs
           ? _value.instantRepairs
@@ -237,6 +244,7 @@ abstract class _$$_SeaForceBaseResourceCopyWith<$Res>
       int ammo,
       int steel,
       int bauxite,
+      int instantCreateShip,
       int instantRepairs,
       int developmentMaterials,
       int improvementMaterials});
@@ -257,6 +265,7 @@ class __$$_SeaForceBaseResourceCopyWithImpl<$Res>
     Object? ammo = null,
     Object? steel = null,
     Object? bauxite = null,
+    Object? instantCreateShip = null,
     Object? instantRepairs = null,
     Object? developmentMaterials = null,
     Object? improvementMaterials = null,
@@ -277,6 +286,10 @@ class __$$_SeaForceBaseResourceCopyWithImpl<$Res>
       bauxite: null == bauxite
           ? _value.bauxite
           : bauxite // ignore: cast_nullable_to_non_nullable
+              as int,
+      instantCreateShip: null == instantCreateShip
+          ? _value.instantCreateShip
+          : instantCreateShip // ignore: cast_nullable_to_non_nullable
               as int,
       instantRepairs: null == instantRepairs
           ? _value.instantRepairs
@@ -302,6 +315,7 @@ class _$_SeaForceBaseResource implements _SeaForceBaseResource {
       required this.ammo,
       required this.steel,
       required this.bauxite,
+      required this.instantCreateShip,
       required this.instantRepairs,
       required this.developmentMaterials,
       required this.improvementMaterials});
@@ -315,6 +329,8 @@ class _$_SeaForceBaseResource implements _SeaForceBaseResource {
   @override
   final int bauxite;
   @override
+  final int instantCreateShip;
+  @override
   final int instantRepairs;
   @override
   final int developmentMaterials;
@@ -323,7 +339,7 @@ class _$_SeaForceBaseResource implements _SeaForceBaseResource {
 
   @override
   String toString() {
-    return 'SeaForceBaseResource(oil: $oil, ammo: $ammo, steel: $steel, bauxite: $bauxite, instantRepairs: $instantRepairs, developmentMaterials: $developmentMaterials, improvementMaterials: $improvementMaterials)';
+    return 'SeaForceBaseResource(oil: $oil, ammo: $ammo, steel: $steel, bauxite: $bauxite, instantCreateShip: $instantCreateShip, instantRepairs: $instantRepairs, developmentMaterials: $developmentMaterials, improvementMaterials: $improvementMaterials)';
   }
 
   @override
@@ -335,6 +351,8 @@ class _$_SeaForceBaseResource implements _SeaForceBaseResource {
             (identical(other.ammo, ammo) || other.ammo == ammo) &&
             (identical(other.steel, steel) || other.steel == steel) &&
             (identical(other.bauxite, bauxite) || other.bauxite == bauxite) &&
+            (identical(other.instantCreateShip, instantCreateShip) ||
+                other.instantCreateShip == instantCreateShip) &&
             (identical(other.instantRepairs, instantRepairs) ||
                 other.instantRepairs == instantRepairs) &&
             (identical(other.developmentMaterials, developmentMaterials) ||
@@ -344,8 +362,16 @@ class _$_SeaForceBaseResource implements _SeaForceBaseResource {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, oil, ammo, steel, bauxite,
-      instantRepairs, developmentMaterials, improvementMaterials);
+  int get hashCode => Object.hash(
+      runtimeType,
+      oil,
+      ammo,
+      steel,
+      bauxite,
+      instantCreateShip,
+      instantRepairs,
+      developmentMaterials,
+      improvementMaterials);
 
   @JsonKey(ignore: true)
   @override
@@ -361,6 +387,7 @@ abstract class _SeaForceBaseResource implements SeaForceBaseResource {
       required final int ammo,
       required final int steel,
       required final int bauxite,
+      required final int instantCreateShip,
       required final int instantRepairs,
       required final int developmentMaterials,
       required final int improvementMaterials}) = _$_SeaForceBaseResource;
@@ -373,6 +400,8 @@ abstract class _SeaForceBaseResource implements SeaForceBaseResource {
   int get steel;
   @override
   int get bauxite;
+  @override
+  int get instantCreateShip;
   @override
   int get instantRepairs;
   @override

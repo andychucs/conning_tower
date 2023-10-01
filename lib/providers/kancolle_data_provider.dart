@@ -31,6 +31,7 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
       ammo: 0,
       steel: 0,
       bauxite: 0,
+      instantCreateShip: 0,
       instantRepairs: 0,
       developmentMaterials: 0,
       improvementMaterials: 0);

@@ -102,6 +102,23 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   child: Container(
                     width: 25,
                     height: 25,
+                    color: Color.fromRGBO(255, 176, 7, 1.0),
+                  ),
+                ),
+                bottom: AutoSizeText(
+                  "${resourceInfo.instantCreateShip}",
+                  style: TextStyle(fontSize: 30),
+                  minFontSize: 18,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              InfoBox(
+                top: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 25,
+                    height: 25,
                     color: Color.fromRGBO(195, 212, 75, 1.0),
                   ),
                 ),

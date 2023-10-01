@@ -18,14 +18,16 @@ class SeaForceBase with _$SeaForceBase {
     var ammo = updatedMaterial[1].apiValue;
     var steel = updatedMaterial[2].apiValue;
     var bauxite = updatedMaterial[3].apiValue;
-    var instantRepairs = updatedMaterial[4].apiValue;
-    var developmentMaterials = updatedMaterial[5].apiValue;
-    var improvementMaterials = updatedMaterial[6].apiValue;
+    var instantCreateShip = updatedMaterial[4].apiValue;
+    var instantRepairs = updatedMaterial[5].apiValue;
+    var developmentMaterials = updatedMaterial[6].apiValue;
+    var improvementMaterials = updatedMaterial[7].apiValue;
     resource = resource.copyWith(
         oil: oil,
         ammo: ammo,
         steel: steel,
         bauxite: bauxite,
+        instantCreateShip: instantCreateShip,
         instantRepairs: instantRepairs,
         developmentMaterials: developmentMaterials,
         improvementMaterials: improvementMaterials);
@@ -40,6 +42,7 @@ class SeaForceBaseResource with _$SeaForceBaseResource {
     required int ammo,
     required int steel,
     required int bauxite,
+    required int instantCreateShip,
     required int instantRepairs,
     required int developmentMaterials,
     required int improvementMaterials,
