@@ -11,7 +11,18 @@ class SeaForceBase with _$SeaForceBase {
 
   factory SeaForceBase({
     required SeaForceBaseResource resource,
+    required Commander commander
   }) = _SeaForceBase;
+
+  void updateCommanderInfo(PortApiDataApiBasicEntity apiBasic) {
+    commander = commander.copyWith(
+      name: apiBasic.apiNickname,
+      level: apiBasic.apiLevel,
+      rank: apiBasic.apiRank,
+      maxShip: apiBasic.apiMaxChara,
+      maxItem: apiBasic.apiMaxSlotitem
+    );
+  }
 
   void updateMaterial(List<PortApiDataApiMaterialEntity> updatedMaterial) {
     var oil = updatedMaterial[0].apiValue;
@@ -47,4 +58,25 @@ class SeaForceBaseResource with _$SeaForceBaseResource {
     required int developmentMaterials,
     required int improvementMaterials,
   }) = _SeaForceBaseResource;
+}
+
+@freezed
+class Commander with _$Commander {
+  const Commander._();
+
+  const factory Commander({
+    required String name,
+    required int level,
+    required int rank,
+    required int maxShip,
+    required int maxItem,
+  }) = _Commander;
+
+  String get rankName {
+    try {
+      return ['元帥', '大将', '中将', '少将', '大佐', '中佐', '新米中佐', '少佐', '中堅少佐', '新米少佐'][rank - 1];
+    } catch (e) {
+      return 'N/A';
+    }
+  }
 }

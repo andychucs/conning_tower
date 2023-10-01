@@ -19,6 +19,8 @@ mixin _$SeaForceBase {
   SeaForceBaseResource get resource => throw _privateConstructorUsedError;
   set resource(SeaForceBaseResource value) =>
       throw _privateConstructorUsedError;
+  Commander get commander => throw _privateConstructorUsedError;
+  set commander(Commander value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SeaForceBaseCopyWith<SeaForceBase> get copyWith =>
@@ -31,9 +33,10 @@ abstract class $SeaForceBaseCopyWith<$Res> {
           SeaForceBase value, $Res Function(SeaForceBase) then) =
       _$SeaForceBaseCopyWithImpl<$Res, SeaForceBase>;
   @useResult
-  $Res call({SeaForceBaseResource resource});
+  $Res call({SeaForceBaseResource resource, Commander commander});
 
   $SeaForceBaseResourceCopyWith<$Res> get resource;
+  $CommanderCopyWith<$Res> get commander;
 }
 
 /// @nodoc
@@ -50,12 +53,17 @@ class _$SeaForceBaseCopyWithImpl<$Res, $Val extends SeaForceBase>
   @override
   $Res call({
     Object? resource = null,
+    Object? commander = null,
   }) {
     return _then(_value.copyWith(
       resource: null == resource
           ? _value.resource
           : resource // ignore: cast_nullable_to_non_nullable
               as SeaForceBaseResource,
+      commander: null == commander
+          ? _value.commander
+          : commander // ignore: cast_nullable_to_non_nullable
+              as Commander,
     ) as $Val);
   }
 
@@ -64,6 +72,14 @@ class _$SeaForceBaseCopyWithImpl<$Res, $Val extends SeaForceBase>
   $SeaForceBaseResourceCopyWith<$Res> get resource {
     return $SeaForceBaseResourceCopyWith<$Res>(_value.resource, (value) {
       return _then(_value.copyWith(resource: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CommanderCopyWith<$Res> get commander {
+    return $CommanderCopyWith<$Res>(_value.commander, (value) {
+      return _then(_value.copyWith(commander: value) as $Val);
     });
   }
 }
@@ -76,10 +92,12 @@ abstract class _$$_SeaForceBaseCopyWith<$Res>
       __$$_SeaForceBaseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SeaForceBaseResource resource});
+  $Res call({SeaForceBaseResource resource, Commander commander});
 
   @override
   $SeaForceBaseResourceCopyWith<$Res> get resource;
+  @override
+  $CommanderCopyWith<$Res> get commander;
 }
 
 /// @nodoc
@@ -94,12 +112,17 @@ class __$$_SeaForceBaseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? resource = null,
+    Object? commander = null,
   }) {
     return _then(_$_SeaForceBase(
       resource: null == resource
           ? _value.resource
           : resource // ignore: cast_nullable_to_non_nullable
               as SeaForceBaseResource,
+      commander: null == commander
+          ? _value.commander
+          : commander // ignore: cast_nullable_to_non_nullable
+              as Commander,
     ));
   }
 }
@@ -107,14 +130,17 @@ class __$$_SeaForceBaseCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SeaForceBase extends _SeaForceBase {
-  _$_SeaForceBase({required this.resource}) : super._();
+  _$_SeaForceBase({required this.resource, required this.commander})
+      : super._();
 
   @override
   SeaForceBaseResource resource;
+  @override
+  Commander commander;
 
   @override
   String toString() {
-    return 'SeaForceBase(resource: $resource)';
+    return 'SeaForceBase(resource: $resource, commander: $commander)';
   }
 
   @JsonKey(ignore: true)
@@ -125,13 +151,17 @@ class _$_SeaForceBase extends _SeaForceBase {
 }
 
 abstract class _SeaForceBase extends SeaForceBase {
-  factory _SeaForceBase({required SeaForceBaseResource resource}) =
-      _$_SeaForceBase;
+  factory _SeaForceBase(
+      {required SeaForceBaseResource resource,
+      required Commander commander}) = _$_SeaForceBase;
   _SeaForceBase._() : super._();
 
   @override
   SeaForceBaseResource get resource;
   set resource(SeaForceBaseResource value);
+  @override
+  Commander get commander;
+  set commander(Commander value);
   @override
   @JsonKey(ignore: true)
   _$$_SeaForceBaseCopyWith<_$_SeaForceBase> get copyWith =>
@@ -411,5 +441,197 @@ abstract class _SeaForceBaseResource implements SeaForceBaseResource {
   @override
   @JsonKey(ignore: true)
   _$$_SeaForceBaseResourceCopyWith<_$_SeaForceBaseResource> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$Commander {
+  String get name => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError;
+  int get rank => throw _privateConstructorUsedError;
+  int get maxShip => throw _privateConstructorUsedError;
+  int get maxItem => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CommanderCopyWith<Commander> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CommanderCopyWith<$Res> {
+  factory $CommanderCopyWith(Commander value, $Res Function(Commander) then) =
+      _$CommanderCopyWithImpl<$Res, Commander>;
+  @useResult
+  $Res call({String name, int level, int rank, int maxShip, int maxItem});
+}
+
+/// @nodoc
+class _$CommanderCopyWithImpl<$Res, $Val extends Commander>
+    implements $CommanderCopyWith<$Res> {
+  _$CommanderCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? level = null,
+    Object? rank = null,
+    Object? maxShip = null,
+    Object? maxItem = null,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      rank: null == rank
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxShip: null == maxShip
+          ? _value.maxShip
+          : maxShip // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxItem: null == maxItem
+          ? _value.maxItem
+          : maxItem // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CommanderCopyWith<$Res> implements $CommanderCopyWith<$Res> {
+  factory _$$_CommanderCopyWith(
+          _$_Commander value, $Res Function(_$_Commander) then) =
+      __$$_CommanderCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name, int level, int rank, int maxShip, int maxItem});
+}
+
+/// @nodoc
+class __$$_CommanderCopyWithImpl<$Res>
+    extends _$CommanderCopyWithImpl<$Res, _$_Commander>
+    implements _$$_CommanderCopyWith<$Res> {
+  __$$_CommanderCopyWithImpl(
+      _$_Commander _value, $Res Function(_$_Commander) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? level = null,
+    Object? rank = null,
+    Object? maxShip = null,
+    Object? maxItem = null,
+  }) {
+    return _then(_$_Commander(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      level: null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      rank: null == rank
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxShip: null == maxShip
+          ? _value.maxShip
+          : maxShip // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxItem: null == maxItem
+          ? _value.maxItem
+          : maxItem // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Commander extends _Commander {
+  const _$_Commander(
+      {required this.name,
+      required this.level,
+      required this.rank,
+      required this.maxShip,
+      required this.maxItem})
+      : super._();
+
+  @override
+  final String name;
+  @override
+  final int level;
+  @override
+  final int rank;
+  @override
+  final int maxShip;
+  @override
+  final int maxItem;
+
+  @override
+  String toString() {
+    return 'Commander(name: $name, level: $level, rank: $rank, maxShip: $maxShip, maxItem: $maxItem)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Commander &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.rank, rank) || other.rank == rank) &&
+            (identical(other.maxShip, maxShip) || other.maxShip == maxShip) &&
+            (identical(other.maxItem, maxItem) || other.maxItem == maxItem));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, name, level, rank, maxShip, maxItem);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CommanderCopyWith<_$_Commander> get copyWith =>
+      __$$_CommanderCopyWithImpl<_$_Commander>(this, _$identity);
+}
+
+abstract class _Commander extends Commander {
+  const factory _Commander(
+      {required final String name,
+      required final int level,
+      required final int rank,
+      required final int maxShip,
+      required final int maxItem}) = _$_Commander;
+  const _Commander._() : super._();
+
+  @override
+  String get name;
+  @override
+  int get level;
+  @override
+  int get rank;
+  @override
+  int get maxShip;
+  @override
+  int get maxItem;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CommanderCopyWith<_$_Commander> get copyWith =>
       throw _privateConstructorUsedError;
 }
