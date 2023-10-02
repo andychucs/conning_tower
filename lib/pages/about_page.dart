@@ -50,183 +50,185 @@ class _AboutPageState extends ConsumerState<AboutPage> {
     Size size = ref.watch(deviceManagerProvider.select((manager) => manager.size));
     
     return SingleChildFunctionalPage(
-      child: CustomScrollView(
-        slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(S.current.AboutButton),
-            backgroundColor: CupertinoColors.systemGroupedBackground,
-            border: null,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Center(
-                  child: SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: Image.asset('assets/images/logo.png'),
+      child: CupertinoScrollbar(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            CupertinoSliverNavigationBar(
+              largeTitle: Text(S.current.AboutButton),
+              backgroundColor: CupertinoColors.systemGroupedBackground,
+              border: null,
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Center(
+                    child: SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
                   ),
-                ),
-                CupertinoListSection.insetGrouped(
-                  footer: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(kIsOpenSource
-                        ? S.of(context).AboutDescriptionOpen
-                        : S.of(context).AboutDescriptionStore),
-                  ),
-                  children: [
-                    CupertinoListTile(
-                      title: Text(S.of(context).AboutVersion),
-                      additionalInfo: Text(
-                          '${_packageInfo.version}(${_packageInfo.buildNumber})'),
+                  CupertinoListSection.insetGrouped(
+                    footer: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(kIsOpenSource
+                          ? S.of(context).AboutDescriptionOpen
+                          : S.of(context).AboutDescriptionStore),
                     ),
-                    const CupertinoListTile(
-                      title: Text("Channel"),
-                      additionalInfo: Text(kIsOpenSource ? "GitHub" : "AppStore"),
-                    )
-                  ],
-                ),
-                CupertinoListSection.insetGrouped(
-                  children: [
-                    CupertinoListTile(
-                      title: Text(S.of(context).AppStoreRating),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.activeBlue,
-                          icon: CupertinoIcons.heart),
-                      trailing: const CupertinoListTileChevron(),
-                      onTap: () async {
-                        if (await _inAppReview.isAvailable()) {
-                          _inAppReview.requestReview();
-                        }
-                      },
-                    ),
-                    CupertinoListTile(
-                      title: const Text("X"),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.black,
-                          icon: FontAwesomeIcons.xTwitter),
-                      trailing: const CupertinoListTileChevron(),
-                      onTap: () => launchUrl(Uri.parse(kXUrl)),
-                    ),
-                    if (kIsOpenSource)
+                    children: [
                       CupertinoListTile(
-                        title: const Text("GitHub"),
+                        title: Text(S.of(context).AboutVersion),
+                        additionalInfo: Text(
+                            '${_packageInfo.version}(${_packageInfo.buildNumber})'),
+                      ),
+                      const CupertinoListTile(
+                        title: Text("Channel"),
+                        additionalInfo: Text(kIsOpenSource ? "GitHub" : "AppStore"),
+                      )
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    children: [
+                      CupertinoListTile(
+                        title: Text(S.of(context).AppStoreRating),
+                        leading: const DummyIcon(
+                            color: CupertinoColors.activeBlue,
+                            icon: CupertinoIcons.heart),
+                        trailing: const CupertinoListTileChevron(),
+                        onTap: () async {
+                          if (await _inAppReview.isAvailable()) {
+                            _inAppReview.requestReview();
+                          }
+                        },
+                      ),
+                      CupertinoListTile(
+                        title: const Text("X"),
                         leading: const DummyIcon(
                             color: CupertinoColors.black,
-                            icon: FontAwesomeIcons.github),
+                            icon: FontAwesomeIcons.xTwitter),
                         trailing: const CupertinoListTileChevron(),
-                        onTap: () => launchUrl(Uri.parse(kGitHubOpenUrl)),
+                        onTap: () => launchUrl(Uri.parse(kXUrl)),
                       ),
-                    CupertinoListTile(
-                      title: const Text("Docs"),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.activeOrange,
-                          icon: CupertinoIcons.doc),
-                      trailing: const CupertinoListTileChevron(),
-                      onTap: () => launchUrl(Uri.parse(kDocsUrl)),
-                    )
-                  ],
-                ),
-                CupertinoListSection.insetGrouped(
-                  header: Text(S.of(context).AboutContributors),
-                  children: [
-                    CupertinoListTile(
-                      title: const Text('AndyChu'),
-                      leading: kIsOpenSource
-                          ? FadeInImage(
-                              fadeInDuration: const Duration(milliseconds: 500),
-                              fadeInCurve: Curves.easeInExpo,
-                              fadeOutCurve: Curves.easeOutExpo,
-                              placeholder: const AssetImage(
-                                  "assets/images/defaultAvatarImage.png"),
-                              image: const NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/24852023?v=4'),
-                              imageErrorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                    "assets/images/defaultAvatarImage.png");
-                              },
-                              fit: BoxFit.cover)
-                          : null,
-                    ),
-                    CupertinoListTile(
-                      title: const Text('Angus'),
-                      leading: kIsOpenSource
-                          ? FadeInImage(
-                              fadeInDuration: const Duration(milliseconds: 500),
-                              fadeInCurve: Curves.easeInExpo,
-                              fadeOutCurve: Curves.easeOutExpo,
-                              placeholder: const AssetImage(
-                                  "assets/images/defaultAvatarImage.png"),
-                              image: const NetworkImage(
-                                  'https://avatars.githubusercontent.com/u/91370281?v=4'),
-                              imageErrorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                    "assets/images/defaultAvatarImage.png");
-                              },
-                              fit: BoxFit.cover)
-                          : null,
-                    ),
-                    CupertinoListTile(
-                      title: const Text('naayu'),
-                      leading: kIsOpenSource
-                          ? FadeInImage(
-                              fadeInDuration: const Duration(milliseconds: 500),
-                              fadeInCurve: Curves.easeInExpo,
-                              fadeOutCurve: Curves.easeOutExpo,
-                              placeholder: const AssetImage(
-                                  "assets/images/defaultAvatarImage.png"),
-                              image: const NetworkImage(
-                                  'https://pbs.twimg.com/profile_images/1651315887540928512/tC6-eeXi_400x400.jpg'),
-                              imageErrorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                    "assets/images/defaultAvatarImage.png");
-                              },
-                              fit: BoxFit.cover)
-                          : null,
-                    ),
-                  ],
-                ),
-                CupertinoListSection.insetGrouped(
-                    header: const CupertinoListSectionDescription(
-                      "Device Info:",
-                    ),
-                    children: [
+                      if (kIsOpenSource)
+                        CupertinoListTile(
+                          title: const Text("GitHub"),
+                          leading: const DummyIcon(
+                              color: CupertinoColors.black,
+                              icon: FontAwesomeIcons.github),
+                          trailing: const CupertinoListTileChevron(),
+                          onTap: () => launchUrl(Uri.parse(kGitHubOpenUrl)),
+                        ),
                       CupertinoListTile(
-                        title: const Text("Screen Size"),
-                        additionalInfo: Text("W:${size.width} H:${size.height}"),
-                      ),
-                      CupertinoListTile(
-                        title: const Text("Device Type"),
-                        additionalInfo: Text(deviceType.name),
-                      ),
-                    ]),
-                CupertinoListSection.insetGrouped(
-                    header: const CupertinoListSectionDescription(
-                      "ConningTower makes use of the following libraries:",
-                    ),
-                    footer: const CupertinoListSectionDescription(
-                        'For license requirements, packages from pub.dev will not be listed here.'),
-                    children: [
-                      CupertinoListTile(
-                        title: const Text("Libraries"),
+                        title: const Text("Docs"),
+                        leading: const DummyIcon(
+                            color: CupertinoColors.activeOrange,
+                            icon: CupertinoIcons.doc),
                         trailing: const CupertinoListTileChevron(),
-                        onTap: () => navigatorToCupertino(
-                            context,
-                            CupertinoPageScaffold(
-                                navigationBar: CupertinoNavigationBar(
-                                  backgroundColor: CupertinoColors.systemGroupedBackground,
-                                  middle: const Text('Libraries'),
-                                  previousPageTitle:
-                                      S.of(context).AboutButton,
-                                ),
-                                child: const LibsInfo())),
+                        onTap: () => launchUrl(Uri.parse(kDocsUrl)),
                       )
-                    ]),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    header: Text(S.of(context).AboutContributors),
+                    children: [
+                      CupertinoListTile(
+                        title: const Text('AndyChu'),
+                        leading: kIsOpenSource
+                            ? FadeInImage(
+                                fadeInDuration: const Duration(milliseconds: 500),
+                                fadeInCurve: Curves.easeInExpo,
+                                fadeOutCurve: Curves.easeOutExpo,
+                                placeholder: const AssetImage(
+                                    "assets/images/defaultAvatarImage.png"),
+                                image: const NetworkImage(
+                                    'https://avatars.githubusercontent.com/u/24852023?v=4'),
+                                imageErrorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                      "assets/images/defaultAvatarImage.png");
+                                },
+                                fit: BoxFit.cover)
+                            : null,
+                      ),
+                      CupertinoListTile(
+                        title: const Text('Angus'),
+                        leading: kIsOpenSource
+                            ? FadeInImage(
+                                fadeInDuration: const Duration(milliseconds: 500),
+                                fadeInCurve: Curves.easeInExpo,
+                                fadeOutCurve: Curves.easeOutExpo,
+                                placeholder: const AssetImage(
+                                    "assets/images/defaultAvatarImage.png"),
+                                image: const NetworkImage(
+                                    'https://avatars.githubusercontent.com/u/91370281?v=4'),
+                                imageErrorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                      "assets/images/defaultAvatarImage.png");
+                                },
+                                fit: BoxFit.cover)
+                            : null,
+                      ),
+                      CupertinoListTile(
+                        title: const Text('naayu'),
+                        leading: kIsOpenSource
+                            ? FadeInImage(
+                                fadeInDuration: const Duration(milliseconds: 500),
+                                fadeInCurve: Curves.easeInExpo,
+                                fadeOutCurve: Curves.easeOutExpo,
+                                placeholder: const AssetImage(
+                                    "assets/images/defaultAvatarImage.png"),
+                                image: const NetworkImage(
+                                    'https://pbs.twimg.com/profile_images/1651315887540928512/tC6-eeXi_400x400.jpg'),
+                                imageErrorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                      "assets/images/defaultAvatarImage.png");
+                                },
+                                fit: BoxFit.cover)
+                            : null,
+                      ),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                      header: const CupertinoListSectionDescription(
+                        "Device Info:",
+                      ),
+                      children: [
+                        CupertinoListTile(
+                          title: const Text("Screen Size"),
+                          additionalInfo: Text("W:${size.width} H:${size.height}"),
+                        ),
+                        CupertinoListTile(
+                          title: const Text("Device Type"),
+                          additionalInfo: Text(deviceType.name),
+                        ),
+                      ]),
+                  CupertinoListSection.insetGrouped(
+                      header: const CupertinoListSectionDescription(
+                        "ConningTower makes use of the following libraries:",
+                      ),
+                      footer: const CupertinoListSectionDescription(
+                          'For license requirements, packages from pub.dev will not be listed here.'),
+                      children: [
+                        CupertinoListTile(
+                          title: const Text("Libraries"),
+                          trailing: const CupertinoListTileChevron(),
+                          onTap: () => navigatorToCupertino(
+                              context,
+                              CupertinoPageScaffold(
+                                  navigationBar: CupertinoNavigationBar(
+                                    backgroundColor: CupertinoColors.systemGroupedBackground,
+                                    middle: const Text('Libraries'),
+                                    previousPageTitle:
+                                        S.of(context).AboutButton,
+                                  ),
+                                  child: const LibsInfo())),
+                        )
+                      ]),
 
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

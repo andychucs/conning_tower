@@ -165,11 +165,13 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
           ),
         ),
         child: SafeArea(
-          child: CustomScrollView(slivers: [
-            SliverList(
-              delegate: SliverChildListDelegate([body]),
-            ),
-          ]),
+          child: CupertinoScrollbar(
+            child: CustomScrollView(slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate([body]),
+              ),
+            ]),
+          ),
         ),
       ),
     );

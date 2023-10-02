@@ -171,30 +171,32 @@ class _ShipDataItemsListState extends State<ShipDataItemsList> {
     return CupertinoActionPage(
         title: S.of(context).ShipData,
         previousPageTitle: S.of(context).FleetData,
-        child: ListView(children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
-            child: CupertinoSearchTextField(
-              onChanged: (text) {
-                setState(() {
-                  searchText = text;
-                });
-              },
+        child: CupertinoScrollbar(
+          child: ListView(children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+              child: CupertinoSearchTextField(
+                onChanged: (text) {
+                  setState(() {
+                    searchText = text;
+                  });
+                },
+              ),
             ),
-          ),
-          CupertinoListSection.insetGrouped(
-            children: ships.isNotEmpty
-                ? List.generate(
-                    ships.length,
-                    (index) => CupertinoListTile(
-                          title: Text(ships[index].name!),
-                          subtitle:
-                              Text("改造Lv: ${ships[index].afterLv ?? "-"}"),
-                          additionalInfo: Text(ships[index].yomi ?? ''),
-                        ))
-                : [const CupertinoListTile(title: Text("N/A"))],
-          )
-        ]));
+            CupertinoListSection.insetGrouped(
+              children: ships.isNotEmpty
+                  ? List.generate(
+                      ships.length,
+                      (index) => CupertinoListTile(
+                            title: Text(ships[index].name!),
+                            subtitle:
+                                Text("改造Lv: ${ships[index].afterLv ?? "-"}"),
+                            additionalInfo: Text(ships[index].yomi ?? ''),
+                          ))
+                  : [const CupertinoListTile(title: Text("N/A"))],
+            )
+          ]),
+        ));
   }
 }
 
@@ -240,22 +242,24 @@ class TaskInfoPage extends ConsumerWidget {
                     ),
                   );
                 }
-                return CustomScrollView(
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildListDelegate([
-                        CupertinoListSection.insetGrouped(
-                          children: List.generate(
-                              items.length,
-                              (index) => CupertinoListTile(
-                                    leading: Text(items[index].id),
-                                    title: Text(items[index].title),
-                                    additionalInfo: Text(items[index].time),
-                                  )),
-                        ),
-                      ]),
-                    )
-                  ],
+                return CupertinoScrollbar(
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          CupertinoListSection.insetGrouped(
+                            children: List.generate(
+                                items.length,
+                                (index) => CupertinoListTile(
+                                      leading: Text(items[index].id),
+                                      title: Text(items[index].title),
+                                      additionalInfo: Text(items[index].time),
+                                    )),
+                          ),
+                        ]),
+                      )
+                    ],
+                  ),
                 );
               },
               error: (Object error, StackTrace stackTrace) => Center(
