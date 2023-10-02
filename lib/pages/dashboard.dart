@@ -1,12 +1,12 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/pages/opreation_schedule.dart';
-import 'package:conning_tower/pages/photo_gallery.dart';
-import 'package:conning_tower/pages/port_info.dart';
-import 'package:conning_tower/pages/squad_info.dart';
+import 'package:conning_tower/pages/dashboard_pages/opreation_schedule.dart';
+import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
+import 'package:conning_tower/pages/dashboard_pages/port_info.dart';
+import 'package:conning_tower/pages/dashboard_pages/squad_info.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
-import 'package:conning_tower/pages/web_info_list.dart';
+import 'package:conning_tower/pages/dashboard_pages/web_info_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
