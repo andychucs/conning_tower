@@ -73,33 +73,6 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
       }
     }
 
-    if (squads.length > _selectedSegment) {
-      if (squads[_selectedSegment].ships.isNotEmpty) {
-        body = CupertinoListSection.insetGrouped(
-          children: List.generate(
-            squads[_selectedSegment].ships.length,
-            (index) => CupertinoListTile(
-              title: Text(squads[_selectedSegment].ships[index].name),
-              onTap: () {
-                setState(() {
-                  _selectedShip = squads[_selectedSegment].ships[index];
-                  _showShipInfo = true;
-                });
-              },
-              additionalInfo: Text(
-                "HP:${squads[_selectedSegment].ships[index].nowHP}/${squads[_selectedSegment].ships[index].maxHP}",
-                style: TextStyle(color: squads[_selectedSegment].ships[index].damageColor)
-              ),
-              trailing: Icon(
-                CupertinoIcons.circle,
-                color: squads[_selectedSegment].ships[index].sparked ? Colors.yellowAccent : null,
-              ),
-            ),
-          ),
-        );
-      }
-    }
-
     if (_showShipInfo) {
       body = CupertinoListSection.insetGrouped(
         header: CupertinoListSectionDescription(_selectedShip.name),
