@@ -45,15 +45,9 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                   childAspectRatio: 1.618,
                   children: <Widget>[
                     InfoBox(
-                      top: AutoSizeText(
-                        commanderInfo.name,
-                        style: TextStyle(fontSize: 30),
-                        minFontSize: 16,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      top: Text(commanderInfo.rankName),
                       bottom: AutoSizeText(
-                        commanderInfo.rankName,
+                        commanderInfo.name,
                         style: TextStyle(fontSize: 30),
                         minFontSize: 16,
                         maxLines: 1,
