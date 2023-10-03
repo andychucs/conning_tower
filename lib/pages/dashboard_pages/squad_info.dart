@@ -168,7 +168,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                   } else {
                     controller.animateToPage(value,
                         duration: Duration(milliseconds: 200),
-                        curve: Curves.decelerate);
+                        curve: Curves.ease);
                   }
                 });
               }
