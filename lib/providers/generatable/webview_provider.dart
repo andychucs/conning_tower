@@ -288,6 +288,7 @@ class WebController extends _$WebController {
     log("isUseUserScript:${controller.hasUserScript(userScript: kancolleUserScript)}");
   }
 
+  @Deprecated("use UserScript to Intercept")
   Future<WebResourceResponse?>? onShouldInterceptRequest(
       WebResourceRequest request) {
     if (useKancolleListener && request.url.path.contains("/kcs2/js/main.js")) {
@@ -297,6 +298,7 @@ class WebController extends _$WebController {
     return null;
   }
 
+  @Deprecated("use UserScript to Intercept")
   Future<WebResourceResponse?> _interceptRequest(
       WebResourceRequest orgRequest) async {
     var kcResponse =
