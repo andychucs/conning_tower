@@ -49,6 +49,12 @@ The minimum OS versions are iOS 11.0 and Android 4.4.
 Best platform suggest is iPad.
 Will support macOS, Windows and Linux in the future.
 
+## Previews
+![Simulator Screenshot - iPhone 15 Pro Max - 2023-10-05 at 23 28 43](https://github.com/andychucs/conning_tower/assets/24852023/24dc2a41-82dc-4cd4-925c-b4c3b54c66d1) | ![Simulator Screenshot - iPhone 15 Pro Max - 2023-10-05 at 23 28 37](https://github.com/andychucs/conning_tower/assets/24852023/5583c76d-6c94-4dd4-9dc8-94c826b74dda) | ![Simulator Screenshot - iPhone 15 Pro Max - 2023-10-05 at 23 28 33](https://github.com/andychucs/conning_tower/assets/24852023/791bbce5-f808-4bc6-9a13-47805c53c7ec)
+--- | --- | ---
+
+
+
 ## Why start this project
 
 Playing KanColle on iOS is not easy.
