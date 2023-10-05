@@ -25,6 +25,12 @@ part 'webview_provider.freezed.dart';
 
 final gameUrlPath = Uri.parse(kGameUrl).path;
 
+UserScript get kancolleUserScript => UserScript(
+    source: kInterceptJS,
+    injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+    forMainFrameOnly: false,
+    groupName: "KC");
+
 @freezed
 class WebControllerState with _$WebControllerState {
   factory WebControllerState(
@@ -224,8 +230,7 @@ class WebController extends _$WebController {
       const end = "conning_tower_readyState:";
       final startIndex = message.indexOf(start);
       final endIndex = message.indexOf(end, startIndex + start.length);
-      responseURL =
-          message.substring(startIndex + start.length, endIndex);
+      responseURL = message.substring(startIndex + start.length, endIndex);
       // print("responseURL:");
       // print(responseURL);
     }
@@ -252,16 +257,35 @@ class WebController extends _$WebController {
     }
   }
 
-  void onWebviewCreate() {
-    if (Platform.isAndroid) {
+  Future<void> onWebviewCreate() async {
+    if (useKancolleListener) {
+      await addKCUserScript();
       //Listen Kancolle API
       WebMessageListener kcListener = WebMessageListener(
-          jsObjectName: "kcMessage",
-          onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
-            _kancolleMessageHandle(message!);
-          });
-      controller.addWebMessageListener(kcListener);
+        jsObjectName: "kcMessage",
+        onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+          _kancolleMessageHandle(message!);
+        },
+      );
+      await controller.addWebMessageListener(kcListener);
     }
+  }
+
+  Future<void> addKCUserScript() async {
+     await controller.addUserScript(userScript: kancolleUserScript);
+  }
+
+  Future<void> removeKCUserScript() async {
+    await controller.removeUserScriptsByGroupName(groupName: "KC");
+  }
+
+  Future<void> manageKCUserScript(bool _) async {
+    if (_) {
+      await addKCUserScript();
+    } else {
+      await removeKCUserScript();
+    }
+    log("isUseUserScript:${controller.hasUserScript(userScript: kancolleUserScript)}");
   }
 
   Future<WebResourceResponse?>? onShouldInterceptRequest(

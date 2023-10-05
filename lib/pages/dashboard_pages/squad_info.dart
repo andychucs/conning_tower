@@ -20,6 +20,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final PageController controller = PageController(initialPage: _selectedSegment);
     var data = ref.watch(kancolleDataProvider);
     var squads = data.squads;
     Map<int, Widget> segments = {
@@ -40,26 +41,31 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
       ],
     );
 
-    if (squads.length > _selectedSegment) {
-      if (squads[_selectedSegment].ships.isNotEmpty) {
-        body = CupertinoListSection.insetGrouped(
-          children: List.generate(
-            squads[_selectedSegment].ships.length,
-            (index) => CupertinoListTile(
-              title: Text(squads[_selectedSegment].ships[index].name),
-              onTap: () {
-                setState(() {
-                  _selectedShip = squads[_selectedSegment].ships[index];
-                  _showShipInfo = true;
-                });
-              },
-              additionalInfo: Text(
-                "HP:${squads[_selectedSegment].ships[index].nowHP}/${squads[_selectedSegment].ships[index].maxHP}",
-                style: TextStyle(color: squads[_selectedSegment].ships[index].damageColor)
-              ),
-              trailing: Icon(
-                CupertinoIcons.circle,
-                color: squads[_selectedSegment].ships[index].sparked ? Colors.yellowAccent : null,
+    List<Widget> pages = <Widget>[body, body, body, body];
+
+    for (int index = 0; index < squads.length; index++) {
+      var squad = squads[index];
+      if (squad.ships.isNotEmpty) {
+        pages[index] = ScrollViewPageWithScrollbar(
+          child: CupertinoListSection.insetGrouped(
+            children: List.generate(
+              squad.ships.length,
+              (_index) => CupertinoListTile(
+                title: Text(squad.ships[_index].name),
+                onTap: () {
+                  setState(() {
+                    _selectedShip = squads[_selectedSegment].ships[_index];
+                    _showShipInfo = true;
+                  });
+                },
+                additionalInfo: Text(
+                    "HP:${squad.ships[_index].nowHP}/${squad.ships[_index].maxHP}",
+                    style: TextStyle(color: squad.ships[_index].damageColor)),
+                trailing: Icon(
+                  CupertinoIcons.circle,
+                  color:
+                      squad.ships[_index].sparked ? Colors.yellowAccent : null,
+                ),
               ),
             ),
           ),
@@ -144,32 +150,63 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
       );
     }
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        automaticallyImplyLeading: false,
-        transitionBetweenRoutes: false,
-        backgroundColor: Colors.transparent,
-        border: null,
-        middle: CupertinoSlidingSegmentedControl(
-          groupValue: _selectedSegment,
-          onValueChanged: (int? value) {
-            if (value != null) {
-              setState(() {
-                _selectedSegment = value;
-                _showShipInfo = false;
-              });
-            }
-          },
-          children: segments,
+    return SafeArea(
+      child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
+          transitionBetweenRoutes: false,
+          backgroundColor: Colors.transparent,
+          border: null,
+          middle: CupertinoSlidingSegmentedControl(
+            groupValue: _selectedSegment,
+            onValueChanged: (int? value) {
+              if (value != null) {
+                setState(() {
+                  _selectedSegment = value;
+                  if (_showShipInfo) {
+                    _showShipInfo = false;
+                  } else {
+                    controller.animateToPage(value,
+                        duration: Duration(milliseconds: 200),
+                        curve: Curves.ease);
+                  }
+                });
+              }
+            },
+            children: segments,
+          ),
+        ),
+        child: SafeArea(
+          child: _showShipInfo
+              ? ScrollViewPageWithScrollbar(child: body)
+              : PageView(
+                  controller: controller,
+                  onPageChanged: (value) {
+                    setState(() {
+                      _selectedSegment = value;
+                    });
+                  },
+                  children: pages,
+                ),
         ),
       ),
-      child: SafeArea(
-        child: CustomScrollView(slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate([body]),
-          ),
-        ]),
-      ),
+    );
+  }
+}
+
+class ScrollViewPageWithScrollbar extends StatelessWidget {
+  const ScrollViewPageWithScrollbar({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoScrollbar(
+      child: CustomScrollView(slivers: [
+        SliverList(
+          delegate: SliverChildListDelegate([child]),
+        ),
+      ]),
     );
   }
 }

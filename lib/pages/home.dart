@@ -105,7 +105,7 @@ class HomePageState extends ConsumerState<HomePage> {
 
   Future<void> showNewVersionInfo() async {
     if (showNewVersion) {
-      await showAdaptiveDialog(context,
+      await customShowAdaptiveDialog(context,
           title: Text(S.current.VersionUpdateTitle),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -194,7 +194,7 @@ class HomePageState extends ConsumerState<HomePage> {
       log(next.toString());
       if (next.isNotEmpty) {
         HapticFeedback.heavyImpact();
-        showAdaptiveDialog(context,
+        customShowAdaptiveDialog(context,
             title: Text(next["title"]!),
             content: SelectableText(next["content"]!),
             actions: [
@@ -342,7 +342,7 @@ class HomePageState extends ConsumerState<HomePage> {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
             overlays: SystemUiOverlay.values);
       }
-      return  Scaffold(
+      return Scaffold(
           resizeToAvoidBottomInset: orientation == Orientation.portrait,
           bottomNavigationBar: orientation == Orientation.portrait
               ? Controls(
@@ -438,7 +438,7 @@ class HomePageState extends ConsumerState<HomePage> {
                   // This is the main content.
                   Expanded(
                     child: LayoutBuilder(builder: (context, box) {
-                      double aspectRatio = 5 / 3; // 长宽比为 5:3
+                      double aspectRatio = 5 / 3; // The aspect ratio is 5:3
                       double parentAspectRatio = box.maxWidth / box.maxHeight;
                       double childWidth = box.maxWidth;
                       double childHeight = box.maxHeight;
@@ -448,10 +448,10 @@ class HomePageState extends ConsumerState<HomePage> {
                         childHeight = box.maxHeight - bottomPaddingHeight;
                       }
                       if (parentAspectRatio > aspectRatio) {
-                        // 如果父元素的长宽比大于子元素的长宽比，则通过高度计算宽度
+                        // If the aspect ratio of the parent element is greater than the aspect ratio of the child element, the width is calculated from the height
                         childWidth = childHeight * aspectRatio;
                       } else {
-                        // 如果父元素的长宽比小于等于子元素的长宽比，则通过宽度计算高度
+                        // If the aspect ratio of the parent element is less than or equal to the aspect ratio of the child element, the height is calculated by width
                         childHeight = childWidth / aspectRatio;
                       }
                       double dashboardHeight = box.maxHeight - childHeight;
@@ -471,6 +471,12 @@ class HomePageState extends ConsumerState<HomePage> {
                         !showDashboardInHome) {
                       enableBottomPadding = false;
                     }
+
+                    double bottomPaddingHeightValue = bottomPaddingHeight;
+                    if ((orientation == Orientation.portrait) && bottomPaddingHeightValue == 0.0) {
+                      bottomPaddingHeightValue = 32;
+                      // Padding can be added at the bottom of the vertical screen for non-All-Screen devices
+                    }
                     return IndexedStackWithCupertinoPageTransition(
                       index: useStack ? selectedIndex : 0,
                       duration: const Duration(milliseconds: 300),
@@ -487,10 +493,7 @@ class HomePageState extends ConsumerState<HomePage> {
                                     child: Dashboard(
                                         notifyParent: () => setState(() {}))),
                               Padding(
-                                padding: EdgeInsets.only(
-                                      bottom: enableBottomPadding
-                                          ? bottomPaddingHeight
-                                          : 0),
+                                padding: EdgeInsets.only(bottom: enableBottomPadding ? bottomPaddingHeightValue : 0),
                                 child: SizedBox(
                                   height: childHeight,
                                   width: childWidth,

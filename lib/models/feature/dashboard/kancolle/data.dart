@@ -105,6 +105,7 @@ class KancolleData {
     if (model is PortEntity) {
       updateFleetShips(model.apiData.apiShip);
 
+      seaForceBase.updateCommanderInfo(model.apiData.apiBasic);
       seaForceBase.updateMaterial(model.apiData.apiMaterial);
 
       for (var data in model.apiData.apiDeckPort) {

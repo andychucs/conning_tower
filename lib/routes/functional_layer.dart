@@ -113,17 +113,19 @@ class _FunctionalPageState extends State<FunctionalPage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
-      child: CustomScrollView(
-        slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(widget.title),
-            backgroundColor: CupertinoColors.systemGroupedBackground,
-            border: null,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(widget.children),
-          ),
-        ],
+      child: CupertinoScrollbar(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            CupertinoSliverNavigationBar(
+              largeTitle: Text(widget.title),
+              backgroundColor: CupertinoColors.systemGroupedBackground,
+              border: null,
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(widget.children),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -21,6 +21,8 @@ void main() {
   setUp(() {});
 
   group("smoke test", () {
+    test("channel flag check", () => expect(kIsOpenSource, isTrue));
+
     testWidgets("ToolsPage smoke", (tester) async {
       SharedPreferences.setMockInitialValues({});
       await app_main.init();
