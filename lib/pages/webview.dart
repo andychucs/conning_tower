@@ -40,7 +40,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
     //Allow window.open JS
     javaScriptCanOpenWindowsAutomatically: true,
     //Android intercept kancolle API
-    useShouldInterceptRequest: true,
+    useShouldInterceptRequest: false,
     isElementFullscreenEnabled: false,
   );
 
@@ -90,12 +90,12 @@ class AppWebViewState extends ConsumerState<AppWebView> {
               debugPrint("onContentSizeChanged $oldContentSize, $newContentSize");
               webController.onContentSizeChanged();
             },
-            shouldInterceptRequest: (
-              controller,
-              WebResourceRequest request,
-            ) async {
-              return webController.onShouldInterceptRequest(request);
-            },
+            // shouldInterceptRequest: (
+            //   controller,
+            //   WebResourceRequest request,
+            // ) async {
+            //   return webController.onShouldInterceptRequest(request);
+            // },
             onReceivedHttpError: (controller , request, response) {
               // print("error");
               // print(request);
