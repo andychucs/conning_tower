@@ -1,5 +1,6 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
 import 'package:conning_tower/pages/dashboard_pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
 import 'package:conning_tower/pages/dashboard_pages/port_info.dart';
@@ -35,6 +36,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         titles.add("提督室");
         titles.add("遠征");
         titles.add("艦隊");
+        titles.add("戦闘");
       } else {
         titles.add(S.of(context).TaskDashboardTitle);
       }
@@ -60,6 +62,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         children.add(const PortInfo());
         children.add(const OperationPage());
         children.add(const SquadInfo());
+        children.add(const BattleInfo());
       } else {
         children.add(const TaskDashboard());
       }
