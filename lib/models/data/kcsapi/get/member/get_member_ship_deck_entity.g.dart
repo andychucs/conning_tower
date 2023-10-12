@@ -102,7 +102,7 @@ _$_GetMemberShipDeckApiDataApiShipDataEntity
               .toList(),
           apiLocked: json['api_locked'] as int,
           apiLockedEquip: json['api_locked_equip'] as int,
-          apiSallyArea: json['api_sally_area'] as int,
+          apiSallyArea: json['api_sally_area'] as int?,
           apiSlotitemEx: json['api_slotitem_ex'] as int?,
           apiSlotitemLevel: json['api_slotitem_level'] as int?,
         );

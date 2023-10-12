@@ -222,10 +222,10 @@ PortApiDataEntity _$PortApiDataEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PortApiDataEntity {
   @JsonKey(name: 'api_event_object')
-  PortApiDataApiEventObjectEntity get apiEventObject =>
+  PortApiDataApiEventObjectEntity? get apiEventObject =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_event_object')
-  set apiEventObject(PortApiDataApiEventObjectEntity value) =>
+  set apiEventObject(PortApiDataApiEventObjectEntity? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_material')
   List<PortApiDataApiMaterialEntity> get apiMaterial =>
@@ -263,9 +263,9 @@ mixin _$PortApiDataEntity {
   set apiLog(List<PortApiDataApiLogEntity> value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_combined_flag')
-  int get apiCombinedFlag => throw _privateConstructorUsedError;
+  int? get apiCombinedFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_combined_flag')
-  set apiCombinedFlag(int value) => throw _privateConstructorUsedError;
+  set apiCombinedFlag(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_p_bgm_id')
   int get apiPBgmId => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_p_bgm_id')
@@ -297,7 +297,7 @@ abstract class $PortApiDataEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'api_event_object')
-      PortApiDataApiEventObjectEntity apiEventObject,
+      PortApiDataApiEventObjectEntity? apiEventObject,
       @JsonKey(name: 'api_material')
       List<PortApiDataApiMaterialEntity> apiMaterial,
       @JsonKey(name: 'api_deck_port')
@@ -306,13 +306,13 @@ abstract class $PortApiDataEntityCopyWith<$Res> {
       @JsonKey(name: 'api_ship') List<PortApiDataApiShipEntity> apiShip,
       @JsonKey(name: 'api_basic') PortApiDataApiBasicEntity apiBasic,
       @JsonKey(name: 'api_log') List<PortApiDataApiLogEntity> apiLog,
-      @JsonKey(name: 'api_combined_flag') int apiCombinedFlag,
+      @JsonKey(name: 'api_combined_flag') int? apiCombinedFlag,
       @JsonKey(name: 'api_p_bgm_id') int apiPBgmId,
       @JsonKey(name: 'api_parallel_quest_count') int apiParallelQuestCount,
       @JsonKey(name: 'api_dest_ship_slot') int apiDestShipSlot,
       @JsonKey(name: 'api_c_flags') List<int> apiCFlags});
 
-  $PortApiDataApiEventObjectEntityCopyWith<$Res> get apiEventObject;
+  $PortApiDataApiEventObjectEntityCopyWith<$Res>? get apiEventObject;
   $PortApiDataApiBasicEntityCopyWith<$Res> get apiBasic;
 }
 
@@ -329,24 +329,24 @@ class _$PortApiDataEntityCopyWithImpl<$Res, $Val extends PortApiDataEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiEventObject = null,
+    Object? apiEventObject = freezed,
     Object? apiMaterial = null,
     Object? apiDeckPort = null,
     Object? apiNdock = null,
     Object? apiShip = null,
     Object? apiBasic = null,
     Object? apiLog = null,
-    Object? apiCombinedFlag = null,
+    Object? apiCombinedFlag = freezed,
     Object? apiPBgmId = null,
     Object? apiParallelQuestCount = null,
     Object? apiDestShipSlot = null,
     Object? apiCFlags = null,
   }) {
     return _then(_value.copyWith(
-      apiEventObject: null == apiEventObject
+      apiEventObject: freezed == apiEventObject
           ? _value.apiEventObject
           : apiEventObject // ignore: cast_nullable_to_non_nullable
-              as PortApiDataApiEventObjectEntity,
+              as PortApiDataApiEventObjectEntity?,
       apiMaterial: null == apiMaterial
           ? _value.apiMaterial
           : apiMaterial // ignore: cast_nullable_to_non_nullable
@@ -371,10 +371,10 @@ class _$PortApiDataEntityCopyWithImpl<$Res, $Val extends PortApiDataEntity>
           ? _value.apiLog
           : apiLog // ignore: cast_nullable_to_non_nullable
               as List<PortApiDataApiLogEntity>,
-      apiCombinedFlag: null == apiCombinedFlag
+      apiCombinedFlag: freezed == apiCombinedFlag
           ? _value.apiCombinedFlag
           : apiCombinedFlag // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       apiPBgmId: null == apiPBgmId
           ? _value.apiPBgmId
           : apiPBgmId // ignore: cast_nullable_to_non_nullable
@@ -396,9 +396,13 @@ class _$PortApiDataEntityCopyWithImpl<$Res, $Val extends PortApiDataEntity>
 
   @override
   @pragma('vm:prefer-inline')
-  $PortApiDataApiEventObjectEntityCopyWith<$Res> get apiEventObject {
-    return $PortApiDataApiEventObjectEntityCopyWith<$Res>(_value.apiEventObject,
-        (value) {
+  $PortApiDataApiEventObjectEntityCopyWith<$Res>? get apiEventObject {
+    if (_value.apiEventObject == null) {
+      return null;
+    }
+
+    return $PortApiDataApiEventObjectEntityCopyWith<$Res>(
+        _value.apiEventObject!, (value) {
       return _then(_value.copyWith(apiEventObject: value) as $Val);
     });
   }
@@ -422,7 +426,7 @@ abstract class _$$_PortApiDataEntityCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'api_event_object')
-      PortApiDataApiEventObjectEntity apiEventObject,
+      PortApiDataApiEventObjectEntity? apiEventObject,
       @JsonKey(name: 'api_material')
       List<PortApiDataApiMaterialEntity> apiMaterial,
       @JsonKey(name: 'api_deck_port')
@@ -431,14 +435,14 @@ abstract class _$$_PortApiDataEntityCopyWith<$Res>
       @JsonKey(name: 'api_ship') List<PortApiDataApiShipEntity> apiShip,
       @JsonKey(name: 'api_basic') PortApiDataApiBasicEntity apiBasic,
       @JsonKey(name: 'api_log') List<PortApiDataApiLogEntity> apiLog,
-      @JsonKey(name: 'api_combined_flag') int apiCombinedFlag,
+      @JsonKey(name: 'api_combined_flag') int? apiCombinedFlag,
       @JsonKey(name: 'api_p_bgm_id') int apiPBgmId,
       @JsonKey(name: 'api_parallel_quest_count') int apiParallelQuestCount,
       @JsonKey(name: 'api_dest_ship_slot') int apiDestShipSlot,
       @JsonKey(name: 'api_c_flags') List<int> apiCFlags});
 
   @override
-  $PortApiDataApiEventObjectEntityCopyWith<$Res> get apiEventObject;
+  $PortApiDataApiEventObjectEntityCopyWith<$Res>? get apiEventObject;
   @override
   $PortApiDataApiBasicEntityCopyWith<$Res> get apiBasic;
 }
@@ -454,24 +458,24 @@ class __$$_PortApiDataEntityCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiEventObject = null,
+    Object? apiEventObject = freezed,
     Object? apiMaterial = null,
     Object? apiDeckPort = null,
     Object? apiNdock = null,
     Object? apiShip = null,
     Object? apiBasic = null,
     Object? apiLog = null,
-    Object? apiCombinedFlag = null,
+    Object? apiCombinedFlag = freezed,
     Object? apiPBgmId = null,
     Object? apiParallelQuestCount = null,
     Object? apiDestShipSlot = null,
     Object? apiCFlags = null,
   }) {
     return _then(_$_PortApiDataEntity(
-      apiEventObject: null == apiEventObject
+      apiEventObject: freezed == apiEventObject
           ? _value.apiEventObject
           : apiEventObject // ignore: cast_nullable_to_non_nullable
-              as PortApiDataApiEventObjectEntity,
+              as PortApiDataApiEventObjectEntity?,
       apiMaterial: null == apiMaterial
           ? _value.apiMaterial
           : apiMaterial // ignore: cast_nullable_to_non_nullable
@@ -496,10 +500,10 @@ class __$$_PortApiDataEntityCopyWithImpl<$Res>
           ? _value.apiLog
           : apiLog // ignore: cast_nullable_to_non_nullable
               as List<PortApiDataApiLogEntity>,
-      apiCombinedFlag: null == apiCombinedFlag
+      apiCombinedFlag: freezed == apiCombinedFlag
           ? _value.apiCombinedFlag
           : apiCombinedFlag // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       apiPBgmId: null == apiPBgmId
           ? _value.apiPBgmId
           : apiPBgmId // ignore: cast_nullable_to_non_nullable
@@ -543,7 +547,7 @@ class _$_PortApiDataEntity implements _PortApiDataEntity {
 
   @override
   @JsonKey(name: 'api_event_object')
-  PortApiDataApiEventObjectEntity apiEventObject;
+  PortApiDataApiEventObjectEntity? apiEventObject;
   @override
   @JsonKey(name: 'api_material')
   List<PortApiDataApiMaterialEntity> apiMaterial;
@@ -564,7 +568,7 @@ class _$_PortApiDataEntity implements _PortApiDataEntity {
   List<PortApiDataApiLogEntity> apiLog;
   @override
   @JsonKey(name: 'api_combined_flag')
-  int apiCombinedFlag;
+  int? apiCombinedFlag;
   @override
   @JsonKey(name: 'api_p_bgm_id')
   int apiPBgmId;
@@ -601,7 +605,7 @@ class _$_PortApiDataEntity implements _PortApiDataEntity {
 abstract class _PortApiDataEntity implements PortApiDataEntity {
   factory _PortApiDataEntity(
       {@JsonKey(name: 'api_event_object')
-      required PortApiDataApiEventObjectEntity apiEventObject,
+      required PortApiDataApiEventObjectEntity? apiEventObject,
       @JsonKey(name: 'api_material')
       required List<PortApiDataApiMaterialEntity> apiMaterial,
       @JsonKey(name: 'api_deck_port')
@@ -612,7 +616,7 @@ abstract class _PortApiDataEntity implements PortApiDataEntity {
       required List<PortApiDataApiShipEntity> apiShip,
       @JsonKey(name: 'api_basic') required PortApiDataApiBasicEntity apiBasic,
       @JsonKey(name: 'api_log') required List<PortApiDataApiLogEntity> apiLog,
-      @JsonKey(name: 'api_combined_flag') required int apiCombinedFlag,
+      @JsonKey(name: 'api_combined_flag') required int? apiCombinedFlag,
       @JsonKey(name: 'api_p_bgm_id') required int apiPBgmId,
       @JsonKey(name: 'api_parallel_quest_count')
       required int apiParallelQuestCount,
@@ -625,9 +629,9 @@ abstract class _PortApiDataEntity implements PortApiDataEntity {
 
   @override
   @JsonKey(name: 'api_event_object')
-  PortApiDataApiEventObjectEntity get apiEventObject;
+  PortApiDataApiEventObjectEntity? get apiEventObject;
   @JsonKey(name: 'api_event_object')
-  set apiEventObject(PortApiDataApiEventObjectEntity value);
+  set apiEventObject(PortApiDataApiEventObjectEntity? value);
   @override
   @JsonKey(name: 'api_material')
   List<PortApiDataApiMaterialEntity> get apiMaterial;
@@ -660,9 +664,9 @@ abstract class _PortApiDataEntity implements PortApiDataEntity {
   set apiLog(List<PortApiDataApiLogEntity> value);
   @override
   @JsonKey(name: 'api_combined_flag')
-  int get apiCombinedFlag;
+  int? get apiCombinedFlag;
   @JsonKey(name: 'api_combined_flag')
-  set apiCombinedFlag(int value);
+  set apiCombinedFlag(int? value);
   @override
   @JsonKey(name: 'api_p_bgm_id')
   int get apiPBgmId;
@@ -1871,9 +1875,9 @@ mixin _$PortApiDataApiShipEntity {
   @JsonKey(name: 'api_locked_equip')
   set apiLockedEquip(int value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_sally_area')
-  int get apiSallyArea => throw _privateConstructorUsedError;
+  int? get apiSallyArea => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_sally_area')
-  set apiSallyArea(int value) => throw _privateConstructorUsedError;
+  set apiSallyArea(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1919,7 +1923,7 @@ abstract class $PortApiDataApiShipEntityCopyWith<$Res> {
       @JsonKey(name: 'api_lucky') List<int> apiLucky,
       @JsonKey(name: 'api_locked') int apiLocked,
       @JsonKey(name: 'api_locked_equip') int apiLockedEquip,
-      @JsonKey(name: 'api_sally_area') int apiSallyArea});
+      @JsonKey(name: 'api_sally_area') int? apiSallyArea});
 }
 
 /// @nodoc
@@ -1967,7 +1971,7 @@ class _$PortApiDataApiShipEntityCopyWithImpl<$Res,
     Object? apiLucky = null,
     Object? apiLocked = null,
     Object? apiLockedEquip = null,
-    Object? apiSallyArea = null,
+    Object? apiSallyArea = freezed,
   }) {
     return _then(_value.copyWith(
       apiId: null == apiId
@@ -2094,10 +2098,10 @@ class _$PortApiDataApiShipEntityCopyWithImpl<$Res,
           ? _value.apiLockedEquip
           : apiLockedEquip // ignore: cast_nullable_to_non_nullable
               as int,
-      apiSallyArea: null == apiSallyArea
+      apiSallyArea: freezed == apiSallyArea
           ? _value.apiSallyArea
           : apiSallyArea // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -2143,7 +2147,7 @@ abstract class _$$_PortApiDataApiShipEntityCopyWith<$Res>
       @JsonKey(name: 'api_lucky') List<int> apiLucky,
       @JsonKey(name: 'api_locked') int apiLocked,
       @JsonKey(name: 'api_locked_equip') int apiLockedEquip,
-      @JsonKey(name: 'api_sally_area') int apiSallyArea});
+      @JsonKey(name: 'api_sally_area') int? apiSallyArea});
 }
 
 /// @nodoc
@@ -2189,7 +2193,7 @@ class __$$_PortApiDataApiShipEntityCopyWithImpl<$Res>
     Object? apiLucky = null,
     Object? apiLocked = null,
     Object? apiLockedEquip = null,
-    Object? apiSallyArea = null,
+    Object? apiSallyArea = freezed,
   }) {
     return _then(_$_PortApiDataApiShipEntity(
       apiId: null == apiId
@@ -2316,10 +2320,10 @@ class __$$_PortApiDataApiShipEntityCopyWithImpl<$Res>
           ? _value.apiLockedEquip
           : apiLockedEquip // ignore: cast_nullable_to_non_nullable
               as int,
-      apiSallyArea: null == apiSallyArea
+      apiSallyArea: freezed == apiSallyArea
           ? _value.apiSallyArea
           : apiSallyArea // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -2359,7 +2363,7 @@ class _$_PortApiDataApiShipEntity implements _PortApiDataApiShipEntity {
       @JsonKey(name: 'api_lucky') required this.apiLucky,
       @JsonKey(name: 'api_locked') required this.apiLocked,
       @JsonKey(name: 'api_locked_equip') required this.apiLockedEquip,
-      @JsonKey(name: 'api_sally_area') required this.apiSallyArea});
+      @JsonKey(name: 'api_sally_area') this.apiSallyArea});
 
   factory _$_PortApiDataApiShipEntity.fromJson(Map<String, dynamic> json) =>
       _$$_PortApiDataApiShipEntityFromJson(json);
@@ -2459,7 +2463,7 @@ class _$_PortApiDataApiShipEntity implements _PortApiDataApiShipEntity {
   int apiLockedEquip;
   @override
   @JsonKey(name: 'api_sally_area')
-  int apiSallyArea;
+  int? apiSallyArea;
 
   @override
   String toString() {
@@ -2514,7 +2518,7 @@ abstract class _PortApiDataApiShipEntity implements PortApiDataApiShipEntity {
           @JsonKey(name: 'api_lucky') required List<int> apiLucky,
           @JsonKey(name: 'api_locked') required int apiLocked,
           @JsonKey(name: 'api_locked_equip') required int apiLockedEquip,
-          @JsonKey(name: 'api_sally_area') required int apiSallyArea}) =
+          @JsonKey(name: 'api_sally_area') int? apiSallyArea}) =
       _$_PortApiDataApiShipEntity;
 
   factory _PortApiDataApiShipEntity.fromJson(Map<String, dynamic> json) =
@@ -2677,9 +2681,9 @@ abstract class _PortApiDataApiShipEntity implements PortApiDataApiShipEntity {
   set apiLockedEquip(int value);
   @override
   @JsonKey(name: 'api_sally_area')
-  int get apiSallyArea;
+  int? get apiSallyArea;
   @JsonKey(name: 'api_sally_area')
-  set apiSallyArea(int value);
+  set apiSallyArea(int? value);
   @override
   @JsonKey(ignore: true)
   _$$_PortApiDataApiShipEntityCopyWith<_$_PortApiDataApiShipEntity>

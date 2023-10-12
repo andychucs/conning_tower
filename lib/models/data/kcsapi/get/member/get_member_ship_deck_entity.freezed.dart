@@ -540,9 +540,9 @@ mixin _$GetMemberShipDeckApiDataApiShipDataEntity {
   @JsonKey(name: 'api_locked_equip')
   set apiLockedEquip(int value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_sally_area')
-  int get apiSallyArea => throw _privateConstructorUsedError;
+  int? get apiSallyArea => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_sally_area')
-  set apiSallyArea(int value) => throw _privateConstructorUsedError;
+  set apiSallyArea(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_slotitem_ex')
   int? get apiSlotitemEx => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_slotitem_ex')
@@ -599,7 +599,7 @@ abstract class $GetMemberShipDeckApiDataApiShipDataEntityCopyWith<$Res> {
       @JsonKey(name: 'api_lucky') List<int> apiLucky,
       @JsonKey(name: 'api_locked') int apiLocked,
       @JsonKey(name: 'api_locked_equip') int apiLockedEquip,
-      @JsonKey(name: 'api_sally_area') int apiSallyArea,
+      @JsonKey(name: 'api_sally_area') int? apiSallyArea,
       @JsonKey(name: 'api_slotitem_ex') int? apiSlotitemEx,
       @JsonKey(name: 'api_slotitem_level') int? apiSlotitemLevel});
 }
@@ -650,7 +650,7 @@ class _$GetMemberShipDeckApiDataApiShipDataEntityCopyWithImpl<$Res,
     Object? apiLucky = null,
     Object? apiLocked = null,
     Object? apiLockedEquip = null,
-    Object? apiSallyArea = null,
+    Object? apiSallyArea = freezed,
     Object? apiSlotitemEx = freezed,
     Object? apiSlotitemLevel = freezed,
   }) {
@@ -779,10 +779,10 @@ class _$GetMemberShipDeckApiDataApiShipDataEntityCopyWithImpl<$Res,
           ? _value.apiLockedEquip
           : apiLockedEquip // ignore: cast_nullable_to_non_nullable
               as int,
-      apiSallyArea: null == apiSallyArea
+      apiSallyArea: freezed == apiSallyArea
           ? _value.apiSallyArea
           : apiSallyArea // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       apiSlotitemEx: freezed == apiSlotitemEx
           ? _value.apiSlotitemEx
           : apiSlotitemEx // ignore: cast_nullable_to_non_nullable
@@ -836,7 +836,7 @@ abstract class _$$_GetMemberShipDeckApiDataApiShipDataEntityCopyWith<$Res>
       @JsonKey(name: 'api_lucky') List<int> apiLucky,
       @JsonKey(name: 'api_locked') int apiLocked,
       @JsonKey(name: 'api_locked_equip') int apiLockedEquip,
-      @JsonKey(name: 'api_sally_area') int apiSallyArea,
+      @JsonKey(name: 'api_sally_area') int? apiSallyArea,
       @JsonKey(name: 'api_slotitem_ex') int? apiSlotitemEx,
       @JsonKey(name: 'api_slotitem_level') int? apiSlotitemLevel});
 }
@@ -885,7 +885,7 @@ class __$$_GetMemberShipDeckApiDataApiShipDataEntityCopyWithImpl<$Res>
     Object? apiLucky = null,
     Object? apiLocked = null,
     Object? apiLockedEquip = null,
-    Object? apiSallyArea = null,
+    Object? apiSallyArea = freezed,
     Object? apiSlotitemEx = freezed,
     Object? apiSlotitemLevel = freezed,
   }) {
@@ -1014,10 +1014,10 @@ class __$$_GetMemberShipDeckApiDataApiShipDataEntityCopyWithImpl<$Res>
           ? _value.apiLockedEquip
           : apiLockedEquip // ignore: cast_nullable_to_non_nullable
               as int,
-      apiSallyArea: null == apiSallyArea
+      apiSallyArea: freezed == apiSallyArea
           ? _value.apiSallyArea
           : apiSallyArea // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       apiSlotitemEx: freezed == apiSlotitemEx
           ? _value.apiSlotitemEx
           : apiSlotitemEx // ignore: cast_nullable_to_non_nullable
@@ -1066,7 +1066,7 @@ class _$_GetMemberShipDeckApiDataApiShipDataEntity
       @JsonKey(name: 'api_lucky') required this.apiLucky,
       @JsonKey(name: 'api_locked') required this.apiLocked,
       @JsonKey(name: 'api_locked_equip') required this.apiLockedEquip,
-      @JsonKey(name: 'api_sally_area') required this.apiSallyArea,
+      @JsonKey(name: 'api_sally_area') this.apiSallyArea,
       @JsonKey(name: 'api_slotitem_ex') this.apiSlotitemEx,
       @JsonKey(name: 'api_slotitem_level') this.apiSlotitemLevel});
 
@@ -1169,7 +1169,7 @@ class _$_GetMemberShipDeckApiDataApiShipDataEntity
   int apiLockedEquip;
   @override
   @JsonKey(name: 'api_sally_area')
-  int apiSallyArea;
+  int? apiSallyArea;
   @override
   @JsonKey(name: 'api_slotitem_ex')
   int? apiSlotitemEx;
@@ -1233,7 +1233,7 @@ abstract class _GetMemberShipDeckApiDataApiShipDataEntity
           @JsonKey(name: 'api_lucky') required List<int> apiLucky,
           @JsonKey(name: 'api_locked') required int apiLocked,
           @JsonKey(name: 'api_locked_equip') required int apiLockedEquip,
-          @JsonKey(name: 'api_sally_area') required int apiSallyArea,
+          @JsonKey(name: 'api_sally_area') int? apiSallyArea,
           @JsonKey(name: 'api_slotitem_ex') int? apiSlotitemEx,
           @JsonKey(name: 'api_slotitem_level') int? apiSlotitemLevel}) =
       _$_GetMemberShipDeckApiDataApiShipDataEntity;
@@ -1399,9 +1399,9 @@ abstract class _GetMemberShipDeckApiDataApiShipDataEntity
   set apiLockedEquip(int value);
   @override
   @JsonKey(name: 'api_sally_area')
-  int get apiSallyArea;
+  int? get apiSallyArea;
   @JsonKey(name: 'api_sally_area')
-  set apiSallyArea(int value);
+  set apiSallyArea(int? value);
   @override
   @JsonKey(name: 'api_slotitem_ex')
   int? get apiSlotitemEx;
