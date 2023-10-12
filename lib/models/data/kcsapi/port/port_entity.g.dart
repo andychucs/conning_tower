@@ -77,8 +77,8 @@ Map<String, dynamic> _$$_PortApiDataEntityToJson(
 _$_PortApiDataApiEventObjectEntity _$$_PortApiDataApiEventObjectEntityFromJson(
         Map<String, dynamic> json) =>
     _$_PortApiDataApiEventObjectEntity(
-      apiCNum: json['api_c_num'] as int,
-      apiMFlag: json['api_m_flag'] as int,
+      apiCNum: json['api_c_num'] as int?,
+      apiMFlag: json['api_m_flag'] as int?,
     );
 
 Map<String, dynamic> _$$_PortApiDataApiEventObjectEntityToJson(

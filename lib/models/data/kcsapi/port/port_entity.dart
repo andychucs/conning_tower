@@ -24,7 +24,7 @@ class PortEntity with _$PortEntity {
 class PortApiDataEntity with _$PortApiDataEntity {
   factory PortApiDataEntity({
     @JsonKey(name: 'api_event_object')
-    required PortApiDataApiEventObjectEntity? apiEventObject,
+    PortApiDataApiEventObjectEntity? apiEventObject,
     @JsonKey(name: 'api_material')
     required List<PortApiDataApiMaterialEntity> apiMaterial,
     @JsonKey(name: 'api_deck_port')
@@ -34,7 +34,7 @@ class PortApiDataEntity with _$PortApiDataEntity {
     @JsonKey(name: 'api_ship') required List<PortApiDataApiShipEntity> apiShip,
     @JsonKey(name: 'api_basic') required PortApiDataApiBasicEntity apiBasic,
     @JsonKey(name: 'api_log') required List<PortApiDataApiLogEntity> apiLog,
-    @JsonKey(name: 'api_combined_flag') required int? apiCombinedFlag,
+    @JsonKey(name: 'api_combined_flag') int? apiCombinedFlag,
     @JsonKey(name: 'api_p_bgm_id') required int apiPBgmId,
     @JsonKey(name: 'api_parallel_quest_count')
     required int apiParallelQuestCount,
@@ -49,8 +49,8 @@ class PortApiDataEntity with _$PortApiDataEntity {
 @unfreezed
 class PortApiDataApiEventObjectEntity with _$PortApiDataApiEventObjectEntity {
   factory PortApiDataApiEventObjectEntity({
-    @JsonKey(name: 'api_c_num') required int apiCNum,
-    @JsonKey(name: 'api_m_flag') required int apiMFlag,
+    @JsonKey(name: 'api_c_num') int? apiCNum,
+    @JsonKey(name: 'api_m_flag') int? apiMFlag,
   }) = _PortApiDataApiEventObjectEntity;
 
   factory PortApiDataApiEventObjectEntity.fromJson(Map<String, dynamic> json) =>
