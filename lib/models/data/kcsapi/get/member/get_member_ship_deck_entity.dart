@@ -68,7 +68,7 @@ class GetMemberShipDeckApiDataApiShipDataEntity
     @JsonKey(name: 'api_lucky') required List<int> apiLucky,
     @JsonKey(name: 'api_locked') required int apiLocked,
     @JsonKey(name: 'api_locked_equip') required int apiLockedEquip,
-    @JsonKey(name: 'api_sally_area') required int apiSallyArea,
+    @JsonKey(name: 'api_sally_area') int? apiSallyArea,
     @JsonKey(name: 'api_slotitem_ex') int? apiSlotitemEx,
     @JsonKey(name: 'api_slotitem_level') int? apiSlotitemLevel,
   }) = _GetMemberShipDeckApiDataApiShipDataEntity;

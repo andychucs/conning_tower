@@ -23,8 +23,10 @@ Map<String, dynamic> _$$_PortEntityToJson(_$_PortEntity instance) =>
 
 _$_PortApiDataEntity _$$_PortApiDataEntityFromJson(Map<String, dynamic> json) =>
     _$_PortApiDataEntity(
-      apiEventObject: PortApiDataApiEventObjectEntity.fromJson(
-          json['api_event_object'] as Map<String, dynamic>),
+      apiEventObject: json['api_event_object'] == null
+          ? null
+          : PortApiDataApiEventObjectEntity.fromJson(
+              json['api_event_object'] as Map<String, dynamic>),
       apiMaterial: (json['api_material'] as List<dynamic>)
           .map((e) =>
               PortApiDataApiMaterialEntity.fromJson(e as Map<String, dynamic>))
@@ -47,7 +49,7 @@ _$_PortApiDataEntity _$$_PortApiDataEntityFromJson(Map<String, dynamic> json) =>
           .map((e) =>
               PortApiDataApiLogEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      apiCombinedFlag: json['api_combined_flag'] as int,
+      apiCombinedFlag: json['api_combined_flag'] as int?,
       apiPBgmId: json['api_p_bgm_id'] as int,
       apiParallelQuestCount: json['api_parallel_quest_count'] as int,
       apiDestShipSlot: json['api_dest_ship_slot'] as int,
@@ -75,8 +77,8 @@ Map<String, dynamic> _$$_PortApiDataEntityToJson(
 _$_PortApiDataApiEventObjectEntity _$$_PortApiDataApiEventObjectEntityFromJson(
         Map<String, dynamic> json) =>
     _$_PortApiDataApiEventObjectEntity(
-      apiCNum: json['api_c_num'] as int,
-      apiMFlag: json['api_m_flag'] as int,
+      apiCNum: json['api_c_num'] as int?,
+      apiMFlag: json['api_m_flag'] as int?,
     );
 
 Map<String, dynamic> _$$_PortApiDataApiEventObjectEntityToJson(
@@ -205,7 +207,7 @@ _$_PortApiDataApiShipEntity _$$_PortApiDataApiShipEntityFromJson(
           (json['api_lucky'] as List<dynamic>).map((e) => e as int).toList(),
       apiLocked: json['api_locked'] as int,
       apiLockedEquip: json['api_locked_equip'] as int,
-      apiSallyArea: json['api_sally_area'] as int,
+      apiSallyArea: json['api_sally_area'] as int?,
     );
 
 Map<String, dynamic> _$$_PortApiDataApiShipEntityToJson(

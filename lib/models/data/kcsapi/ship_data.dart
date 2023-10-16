@@ -30,5 +30,5 @@ abstract class ShipData {
   late List<int> apiLucky;
   late int apiLocked;
   late int apiLockedEquip;
-  late int apiSallyArea;
+  late int? apiSallyArea;
 }
