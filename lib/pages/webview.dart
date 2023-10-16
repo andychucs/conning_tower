@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
@@ -80,7 +81,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
               debugPrint("onZoomScaleChanged $oldScale, $newScale");
             },
             onConsoleMessage: (controller, consoleMessage) {
-              debugPrint(consoleMessage.message);
+              log(consoleMessage.message);
             },
             onNavigationResponse: (controller, response) async {
               await webController.onNavigationResponse(response);
