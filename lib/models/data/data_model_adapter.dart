@@ -14,6 +14,7 @@ class DataModelAdapter {
         GetMemberShipDeckEntity.fromJson(json),
     ReqMapNextEntity.source: (json) => ReqMapNextEntity.fromJson(json),
     ReqMapStartEntity.source: (json) => ReqMapStartEntity.fromJson(json),
+    GetDataEntity.source: (json) => GetDataEntity.fromJson(json),
   };
 
   dynamic parseData(String source, Map<String, dynamic> json) {

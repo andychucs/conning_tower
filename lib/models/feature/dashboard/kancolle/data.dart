@@ -55,6 +55,10 @@ class KancolleData {
     String path = source.split("kcsapi").last;
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+    if (model is GetDataEntity) {
+      log("GetDataEntity");
+    }
+
     if (model is ReqMissionStartEntity) {
       log("MissionStart");
     }
