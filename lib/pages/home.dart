@@ -168,13 +168,13 @@ class HomePageState extends ConsumerState<HomePage> {
   };
 
   void enableListener(WidgetRef ref, BuildContext context) {
-    ref.listen(kcwikiDataStateProvider,
-        (previous, AsyncValue<KcwikiData> next) {
-      log("kcwiki Loading:${next.isLoading}");
-      ref
-          .watch(kancolleDataProvider.notifier)
-          .update((state) => state.copyWith(kcwikiData: next.value));
-    });
+    // ref.listen(kcwikiDataStateProvider,
+    //     (previous, AsyncValue<KcwikiData> next) {
+    //   log("kcwiki Loading:${next.isLoading}");
+    //   ref
+    //       .watch(kancolleDataProvider.notifier)
+    //       .update((state) => state.copyWith(kcwikiData: next.value));
+    // });
 
     ref.listen(rawDataProvider, (previous, RawData next) {
       debugPrint('listen.rawDataProvider');

@@ -23,7 +23,6 @@ class KancolleData {
   final List<Squad> squads;
   final SeaForceBase seaForceBase;
   final Fleet fleet;
-  final KcwikiData kcwikiData;
   final Ref ref;
   Map<dynamic, dynamic> shipInfo;
 
@@ -32,7 +31,6 @@ class KancolleData {
     required this.squads,
     required this.seaForceBase,
     required this.fleet,
-    required this.kcwikiData,
     required this.ref,
     required this.shipInfo,
   });
@@ -50,7 +48,6 @@ class KancolleData {
       squads: squads ?? this.squads,
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
-      kcwikiData: kcwikiData ?? this.kcwikiData,
       shipInfo: shipInfo ?? this.shipInfo,
       ref: ref ?? this.ref,
     );
