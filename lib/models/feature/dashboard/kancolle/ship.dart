@@ -56,11 +56,18 @@ class Ship with _$Ship {
 
   bool get sparked => condition! >= 50;
 
+  Color? get sparkColor {
+    if (sparked) return Colors.yellow[600];
+    if (condition! < 40) return CupertinoColors.activeOrange;
+    if (condition! < 30) CupertinoColors.destructiveRed;
+    return Colors.lightGreenAccent[700];
+  }
+
   Color? get damageColor {
     if (nowHP <= maxHP * 0.25) return CupertinoColors.destructiveRed;
     if (nowHP <= maxHP * 0.50) return CupertinoColors.activeOrange;
-    if (nowHP <= maxHP * 0.75) return Colors.limeAccent;
-    return null;
+    if (nowHP <= maxHP * 0.75) return Colors.lime[600];
+    return Colors.lightGreenAccent[700];
   }
 
   String get damageLevel {
