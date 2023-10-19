@@ -25,14 +25,17 @@ class KancolleData {
   final Fleet fleet;
   final KcwikiData kcwikiData;
   final Ref ref;
+  Map<dynamic, dynamic> shipInfo;
 
-  KancolleData(
-      {required this.queue,
-      required this.squads,
-      required this.seaForceBase,
-      required this.fleet,
-      required this.kcwikiData,
-      required this.ref});
+  KancolleData({
+    required this.queue,
+    required this.squads,
+    required this.seaForceBase,
+    required this.fleet,
+    required this.kcwikiData,
+    required this.ref,
+    required this.shipInfo,
+  });
 
   KancolleData copyWith(
       {OperationQueue? queue,
@@ -40,13 +43,15 @@ class KancolleData {
       SeaForceBase? seaForceBase,
       Fleet? fleet,
       KcwikiData? kcwikiData,
-      Ref? ref}) {
+      Map? shipInfo,
+      Ref? ref,}) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
       kcwikiData: kcwikiData ?? this.kcwikiData,
+      shipInfo: shipInfo ?? this.shipInfo,
       ref: ref ?? this.ref,
     );
   }
@@ -57,6 +62,9 @@ class KancolleData {
 
     if (model is GetDataEntity) {
       log("GetDataEntity");
+      shipInfo =
+          Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
+      log(shipInfo[1]!.apiName);
     }
 
     if (model is ReqMissionStartEntity) {
@@ -96,7 +104,7 @@ class KancolleData {
         for (var shipsId in squad.apiShip) {
           if (shipsId != -1) {
             ships.add(model.apiData.apiShipData
-              .firstWhere((element) => element.apiId == shipsId));
+                .firstWhere((element) => element.apiId == shipsId));
           }
         }
         // var ships = model.apiData.apiShipData
@@ -133,6 +141,7 @@ class KancolleData {
         _setNotification(endTimeMap, newData);
       } else {
         parse(source, data);
+        newData = this;
       }
 
       if (_shouldAlertSource(source)) addAlert();
@@ -172,16 +181,8 @@ class KancolleData {
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
     List<Ship> allShips = [];
     for (var data in apiShip) {
-      late String shipName;
-      try {
-        shipName = kcwikiData.ships
-                .firstWhere((element) => element.id == data.apiShipId)
-                .name ??
-            "Ship No.${data.apiShipId}";
-      } catch (e) {
-        log(e.toString());
-        shipName = "Ship No.${data.apiShipId}";
-      }
+      String shipName =
+          shipInfo[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
       allShips.add(Ship.fromApi(data, shipName));
     }
     fleet.ships = allShips;
@@ -225,15 +226,8 @@ class KancolleData {
     Squad squad = squads[index].copyWith();
     squad.ships.clear();
     for (var data in apiShipData) {
-      late String shipName;
-      try {
-        shipName = kcwikiData.ships
-                .firstWhere((element) => element.id == data.apiShipId)
-                .name ??
-            "Ship No.${data.apiShipId}";
-      } catch (e) {
-        shipName = "Ship No.${data.apiShipId}";
-      }
+      String shipName =
+          shipInfo[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
       Ship ship = Ship.fromApi(data, shipName);
       log(ship.toString());
       log(ship.damaged().toString());

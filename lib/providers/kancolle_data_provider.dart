@@ -44,6 +44,6 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
     squads: squads,
     ref: ref,
     seaForceBase: seaForceBase,
-    fleet: fleet, kcwikiData: KcwikiData(ships: []),
+    fleet: fleet, kcwikiData: KcwikiData(ships: []), shipInfo: {},
   );
 });
