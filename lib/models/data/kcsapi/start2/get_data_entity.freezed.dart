@@ -1015,89 +1015,89 @@ mixin _$GetDataApiDataApiMstShipEntity {
   @JsonKey(name: 'api_afterlv')
   set apiAfterlv(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_aftershipid')
-  String get apiAftershipid => throw _privateConstructorUsedError;
+  String? get apiAftershipid => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_aftershipid')
-  set apiAftershipid(String value) => throw _privateConstructorUsedError;
+  set apiAftershipid(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_taik')
-  List<int> get apiTaik => throw _privateConstructorUsedError;
+  List<int>? get apiTaik => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_taik')
-  set apiTaik(List<int> value) => throw _privateConstructorUsedError;
+  set apiTaik(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_souk')
-  List<int> get apiSouk => throw _privateConstructorUsedError;
+  List<int>? get apiSouk => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_souk')
-  set apiSouk(List<int> value) => throw _privateConstructorUsedError;
+  set apiSouk(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_houg')
-  List<int> get apiHoug => throw _privateConstructorUsedError;
+  List<int>? get apiHoug => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_houg')
-  set apiHoug(List<int> value) => throw _privateConstructorUsedError;
+  set apiHoug(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_raig')
-  List<int> get apiRaig => throw _privateConstructorUsedError;
+  List<int>? get apiRaig => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_raig')
-  set apiRaig(List<int> value) => throw _privateConstructorUsedError;
+  set apiRaig(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_tyku')
-  List<int> get apiTyku => throw _privateConstructorUsedError;
+  List<int>? get apiTyku => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_tyku')
-  set apiTyku(List<int> value) => throw _privateConstructorUsedError;
+  set apiTyku(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_luck')
-  List<int> get apiLuck => throw _privateConstructorUsedError;
+  List<int>? get apiLuck => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_luck')
-  set apiLuck(List<int> value) => throw _privateConstructorUsedError;
+  set apiLuck(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_soku')
-  int get apiSoku => throw _privateConstructorUsedError;
+  int? get apiSoku => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_soku')
-  set apiSoku(int value) => throw _privateConstructorUsedError;
+  set apiSoku(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_leng')
-  int get apiLeng => throw _privateConstructorUsedError;
+  int? get apiLeng => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_leng')
-  set apiLeng(int value) => throw _privateConstructorUsedError;
+  set apiLeng(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_slot_num')
-  int get apiSlotNum => throw _privateConstructorUsedError;
+  int? get apiSlotNum => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_slot_num')
-  set apiSlotNum(int value) => throw _privateConstructorUsedError;
+  set apiSlotNum(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_maxeq')
-  List<int> get apiMaxeq => throw _privateConstructorUsedError;
+  List<int>? get apiMaxeq => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_maxeq')
-  set apiMaxeq(List<int> value) => throw _privateConstructorUsedError;
+  set apiMaxeq(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_buildtime')
-  int get apiBuildtime => throw _privateConstructorUsedError;
+  int? get apiBuildtime => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_buildtime')
-  set apiBuildtime(int value) => throw _privateConstructorUsedError;
+  set apiBuildtime(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_broken')
-  List<int> get apiBroken => throw _privateConstructorUsedError;
+  List<int>? get apiBroken => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_broken')
-  set apiBroken(List<int> value) => throw _privateConstructorUsedError;
+  set apiBroken(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_powup')
-  List<int> get apiPowup => throw _privateConstructorUsedError;
+  List<int>? get apiPowup => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_powup')
-  set apiPowup(List<int> value) => throw _privateConstructorUsedError;
+  set apiPowup(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_backs')
-  int get apiBacks => throw _privateConstructorUsedError;
+  int? get apiBacks => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_backs')
-  set apiBacks(int value) => throw _privateConstructorUsedError;
+  set apiBacks(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_getmes')
-  String get apiGetmes => throw _privateConstructorUsedError;
+  String? get apiGetmes => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_getmes')
-  set apiGetmes(String value) => throw _privateConstructorUsedError;
+  set apiGetmes(String? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_afterfuel')
-  int get apiAfterfuel => throw _privateConstructorUsedError;
+  int? get apiAfterfuel => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_afterfuel')
-  set apiAfterfuel(int value) => throw _privateConstructorUsedError;
+  set apiAfterfuel(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_afterbull')
-  int get apiAfterbull => throw _privateConstructorUsedError;
+  int? get apiAfterbull => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_afterbull')
-  set apiAfterbull(int value) => throw _privateConstructorUsedError;
+  set apiAfterbull(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_fuel_max')
-  int get apiFuelMax => throw _privateConstructorUsedError;
+  int? get apiFuelMax => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_fuel_max')
-  set apiFuelMax(int value) => throw _privateConstructorUsedError;
+  set apiFuelMax(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_bull_max')
-  int get apiBullMax => throw _privateConstructorUsedError;
+  int? get apiBullMax => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_bull_max')
-  set apiBullMax(int value) => throw _privateConstructorUsedError;
+  set apiBullMax(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_voicef')
-  int get apiVoicef => throw _privateConstructorUsedError;
+  int? get apiVoicef => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_voicef')
-  set apiVoicef(int value) => throw _privateConstructorUsedError;
+  set apiVoicef(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1122,27 +1122,27 @@ abstract class $GetDataApiDataApiMstShipEntityCopyWith<$Res> {
       @JsonKey(name: 'api_stype') int apiStype,
       @JsonKey(name: 'api_ctype') int apiCtype,
       @JsonKey(name: 'api_afterlv') int? apiAfterlv,
-      @JsonKey(name: 'api_aftershipid') String apiAftershipid,
-      @JsonKey(name: 'api_taik') List<int> apiTaik,
-      @JsonKey(name: 'api_souk') List<int> apiSouk,
-      @JsonKey(name: 'api_houg') List<int> apiHoug,
-      @JsonKey(name: 'api_raig') List<int> apiRaig,
-      @JsonKey(name: 'api_tyku') List<int> apiTyku,
-      @JsonKey(name: 'api_luck') List<int> apiLuck,
-      @JsonKey(name: 'api_soku') int apiSoku,
-      @JsonKey(name: 'api_leng') int apiLeng,
-      @JsonKey(name: 'api_slot_num') int apiSlotNum,
-      @JsonKey(name: 'api_maxeq') List<int> apiMaxeq,
-      @JsonKey(name: 'api_buildtime') int apiBuildtime,
-      @JsonKey(name: 'api_broken') List<int> apiBroken,
-      @JsonKey(name: 'api_powup') List<int> apiPowup,
-      @JsonKey(name: 'api_backs') int apiBacks,
-      @JsonKey(name: 'api_getmes') String apiGetmes,
-      @JsonKey(name: 'api_afterfuel') int apiAfterfuel,
-      @JsonKey(name: 'api_afterbull') int apiAfterbull,
-      @JsonKey(name: 'api_fuel_max') int apiFuelMax,
-      @JsonKey(name: 'api_bull_max') int apiBullMax,
-      @JsonKey(name: 'api_voicef') int apiVoicef});
+      @JsonKey(name: 'api_aftershipid') String? apiAftershipid,
+      @JsonKey(name: 'api_taik') List<int>? apiTaik,
+      @JsonKey(name: 'api_souk') List<int>? apiSouk,
+      @JsonKey(name: 'api_houg') List<int>? apiHoug,
+      @JsonKey(name: 'api_raig') List<int>? apiRaig,
+      @JsonKey(name: 'api_tyku') List<int>? apiTyku,
+      @JsonKey(name: 'api_luck') List<int>? apiLuck,
+      @JsonKey(name: 'api_soku') int? apiSoku,
+      @JsonKey(name: 'api_leng') int? apiLeng,
+      @JsonKey(name: 'api_slot_num') int? apiSlotNum,
+      @JsonKey(name: 'api_maxeq') List<int>? apiMaxeq,
+      @JsonKey(name: 'api_buildtime') int? apiBuildtime,
+      @JsonKey(name: 'api_broken') List<int>? apiBroken,
+      @JsonKey(name: 'api_powup') List<int>? apiPowup,
+      @JsonKey(name: 'api_backs') int? apiBacks,
+      @JsonKey(name: 'api_getmes') String? apiGetmes,
+      @JsonKey(name: 'api_afterfuel') int? apiAfterfuel,
+      @JsonKey(name: 'api_afterbull') int? apiAfterbull,
+      @JsonKey(name: 'api_fuel_max') int? apiFuelMax,
+      @JsonKey(name: 'api_bull_max') int? apiBullMax,
+      @JsonKey(name: 'api_voicef') int? apiVoicef});
 }
 
 /// @nodoc
@@ -1167,27 +1167,27 @@ class _$GetDataApiDataApiMstShipEntityCopyWithImpl<$Res,
     Object? apiStype = null,
     Object? apiCtype = null,
     Object? apiAfterlv = freezed,
-    Object? apiAftershipid = null,
-    Object? apiTaik = null,
-    Object? apiSouk = null,
-    Object? apiHoug = null,
-    Object? apiRaig = null,
-    Object? apiTyku = null,
-    Object? apiLuck = null,
-    Object? apiSoku = null,
-    Object? apiLeng = null,
-    Object? apiSlotNum = null,
-    Object? apiMaxeq = null,
-    Object? apiBuildtime = null,
-    Object? apiBroken = null,
-    Object? apiPowup = null,
-    Object? apiBacks = null,
-    Object? apiGetmes = null,
-    Object? apiAfterfuel = null,
-    Object? apiAfterbull = null,
-    Object? apiFuelMax = null,
-    Object? apiBullMax = null,
-    Object? apiVoicef = null,
+    Object? apiAftershipid = freezed,
+    Object? apiTaik = freezed,
+    Object? apiSouk = freezed,
+    Object? apiHoug = freezed,
+    Object? apiRaig = freezed,
+    Object? apiTyku = freezed,
+    Object? apiLuck = freezed,
+    Object? apiSoku = freezed,
+    Object? apiLeng = freezed,
+    Object? apiSlotNum = freezed,
+    Object? apiMaxeq = freezed,
+    Object? apiBuildtime = freezed,
+    Object? apiBroken = freezed,
+    Object? apiPowup = freezed,
+    Object? apiBacks = freezed,
+    Object? apiGetmes = freezed,
+    Object? apiAfterfuel = freezed,
+    Object? apiAfterbull = freezed,
+    Object? apiFuelMax = freezed,
+    Object? apiBullMax = freezed,
+    Object? apiVoicef = freezed,
   }) {
     return _then(_value.copyWith(
       apiId: null == apiId
@@ -1222,90 +1222,90 @@ class _$GetDataApiDataApiMstShipEntityCopyWithImpl<$Res,
           ? _value.apiAfterlv
           : apiAfterlv // ignore: cast_nullable_to_non_nullable
               as int?,
-      apiAftershipid: null == apiAftershipid
+      apiAftershipid: freezed == apiAftershipid
           ? _value.apiAftershipid
           : apiAftershipid // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiTaik: null == apiTaik
+              as String?,
+      apiTaik: freezed == apiTaik
           ? _value.apiTaik
           : apiTaik // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSouk: null == apiSouk
+              as List<int>?,
+      apiSouk: freezed == apiSouk
           ? _value.apiSouk
           : apiSouk // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiHoug: null == apiHoug
+              as List<int>?,
+      apiHoug: freezed == apiHoug
           ? _value.apiHoug
           : apiHoug // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiRaig: null == apiRaig
+              as List<int>?,
+      apiRaig: freezed == apiRaig
           ? _value.apiRaig
           : apiRaig // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiTyku: null == apiTyku
+              as List<int>?,
+      apiTyku: freezed == apiTyku
           ? _value.apiTyku
           : apiTyku // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiLuck: null == apiLuck
+              as List<int>?,
+      apiLuck: freezed == apiLuck
           ? _value.apiLuck
           : apiLuck // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSoku: null == apiSoku
+              as List<int>?,
+      apiSoku: freezed == apiSoku
           ? _value.apiSoku
           : apiSoku // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiLeng: null == apiLeng
+              as int?,
+      apiLeng: freezed == apiLeng
           ? _value.apiLeng
           : apiLeng // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiSlotNum: null == apiSlotNum
+              as int?,
+      apiSlotNum: freezed == apiSlotNum
           ? _value.apiSlotNum
           : apiSlotNum // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiMaxeq: null == apiMaxeq
+              as int?,
+      apiMaxeq: freezed == apiMaxeq
           ? _value.apiMaxeq
           : apiMaxeq // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBuildtime: null == apiBuildtime
+              as List<int>?,
+      apiBuildtime: freezed == apiBuildtime
           ? _value.apiBuildtime
           : apiBuildtime // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiBroken: null == apiBroken
+              as int?,
+      apiBroken: freezed == apiBroken
           ? _value.apiBroken
           : apiBroken // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiPowup: null == apiPowup
+              as List<int>?,
+      apiPowup: freezed == apiPowup
           ? _value.apiPowup
           : apiPowup // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBacks: null == apiBacks
+              as List<int>?,
+      apiBacks: freezed == apiBacks
           ? _value.apiBacks
           : apiBacks // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiGetmes: null == apiGetmes
+              as int?,
+      apiGetmes: freezed == apiGetmes
           ? _value.apiGetmes
           : apiGetmes // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiAfterfuel: null == apiAfterfuel
+              as String?,
+      apiAfterfuel: freezed == apiAfterfuel
           ? _value.apiAfterfuel
           : apiAfterfuel // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiAfterbull: null == apiAfterbull
+              as int?,
+      apiAfterbull: freezed == apiAfterbull
           ? _value.apiAfterbull
           : apiAfterbull // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiFuelMax: null == apiFuelMax
+              as int?,
+      apiFuelMax: freezed == apiFuelMax
           ? _value.apiFuelMax
           : apiFuelMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiBullMax: null == apiBullMax
+              as int?,
+      apiBullMax: freezed == apiBullMax
           ? _value.apiBullMax
           : apiBullMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiVoicef: null == apiVoicef
+              as int?,
+      apiVoicef: freezed == apiVoicef
           ? _value.apiVoicef
           : apiVoicef // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -1328,27 +1328,27 @@ abstract class _$$_GetDataApiDataApiMstShipEntityCopyWith<$Res>
       @JsonKey(name: 'api_stype') int apiStype,
       @JsonKey(name: 'api_ctype') int apiCtype,
       @JsonKey(name: 'api_afterlv') int? apiAfterlv,
-      @JsonKey(name: 'api_aftershipid') String apiAftershipid,
-      @JsonKey(name: 'api_taik') List<int> apiTaik,
-      @JsonKey(name: 'api_souk') List<int> apiSouk,
-      @JsonKey(name: 'api_houg') List<int> apiHoug,
-      @JsonKey(name: 'api_raig') List<int> apiRaig,
-      @JsonKey(name: 'api_tyku') List<int> apiTyku,
-      @JsonKey(name: 'api_luck') List<int> apiLuck,
-      @JsonKey(name: 'api_soku') int apiSoku,
-      @JsonKey(name: 'api_leng') int apiLeng,
-      @JsonKey(name: 'api_slot_num') int apiSlotNum,
-      @JsonKey(name: 'api_maxeq') List<int> apiMaxeq,
-      @JsonKey(name: 'api_buildtime') int apiBuildtime,
-      @JsonKey(name: 'api_broken') List<int> apiBroken,
-      @JsonKey(name: 'api_powup') List<int> apiPowup,
-      @JsonKey(name: 'api_backs') int apiBacks,
-      @JsonKey(name: 'api_getmes') String apiGetmes,
-      @JsonKey(name: 'api_afterfuel') int apiAfterfuel,
-      @JsonKey(name: 'api_afterbull') int apiAfterbull,
-      @JsonKey(name: 'api_fuel_max') int apiFuelMax,
-      @JsonKey(name: 'api_bull_max') int apiBullMax,
-      @JsonKey(name: 'api_voicef') int apiVoicef});
+      @JsonKey(name: 'api_aftershipid') String? apiAftershipid,
+      @JsonKey(name: 'api_taik') List<int>? apiTaik,
+      @JsonKey(name: 'api_souk') List<int>? apiSouk,
+      @JsonKey(name: 'api_houg') List<int>? apiHoug,
+      @JsonKey(name: 'api_raig') List<int>? apiRaig,
+      @JsonKey(name: 'api_tyku') List<int>? apiTyku,
+      @JsonKey(name: 'api_luck') List<int>? apiLuck,
+      @JsonKey(name: 'api_soku') int? apiSoku,
+      @JsonKey(name: 'api_leng') int? apiLeng,
+      @JsonKey(name: 'api_slot_num') int? apiSlotNum,
+      @JsonKey(name: 'api_maxeq') List<int>? apiMaxeq,
+      @JsonKey(name: 'api_buildtime') int? apiBuildtime,
+      @JsonKey(name: 'api_broken') List<int>? apiBroken,
+      @JsonKey(name: 'api_powup') List<int>? apiPowup,
+      @JsonKey(name: 'api_backs') int? apiBacks,
+      @JsonKey(name: 'api_getmes') String? apiGetmes,
+      @JsonKey(name: 'api_afterfuel') int? apiAfterfuel,
+      @JsonKey(name: 'api_afterbull') int? apiAfterbull,
+      @JsonKey(name: 'api_fuel_max') int? apiFuelMax,
+      @JsonKey(name: 'api_bull_max') int? apiBullMax,
+      @JsonKey(name: 'api_voicef') int? apiVoicef});
 }
 
 /// @nodoc
@@ -1372,27 +1372,27 @@ class __$$_GetDataApiDataApiMstShipEntityCopyWithImpl<$Res>
     Object? apiStype = null,
     Object? apiCtype = null,
     Object? apiAfterlv = freezed,
-    Object? apiAftershipid = null,
-    Object? apiTaik = null,
-    Object? apiSouk = null,
-    Object? apiHoug = null,
-    Object? apiRaig = null,
-    Object? apiTyku = null,
-    Object? apiLuck = null,
-    Object? apiSoku = null,
-    Object? apiLeng = null,
-    Object? apiSlotNum = null,
-    Object? apiMaxeq = null,
-    Object? apiBuildtime = null,
-    Object? apiBroken = null,
-    Object? apiPowup = null,
-    Object? apiBacks = null,
-    Object? apiGetmes = null,
-    Object? apiAfterfuel = null,
-    Object? apiAfterbull = null,
-    Object? apiFuelMax = null,
-    Object? apiBullMax = null,
-    Object? apiVoicef = null,
+    Object? apiAftershipid = freezed,
+    Object? apiTaik = freezed,
+    Object? apiSouk = freezed,
+    Object? apiHoug = freezed,
+    Object? apiRaig = freezed,
+    Object? apiTyku = freezed,
+    Object? apiLuck = freezed,
+    Object? apiSoku = freezed,
+    Object? apiLeng = freezed,
+    Object? apiSlotNum = freezed,
+    Object? apiMaxeq = freezed,
+    Object? apiBuildtime = freezed,
+    Object? apiBroken = freezed,
+    Object? apiPowup = freezed,
+    Object? apiBacks = freezed,
+    Object? apiGetmes = freezed,
+    Object? apiAfterfuel = freezed,
+    Object? apiAfterbull = freezed,
+    Object? apiFuelMax = freezed,
+    Object? apiBullMax = freezed,
+    Object? apiVoicef = freezed,
   }) {
     return _then(_$_GetDataApiDataApiMstShipEntity(
       apiId: null == apiId
@@ -1427,90 +1427,90 @@ class __$$_GetDataApiDataApiMstShipEntityCopyWithImpl<$Res>
           ? _value.apiAfterlv
           : apiAfterlv // ignore: cast_nullable_to_non_nullable
               as int?,
-      apiAftershipid: null == apiAftershipid
+      apiAftershipid: freezed == apiAftershipid
           ? _value.apiAftershipid
           : apiAftershipid // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiTaik: null == apiTaik
+              as String?,
+      apiTaik: freezed == apiTaik
           ? _value.apiTaik
           : apiTaik // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSouk: null == apiSouk
+              as List<int>?,
+      apiSouk: freezed == apiSouk
           ? _value.apiSouk
           : apiSouk // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiHoug: null == apiHoug
+              as List<int>?,
+      apiHoug: freezed == apiHoug
           ? _value.apiHoug
           : apiHoug // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiRaig: null == apiRaig
+              as List<int>?,
+      apiRaig: freezed == apiRaig
           ? _value.apiRaig
           : apiRaig // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiTyku: null == apiTyku
+              as List<int>?,
+      apiTyku: freezed == apiTyku
           ? _value.apiTyku
           : apiTyku // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiLuck: null == apiLuck
+              as List<int>?,
+      apiLuck: freezed == apiLuck
           ? _value.apiLuck
           : apiLuck // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSoku: null == apiSoku
+              as List<int>?,
+      apiSoku: freezed == apiSoku
           ? _value.apiSoku
           : apiSoku // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiLeng: null == apiLeng
+              as int?,
+      apiLeng: freezed == apiLeng
           ? _value.apiLeng
           : apiLeng // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiSlotNum: null == apiSlotNum
+              as int?,
+      apiSlotNum: freezed == apiSlotNum
           ? _value.apiSlotNum
           : apiSlotNum // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiMaxeq: null == apiMaxeq
+              as int?,
+      apiMaxeq: freezed == apiMaxeq
           ? _value.apiMaxeq
           : apiMaxeq // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBuildtime: null == apiBuildtime
+              as List<int>?,
+      apiBuildtime: freezed == apiBuildtime
           ? _value.apiBuildtime
           : apiBuildtime // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiBroken: null == apiBroken
+              as int?,
+      apiBroken: freezed == apiBroken
           ? _value.apiBroken
           : apiBroken // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiPowup: null == apiPowup
+              as List<int>?,
+      apiPowup: freezed == apiPowup
           ? _value.apiPowup
           : apiPowup // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBacks: null == apiBacks
+              as List<int>?,
+      apiBacks: freezed == apiBacks
           ? _value.apiBacks
           : apiBacks // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiGetmes: null == apiGetmes
+              as int?,
+      apiGetmes: freezed == apiGetmes
           ? _value.apiGetmes
           : apiGetmes // ignore: cast_nullable_to_non_nullable
-              as String,
-      apiAfterfuel: null == apiAfterfuel
+              as String?,
+      apiAfterfuel: freezed == apiAfterfuel
           ? _value.apiAfterfuel
           : apiAfterfuel // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiAfterbull: null == apiAfterbull
+              as int?,
+      apiAfterbull: freezed == apiAfterbull
           ? _value.apiAfterbull
           : apiAfterbull // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiFuelMax: null == apiFuelMax
+              as int?,
+      apiFuelMax: freezed == apiFuelMax
           ? _value.apiFuelMax
           : apiFuelMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiBullMax: null == apiBullMax
+              as int?,
+      apiBullMax: freezed == apiBullMax
           ? _value.apiBullMax
           : apiBullMax // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiVoicef: null == apiVoicef
+              as int?,
+      apiVoicef: freezed == apiVoicef
           ? _value.apiVoicef
           : apiVoicef // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -1528,27 +1528,27 @@ class _$_GetDataApiDataApiMstShipEntity
       @JsonKey(name: 'api_stype') required this.apiStype,
       @JsonKey(name: 'api_ctype') required this.apiCtype,
       @JsonKey(name: 'api_afterlv') this.apiAfterlv,
-      @JsonKey(name: 'api_aftershipid') required this.apiAftershipid,
-      @JsonKey(name: 'api_taik') required this.apiTaik,
-      @JsonKey(name: 'api_souk') required this.apiSouk,
-      @JsonKey(name: 'api_houg') required this.apiHoug,
-      @JsonKey(name: 'api_raig') required this.apiRaig,
-      @JsonKey(name: 'api_tyku') required this.apiTyku,
-      @JsonKey(name: 'api_luck') required this.apiLuck,
-      @JsonKey(name: 'api_soku') required this.apiSoku,
-      @JsonKey(name: 'api_leng') required this.apiLeng,
-      @JsonKey(name: 'api_slot_num') required this.apiSlotNum,
-      @JsonKey(name: 'api_maxeq') required this.apiMaxeq,
-      @JsonKey(name: 'api_buildtime') required this.apiBuildtime,
-      @JsonKey(name: 'api_broken') required this.apiBroken,
-      @JsonKey(name: 'api_powup') required this.apiPowup,
-      @JsonKey(name: 'api_backs') required this.apiBacks,
-      @JsonKey(name: 'api_getmes') required this.apiGetmes,
-      @JsonKey(name: 'api_afterfuel') required this.apiAfterfuel,
-      @JsonKey(name: 'api_afterbull') required this.apiAfterbull,
-      @JsonKey(name: 'api_fuel_max') required this.apiFuelMax,
-      @JsonKey(name: 'api_bull_max') required this.apiBullMax,
-      @JsonKey(name: 'api_voicef') required this.apiVoicef});
+      @JsonKey(name: 'api_aftershipid') this.apiAftershipid,
+      @JsonKey(name: 'api_taik') this.apiTaik,
+      @JsonKey(name: 'api_souk') this.apiSouk,
+      @JsonKey(name: 'api_houg') this.apiHoug,
+      @JsonKey(name: 'api_raig') this.apiRaig,
+      @JsonKey(name: 'api_tyku') this.apiTyku,
+      @JsonKey(name: 'api_luck') this.apiLuck,
+      @JsonKey(name: 'api_soku') this.apiSoku,
+      @JsonKey(name: 'api_leng') this.apiLeng,
+      @JsonKey(name: 'api_slot_num') this.apiSlotNum,
+      @JsonKey(name: 'api_maxeq') this.apiMaxeq,
+      @JsonKey(name: 'api_buildtime') this.apiBuildtime,
+      @JsonKey(name: 'api_broken') this.apiBroken,
+      @JsonKey(name: 'api_powup') this.apiPowup,
+      @JsonKey(name: 'api_backs') this.apiBacks,
+      @JsonKey(name: 'api_getmes') this.apiGetmes,
+      @JsonKey(name: 'api_afterfuel') this.apiAfterfuel,
+      @JsonKey(name: 'api_afterbull') this.apiAfterbull,
+      @JsonKey(name: 'api_fuel_max') this.apiFuelMax,
+      @JsonKey(name: 'api_bull_max') this.apiBullMax,
+      @JsonKey(name: 'api_voicef') this.apiVoicef});
 
   factory _$_GetDataApiDataApiMstShipEntity.fromJson(
           Map<String, dynamic> json) =>
@@ -1580,67 +1580,67 @@ class _$_GetDataApiDataApiMstShipEntity
   int? apiAfterlv;
   @override
   @JsonKey(name: 'api_aftershipid')
-  String apiAftershipid;
+  String? apiAftershipid;
   @override
   @JsonKey(name: 'api_taik')
-  List<int> apiTaik;
+  List<int>? apiTaik;
   @override
   @JsonKey(name: 'api_souk')
-  List<int> apiSouk;
+  List<int>? apiSouk;
   @override
   @JsonKey(name: 'api_houg')
-  List<int> apiHoug;
+  List<int>? apiHoug;
   @override
   @JsonKey(name: 'api_raig')
-  List<int> apiRaig;
+  List<int>? apiRaig;
   @override
   @JsonKey(name: 'api_tyku')
-  List<int> apiTyku;
+  List<int>? apiTyku;
   @override
   @JsonKey(name: 'api_luck')
-  List<int> apiLuck;
+  List<int>? apiLuck;
   @override
   @JsonKey(name: 'api_soku')
-  int apiSoku;
+  int? apiSoku;
   @override
   @JsonKey(name: 'api_leng')
-  int apiLeng;
+  int? apiLeng;
   @override
   @JsonKey(name: 'api_slot_num')
-  int apiSlotNum;
+  int? apiSlotNum;
   @override
   @JsonKey(name: 'api_maxeq')
-  List<int> apiMaxeq;
+  List<int>? apiMaxeq;
   @override
   @JsonKey(name: 'api_buildtime')
-  int apiBuildtime;
+  int? apiBuildtime;
   @override
   @JsonKey(name: 'api_broken')
-  List<int> apiBroken;
+  List<int>? apiBroken;
   @override
   @JsonKey(name: 'api_powup')
-  List<int> apiPowup;
+  List<int>? apiPowup;
   @override
   @JsonKey(name: 'api_backs')
-  int apiBacks;
+  int? apiBacks;
   @override
   @JsonKey(name: 'api_getmes')
-  String apiGetmes;
+  String? apiGetmes;
   @override
   @JsonKey(name: 'api_afterfuel')
-  int apiAfterfuel;
+  int? apiAfterfuel;
   @override
   @JsonKey(name: 'api_afterbull')
-  int apiAfterbull;
+  int? apiAfterbull;
   @override
   @JsonKey(name: 'api_fuel_max')
-  int apiFuelMax;
+  int? apiFuelMax;
   @override
   @JsonKey(name: 'api_bull_max')
-  int apiBullMax;
+  int? apiBullMax;
   @override
   @JsonKey(name: 'api_voicef')
-  int apiVoicef;
+  int? apiVoicef;
 
   @override
   String toString() {
@@ -1673,27 +1673,27 @@ abstract class _GetDataApiDataApiMstShipEntity
           @JsonKey(name: 'api_stype') required int apiStype,
           @JsonKey(name: 'api_ctype') required int apiCtype,
           @JsonKey(name: 'api_afterlv') int? apiAfterlv,
-          @JsonKey(name: 'api_aftershipid') required String apiAftershipid,
-          @JsonKey(name: 'api_taik') required List<int> apiTaik,
-          @JsonKey(name: 'api_souk') required List<int> apiSouk,
-          @JsonKey(name: 'api_houg') required List<int> apiHoug,
-          @JsonKey(name: 'api_raig') required List<int> apiRaig,
-          @JsonKey(name: 'api_tyku') required List<int> apiTyku,
-          @JsonKey(name: 'api_luck') required List<int> apiLuck,
-          @JsonKey(name: 'api_soku') required int apiSoku,
-          @JsonKey(name: 'api_leng') required int apiLeng,
-          @JsonKey(name: 'api_slot_num') required int apiSlotNum,
-          @JsonKey(name: 'api_maxeq') required List<int> apiMaxeq,
-          @JsonKey(name: 'api_buildtime') required int apiBuildtime,
-          @JsonKey(name: 'api_broken') required List<int> apiBroken,
-          @JsonKey(name: 'api_powup') required List<int> apiPowup,
-          @JsonKey(name: 'api_backs') required int apiBacks,
-          @JsonKey(name: 'api_getmes') required String apiGetmes,
-          @JsonKey(name: 'api_afterfuel') required int apiAfterfuel,
-          @JsonKey(name: 'api_afterbull') required int apiAfterbull,
-          @JsonKey(name: 'api_fuel_max') required int apiFuelMax,
-          @JsonKey(name: 'api_bull_max') required int apiBullMax,
-          @JsonKey(name: 'api_voicef') required int apiVoicef}) =
+          @JsonKey(name: 'api_aftershipid') String? apiAftershipid,
+          @JsonKey(name: 'api_taik') List<int>? apiTaik,
+          @JsonKey(name: 'api_souk') List<int>? apiSouk,
+          @JsonKey(name: 'api_houg') List<int>? apiHoug,
+          @JsonKey(name: 'api_raig') List<int>? apiRaig,
+          @JsonKey(name: 'api_tyku') List<int>? apiTyku,
+          @JsonKey(name: 'api_luck') List<int>? apiLuck,
+          @JsonKey(name: 'api_soku') int? apiSoku,
+          @JsonKey(name: 'api_leng') int? apiLeng,
+          @JsonKey(name: 'api_slot_num') int? apiSlotNum,
+          @JsonKey(name: 'api_maxeq') List<int>? apiMaxeq,
+          @JsonKey(name: 'api_buildtime') int? apiBuildtime,
+          @JsonKey(name: 'api_broken') List<int>? apiBroken,
+          @JsonKey(name: 'api_powup') List<int>? apiPowup,
+          @JsonKey(name: 'api_backs') int? apiBacks,
+          @JsonKey(name: 'api_getmes') String? apiGetmes,
+          @JsonKey(name: 'api_afterfuel') int? apiAfterfuel,
+          @JsonKey(name: 'api_afterbull') int? apiAfterbull,
+          @JsonKey(name: 'api_fuel_max') int? apiFuelMax,
+          @JsonKey(name: 'api_bull_max') int? apiBullMax,
+          @JsonKey(name: 'api_voicef') int? apiVoicef}) =
       _$_GetDataApiDataApiMstShipEntity;
 
   factory _GetDataApiDataApiMstShipEntity.fromJson(Map<String, dynamic> json) =
@@ -1741,109 +1741,109 @@ abstract class _GetDataApiDataApiMstShipEntity
   set apiAfterlv(int? value);
   @override
   @JsonKey(name: 'api_aftershipid')
-  String get apiAftershipid;
+  String? get apiAftershipid;
   @JsonKey(name: 'api_aftershipid')
-  set apiAftershipid(String value);
+  set apiAftershipid(String? value);
   @override
   @JsonKey(name: 'api_taik')
-  List<int> get apiTaik;
+  List<int>? get apiTaik;
   @JsonKey(name: 'api_taik')
-  set apiTaik(List<int> value);
+  set apiTaik(List<int>? value);
   @override
   @JsonKey(name: 'api_souk')
-  List<int> get apiSouk;
+  List<int>? get apiSouk;
   @JsonKey(name: 'api_souk')
-  set apiSouk(List<int> value);
+  set apiSouk(List<int>? value);
   @override
   @JsonKey(name: 'api_houg')
-  List<int> get apiHoug;
+  List<int>? get apiHoug;
   @JsonKey(name: 'api_houg')
-  set apiHoug(List<int> value);
+  set apiHoug(List<int>? value);
   @override
   @JsonKey(name: 'api_raig')
-  List<int> get apiRaig;
+  List<int>? get apiRaig;
   @JsonKey(name: 'api_raig')
-  set apiRaig(List<int> value);
+  set apiRaig(List<int>? value);
   @override
   @JsonKey(name: 'api_tyku')
-  List<int> get apiTyku;
+  List<int>? get apiTyku;
   @JsonKey(name: 'api_tyku')
-  set apiTyku(List<int> value);
+  set apiTyku(List<int>? value);
   @override
   @JsonKey(name: 'api_luck')
-  List<int> get apiLuck;
+  List<int>? get apiLuck;
   @JsonKey(name: 'api_luck')
-  set apiLuck(List<int> value);
+  set apiLuck(List<int>? value);
   @override
   @JsonKey(name: 'api_soku')
-  int get apiSoku;
+  int? get apiSoku;
   @JsonKey(name: 'api_soku')
-  set apiSoku(int value);
+  set apiSoku(int? value);
   @override
   @JsonKey(name: 'api_leng')
-  int get apiLeng;
+  int? get apiLeng;
   @JsonKey(name: 'api_leng')
-  set apiLeng(int value);
+  set apiLeng(int? value);
   @override
   @JsonKey(name: 'api_slot_num')
-  int get apiSlotNum;
+  int? get apiSlotNum;
   @JsonKey(name: 'api_slot_num')
-  set apiSlotNum(int value);
+  set apiSlotNum(int? value);
   @override
   @JsonKey(name: 'api_maxeq')
-  List<int> get apiMaxeq;
+  List<int>? get apiMaxeq;
   @JsonKey(name: 'api_maxeq')
-  set apiMaxeq(List<int> value);
+  set apiMaxeq(List<int>? value);
   @override
   @JsonKey(name: 'api_buildtime')
-  int get apiBuildtime;
+  int? get apiBuildtime;
   @JsonKey(name: 'api_buildtime')
-  set apiBuildtime(int value);
+  set apiBuildtime(int? value);
   @override
   @JsonKey(name: 'api_broken')
-  List<int> get apiBroken;
+  List<int>? get apiBroken;
   @JsonKey(name: 'api_broken')
-  set apiBroken(List<int> value);
+  set apiBroken(List<int>? value);
   @override
   @JsonKey(name: 'api_powup')
-  List<int> get apiPowup;
+  List<int>? get apiPowup;
   @JsonKey(name: 'api_powup')
-  set apiPowup(List<int> value);
+  set apiPowup(List<int>? value);
   @override
   @JsonKey(name: 'api_backs')
-  int get apiBacks;
+  int? get apiBacks;
   @JsonKey(name: 'api_backs')
-  set apiBacks(int value);
+  set apiBacks(int? value);
   @override
   @JsonKey(name: 'api_getmes')
-  String get apiGetmes;
+  String? get apiGetmes;
   @JsonKey(name: 'api_getmes')
-  set apiGetmes(String value);
+  set apiGetmes(String? value);
   @override
   @JsonKey(name: 'api_afterfuel')
-  int get apiAfterfuel;
+  int? get apiAfterfuel;
   @JsonKey(name: 'api_afterfuel')
-  set apiAfterfuel(int value);
+  set apiAfterfuel(int? value);
   @override
   @JsonKey(name: 'api_afterbull')
-  int get apiAfterbull;
+  int? get apiAfterbull;
   @JsonKey(name: 'api_afterbull')
-  set apiAfterbull(int value);
+  set apiAfterbull(int? value);
   @override
   @JsonKey(name: 'api_fuel_max')
-  int get apiFuelMax;
+  int? get apiFuelMax;
   @JsonKey(name: 'api_fuel_max')
-  set apiFuelMax(int value);
+  set apiFuelMax(int? value);
   @override
   @JsonKey(name: 'api_bull_max')
-  int get apiBullMax;
+  int? get apiBullMax;
   @JsonKey(name: 'api_bull_max')
-  set apiBullMax(int value);
+  set apiBullMax(int? value);
   @override
   @JsonKey(name: 'api_voicef')
-  int get apiVoicef;
+  int? get apiVoicef;
   @JsonKey(name: 'api_voicef')
-  set apiVoicef(int value);
+  set apiVoicef(int? value);
   @override
   @JsonKey(ignore: true)
   _$$_GetDataApiDataApiMstShipEntityCopyWith<_$_GetDataApiDataApiMstShipEntity>
@@ -2443,9 +2443,9 @@ mixin _$GetDataApiDataApiMstSlotitemEntity {
   @JsonKey(name: 'api_usebull')
   set apiUsebull(String value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_version')
-  int get apiVersion => throw _privateConstructorUsedError;
+  int? get apiVersion => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_version')
-  set apiVersion(int value) => throw _privateConstructorUsedError;
+  set apiVersion(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2488,7 +2488,7 @@ abstract class $GetDataApiDataApiMstSlotitemEntityCopyWith<$Res> {
       @JsonKey(name: 'api_rare') int apiRare,
       @JsonKey(name: 'api_broken') List<int> apiBroken,
       @JsonKey(name: 'api_usebull') String apiUsebull,
-      @JsonKey(name: 'api_version') int apiVersion});
+      @JsonKey(name: 'api_version') int? apiVersion});
 }
 
 /// @nodoc
@@ -2530,7 +2530,7 @@ class _$GetDataApiDataApiMstSlotitemEntityCopyWithImpl<$Res,
     Object? apiRare = null,
     Object? apiBroken = null,
     Object? apiUsebull = null,
-    Object? apiVersion = null,
+    Object? apiVersion = freezed,
   }) {
     return _then(_value.copyWith(
       apiId: null == apiId
@@ -2633,10 +2633,10 @@ class _$GetDataApiDataApiMstSlotitemEntityCopyWithImpl<$Res,
           ? _value.apiUsebull
           : apiUsebull // ignore: cast_nullable_to_non_nullable
               as String,
-      apiVersion: null == apiVersion
+      apiVersion: freezed == apiVersion
           ? _value.apiVersion
           : apiVersion // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -2676,7 +2676,7 @@ abstract class _$$_GetDataApiDataApiMstSlotitemEntityCopyWith<$Res>
       @JsonKey(name: 'api_rare') int apiRare,
       @JsonKey(name: 'api_broken') List<int> apiBroken,
       @JsonKey(name: 'api_usebull') String apiUsebull,
-      @JsonKey(name: 'api_version') int apiVersion});
+      @JsonKey(name: 'api_version') int? apiVersion});
 }
 
 /// @nodoc
@@ -2717,7 +2717,7 @@ class __$$_GetDataApiDataApiMstSlotitemEntityCopyWithImpl<$Res>
     Object? apiRare = null,
     Object? apiBroken = null,
     Object? apiUsebull = null,
-    Object? apiVersion = null,
+    Object? apiVersion = freezed,
   }) {
     return _then(_$_GetDataApiDataApiMstSlotitemEntity(
       apiId: null == apiId
@@ -2820,10 +2820,10 @@ class __$$_GetDataApiDataApiMstSlotitemEntityCopyWithImpl<$Res>
           ? _value.apiUsebull
           : apiUsebull // ignore: cast_nullable_to_non_nullable
               as String,
-      apiVersion: null == apiVersion
+      apiVersion: freezed == apiVersion
           ? _value.apiVersion
           : apiVersion // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -2858,7 +2858,7 @@ class _$_GetDataApiDataApiMstSlotitemEntity
       @JsonKey(name: 'api_rare') required this.apiRare,
       @JsonKey(name: 'api_broken') required this.apiBroken,
       @JsonKey(name: 'api_usebull') required this.apiUsebull,
-      @JsonKey(name: 'api_version') required this.apiVersion});
+      @JsonKey(name: 'api_version') this.apiVersion});
 
   factory _$_GetDataApiDataApiMstSlotitemEntity.fromJson(
           Map<String, dynamic> json) =>
@@ -2941,7 +2941,7 @@ class _$_GetDataApiDataApiMstSlotitemEntity
   String apiUsebull;
   @override
   @JsonKey(name: 'api_version')
-  int apiVersion;
+  int? apiVersion;
 
   @override
   String toString() {
@@ -2992,7 +2992,7 @@ abstract class _GetDataApiDataApiMstSlotitemEntity
           @JsonKey(name: 'api_rare') required int apiRare,
           @JsonKey(name: 'api_broken') required List<int> apiBroken,
           @JsonKey(name: 'api_usebull') required String apiUsebull,
-          @JsonKey(name: 'api_version') required int apiVersion}) =
+          @JsonKey(name: 'api_version') int? apiVersion}) =
       _$_GetDataApiDataApiMstSlotitemEntity;
 
   factory _GetDataApiDataApiMstSlotitemEntity.fromJson(
@@ -3126,9 +3126,9 @@ abstract class _GetDataApiDataApiMstSlotitemEntity
   set apiUsebull(String value);
   @override
   @JsonKey(name: 'api_version')
-  int get apiVersion;
+  int? get apiVersion;
   @JsonKey(name: 'api_version')
-  set apiVersion(int value);
+  set apiVersion(int? value);
   @override
   @JsonKey(ignore: true)
   _$$_GetDataApiDataApiMstSlotitemEntityCopyWith<
@@ -5104,9 +5104,9 @@ mixin _$GetDataApiDataApiMstMissionEntity {
   @JsonKey(name: 'api_use_fuel')
   set apiUseFuel(double value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_use_bull')
-  int get apiUseBull => throw _privateConstructorUsedError;
+  double get apiUseBull => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_use_bull')
-  set apiUseBull(int value) => throw _privateConstructorUsedError;
+  set apiUseBull(double value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_win_item1')
   List<int> get apiWinItem1 => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_win_item1')
@@ -5154,7 +5154,7 @@ abstract class $GetDataApiDataApiMstMissionEntityCopyWith<$Res> {
       @JsonKey(name: 'api_deck_num') int apiDeckNum,
       @JsonKey(name: 'api_difficulty') int apiDifficulty,
       @JsonKey(name: 'api_use_fuel') double apiUseFuel,
-      @JsonKey(name: 'api_use_bull') int apiUseBull,
+      @JsonKey(name: 'api_use_bull') double apiUseBull,
       @JsonKey(name: 'api_win_item1') List<int> apiWinItem1,
       @JsonKey(name: 'api_win_item2') List<int> apiWinItem2,
       @JsonKey(name: 'api_win_mat_level') List<int> apiWinMatLevel,
@@ -5242,7 +5242,7 @@ class _$GetDataApiDataApiMstMissionEntityCopyWithImpl<$Res,
       apiUseBull: null == apiUseBull
           ? _value.apiUseBull
           : apiUseBull // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       apiWinItem1: null == apiWinItem1
           ? _value.apiWinItem1
           : apiWinItem1 // ignore: cast_nullable_to_non_nullable
@@ -5288,7 +5288,7 @@ abstract class _$$_GetDataApiDataApiMstMissionEntityCopyWith<$Res>
       @JsonKey(name: 'api_deck_num') int apiDeckNum,
       @JsonKey(name: 'api_difficulty') int apiDifficulty,
       @JsonKey(name: 'api_use_fuel') double apiUseFuel,
-      @JsonKey(name: 'api_use_bull') int apiUseBull,
+      @JsonKey(name: 'api_use_bull') double apiUseBull,
       @JsonKey(name: 'api_win_item1') List<int> apiWinItem1,
       @JsonKey(name: 'api_win_item2') List<int> apiWinItem2,
       @JsonKey(name: 'api_win_mat_level') List<int> apiWinMatLevel,
@@ -5375,7 +5375,7 @@ class __$$_GetDataApiDataApiMstMissionEntityCopyWithImpl<$Res>
       apiUseBull: null == apiUseBull
           ? _value.apiUseBull
           : apiUseBull // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       apiWinItem1: null == apiWinItem1
           ? _value.apiWinItem1
           : apiWinItem1 // ignore: cast_nullable_to_non_nullable
@@ -5462,7 +5462,7 @@ class _$_GetDataApiDataApiMstMissionEntity
   double apiUseFuel;
   @override
   @JsonKey(name: 'api_use_bull')
-  int apiUseBull;
+  double apiUseBull;
   @override
   @JsonKey(name: 'api_win_item1')
   List<int> apiWinItem1;
@@ -5514,7 +5514,7 @@ abstract class _GetDataApiDataApiMstMissionEntity
           @JsonKey(name: 'api_deck_num') required int apiDeckNum,
           @JsonKey(name: 'api_difficulty') required int apiDifficulty,
           @JsonKey(name: 'api_use_fuel') required double apiUseFuel,
-          @JsonKey(name: 'api_use_bull') required int apiUseBull,
+          @JsonKey(name: 'api_use_bull') required double apiUseBull,
           @JsonKey(name: 'api_win_item1') required List<int> apiWinItem1,
           @JsonKey(name: 'api_win_item2') required List<int> apiWinItem2,
           @JsonKey(name: 'api_win_mat_level') required List<int> apiWinMatLevel,
@@ -5584,9 +5584,9 @@ abstract class _GetDataApiDataApiMstMissionEntity
   set apiUseFuel(double value);
   @override
   @JsonKey(name: 'api_use_bull')
-  int get apiUseBull;
+  double get apiUseBull;
   @JsonKey(name: 'api_use_bull')
-  set apiUseBull(int value);
+  set apiUseBull(double value);
   @override
   @JsonKey(name: 'api_win_item1')
   List<int> get apiWinItem1;
@@ -7658,77 +7658,77 @@ mixin _$GetDataApiDataApiMstShipgraphEntity {
   @JsonKey(name: 'api_version')
   set apiVersion(List<String> value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_battle_n')
-  List<int> get apiBattleN => throw _privateConstructorUsedError;
+  List<int>? get apiBattleN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_battle_n')
-  set apiBattleN(List<int> value) => throw _privateConstructorUsedError;
+  set apiBattleN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_battle_d')
-  List<int> get apiBattleD => throw _privateConstructorUsedError;
+  List<int>? get apiBattleD => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_battle_d')
-  set apiBattleD(List<int> value) => throw _privateConstructorUsedError;
+  set apiBattleD(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_sortno')
-  int get apiSortno => throw _privateConstructorUsedError;
+  int? get apiSortno => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_sortno')
-  set apiSortno(int value) => throw _privateConstructorUsedError;
+  set apiSortno(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_boko_n')
-  List<int> get apiBokoN => throw _privateConstructorUsedError;
+  List<int>? get apiBokoN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_boko_n')
-  set apiBokoN(List<int> value) => throw _privateConstructorUsedError;
+  set apiBokoN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_boko_d')
-  List<int> get apiBokoD => throw _privateConstructorUsedError;
+  List<int>? get apiBokoD => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_boko_d')
-  set apiBokoD(List<int> value) => throw _privateConstructorUsedError;
+  set apiBokoD(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaisyu_n')
-  List<int> get apiKaisyuN => throw _privateConstructorUsedError;
+  List<int>? get apiKaisyuN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaisyu_n')
-  set apiKaisyuN(List<int> value) => throw _privateConstructorUsedError;
+  set apiKaisyuN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaisyu_d')
-  List<int> get apiKaisyuD => throw _privateConstructorUsedError;
+  List<int>? get apiKaisyuD => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaisyu_d')
-  set apiKaisyuD(List<int> value) => throw _privateConstructorUsedError;
+  set apiKaisyuD(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaizo_n')
-  List<int> get apiKaizoN => throw _privateConstructorUsedError;
+  List<int>? get apiKaizoN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaizo_n')
-  set apiKaizoN(List<int> value) => throw _privateConstructorUsedError;
+  set apiKaizoN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaizo_d')
-  List<int> get apiKaizoD => throw _privateConstructorUsedError;
+  List<int>? get apiKaizoD => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kaizo_d')
-  set apiKaizoD(List<int> value) => throw _privateConstructorUsedError;
+  set apiKaizoD(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_map_n')
-  List<int> get apiMapN => throw _privateConstructorUsedError;
+  List<int>? get apiMapN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_map_n')
-  set apiMapN(List<int> value) => throw _privateConstructorUsedError;
+  set apiMapN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_map_d')
-  List<int> get apiMapD => throw _privateConstructorUsedError;
+  List<int>? get apiMapD => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_map_d')
-  set apiMapD(List<int> value) => throw _privateConstructorUsedError;
+  set apiMapD(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ensyuf_n')
-  List<int> get apiEnsyufN => throw _privateConstructorUsedError;
+  List<int>? get apiEnsyufN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ensyuf_n')
-  set apiEnsyufN(List<int> value) => throw _privateConstructorUsedError;
+  set apiEnsyufN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ensyuf_d')
-  List<int> get apiEnsyufD => throw _privateConstructorUsedError;
+  List<int>? get apiEnsyufD => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ensyuf_d')
-  set apiEnsyufD(List<int> value) => throw _privateConstructorUsedError;
+  set apiEnsyufD(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ensyue_n')
-  List<int> get apiEnsyueN => throw _privateConstructorUsedError;
+  List<int>? get apiEnsyueN => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ensyue_n')
-  set apiEnsyueN(List<int> value) => throw _privateConstructorUsedError;
+  set apiEnsyueN(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_weda')
-  List<int> get apiWeda => throw _privateConstructorUsedError;
+  List<int>? get apiWeda => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_weda')
-  set apiWeda(List<int> value) => throw _privateConstructorUsedError;
+  set apiWeda(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_wedb')
-  List<int> get apiWedb => throw _privateConstructorUsedError;
+  List<int>? get apiWedb => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_wedb')
-  set apiWedb(List<int> value) => throw _privateConstructorUsedError;
+  set apiWedb(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_pa')
-  List<int> get apiPa => throw _privateConstructorUsedError;
+  List<int>? get apiPa => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_pa')
-  set apiPa(List<int> value) => throw _privateConstructorUsedError;
+  set apiPa(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_pab')
-  List<int> get apiPab => throw _privateConstructorUsedError;
+  List<int>? get apiPab => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_pab')
-  set apiPab(List<int> value) => throw _privateConstructorUsedError;
+  set apiPab(List<int>? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -7749,24 +7749,24 @@ abstract class $GetDataApiDataApiMstShipgraphEntityCopyWith<$Res> {
       {@JsonKey(name: 'api_id') int apiId,
       @JsonKey(name: 'api_filename') String apiFilename,
       @JsonKey(name: 'api_version') List<String> apiVersion,
-      @JsonKey(name: 'api_battle_n') List<int> apiBattleN,
-      @JsonKey(name: 'api_battle_d') List<int> apiBattleD,
-      @JsonKey(name: 'api_sortno') int apiSortno,
-      @JsonKey(name: 'api_boko_n') List<int> apiBokoN,
-      @JsonKey(name: 'api_boko_d') List<int> apiBokoD,
-      @JsonKey(name: 'api_kaisyu_n') List<int> apiKaisyuN,
-      @JsonKey(name: 'api_kaisyu_d') List<int> apiKaisyuD,
-      @JsonKey(name: 'api_kaizo_n') List<int> apiKaizoN,
-      @JsonKey(name: 'api_kaizo_d') List<int> apiKaizoD,
-      @JsonKey(name: 'api_map_n') List<int> apiMapN,
-      @JsonKey(name: 'api_map_d') List<int> apiMapD,
-      @JsonKey(name: 'api_ensyuf_n') List<int> apiEnsyufN,
-      @JsonKey(name: 'api_ensyuf_d') List<int> apiEnsyufD,
-      @JsonKey(name: 'api_ensyue_n') List<int> apiEnsyueN,
-      @JsonKey(name: 'api_weda') List<int> apiWeda,
-      @JsonKey(name: 'api_wedb') List<int> apiWedb,
-      @JsonKey(name: 'api_pa') List<int> apiPa,
-      @JsonKey(name: 'api_pab') List<int> apiPab});
+      @JsonKey(name: 'api_battle_n') List<int>? apiBattleN,
+      @JsonKey(name: 'api_battle_d') List<int>? apiBattleD,
+      @JsonKey(name: 'api_sortno') int? apiSortno,
+      @JsonKey(name: 'api_boko_n') List<int>? apiBokoN,
+      @JsonKey(name: 'api_boko_d') List<int>? apiBokoD,
+      @JsonKey(name: 'api_kaisyu_n') List<int>? apiKaisyuN,
+      @JsonKey(name: 'api_kaisyu_d') List<int>? apiKaisyuD,
+      @JsonKey(name: 'api_kaizo_n') List<int>? apiKaizoN,
+      @JsonKey(name: 'api_kaizo_d') List<int>? apiKaizoD,
+      @JsonKey(name: 'api_map_n') List<int>? apiMapN,
+      @JsonKey(name: 'api_map_d') List<int>? apiMapD,
+      @JsonKey(name: 'api_ensyuf_n') List<int>? apiEnsyufN,
+      @JsonKey(name: 'api_ensyuf_d') List<int>? apiEnsyufD,
+      @JsonKey(name: 'api_ensyue_n') List<int>? apiEnsyueN,
+      @JsonKey(name: 'api_weda') List<int>? apiWeda,
+      @JsonKey(name: 'api_wedb') List<int>? apiWedb,
+      @JsonKey(name: 'api_pa') List<int>? apiPa,
+      @JsonKey(name: 'api_pab') List<int>? apiPab});
 }
 
 /// @nodoc
@@ -7786,24 +7786,24 @@ class _$GetDataApiDataApiMstShipgraphEntityCopyWithImpl<$Res,
     Object? apiId = null,
     Object? apiFilename = null,
     Object? apiVersion = null,
-    Object? apiBattleN = null,
-    Object? apiBattleD = null,
-    Object? apiSortno = null,
-    Object? apiBokoN = null,
-    Object? apiBokoD = null,
-    Object? apiKaisyuN = null,
-    Object? apiKaisyuD = null,
-    Object? apiKaizoN = null,
-    Object? apiKaizoD = null,
-    Object? apiMapN = null,
-    Object? apiMapD = null,
-    Object? apiEnsyufN = null,
-    Object? apiEnsyufD = null,
-    Object? apiEnsyueN = null,
-    Object? apiWeda = null,
-    Object? apiWedb = null,
-    Object? apiPa = null,
-    Object? apiPab = null,
+    Object? apiBattleN = freezed,
+    Object? apiBattleD = freezed,
+    Object? apiSortno = freezed,
+    Object? apiBokoN = freezed,
+    Object? apiBokoD = freezed,
+    Object? apiKaisyuN = freezed,
+    Object? apiKaisyuD = freezed,
+    Object? apiKaizoN = freezed,
+    Object? apiKaizoD = freezed,
+    Object? apiMapN = freezed,
+    Object? apiMapD = freezed,
+    Object? apiEnsyufN = freezed,
+    Object? apiEnsyufD = freezed,
+    Object? apiEnsyueN = freezed,
+    Object? apiWeda = freezed,
+    Object? apiWedb = freezed,
+    Object? apiPa = freezed,
+    Object? apiPab = freezed,
   }) {
     return _then(_value.copyWith(
       apiId: null == apiId
@@ -7818,78 +7818,78 @@ class _$GetDataApiDataApiMstShipgraphEntityCopyWithImpl<$Res,
           ? _value.apiVersion
           : apiVersion // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      apiBattleN: null == apiBattleN
+      apiBattleN: freezed == apiBattleN
           ? _value.apiBattleN
           : apiBattleN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBattleD: null == apiBattleD
+              as List<int>?,
+      apiBattleD: freezed == apiBattleD
           ? _value.apiBattleD
           : apiBattleD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSortno: null == apiSortno
+              as List<int>?,
+      apiSortno: freezed == apiSortno
           ? _value.apiSortno
           : apiSortno // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiBokoN: null == apiBokoN
+              as int?,
+      apiBokoN: freezed == apiBokoN
           ? _value.apiBokoN
           : apiBokoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBokoD: null == apiBokoD
+              as List<int>?,
+      apiBokoD: freezed == apiBokoD
           ? _value.apiBokoD
           : apiBokoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaisyuN: null == apiKaisyuN
+              as List<int>?,
+      apiKaisyuN: freezed == apiKaisyuN
           ? _value.apiKaisyuN
           : apiKaisyuN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaisyuD: null == apiKaisyuD
+              as List<int>?,
+      apiKaisyuD: freezed == apiKaisyuD
           ? _value.apiKaisyuD
           : apiKaisyuD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaizoN: null == apiKaizoN
+              as List<int>?,
+      apiKaizoN: freezed == apiKaizoN
           ? _value.apiKaizoN
           : apiKaizoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaizoD: null == apiKaizoD
+              as List<int>?,
+      apiKaizoD: freezed == apiKaizoD
           ? _value.apiKaizoD
           : apiKaizoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiMapN: null == apiMapN
+              as List<int>?,
+      apiMapN: freezed == apiMapN
           ? _value.apiMapN
           : apiMapN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiMapD: null == apiMapD
+              as List<int>?,
+      apiMapD: freezed == apiMapD
           ? _value.apiMapD
           : apiMapD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiEnsyufN: null == apiEnsyufN
+              as List<int>?,
+      apiEnsyufN: freezed == apiEnsyufN
           ? _value.apiEnsyufN
           : apiEnsyufN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiEnsyufD: null == apiEnsyufD
+              as List<int>?,
+      apiEnsyufD: freezed == apiEnsyufD
           ? _value.apiEnsyufD
           : apiEnsyufD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiEnsyueN: null == apiEnsyueN
+              as List<int>?,
+      apiEnsyueN: freezed == apiEnsyueN
           ? _value.apiEnsyueN
           : apiEnsyueN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiWeda: null == apiWeda
+              as List<int>?,
+      apiWeda: freezed == apiWeda
           ? _value.apiWeda
           : apiWeda // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiWedb: null == apiWedb
+              as List<int>?,
+      apiWedb: freezed == apiWedb
           ? _value.apiWedb
           : apiWedb // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiPa: null == apiPa
+              as List<int>?,
+      apiPa: freezed == apiPa
           ? _value.apiPa
           : apiPa // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiPab: null == apiPab
+              as List<int>?,
+      apiPab: freezed == apiPab
           ? _value.apiPab
           : apiPab // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
     ) as $Val);
   }
 }
@@ -7907,24 +7907,24 @@ abstract class _$$_GetDataApiDataApiMstShipgraphEntityCopyWith<$Res>
       {@JsonKey(name: 'api_id') int apiId,
       @JsonKey(name: 'api_filename') String apiFilename,
       @JsonKey(name: 'api_version') List<String> apiVersion,
-      @JsonKey(name: 'api_battle_n') List<int> apiBattleN,
-      @JsonKey(name: 'api_battle_d') List<int> apiBattleD,
-      @JsonKey(name: 'api_sortno') int apiSortno,
-      @JsonKey(name: 'api_boko_n') List<int> apiBokoN,
-      @JsonKey(name: 'api_boko_d') List<int> apiBokoD,
-      @JsonKey(name: 'api_kaisyu_n') List<int> apiKaisyuN,
-      @JsonKey(name: 'api_kaisyu_d') List<int> apiKaisyuD,
-      @JsonKey(name: 'api_kaizo_n') List<int> apiKaizoN,
-      @JsonKey(name: 'api_kaizo_d') List<int> apiKaizoD,
-      @JsonKey(name: 'api_map_n') List<int> apiMapN,
-      @JsonKey(name: 'api_map_d') List<int> apiMapD,
-      @JsonKey(name: 'api_ensyuf_n') List<int> apiEnsyufN,
-      @JsonKey(name: 'api_ensyuf_d') List<int> apiEnsyufD,
-      @JsonKey(name: 'api_ensyue_n') List<int> apiEnsyueN,
-      @JsonKey(name: 'api_weda') List<int> apiWeda,
-      @JsonKey(name: 'api_wedb') List<int> apiWedb,
-      @JsonKey(name: 'api_pa') List<int> apiPa,
-      @JsonKey(name: 'api_pab') List<int> apiPab});
+      @JsonKey(name: 'api_battle_n') List<int>? apiBattleN,
+      @JsonKey(name: 'api_battle_d') List<int>? apiBattleD,
+      @JsonKey(name: 'api_sortno') int? apiSortno,
+      @JsonKey(name: 'api_boko_n') List<int>? apiBokoN,
+      @JsonKey(name: 'api_boko_d') List<int>? apiBokoD,
+      @JsonKey(name: 'api_kaisyu_n') List<int>? apiKaisyuN,
+      @JsonKey(name: 'api_kaisyu_d') List<int>? apiKaisyuD,
+      @JsonKey(name: 'api_kaizo_n') List<int>? apiKaizoN,
+      @JsonKey(name: 'api_kaizo_d') List<int>? apiKaizoD,
+      @JsonKey(name: 'api_map_n') List<int>? apiMapN,
+      @JsonKey(name: 'api_map_d') List<int>? apiMapD,
+      @JsonKey(name: 'api_ensyuf_n') List<int>? apiEnsyufN,
+      @JsonKey(name: 'api_ensyuf_d') List<int>? apiEnsyufD,
+      @JsonKey(name: 'api_ensyue_n') List<int>? apiEnsyueN,
+      @JsonKey(name: 'api_weda') List<int>? apiWeda,
+      @JsonKey(name: 'api_wedb') List<int>? apiWedb,
+      @JsonKey(name: 'api_pa') List<int>? apiPa,
+      @JsonKey(name: 'api_pab') List<int>? apiPab});
 }
 
 /// @nodoc
@@ -7943,24 +7943,24 @@ class __$$_GetDataApiDataApiMstShipgraphEntityCopyWithImpl<$Res>
     Object? apiId = null,
     Object? apiFilename = null,
     Object? apiVersion = null,
-    Object? apiBattleN = null,
-    Object? apiBattleD = null,
-    Object? apiSortno = null,
-    Object? apiBokoN = null,
-    Object? apiBokoD = null,
-    Object? apiKaisyuN = null,
-    Object? apiKaisyuD = null,
-    Object? apiKaizoN = null,
-    Object? apiKaizoD = null,
-    Object? apiMapN = null,
-    Object? apiMapD = null,
-    Object? apiEnsyufN = null,
-    Object? apiEnsyufD = null,
-    Object? apiEnsyueN = null,
-    Object? apiWeda = null,
-    Object? apiWedb = null,
-    Object? apiPa = null,
-    Object? apiPab = null,
+    Object? apiBattleN = freezed,
+    Object? apiBattleD = freezed,
+    Object? apiSortno = freezed,
+    Object? apiBokoN = freezed,
+    Object? apiBokoD = freezed,
+    Object? apiKaisyuN = freezed,
+    Object? apiKaisyuD = freezed,
+    Object? apiKaizoN = freezed,
+    Object? apiKaizoD = freezed,
+    Object? apiMapN = freezed,
+    Object? apiMapD = freezed,
+    Object? apiEnsyufN = freezed,
+    Object? apiEnsyufD = freezed,
+    Object? apiEnsyueN = freezed,
+    Object? apiWeda = freezed,
+    Object? apiWedb = freezed,
+    Object? apiPa = freezed,
+    Object? apiPab = freezed,
   }) {
     return _then(_$_GetDataApiDataApiMstShipgraphEntity(
       apiId: null == apiId
@@ -7975,78 +7975,78 @@ class __$$_GetDataApiDataApiMstShipgraphEntityCopyWithImpl<$Res>
           ? _value.apiVersion
           : apiVersion // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      apiBattleN: null == apiBattleN
+      apiBattleN: freezed == apiBattleN
           ? _value.apiBattleN
           : apiBattleN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBattleD: null == apiBattleD
+              as List<int>?,
+      apiBattleD: freezed == apiBattleD
           ? _value.apiBattleD
           : apiBattleD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSortno: null == apiSortno
+              as List<int>?,
+      apiSortno: freezed == apiSortno
           ? _value.apiSortno
           : apiSortno // ignore: cast_nullable_to_non_nullable
-              as int,
-      apiBokoN: null == apiBokoN
+              as int?,
+      apiBokoN: freezed == apiBokoN
           ? _value.apiBokoN
           : apiBokoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiBokoD: null == apiBokoD
+              as List<int>?,
+      apiBokoD: freezed == apiBokoD
           ? _value.apiBokoD
           : apiBokoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaisyuN: null == apiKaisyuN
+              as List<int>?,
+      apiKaisyuN: freezed == apiKaisyuN
           ? _value.apiKaisyuN
           : apiKaisyuN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaisyuD: null == apiKaisyuD
+              as List<int>?,
+      apiKaisyuD: freezed == apiKaisyuD
           ? _value.apiKaisyuD
           : apiKaisyuD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaizoN: null == apiKaizoN
+              as List<int>?,
+      apiKaizoN: freezed == apiKaizoN
           ? _value.apiKaizoN
           : apiKaizoN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiKaizoD: null == apiKaizoD
+              as List<int>?,
+      apiKaizoD: freezed == apiKaizoD
           ? _value.apiKaizoD
           : apiKaizoD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiMapN: null == apiMapN
+              as List<int>?,
+      apiMapN: freezed == apiMapN
           ? _value.apiMapN
           : apiMapN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiMapD: null == apiMapD
+              as List<int>?,
+      apiMapD: freezed == apiMapD
           ? _value.apiMapD
           : apiMapD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiEnsyufN: null == apiEnsyufN
+              as List<int>?,
+      apiEnsyufN: freezed == apiEnsyufN
           ? _value.apiEnsyufN
           : apiEnsyufN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiEnsyufD: null == apiEnsyufD
+              as List<int>?,
+      apiEnsyufD: freezed == apiEnsyufD
           ? _value.apiEnsyufD
           : apiEnsyufD // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiEnsyueN: null == apiEnsyueN
+              as List<int>?,
+      apiEnsyueN: freezed == apiEnsyueN
           ? _value.apiEnsyueN
           : apiEnsyueN // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiWeda: null == apiWeda
+              as List<int>?,
+      apiWeda: freezed == apiWeda
           ? _value.apiWeda
           : apiWeda // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiWedb: null == apiWedb
+              as List<int>?,
+      apiWedb: freezed == apiWedb
           ? _value.apiWedb
           : apiWedb // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiPa: null == apiPa
+              as List<int>?,
+      apiPa: freezed == apiPa
           ? _value.apiPa
           : apiPa // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiPab: null == apiPab
+              as List<int>?,
+      apiPab: freezed == apiPab
           ? _value.apiPab
           : apiPab // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
     ));
   }
 }
@@ -8059,24 +8059,24 @@ class _$_GetDataApiDataApiMstShipgraphEntity
       {@JsonKey(name: 'api_id') required this.apiId,
       @JsonKey(name: 'api_filename') required this.apiFilename,
       @JsonKey(name: 'api_version') required this.apiVersion,
-      @JsonKey(name: 'api_battle_n') required this.apiBattleN,
-      @JsonKey(name: 'api_battle_d') required this.apiBattleD,
-      @JsonKey(name: 'api_sortno') required this.apiSortno,
-      @JsonKey(name: 'api_boko_n') required this.apiBokoN,
-      @JsonKey(name: 'api_boko_d') required this.apiBokoD,
-      @JsonKey(name: 'api_kaisyu_n') required this.apiKaisyuN,
-      @JsonKey(name: 'api_kaisyu_d') required this.apiKaisyuD,
-      @JsonKey(name: 'api_kaizo_n') required this.apiKaizoN,
-      @JsonKey(name: 'api_kaizo_d') required this.apiKaizoD,
-      @JsonKey(name: 'api_map_n') required this.apiMapN,
-      @JsonKey(name: 'api_map_d') required this.apiMapD,
-      @JsonKey(name: 'api_ensyuf_n') required this.apiEnsyufN,
-      @JsonKey(name: 'api_ensyuf_d') required this.apiEnsyufD,
-      @JsonKey(name: 'api_ensyue_n') required this.apiEnsyueN,
-      @JsonKey(name: 'api_weda') required this.apiWeda,
-      @JsonKey(name: 'api_wedb') required this.apiWedb,
-      @JsonKey(name: 'api_pa') required this.apiPa,
-      @JsonKey(name: 'api_pab') required this.apiPab});
+      @JsonKey(name: 'api_battle_n') this.apiBattleN,
+      @JsonKey(name: 'api_battle_d') this.apiBattleD,
+      @JsonKey(name: 'api_sortno') this.apiSortno,
+      @JsonKey(name: 'api_boko_n') this.apiBokoN,
+      @JsonKey(name: 'api_boko_d') this.apiBokoD,
+      @JsonKey(name: 'api_kaisyu_n') this.apiKaisyuN,
+      @JsonKey(name: 'api_kaisyu_d') this.apiKaisyuD,
+      @JsonKey(name: 'api_kaizo_n') this.apiKaizoN,
+      @JsonKey(name: 'api_kaizo_d') this.apiKaizoD,
+      @JsonKey(name: 'api_map_n') this.apiMapN,
+      @JsonKey(name: 'api_map_d') this.apiMapD,
+      @JsonKey(name: 'api_ensyuf_n') this.apiEnsyufN,
+      @JsonKey(name: 'api_ensyuf_d') this.apiEnsyufD,
+      @JsonKey(name: 'api_ensyue_n') this.apiEnsyueN,
+      @JsonKey(name: 'api_weda') this.apiWeda,
+      @JsonKey(name: 'api_wedb') this.apiWedb,
+      @JsonKey(name: 'api_pa') this.apiPa,
+      @JsonKey(name: 'api_pab') this.apiPab});
 
   factory _$_GetDataApiDataApiMstShipgraphEntity.fromJson(
           Map<String, dynamic> json) =>
@@ -8093,58 +8093,58 @@ class _$_GetDataApiDataApiMstShipgraphEntity
   List<String> apiVersion;
   @override
   @JsonKey(name: 'api_battle_n')
-  List<int> apiBattleN;
+  List<int>? apiBattleN;
   @override
   @JsonKey(name: 'api_battle_d')
-  List<int> apiBattleD;
+  List<int>? apiBattleD;
   @override
   @JsonKey(name: 'api_sortno')
-  int apiSortno;
+  int? apiSortno;
   @override
   @JsonKey(name: 'api_boko_n')
-  List<int> apiBokoN;
+  List<int>? apiBokoN;
   @override
   @JsonKey(name: 'api_boko_d')
-  List<int> apiBokoD;
+  List<int>? apiBokoD;
   @override
   @JsonKey(name: 'api_kaisyu_n')
-  List<int> apiKaisyuN;
+  List<int>? apiKaisyuN;
   @override
   @JsonKey(name: 'api_kaisyu_d')
-  List<int> apiKaisyuD;
+  List<int>? apiKaisyuD;
   @override
   @JsonKey(name: 'api_kaizo_n')
-  List<int> apiKaizoN;
+  List<int>? apiKaizoN;
   @override
   @JsonKey(name: 'api_kaizo_d')
-  List<int> apiKaizoD;
+  List<int>? apiKaizoD;
   @override
   @JsonKey(name: 'api_map_n')
-  List<int> apiMapN;
+  List<int>? apiMapN;
   @override
   @JsonKey(name: 'api_map_d')
-  List<int> apiMapD;
+  List<int>? apiMapD;
   @override
   @JsonKey(name: 'api_ensyuf_n')
-  List<int> apiEnsyufN;
+  List<int>? apiEnsyufN;
   @override
   @JsonKey(name: 'api_ensyuf_d')
-  List<int> apiEnsyufD;
+  List<int>? apiEnsyufD;
   @override
   @JsonKey(name: 'api_ensyue_n')
-  List<int> apiEnsyueN;
+  List<int>? apiEnsyueN;
   @override
   @JsonKey(name: 'api_weda')
-  List<int> apiWeda;
+  List<int>? apiWeda;
   @override
   @JsonKey(name: 'api_wedb')
-  List<int> apiWedb;
+  List<int>? apiWedb;
   @override
   @JsonKey(name: 'api_pa')
-  List<int> apiPa;
+  List<int>? apiPa;
   @override
   @JsonKey(name: 'api_pab')
-  List<int> apiPab;
+  List<int>? apiPab;
 
   @override
   String toString() {
@@ -8173,24 +8173,24 @@ abstract class _GetDataApiDataApiMstShipgraphEntity
           {@JsonKey(name: 'api_id') required int apiId,
           @JsonKey(name: 'api_filename') required String apiFilename,
           @JsonKey(name: 'api_version') required List<String> apiVersion,
-          @JsonKey(name: 'api_battle_n') required List<int> apiBattleN,
-          @JsonKey(name: 'api_battle_d') required List<int> apiBattleD,
-          @JsonKey(name: 'api_sortno') required int apiSortno,
-          @JsonKey(name: 'api_boko_n') required List<int> apiBokoN,
-          @JsonKey(name: 'api_boko_d') required List<int> apiBokoD,
-          @JsonKey(name: 'api_kaisyu_n') required List<int> apiKaisyuN,
-          @JsonKey(name: 'api_kaisyu_d') required List<int> apiKaisyuD,
-          @JsonKey(name: 'api_kaizo_n') required List<int> apiKaizoN,
-          @JsonKey(name: 'api_kaizo_d') required List<int> apiKaizoD,
-          @JsonKey(name: 'api_map_n') required List<int> apiMapN,
-          @JsonKey(name: 'api_map_d') required List<int> apiMapD,
-          @JsonKey(name: 'api_ensyuf_n') required List<int> apiEnsyufN,
-          @JsonKey(name: 'api_ensyuf_d') required List<int> apiEnsyufD,
-          @JsonKey(name: 'api_ensyue_n') required List<int> apiEnsyueN,
-          @JsonKey(name: 'api_weda') required List<int> apiWeda,
-          @JsonKey(name: 'api_wedb') required List<int> apiWedb,
-          @JsonKey(name: 'api_pa') required List<int> apiPa,
-          @JsonKey(name: 'api_pab') required List<int> apiPab}) =
+          @JsonKey(name: 'api_battle_n') List<int>? apiBattleN,
+          @JsonKey(name: 'api_battle_d') List<int>? apiBattleD,
+          @JsonKey(name: 'api_sortno') int? apiSortno,
+          @JsonKey(name: 'api_boko_n') List<int>? apiBokoN,
+          @JsonKey(name: 'api_boko_d') List<int>? apiBokoD,
+          @JsonKey(name: 'api_kaisyu_n') List<int>? apiKaisyuN,
+          @JsonKey(name: 'api_kaisyu_d') List<int>? apiKaisyuD,
+          @JsonKey(name: 'api_kaizo_n') List<int>? apiKaizoN,
+          @JsonKey(name: 'api_kaizo_d') List<int>? apiKaizoD,
+          @JsonKey(name: 'api_map_n') List<int>? apiMapN,
+          @JsonKey(name: 'api_map_d') List<int>? apiMapD,
+          @JsonKey(name: 'api_ensyuf_n') List<int>? apiEnsyufN,
+          @JsonKey(name: 'api_ensyuf_d') List<int>? apiEnsyufD,
+          @JsonKey(name: 'api_ensyue_n') List<int>? apiEnsyueN,
+          @JsonKey(name: 'api_weda') List<int>? apiWeda,
+          @JsonKey(name: 'api_wedb') List<int>? apiWedb,
+          @JsonKey(name: 'api_pa') List<int>? apiPa,
+          @JsonKey(name: 'api_pab') List<int>? apiPab}) =
       _$_GetDataApiDataApiMstShipgraphEntity;
 
   factory _GetDataApiDataApiMstShipgraphEntity.fromJson(
@@ -8214,94 +8214,94 @@ abstract class _GetDataApiDataApiMstShipgraphEntity
   set apiVersion(List<String> value);
   @override
   @JsonKey(name: 'api_battle_n')
-  List<int> get apiBattleN;
+  List<int>? get apiBattleN;
   @JsonKey(name: 'api_battle_n')
-  set apiBattleN(List<int> value);
+  set apiBattleN(List<int>? value);
   @override
   @JsonKey(name: 'api_battle_d')
-  List<int> get apiBattleD;
+  List<int>? get apiBattleD;
   @JsonKey(name: 'api_battle_d')
-  set apiBattleD(List<int> value);
+  set apiBattleD(List<int>? value);
   @override
   @JsonKey(name: 'api_sortno')
-  int get apiSortno;
+  int? get apiSortno;
   @JsonKey(name: 'api_sortno')
-  set apiSortno(int value);
+  set apiSortno(int? value);
   @override
   @JsonKey(name: 'api_boko_n')
-  List<int> get apiBokoN;
+  List<int>? get apiBokoN;
   @JsonKey(name: 'api_boko_n')
-  set apiBokoN(List<int> value);
+  set apiBokoN(List<int>? value);
   @override
   @JsonKey(name: 'api_boko_d')
-  List<int> get apiBokoD;
+  List<int>? get apiBokoD;
   @JsonKey(name: 'api_boko_d')
-  set apiBokoD(List<int> value);
+  set apiBokoD(List<int>? value);
   @override
   @JsonKey(name: 'api_kaisyu_n')
-  List<int> get apiKaisyuN;
+  List<int>? get apiKaisyuN;
   @JsonKey(name: 'api_kaisyu_n')
-  set apiKaisyuN(List<int> value);
+  set apiKaisyuN(List<int>? value);
   @override
   @JsonKey(name: 'api_kaisyu_d')
-  List<int> get apiKaisyuD;
+  List<int>? get apiKaisyuD;
   @JsonKey(name: 'api_kaisyu_d')
-  set apiKaisyuD(List<int> value);
+  set apiKaisyuD(List<int>? value);
   @override
   @JsonKey(name: 'api_kaizo_n')
-  List<int> get apiKaizoN;
+  List<int>? get apiKaizoN;
   @JsonKey(name: 'api_kaizo_n')
-  set apiKaizoN(List<int> value);
+  set apiKaizoN(List<int>? value);
   @override
   @JsonKey(name: 'api_kaizo_d')
-  List<int> get apiKaizoD;
+  List<int>? get apiKaizoD;
   @JsonKey(name: 'api_kaizo_d')
-  set apiKaizoD(List<int> value);
+  set apiKaizoD(List<int>? value);
   @override
   @JsonKey(name: 'api_map_n')
-  List<int> get apiMapN;
+  List<int>? get apiMapN;
   @JsonKey(name: 'api_map_n')
-  set apiMapN(List<int> value);
+  set apiMapN(List<int>? value);
   @override
   @JsonKey(name: 'api_map_d')
-  List<int> get apiMapD;
+  List<int>? get apiMapD;
   @JsonKey(name: 'api_map_d')
-  set apiMapD(List<int> value);
+  set apiMapD(List<int>? value);
   @override
   @JsonKey(name: 'api_ensyuf_n')
-  List<int> get apiEnsyufN;
+  List<int>? get apiEnsyufN;
   @JsonKey(name: 'api_ensyuf_n')
-  set apiEnsyufN(List<int> value);
+  set apiEnsyufN(List<int>? value);
   @override
   @JsonKey(name: 'api_ensyuf_d')
-  List<int> get apiEnsyufD;
+  List<int>? get apiEnsyufD;
   @JsonKey(name: 'api_ensyuf_d')
-  set apiEnsyufD(List<int> value);
+  set apiEnsyufD(List<int>? value);
   @override
   @JsonKey(name: 'api_ensyue_n')
-  List<int> get apiEnsyueN;
+  List<int>? get apiEnsyueN;
   @JsonKey(name: 'api_ensyue_n')
-  set apiEnsyueN(List<int> value);
+  set apiEnsyueN(List<int>? value);
   @override
   @JsonKey(name: 'api_weda')
-  List<int> get apiWeda;
+  List<int>? get apiWeda;
   @JsonKey(name: 'api_weda')
-  set apiWeda(List<int> value);
+  set apiWeda(List<int>? value);
   @override
   @JsonKey(name: 'api_wedb')
-  List<int> get apiWedb;
+  List<int>? get apiWedb;
   @JsonKey(name: 'api_wedb')
-  set apiWedb(List<int> value);
+  set apiWedb(List<int>? value);
   @override
   @JsonKey(name: 'api_pa')
-  List<int> get apiPa;
+  List<int>? get apiPa;
   @JsonKey(name: 'api_pa')
-  set apiPa(List<int> value);
+  set apiPa(List<int>? value);
   @override
   @JsonKey(name: 'api_pab')
-  List<int> get apiPab;
+  List<int>? get apiPab;
   @JsonKey(name: 'api_pab')
-  set apiPab(List<int> value);
+  set apiPab(List<int>? value);
   @override
   @JsonKey(ignore: true)
   _$$_GetDataApiDataApiMstShipgraphEntityCopyWith<

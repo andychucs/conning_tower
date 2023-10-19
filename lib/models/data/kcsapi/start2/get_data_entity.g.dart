@@ -135,36 +135,36 @@ _$_GetDataApiDataApiMstShipEntity _$$_GetDataApiDataApiMstShipEntityFromJson(
       apiStype: json['api_stype'] as int,
       apiCtype: json['api_ctype'] as int,
       apiAfterlv: json['api_afterlv'] as int?,
-      apiAftershipid: json['api_aftershipid'] as String,
+      apiAftershipid: json['api_aftershipid'] as String?,
       apiTaik:
-          (json['api_taik'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['api_taik'] as List<dynamic>?)?.map((e) => e as int).toList(),
       apiSouk:
-          (json['api_souk'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['api_souk'] as List<dynamic>?)?.map((e) => e as int).toList(),
       apiHoug:
-          (json['api_houg'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['api_houg'] as List<dynamic>?)?.map((e) => e as int).toList(),
       apiRaig:
-          (json['api_raig'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['api_raig'] as List<dynamic>?)?.map((e) => e as int).toList(),
       apiTyku:
-          (json['api_tyku'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['api_tyku'] as List<dynamic>?)?.map((e) => e as int).toList(),
       apiLuck:
-          (json['api_luck'] as List<dynamic>).map((e) => e as int).toList(),
-      apiSoku: json['api_soku'] as int,
-      apiLeng: json['api_leng'] as int,
-      apiSlotNum: json['api_slot_num'] as int,
+          (json['api_luck'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      apiSoku: json['api_soku'] as int?,
+      apiLeng: json['api_leng'] as int?,
+      apiSlotNum: json['api_slot_num'] as int?,
       apiMaxeq:
-          (json['api_maxeq'] as List<dynamic>).map((e) => e as int).toList(),
-      apiBuildtime: json['api_buildtime'] as int,
+          (json['api_maxeq'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      apiBuildtime: json['api_buildtime'] as int?,
       apiBroken:
-          (json['api_broken'] as List<dynamic>).map((e) => e as int).toList(),
+          (json['api_broken'] as List<dynamic>?)?.map((e) => e as int).toList(),
       apiPowup:
-          (json['api_powup'] as List<dynamic>).map((e) => e as int).toList(),
-      apiBacks: json['api_backs'] as int,
-      apiGetmes: json['api_getmes'] as String,
-      apiAfterfuel: json['api_afterfuel'] as int,
-      apiAfterbull: json['api_afterbull'] as int,
-      apiFuelMax: json['api_fuel_max'] as int,
-      apiBullMax: json['api_bull_max'] as int,
-      apiVoicef: json['api_voicef'] as int,
+          (json['api_powup'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      apiBacks: json['api_backs'] as int?,
+      apiGetmes: json['api_getmes'] as String?,
+      apiAfterfuel: json['api_afterfuel'] as int?,
+      apiAfterbull: json['api_afterbull'] as int?,
+      apiFuelMax: json['api_fuel_max'] as int?,
+      apiBullMax: json['api_bull_max'] as int?,
+      apiVoicef: json['api_voicef'] as int?,
     );
 
 Map<String, dynamic> _$$_GetDataApiDataApiMstShipEntityToJson(
@@ -271,7 +271,7 @@ _$_GetDataApiDataApiMstSlotitemEntity
               .map((e) => e as int)
               .toList(),
           apiUsebull: json['api_usebull'] as String,
-          apiVersion: json['api_version'] as int,
+          apiVersion: json['api_version'] as int?,
         );
 
 Map<String, dynamic> _$$_GetDataApiDataApiMstSlotitemEntityToJson(
@@ -484,7 +484,7 @@ _$_GetDataApiDataApiMstMissionEntity
           apiDeckNum: json['api_deck_num'] as int,
           apiDifficulty: json['api_difficulty'] as int,
           apiUseFuel: (json['api_use_fuel'] as num).toDouble(),
-          apiUseBull: json['api_use_bull'] as int,
+          apiUseBull: (json['api_use_bull'] as num).toDouble(),
           apiWinItem1: (json['api_win_item1'] as List<dynamic>)
               .map((e) => e as int)
               .toList(),
@@ -696,54 +696,57 @@ _$_GetDataApiDataApiMstShipgraphEntity
           apiVersion: (json['api_version'] as List<dynamic>)
               .map((e) => e as String)
               .toList(),
-          apiBattleN: (json['api_battle_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiBattleN: (json['api_battle_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiBattleD: (json['api_battle_d'] as List<dynamic>)
-              .map((e) => e as int)
+          apiBattleD: (json['api_battle_d'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiSortno: json['api_sortno'] as int,
-          apiBokoN: (json['api_boko_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiSortno: json['api_sortno'] as int?,
+          apiBokoN: (json['api_boko_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiBokoD: (json['api_boko_d'] as List<dynamic>)
-              .map((e) => e as int)
+          apiBokoD: (json['api_boko_d'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiKaisyuN: (json['api_kaisyu_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiKaisyuN: (json['api_kaisyu_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiKaisyuD: (json['api_kaisyu_d'] as List<dynamic>)
-              .map((e) => e as int)
+          apiKaisyuD: (json['api_kaisyu_d'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiKaizoN: (json['api_kaizo_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiKaizoN: (json['api_kaizo_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiKaizoD: (json['api_kaizo_d'] as List<dynamic>)
-              .map((e) => e as int)
+          apiKaizoD: (json['api_kaizo_d'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiMapN: (json['api_map_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiMapN: (json['api_map_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiMapD: (json['api_map_d'] as List<dynamic>)
-              .map((e) => e as int)
+          apiMapD: (json['api_map_d'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiEnsyufN: (json['api_ensyuf_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiEnsyufN: (json['api_ensyuf_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiEnsyufD: (json['api_ensyuf_d'] as List<dynamic>)
-              .map((e) => e as int)
+          apiEnsyufD: (json['api_ensyuf_d'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiEnsyueN: (json['api_ensyue_n'] as List<dynamic>)
-              .map((e) => e as int)
+          apiEnsyueN: (json['api_ensyue_n'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiWeda:
-              (json['api_weda'] as List<dynamic>).map((e) => e as int).toList(),
-          apiWedb:
-              (json['api_wedb'] as List<dynamic>).map((e) => e as int).toList(),
+          apiWeda: (json['api_weda'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList(),
+          apiWedb: (json['api_wedb'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList(),
           apiPa:
-              (json['api_pa'] as List<dynamic>).map((e) => e as int).toList(),
-          apiPab:
-              (json['api_pab'] as List<dynamic>).map((e) => e as int).toList(),
+              (json['api_pa'] as List<dynamic>?)?.map((e) => e as int).toList(),
+          apiPab: (json['api_pab'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList(),
         );
 
 Map<String, dynamic> _$$_GetDataApiDataApiMstShipgraphEntityToJson(
