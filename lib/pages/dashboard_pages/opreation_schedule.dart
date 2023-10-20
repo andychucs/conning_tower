@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
@@ -15,18 +16,21 @@ class OperationPage extends ConsumerWidget {
     Map<String, Task> taskMap = Map.fromIterable(
         ref.read(tasksStateProvider).items,
         key: (task) => task.id);
+    final queueMap =
+    ref.watch(kancolleDataProvider.select((data) => data.queue.map));
     if (taskMap.isEmpty) {
       Future((){
         ref.watch(taskUtilProvider.notifier).loadLocalTasks();
       });
     }
-    return OperationSchedule(taskMap: taskMap);
+    return OperationSchedule(taskMap: taskMap, queueMap: queueMap,);
   }
 }
 
 class OperationSchedule extends ConsumerStatefulWidget {
   final Map<String, Task> taskMap;
-  const OperationSchedule({Key? key, required this.taskMap}) : super(key: key);
+  final Map<int, Operation> queueMap;
+  const OperationSchedule({Key? key, required this.taskMap, required this.queueMap}) : super(key: key);
 
   @override
   _OperationScheduleState createState() => _OperationScheduleState();
@@ -54,9 +58,7 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
   void startTimer() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       // 更新每个小队任务的剩余时间
-      final queueMap =
-      ref.watch(kancolleDataProvider.select((data) => data.queue.map));
-      queueMap.forEach((squad, operation) {
+      widget.queueMap.forEach((squad, operation) {
 
         final remainingTime = operation.endTime.difference(DateTime.now());
 
@@ -86,8 +88,7 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    final queueMap =
-        ref.watch(kancolleDataProvider.select((data) => data.queue.map));
+    final queueMap = widget.queueMap;
     final squads =
         ref.watch(kancolleDataProvider.select((data) => data.squads));
 
