@@ -116,9 +116,6 @@ class FleetInfoPage extends ConsumerWidget {
                         title: Text(S.of(context).ShipData),
                         additionalInfo: kcwikiData.when(
                           data: (data) {
-                            Future((){
-                              ref.watch(kancolleDataProvider.notifier).update((state) => state.copyWith(kcwikiData: data));
-                            });
                             return Text("${data.ships.length}");
                           },
                           error: (e, s) => Text(S.of(context).Error),
