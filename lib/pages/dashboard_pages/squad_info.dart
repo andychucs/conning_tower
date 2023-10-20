@@ -26,72 +26,92 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
     final PageController controller = PageController(initialPage: _selectedSegment);
     var data = ref.watch(kancolleDataProvider);
     var squads = data.squads;
-    Map<int, Widget> segments = {
-      0: const Text("1"),
-      1: const Text("2"),
-      2: const Text("3"),
-      3: const Text("4")
-    };
-    for (var element in squads) {
-      segments.update(squads.indexOf(element), (value) => Text(element.name,style: TextStyle(fontSize: 14),));
-    }
+    late Map<int, Widget> segments;
+    late Widget body;
+    late List<Widget> pages;
+    if (squads.isEmpty) {
+      segments = {
+        0: const Text("1"),
+        1: const Text("2"),
+        2: const Text("3"),
+        3: const Text("4")
+      };
+      body = CupertinoListSection.insetGrouped(
+        children: const [
+          CupertinoListTile.notched(
+            title: Text("N/A"),
+          ),
+        ],
+      );
+      pages = <Widget>[body, body, body, body];
 
-    Widget body = CupertinoListSection.insetGrouped(
-      children: const [
-        CupertinoListTile.notched(
-          title: Text("N/A"),
-        ),
-      ],
-    );
+    } else {
+      segments = {
+        for (var element in squads)
+          squads.indexOf(element):
+              Text(element.name, style: const TextStyle(fontSize: 14))
+      };
 
-    List<Widget> pages = <Widget>[body, body, body, body];
-
-    for (int index = 0; index < squads.length; index++) {
-      var squad = squads[index];
-      if (squad.ships.isNotEmpty) {
-        pages[index] = ScrollViewPageWithScrollbar(
-          child: CupertinoListSection.insetGrouped(
-            children: List.generate(
-              squad.ships.length,
-              (_index) => CupertinoListTile(
-                title: Text(squad.ships[_index].name),
-                onTap: () {
-                  setState(() {
-                    _selectedShip = _index;
-                    _showShipInfo = true;
-                  });
-                },
-                additionalInfo: SizedBox(
-                  width: 70,
-                    child: Text("${squad.ships[_index].nowHP}/${squad.ships[_index].maxHP}", textAlign: TextAlign.end,)),
-                subtitle: LinearPercentIndicator(
-                  backgroundColor: CupertinoDynamicColor.resolve(CupertinoColors.systemGroupedBackground, context),
-                  animation: true,
-                  animationDuration: 500,
-                  barRadius: const Radius.circular(2.5),
-                  animateFromLastPercent: true,
-                  lineHeight: 5.0,
-                  percent: squad.ships[_index].nowHP / squad.ships[_index].maxHP,
-                  progressColor: squad.ships[_index].damageColor,
-                ),
-                trailing: CircularPercentIndicator(
-                  backgroundColor: CupertinoDynamicColor.resolve(CupertinoColors.systemGroupedBackground, context),
-                  reverse: true,
-                  radius: 12.0,
-                  lineWidth: 5.0,
-                  animation: true,
-                  animationDuration: 500,
-                  animateFromLastPercent: true,
-                  circularStrokeCap: CircularStrokeCap.round,
-                  percent: squad.ships[_index].condition! / 100,
-                  // center: Text('${squad.ships[_index].condition}', style: TextStyle(fontSize: 8),),
-                  progressColor: squad.ships[_index].sparkColor,
+      pages = List.generate(squads.length, (index) {
+        var squad = squads[index];
+        if (squad.ships.isNotEmpty) {
+          return ScrollViewPageWithScrollbar(
+            child: CupertinoListSection.insetGrouped(
+              children: List.generate(
+                squad.ships.length,
+                    (_index) => CupertinoListTile(
+                  title: Text(squad.ships[_index].name),
+                  onTap: () {
+                    setState(() {
+                      _selectedShip = _index;
+                      _showShipInfo = true;
+                    });
+                  },
+                  additionalInfo: SizedBox(
+                      width: 70,
+                      child: Text(
+                        "${squad.ships[_index].nowHP}/${squad.ships[_index].maxHP}",
+                        textAlign: TextAlign.end,
+                      )),
+                  subtitle: LinearPercentIndicator(
+                    backgroundColor: CupertinoDynamicColor.resolve(
+                        CupertinoColors.systemGroupedBackground, context),
+                    animation: true,
+                    animationDuration: 500,
+                    barRadius: const Radius.circular(2.5),
+                    animateFromLastPercent: true,
+                    lineHeight: 5.0,
+                    percent:
+                    squad.ships[_index].nowHP / squad.ships[_index].maxHP,
+                    progressColor: squad.ships[_index].damageColor,
+                  ),
+                  trailing: CircularPercentIndicator(
+                    backgroundColor: CupertinoDynamicColor.resolve(
+                        CupertinoColors.systemGroupedBackground, context),
+                    reverse: true,
+                    radius: 12.0,
+                    lineWidth: 5.0,
+                    animation: true,
+                    animationDuration: 500,
+                    animateFromLastPercent: true,
+                    circularStrokeCap: CircularStrokeCap.round,
+                    percent: squad.ships[_index].condition! / 100,
+                    // center: Text('${squad.ships[_index].condition}', style: TextStyle(fontSize: 8),),
+                    progressColor: squad.ships[_index].sparkColor,
+                  ),
                 ),
               ),
             ),
-          ),
+          );
+        }
+        return CupertinoListSection.insetGrouped(
+          children: const [
+            CupertinoListTile.notched(
+              title: Text("N/A"),
+            ),
+          ],
         );
-      }
+      });
     }
 
     if (_showShipInfo) {
