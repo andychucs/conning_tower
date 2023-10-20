@@ -5,6 +5,7 @@ import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
@@ -24,7 +25,7 @@ class KancolleData {
   final SeaForceBase seaForceBase;
   final Fleet fleet;
   final Ref ref;
-  Map<dynamic, dynamic> shipInfo;
+  final DataInfo dataInfo;
 
   KancolleData({
     required this.queue,
@@ -32,7 +33,7 @@ class KancolleData {
     required this.seaForceBase,
     required this.fleet,
     required this.ref,
-    required this.shipInfo,
+    required this.dataInfo,
   });
 
   KancolleData copyWith(
@@ -40,15 +41,14 @@ class KancolleData {
       List<Squad>? squads,
       SeaForceBase? seaForceBase,
       Fleet? fleet,
-      KcwikiData? kcwikiData,
-      Map? shipInfo,
+      DataInfo? dataInfo,
       Ref? ref,}) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
-      shipInfo: shipInfo ?? this.shipInfo,
+      dataInfo: dataInfo ?? this.dataInfo,
       ref: ref ?? this.ref,
     );
   }
@@ -59,9 +59,8 @@ class KancolleData {
 
     if (model is GetDataEntity) {
       log("GetDataEntity");
-      shipInfo =
+      dataInfo.shipInfo =
           Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
-      log(shipInfo[1]!.apiName);
     }
 
     if (model is ReqMissionStartEntity) {
@@ -138,7 +137,7 @@ class KancolleData {
         _setNotification(endTimeMap, newData);
       } else {
         parse(source, data);
-        newData = this;
+        // newData = this;
       }
 
       if (_shouldAlertSource(source)) addAlert();
@@ -179,7 +178,7 @@ class KancolleData {
     List<Ship> allShips = [];
     for (var data in apiShip) {
       String shipName =
-          shipInfo[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
+          dataInfo.shipInfo?[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
       allShips.add(Ship.fromApi(data, shipName));
     }
     fleet.ships = allShips;
@@ -224,7 +223,7 @@ class KancolleData {
     squad.ships.clear();
     for (var data in apiShipData) {
       String shipName =
-          shipInfo[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
+          dataInfo.shipInfo?[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
       Ship ship = Ship.fromApi(data, shipName);
       log(ship.toString());
       log(ship.damaged().toString());
