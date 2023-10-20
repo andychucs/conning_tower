@@ -1,5 +1,6 @@
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
@@ -38,12 +39,13 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   const commander = Commander(name: "T", level: 1, rank: 10, maxShip: 100, maxItem: 590);
   final seaForceBase = SeaForceBase(resource: resource, commander: commander);
   final fleet = Fleet(ships: [], items: []);
+  final dataInfo = DataInfo();
 
   return KancolleData(
     queue: queue,
     squads: squads,
     ref: ref,
     seaForceBase: seaForceBase,
-    fleet: fleet, shipInfo: {},
+    fleet: fleet, dataInfo: dataInfo,
   );
 });
