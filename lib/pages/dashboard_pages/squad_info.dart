@@ -57,10 +57,21 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
         if (squad.ships.isNotEmpty) {
           return ScrollViewPageWithScrollbar(
             child: CupertinoListSection.insetGrouped(
+              margin: EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 10.0),
               children: List.generate(
                 squad.ships.length,
                     (_index) => CupertinoListTile(
                   title: Text(squad.ships[_index].name),
+                  padding: EdgeInsetsDirectional.only(start: 10.0, end: 8.0),
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text("Lv", style: TextStyle(fontSize: 10),),
+                      Text("${squad.ships[_index].level}", style: TextStyle(fontSize: 12),)
+                    ],
+                  ),
+                  leadingToTitle: 0,
                   onTap: () {
                     setState(() {
                       _selectedShip = _index;
@@ -117,6 +128,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
     if (_showShipInfo) {
       var ship = squads[_selectedSegment].ships[_selectedShip];
       body = CupertinoListSection.insetGrouped(
+        margin: EdgeInsetsDirectional.fromSTEB(10.0, 0, 10.0, 10.0),
         header: CupertinoListSectionDescription(ship.name),
         children: [
           CupertinoListTile(
@@ -252,3 +264,4 @@ class ScrollViewPageWithScrollbar extends StatelessWidget {
     );
   }
 }
+
