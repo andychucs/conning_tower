@@ -60,20 +60,20 @@ class S {
     );
   }
 
-  /// `COM`
+  /// `Command`
   String get KCDashboardCommand {
     return Intl.message(
-      'COM',
+      'Command',
       name: 'KCDashboardCommand',
       desc: '',
       args: [],
     );
   }
 
-  /// `OP`
+  /// `Operation`
   String get KCDashboardOperation {
     return Intl.message(
-      'OP',
+      'Operation',
       name: 'KCDashboardOperation',
       desc: '',
       args: [],

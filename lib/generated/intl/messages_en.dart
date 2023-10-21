@@ -132,9 +132,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
         "KCDashboardBattleReport":
             MessageLookupByLibrary.simpleMessage("Report"),
-        "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("COM"),
+        "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("Command"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("Fleet"),
-        "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("OP"),
+        "KCDashboardOperation":
+            MessageLookupByLibrary.simpleMessage("Operation"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
