@@ -1,3 +1,4 @@
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,27 +64,27 @@ class Ship with _$Ship {
   }
 
   String get damageLevel {
-    if (nowHP <= maxHP * 0.25) return '大破';
-    if (nowHP <= maxHP * 0.50) return '中破';
-    if (nowHP <= maxHP * 0.75) return '小破';
+    if (nowHP <= maxHP * 0.25) return S.current.TextLDamage;
+    if (nowHP <= maxHP * 0.50) return S.current.TextMDamage;
+    if (nowHP <= maxHP * 0.75) return S.current.TextSDamage;
     return 'N/A';
   }
 
   String get speedLevel {
-    if (speed == 5) return '低速';
-    if (speed == 10) return '高速';
-    if (speed == 15) return '高速+';
-    if (speed == 20) return '最速';
+    if (speed == 5) return S.current.TextSlowSpeed;
+    if (speed == 10) return S.current.TextFastSpeed;
+    if (speed == 15) return S.current.TextFastPlusSpeed;
+    if (speed == 20) return S.current.TextFastestSpeed;
     return 'N/A';
   }
 
   String get attackRangeLevel {
-    if (attackRange == 5) return "超長+";
-    if (attackRange == 4) return "超長";
-    if (attackRange == 3) return "長";
-    if (attackRange == 2) return "中";
-    if (attackRange == 1) return "短";
-    if (attackRange == 0) return "無";
+    if (attackRange == 5) return S.current.TextSuperLongRangePlus;
+    if (attackRange == 4) return S.current.TextSuperLongRange;
+    if (attackRange == 3) return S.current.TextLongRange;
+    if (attackRange == 2) return S.current.TextMediumRange;
+    if (attackRange == 1) return S.current.TextShortRange;
+    if (attackRange == 0) return S.current.TextNone;
     return 'N/A';
   }
 
