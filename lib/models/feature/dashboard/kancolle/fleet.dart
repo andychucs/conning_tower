@@ -8,7 +8,7 @@ part 'fleet.freezed.dart';
 class Fleet with _$Fleet {
   factory Fleet({
     required List<Ship> ships,
-    required List<dynamic> items
+    required List<dynamic> equipment
   }) = _Fleet;
 
 }

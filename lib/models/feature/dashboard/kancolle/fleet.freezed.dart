@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Fleet {
   List<Ship> get ships => throw _privateConstructorUsedError;
   set ships(List<Ship> value) => throw _privateConstructorUsedError;
-  List<dynamic> get items => throw _privateConstructorUsedError;
-  set items(List<dynamic> value) => throw _privateConstructorUsedError;
+  List<dynamic> get equipment => throw _privateConstructorUsedError;
+  set equipment(List<dynamic> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FleetCopyWith<Fleet> get copyWith => throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ abstract class $FleetCopyWith<$Res> {
   factory $FleetCopyWith(Fleet value, $Res Function(Fleet) then) =
       _$FleetCopyWithImpl<$Res, Fleet>;
   @useResult
-  $Res call({List<Ship> ships, List<dynamic> items});
+  $Res call({List<Ship> ships, List<dynamic> equipment});
 }
 
 /// @nodoc
@@ -47,16 +47,16 @@ class _$FleetCopyWithImpl<$Res, $Val extends Fleet>
   @override
   $Res call({
     Object? ships = null,
-    Object? items = null,
+    Object? equipment = null,
   }) {
     return _then(_value.copyWith(
       ships: null == ships
           ? _value.ships
           : ships // ignore: cast_nullable_to_non_nullable
               as List<Ship>,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
+      equipment: null == equipment
+          ? _value.equipment
+          : equipment // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
     ) as $Val);
   }
@@ -68,7 +68,7 @@ abstract class _$$_FleetCopyWith<$Res> implements $FleetCopyWith<$Res> {
       __$$_FleetCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Ship> ships, List<dynamic> items});
+  $Res call({List<Ship> ships, List<dynamic> equipment});
 }
 
 /// @nodoc
@@ -81,16 +81,16 @@ class __$$_FleetCopyWithImpl<$Res> extends _$FleetCopyWithImpl<$Res, _$_Fleet>
   @override
   $Res call({
     Object? ships = null,
-    Object? items = null,
+    Object? equipment = null,
   }) {
     return _then(_$_Fleet(
       ships: null == ships
           ? _value.ships
           : ships // ignore: cast_nullable_to_non_nullable
               as List<Ship>,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
+      equipment: null == equipment
+          ? _value.equipment
+          : equipment // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
     ));
   }
@@ -99,16 +99,16 @@ class __$$_FleetCopyWithImpl<$Res> extends _$FleetCopyWithImpl<$Res, _$_Fleet>
 /// @nodoc
 
 class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
-  _$_Fleet({required this.ships, required this.items});
+  _$_Fleet({required this.ships, required this.equipment});
 
   @override
   List<Ship> ships;
   @override
-  List<dynamic> items;
+  List<dynamic> equipment;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Fleet(ships: $ships, items: $items)';
+    return 'Fleet(ships: $ships, equipment: $equipment)';
   }
 
   @override
@@ -117,7 +117,7 @@ class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
     properties
       ..add(DiagnosticsProperty('type', 'Fleet'))
       ..add(DiagnosticsProperty('ships', ships))
-      ..add(DiagnosticsProperty('items', items));
+      ..add(DiagnosticsProperty('equipment', equipment));
   }
 
   @JsonKey(ignore: true)
@@ -128,15 +128,15 @@ class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
 }
 
 abstract class _Fleet implements Fleet {
-  factory _Fleet({required List<Ship> ships, required List<dynamic> items}) =
-      _$_Fleet;
+  factory _Fleet(
+      {required List<Ship> ships, required List<dynamic> equipment}) = _$_Fleet;
 
   @override
   List<Ship> get ships;
   set ships(List<Ship> value);
   @override
-  List<dynamic> get items;
-  set items(List<dynamic> value);
+  List<dynamic> get equipment;
+  set equipment(List<dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$_FleetCopyWith<_$_Fleet> get copyWith =>

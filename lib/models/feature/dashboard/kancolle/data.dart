@@ -121,6 +121,14 @@ class KancolleData {
         }
       }
     }
+
+    if (model is GetMemberRequireInfoEntity) {
+      fleet.equipment = model.apiData.apiSlotItem;
+    }
+
+    if (model is GetMemberSlotItemEntity) {
+      fleet.equipment = model.apiData;
+    }
   }
 
   KancolleData parseWith(String source, String data) {

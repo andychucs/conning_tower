@@ -18,11 +18,10 @@ class PortInfo extends ConsumerStatefulWidget {
 class _PortInfoState extends ConsumerState<PortInfo> {
   @override
   Widget build(BuildContext context) {
-    final seaForceInfo = ref.watch(kancolleDataProvider.select((value) => value.seaForceBase));
-    final resourceInfo = seaForceInfo.resource;
-    final commanderInfo = seaForceInfo.commander;
-
-    final fleetInfo = ref.watch(kancolleDataProvider.select((value) => value.fleet));
+    var data = ref.watch(kancolleDataProvider);
+    final resourceInfo = data.seaForceBase.resource;
+    final commanderInfo = data.seaForceBase.commander;
+    final fleetInfo = data.fleet;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -78,7 +77,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                     InfoBox(
                       top: Text(S.of(context).TextEquipment),
                       bottom: AutoSizeText(
-                        '-/${commanderInfo.maxItem}',
+                        '${fleetInfo.equipment.length}/${commanderInfo.maxItem}',
                         style: TextStyle(fontSize: 30),
                         minFontSize: 16,
                         maxLines: 1,
