@@ -130,6 +130,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
+        "KCDashboardBattleReport":
+            MessageLookupByLibrary.simpleMessage("Report"),
+        "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("COM"),
+        "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("Fleet"),
+        "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("OP"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -219,8 +224,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage(
             "request tasks number over limit."),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "TextEquipment": MessageLookupByLibrary.simpleMessage("Equipment"),
+        "TextFleetGirl": MessageLookupByLibrary.simpleMessage("Fleet Girl"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("Help"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
+        "TextItem": MessageLookupByLibrary.simpleMessage("Item"),
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
         "TextShouldClose":

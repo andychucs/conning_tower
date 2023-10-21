@@ -60,6 +60,76 @@ class S {
     );
   }
 
+  /// `COM`
+  String get KCDashboardCommand {
+    return Intl.message(
+      'COM',
+      name: 'KCDashboardCommand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OP`
+  String get KCDashboardOperation {
+    return Intl.message(
+      'OP',
+      name: 'KCDashboardOperation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fleet`
+  String get KCDashboardFleet {
+    return Intl.message(
+      'Fleet',
+      name: 'KCDashboardFleet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report`
+  String get KCDashboardBattleReport {
+    return Intl.message(
+      'Report',
+      name: 'KCDashboardBattleReport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fleet Girl`
+  String get TextFleetGirl {
+    return Intl.message(
+      'Fleet Girl',
+      name: 'TextFleetGirl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Equipment`
+  String get TextEquipment {
+    return Intl.message(
+      'Equipment',
+      name: 'TextEquipment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Item`
+  String get TextItem {
+    return Intl.message(
+      'Item',
+      name: 'TextItem',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Contributors`
   String get AboutContributors {
     return Intl.message(

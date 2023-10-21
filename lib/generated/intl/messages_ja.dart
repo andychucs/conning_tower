@@ -122,6 +122,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("無効なYAML形式です。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON例："),
+        "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),
+        "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
+        "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("艦隊"),
+        "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("遠征"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -204,8 +208,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit":
             MessageLookupByLibrary.simpleMessage("タスク数が制限を超えています。"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "TextEquipment": MessageLookupByLibrary.simpleMessage("装備"),
+        "TextFleetGirl": MessageLookupByLibrary.simpleMessage("艦娘"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("ヘルプ"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
+        "TextItem": MessageLookupByLibrary.simpleMessage("アイテム"),
         "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("閉じてよろしいですか？"),
