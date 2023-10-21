@@ -12,17 +12,14 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   final OperationQueue queue = OperationQueue(map: {
     2: Operation(
       id: 999,
-      code: '--',
       endTime: tz.TZDateTime.now(tz.local),
     ),
     3: Operation(
       id: 999,
-      code: '--',
       endTime: tz.TZDateTime.now(tz.local),
     ),
     4: Operation(
       id: 999,
-      code: '--',
       endTime: tz.TZDateTime.now(tz.local),
     ),
   });

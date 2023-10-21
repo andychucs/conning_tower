@@ -16,10 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DataInfo {
-  Map<int, dynamic>? get shipInfo => throw _privateConstructorUsedError;
-  set shipInfo(Map<int, dynamic>? value) => throw _privateConstructorUsedError;
+  Map<int, GetDataApiDataApiMstShipEntity>? get shipInfo =>
+      throw _privateConstructorUsedError;
+  set shipInfo(Map<int, GetDataApiDataApiMstShipEntity>? value) =>
+      throw _privateConstructorUsedError;
   Map<int, dynamic>? get itemInfo => throw _privateConstructorUsedError;
   set itemInfo(Map<int, dynamic>? value) => throw _privateConstructorUsedError;
+  Map<int, GetDataApiDataApiMstMissionEntity>? get missionInfo =>
+      throw _privateConstructorUsedError;
+  set missionInfo(Map<int, GetDataApiDataApiMstMissionEntity>? value) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DataInfoCopyWith<DataInfo> get copyWith =>
@@ -31,7 +37,10 @@ abstract class $DataInfoCopyWith<$Res> {
   factory $DataInfoCopyWith(DataInfo value, $Res Function(DataInfo) then) =
       _$DataInfoCopyWithImpl<$Res, DataInfo>;
   @useResult
-  $Res call({Map<int, dynamic>? shipInfo, Map<int, dynamic>? itemInfo});
+  $Res call(
+      {Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
+      Map<int, dynamic>? itemInfo,
+      Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo});
 }
 
 /// @nodoc
@@ -49,16 +58,21 @@ class _$DataInfoCopyWithImpl<$Res, $Val extends DataInfo>
   $Res call({
     Object? shipInfo = freezed,
     Object? itemInfo = freezed,
+    Object? missionInfo = freezed,
   }) {
     return _then(_value.copyWith(
       shipInfo: freezed == shipInfo
           ? _value.shipInfo
           : shipInfo // ignore: cast_nullable_to_non_nullable
-              as Map<int, dynamic>?,
+              as Map<int, GetDataApiDataApiMstShipEntity>?,
       itemInfo: freezed == itemInfo
           ? _value.itemInfo
           : itemInfo // ignore: cast_nullable_to_non_nullable
               as Map<int, dynamic>?,
+      missionInfo: freezed == missionInfo
+          ? _value.missionInfo
+          : missionInfo // ignore: cast_nullable_to_non_nullable
+              as Map<int, GetDataApiDataApiMstMissionEntity>?,
     ) as $Val);
   }
 }
@@ -70,7 +84,10 @@ abstract class _$$_DataInfoCopyWith<$Res> implements $DataInfoCopyWith<$Res> {
       __$$_DataInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<int, dynamic>? shipInfo, Map<int, dynamic>? itemInfo});
+  $Res call(
+      {Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
+      Map<int, dynamic>? itemInfo,
+      Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo});
 }
 
 /// @nodoc
@@ -86,16 +103,21 @@ class __$$_DataInfoCopyWithImpl<$Res>
   $Res call({
     Object? shipInfo = freezed,
     Object? itemInfo = freezed,
+    Object? missionInfo = freezed,
   }) {
     return _then(_$_DataInfo(
       shipInfo: freezed == shipInfo
           ? _value.shipInfo
           : shipInfo // ignore: cast_nullable_to_non_nullable
-              as Map<int, dynamic>?,
+              as Map<int, GetDataApiDataApiMstShipEntity>?,
       itemInfo: freezed == itemInfo
           ? _value.itemInfo
           : itemInfo // ignore: cast_nullable_to_non_nullable
               as Map<int, dynamic>?,
+      missionInfo: freezed == missionInfo
+          ? _value.missionInfo
+          : missionInfo // ignore: cast_nullable_to_non_nullable
+              as Map<int, GetDataApiDataApiMstMissionEntity>?,
     ));
   }
 }
@@ -103,16 +125,18 @@ class __$$_DataInfoCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DataInfo with DiagnosticableTreeMixin implements _DataInfo {
-  _$_DataInfo({this.shipInfo, this.itemInfo});
+  _$_DataInfo({this.shipInfo, this.itemInfo, this.missionInfo});
 
   @override
-  Map<int, dynamic>? shipInfo;
+  Map<int, GetDataApiDataApiMstShipEntity>? shipInfo;
   @override
   Map<int, dynamic>? itemInfo;
+  @override
+  Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataInfo(shipInfo: $shipInfo, itemInfo: $itemInfo)';
+    return 'DataInfo(shipInfo: $shipInfo, itemInfo: $itemInfo, missionInfo: $missionInfo)';
   }
 
   @override
@@ -121,7 +145,8 @@ class _$_DataInfo with DiagnosticableTreeMixin implements _DataInfo {
     properties
       ..add(DiagnosticsProperty('type', 'DataInfo'))
       ..add(DiagnosticsProperty('shipInfo', shipInfo))
-      ..add(DiagnosticsProperty('itemInfo', itemInfo));
+      ..add(DiagnosticsProperty('itemInfo', itemInfo))
+      ..add(DiagnosticsProperty('missionInfo', missionInfo));
   }
 
   @JsonKey(ignore: true)
@@ -133,14 +158,19 @@ class _$_DataInfo with DiagnosticableTreeMixin implements _DataInfo {
 
 abstract class _DataInfo implements DataInfo {
   factory _DataInfo(
-      {Map<int, dynamic>? shipInfo, Map<int, dynamic>? itemInfo}) = _$_DataInfo;
+      {Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
+      Map<int, dynamic>? itemInfo,
+      Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo}) = _$_DataInfo;
 
   @override
-  Map<int, dynamic>? get shipInfo;
-  set shipInfo(Map<int, dynamic>? value);
+  Map<int, GetDataApiDataApiMstShipEntity>? get shipInfo;
+  set shipInfo(Map<int, GetDataApiDataApiMstShipEntity>? value);
   @override
   Map<int, dynamic>? get itemInfo;
   set itemInfo(Map<int, dynamic>? value);
+  @override
+  Map<int, GetDataApiDataApiMstMissionEntity>? get missionInfo;
+  set missionInfo(Map<int, GetDataApiDataApiMstMissionEntity>? value);
   @override
   @JsonKey(ignore: true)
   _$$_DataInfoCopyWith<_$_DataInfo> get copyWith =>

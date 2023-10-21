@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
-import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
@@ -12,7 +11,6 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
-import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -59,8 +57,8 @@ class KancolleData {
 
     if (model is GetDataEntity) {
       log("GetDataEntity");
-      dataInfo.shipInfo =
-          Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
+      dataInfo.shipInfo = Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
+      dataInfo.missionInfo = Map.fromIterable(model.apiData.apiMstMission, key: (item) => item.apiId);
     }
 
     if (model is ReqMissionStartEntity) {
@@ -87,7 +85,6 @@ class KancolleData {
               key,
               Operation(
                   id: data.apiMission[1],
-                  code: data.apiMission[1].toString(),
                   endTime: endDatetime));
         }
       });
@@ -192,7 +189,6 @@ class KancolleData {
           id,
           Operation(
               id: data.apiMission[1],
-              code: data.apiMission[1].toString(),
               endTime: endDatetime));
     }
   }
@@ -251,20 +247,14 @@ class KancolleData {
     endTimeMap.forEach((key, value) {
       Operation operation = newData.queue.map[key]!;
       if (!value.isAtSameMomentAs(operation.endTime)) {
-        Map<String, Task> taskMap = Map.fromIterable(
-            ref.watch(tasksStateProvider).items,
-            key: (task) => task.id);
 
         log("before:$value");
         log("after:${operation.endTime}");
-        log("End time change ${operation.code}");
+        log("End time change ${operation.id}");
 
-        if (taskMap.containsKey(operation.code)) {
-          notification.setNotificationWithEndTime(
-              taskMap[operation.code]!, operation.endTime);
-        } else {
-          notification.setNotificationWithOperation(operation);
-        }
+        var name = dataInfo.missionInfo?[operation.id]?.apiName;
+
+        notification.setNotificationWithOperation(operation, name);
       }
     });
   }

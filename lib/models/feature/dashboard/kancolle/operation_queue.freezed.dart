@@ -127,7 +127,6 @@ abstract class _OperationQueue extends OperationQueue {
 /// @nodoc
 mixin _$Operation {
   int get id => throw _privateConstructorUsedError;
-  String get code => throw _privateConstructorUsedError;
   TZDateTime get endTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -140,7 +139,7 @@ abstract class $OperationCopyWith<$Res> {
   factory $OperationCopyWith(Operation value, $Res Function(Operation) then) =
       _$OperationCopyWithImpl<$Res, Operation>;
   @useResult
-  $Res call({int id, String code, TZDateTime endTime});
+  $Res call({int id, TZDateTime endTime});
 }
 
 /// @nodoc
@@ -157,7 +156,6 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
   @override
   $Res call({
     Object? id = null,
-    Object? code = null,
     Object? endTime = null,
   }) {
     return _then(_value.copyWith(
@@ -165,10 +163,6 @@ class _$OperationCopyWithImpl<$Res, $Val extends Operation>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String,
       endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
@@ -184,7 +178,7 @@ abstract class _$$_OperationCopyWith<$Res> implements $OperationCopyWith<$Res> {
       __$$_OperationCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String code, TZDateTime endTime});
+  $Res call({int id, TZDateTime endTime});
 }
 
 /// @nodoc
@@ -199,7 +193,6 @@ class __$$_OperationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? code = null,
     Object? endTime = null,
   }) {
     return _then(_$_Operation(
@@ -207,10 +200,6 @@ class __$$_OperationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      code: null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String,
       endTime: null == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
@@ -222,18 +211,16 @@ class __$$_OperationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Operation implements _Operation {
-  _$_Operation({required this.id, required this.code, required this.endTime});
+  _$_Operation({required this.id, required this.endTime});
 
   @override
   final int id;
-  @override
-  final String code;
   @override
   final TZDateTime endTime;
 
   @override
   String toString() {
-    return 'Operation(id: $id, code: $code, endTime: $endTime)';
+    return 'Operation(id: $id, endTime: $endTime)';
   }
 
   @override
@@ -242,12 +229,11 @@ class _$_Operation implements _Operation {
         (other.runtimeType == runtimeType &&
             other is _$_Operation &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.code, code) || other.code == code) &&
             (identical(other.endTime, endTime) || other.endTime == endTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, code, endTime);
+  int get hashCode => Object.hash(runtimeType, id, endTime);
 
   @JsonKey(ignore: true)
   @override
@@ -259,13 +245,10 @@ class _$_Operation implements _Operation {
 abstract class _Operation implements Operation {
   factory _Operation(
       {required final int id,
-      required final String code,
       required final TZDateTime endTime}) = _$_Operation;
 
   @override
   int get id;
-  @override
-  String get code;
   @override
   TZDateTime get endTime;
   @override
