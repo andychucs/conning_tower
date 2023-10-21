@@ -1,6 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,13 +39,12 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
       };
       body = CupertinoListSection.insetGrouped(
         children: const [
-          CupertinoListTile.notched(
+          CupertinoListTile(
             title: Text("N/A"),
           ),
         ],
       );
       pages = <Widget>[body, body, body, body];
-
     } else {
       segments = {
         for (var element in squads)
@@ -60,18 +60,31 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
               margin: EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 10.0),
               children: List.generate(
                 squad.ships.length,
-                    (_index) => CupertinoListTile(
+                (_index) => CupertinoListTile(
                   title: Text(squad.ships[_index].name),
-                  padding: EdgeInsetsDirectional.only(start: 10.0, end: 8.0),
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("Lv", style: TextStyle(fontSize: 10),),
-                      Text("${squad.ships[_index].level}", style: TextStyle(fontSize: 12),)
+                  padding:
+                      const EdgeInsetsDirectional.only(start: 10.0, end: 8.0),
+                  leading: CarouselSlider(
+                    items: [
+                      AttributeLabel.vertical(
+                          label: 'Lv', value: '${squad.ships[_index].level}'),
+                      AttributeLabel.vertical(
+                          label: 'Lv Up', value: '${squad.ships[_index].exp[1]}'),
                     ],
+                    options: CarouselOptions(
+                      height: 30,
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 5),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.ease,
+                      scrollDirection: Axis.horizontal,
+                    ),
                   ),
-                  leadingToTitle: 0,
+                  leadingToTitle: 4,
                   onTap: () {
                     setState(() {
                       _selectedShip = _index;
@@ -93,7 +106,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                     animateFromLastPercent: true,
                     lineHeight: 5.0,
                     percent:
-                    squad.ships[_index].nowHP / squad.ships[_index].maxHP,
+                        squad.ships[_index].nowHP / squad.ships[_index].maxHP,
                     progressColor: squad.ships[_index].damageColor,
                   ),
                   trailing: CircularPercentIndicator(
@@ -264,4 +277,3 @@ class ScrollViewPageWithScrollbar extends StatelessWidget {
     );
   }
 }
-

@@ -17,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 
-version: 1.8.6+2
+version: 1.8.7+3
 
 
 
@@ -74,6 +74,7 @@ dependencies:
   shake: ^2.2.0
   flutter_staggered_grid_view: ^0.7.0
   percent_indicator: ^4.2.3
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
