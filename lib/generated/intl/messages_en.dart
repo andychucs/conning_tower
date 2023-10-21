@@ -247,10 +247,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Should Close?"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("Slow"),
         "TextSunken": MessageLookupByLibrary.simpleMessage("Sunken"),
-        "TextSuperLongPLusRange":
-            MessageLookupByLibrary.simpleMessage("Super long+"),
         "TextSuperLongRange":
             MessageLookupByLibrary.simpleMessage("Super long"),
+        "TextSuperLongRangePlus":
+            MessageLookupByLibrary.simpleMessage("Super long+"),
         "TextTag": MessageLookupByLibrary.simpleMessage("Tag"),
         "TextTime": MessageLookupByLibrary.simpleMessage("Time"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("Title"),

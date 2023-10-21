@@ -215,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("低速"),
         "TextSunken": MessageLookupByLibrary.simpleMessage("击沉"),
         "TextSuperLongRange": MessageLookupByLibrary.simpleMessage("超长"),
+        "TextSuperLongRangePlus": MessageLookupByLibrary.simpleMessage("超长+"),
         "TextTag": MessageLookupByLibrary.simpleMessage("标签"),
         "TextTime": MessageLookupByLibrary.simpleMessage("时间"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("标题"),

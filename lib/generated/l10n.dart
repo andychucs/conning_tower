@@ -1451,10 +1451,10 @@ class S {
   }
 
   /// `Super long+`
-  String get TextSuperLongPLusRange {
+  String get TextSuperLongRangePlus {
     return Intl.message(
       'Super long+',
-      name: 'TextSuperLongPLusRange',
+      name: 'TextSuperLongRangePlus',
       desc: '',
       args: [],
     );
