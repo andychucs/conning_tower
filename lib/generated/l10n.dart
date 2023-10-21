@@ -130,6 +130,146 @@ class S {
     );
   }
 
+  /// `Slightly damaged`
+  String get TextSDamage {
+    return Intl.message(
+      'Slightly damaged',
+      name: 'TextSDamage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Moderately damaged`
+  String get TextMDamage {
+    return Intl.message(
+      'Moderately damaged',
+      name: 'TextMDamage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Heavily damaged`
+  String get TextLDamage {
+    return Intl.message(
+      'Heavily damaged',
+      name: 'TextLDamage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sunken`
+  String get TextSunken {
+    return Intl.message(
+      'Sunken',
+      name: 'TextSunken',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Slow`
+  String get TextSlowSpeed {
+    return Intl.message(
+      'Slow',
+      name: 'TextSlowSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fast`
+  String get TextFastSpeed {
+    return Intl.message(
+      'Fast',
+      name: 'TextFastSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fast+`
+  String get TextFastPlusSpeed {
+    return Intl.message(
+      'Fast+',
+      name: 'TextFastPlusSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fastest`
+  String get TextFastestSpeed {
+    return Intl.message(
+      'Fastest',
+      name: 'TextFastestSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `None`
+  String get TextNone {
+    return Intl.message(
+      'None',
+      name: 'TextNone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Short`
+  String get TextShortRange {
+    return Intl.message(
+      'Short',
+      name: 'TextShortRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medium`
+  String get TextMediumRange {
+    return Intl.message(
+      'Medium',
+      name: 'TextMediumRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Long`
+  String get TextLongRange {
+    return Intl.message(
+      'Long',
+      name: 'TextLongRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Super long`
+  String get TextSuperLongRange {
+    return Intl.message(
+      'Super long',
+      name: 'TextSuperLongRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Super long+`
+  String get TextSuperLongPLusRange {
+    return Intl.message(
+      'Super long+',
+      name: 'TextSuperLongPLusRange',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Contributors`
   String get AboutContributors {
     return Intl.message(
