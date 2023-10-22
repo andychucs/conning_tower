@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:conning_tower/models/data/kcsapi/start2/get_data_entity.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
@@ -11,8 +10,11 @@ class OperationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final queueMap = ref.watch(kancolleDataProvider.select((data) => data.queue.map));
-    return OperationSchedule(queueMap: queueMap,);
+    final queueMap =
+        ref.watch(kancolleDataProvider.select((data) => data.queue.map));
+    return OperationSchedule(
+      queueMap: queueMap,
+    );
   }
 }
 
@@ -21,10 +23,10 @@ class OperationSchedule extends ConsumerStatefulWidget {
   const OperationSchedule({Key? key, required this.queueMap}) : super(key: key);
 
   @override
-  _OperationScheduleState createState() => _OperationScheduleState();
+  OperationScheduleState createState() => OperationScheduleState();
 }
 
-class _OperationScheduleState extends ConsumerState<OperationSchedule> {
+class OperationScheduleState extends ConsumerState<OperationSchedule> {
   late Timer timer;
   late Map<int, String> remainingTimes;
 
@@ -40,7 +42,6 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
 
   void updateTime() {
     widget.queueMap.forEach((squad, operation) {
-
       final remainingTime = operation.endTime.difference(DateTime.now());
 
       String remainingTimeString;
@@ -51,7 +52,7 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
         remainingTimeString = remainingTimeToString(remainingTime);
       }
 
-      // 更新任务的剩余时间
+      // Update the remaining time of the task
       remainingTimes[squad] = remainingTimeString;
     });
   }
@@ -63,10 +64,10 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      // 更新每个小队任务的剩余时间
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Update the time remaining for each squad mission
       updateTime();
-      if (mounted) setState(() {}); // 触发重建以更新UI
+      if (mounted) setState(() {}); // Trigger a rebuild to update the UI
     });
   }
 
@@ -84,8 +85,8 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
     final queueMap = widget.queueMap;
     final squads =
         ref.watch(kancolleDataProvider.select((data) => data.squads));
-    final missionInfo = ref.watch(kancolleDataProvider.select((data) => data.dataInfo.missionInfo));
-
+    final missionInfo = ref.watch(
+        kancolleDataProvider.select((data) => data.dataInfo.missionInfo));
 
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
@@ -95,7 +96,7 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
           shrinkWrap: true,
           physics: constraints.maxHeight < 220
               ? null
-              : NeverScrollableScrollPhysics(),
+              : const NeverScrollableScrollPhysics(),
           itemCount: 3,
           itemBuilder: (context, index) {
             final squad = index + 2;
@@ -115,7 +116,8 @@ class _OperationScheduleState extends ConsumerState<OperationSchedule> {
               missionName = mission.apiName;
             }
             return CupertinoListSection.insetGrouped(
-                margin: EdgeInsetsDirectional.only(top: 5.0, bottom: 5.0, end: 10.0, start: 5.0),
+                margin: const EdgeInsetsDirectional.only(
+                    top: 5.0, bottom: 5.0, end: 10.0, start: 5.0),
                 footer: CupertinoListSectionDescription(squadName),
                 children: [
                   CupertinoListTile(

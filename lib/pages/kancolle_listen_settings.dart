@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -8,7 +6,6 @@ import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
-import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';

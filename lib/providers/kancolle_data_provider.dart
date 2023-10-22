@@ -1,4 +1,3 @@
-import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
