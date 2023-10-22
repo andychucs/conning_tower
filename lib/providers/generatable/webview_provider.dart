@@ -229,8 +229,9 @@ class WebController extends _$WebController {
 
     log("responseURL:${messageData.responseUrl}");
     log("readyState:${messageData.readyState}");
+    int time = DateTime.now().millisecondsSinceEpoch;
     ref.watch(rawDataProvider.notifier).update(
-        (state) => RawData(source: messageData.responseUrl, data: result));
+        (state) => RawData(source: messageData.responseUrl, data: result, timestamp: time));
   }
 
   Future<void> onWebviewCreate() async {
