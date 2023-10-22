@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -7,6 +8,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
+import 'package:conning_tower/models/feature/web_message_data.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/web_info_provider.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -169,23 +171,20 @@ class WebController extends _$WebController {
         "safeNavi:$safeNavi enableAutoProcess:$enableAutoProcess state.currPageUrls.isNotEmpty:${state.currPageUrls.isNotEmpty}");
     if (!safeNavi && enableAutoProcess && state.currPageUrls.isNotEmpty) {
       debugPrint("latest responseUrl: ${state.currPageUrls.last}");
-      for (final url in currPageUrls.reversed) {
-        if (url.host == kDMMOSAPIDomain &&
-            currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
-          await Future.delayed(const Duration(seconds: 1));
-          // Delay to allow time for Webview to load previous page
-          if (url.scheme == 'https') {
-            debugPrint("replace scheme ${url.replace(scheme: 'http')}");
-            state.controller.loadUrl(
-                urlRequest:
-                    URLRequest(url: WebUri.uri(url.replace(scheme: 'http'))));
-            Fluttertoast.showToast(
-                msg: S.current.KCViewFuncMsgAutoGameRedirect);
-          } else {
-            state.controller.loadUrl(urlRequest: URLRequest(url: url));
-            Fluttertoast.showToast(
-                msg: S.current.KCViewFuncMsgAutoGameRedirect);
-          }
+      var url = state.currPageUrls.last;
+      if (url.host == kDMMOSAPIDomain &&
+          currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
+        await Future.delayed(const Duration(seconds: 1));
+        // Delay to allow time for Webview to load previous page
+        if (url.scheme == 'https') {
+          debugPrint("replace scheme ${url.replace(scheme: 'http')}");
+          state.controller.loadUrl(
+              urlRequest:
+                  URLRequest(url: WebUri.uri(url.replace(scheme: 'http'))));
+          Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+        } else {
+          state.controller.loadUrl(urlRequest: URLRequest(url: url));
+          Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
         }
       }
     }
@@ -224,37 +223,14 @@ class WebController extends _$WebController {
   }
 
   void _kancolleMessageHandle(String message) {
-    String responseURL = '';
-    if (true) {
-      const start = "conning_tower_responseURL:";
-      const end = "conning_tower_readyState:";
-      final startIndex = message.indexOf(start);
-      final endIndex = message.indexOf(end, startIndex + start.length);
-      responseURL = message.substring(startIndex + start.length, endIndex);
-      // print("responseURL:");
-      // print(responseURL);
-    }
-    if (true) {
-      const start = "conning_tower_readyState:";
-      const end = "conning_tower_responseText:";
-      final startIndex = message.indexOf(start);
-      final endIndex = message.indexOf(end, startIndex + start.length);
-      String readyState =
-          message.substring(startIndex + start.length, endIndex);
-      log("readyState:");
-      log(readyState);
-    }
-    if (true) {
-      const start = "conning_tower_responseText:";
-      const end = "conning_tower_END";
-      final startIndex = message.indexOf(start);
-      final endIndex = message.indexOf(end, startIndex + start.length);
-      String responseText =
-          message.substring(startIndex + start.length, endIndex);
-      String result = responseText.replaceAll('svdata=', '');
-      ref.watch(rawDataProvider.notifier).update((state) => RawData(source: responseURL, data: result));
-      // debugPrint(result);
-    }
+    var json = jsonDecode(message);
+    var messageData = WebMessageData.fromJson(json);
+    String result = messageData.responseText.replaceAll('svdata=', '');
+
+    log("responseURL:${messageData.responseUrl}");
+    log("readyState:${messageData.readyState}");
+    ref.watch(rawDataProvider.notifier).update(
+        (state) => RawData(source: messageData.responseUrl, data: result));
   }
 
   Future<void> onWebviewCreate() async {
@@ -272,7 +248,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> addKCUserScript() async {
-     await controller.addUserScript(userScript: kancolleUserScript);
+    await controller.addUserScript(userScript: kancolleUserScript);
   }
 
   Future<void> removeKCUserScript() async {

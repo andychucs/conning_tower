@@ -25,7 +25,14 @@ XMLHttpRequest.prototype.open = function() {
     origOpen.apply(this, arguments);
 };
 function KcapiToFlutter(data) {
-    kcMessage.postMessage("conning_tower_responseURL:"+data.responseURL+"conning_tower_readyState:"+data.readyState+"conning_tower_responseText:"+data.responseText+"conning_tower_END");
+    const messageData = {
+        response_url: data.responseURL,
+        ready_state: data.readyState,
+        response_text: data.responseText,
+    };
+
+    const jsonString = JSON.stringify(messageData);
+    kcMessage.postMessage(jsonString);
 }
 
 ''';
