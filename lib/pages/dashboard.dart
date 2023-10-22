@@ -33,10 +33,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
       ];
 
       if (useKancolleListener) {
-        titles.add("提督室");
-        titles.add("遠征");
-        titles.add("艦隊");
-        // titles.add("戦闘");
+        titles.add(S.of(context).KCDashboardCommand);
+        titles.add(S.of(context).KCDashboardOperation);
+        titles.add(S.of(context).KCDashboardFleet);
+        // titles.add("S.of(context).KCDashboardBattleReport");
       } else {
         titles.add(S.of(context).TaskDashboardTitle);
       }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,7 +66,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                       ),
                     ),
                     InfoBox(
-                      top: Text('艦娘'),
+                      top: Text(S.of(context).TextFleetGirl),
                       bottom: AutoSizeText(
                         '${fleetInfo.ships.length}/${commanderInfo.maxShip}',
                         style: TextStyle(fontSize: 30),
@@ -75,7 +76,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                       ),
                     ),
                     InfoBox(
-                      top: Text('装備'),
+                      top: Text(S.of(context).TextEquipment),
                       bottom: AutoSizeText(
                         '-/${commanderInfo.maxItem}',
                         style: TextStyle(fontSize: 30),

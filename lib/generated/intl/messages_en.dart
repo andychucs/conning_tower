@@ -130,6 +130,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
+        "KCDashboardBattleReport":
+            MessageLookupByLibrary.simpleMessage("Report"),
+        "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("Command"),
+        "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("Fleet"),
+        "KCDashboardOperation":
+            MessageLookupByLibrary.simpleMessage("Operation"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -219,12 +225,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage(
             "request tasks number over limit."),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "TextEquipment": MessageLookupByLibrary.simpleMessage("Equipment"),
+        "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("Fast+"),
+        "TextFastSpeed": MessageLookupByLibrary.simpleMessage("Fast"),
+        "TextFastestSpeed": MessageLookupByLibrary.simpleMessage("Fastest"),
+        "TextFleetGirl": MessageLookupByLibrary.simpleMessage("Fleet Girl"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("Help"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
+        "TextItem": MessageLookupByLibrary.simpleMessage("Item"),
+        "TextLDamage": MessageLookupByLibrary.simpleMessage("Heavily damaged"),
+        "TextLongRange": MessageLookupByLibrary.simpleMessage("Long"),
+        "TextMDamage":
+            MessageLookupByLibrary.simpleMessage("Moderately damaged"),
+        "TextMediumRange": MessageLookupByLibrary.simpleMessage("Medium"),
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
+        "TextNone": MessageLookupByLibrary.simpleMessage("None"),
+        "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
+        "TextShortRange": MessageLookupByLibrary.simpleMessage("Short"),
         "TextShouldClose":
             MessageLookupByLibrary.simpleMessage("Should Close?"),
+        "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("Slow"),
+        "TextSunken": MessageLookupByLibrary.simpleMessage("Sunken"),
+        "TextSuperLongRange":
+            MessageLookupByLibrary.simpleMessage("Super long"),
+        "TextSuperLongRangePlus":
+            MessageLookupByLibrary.simpleMessage("Super long+"),
         "TextTag": MessageLookupByLibrary.simpleMessage("Tag"),
         "TextTime": MessageLookupByLibrary.simpleMessage("Time"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("Title"),
