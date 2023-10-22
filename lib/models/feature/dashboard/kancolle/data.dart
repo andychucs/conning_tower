@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
@@ -24,6 +25,7 @@ class KancolleData {
   final Fleet fleet;
   final Ref ref;
   final DataInfo dataInfo;
+  late BattleInfo battleInfo;
 
   KancolleData({
     required this.queue,
@@ -32,6 +34,7 @@ class KancolleData {
     required this.fleet,
     required this.ref,
     required this.dataInfo,
+    required this.battleInfo
   });
 
   KancolleData copyWith(
@@ -40,6 +43,7 @@ class KancolleData {
       SeaForceBase? seaForceBase,
       Fleet? fleet,
       DataInfo? dataInfo,
+        BattleInfo? battleInfo,
       Ref? ref,}) {
     return KancolleData(
       queue: queue ?? this.queue,
@@ -47,6 +51,7 @@ class KancolleData {
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
       dataInfo: dataInfo ?? this.dataInfo,
+      battleInfo: battleInfo ?? this.battleInfo,
       ref: ref ?? this.ref,
     );
   }
@@ -54,6 +59,17 @@ class KancolleData {
   void parse(String source, String data) {
     String path = source.split("kcsapi").last;
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
+
+    if (model is ReqSortieBattleResultEntity) {
+      var _battleInfo = BattleInfo(
+        result: model.apiData.apiWinRank,
+        dropName: model.apiData.apiGetShip?.apiShipName,
+        enemyName: model.apiData.apiEnemyInfo.apiDeckName,
+        mvp: model.apiData.apiMvp,
+        enemyShips: model.apiData.apiShipId
+      );
+      battleInfo.updateBattleInfo(_battleInfo);
+    }
 
     if (model is GetDataEntity) {
       log("GetDataEntity");

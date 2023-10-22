@@ -1,3 +1,4 @@
+import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
@@ -42,6 +43,6 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
     squads: squads,
     ref: ref,
     seaForceBase: seaForceBase,
-    fleet: fleet, dataInfo: dataInfo,
+    fleet: fleet, dataInfo: dataInfo, battleInfo: BattleInfo(),
   );
 });

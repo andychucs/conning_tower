@@ -1,6 +1,6 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
-// import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
+import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
 import 'package:conning_tower/pages/dashboard_pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
 import 'package:conning_tower/pages/dashboard_pages/port_info.dart';
@@ -29,14 +29,16 @@ class Dashboard extends ConsumerStatefulWidget {
           S.current.WebInfo,
           S.current.KCDashboardCommand,
           S.current.KCDashboardOperation,
-          S.current.KCDashboardFleet
+          S.current.KCDashboardFleet,
+          S.current.KCDashboardBattleReport
         ],
         children = [
           const PhotoGallery(),
           const WebInfoList(),
           const PortInfo(),
           const OperationPage(),
-          const SquadInfo()
+          const SquadInfo(),
+          const BattleInfo()
         ];
 
   final VoidCallback notifyParent;

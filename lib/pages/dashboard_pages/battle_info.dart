@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +25,9 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
   Widget build(BuildContext context) {
     bool combinedFleet = true;
     int crossAxisCount = 1;
+    final data = ref.watch(kancolleDataProvider);
+    final battleInfo = data.battleInfo;
+    log(battleInfo.toString());
 
     List fleets = [
       ["A1", "B1", "C1", "D1", "E1", "F1"],
@@ -80,20 +86,46 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
       )
     ];
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        debugPrint(constraints.maxWidth.toString());
-        if (constraints.maxWidth >= 600) {
-          crossAxisCount = 2;
-        }
-        return MasonryGridView.count(
-          crossAxisCount: crossAxisCount,
-          itemCount: 4,
-          itemBuilder: (BuildContext context, int index) {
-            return items[index];
-          },
-        );
-      },
+    return SafeArea(
+      child: CupertinoPageScaffold(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(battleInfo.enemyName ?? ''),
+              Text(battleInfo.result ?? ''),
+              if (battleInfo.dropName?.isEmpty != null) Text('${battleInfo.dropName} GET!')
+            ],
+          ),
+        ),
+        // navigationBar: CupertinoNavigationBar(
+        //   automaticallyImplyLeading: false,
+        //   transitionBetweenRoutes: false,
+        //   backgroundColor: Colors.transparent,
+        //   middle: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       Text('${battleInfo.result}'),
+        //       Text('${battleInfo.dropName} GET!')
+        //     ],
+        //   ),
+        // ),
+        // child: LayoutBuilder(
+        //   builder: (context, constraints) {
+        //     debugPrint(constraints.maxWidth.toString());
+        //     if (constraints.maxWidth >= 600) {
+        //       crossAxisCount = 2;
+        //     }
+        //     return MasonryGridView.count(
+        //       crossAxisCount: crossAxisCount,
+        //       itemCount: 4,
+        //       itemBuilder: (BuildContext context, int index) {
+        //         return items[index];
+        //       },
+        //     );
+        //   },
+        // ),
+      ),
     );
   }
 }
