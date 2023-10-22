@@ -490,8 +490,9 @@ class HomePageState extends ConsumerState<HomePage> {
                             children: [
                               if (enableDashboard && showDashboardInHome)
                                 Expanded(
-                                    child: Dashboard(
-                                        notifyParent: () => setState(() {}))),
+                                    child: useKancolleListener
+                                        ? Dashboard.kancolle(notifyParent: () => setState(() {}))
+                                        : Dashboard.general(notifyParent: () => setState(() {}))),
                               Padding(
                                 padding: EdgeInsets.only(bottom: enableBottomPadding ? bottomPaddingHeightValue : 0),
                                 child: SizedBox(
