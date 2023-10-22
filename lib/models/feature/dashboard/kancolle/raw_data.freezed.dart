@@ -191,3 +191,173 @@ abstract class _RawData implements RawData {
   _$$_RawDataCopyWith<_$_RawData> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+RawDataLog _$RawDataLogFromJson(Map<String, dynamic> json) {
+  return _RawDataLog.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RawDataLog {
+  int get time => throw _privateConstructorUsedError;
+  List<RawData> get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RawDataLogCopyWith<RawDataLog> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RawDataLogCopyWith<$Res> {
+  factory $RawDataLogCopyWith(
+          RawDataLog value, $Res Function(RawDataLog) then) =
+      _$RawDataLogCopyWithImpl<$Res, RawDataLog>;
+  @useResult
+  $Res call({int time, List<RawData> data});
+}
+
+/// @nodoc
+class _$RawDataLogCopyWithImpl<$Res, $Val extends RawDataLog>
+    implements $RawDataLogCopyWith<$Res> {
+  _$RawDataLogCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? time = null,
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as int,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<RawData>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_RawDataLogCopyWith<$Res>
+    implements $RawDataLogCopyWith<$Res> {
+  factory _$$_RawDataLogCopyWith(
+          _$_RawDataLog value, $Res Function(_$_RawDataLog) then) =
+      __$$_RawDataLogCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int time, List<RawData> data});
+}
+
+/// @nodoc
+class __$$_RawDataLogCopyWithImpl<$Res>
+    extends _$RawDataLogCopyWithImpl<$Res, _$_RawDataLog>
+    implements _$$_RawDataLogCopyWith<$Res> {
+  __$$_RawDataLogCopyWithImpl(
+      _$_RawDataLog _value, $Res Function(_$_RawDataLog) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? time = null,
+    Object? data = null,
+  }) {
+    return _then(_$_RawDataLog(
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as int,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<RawData>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_RawDataLog with DiagnosticableTreeMixin implements _RawDataLog {
+  const _$_RawDataLog({required this.time, required final List<RawData> data})
+      : _data = data;
+
+  factory _$_RawDataLog.fromJson(Map<String, dynamic> json) =>
+      _$$_RawDataLogFromJson(json);
+
+  @override
+  final int time;
+  final List<RawData> _data;
+  @override
+  List<RawData> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'RawDataLog(time: $time, data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'RawDataLog'))
+      ..add(DiagnosticsProperty('time', time))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RawDataLog &&
+            (identical(other.time, time) || other.time == time) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, time, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RawDataLogCopyWith<_$_RawDataLog> get copyWith =>
+      __$$_RawDataLogCopyWithImpl<_$_RawDataLog>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_RawDataLogToJson(
+      this,
+    );
+  }
+}
+
+abstract class _RawDataLog implements RawDataLog {
+  const factory _RawDataLog(
+      {required final int time,
+      required final List<RawData> data}) = _$_RawDataLog;
+
+  factory _RawDataLog.fromJson(Map<String, dynamic> json) =
+      _$_RawDataLog.fromJson;
+
+  @override
+  int get time;
+  @override
+  List<RawData> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_RawDataLogCopyWith<_$_RawDataLog> get copyWith =>
+      throw _privateConstructorUsedError;
+}

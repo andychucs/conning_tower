@@ -14,3 +14,14 @@ class RawData with _$RawData {
   factory RawData.fromJson(Map<String, dynamic> json) =>
       _$RawDataFromJson(json);
 }
+
+@freezed
+class RawDataLog with _$RawDataLog {
+  const factory RawDataLog({
+    required int time,
+    required List<RawData> data
+  }) = _RawDataLog;
+
+  factory RawDataLog.fromJson(Map<String, dynamic> json) =>
+      _$RawDataLogFromJson(json);
+}
