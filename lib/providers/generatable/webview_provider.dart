@@ -226,6 +226,52 @@ class WebController extends _$WebController {
     state.controller.reload();
   }
 
+  Future<void> httpRedirect() async {
+    if (!inKancolleWindow) {
+      WebUri? currentUrl = await controller.getUrl();
+      if (currentUrl!.path.startsWith(Uri.parse(kGameUrl).path)) {
+        // May be HTTPS or HTTP
+        if (Platform.isIOS) {
+          await controller.injectJavascriptFileFromAsset(
+              assetFilePath: httpRedirectJS);
+        }
+        inKancolleWindow = true;
+      }
+      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+      log("HTTP Redirect success");
+    } else {
+      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
+      log("HTTP Redirect fail");
+    }
+    log("inKancolleWindow: $inKancolleWindow");
+  }
+
+  Future<void> adjustWindow() async {
+    if (gameLoadCompleted) {
+      bool flag = await autoAdjustWindowV2(controller, force: true);
+      if (flag) {
+        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+      } else {
+        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+      }
+    } else {
+      Fluttertoast.showToast(
+          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
+    }
+  }
+
+  Future<void> muteGame() async {
+    await controller.injectJavascriptFileFromAsset(
+        assetFilePath: muteKancolleJS);
+    Fluttertoast.showToast(msg: S.current.MsgMuteGame);
+  }
+
+  Future<void> unmuteGame() async {
+    await controller.injectJavascriptFileFromAsset(
+        assetFilePath: unMuteKancolleJS);
+    Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
+  }
+
   void _kancolleMessageHandle(String message) {
     var json = jsonDecode(message);
     var messageData = WebMessageData.fromJson(json);

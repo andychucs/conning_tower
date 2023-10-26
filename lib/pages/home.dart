@@ -20,7 +20,6 @@ import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/dialog.dart';
-import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/indexed_stack.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
