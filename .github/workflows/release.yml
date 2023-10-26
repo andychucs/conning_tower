@@ -27,7 +27,7 @@ jobs:
           distribution: temurin
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.13.6'
+          flutter-version: '3.13.8'
       - run: flutter doctor -v
       - run: flutter pub get
       - name: Create the Keystore
