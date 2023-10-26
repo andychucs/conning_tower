@@ -229,23 +229,26 @@ class HomePageState extends ConsumerState<HomePage> {
                   middle: Text(next["title"]!),
                   backgroundColor: CupertinoColors.systemGroupedBackground,
                 ),
-                child: ListView(
-                  children: [
-                    CupertinoListSection.insetGrouped(
-                      footer: SelectableText(next["content"]!),
-                      children: [
-                        CupertinoListTile(
-                          title: Text(
-                            S.of(context).AppControlsReload,
-                            style: const TextStyle(color: CupertinoColors.activeBlue),
-                          ),
-                          trailing: const Icon(CupertinoIcons.refresh),
-                          onTap: () =>
-                              ref.read(webControllerProvider.notifier).reload(),
-                        )
-                      ],
-                    )
-                  ],
+                child: SafeArea(
+                  bottom: false,
+                  child: ListView(
+                    children: [
+                      CupertinoListSection.insetGrouped(
+                        footer: SelectableText(next["content"]!),
+                        children: [
+                          CupertinoListTile(
+                            title: Text(
+                              S.of(context).AppControlsReload,
+                              style: const TextStyle(color: CupertinoColors.activeBlue),
+                            ),
+                            trailing: const Icon(CupertinoIcons.refresh),
+                            onTap: () =>
+                                ref.read(webControllerProvider.notifier).reload(),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
