@@ -222,6 +222,10 @@ class WebController extends _$WebController {
     }
   }
 
+  void reload() {
+    state.controller.reload();
+  }
+
   void _kancolleMessageHandle(String message) {
     var json = jsonDecode(message);
     var messageData = WebMessageData.fromJson(json);

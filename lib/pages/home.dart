@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
@@ -19,6 +20,7 @@ import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:conning_tower/widgets/dialog.dart';
+import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/indexed_stack.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
@@ -198,26 +200,58 @@ class HomePageState extends ConsumerState<HomePage> {
       log(next.toString());
       if (next.isNotEmpty) {
         HapticFeedback.heavyImpact();
-        showAdaptiveDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (builder) {
-              return AlertDialog.adaptive(
-                title: Text(next["title"]!),
-                content: SelectableText(next["content"]!),
-                actions: [
-                  adaptiveAction(
-                    context: context,
-                    child: Text(
-                      S.of(context).TextYes,
-                      style: const TextStyle(
-                          color: CupertinoColors.destructiveRed),
-                    ),
-                    onPressed: () => Navigator.of(context).pop(),
-                  )
-                ],
-              );
-            });
+        if (Platform.isAndroid) {
+          showAdaptiveDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (builder) {
+                return AlertDialog.adaptive(
+                  title: Text(next["title"]!),
+                  content: SelectableText(next["content"]!),
+                  actions: [
+                    adaptiveAction(
+                      context: context,
+                      child: Text(
+                        S.of(context).TextYes,
+                        style: const TextStyle(
+                            color: CupertinoColors.destructiveRed),
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                    )
+                  ],
+                );
+              });
+        } else {
+          navigatorToCupertino(
+            context,
+            Scaffold(
+              body: CupertinoPageScaffold(
+                navigationBar: CupertinoNavigationBar(
+                  middle: Text(next["title"]!),
+                  backgroundColor: CupertinoColors.systemGroupedBackground,
+                ),
+                child: ListView(
+                  children: [
+                    CupertinoListSection.insetGrouped(
+                      footer: SelectableText(next["content"]!),
+                      children: [
+                        CupertinoListTile(
+                          title: Text(
+                            S.of(context).AppControlsReload,
+                            style: const TextStyle(color: CupertinoColors.activeBlue),
+                          ),
+                          trailing: const Icon(CupertinoIcons.refresh),
+                          onTap: () =>
+                              ref.read(webControllerProvider.notifier).reload(),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
       }
       next.clear();
     });
