@@ -9,7 +9,7 @@ import 'package:conning_tower/pages/settings_page.dart';
 import 'package:conning_tower/pages/tools_page.dart';
 import 'package:conning_tower/providers/generatable/navigator_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
-import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -370,6 +370,7 @@ class _ControlsState extends ConsumerState<Controls> {
     if (!_isInit) return;
     safeNavi = false;
     bool? value = await showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AdaptiveDialogWithBool(msg: S.current.AppControlsReload);

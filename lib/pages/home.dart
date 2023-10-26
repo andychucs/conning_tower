@@ -6,7 +6,6 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/pages/dashboard.dart';
@@ -14,13 +13,12 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/pages/webview.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
-import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/widgets/controls.dart';
-import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/widgets/indexed_stack.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
@@ -104,28 +102,34 @@ class HomePageState extends ConsumerState<HomePage> {
   }
 
   Future<void> showNewVersionInfo() async {
-    if (showNewVersion) {
-      await customShowAdaptiveDialog(context,
-          title: Text(S.current.VersionUpdateTitle),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(S.current.VersionUpdateContent),
-              textLink(S.of(context).DocsNewUrl,
-                  S.of(context).VersionUpdateLinkText),
-              if (kIsOpenSource) Text(S.of(context).DataDownloadGuide)
-            ],
-          ),
-          actions: [
-            AdaptiveDialogAction(
-              child: Text(S.of(context).TextYes),
-              onPressed: () {
-                var version = _packageInfo.version;
-                localStorage.setString("preVersion", version);
-                Navigator.of(context).pop();
-              },
-            )
-          ]);
+    if (showNewVersion && !kIsOpenSource) {
+      showAdaptiveDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (builder) {
+            return AlertDialog.adaptive(
+              title: Text(S.current.VersionUpdateTitle),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(S.current.VersionUpdateContent),
+                  textLink(S.of(context).DocsNewUrl,
+                      S.of(context).VersionUpdateLinkText),
+                ],
+              ),
+              actions: [
+                adaptiveAction(
+                  context: context,
+                  child: Text(S.of(context).TextYes),
+                  onPressed: () {
+                    var version = _packageInfo.version;
+                    localStorage.setString("preVersion", version);
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
     }
   }
 
@@ -194,18 +198,26 @@ class HomePageState extends ConsumerState<HomePage> {
       log(next.toString());
       if (next.isNotEmpty) {
         HapticFeedback.heavyImpact();
-        customShowAdaptiveDialog(context,
-            title: Text(next["title"]!),
-            content: SelectableText(next["content"]!),
-            actions: [
-              AdaptiveDialogAction(
-                color: CupertinoColors.destructiveRed,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(S.of(context).TextYes),
-              )
-            ]);
+        showAdaptiveDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (builder) {
+              return AlertDialog.adaptive(
+                title: Text(next["title"]!),
+                content: SelectableText(next["content"]!),
+                actions: [
+                  adaptiveAction(
+                    context: context,
+                    child: Text(
+                      S.of(context).TextYes,
+                      style: const TextStyle(
+                          color: CupertinoColors.destructiveRed),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              );
+            });
       }
       next.clear();
     });

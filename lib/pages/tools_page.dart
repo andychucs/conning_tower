@@ -10,7 +10,7 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/utils/notification_util.dart';
-import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
