@@ -241,7 +241,7 @@ class HomePageState extends ConsumerState<HomePage> {
                               S.of(context).AppControlsReload,
                               style: const TextStyle(color: CupertinoColors.activeBlue),
                             ),
-                            trailing: const Icon(CupertinoIcons.refresh),
+                            trailing: const Icon(CupertinoIcons.refresh, color: CupertinoColors.activeBlue,),
                             onTap: () =>
                                 ref.read(webControllerProvider.notifier).reload(),
                           )
