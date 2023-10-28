@@ -149,3 +149,6 @@ coverage/
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+/lib/firebase_options.dart
+/ios/Runner/GoogleService-Info.plist
+/ios/firebase_app_id_file.json
