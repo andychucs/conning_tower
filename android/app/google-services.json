@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "939732836583",
+    "project_id": "conningtower-1",
+    "storage_bucket": "conningtower-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939732836583:android:eeb4dfe669136d3d0c8242",
+        "android_client_info": {
+          "package_name": "com.conntower.conning_tower"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939732836583-ki25jf2balao36e5i2bpgpfoe0t3qui6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANSJjJ3Jk13RrWrbJhOhVYukMwG9Mx0Xg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939732836583-ki25jf2balao36e5i2bpgpfoe0t3qui6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "939732836583-98ufephpr85cf8e3g8hn7kluq9j5p543.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.conntower.conningTower"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
