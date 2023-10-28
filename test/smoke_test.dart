@@ -73,10 +73,14 @@ void main() {
         await tester.tap(find.text(S.current.AdvancedGameSupport));
         await tester.pumpAndSettle();
         expect(find.text('KC'), findsNothing);
+        await tester.pageBack();
+        await tester.pumpAndSettle();
+      } else {
+        await tester.ensureVisible(find.text('KC'));
+        await tester.pumpAndSettle();
       }
 
-      await tester.pageBack();
-      await tester.pumpAndSettle();
+
       if (kIsOpenSource) {
         expect(find.byIcon(Icons.anchor), findsOneWidget);
         expect(find.text(S.current.AdvancedGameSupport), findsNothing);
