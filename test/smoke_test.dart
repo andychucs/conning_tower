@@ -67,14 +67,28 @@ void main() {
       await tester.pumpAndSettle();
 
       if (!kIsOpenSource) {
-        expect(find.byIcon(CupertinoIcons.rectangle_expand_vertical), findsNothing);
-        expect(find.text(S.current.ToolTitleGameSound), findsNothing);
+        await tester.ensureVisible(find.text(S.current.AdvancedGameSupport));
+        await tester.pumpAndSettle();
+        expect(find.text('KC'), findsNothing);
+        await tester.tap(find.text(S.current.AdvancedGameSupport));
+        await tester.pumpAndSettle();
+        expect(find.text('KC'), findsNothing);
+        await tester.pageBack();
+        await tester.pumpAndSettle();
+      } else {
+        await tester.ensureVisible(find.text('KC'));
+        await tester.pumpAndSettle();
       }
 
 
-      final gesture = await tester.startGesture(Offset(0, 300)); //Position of the scrollview
-      await gesture.moveBy(Offset(0, -300)); //How much to scroll by
-      await tester.pump();
+      if (kIsOpenSource) {
+        expect(find.byIcon(Icons.anchor), findsOneWidget);
+        expect(find.text(S.current.AdvancedGameSupport), findsNothing);
+      } else {
+        expect(find.byIcon(Icons.anchor), findsNothing);
+        expect(find.text(S.current.AdvancedGameSupport), findsOneWidget);
+      }
+
       expect(find.byIcon(CupertinoIcons.square_list), findsOneWidget);
 
     });

@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -10,7 +7,7 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/utils/notification_util.dart';
-import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,26 +62,6 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
     });
   }
 
-  Future<void> _onHttpRedirect(InAppWebViewController controller) async {
-    if (!inKancolleWindow) {
-      WebUri? currentUrl = await controller.getUrl();
-      if (currentUrl!.path.startsWith(Uri.parse(kGameUrl).path)) {
-        // May be HTTPS or HTTP
-        if (Platform.isIOS) {
-          await controller.injectJavascriptFileFromAsset(
-              assetFilePath: httpRedirectJS);
-        }
-        inKancolleWindow = true;
-      }
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
-      log("HTTP Redirect success");
-    } else {
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
-      log("HTTP Redirect fail");
-    }
-    log("inKancolleWindow: $inKancolleWindow");
-  }
-
   Future<void> _onClearCache(
       BuildContext context, InAppWebViewController controller) async {
     bool? value = await showDialog(
@@ -111,32 +88,6 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
       String message = S.current.AppControlsLogoutSuccess;
       Fluttertoast.showToast(msg: message);
     }
-  }
-
-  Future<void> _onAdjustWindow(InAppWebViewController controller) async {
-    if (gameLoadCompleted) {
-      bool flag = await autoAdjustWindowV2(controller, force: true);
-      if (flag) {
-        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
-      } else {
-        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
-      }
-    } else {
-      Fluttertoast.showToast(
-          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
-    }
-  }
-
-  Future<void> _onMuteGame(InAppWebViewController controller) async {
-    await controller.injectJavascriptFileFromAsset(
-        assetFilePath: muteKancolleJS);
-    Fluttertoast.showToast(msg: S.current.MsgMuteGame);
-  }
-
-  Future<void> _onUnmuteGame(InAppWebViewController controller) async {
-    await controller.injectJavascriptFileFromAsset(
-        assetFilePath: unMuteKancolleJS);
-    Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
   Future<void> _onHomeSave(InAppWebViewController controller) async {
@@ -234,18 +185,6 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                 _onHomeSave(controller);
               },
             ),
-            if (kIsOpenSource)
-              CupertinoListTile(
-                title: Text(S.of(context).AppRedirect),
-                leading: const DummyIcon(
-                    color: CupertinoColors.activeBlue,
-                    icon: CupertinoIcons.rectangle_expand_vertical),
-                onTap: () async {
-                  HapticFeedback.heavyImpact();
-                  if (!isInit) return;
-                  _onHttpRedirect(controller);
-                },
-              ),
             CupertinoListTile(
               title: Text(S.of(context).AppClearCache),
               leading: const DummyIcon(
@@ -269,50 +208,10 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
             ),
           ],
         ),
-        if (kIsOpenSource)
-          CupertinoListSection.insetGrouped(
-              header: CupertinoListSectionDescription(
-                  S.of(context).ToolTitleGameSound),
-              children: [
-                CupertinoListTile(
-                  title: Text(S.of(context).GameUnmute),
-                  leading: const DummyIcon(
-                      color: CupertinoColors.activeBlue,
-                      icon: CupertinoIcons.volume_down),
-                  onTap: () async {
-                    HapticFeedback.heavyImpact();
-                    if (!isInit) return;
-                    _onUnmuteGame(controller);
-                  },
-                ),
-                CupertinoListTile(
-                  title: Text(S.of(context).GameMute),
-                  leading: const DummyIcon(
-                      color: CupertinoColors.activeOrange,
-                      icon: CupertinoIcons.volume_off),
-                  onTap: () async {
-                    HapticFeedback.heavyImpact();
-                    if (!isInit) return;
-                    _onMuteGame(controller);
-                  },
-                ),
-              ]),
         CupertinoListSection.insetGrouped(
             header: CupertinoListSectionDescription(
                 S.of(context).ToolTitleGameScreen),
             children: [
-              if (kIsOpenSource)
-                CupertinoListTile(
-                  title: Text(S.of(context).AppResize),
-                  leading: const DummyIcon(
-                      color: CupertinoColors.activeBlue,
-                      icon: CupertinoIcons.fullscreen),
-                  onTap: () async {
-                    HapticFeedback.heavyImpact();
-                    if (!isInit) return;
-                    _onAdjustWindow(controller);
-                  },
-                ),
               CupertinoListTile(
                 title: Text(S.of(context).AppBottomSafe),
                 leading: const DummyIcon(
@@ -370,45 +269,45 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
               },
               trailing: const CupertinoListTileChevron(),
             ),
-            CupertinoListTile(
-              title: Text(S.of(context).AdvancedGameSupport),
-              leading: const DummyIcon(
-                  color: CupertinoColors.activeOrange,
-                  icon: CupertinoIcons.game_controller),
-              onTap: () {
-                navigatorToCupertino(
-                    context,
-                    CupertinoActionPage(
-                        title: S.of(context).AdvancedGameSupport,
-                        previousPageTitle: S.of(context).ToolsButton,
-                        child: ListView(
-                          children: [
-                            CupertinoListSection.insetGrouped(
-                              footer: CupertinoListSectionDescription(
-                                  S.of(context).AdvancedGameSupportDescription),
-                              children: [
-                                CupertinoListTile(
-                                    title: Text(
-                                        S.of(context).Game)),
-                                if (kIsOpenSource)
+            if (kIsOpenSource)
+              CupertinoListTile(
+                title: Text("KC"),
+                leading: const DummyIcon(
+                    color: CupertinoColors.activeBlue, icon: Icons.anchor),
+                trailing: const CupertinoListTileChevron(),
+                onTap: () async {
+                  await navigatorToCupertino(
+                      context, const KancollelistenSettings());
+                },
+              ),
+            if (!kIsOpenSource)
+              CupertinoListTile(
+                title: Text(S.of(context).AdvancedGameSupport),
+                leading: const DummyIcon(
+                    color: CupertinoColors.activeOrange,
+                    icon: CupertinoIcons.game_controller),
+                onTap: () {
+                  navigatorToCupertino(
+                      context,
+                      CupertinoActionPage(
+                          title: S.of(context).AdvancedGameSupport,
+                          previousPageTitle: S.of(context).ToolsButton,
+                          child: ListView(
+                            children: [
+                              CupertinoListSection.insetGrouped(
+                                footer: CupertinoListSectionDescription(S
+                                    .of(context)
+                                    .AdvancedGameSupportDescription),
+                                children: [
                                   CupertinoListTile(
-                                    title: Text("KC"),
-                                    leading: const DummyIcon(
-                                        color: CupertinoColors.activeBlue,
-                                        icon: Icons.anchor),
-                                    trailing: const CupertinoListTileChevron(),
-                                    onTap: () async {
-                                      await navigatorToCupertino(context,
-                                          const KancollelistenSettings());
-                                    },
-                                  ),
-                              ],
-                            )
-                          ],
-                        )));
-              },
-              trailing: const CupertinoListTileChevron(),
-            ),
+                                      title: Text(S.of(context).Game)),
+                                ],
+                              )
+                            ],
+                          )));
+                },
+                trailing: const CupertinoListTileChevron(),
+              ),
           ],
         ),
       ],

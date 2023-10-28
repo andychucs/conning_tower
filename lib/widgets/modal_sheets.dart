@@ -1,5 +1,5 @@
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/widgets/dailog.dart';
+import 'package:conning_tower/widgets/dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,25 +33,31 @@ class ComplexModal extends StatelessWidget {
       child: WillPopScope(
         onWillPop: () async {
           bool shouldClose = true;
-          await customShowAdaptiveDialog(context,
-              title: Text(S.of(context).TextShouldClose),
-              content: null,
-              actions: [
-                AdaptiveDialogAction(
-                  child: Text(S.current.TextNo),
-                  onPressed: () {
-                    shouldClose = false;
-                    Navigator.of(context).pop();
-                  },
-                ),
-                AdaptiveDialogAction(
-                  child: Text(S.current.TextYes),
-                  onPressed: () {
-                    shouldClose = true;
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ]);
+          showAdaptiveDialog(
+              context: context,
+              builder: (builder) {
+                return AlertDialog.adaptive(
+                    title: Text(S.of(context).TextShouldClose),
+                    content: null,
+                    actions: [
+                      adaptiveAction(
+                        child: Text(S.current.TextNo),
+                        onPressed: () {
+                          shouldClose = false;
+                          Navigator.of(context).pop();
+                        },
+                        context: context,
+                      ),
+                      adaptiveAction(
+                        child: Text(S.current.TextYes),
+                        onPressed: () {
+                          shouldClose = true;
+                          Navigator.of(context).pop();
+                        },
+                        context: context,
+                      ),
+                    ]);
+              });
           return shouldClose;
         },
         child: child,

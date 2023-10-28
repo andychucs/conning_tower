@@ -104,10 +104,10 @@ class NotificationUtil {
     });
   }
 
-  Future<void> setNotificationWithOperation(Operation operation, {bool feedBack = true}) async {
+  Future<void> setNotificationWithOperation(Operation operation, String? name, {bool feedBack = true}) async {
     if (operation.endTime.isBefore(tz.TZDateTime.now(tz.local))) return;
 
-    String notificationTitle = S.current.TaskCompleted(operation.code);
+    String notificationTitle = S.current.TaskCompleted(name ?? operation.id);
 
     var notificationDetails = const NotificationDetails(
       android: AndroidNotificationDetails(
@@ -118,7 +118,7 @@ class NotificationUtil {
     );
 
     await notification.zonedScheduleAlarmClockNotification(
-        operation.code.hashCode,
+        operation.id.hashCode,
         notificationTitle,
         '',
         operation.endTime,
@@ -129,7 +129,7 @@ class NotificationUtil {
     }
   }
 
-  Future<void> setNotificationWithEndTime(Task task, tz.TZDateTime endTime, {bool feedBack = true}) async {
+  Future<void>  setNotificationWithEndTime(Task task, tz.TZDateTime endTime, {bool feedBack = true}) async {
     if (endTime.isBefore(tz.TZDateTime.now(tz.local))) return;
     // set the title and content of the notification
     String notificationTitle = S.current.TaskCompleted(task.title);

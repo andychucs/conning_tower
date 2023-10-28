@@ -1,6 +1,6 @@
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
-// import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
+import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
 import 'package:conning_tower/pages/dashboard_pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
 import 'package:conning_tower/pages/dashboard_pages/port_info.dart';
@@ -12,9 +12,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
-  const Dashboard({super.key, required this.notifyParent});
+  Dashboard.general({super.key, required this.notifyParent})
+      : titles = [
+          S.current.PhotoAlbum,
+          S.current.WebInfo,
+          S.current.TaskDashboardTitle
+        ],
+        children = [
+          const PhotoGallery(),
+          const WebInfoList(),
+          const TaskDashboard()
+        ];
+  Dashboard.kancolle({super.key, required this.notifyParent})
+      : titles = [
+          S.current.PhotoAlbum,
+          S.current.WebInfo,
+          S.current.KCDashboardCommand,
+          S.current.KCDashboardOperation,
+          S.current.KCDashboardFleet,
+          S.current.KCDashboardBattleReport
+        ],
+        children = [
+          const PhotoGallery(),
+          const WebInfoList(),
+          const PortInfo(),
+          const OperationPage(),
+          const SquadInfo(),
+          const BattleInfo()
+        ];
 
   final VoidCallback notifyParent;
+  final List<String> titles;
+  final List<Widget> children;
 
   @override
   ConsumerState createState() => _DashboardState();
@@ -26,23 +55,8 @@ class _DashboardState extends ConsumerState<Dashboard> {
     return LayoutBuilder(builder: (context, constraints) {
       // debugPrint(
       //     "dashboard space: W:${constraints.maxWidth} H:${constraints.maxHeight}");
-
-      List<String> titles = [
-        S.of(context).PhotoAlbum,
-        S.of(context).WebInfo
-      ];
-
-      if (useKancolleListener) {
-        titles.add(S.of(context).KCDashboardCommand);
-        titles.add(S.of(context).KCDashboardOperation);
-        titles.add(S.of(context).KCDashboardFleet);
-        // titles.add("S.of(context).KCDashboardBattleReport");
-      } else {
-        titles.add(S.of(context).TaskDashboardTitle);
-      }
-
       List<Widget> items = <Widget>[
-        for (var i in titles)
+        for (var i in widget.titles)
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
@@ -53,24 +67,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
           )
       ];
 
-      List<Widget> children = [
-        const PhotoGallery(),
-        const WebInfoList()
-      ];
-
-      if (useKancolleListener) {
-        children.add(const PortInfo());
-        children.add(const OperationPage());
-        children.add(const SquadInfo());
-        // children.add(const BattleInfo());
-      } else {
-        children.add(const TaskDashboard());
-      }
-
       return CupertinoPickerView(
         items: items,
         wideStyle: constraints.maxWidth >= 500,
-        children: children,
+        children: widget.children,
       );
     });
   }
@@ -87,6 +87,8 @@ class DashboardPage extends StatelessWidget {
           backgroundColor: CupertinoColors.systemGroupedBackground,
           border: null,
         ),
-        child: Dashboard(notifyParent: notifyParent));
+        child: useKancolleListener
+            ? Dashboard.kancolle(notifyParent: notifyParent)
+            : Dashboard.general(notifyParent: notifyParent));
   }
 }

@@ -27,7 +27,6 @@ class SettingsPage extends ConsumerStatefulWidget {
 }
 
 class SettingsPageState extends ConsumerState<SettingsPage> {
-  bool enableAutoProcessSwitchValue = true;
   bool enableAutoLoadHomeUrlSwitchValue = false;
 
   @override
@@ -39,8 +38,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
   void _loadConfig() {
     final prefs = localStorage;
     setState(() {
-      enableAutoProcessSwitchValue =
-          (prefs.getBool('enableAutoProcess') ?? true);
       enableAutoLoadHomeUrlSwitchValue =
           (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
     });
@@ -140,26 +137,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                   });
                   widget.notifyParent();
                 },
-              ),
-            if (kIsOpenSource)
-              CupertinoListTile(
-                title: Text(S.of(context).SettingsEnableAutoProcess),
-                leading: const DummyIcon(
-                    color: CupertinoColors.activeBlue,
-                    icon: CupertinoIcons.fullscreen),
-                trailing: CupertinoSwitch(
-                  value: enableAutoProcessSwitchValue,
-                  onChanged: (value) async {
-                    HapticFeedback.heavyImpact();
-                    setState(() {
-                      enableAutoProcessSwitchValue = value;
-                    });
-                    enableAutoProcess = value;
-                    localStorage.setBool('enableAutoProcess', value);
-                    debugPrint("enableAutoProcess:$enableAutoProcess");
-                    widget.reloadConfig();
-                  },
-                ),
               ),
             CupertinoListTile(
               title: Text(S.of(context).AppLayoutSetting),

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
@@ -18,6 +19,7 @@ class AppWebView extends ConsumerStatefulWidget {
 class AppWebViewState extends ConsumerState<AppWebView> {
   // late String defaultUA;
   final GlobalKey webViewKey = GlobalKey();
+  double progress = 0;
 
   static get defaultUA {
     if (Platform.isAndroid) {
@@ -42,6 +44,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
     //Android intercept kancolle API
     useShouldInterceptRequest: false,
     isElementFullscreenEnabled: false,
+    mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
   );
 
   @override
@@ -56,56 +59,67 @@ class AppWebViewState extends ConsumerState<AppWebView> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           // debugPrint("rate: ${(constraints.maxWidth / constraints.maxHeight)/(5/3)}");
-          return InAppWebView(
-            key: webViewKey,
-            initialSettings: webViewSetting,
-            initialUrlRequest: URLRequest(url: WebUri(homeUrl)),
-            onWebViewCreated: (InAppWebViewController controller) {
-              webController.setController(controller);
-              // ref.read(webViewControllerProvider.notifier).setController(controller);
-              // urlController.setWebViewController(controller);
-              webController.onWebviewCreate();
-            },
-            onLoadStart: (controller, uri) async {
-              print('Page started loading: $uri');
-              // urlController.setCurrentUrl(uri.toString());
-              // urlController.resetResponseUrls();
-              await webController.onLoadStart(uri!);
-              // var uri = Uri.parse(uri);
-            },
-            onLoadStop: (controller, uri) {
-              webController.onLoadStop(uri!);
-            },
-            onZoomScaleChanged: (controller, oldScale, newScale) async {
-              debugPrint("onZoomScaleChanged $oldScale, $newScale");
-            },
-            onConsoleMessage: (controller, consoleMessage) {
-              debugPrint(consoleMessage.message);
-            },
-            onNavigationResponse: (controller, response) async {
-              await webController.onNavigationResponse(response);
-              return NavigationResponseAction.ALLOW;
-            },
-            onContentSizeChanged: (controller, oldContentSize, newContentSize) {
-              debugPrint("onContentSizeChanged $oldContentSize, $newContentSize");
-              webController.onContentSizeChanged();
-            },
-            // shouldInterceptRequest: (
-            //   controller,
-            //   WebResourceRequest request,
-            // ) async {
-            //   return webController.onShouldInterceptRequest(request);
-            // },
-            onReceivedHttpError: (controller , request, response) {
-              // print("error");
-              // print(request);
-              // print(response);
-            },
-            onReceivedError: (controller , request, response) {
-              // print("error");
-              // print(request);
-              // print(response);
-            },
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              InAppWebView(
+                key: webViewKey,
+                initialSettings: webViewSetting,
+                initialUrlRequest: URLRequest(url: WebUri(homeUrl)),
+                onWebViewCreated: (InAppWebViewController controller) {
+                  webController.setController(controller);
+                  // ref.read(webViewControllerProvider.notifier).setController(controller);
+                  // urlController.setWebViewController(controller);
+                  webController.onWebviewCreate();
+                },
+                onLoadStart: (controller, uri) async {
+                  print('Page started loading: $uri');
+                  // urlController.setCurrentUrl(uri.toString());
+                  // urlController.resetResponseUrls();
+                  await webController.onLoadStart(uri!);
+                  // var uri = Uri.parse(uri);
+                },
+                onLoadStop: (controller, uri) {
+                  webController.onLoadStop(uri!);
+                },
+                onZoomScaleChanged: (controller, oldScale, newScale) async {
+                  debugPrint("onZoomScaleChanged $oldScale, $newScale");
+                },
+                onConsoleMessage: (controller, consoleMessage) {
+                  log(consoleMessage.message);
+                },
+                onNavigationResponse: (controller, response) async {
+                  await webController.onNavigationResponse(response);
+                  return NavigationResponseAction.ALLOW;
+                },
+                onContentSizeChanged: (controller, oldContentSize, newContentSize) {
+                  debugPrint("onContentSizeChanged $oldContentSize, $newContentSize");
+                  webController.onContentSizeChanged();
+                },
+                //shouldInterceptRequest: (
+                //  controller,
+                //  WebResourceRequest request,
+                //) async {
+                //  return webController.onShouldInterceptRequest(request);
+                //},
+                onProgressChanged: (controller, progress) {
+                  setState(() {
+                    this.progress = progress / 100;
+                  });
+                },
+                onReceivedHttpError: (controller , request, response) {
+                  // print("error");
+                  // print(request);
+                  // print(response);
+                },
+                onReceivedError: (controller , request, response) {
+                  // print("error");
+                  // print(request);
+                  // print(response);
+                },
+              ),
+              progress < 1.0 ? LinearProgressIndicator(value: progress, color: CupertinoColors.systemBlue, backgroundColor: Colors.transparent,) : Container(),
+            ],
           );
         }
       ),

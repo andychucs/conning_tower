@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -8,7 +6,7 @@ import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
-import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +21,21 @@ class KancollelistenSettings extends ConsumerStatefulWidget {
 
 class _KancollelistenSettingsState
     extends ConsumerState<KancollelistenSettings> {
+  late bool enableAutoProcessSwitchValue;
+
+  void _loadConfig() {
+    setState(() {
+      enableAutoProcess = (localStorage.getBool('enableAutoProcess') ?? true);
+      enableAutoProcessSwitchValue = enableAutoProcess;
+    });
+  }
+
+  @override
+  void initState() {
+    _loadConfig();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoActionPage(
@@ -31,6 +44,7 @@ class _KancollelistenSettingsState
         child: ListView(
           children: [
             CupertinoListSection.insetGrouped(
+              header: const CupertinoListSectionDescription('KC'),
               footer: CupertinoListSectionDescription(S.of(context).ToolUATip),
               children: [
                 CupertinoListTile(
@@ -71,7 +85,78 @@ class _KancollelistenSettingsState
                   },
                 ),
               ],
-            )
+            ),
+            CupertinoListSection.insetGrouped(
+                  header: CupertinoListSectionDescription(
+                      S.of(context).ToolTitleGameSound),
+                  children: [
+                    CupertinoListTile(
+                      title: Text(S.of(context).GameUnmute),
+                      leading: const DummyIcon(
+                          color: CupertinoColors.activeBlue,
+                          icon: CupertinoIcons.volume_down),
+                      onTap: () async {
+                        HapticFeedback.mediumImpact();
+                        await ref.read(webControllerProvider).unmuteGame();
+                      },
+                    ),
+                    CupertinoListTile(
+                      title: Text(S.of(context).GameMute),
+                      leading: const DummyIcon(
+                          color: CupertinoColors.activeOrange,
+                          icon: CupertinoIcons.volume_off),
+                      onTap: () async {
+                        HapticFeedback.mediumImpact();
+                        await ref.read(webControllerProvider).muteGame();
+
+                      },
+                    ),
+                  ]),
+            CupertinoListSection.insetGrouped(
+                header: CupertinoListSectionDescription(
+                    S.of(context).ToolTitleGameScreen),
+                children: [
+                  CupertinoListTile(
+                      title: Text(S.of(context).AppResize),
+                      leading: const DummyIcon(
+                          color: CupertinoColors.activeBlue,
+                          icon: CupertinoIcons.fullscreen),
+                      onTap: () async {
+                        HapticFeedback.mediumImpact();
+                        await ref.read(webControllerProvider).adjustWindow();
+                      },
+                    ),
+                  CupertinoListTile(
+                    title: Text(S.of(context).AppRedirect),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeBlue,
+                        icon: CupertinoIcons.rectangle_expand_vertical),
+                    onTap: () async {
+                      HapticFeedback.heavyImpact();
+                      HapticFeedback.mediumImpact();
+                      await ref.read(webControllerProvider).httpRedirect();
+                    },
+                  ),
+                  CupertinoListTile(
+                      title: Text(S.of(context).SettingsEnableAutoProcess),
+                      leading: const DummyIcon(
+                          color: CupertinoColors.activeBlue,
+                          icon: CupertinoIcons.fullscreen),
+                      trailing: CupertinoSwitch(
+                        value: enableAutoProcessSwitchValue,
+                        onChanged: (value) async {
+                          HapticFeedback.heavyImpact();
+                          setState(() {
+                            enableAutoProcessSwitchValue = value;
+                          });
+                          enableAutoProcess = value;
+                          localStorage.setBool('enableAutoProcess', value);
+                          debugPrint("enableAutoProcess:$enableAutoProcess");
+                          _loadConfig();
+                        },
+                      ),
+                    ),
+                ]),
           ],
         ));
   }
@@ -116,9 +201,6 @@ class FleetInfoPage extends ConsumerWidget {
                         title: Text(S.of(context).ShipData),
                         additionalInfo: kcwikiData.when(
                           data: (data) {
-                            Future((){
-                              ref.watch(kancolleDataProvider.notifier).update((state) => state.copyWith(kcwikiData: data));
-                            });
                             return Text("${data.ships.length}");
                           },
                           error: (e, s) => Text(S.of(context).Error),

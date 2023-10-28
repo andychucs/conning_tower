@@ -4,14 +4,14 @@ import 'dart:developer';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
-import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
-import 'package:conning_tower/providers/tasks_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -23,30 +23,35 @@ class KancolleData {
   final List<Squad> squads;
   final SeaForceBase seaForceBase;
   final Fleet fleet;
-  final KcwikiData kcwikiData;
   final Ref ref;
+  final DataInfo dataInfo;
+  late BattleInfo battleInfo;
 
-  KancolleData(
-      {required this.queue,
-      required this.squads,
-      required this.seaForceBase,
-      required this.fleet,
-      required this.kcwikiData,
-      required this.ref});
+  KancolleData({
+    required this.queue,
+    required this.squads,
+    required this.seaForceBase,
+    required this.fleet,
+    required this.ref,
+    required this.dataInfo,
+    required this.battleInfo
+  });
 
   KancolleData copyWith(
       {OperationQueue? queue,
       List<Squad>? squads,
       SeaForceBase? seaForceBase,
       Fleet? fleet,
-      KcwikiData? kcwikiData,
-      Ref? ref}) {
+      DataInfo? dataInfo,
+        BattleInfo? battleInfo,
+      Ref? ref,}) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
       seaForceBase: seaForceBase ?? this.seaForceBase,
       fleet: fleet ?? this.fleet,
-      kcwikiData: kcwikiData ?? this.kcwikiData,
+      dataInfo: dataInfo ?? this.dataInfo,
+      battleInfo: battleInfo ?? this.battleInfo,
       ref: ref ?? this.ref,
     );
   }
@@ -54,6 +59,23 @@ class KancolleData {
   void parse(String source, String data) {
     String path = source.split("kcsapi").last;
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
+
+    if (model is ReqSortieBattleResultEntity) {
+      var _battleInfo = BattleInfo(
+        result: model.apiData.apiWinRank,
+        dropName: model.apiData.apiGetShip?.apiShipName,
+        enemyName: model.apiData.apiEnemyInfo.apiDeckName,
+        mvp: model.apiData.apiMvp,
+        enemyShips: model.apiData.apiShipId
+      );
+      battleInfo.updateBattleInfo(_battleInfo);
+    }
+
+    if (model is GetDataEntity) {
+      log("GetDataEntity");
+      dataInfo.shipInfo = Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
+      dataInfo.missionInfo = Map.fromIterable(model.apiData.apiMstMission, key: (item) => item.apiId);
+    }
 
     if (model is ReqMissionStartEntity) {
       log("MissionStart");
@@ -79,7 +101,6 @@ class KancolleData {
               key,
               Operation(
                   id: data.apiMission[1],
-                  code: data.apiMission[1].toString(),
                   endTime: endDatetime));
         }
       });
@@ -92,7 +113,7 @@ class KancolleData {
         for (var shipsId in squad.apiShip) {
           if (shipsId != -1) {
             ships.add(model.apiData.apiShipData
-              .firstWhere((element) => element.apiId == shipsId));
+                .firstWhere((element) => element.apiId == shipsId));
           }
         }
         // var ships = model.apiData.apiShipData
@@ -116,6 +137,14 @@ class KancolleData {
         }
       }
     }
+
+    if (model is GetMemberRequireInfoEntity) {
+      fleet.equipment = model.apiData.apiSlotItem;
+    }
+
+    if (model is GetMemberSlotItemEntity) {
+      fleet.equipment = model.apiData;
+    }
   }
 
   KancolleData parseWith(String source, String data) {
@@ -129,6 +158,7 @@ class KancolleData {
         _setNotification(endTimeMap, newData);
       } else {
         parse(source, data);
+        // newData = this;
       }
 
       if (_shouldAlertSource(source)) addAlert();
@@ -168,16 +198,8 @@ class KancolleData {
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
     List<Ship> allShips = [];
     for (var data in apiShip) {
-      late String shipName;
-      try {
-        shipName = kcwikiData.ships
-                .firstWhere((element) => element.id == data.apiShipId)
-                .name ??
-            "Ship No.${data.apiShipId}";
-      } catch (e) {
-        log(e.toString());
-        shipName = "Ship No.${data.apiShipId}";
-      }
+      String shipName =
+          dataInfo.shipInfo?[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
       allShips.add(Ship.fromApi(data, shipName));
     }
     fleet.ships = allShips;
@@ -191,7 +213,6 @@ class KancolleData {
           id,
           Operation(
               id: data.apiMission[1],
-              code: data.apiMission[1].toString(),
               endTime: endDatetime));
     }
   }
@@ -221,15 +242,8 @@ class KancolleData {
     Squad squad = squads[index].copyWith();
     squad.ships.clear();
     for (var data in apiShipData) {
-      late String shipName;
-      try {
-        shipName = kcwikiData.ships
-                .firstWhere((element) => element.id == data.apiShipId)
-                .name ??
-            "Ship No.${data.apiShipId}";
-      } catch (e) {
-        shipName = "Ship No.${data.apiShipId}";
-      }
+      String shipName =
+          dataInfo.shipInfo?[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
       Ship ship = Ship.fromApi(data, shipName);
       log(ship.toString());
       log(ship.damaged().toString());
@@ -257,20 +271,14 @@ class KancolleData {
     endTimeMap.forEach((key, value) {
       Operation operation = newData.queue.map[key]!;
       if (!value.isAtSameMomentAs(operation.endTime)) {
-        Map<String, Task> taskMap = Map.fromIterable(
-            ref.watch(tasksStateProvider).items,
-            key: (task) => task.id);
 
         log("before:$value");
         log("after:${operation.endTime}");
-        log("End time change ${operation.code}");
+        log("End time change ${operation.id}");
 
-        if (taskMap.containsKey(operation.code)) {
-          notification.setNotificationWithEndTime(
-              taskMap[operation.code]!, operation.endTime);
-        } else {
-          notification.setNotificationWithOperation(operation);
-        }
+        var name = dataInfo.missionInfo?[operation.id]?.apiName;
+
+        notification.setNotificationWithOperation(operation, name);
       }
     });
   }
