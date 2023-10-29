@@ -61,7 +61,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
               children: List.generate(
                 squad.ships.length,
                 (_index) => CupertinoListTile(
-                  title: Text(squad.ships[_index].name),
+                  title: Text(squad.ships[_index].name!),
                   padding:
                       const EdgeInsetsDirectional.only(start: 10.0, end: 8.0),
                   leading: CarouselSlider(
@@ -69,7 +69,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                       AttributeLabel.vertical(
                           label: 'Lv', value: '${squad.ships[_index].level}'),
                       AttributeLabel.vertical(
-                          label: 'Lv Up', value: '${squad.ships[_index].exp[1]}'),
+                          label: 'Lv Up', value: '${squad.ships[_index].exp?[1]}'),
                     ],
                     options: CarouselOptions(
                       height: 30,
@@ -142,7 +142,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
       var ship = squads[_selectedSegment].ships[_selectedShip];
       body = CupertinoListSection.insetGrouped(
         margin: EdgeInsetsDirectional.fromSTEB(10.0, 0, 10.0, 10.0),
-        header: CupertinoListSectionDescription(ship.name),
+        header: CupertinoListSectionDescription(ship.name!),
         children: [
           CupertinoListTile(
             title: Text("Lv"),
@@ -150,7 +150,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
           ),
           CupertinoListTile(
             title: Text("Lv. up EXP"),
-            additionalInfo: Text('${ship.exp[1]}'),
+            additionalInfo: Text('${ship.exp?[1]}'),
           ),
           CupertinoListTile(
             title: Text("疲労度"),
