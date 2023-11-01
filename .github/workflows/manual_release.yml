@@ -42,7 +42,7 @@ jobs:
       - run: flutter build apk
       - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk
       - name: Create Release
-        uses: ncipollo/release-action@v1.11.2
+        uses: ncipollo/release-action@v1.13.0
         with:
           allowUpdates: true
           tag: ${{ inputs.tag }}
