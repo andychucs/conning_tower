@@ -13,7 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Create files
+      - name: Create Sentry
+        env:
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        run: |
+          echo $SENTRY_DSN | base64 -d > assets/config/sentry
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.13.8'
+      - run: flutter pub get
+      - name: Create the Keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEY_PROPERTIES: ${{ secrets.KEY_PROPERTIES }}
@@ -25,15 +39,6 @@ jobs:
           echo $KEY_PROPERTIES | base64 -d > android/key.properties
           echo $FIREBASE_OPTIONS | base64 -d > lib/firebase_options.dart
           echo $GOOGLE_SERVICES_JSON | base64 -d > android/app/google-services.json
-      - name: Setup Java JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: temurin
-      - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.13.8'
-      - run: flutter pub get
       - run: flutter build apk
       - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk
       - name: Create Release
