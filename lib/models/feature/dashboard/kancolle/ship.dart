@@ -62,6 +62,7 @@ class Ship with _$Ship {
 
   Color? get sparkColor {
     if (sparked) return Colors.yellow[600];
+    if (condition! == 49) return Colors.amber[100];
     if (condition! < 40) return CupertinoColors.activeOrange;
     if (condition! < 30) CupertinoColors.destructiveRed;
     return Colors.lightGreenAccent[700];
