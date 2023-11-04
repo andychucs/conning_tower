@@ -1,17 +1,15 @@
-import 'dart:developer';
-
-import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
-import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
+import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
-    EdgeInsetsDirectional.fromSTEB(4.0, 10.0, 8.0, 8.0);
+    EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 8.0, 5.0);
 
 class BattleInfo extends ConsumerStatefulWidget {
   const BattleInfo({super.key});
@@ -27,127 +25,159 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
     int crossAxisCount = 1;
     final data = ref.watch(kancolleDataProvider);
     final battleInfo = data.battleInfo;
-    log(battleInfo.toString());
+    final useItemData = data.dataInfo.itemInfo;
+    final shipInfo = data.dataInfo.shipInfo;
 
-    List fleets = [
-      ["A1", "B1", "C1", "D1", "E1", "F1"],
-      ["A2", "B2", "C2", "D2", "E2", "F2"],
-      ["A3", "B3", "C3", "D3", "E3", "F3"],
-      ["A4", "B4", "C4", "D4", "E4", "F4"],
-    ];
+    var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
 
-    var items = [
-      CupertinoListSection.insetGrouped(
+    var items = [];
+
+    for (final squad in squads) {
+      items.add(CupertinoListSection.insetGrouped(
         margin: _kBattleInfoGridMargin,
-        header: CupertinoListSectionDescription("第1艦隊"),
-        children: [
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-        ],
-      ),
-      CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
-        header: CupertinoListSectionDescription("第2艦隊"),
-        children: [
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-        ],
-      ),
-      CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
-        header: CupertinoListSectionDescription("敵艦隊"),
-        children: [
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-        ],
-      ),
-      CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
-        header: CupertinoListSectionDescription("敵艦隊"),
-        children: [
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-          ShipInfoInBattle(),
-        ],
-      )
-    ];
+        header: CupertinoListSectionDescription(squad.name),
+        children: List.generate(
+            squad.ships.length,
+            (index) => ShipInfoInBattle(
+                  ship: squad.ships[index],
+                  name: squad.ships[index].name ??
+                      shipInfo?[squad.ships[index].shipId]?.apiName ??
+                      'N/A',
+                  dmg: battleInfo.dmgMap?[squad.ships[index].hashCode] ?? 0,
+                  dmgTaken:
+                      battleInfo.dmgTakenMap?[squad.ships[index].hashCode] ?? 0,
+                )),
+      ));
+    }
 
     return SafeArea(
       child: CupertinoPageScaffold(
-        child: Center(
-          child: Column(
+        navigationBar: CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
+          transitionBetweenRoutes: false,
+          backgroundColor: CupertinoColors.systemGroupedBackground,
+          border: null,
+          middle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(battleInfo.enemyName ?? ''),
-              Text(battleInfo.result ?? ''),
-              if (battleInfo.dropName?.isEmpty != null) Text('${battleInfo.dropName} GET!')
+              if (battleInfo.result != null)
+                Text(
+                  '${battleInfo.result}',
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
+              if (battleInfo.dropName != null)
+                Text(
+                  '${battleInfo.dropName} GET!',
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
+              if (battleInfo.dropItemId != null)
+                Text(
+                  '${battleInfo.dropItemName ?? useItemData?[battleInfo.dropItemId]?.apiName} GET!',
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
             ],
           ),
         ),
-        // navigationBar: CupertinoNavigationBar(
-        //   automaticallyImplyLeading: false,
-        //   transitionBetweenRoutes: false,
-        //   backgroundColor: Colors.transparent,
-        //   middle: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //     children: [
-        //       Text('${battleInfo.result}'),
-        //       Text('${battleInfo.dropName} GET!')
-        //     ],
-        //   ),
-        // ),
-        // child: LayoutBuilder(
-        //   builder: (context, constraints) {
-        //     debugPrint(constraints.maxWidth.toString());
-        //     if (constraints.maxWidth >= 600) {
-        //       crossAxisCount = 2;
-        //     }
-        //     return MasonryGridView.count(
-        //       crossAxisCount: crossAxisCount,
-        //       itemCount: 4,
-        //       itemBuilder: (BuildContext context, int index) {
-        //         return items[index];
-        //       },
-        //     );
-        //   },
-        // ),
+        child: items.isNotEmpty
+            ? LayoutBuilder(
+                builder: (context, constraints) {
+                  debugPrint(constraints.maxWidth.toString());
+                  if (constraints.maxWidth >= 600) {
+                    crossAxisCount = 2;
+                  }
+                  return MasonryGridView.count(
+                    crossAxisCount: crossAxisCount,
+                    itemCount: items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return items[index];
+                    },
+                  );
+                },
+              )
+            : Container(),
       ),
     );
   }
 }
 
 class ShipInfoInBattle extends StatelessWidget {
+  final Ship ship;
+  final String name;
+  final int dmg;
+  final int dmgTaken;
+
   const ShipInfoInBattle({
     super.key,
+    required this.ship,
+    required this.name,
+    required this.dmg,
+    required this.dmgTaken,
   });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoListTile.notched(
-      leadingSize: 50,
-      leading: CircularPercentIndicator(
-        reverse: true,
-        radius: 21.0,
-        lineWidth: 9.0,
-        percent: 0.9,
-        center: Text("100", style: TextStyle(fontSize: 12),),
-        progressColor: Colors.green,
+      leading: AttributeLabel.vertical(label: 'DMG', value: '$dmg'),
+      leadingToTitle: 0.0,
+      title: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              name,
+              style: const TextStyle(fontWeight: FontWeight.normal),
+            ),
+            if (ship.condition != null)
+              Row(
+                children: [
+                  CircularPercentIndicator(
+                    backgroundColor: CupertinoDynamicColor.resolve(
+                        CupertinoColors.systemGroupedBackground, context),
+                    reverse: true,
+                    radius: 10.0,
+                    lineWidth: 5.0,
+                    animation: true,
+                    animationDuration: 500,
+                    animateFromLastPercent: true,
+                    circularStrokeCap: CircularStrokeCap.round,
+                    percent: ship.condition! / 100,
+                    progressColor: ship.sparkColor,
+                  ),
+                  const SizedBox(width: 5,),
+                  Text(
+                    '${ship.condition}',
+                    style: const TextStyle(fontWeight: FontWeight.normal),
+                  )
+                ],
+              ),
+            Text(
+              "${(ship.nowHP >= 0 ? ship.nowHP : 0)}/${ship.maxHP}",
+              style: const TextStyle(fontWeight: FontWeight.normal),
+            )
+          ],
+        ),
       ),
-      title: Text("大和"),
+      subtitle: LinearPercentIndicator(
+        backgroundColor: CupertinoDynamicColor.resolve(
+            CupertinoColors.systemGroupedBackground, context),
+        animation: true,
+        animationDuration: 500,
+        barRadius: const Radius.circular(6),
+        animateFromLastPercent: true,
+        lineHeight: 12.0,
+        percent: (ship.nowHP >= 0 ? ship.nowHP : 0) / ship.maxHP,
+        progressColor: ship.damageColor,
+        trailing: SizedBox(
+          width: 50,
+          child: dmgTaken < 0
+              ? Text(
+                  "$dmgTaken",
+                  textAlign: TextAlign.right,
+                )
+              : null,
+        ),
+      ),
     );
   }
 }

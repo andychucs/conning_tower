@@ -73,10 +73,22 @@ class KancolleData {
       log("GetDataEntity");
       dataInfo.shipInfo = Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
       dataInfo.missionInfo = Map.fromIterable(model.apiData.apiMstMission, key: (item) => item.apiId);
+      dataInfo.itemInfo = Map.fromIterable(model.apiData.apiMstUseitem, key: (item) => item.apiId);
     }
 
     if (model is ReqMissionStartEntity) {
       log("MissionStart");
+    }
+
+    if (model is ReqMapNextEntity) {
+      log("Next");
+      battleInfo.clear();
+    }
+
+    if (model is ReqMapStartEntity) {
+      log("Start");
+      battleInfo.clear();
+      battleInfo.inBattleSquads?.clear();
     }
 
     if (model is GetMemberDeckEntity) {

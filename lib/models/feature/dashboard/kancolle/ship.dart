@@ -64,17 +64,24 @@ class Ship with _$Ship {
   bool get sparked => condition! >= 50;
 
   Color? get sparkColor {
-    if (sparked) return Colors.yellow[600];
+    if (condition! < 20) return const Color(0xFFC84041);
+    if (condition! < 30) return const Color(0xFFCF6638);
     if (condition! == 49) return Colors.amber[100];
-    if (condition! < 40) return CupertinoColors.activeOrange;
-    if (condition! < 30) CupertinoColors.destructiveRed;
+    if (sparked) return Colors.yellow[600];
     return Colors.lightGreenAccent[700];
   }
 
+  String get sparkEmoji {
+    if (condition! < 20) return '🙁';
+    if (condition! < 30) return '😐';
+    if (sparked) return '☺️';
+    return '🙂';
+  }
+
   Color? get damageColor {
-    if (nowHP <= maxHP * 0.25) return CupertinoColors.destructiveRed;
-    if (nowHP <= maxHP * 0.50) return CupertinoColors.activeOrange;
-    if (nowHP <= maxHP * 0.75) return Colors.lime[600];
+    if (nowHP <= maxHP * 0.25) return const Color(0xFFEF471C);
+    if (nowHP <= maxHP * 0.50) return const Color(0xFFF06F23);
+    if (nowHP <= maxHP * 0.75) return const Color(0xFFD0FD3D);
     return Colors.lightGreenAccent[700];
   }
 
