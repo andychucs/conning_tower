@@ -125,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("艦隊"),
+        "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
+            "リストアイテムの右側にはステータスインジケータがあり、外環は疲労度を表します。浅黄色の場合、疲労度は49を示します。中心には燃料および弾薬のステータスが表示され、どちらも満タンの場合は緑色です。どちらかが満タンでない場合はオレンジ色です。アイテムをクリックして詳細な数値を表示できます。"),
         "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("遠征"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),

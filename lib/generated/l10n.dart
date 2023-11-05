@@ -700,6 +700,16 @@ class S {
     );
   }
 
+  /// `The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values.`
+  String get KCDashboardFleetDescription {
+    return Intl.message(
+      'The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values.',
+      name: 'KCDashboardFleetDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Operation`
   String get KCDashboardOperation {
     return Intl.message(
@@ -1450,21 +1460,21 @@ class S {
     );
   }
 
-  /// `Super long+`
-  String get TextSuperLongRangePlus {
-    return Intl.message(
-      'Super long+',
-      name: 'TextSuperLongRangePlus',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Super long`
   String get TextSuperLongRange {
     return Intl.message(
       'Super long',
       name: 'TextSuperLongRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Super long+`
+  String get TextSuperLongRangePlus {
+    return Intl.message(
+      'Super long+',
+      name: 'TextSuperLongRangePlus',
       desc: '',
       args: [],
     );

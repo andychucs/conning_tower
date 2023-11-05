@@ -134,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Report"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("Command"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("Fleet"),
+        "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
+            "The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values."),
         "KCDashboardOperation":
             MessageLookupByLibrary.simpleMessage("Operation"),
         "KCViewFuncMsgAlreadyGameRedirect":

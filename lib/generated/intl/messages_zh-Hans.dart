@@ -115,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("战斗报告"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("舰队"),
+        "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
+            "列表项目右侧圆环为状态指示，外环表示疲劳度，为浅黄色时表示疲劳度为49，圆心表示燃料和弹药状态，燃料和弹药全满时为绿色，任意一项不满时为橙色。项目可以点击查看详细数值。"),
         "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("远征"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
