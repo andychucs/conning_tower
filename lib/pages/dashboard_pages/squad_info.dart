@@ -5,13 +5,15 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/label.dart';
+import 'package:conning_tower/widgets/dialog.dart';
+import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0);
+const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 
 class SquadInfo extends ConsumerStatefulWidget {
   const SquadInfo({super.key});
@@ -81,6 +83,35 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                       return ScrollViewPageWithScrollbar(
                         child: CupertinoListSection.insetGrouped(
                           margin: _sectionMargin,
+                          footer: Container(
+                            alignment: Alignment.centerRight,
+                            child: GestureDetector(
+                              child: Icon(
+                                CupertinoIcons.info,
+                                size: 20,
+                                color: CupertinoDynamicColor.resolve(
+                                    kHeaderFooterColor, context),
+                              ),
+                              onTap: () => showAdaptiveDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog.adaptive(
+                                      content: Text(S
+                                          .of(context)
+                                          .KCDashboardFleetDescription),
+                                      actions: [
+                                        adaptiveAction(
+                                          context: context,
+                                          child: Text(S.of(context).TextYes),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  }),
+                            ),
+                          ),
                           children: [
                             for (final ship in squad.ships)
                               CupertinoListTile(
