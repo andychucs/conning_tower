@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -25,6 +27,14 @@ class SquadInfo extends ConsumerStatefulWidget {
 class _SquadInfoState extends ConsumerState<SquadInfo> {
   int _selectedSegment = 0;
   late Map<int, Widget> segments;
+
+  String speedLevel(speed) {
+    if (speed == 5) return S.current.TextSlowSpeed;
+    if (speed == 10) return S.current.TextFastSpeed;
+    if (speed == 15) return S.current.TextFastPlusSpeed;
+    if (speed == 20) return S.current.TextFastestSpeed;
+    return 'N/A';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,38 +90,60 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                   children: List.generate(squads.length, (index) {
                     var squad = squads[index];
                     if (squad.ships.isNotEmpty) {
+                      List<int> speedList = [];
+                      List<int> attackList = [];
+                      List<int> antiAircraftList = [];
+                      List<int> levelList = [];
+                      List<int> antiSubmarineList = [];
+                      for (var ship in squad.ships) {
+                        speedList.add(ship.speed!);
+                        attackList.add(ship.attack![0]);
+                        antiAircraftList.add(ship.antiAircraft![0]);
+                        levelList.add(ship.level);
+                        antiSubmarineList.add(ship.antiSubmarine![0]);
+                      }
+
                       return ScrollViewPageWithScrollbar(
                         child: CupertinoListSection.insetGrouped(
                           margin: _sectionMargin,
-                          footer: Container(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              child: Icon(
-                                CupertinoIcons.info,
-                                size: 20,
-                                color: CupertinoDynamicColor.resolve(
-                                    kHeaderFooterColor, context),
-                              ),
-                              onTap: () => showAdaptiveDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog.adaptive(
-                                      content: Text(S
-                                          .of(context)
-                                          .KCDashboardFleetDescription),
-                                      actions: [
-                                        adaptiveAction(
-                                          context: context,
-                                          child: Text(S.of(context).TextYes),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        )
-                                      ],
-                                    );
-                                  }),
-                            ),
-                          ),
+                          footer: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CupertinoListSectionDescription(
+                                    'Lv:${levelList.reduce((value, element) => value + element)}\n'
+                                    '速力:${speedLevel(speedList.reduce(min))}\n'
+                                    '火力:${attackList.reduce((value, element) => value + element)}\n'
+                                    '対空:${antiAircraftList.reduce((value, element) => value + element)}\n'
+                                    '対潜:${antiSubmarineList.reduce((value, element) => value + element)}\n'),
+                                GestureDetector(
+                                  child: Icon(
+                                    CupertinoIcons.info,
+                                    size: 20,
+                                    color: CupertinoDynamicColor.resolve(
+                                        kHeaderFooterColor, context),
+                                  ),
+                                  onTap: () => showAdaptiveDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog.adaptive(
+                                          content: Text(S
+                                              .of(context)
+                                              .KCDashboardFleetDescription),
+                                          actions: [
+                                            adaptiveAction(
+                                              context: context,
+                                              child:
+                                                  Text(S.of(context).TextYes),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      }),
+                                ),
+                              ]),
                           children: [
                             for (final ship in squad.ships)
                               CupertinoListTile(
