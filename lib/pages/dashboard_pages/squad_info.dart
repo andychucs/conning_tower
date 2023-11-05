@@ -22,6 +22,7 @@ class SquadInfo extends ConsumerStatefulWidget {
 
 class _SquadInfoState extends ConsumerState<SquadInfo> {
   int _selectedSegment = 0;
+  late Map<int, Widget> segments;
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +30,13 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
         PageController(initialPage: _selectedSegment);
     var data = ref.watch(kancolleDataProvider);
     var squads = data.squads;
-    late Map<int, Widget> segments;
-    if (squads.isEmpty) {
-      segments = {
-        0: const Text("1"),
-        1: const Text("2"),
-        2: const Text("3"),
-        3: const Text("4")
-      };
-    } else {
-      segments = {
-        for (var element in squads)
-          squads.indexOf(element):
-              Text(element.name, style: const TextStyle(fontSize: 14))
-      };
-    }
+    final shipInfo = data.dataInfo.shipInfo;
+
+    segments = {
+      for (var element in squads)
+        squads.indexOf(element):
+            Text(element.name, style: const TextStyle(fontSize: 14))
+    };
 
     return SafeArea(
       child: Padding(
@@ -57,20 +50,22 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                 transitionBetweenRoutes: false,
                 backgroundColor: Colors.transparent,
                 border: null,
-                middle: CupertinoSlidingSegmentedControl(
-                  groupValue: _selectedSegment,
-                  onValueChanged: (int? value) {
-                    if (value != null) {
-                      setState(() {
-                        _selectedSegment = value;
-                        controller.animateToPage(value,
-                            duration: Duration(milliseconds: 200),
-                            curve: Curves.ease);
-                      });
-                    }
-                  },
-                  children: segments,
-                ),
+                middle: segments.length >= 2
+                    ? CupertinoSlidingSegmentedControl(
+                        groupValue: _selectedSegment,
+                        onValueChanged: (int? value) {
+                          if (value != null) {
+                            setState(() {
+                              _selectedSegment = value;
+                              controller.animateToPage(value,
+                                  duration: const Duration(milliseconds: 200),
+                                  curve: Curves.ease);
+                            });
+                          }
+                        },
+                        children: segments,
+                      )
+                    : null,
               ),
               child: SafeArea(
                 child: PageView(
@@ -86,81 +81,91 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                       return ScrollViewPageWithScrollbar(
                         child: CupertinoListSection.insetGrouped(
                           margin: _sectionMargin,
-                          children: List.generate(
-                            squad.ships.length,
-                            (_index) => CupertinoListTile(
-                              title: Text(squad.ships[_index].name!),
-                              padding: const EdgeInsetsDirectional.only(
-                                  start: 10.0, end: 8.0),
-                              leading: CarouselSlider(
-                                items: [
-                                  AttributeLabel.vertical(
-                                      label: 'Lv',
-                                      value: '${squad.ships[_index].level}'),
-                                  AttributeLabel.vertical(
-                                      label: 'Lv Up',
-                                      value: '${squad.ships[_index].exp?[1]}'),
-                                ],
-                                options: CarouselOptions(
-                                  height: 30,
-                                  viewportFraction: 1,
-                                  initialPage: 0,
-                                  enableInfiniteScroll: true,
-                                  reverse: false,
-                                  autoPlay: true,
-                                  autoPlayInterval: Duration(seconds: 5),
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
-                                  autoPlayCurve: Curves.ease,
-                                  scrollDirection: Axis.horizontal,
+                          children: [
+                            for (final ship in squad.ships)
+                              CupertinoListTile(
+                                title: Text(ship.name!),
+                                padding: const EdgeInsetsDirectional.only(
+                                    start: 10.0, end: 8.0),
+                                leading: CarouselSlider(
+                                  items: [
+                                    AttributeLabel.vertical(
+                                        label: 'Lv', value: '${ship.level}'),
+                                    AttributeLabel.vertical(
+                                        label: 'Lv Up',
+                                        value: '${ship.exp?[1]}'),
+                                  ],
+                                  options: CarouselOptions(
+                                    height: 30,
+                                    viewportFraction: 1,
+                                    initialPage: 0,
+                                    enableInfiniteScroll: true,
+                                    reverse: false,
+                                    autoPlay: true,
+                                    autoPlayInterval: Duration(seconds: 5),
+                                    autoPlayAnimationDuration:
+                                        Duration(milliseconds: 800),
+                                    autoPlayCurve: Curves.ease,
+                                    scrollDirection: Axis.horizontal,
+                                  ),
+                                ),
+                                leadingToTitle: 4,
+                                onTap: () async {
+                                  await navigatorToCupertino(
+                                      context,
+                                      ShipInfo(
+                                        ship: ship,
+                                        squadName: squads[index].name,
+                                      ));
+                                },
+                                additionalInfo: SizedBox(
+                                    width: 70,
+                                    child: Text(
+                                      "${ship.nowHP}/${ship.maxHP}",
+                                      textAlign: TextAlign.end,
+                                    )),
+                                subtitle: LinearPercentIndicator(
+                                  backgroundColor:
+                                      CupertinoDynamicColor.resolve(
+                                          CupertinoColors
+                                              .systemGroupedBackground,
+                                          context),
+                                  animation: true,
+                                  animationDuration: 500,
+                                  barRadius: const Radius.circular(2.5),
+                                  animateFromLastPercent: true,
+                                  lineHeight: 5.0,
+                                  percent: ship.nowHP / ship.maxHP,
+                                  progressColor: ship.damageColor,
+                                ),
+                                trailing: CircularPercentIndicator(
+                                  backgroundColor:
+                                      CupertinoDynamicColor.resolve(
+                                          CupertinoColors
+                                              .systemGroupedBackground,
+                                          context),
+                                  reverse: true,
+                                  radius: 12.0,
+                                  lineWidth: 5.0,
+                                  animation: true,
+                                  animationDuration: 500,
+                                  animateFromLastPercent: true,
+                                  circularStrokeCap: CircularStrokeCap.round,
+                                  percent: ship.condition! / 100,
+                                  center: Container(
+                                    height: 6,
+                                    width: 6,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ship.fuelBullColor(
+                                          shipInfo?[ship.shipId]!.apiFuelMax,
+                                          shipInfo?[ship.shipId]!.apiBullMax),
+                                    ),
+                                  ),
+                                  progressColor: ship.sparkColor,
                                 ),
                               ),
-                              leadingToTitle: 4,
-                              onTap: () async {
-                                var ship = squads[index].ships[_index];
-                                await navigatorToCupertino(
-                                    context,
-                                    ShipInfo(
-                                      ship: ship,
-                                      squadName: squads[index].name,
-                                    ));
-                              },
-                              additionalInfo: SizedBox(
-                                  width: 70,
-                                  child: Text(
-                                    "${squad.ships[_index].nowHP}/${squad.ships[_index].maxHP}",
-                                    textAlign: TextAlign.end,
-                                  )),
-                              subtitle: LinearPercentIndicator(
-                                backgroundColor: CupertinoDynamicColor.resolve(
-                                    CupertinoColors.systemGroupedBackground,
-                                    context),
-                                animation: true,
-                                animationDuration: 500,
-                                barRadius: const Radius.circular(2.5),
-                                animateFromLastPercent: true,
-                                lineHeight: 5.0,
-                                percent: squad.ships[_index].nowHP /
-                                    squad.ships[_index].maxHP,
-                                progressColor: squad.ships[_index].damageColor,
-                              ),
-                              trailing: CircularPercentIndicator(
-                                backgroundColor: CupertinoDynamicColor.resolve(
-                                    CupertinoColors.systemGroupedBackground,
-                                    context),
-                                reverse: true,
-                                radius: 12.0,
-                                lineWidth: 5.0,
-                                animation: true,
-                                animationDuration: 500,
-                                animateFromLastPercent: true,
-                                circularStrokeCap: CircularStrokeCap.round,
-                                percent: squad.ships[_index].condition! / 100,
-                                // center: Text('${squad.ships[_index].condition}', style: TextStyle(fontSize: 8),),
-                                progressColor: squad.ships[_index].sparkColor,
-                              ),
-                            ),
-                          ),
+                          ],
                         ),
                       );
                     }

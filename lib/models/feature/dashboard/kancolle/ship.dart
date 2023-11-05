@@ -26,8 +26,8 @@ class Ship with _$Ship {
     // required int apiSlotEx,
     // required List<int> apiKyouka,
     // required int apiBacks,
-    // required int apiFuel,
-    // required int apiBull,
+    int? fuel,
+    int? bull,
     // required int apiSlotnum,
     // required int apiNdockTime,
     // required List<int> apiNdockItem,
@@ -76,6 +76,15 @@ class Ship with _$Ship {
     if (condition! < 30) return '😐';
     if (sparked) return '☺️';
     return '🙂';
+  }
+
+  Color? fuelBullColor(int? fuelMax, int? bullMax) {
+    if (fuelMax != null && bullMax != null) {
+      if (fuel! < fuelMax || bull! < bullMax) {
+        return const Color(0xFFF06F23);
+      }
+    }
+    return Colors.lightGreenAccent[700];
   }
 
   Color? get damageColor {
@@ -130,6 +139,9 @@ class Ship with _$Ship {
         antiSubmarine: data.apiTaisen,
         scout: data.apiSakuteki,
         luck: data.apiLucky,
-        attackRange: data.apiLeng);
+        attackRange: data.apiLeng,
+        fuel: data.apiFuel,
+        bull: data.apiBull,
+    );
   }
 }
