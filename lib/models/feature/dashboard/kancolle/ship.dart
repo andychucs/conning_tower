@@ -48,6 +48,9 @@ class Ship with _$Ship {
 
   void onHPChange(int damage) {
     nowHP = nowHP + damage;
+    if (nowHP < 0) {
+      nowHP = 0;
+    }
   }
 
   bool damaged() {
