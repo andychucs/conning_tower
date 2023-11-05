@@ -318,6 +318,8 @@
   "@UrlExample": {},
   "UrlRequestFormat": "URLのリクエストの返り値はJSON形式である必要があり、上記URLのレスポンスと同じ構造である必要があります。",
   "@UrlRequestFormat": {},
+  "UseEmojiForFatigue": "疲労度の表示に絵文字を使用",
+  "@UseEmojiForFatigue": {},
   "VersionUpdateContent": "ソフトウェアのバージョン更新が見つかりました。バージョン更新ドキュメントをご確認ください。",
   "@VersionUpdateContent": {},
   "VersionUpdateLinkText": "ここをクリックして表示",

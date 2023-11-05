@@ -252,6 +252,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UrlExample": MessageLookupByLibrary.simpleMessage("URL例："),
         "UrlRequestFormat": MessageLookupByLibrary.simpleMessage(
             "URLのリクエストの返り値はJSON形式である必要があり、上記URLのレスポンスと同じ構造である必要があります。"),
+        "UseEmojiForFatigue":
+            MessageLookupByLibrary.simpleMessage("疲労度の表示に絵文字を使用"),
         "VersionUpdateContent": MessageLookupByLibrary.simpleMessage(
             "ソフトウェアのバージョン更新が見つかりました。バージョン更新ドキュメントをご確認ください。"),
         "VersionUpdateLinkText":

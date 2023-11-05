@@ -235,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UrlExample": MessageLookupByLibrary.simpleMessage("URL示例："),
         "UrlRequestFormat": MessageLookupByLibrary.simpleMessage(
             "填入URL请求的返回必须为JSON，且结构与上述URL中的响应一致。"),
+        "UseEmojiForFatigue":
+            MessageLookupByLibrary.simpleMessage("使用emoji显示疲劳度"),
         "VersionUpdateContent":
             MessageLookupByLibrary.simpleMessage("发现软件版本已更新，请查看版本更新文档。"),
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("点击此处查看"),

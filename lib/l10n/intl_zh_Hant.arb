@@ -314,6 +314,8 @@
   "@UrlExample": {},
   "UrlRequestFormat": "填入URL請求的返回必須為JSON，且結構與上述URL中的響應一致。",
   "@UrlRequestFormat": {},
+  "UseEmojiForFatigue": "使用emoji顯示疲勞度",
+  "@UseEmojiForFatigue": {},
   "VersionUpdateContent": "發現軟體版本已更新，請查看版本更新文檔。",
   "@VersionUpdateContent": {},
   "VersionUpdateLinkText": "點擊此處查看",

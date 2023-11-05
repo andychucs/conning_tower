@@ -319,6 +319,8 @@
   "@UrlExample": {},
   "UrlRequestFormat": "The response from the URL request must be in JSON format and have a structure consistent with the example response above.",
   "@UrlRequestFormat": {},
+  "UseEmojiForFatigue": "Use Emoji for Fatigue Display",
+  "@UseEmojiForFatigue": {},
   "VersionUpdateContent": "Software version update found, please check the version update document.",
   "@VersionUpdateContent": {},
   "VersionUpdateLinkText": "Click here to view",

@@ -1650,6 +1650,16 @@ class S {
     );
   }
 
+  /// `Use Emoji for Fatigue Display`
+  String get UseEmojiForFatigue {
+    return Intl.message(
+      'Use Emoji for Fatigue Display',
+      name: 'UseEmojiForFatigue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Software version update found, please check the version update document.`
   String get VersionUpdateContent {
     return Intl.message(

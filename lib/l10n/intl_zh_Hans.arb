@@ -318,6 +318,8 @@
   "@UrlExample": {},
   "UrlRequestFormat": "填入URL请求的返回必须为JSON，且结构与上述URL中的响应一致。",
   "@UrlRequestFormat": {},
+  "UseEmojiForFatigue": "使用emoji显示疲劳度",
+  "@UseEmojiForFatigue": {},
   "VersionUpdateContent": "发现软件版本已更新，请查看版本更新文档。",
   "@VersionUpdateContent": {},
   "VersionUpdateLinkText": "点击此处查看",
