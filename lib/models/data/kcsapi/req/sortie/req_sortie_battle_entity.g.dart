@@ -174,9 +174,7 @@ _$_ReqSortieBattleApiDataApiHougekiEntity
           apiDfList: (json['api_df_list'] as List<dynamic>)
               .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
-          apiSiList: (json['api_si_list'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
-              .toList(),
+          apiSiList: json['api_si_list'] as List<dynamic>,
           apiClList: (json['api_cl_list'] as List<dynamic>)
               .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),

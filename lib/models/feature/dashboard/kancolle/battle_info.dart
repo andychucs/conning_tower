@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:conning_tower/models/data/kcsapi/battle_data.dart';
-import 'package:conning_tower/models/data/kcsapi/req/sortie/sortie.dart';
+import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter/foundation.dart';
@@ -53,7 +53,7 @@ class BattleInfo with _$BattleInfo {
     var item = data.apiGetUseitem;
     if (item != null) {
       dropItemId = item.apiUseitemId;
-      if(item.apiUseitemName != '') {
+      if (item.apiUseitemName != '') {
         dropItemName = item.apiUseitemName;
       }
     }
@@ -67,7 +67,8 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
 
     /*
     TODO: api_air_base_injection, api_injection_kouku, api_air_base_attack,
@@ -90,6 +91,23 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
+  void parseReqBattleMidnightBattle(
+      ReqBattleMidnightBattleApiDataEntity data, Squad squad) {
+    clear();
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [squad];
+
+    initDMGMap();
+
+    initShipHPSingleVsSingle(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    gunFireRoundSingleVsSingle(data.apiHougeki!);
+
+    updateShipHP();
+  }
+
   void updateShipHP() {
     if (dmgTakenMap != null) {
       final shipsMap = {for (Ship ship in allShips) ship.hashCode: ship};
@@ -102,7 +120,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void initShipHPSingleVsSingle(List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax) {
+  void initShipHPSingleVsSingle(
+      List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax) {
     for (final (index, now) in fNow.indexed) {
       final max = fMax[index];
       final ship = inBattleSquads![0].ships[index];
@@ -130,7 +149,7 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void initSingleEnemySquads(ReqSortieBattleApiDataEntity data) {
+  void initSingleEnemySquads(SingleVsSingleBaseModel data) {
     enemySquads = [
       Squad.fromSingleEnemy(
           data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps)
@@ -142,7 +161,8 @@ class BattleInfo with _$BattleInfo {
     dmgMap = {for (var ship in allShips) ship.hashCode: 0};
   }
 
-  void torpedoFireRoundSingleVsSingle(ReqSortieBattleApiDataApiRaigekiEntity data) {
+  void torpedoFireRoundSingleVsSingle(
+      ReqSortieBattleApiDataApiRaigekiEntity data) {
     for (final (index, eIndex) in data.apiFrai.indexed) {
       if (eIndex != -1) {
         final actShipHash = inBattleSquads![0].ships[index].hashCode;
@@ -153,7 +173,8 @@ class BattleInfo with _$BattleInfo {
 
       if (data.apiErai[index] != -1) {
         final actShipHash = enemySquads![0].ships[index].hashCode;
-        final defShipHash = inBattleSquads![0].ships[data.apiErai[index]].hashCode;
+        final defShipHash =
+            inBattleSquads![0].ships[data.apiErai[index]].hashCode;
         dmgCount(actShipHash, data.apiEydam[index]);
         dmgTake(defShipHash, data.apiEydam[index]);
       }

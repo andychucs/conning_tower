@@ -20,7 +20,7 @@ class ReqSortieBattleEntity with _$ReqSortieBattleEntity {
 }
 
 @unfreezed
-class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity {
+class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity implements SingleVsSingleBaseModel{
   factory ReqSortieBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -104,7 +104,7 @@ class ReqSortieBattleApiDataApiHougekiEntity
     @JsonKey(name: 'api_df_list')
     required List<List<int>> apiDfList,
     @JsonKey(name: 'api_si_list')
-    required List<List<int>> apiSiList,
+    required List<dynamic> apiSiList,
     @JsonKey(name: 'api_cl_list')
     required List<List<int>> apiClList,
     @JsonKey(name: 'api_damage')

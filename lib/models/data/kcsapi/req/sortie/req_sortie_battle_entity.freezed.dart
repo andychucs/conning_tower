@@ -1704,9 +1704,9 @@ mixin _$ReqSortieBattleApiDataApiHougekiEntity {
   @JsonKey(name: 'api_df_list')
   set apiDfList(List<List<int>> value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_si_list')
-  List<List<int>> get apiSiList => throw _privateConstructorUsedError;
+  List<dynamic> get apiSiList => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_si_list')
-  set apiSiList(List<List<int>> value) => throw _privateConstructorUsedError;
+  set apiSiList(List<dynamic> value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_cl_list')
   List<List<int>> get apiClList => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_cl_list')
@@ -1736,7 +1736,7 @@ abstract class $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res> {
       @JsonKey(name: 'api_at_list') List<int> apiAtList,
       @JsonKey(name: 'api_at_type') List<int> apiAtType,
       @JsonKey(name: 'api_df_list') List<List<int>> apiDfList,
-      @JsonKey(name: 'api_si_list') List<List<int>> apiSiList,
+      @JsonKey(name: 'api_si_list') List<dynamic> apiSiList,
       @JsonKey(name: 'api_cl_list') List<List<int>> apiClList,
       @JsonKey(name: 'api_damage') List<List<num>> apiDamage});
 }
@@ -1783,7 +1783,7 @@ class _$ReqSortieBattleApiDataApiHougekiEntityCopyWithImpl<$Res,
       apiSiList: null == apiSiList
           ? _value.apiSiList
           : apiSiList // ignore: cast_nullable_to_non_nullable
-              as List<List<int>>,
+              as List<dynamic>,
       apiClList: null == apiClList
           ? _value.apiClList
           : apiClList // ignore: cast_nullable_to_non_nullable
@@ -1810,7 +1810,7 @@ abstract class _$$_ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>
       @JsonKey(name: 'api_at_list') List<int> apiAtList,
       @JsonKey(name: 'api_at_type') List<int> apiAtType,
       @JsonKey(name: 'api_df_list') List<List<int>> apiDfList,
-      @JsonKey(name: 'api_si_list') List<List<int>> apiSiList,
+      @JsonKey(name: 'api_si_list') List<dynamic> apiSiList,
       @JsonKey(name: 'api_cl_list') List<List<int>> apiClList,
       @JsonKey(name: 'api_damage') List<List<num>> apiDamage});
 }
@@ -1856,7 +1856,7 @@ class __$$_ReqSortieBattleApiDataApiHougekiEntityCopyWithImpl<$Res>
       apiSiList: null == apiSiList
           ? _value.apiSiList
           : apiSiList // ignore: cast_nullable_to_non_nullable
-              as List<List<int>>,
+              as List<dynamic>,
       apiClList: null == apiClList
           ? _value.apiClList
           : apiClList // ignore: cast_nullable_to_non_nullable
@@ -1900,7 +1900,7 @@ class _$_ReqSortieBattleApiDataApiHougekiEntity
   List<List<int>> apiDfList;
   @override
   @JsonKey(name: 'api_si_list')
-  List<List<int>> apiSiList;
+  List<dynamic> apiSiList;
   @override
   @JsonKey(name: 'api_cl_list')
   List<List<int>> apiClList;
@@ -1936,7 +1936,7 @@ abstract class _ReqSortieBattleApiDataApiHougekiEntity
           @JsonKey(name: 'api_at_list') required List<int> apiAtList,
           @JsonKey(name: 'api_at_type') required List<int> apiAtType,
           @JsonKey(name: 'api_df_list') required List<List<int>> apiDfList,
-          @JsonKey(name: 'api_si_list') required List<List<int>> apiSiList,
+          @JsonKey(name: 'api_si_list') required List<dynamic> apiSiList,
           @JsonKey(name: 'api_cl_list') required List<List<int>> apiClList,
           @JsonKey(name: 'api_damage') required List<List<num>> apiDamage}) =
       _$_ReqSortieBattleApiDataApiHougekiEntity;
@@ -1967,9 +1967,9 @@ abstract class _ReqSortieBattleApiDataApiHougekiEntity
   set apiDfList(List<List<int>> value);
   @override
   @JsonKey(name: 'api_si_list')
-  List<List<int>> get apiSiList;
+  List<dynamic> get apiSiList;
   @JsonKey(name: 'api_si_list')
-  set apiSiList(List<List<int>> value);
+  set apiSiList(List<dynamic> value);
   @override
   @JsonKey(name: 'api_cl_list')
   List<List<int>> get apiClList;
