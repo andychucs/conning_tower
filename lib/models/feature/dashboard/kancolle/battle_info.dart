@@ -78,7 +78,7 @@ class BattleInfo with _$BattleInfo {
         if (index >= 0 && index <= 2) {
           gunFireRoundSingleVsSingle(getGunFireData(data, index));
         } else if (index == 3) {
-          torpedoFireRoundSingleVsSingle();
+          torpedoFireRoundSingleVsSingle(data.apiRaigeki!);
         } else {
           log("unhandled hourai flag");
         }
@@ -125,8 +125,22 @@ class BattleInfo with _$BattleInfo {
     dmgMap = {for (var ship in allShips) ship.hashCode: 0};
   }
 
-  void torpedoFireRoundSingleVsSingle() {
-    //TODO: api_raigeki
+  void torpedoFireRoundSingleVsSingle(ReqSortieBattleApiDataApiRaigekiEntity data) {
+    for (final (index, eIndex) in data.apiFrai.indexed) {
+      if (eIndex != -1) {
+        final actShipHash = inBattleSquads![0].ships[index].hashCode;
+        final defShipHash = enemySquads![0].ships[eIndex].hashCode;
+        dmgCount(actShipHash, data.apiFydam[index]);
+        dmgTake(defShipHash, data.apiFydam[index]);
+      }
+
+      if (data.apiErai[index] != -1) {
+        final actShipHash = enemySquads![0].ships[index].hashCode;
+        final defShipHash = inBattleSquads![0].ships[data.apiErai[index]].hashCode;
+        dmgCount(actShipHash, data.apiEydam[index]);
+        dmgTake(defShipHash, data.apiEydam[index]);
+      }
+    }
   }
 
   void gunFireRoundSingleVsSingle(GunFireRound attackData) {
@@ -147,9 +161,17 @@ class BattleInfo with _$BattleInfo {
         final defIndex = defList[index];
         final defShipHash = defSquads[0].ships[defIndex].hashCode;
         final actShipHash = actSquads[0].ships[actIndex].hashCode;
-        dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
-        dmgMap![actShipHash] = dmgMap![actShipHash]! + damage.truncate();
+        dmgTake(defShipHash, damage);
+        dmgCount(actShipHash, damage);
       }
     }
+  }
+
+  void dmgTake(int defShipHash, num damage) {
+    dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
+  }
+
+  void dmgCount(int actShipHash, num damage) {
+    dmgMap![actShipHash] = dmgMap![actShipHash]! + damage.truncate();
   }
 }
