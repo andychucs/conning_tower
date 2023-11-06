@@ -67,6 +67,8 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
     /*
     TODO: api_air_base_injection, api_injection_kouku, api_air_base_attack,
      api_friendly_battle, api_friendly_kouku, api_kouku, api_support_info,
@@ -97,6 +99,21 @@ class BattleInfo with _$BattleInfo {
           shipsMap[shipHash]?.onHPChange(damage);
         }
       });
+    }
+  }
+
+  void initShipHPSingleVsSingle(List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax) {
+    for (final (index, now) in fNow.indexed) {
+      final max = fMax[index];
+      final ship = inBattleSquads![0].ships[index];
+      ship.nowHP = now;
+      ship.maxHP = max;
+    }
+    for (final (index, now) in eNow.indexed) {
+      final max = eMax[index];
+      final ship = enemySquads![0].ships[index];
+      ship.nowHP = now;
+      ship.maxHP = max;
     }
   }
 
