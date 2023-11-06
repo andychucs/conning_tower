@@ -95,12 +95,14 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                       List<int> antiAircraftList = [];
                       List<int> levelList = [];
                       List<int> antiSubmarineList = [];
+                      List<int> scoutList = [];
                       for (var ship in squad.ships) {
                         speedList.add(ship.speed!);
                         attackList.add(ship.attack![0]);
                         antiAircraftList.add(ship.antiAircraft![0]);
                         levelList.add(ship.level);
                         antiSubmarineList.add(ship.antiSubmarine![0]);
+                        scoutList.add(ship.scout![0]);
                       }
 
                       return ScrollViewPageWithScrollbar(
@@ -115,7 +117,8 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                     '速力:${speedLevel(speedList.reduce(min))}\n'
                                     '火力:${attackList.reduce((value, element) => value + element)}\n'
                                     '対空:${antiAircraftList.reduce((value, element) => value + element)}\n'
-                                    '対潜:${antiSubmarineList.reduce((value, element) => value + element)}\n'),
+                                    '対潜:${antiSubmarineList.reduce((value, element) => value + element)}\n'
+                                    '索敵:${scoutList.reduce((value, element) => value + element)}\n'),
                                 GestureDetector(
                                   child: Icon(
                                     CupertinoIcons.info,
