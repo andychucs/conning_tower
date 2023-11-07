@@ -16,12 +16,13 @@ class BattleInfo with _$BattleInfo {
   factory BattleInfo({
     String? result,
     String? dropName,
-    String? enemyName,
     int? mvp,
+    int? dropItemId,
+    String? dropItemName,
     List<Squad>? enemySquads,
     List<Squad>? inBattleSquads,
-    Map<int, int>? damageMap,
-    Map<int, int>? attackMap,
+    Map<int, int>? dmgTakenMap,
+    Map<int, int>? dmgMap,
   }) = _BattleInfo;
 
   List<Ship> get allShips => inBattleSquads!
@@ -29,29 +30,42 @@ class BattleInfo with _$BattleInfo {
       .followedBy(enemySquads!.expand((squad) => squad.ships))
       .toList();
 
-  void resetInfo() {
+  void clear() {
     result = null;
     dropName = null;
-    enemyName = null;
     mvp = null;
+    dropItemId = null;
+    dropItemName = null;
     enemySquads?.clear();
-    damageMap?.clear();
-    attackMap?.clear();
+    dmgMap?.clear();
+    dmgTakenMap?.clear();
   }
 
   void parseReqSortieBattleResult(ReqSortieBattleResultApiDataEntity data) {
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
-    enemyName = data.apiEnemyInfo.apiDeckName;
+    if (enemySquads != null) {
+      for (var squad in enemySquads!) {
+        squad.name = data.apiEnemyInfo.apiDeckName;
+      }
+    }
     mvp = data.apiMvp;
+    var item = data.apiGetUseitem;
+    if (item != null) {
+      dropItemId = item.apiUseitemId;
+      if(item.apiUseitemName != '') {
+        dropItemName = item.apiUseitemName;
+      }
+    }
   }
 
   void parseReqSortieBattle(ReqSortieBattleApiDataEntity data, Squad squad) {
+    clear();
     initSingleEnemySquads(data);
 
     inBattleSquads = [squad];
 
-    initDamageAndAttackMap();
+    initDMGMap();
 
     /*
     TODO: api_air_base_injection, api_injection_kouku, api_air_base_attack,
@@ -75,10 +89,10 @@ class BattleInfo with _$BattleInfo {
   }
 
   void updateShipHP() {
-    if (damageMap != null) {
+    if (dmgTakenMap != null) {
       final shipsMap = {for (Ship ship in allShips) ship.hashCode: ship};
 
-      damageMap?.forEach((shipHash, damage) {
+      dmgTakenMap?.forEach((shipHash, damage) {
         if (damage != 0) {
           shipsMap[shipHash]?.onHPChange(damage);
         }
@@ -106,9 +120,9 @@ class BattleInfo with _$BattleInfo {
     ];
   }
 
-  void initDamageAndAttackMap() {
-    damageMap = {for (var ship in allShips) ship.hashCode: 0};
-    attackMap = {for (var ship in allShips) ship.hashCode: 0};
+  void initDMGMap() {
+    dmgTakenMap = {for (var ship in allShips) ship.hashCode: 0};
+    dmgMap = {for (var ship in allShips) ship.hashCode: 0};
   }
 
   void torpedoFireRoundSingleVsSingle() {
@@ -133,8 +147,8 @@ class BattleInfo with _$BattleInfo {
         final defIndex = defList[index];
         final defShipHash = defSquads[0].ships[defIndex].hashCode;
         final actShipHash = actSquads[0].ships[actIndex].hashCode;
-        damageMap![defShipHash] = damageMap![defShipHash]! - damage.truncate();
-        attackMap![actShipHash] = attackMap![actShipHash]! + damage.truncate();
+        dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
+        dmgMap![actShipHash] = dmgMap![actShipHash]! + damage.truncate();
       }
     }
   }

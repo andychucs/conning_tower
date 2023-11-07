@@ -20,18 +20,20 @@ mixin _$BattleInfo {
   set result(String? value) => throw _privateConstructorUsedError;
   String? get dropName => throw _privateConstructorUsedError;
   set dropName(String? value) => throw _privateConstructorUsedError;
-  String? get enemyName => throw _privateConstructorUsedError;
-  set enemyName(String? value) => throw _privateConstructorUsedError;
   int? get mvp => throw _privateConstructorUsedError;
   set mvp(int? value) => throw _privateConstructorUsedError;
+  int? get dropItemId => throw _privateConstructorUsedError;
+  set dropItemId(int? value) => throw _privateConstructorUsedError;
+  String? get dropItemName => throw _privateConstructorUsedError;
+  set dropItemName(String? value) => throw _privateConstructorUsedError;
   List<Squad>? get enemySquads => throw _privateConstructorUsedError;
   set enemySquads(List<Squad>? value) => throw _privateConstructorUsedError;
   List<Squad>? get inBattleSquads => throw _privateConstructorUsedError;
   set inBattleSquads(List<Squad>? value) => throw _privateConstructorUsedError;
-  Map<int, int>? get damageMap => throw _privateConstructorUsedError;
-  set damageMap(Map<int, int>? value) => throw _privateConstructorUsedError;
-  Map<int, int>? get attackMap => throw _privateConstructorUsedError;
-  set attackMap(Map<int, int>? value) => throw _privateConstructorUsedError;
+  Map<int, int>? get dmgTakenMap => throw _privateConstructorUsedError;
+  set dmgTakenMap(Map<int, int>? value) => throw _privateConstructorUsedError;
+  Map<int, int>? get dmgMap => throw _privateConstructorUsedError;
+  set dmgMap(Map<int, int>? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BattleInfoCopyWith<BattleInfo> get copyWith =>
@@ -47,12 +49,13 @@ abstract class $BattleInfoCopyWith<$Res> {
   $Res call(
       {String? result,
       String? dropName,
-      String? enemyName,
       int? mvp,
+      int? dropItemId,
+      String? dropItemName,
       List<Squad>? enemySquads,
       List<Squad>? inBattleSquads,
-      Map<int, int>? damageMap,
-      Map<int, int>? attackMap});
+      Map<int, int>? dmgTakenMap,
+      Map<int, int>? dmgMap});
 }
 
 /// @nodoc
@@ -70,12 +73,13 @@ class _$BattleInfoCopyWithImpl<$Res, $Val extends BattleInfo>
   $Res call({
     Object? result = freezed,
     Object? dropName = freezed,
-    Object? enemyName = freezed,
     Object? mvp = freezed,
+    Object? dropItemId = freezed,
+    Object? dropItemName = freezed,
     Object? enemySquads = freezed,
     Object? inBattleSquads = freezed,
-    Object? damageMap = freezed,
-    Object? attackMap = freezed,
+    Object? dmgTakenMap = freezed,
+    Object? dmgMap = freezed,
   }) {
     return _then(_value.copyWith(
       result: freezed == result
@@ -86,14 +90,18 @@ class _$BattleInfoCopyWithImpl<$Res, $Val extends BattleInfo>
           ? _value.dropName
           : dropName // ignore: cast_nullable_to_non_nullable
               as String?,
-      enemyName: freezed == enemyName
-          ? _value.enemyName
-          : enemyName // ignore: cast_nullable_to_non_nullable
-              as String?,
       mvp: freezed == mvp
           ? _value.mvp
           : mvp // ignore: cast_nullable_to_non_nullable
               as int?,
+      dropItemId: freezed == dropItemId
+          ? _value.dropItemId
+          : dropItemId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dropItemName: freezed == dropItemName
+          ? _value.dropItemName
+          : dropItemName // ignore: cast_nullable_to_non_nullable
+              as String?,
       enemySquads: freezed == enemySquads
           ? _value.enemySquads
           : enemySquads // ignore: cast_nullable_to_non_nullable
@@ -102,13 +110,13 @@ class _$BattleInfoCopyWithImpl<$Res, $Val extends BattleInfo>
           ? _value.inBattleSquads
           : inBattleSquads // ignore: cast_nullable_to_non_nullable
               as List<Squad>?,
-      damageMap: freezed == damageMap
-          ? _value.damageMap
-          : damageMap // ignore: cast_nullable_to_non_nullable
+      dmgTakenMap: freezed == dmgTakenMap
+          ? _value.dmgTakenMap
+          : dmgTakenMap // ignore: cast_nullable_to_non_nullable
               as Map<int, int>?,
-      attackMap: freezed == attackMap
-          ? _value.attackMap
-          : attackMap // ignore: cast_nullable_to_non_nullable
+      dmgMap: freezed == dmgMap
+          ? _value.dmgMap
+          : dmgMap // ignore: cast_nullable_to_non_nullable
               as Map<int, int>?,
     ) as $Val);
   }
@@ -125,12 +133,13 @@ abstract class _$$_BattleInfoCopyWith<$Res>
   $Res call(
       {String? result,
       String? dropName,
-      String? enemyName,
       int? mvp,
+      int? dropItemId,
+      String? dropItemName,
       List<Squad>? enemySquads,
       List<Squad>? inBattleSquads,
-      Map<int, int>? damageMap,
-      Map<int, int>? attackMap});
+      Map<int, int>? dmgTakenMap,
+      Map<int, int>? dmgMap});
 }
 
 /// @nodoc
@@ -146,12 +155,13 @@ class __$$_BattleInfoCopyWithImpl<$Res>
   $Res call({
     Object? result = freezed,
     Object? dropName = freezed,
-    Object? enemyName = freezed,
     Object? mvp = freezed,
+    Object? dropItemId = freezed,
+    Object? dropItemName = freezed,
     Object? enemySquads = freezed,
     Object? inBattleSquads = freezed,
-    Object? damageMap = freezed,
-    Object? attackMap = freezed,
+    Object? dmgTakenMap = freezed,
+    Object? dmgMap = freezed,
   }) {
     return _then(_$_BattleInfo(
       result: freezed == result
@@ -162,14 +172,18 @@ class __$$_BattleInfoCopyWithImpl<$Res>
           ? _value.dropName
           : dropName // ignore: cast_nullable_to_non_nullable
               as String?,
-      enemyName: freezed == enemyName
-          ? _value.enemyName
-          : enemyName // ignore: cast_nullable_to_non_nullable
-              as String?,
       mvp: freezed == mvp
           ? _value.mvp
           : mvp // ignore: cast_nullable_to_non_nullable
               as int?,
+      dropItemId: freezed == dropItemId
+          ? _value.dropItemId
+          : dropItemId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dropItemName: freezed == dropItemName
+          ? _value.dropItemName
+          : dropItemName // ignore: cast_nullable_to_non_nullable
+              as String?,
       enemySquads: freezed == enemySquads
           ? _value.enemySquads
           : enemySquads // ignore: cast_nullable_to_non_nullable
@@ -178,13 +192,13 @@ class __$$_BattleInfoCopyWithImpl<$Res>
           ? _value.inBattleSquads
           : inBattleSquads // ignore: cast_nullable_to_non_nullable
               as List<Squad>?,
-      damageMap: freezed == damageMap
-          ? _value.damageMap
-          : damageMap // ignore: cast_nullable_to_non_nullable
+      dmgTakenMap: freezed == dmgTakenMap
+          ? _value.dmgTakenMap
+          : dmgTakenMap // ignore: cast_nullable_to_non_nullable
               as Map<int, int>?,
-      attackMap: freezed == attackMap
-          ? _value.attackMap
-          : attackMap // ignore: cast_nullable_to_non_nullable
+      dmgMap: freezed == dmgMap
+          ? _value.dmgMap
+          : dmgMap // ignore: cast_nullable_to_non_nullable
               as Map<int, int>?,
     ));
   }
@@ -196,12 +210,13 @@ class _$_BattleInfo extends _BattleInfo with DiagnosticableTreeMixin {
   _$_BattleInfo(
       {this.result,
       this.dropName,
-      this.enemyName,
       this.mvp,
+      this.dropItemId,
+      this.dropItemName,
       this.enemySquads,
       this.inBattleSquads,
-      this.damageMap,
-      this.attackMap})
+      this.dmgTakenMap,
+      this.dmgMap})
       : super._();
 
   @override
@@ -209,21 +224,23 @@ class _$_BattleInfo extends _BattleInfo with DiagnosticableTreeMixin {
   @override
   String? dropName;
   @override
-  String? enemyName;
-  @override
   int? mvp;
+  @override
+  int? dropItemId;
+  @override
+  String? dropItemName;
   @override
   List<Squad>? enemySquads;
   @override
   List<Squad>? inBattleSquads;
   @override
-  Map<int, int>? damageMap;
+  Map<int, int>? dmgTakenMap;
   @override
-  Map<int, int>? attackMap;
+  Map<int, int>? dmgMap;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BattleInfo(result: $result, dropName: $dropName, enemyName: $enemyName, mvp: $mvp, enemySquads: $enemySquads, inBattleSquads: $inBattleSquads, damageMap: $damageMap, attackMap: $attackMap)';
+    return 'BattleInfo(result: $result, dropName: $dropName, mvp: $mvp, dropItemId: $dropItemId, dropItemName: $dropItemName, enemySquads: $enemySquads, inBattleSquads: $inBattleSquads, dmgTakenMap: $dmgTakenMap, dmgMap: $dmgMap)';
   }
 
   @override
@@ -233,12 +250,13 @@ class _$_BattleInfo extends _BattleInfo with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'BattleInfo'))
       ..add(DiagnosticsProperty('result', result))
       ..add(DiagnosticsProperty('dropName', dropName))
-      ..add(DiagnosticsProperty('enemyName', enemyName))
       ..add(DiagnosticsProperty('mvp', mvp))
+      ..add(DiagnosticsProperty('dropItemId', dropItemId))
+      ..add(DiagnosticsProperty('dropItemName', dropItemName))
       ..add(DiagnosticsProperty('enemySquads', enemySquads))
       ..add(DiagnosticsProperty('inBattleSquads', inBattleSquads))
-      ..add(DiagnosticsProperty('damageMap', damageMap))
-      ..add(DiagnosticsProperty('attackMap', attackMap));
+      ..add(DiagnosticsProperty('dmgTakenMap', dmgTakenMap))
+      ..add(DiagnosticsProperty('dmgMap', dmgMap));
   }
 
   @JsonKey(ignore: true)
@@ -252,12 +270,13 @@ abstract class _BattleInfo extends BattleInfo {
   factory _BattleInfo(
       {String? result,
       String? dropName,
-      String? enemyName,
       int? mvp,
+      int? dropItemId,
+      String? dropItemName,
       List<Squad>? enemySquads,
       List<Squad>? inBattleSquads,
-      Map<int, int>? damageMap,
-      Map<int, int>? attackMap}) = _$_BattleInfo;
+      Map<int, int>? dmgTakenMap,
+      Map<int, int>? dmgMap}) = _$_BattleInfo;
   _BattleInfo._() : super._();
 
   @override
@@ -267,11 +286,14 @@ abstract class _BattleInfo extends BattleInfo {
   String? get dropName;
   set dropName(String? value);
   @override
-  String? get enemyName;
-  set enemyName(String? value);
-  @override
   int? get mvp;
   set mvp(int? value);
+  @override
+  int? get dropItemId;
+  set dropItemId(int? value);
+  @override
+  String? get dropItemName;
+  set dropItemName(String? value);
   @override
   List<Squad>? get enemySquads;
   set enemySquads(List<Squad>? value);
@@ -279,11 +301,11 @@ abstract class _BattleInfo extends BattleInfo {
   List<Squad>? get inBattleSquads;
   set inBattleSquads(List<Squad>? value);
   @override
-  Map<int, int>? get damageMap;
-  set damageMap(Map<int, int>? value);
+  Map<int, int>? get dmgTakenMap;
+  set dmgTakenMap(Map<int, int>? value);
   @override
-  Map<int, int>? get attackMap;
-  set attackMap(Map<int, int>? value);
+  Map<int, int>? get dmgMap;
+  set dmgMap(Map<int, int>? value);
   @override
   @JsonKey(ignore: true)
   _$$_BattleInfoCopyWith<_$_BattleInfo> get copyWith =>

@@ -40,21 +40,21 @@ mixin _$Ship {
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
-// required int apiSlotnum,
-// required int apiNdockTime,
-// required List<int> apiNdockItem,
-// required int apiSrate,
-  int? get condition =>
+  int? get fuel =>
       throw _privateConstructorUsedError; // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
-// required int apiSlotnum,
+  set fuel(int? value) => throw _privateConstructorUsedError;
+  int? get bull => throw _privateConstructorUsedError;
+  set bull(int? value) =>
+      throw _privateConstructorUsedError; // required int apiSlotnum,
+// required int apiNdockTime,
+// required List<int> apiNdockItem,
+// required int apiSrate,
+  int? get condition =>
+      throw _privateConstructorUsedError; // required int apiSlotnum,
 // required int apiNdockTime,
 // required List<int> apiNdockItem,
 // required int apiSrate,
@@ -95,6 +95,8 @@ abstract class $ShipCopyWith<$Res> {
       int maxHP,
       int? speed,
       int? attackRange,
+      int? fuel,
+      int? bull,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -128,6 +130,8 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
     Object? maxHP = null,
     Object? speed = freezed,
     Object? attackRange = freezed,
+    Object? fuel = freezed,
+    Object? bull = freezed,
     Object? condition = freezed,
     Object? attack = freezed,
     Object? attackT = freezed,
@@ -174,6 +178,14 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
       attackRange: freezed == attackRange
           ? _value.attackRange
           : attackRange // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fuel: freezed == fuel
+          ? _value.fuel
+          : fuel // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bull: freezed == bull
+          ? _value.bull
+          : bull // ignore: cast_nullable_to_non_nullable
               as int?,
       condition: freezed == condition
           ? _value.condition
@@ -231,6 +243,8 @@ abstract class _$$_ShipCopyWith<$Res> implements $ShipCopyWith<$Res> {
       int maxHP,
       int? speed,
       int? attackRange,
+      int? fuel,
+      int? bull,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -260,6 +274,8 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
     Object? maxHP = null,
     Object? speed = freezed,
     Object? attackRange = freezed,
+    Object? fuel = freezed,
+    Object? bull = freezed,
     Object? condition = freezed,
     Object? attack = freezed,
     Object? attackT = freezed,
@@ -306,6 +322,14 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
       attackRange: freezed == attackRange
           ? _value.attackRange
           : attackRange // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fuel: freezed == fuel
+          ? _value.fuel
+          : fuel // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bull: freezed == bull
+          ? _value.bull
+          : bull // ignore: cast_nullable_to_non_nullable
               as int?,
       condition: freezed == condition
           ? _value.condition
@@ -360,6 +384,8 @@ class _$_Ship extends _Ship {
       required this.maxHP,
       this.speed,
       this.attackRange,
+      this.fuel,
+      this.bull,
       this.condition,
       this.attack,
       this.attackT,
@@ -395,8 +421,10 @@ class _$_Ship extends _Ship {
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
+  @override
+  int? fuel;
+  @override
+  int? bull;
 // required int apiSlotnum,
 // required int apiNdockTime,
 // required List<int> apiNdockItem,
@@ -422,7 +450,7 @@ class _$_Ship extends _Ship {
 
   @override
   String toString() {
-    return 'Ship(uid: $uid, shipId: $shipId, name: $name, level: $level, exp: $exp, nowHP: $nowHP, maxHP: $maxHP, speed: $speed, attackRange: $attackRange, condition: $condition, attack: $attack, attackT: $attackT, antiAircraft: $antiAircraft, armor: $armor, evasion: $evasion, antiSubmarine: $antiSubmarine, scout: $scout, luck: $luck)';
+    return 'Ship(uid: $uid, shipId: $shipId, name: $name, level: $level, exp: $exp, nowHP: $nowHP, maxHP: $maxHP, speed: $speed, attackRange: $attackRange, fuel: $fuel, bull: $bull, condition: $condition, attack: $attack, attackT: $attackT, antiAircraft: $antiAircraft, armor: $armor, evasion: $evasion, antiSubmarine: $antiSubmarine, scout: $scout, luck: $luck)';
   }
 
   @JsonKey(ignore: true)
@@ -443,6 +471,8 @@ abstract class _Ship extends Ship {
       required int maxHP,
       int? speed,
       int? attackRange,
+      int? fuel,
+      int? bull,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -486,20 +516,20 @@ abstract class _Ship extends Ship {
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
-// required int apiSlotnum,
-// required int apiNdockTime,
-// required List<int> apiNdockItem,
-// required int apiSrate,
-  int? get condition; // required List<int> apiSlot,
+  int? get fuel; // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
-// required int apiSlotnum,
+  set fuel(int? value);
+  @override
+  int? get bull;
+  set bull(int? value);
+  @override // required int apiSlotnum,
+// required int apiNdockTime,
+// required List<int> apiNdockItem,
+// required int apiSrate,
+  int? get condition; // required int apiSlotnum,
 // required int apiNdockTime,
 // required List<int> apiNdockItem,
 // required int apiSrate,

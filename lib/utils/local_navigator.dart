@@ -20,3 +20,24 @@ class LocalNavigator extends StatelessWidget {
     );
   }
 }
+
+class LocalNavigatorBuilder extends StatelessWidget {
+  final Function builder;
+
+  const LocalNavigatorBuilder({super.key, required this.builder});
+
+  @override
+  Widget build(BuildContext context) {
+    return Navigator(
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        return CupertinoPageRoute(
+          settings: const RouteSettings(name: '/'),
+          builder: (context) {
+            return builder(context);
+          },
+        );
+      },
+    );
+  }
+}
