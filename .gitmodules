@@ -1,6 +1,0 @@
-[submodule "kcQuests"]
-	path = kcQuests
-	url = git@github.com:AndyZhuAZ/kcQuests.git
-[submodule "kcdata"]
-	path = kcdata
-	url = git@github.com:AndyZhuAZ/kcdata.git
