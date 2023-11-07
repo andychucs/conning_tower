@@ -311,6 +311,10 @@ mixin _$ReqSortieBattleResultApiDataEntity {
   @JsonKey(name: 'api_get_ship')
   set apiGetShip(ReqSortieBattleResultApiDataApiGetShipEntity? value) =>
       throw _privateConstructorUsedError;
+  ReqSortieBattleResultApiDataApiGetUseitemEntity? get apiGetUseitem =>
+      throw _privateConstructorUsedError;
+  set apiGetUseitem(ReqSortieBattleResultApiDataApiGetUseitemEntity? value) =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_get_eventflag')
   int? get apiGetEventflag => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_get_eventflag')
@@ -368,6 +372,7 @@ abstract class $ReqSortieBattleResultApiDataEntityCopyWith<$Res> {
       @JsonKey(name: 'api_get_flag') List<int>? apiGetFlag,
       @JsonKey(name: 'api_get_ship')
       ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
+      ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
       @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
       @JsonKey(name: 'api_get_exmap_useitem_id') int? apiGetExmapUseitemId,
@@ -377,6 +382,8 @@ abstract class $ReqSortieBattleResultApiDataEntityCopyWith<$Res> {
   $ReqSortieBattleResultApiDataApiEnemyInfoEntityCopyWith<$Res>
       get apiEnemyInfo;
   $ReqSortieBattleResultApiDataApiGetShipEntityCopyWith<$Res>? get apiGetShip;
+  $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res>?
+      get apiGetUseitem;
 }
 
 /// @nodoc
@@ -411,6 +418,7 @@ class _$ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res,
     Object? apiMapcellIncentive = null,
     Object? apiGetFlag = freezed,
     Object? apiGetShip = freezed,
+    Object? apiGetUseitem = freezed,
     Object? apiGetEventflag = freezed,
     Object? apiGetExmapRate = freezed,
     Object? apiGetExmapUseitemId = freezed,
@@ -490,6 +498,10 @@ class _$ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res,
           ? _value.apiGetShip
           : apiGetShip // ignore: cast_nullable_to_non_nullable
               as ReqSortieBattleResultApiDataApiGetShipEntity?,
+      apiGetUseitem: freezed == apiGetUseitem
+          ? _value.apiGetUseitem
+          : apiGetUseitem // ignore: cast_nullable_to_non_nullable
+              as ReqSortieBattleResultApiDataApiGetUseitemEntity?,
       apiGetEventflag: freezed == apiGetEventflag
           ? _value.apiGetEventflag
           : apiGetEventflag // ignore: cast_nullable_to_non_nullable
@@ -535,6 +547,20 @@ class _$ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res,
       return _then(_value.copyWith(apiGetShip: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res>?
+      get apiGetUseitem {
+    if (_value.apiGetUseitem == null) {
+      return null;
+    }
+
+    return $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res>(
+        _value.apiGetUseitem!, (value) {
+      return _then(_value.copyWith(apiGetUseitem: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -567,6 +593,7 @@ abstract class _$$_ReqSortieBattleResultApiDataEntityCopyWith<$Res>
       @JsonKey(name: 'api_get_flag') List<int>? apiGetFlag,
       @JsonKey(name: 'api_get_ship')
       ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
+      ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
       @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
       @JsonKey(name: 'api_get_exmap_useitem_id') int? apiGetExmapUseitemId,
@@ -578,6 +605,9 @@ abstract class _$$_ReqSortieBattleResultApiDataEntityCopyWith<$Res>
       get apiEnemyInfo;
   @override
   $ReqSortieBattleResultApiDataApiGetShipEntityCopyWith<$Res>? get apiGetShip;
+  @override
+  $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res>?
+      get apiGetUseitem;
 }
 
 /// @nodoc
@@ -611,6 +641,7 @@ class __$$_ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res>
     Object? apiMapcellIncentive = null,
     Object? apiGetFlag = freezed,
     Object? apiGetShip = freezed,
+    Object? apiGetUseitem = freezed,
     Object? apiGetEventflag = freezed,
     Object? apiGetExmapRate = freezed,
     Object? apiGetExmapUseitemId = freezed,
@@ -690,6 +721,10 @@ class __$$_ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res>
           ? _value.apiGetShip
           : apiGetShip // ignore: cast_nullable_to_non_nullable
               as ReqSortieBattleResultApiDataApiGetShipEntity?,
+      apiGetUseitem: freezed == apiGetUseitem
+          ? _value.apiGetUseitem
+          : apiGetUseitem // ignore: cast_nullable_to_non_nullable
+              as ReqSortieBattleResultApiDataApiGetUseitemEntity?,
       apiGetEventflag: freezed == apiGetEventflag
           ? _value.apiGetEventflag
           : apiGetEventflag // ignore: cast_nullable_to_non_nullable
@@ -737,6 +772,7 @@ class _$_ReqSortieBattleResultApiDataEntity
       @JsonKey(name: 'api_mapcell_incentive') required this.apiMapcellIncentive,
       @JsonKey(name: 'api_get_flag') this.apiGetFlag,
       @JsonKey(name: 'api_get_ship') this.apiGetShip,
+      this.apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') this.apiGetEventflag,
       @JsonKey(name: 'api_get_exmap_rate') this.apiGetExmapRate,
       @JsonKey(name: 'api_get_exmap_useitem_id') this.apiGetExmapUseitemId,
@@ -802,6 +838,8 @@ class _$_ReqSortieBattleResultApiDataEntity
   @JsonKey(name: 'api_get_ship')
   ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip;
   @override
+  ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem;
+  @override
   @JsonKey(name: 'api_get_eventflag')
   int? apiGetEventflag;
   @override
@@ -819,7 +857,7 @@ class _$_ReqSortieBattleResultApiDataEntity
 
   @override
   String toString() {
-    return 'ReqSortieBattleResultApiDataEntity(apiShipId: $apiShipId, apiWinRank: $apiWinRank, apiGetExp: $apiGetExp, apiMvp: $apiMvp, apiMemberLv: $apiMemberLv, apiMemberExp: $apiMemberExp, apiGetBaseExp: $apiGetBaseExp, apiGetShipExp: $apiGetShipExp, apiGetExpLvup: $apiGetExpLvup, apiDests: $apiDests, apiDestsf: $apiDestsf, apiQuestName: $apiQuestName, apiQuestLevel: $apiQuestLevel, apiEnemyInfo: $apiEnemyInfo, apiFirstClear: $apiFirstClear, apiMapcellIncentive: $apiMapcellIncentive, apiGetFlag: $apiGetFlag, apiGetShip: $apiGetShip, apiGetEventflag: $apiGetEventflag, apiGetExmapRate: $apiGetExmapRate, apiGetExmapUseitemId: $apiGetExmapUseitemId, apiEscapeFlag: $apiEscapeFlag, apiEscape: $apiEscape)';
+    return 'ReqSortieBattleResultApiDataEntity(apiShipId: $apiShipId, apiWinRank: $apiWinRank, apiGetExp: $apiGetExp, apiMvp: $apiMvp, apiMemberLv: $apiMemberLv, apiMemberExp: $apiMemberExp, apiGetBaseExp: $apiGetBaseExp, apiGetShipExp: $apiGetShipExp, apiGetExpLvup: $apiGetExpLvup, apiDests: $apiDests, apiDestsf: $apiDestsf, apiQuestName: $apiQuestName, apiQuestLevel: $apiQuestLevel, apiEnemyInfo: $apiEnemyInfo, apiFirstClear: $apiFirstClear, apiMapcellIncentive: $apiMapcellIncentive, apiGetFlag: $apiGetFlag, apiGetShip: $apiGetShip, apiGetUseitem: $apiGetUseitem, apiGetEventflag: $apiGetEventflag, apiGetExmapRate: $apiGetExmapRate, apiGetExmapUseitemId: $apiGetExmapUseitemId, apiEscapeFlag: $apiEscapeFlag, apiEscape: $apiEscape)';
   }
 
   @JsonKey(ignore: true)
@@ -861,6 +899,7 @@ abstract class _ReqSortieBattleResultApiDataEntity
       @JsonKey(name: 'api_get_flag') List<int>? apiGetFlag,
       @JsonKey(name: 'api_get_ship')
       ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
+      ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
       @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
       @JsonKey(name: 'api_get_exmap_useitem_id') int? apiGetExmapUseitemId,
@@ -962,6 +1001,9 @@ abstract class _ReqSortieBattleResultApiDataEntity
   ReqSortieBattleResultApiDataApiGetShipEntity? get apiGetShip;
   @JsonKey(name: 'api_get_ship')
   set apiGetShip(ReqSortieBattleResultApiDataApiGetShipEntity? value);
+  @override
+  ReqSortieBattleResultApiDataApiGetUseitemEntity? get apiGetUseitem;
+  set apiGetUseitem(ReqSortieBattleResultApiDataApiGetUseitemEntity? value);
   @override
   @JsonKey(name: 'api_get_eventflag')
   int? get apiGetEventflag;
@@ -1200,6 +1242,189 @@ abstract class _ReqSortieBattleResultApiDataApiEnemyInfoEntity
   @JsonKey(ignore: true)
   _$$_ReqSortieBattleResultApiDataApiEnemyInfoEntityCopyWith<
           _$_ReqSortieBattleResultApiDataApiEnemyInfoEntity>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ReqSortieBattleResultApiDataApiGetUseitemEntity
+    _$ReqSortieBattleResultApiDataApiGetUseitemEntityFromJson(
+        Map<String, dynamic> json) {
+  return _ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ReqSortieBattleResultApiDataApiGetUseitemEntity {
+  @JsonKey(name: 'api_useitem_id')
+  int? get apiUseitemId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_useitem_id')
+  set apiUseitemId(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_useitem_name')
+  String? get apiUseitemName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_useitem_name')
+  set apiUseitemName(String? value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<
+          ReqSortieBattleResultApiDataApiGetUseitemEntity>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res> {
+  factory $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith(
+          ReqSortieBattleResultApiDataApiGetUseitemEntity value,
+          $Res Function(ReqSortieBattleResultApiDataApiGetUseitemEntity) then) =
+      _$ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl<$Res,
+          ReqSortieBattleResultApiDataApiGetUseitemEntity>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'api_useitem_id') int? apiUseitemId,
+      @JsonKey(name: 'api_useitem_name') String? apiUseitemName});
+}
+
+/// @nodoc
+class _$ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl<$Res,
+        $Val extends ReqSortieBattleResultApiDataApiGetUseitemEntity>
+    implements $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res> {
+  _$ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl(
+      this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiUseitemId = freezed,
+    Object? apiUseitemName = freezed,
+  }) {
+    return _then(_value.copyWith(
+      apiUseitemId: freezed == apiUseitemId
+          ? _value.apiUseitemId
+          : apiUseitemId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      apiUseitemName: freezed == apiUseitemName
+          ? _value.apiUseitemName
+          : apiUseitemName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res>
+    implements $ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res> {
+  factory _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith(
+          _$_ReqSortieBattleResultApiDataApiGetUseitemEntity value,
+          $Res Function(_$_ReqSortieBattleResultApiDataApiGetUseitemEntity)
+              then) =
+      __$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'api_useitem_id') int? apiUseitemId,
+      @JsonKey(name: 'api_useitem_name') String? apiUseitemName});
+}
+
+/// @nodoc
+class __$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl<$Res>
+    extends _$ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl<$Res,
+        _$_ReqSortieBattleResultApiDataApiGetUseitemEntity>
+    implements
+        _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<$Res> {
+  __$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl(
+      _$_ReqSortieBattleResultApiDataApiGetUseitemEntity _value,
+      $Res Function(_$_ReqSortieBattleResultApiDataApiGetUseitemEntity) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiUseitemId = freezed,
+    Object? apiUseitemName = freezed,
+  }) {
+    return _then(_$_ReqSortieBattleResultApiDataApiGetUseitemEntity(
+      apiUseitemId: freezed == apiUseitemId
+          ? _value.apiUseitemId
+          : apiUseitemId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      apiUseitemName: freezed == apiUseitemName
+          ? _value.apiUseitemName
+          : apiUseitemName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ReqSortieBattleResultApiDataApiGetUseitemEntity
+    implements _ReqSortieBattleResultApiDataApiGetUseitemEntity {
+  _$_ReqSortieBattleResultApiDataApiGetUseitemEntity(
+      {@JsonKey(name: 'api_useitem_id') this.apiUseitemId,
+      @JsonKey(name: 'api_useitem_name') this.apiUseitemName});
+
+  factory _$_ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityFromJson(json);
+
+  @override
+  @JsonKey(name: 'api_useitem_id')
+  int? apiUseitemId;
+  @override
+  @JsonKey(name: 'api_useitem_name')
+  String? apiUseitemName;
+
+  @override
+  String toString() {
+    return 'ReqSortieBattleResultApiDataApiGetUseitemEntity(apiUseitemId: $apiUseitemId, apiUseitemName: $apiUseitemName)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<
+          _$_ReqSortieBattleResultApiDataApiGetUseitemEntity>
+      get copyWith =>
+          __$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWithImpl<
+                  _$_ReqSortieBattleResultApiDataApiGetUseitemEntity>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ReqSortieBattleResultApiDataApiGetUseitemEntity
+    implements ReqSortieBattleResultApiDataApiGetUseitemEntity {
+  factory _ReqSortieBattleResultApiDataApiGetUseitemEntity(
+          {@JsonKey(name: 'api_useitem_id') int? apiUseitemId,
+          @JsonKey(name: 'api_useitem_name') String? apiUseitemName}) =
+      _$_ReqSortieBattleResultApiDataApiGetUseitemEntity;
+
+  factory _ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson(
+          Map<String, dynamic> json) =
+      _$_ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson;
+
+  @override
+  @JsonKey(name: 'api_useitem_id')
+  int? get apiUseitemId;
+  @JsonKey(name: 'api_useitem_id')
+  set apiUseitemId(int? value);
+  @override
+  @JsonKey(name: 'api_useitem_name')
+  String? get apiUseitemName;
+  @JsonKey(name: 'api_useitem_name')
+  set apiUseitemName(String? value);
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityCopyWith<
+          _$_ReqSortieBattleResultApiDataApiGetUseitemEntity>
       get copyWith => throw _privateConstructorUsedError;
 }
 
