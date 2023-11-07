@@ -20,8 +20,10 @@ mixin _$DataInfo {
       throw _privateConstructorUsedError;
   set shipInfo(Map<int, GetDataApiDataApiMstShipEntity>? value) =>
       throw _privateConstructorUsedError;
-  Map<int, dynamic>? get itemInfo => throw _privateConstructorUsedError;
-  set itemInfo(Map<int, dynamic>? value) => throw _privateConstructorUsedError;
+  Map<int, GetDataApiDataApiMstUseitemEntity>? get itemInfo =>
+      throw _privateConstructorUsedError;
+  set itemInfo(Map<int, GetDataApiDataApiMstUseitemEntity>? value) =>
+      throw _privateConstructorUsedError;
   Map<int, GetDataApiDataApiMstMissionEntity>? get missionInfo =>
       throw _privateConstructorUsedError;
   set missionInfo(Map<int, GetDataApiDataApiMstMissionEntity>? value) =>
@@ -39,7 +41,7 @@ abstract class $DataInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
-      Map<int, dynamic>? itemInfo,
+      Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo,
       Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo});
 }
 
@@ -68,7 +70,7 @@ class _$DataInfoCopyWithImpl<$Res, $Val extends DataInfo>
       itemInfo: freezed == itemInfo
           ? _value.itemInfo
           : itemInfo // ignore: cast_nullable_to_non_nullable
-              as Map<int, dynamic>?,
+              as Map<int, GetDataApiDataApiMstUseitemEntity>?,
       missionInfo: freezed == missionInfo
           ? _value.missionInfo
           : missionInfo // ignore: cast_nullable_to_non_nullable
@@ -86,7 +88,7 @@ abstract class _$$_DataInfoCopyWith<$Res> implements $DataInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
-      Map<int, dynamic>? itemInfo,
+      Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo,
       Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo});
 }
 
@@ -113,7 +115,7 @@ class __$$_DataInfoCopyWithImpl<$Res>
       itemInfo: freezed == itemInfo
           ? _value.itemInfo
           : itemInfo // ignore: cast_nullable_to_non_nullable
-              as Map<int, dynamic>?,
+              as Map<int, GetDataApiDataApiMstUseitemEntity>?,
       missionInfo: freezed == missionInfo
           ? _value.missionInfo
           : missionInfo // ignore: cast_nullable_to_non_nullable
@@ -130,7 +132,7 @@ class _$_DataInfo with DiagnosticableTreeMixin implements _DataInfo {
   @override
   Map<int, GetDataApiDataApiMstShipEntity>? shipInfo;
   @override
-  Map<int, dynamic>? itemInfo;
+  Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo;
   @override
   Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo;
 
@@ -159,15 +161,15 @@ class _$_DataInfo with DiagnosticableTreeMixin implements _DataInfo {
 abstract class _DataInfo implements DataInfo {
   factory _DataInfo(
       {Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
-      Map<int, dynamic>? itemInfo,
+      Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo,
       Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo}) = _$_DataInfo;
 
   @override
   Map<int, GetDataApiDataApiMstShipEntity>? get shipInfo;
   set shipInfo(Map<int, GetDataApiDataApiMstShipEntity>? value);
   @override
-  Map<int, dynamic>? get itemInfo;
-  set itemInfo(Map<int, dynamic>? value);
+  Map<int, GetDataApiDataApiMstUseitemEntity>? get itemInfo;
+  set itemInfo(Map<int, GetDataApiDataApiMstUseitemEntity>? value);
   @override
   Map<int, GetDataApiDataApiMstMissionEntity>? get missionInfo;
   set missionInfo(Map<int, GetDataApiDataApiMstMissionEntity>? value);

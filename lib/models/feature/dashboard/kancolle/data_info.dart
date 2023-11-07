@@ -8,7 +8,7 @@ part 'data_info.freezed.dart';
 class DataInfo with _$DataInfo {
   factory DataInfo({
     Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
-    Map<int, dynamic>? itemInfo,
+    Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo,
     Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo,
   }) = _DataInfo;
 }

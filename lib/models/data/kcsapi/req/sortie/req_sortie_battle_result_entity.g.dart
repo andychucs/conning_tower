@@ -54,6 +54,10 @@ _$_ReqSortieBattleResultApiDataEntity
               ? null
               : ReqSortieBattleResultApiDataApiGetShipEntity.fromJson(
                   json['api_get_ship'] as Map<String, dynamic>),
+          apiGetUseitem: json['api_get_useitem'] == null
+              ? null
+              : ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson(
+                  json['api_get_useitem'] as Map<String, dynamic>),
           apiGetEventflag: json['api_get_eventflag'] as int?,
           apiGetExmapRate: json['api_get_exmap_rate'] as int?,
           apiGetExmapUseitemId: json['api_get_exmap_useitem_id'] as int?,
@@ -82,6 +86,7 @@ Map<String, dynamic> _$$_ReqSortieBattleResultApiDataEntityToJson(
       'api_mapcell_incentive': instance.apiMapcellIncentive,
       'api_get_flag': instance.apiGetFlag,
       'api_get_ship': instance.apiGetShip,
+      'api_get_useitem': instance.apiGetUseitem,
       'api_get_eventflag': instance.apiGetEventflag,
       'api_get_exmap_rate': instance.apiGetExmapRate,
       'api_get_exmap_useitem_id': instance.apiGetExmapUseitemId,
@@ -104,6 +109,21 @@ Map<String, dynamic> _$$_ReqSortieBattleResultApiDataApiEnemyInfoEntityToJson(
       'api_level': instance.apiLevel,
       'api_rank': instance.apiRank,
       'api_deck_name': instance.apiDeckName,
+    };
+
+_$_ReqSortieBattleResultApiDataApiGetUseitemEntity
+    _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityFromJson(
+            Map<String, dynamic> json) =>
+        _$_ReqSortieBattleResultApiDataApiGetUseitemEntity(
+          apiUseitemId: json['api_useitem_id'] as int?,
+          apiUseitemName: json['api_useitem_name'] as String?,
+        );
+
+Map<String, dynamic> _$$_ReqSortieBattleResultApiDataApiGetUseitemEntityToJson(
+        _$_ReqSortieBattleResultApiDataApiGetUseitemEntity instance) =>
+    <String, dynamic>{
+      'api_useitem_id': instance.apiUseitemId,
+      'api_useitem_name': instance.apiUseitemName,
     };
 
 _$_ReqSortieBattleResultApiDataApiGetShipEntity

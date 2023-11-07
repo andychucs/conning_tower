@@ -10,7 +10,6 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
-import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,25 +59,36 @@ class KancolleData {
     String path = source.split("kcsapi").last;
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+    if (model is ReqSortieBattleEntity) {
+      var squad = squads[model.apiData.apiDeckId - 1];
+      battleInfo.parseReqSortieBattle(model.apiData, squad);
+      log(battleInfo.toString());
+    }
+
     if (model is ReqSortieBattleResultEntity) {
-      var _battleInfo = BattleInfo(
-        result: model.apiData.apiWinRank,
-        dropName: model.apiData.apiGetShip?.apiShipName,
-        enemyName: model.apiData.apiEnemyInfo.apiDeckName,
-        mvp: model.apiData.apiMvp,
-        enemyShips: model.apiData.apiShipId
-      );
-      battleInfo.updateBattleInfo(_battleInfo);
+      battleInfo.parseReqSortieBattleResult(model.apiData);
     }
 
     if (model is GetDataEntity) {
       log("GetDataEntity");
       dataInfo.shipInfo = Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
       dataInfo.missionInfo = Map.fromIterable(model.apiData.apiMstMission, key: (item) => item.apiId);
+      dataInfo.itemInfo = Map.fromIterable(model.apiData.apiMstUseitem, key: (item) => item.apiId);
     }
 
     if (model is ReqMissionStartEntity) {
       log("MissionStart");
+    }
+
+    if (model is ReqMapNextEntity) {
+      log("Next");
+      battleInfo.clear();
+    }
+
+    if (model is ReqMapStartEntity) {
+      log("Start");
+      battleInfo.clear();
+      battleInfo.inBattleSquads?.clear();
     }
 
     if (model is GetMemberDeckEntity) {

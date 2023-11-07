@@ -16,35 +16,65 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Ship {
-  int get uid => throw _privateConstructorUsedError; // required int sortNo,
-  int get shipId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  int get uid => throw _privateConstructorUsedError;
+  set uid(int value) =>
+      throw _privateConstructorUsedError; // required int sortNo,
+  int get shipId => throw _privateConstructorUsedError; // required int sortNo,
+  set shipId(int value) => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  set name(String? value) => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
-  List<int> get exp => throw _privateConstructorUsedError;
+  set level(int value) => throw _privateConstructorUsedError;
+  List<int>? get exp => throw _privateConstructorUsedError;
+  set exp(List<int>? value) => throw _privateConstructorUsedError;
   int get nowHP => throw _privateConstructorUsedError;
+  set nowHP(int value) => throw _privateConstructorUsedError;
   int get maxHP => throw _privateConstructorUsedError;
+  set maxHP(int value) => throw _privateConstructorUsedError;
   int? get speed => throw _privateConstructorUsedError;
-  int? get attackRange =>
+  set speed(int? value) => throw _privateConstructorUsedError;
+  int? get attackRange => throw _privateConstructorUsedError;
+  set attackRange(int? value) =>
       throw _privateConstructorUsedError; // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
-// required int apiSlotnum,
+  int? get fuel =>
+      throw _privateConstructorUsedError; // required List<int> apiSlot,
+// required List<int> apiOnslot,
+// required int apiSlotEx,
+// required List<int> apiKyouka,
+// required int apiBacks,
+  set fuel(int? value) => throw _privateConstructorUsedError;
+  int? get bull => throw _privateConstructorUsedError;
+  set bull(int? value) =>
+      throw _privateConstructorUsedError; // required int apiSlotnum,
 // required int apiNdockTime,
 // required List<int> apiNdockItem,
 // required int apiSrate,
-  int? get condition => throw _privateConstructorUsedError;
+  int? get condition =>
+      throw _privateConstructorUsedError; // required int apiSlotnum,
+// required int apiNdockTime,
+// required List<int> apiNdockItem,
+// required int apiSrate,
+  set condition(int? value) => throw _privateConstructorUsedError;
   List<int>? get attack => throw _privateConstructorUsedError;
+  set attack(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get attackT => throw _privateConstructorUsedError;
+  set attackT(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get antiAircraft => throw _privateConstructorUsedError;
+  set antiAircraft(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get armor => throw _privateConstructorUsedError;
+  set armor(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get evasion => throw _privateConstructorUsedError;
+  set evasion(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get antiSubmarine => throw _privateConstructorUsedError;
+  set antiSubmarine(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get scout => throw _privateConstructorUsedError;
+  set scout(List<int>? value) => throw _privateConstructorUsedError;
   List<int>? get luck => throw _privateConstructorUsedError;
+  set luck(List<int>? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShipCopyWith<Ship> get copyWith => throw _privateConstructorUsedError;
@@ -58,13 +88,15 @@ abstract class $ShipCopyWith<$Res> {
   $Res call(
       {int uid,
       int shipId,
-      String name,
+      String? name,
       int level,
-      List<int> exp,
+      List<int>? exp,
       int nowHP,
       int maxHP,
       int? speed,
       int? attackRange,
+      int? fuel,
+      int? bull,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -91,13 +123,15 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
   $Res call({
     Object? uid = null,
     Object? shipId = null,
-    Object? name = null,
+    Object? name = freezed,
     Object? level = null,
-    Object? exp = null,
+    Object? exp = freezed,
     Object? nowHP = null,
     Object? maxHP = null,
     Object? speed = freezed,
     Object? attackRange = freezed,
+    Object? fuel = freezed,
+    Object? bull = freezed,
     Object? condition = freezed,
     Object? attack = freezed,
     Object? attackT = freezed,
@@ -117,18 +151,18 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
           ? _value.shipId
           : shipId // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int,
-      exp: null == exp
+      exp: freezed == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       nowHP: null == nowHP
           ? _value.nowHP
           : nowHP // ignore: cast_nullable_to_non_nullable
@@ -144,6 +178,14 @@ class _$ShipCopyWithImpl<$Res, $Val extends Ship>
       attackRange: freezed == attackRange
           ? _value.attackRange
           : attackRange // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fuel: freezed == fuel
+          ? _value.fuel
+          : fuel // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bull: freezed == bull
+          ? _value.bull
+          : bull // ignore: cast_nullable_to_non_nullable
               as int?,
       condition: freezed == condition
           ? _value.condition
@@ -194,13 +236,15 @@ abstract class _$$_ShipCopyWith<$Res> implements $ShipCopyWith<$Res> {
   $Res call(
       {int uid,
       int shipId,
-      String name,
+      String? name,
       int level,
-      List<int> exp,
+      List<int>? exp,
       int nowHP,
       int maxHP,
       int? speed,
       int? attackRange,
+      int? fuel,
+      int? bull,
       int? condition,
       List<int>? attack,
       List<int>? attackT,
@@ -223,13 +267,15 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
   $Res call({
     Object? uid = null,
     Object? shipId = null,
-    Object? name = null,
+    Object? name = freezed,
     Object? level = null,
-    Object? exp = null,
+    Object? exp = freezed,
     Object? nowHP = null,
     Object? maxHP = null,
     Object? speed = freezed,
     Object? attackRange = freezed,
+    Object? fuel = freezed,
+    Object? bull = freezed,
     Object? condition = freezed,
     Object? attack = freezed,
     Object? attackT = freezed,
@@ -249,18 +295,18 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
           ? _value.shipId
           : shipId // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int,
-      exp: null == exp
-          ? _value._exp
+      exp: freezed == exp
+          ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       nowHP: null == nowHP
           ? _value.nowHP
           : nowHP // ignore: cast_nullable_to_non_nullable
@@ -277,40 +323,48 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
           ? _value.attackRange
           : attackRange // ignore: cast_nullable_to_non_nullable
               as int?,
+      fuel: freezed == fuel
+          ? _value.fuel
+          : fuel // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bull: freezed == bull
+          ? _value.bull
+          : bull // ignore: cast_nullable_to_non_nullable
+              as int?,
       condition: freezed == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
               as int?,
       attack: freezed == attack
-          ? _value._attack
+          ? _value.attack
           : attack // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       attackT: freezed == attackT
-          ? _value._attackT
+          ? _value.attackT
           : attackT // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       antiAircraft: freezed == antiAircraft
-          ? _value._antiAircraft
+          ? _value.antiAircraft
           : antiAircraft // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       armor: freezed == armor
-          ? _value._armor
+          ? _value.armor
           : armor // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       evasion: freezed == evasion
-          ? _value._evasion
+          ? _value.evasion
           : evasion // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       antiSubmarine: freezed == antiSubmarine
-          ? _value._antiSubmarine
+          ? _value.antiSubmarine
           : antiSubmarine // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       scout: freezed == scout
-          ? _value._scout
+          ? _value.scout
           : scout // ignore: cast_nullable_to_non_nullable
               as List<int>?,
       luck: freezed == luck
-          ? _value._luck
+          ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
               as List<int>?,
     ));
@@ -320,209 +374,84 @@ class __$$_ShipCopyWithImpl<$Res> extends _$ShipCopyWithImpl<$Res, _$_Ship>
 /// @nodoc
 
 class _$_Ship extends _Ship {
-  const _$_Ship(
+  _$_Ship(
       {required this.uid,
       required this.shipId,
-      required this.name,
+      this.name,
       required this.level,
-      required final List<int> exp,
+      this.exp,
       required this.nowHP,
       required this.maxHP,
       this.speed,
       this.attackRange,
+      this.fuel,
+      this.bull,
       this.condition,
-      final List<int>? attack,
-      final List<int>? attackT,
-      final List<int>? antiAircraft,
-      final List<int>? armor,
-      final List<int>? evasion,
-      final List<int>? antiSubmarine,
-      final List<int>? scout,
-      final List<int>? luck})
-      : _exp = exp,
-        _attack = attack,
-        _attackT = attackT,
-        _antiAircraft = antiAircraft,
-        _armor = armor,
-        _evasion = evasion,
-        _antiSubmarine = antiSubmarine,
-        _scout = scout,
-        _luck = luck,
-        super._();
+      this.attack,
+      this.attackT,
+      this.antiAircraft,
+      this.armor,
+      this.evasion,
+      this.antiSubmarine,
+      this.scout,
+      this.luck})
+      : super._();
 
   @override
-  final int uid;
+  int uid;
 // required int sortNo,
   @override
-  final int shipId;
+  int shipId;
   @override
-  final String name;
+  String? name;
   @override
-  final int level;
-  final List<int> _exp;
+  int level;
   @override
-  List<int> get exp {
-    if (_exp is EqualUnmodifiableListView) return _exp;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_exp);
-  }
-
+  List<int>? exp;
   @override
-  final int nowHP;
+  int nowHP;
   @override
-  final int maxHP;
+  int maxHP;
   @override
-  final int? speed;
+  int? speed;
   @override
-  final int? attackRange;
+  int? attackRange;
 // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
+  @override
+  int? fuel;
+  @override
+  int? bull;
 // required int apiSlotnum,
 // required int apiNdockTime,
 // required List<int> apiNdockItem,
 // required int apiSrate,
   @override
-  final int? condition;
-  final List<int>? _attack;
+  int? condition;
   @override
-  List<int>? get attack {
-    final value = _attack;
-    if (value == null) return null;
-    if (_attack is EqualUnmodifiableListView) return _attack;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _attackT;
+  List<int>? attack;
   @override
-  List<int>? get attackT {
-    final value = _attackT;
-    if (value == null) return null;
-    if (_attackT is EqualUnmodifiableListView) return _attackT;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _antiAircraft;
+  List<int>? attackT;
   @override
-  List<int>? get antiAircraft {
-    final value = _antiAircraft;
-    if (value == null) return null;
-    if (_antiAircraft is EqualUnmodifiableListView) return _antiAircraft;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _armor;
+  List<int>? antiAircraft;
   @override
-  List<int>? get armor {
-    final value = _armor;
-    if (value == null) return null;
-    if (_armor is EqualUnmodifiableListView) return _armor;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _evasion;
+  List<int>? armor;
   @override
-  List<int>? get evasion {
-    final value = _evasion;
-    if (value == null) return null;
-    if (_evasion is EqualUnmodifiableListView) return _evasion;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _antiSubmarine;
+  List<int>? evasion;
   @override
-  List<int>? get antiSubmarine {
-    final value = _antiSubmarine;
-    if (value == null) return null;
-    if (_antiSubmarine is EqualUnmodifiableListView) return _antiSubmarine;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _scout;
+  List<int>? antiSubmarine;
   @override
-  List<int>? get scout {
-    final value = _scout;
-    if (value == null) return null;
-    if (_scout is EqualUnmodifiableListView) return _scout;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<int>? _luck;
+  List<int>? scout;
   @override
-  List<int>? get luck {
-    final value = _luck;
-    if (value == null) return null;
-    if (_luck is EqualUnmodifiableListView) return _luck;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  List<int>? luck;
 
   @override
   String toString() {
-    return 'Ship(uid: $uid, shipId: $shipId, name: $name, level: $level, exp: $exp, nowHP: $nowHP, maxHP: $maxHP, speed: $speed, attackRange: $attackRange, condition: $condition, attack: $attack, attackT: $attackT, antiAircraft: $antiAircraft, armor: $armor, evasion: $evasion, antiSubmarine: $antiSubmarine, scout: $scout, luck: $luck)';
+    return 'Ship(uid: $uid, shipId: $shipId, name: $name, level: $level, exp: $exp, nowHP: $nowHP, maxHP: $maxHP, speed: $speed, attackRange: $attackRange, fuel: $fuel, bull: $bull, condition: $condition, attack: $attack, attackT: $attackT, antiAircraft: $antiAircraft, armor: $armor, evasion: $evasion, antiSubmarine: $antiSubmarine, scout: $scout, luck: $luck)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Ship &&
-            (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.shipId, shipId) || other.shipId == shipId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.level, level) || other.level == level) &&
-            const DeepCollectionEquality().equals(other._exp, _exp) &&
-            (identical(other.nowHP, nowHP) || other.nowHP == nowHP) &&
-            (identical(other.maxHP, maxHP) || other.maxHP == maxHP) &&
-            (identical(other.speed, speed) || other.speed == speed) &&
-            (identical(other.attackRange, attackRange) ||
-                other.attackRange == attackRange) &&
-            (identical(other.condition, condition) ||
-                other.condition == condition) &&
-            const DeepCollectionEquality().equals(other._attack, _attack) &&
-            const DeepCollectionEquality().equals(other._attackT, _attackT) &&
-            const DeepCollectionEquality()
-                .equals(other._antiAircraft, _antiAircraft) &&
-            const DeepCollectionEquality().equals(other._armor, _armor) &&
-            const DeepCollectionEquality().equals(other._evasion, _evasion) &&
-            const DeepCollectionEquality()
-                .equals(other._antiSubmarine, _antiSubmarine) &&
-            const DeepCollectionEquality().equals(other._scout, _scout) &&
-            const DeepCollectionEquality().equals(other._luck, _luck));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      uid,
-      shipId,
-      name,
-      level,
-      const DeepCollectionEquality().hash(_exp),
-      nowHP,
-      maxHP,
-      speed,
-      attackRange,
-      condition,
-      const DeepCollectionEquality().hash(_attack),
-      const DeepCollectionEquality().hash(_attackT),
-      const DeepCollectionEquality().hash(_antiAircraft),
-      const DeepCollectionEquality().hash(_armor),
-      const DeepCollectionEquality().hash(_evasion),
-      const DeepCollectionEquality().hash(_antiSubmarine),
-      const DeepCollectionEquality().hash(_scout),
-      const DeepCollectionEquality().hash(_luck));
 
   @JsonKey(ignore: true)
   @override
@@ -532,73 +461,103 @@ class _$_Ship extends _Ship {
 }
 
 abstract class _Ship extends Ship {
-  const factory _Ship(
-      {required final int uid,
-      required final int shipId,
-      required final String name,
-      required final int level,
-      required final List<int> exp,
-      required final int nowHP,
-      required final int maxHP,
-      final int? speed,
-      final int? attackRange,
-      final int? condition,
-      final List<int>? attack,
-      final List<int>? attackT,
-      final List<int>? antiAircraft,
-      final List<int>? armor,
-      final List<int>? evasion,
-      final List<int>? antiSubmarine,
-      final List<int>? scout,
-      final List<int>? luck}) = _$_Ship;
-  const _Ship._() : super._();
+  factory _Ship(
+      {required int uid,
+      required int shipId,
+      String? name,
+      required int level,
+      List<int>? exp,
+      required int nowHP,
+      required int maxHP,
+      int? speed,
+      int? attackRange,
+      int? fuel,
+      int? bull,
+      int? condition,
+      List<int>? attack,
+      List<int>? attackT,
+      List<int>? antiAircraft,
+      List<int>? armor,
+      List<int>? evasion,
+      List<int>? antiSubmarine,
+      List<int>? scout,
+      List<int>? luck}) = _$_Ship;
+  _Ship._() : super._();
 
   @override
   int get uid;
+  set uid(int value);
   @override // required int sortNo,
-  int get shipId;
+  int get shipId; // required int sortNo,
+  set shipId(int value);
   @override
-  String get name;
+  String? get name;
+  set name(String? value);
   @override
   int get level;
+  set level(int value);
   @override
-  List<int> get exp;
+  List<int>? get exp;
+  set exp(List<int>? value);
   @override
   int get nowHP;
+  set nowHP(int value);
   @override
   int get maxHP;
+  set maxHP(int value);
   @override
   int? get speed;
+  set speed(int? value);
   @override
   int? get attackRange;
+  set attackRange(int? value);
   @override // required List<int> apiSlot,
 // required List<int> apiOnslot,
 // required int apiSlotEx,
 // required List<int> apiKyouka,
 // required int apiBacks,
-// required int apiFuel,
-// required int apiBull,
-// required int apiSlotnum,
+  int? get fuel; // required List<int> apiSlot,
+// required List<int> apiOnslot,
+// required int apiSlotEx,
+// required List<int> apiKyouka,
+// required int apiBacks,
+  set fuel(int? value);
+  @override
+  int? get bull;
+  set bull(int? value);
+  @override // required int apiSlotnum,
 // required int apiNdockTime,
 // required List<int> apiNdockItem,
 // required int apiSrate,
-  int? get condition;
+  int? get condition; // required int apiSlotnum,
+// required int apiNdockTime,
+// required List<int> apiNdockItem,
+// required int apiSrate,
+  set condition(int? value);
   @override
   List<int>? get attack;
+  set attack(List<int>? value);
   @override
   List<int>? get attackT;
+  set attackT(List<int>? value);
   @override
   List<int>? get antiAircraft;
+  set antiAircraft(List<int>? value);
   @override
   List<int>? get armor;
+  set armor(List<int>? value);
   @override
   List<int>? get evasion;
+  set evasion(List<int>? value);
   @override
   List<int>? get antiSubmarine;
+  set antiSubmarine(List<int>? value);
   @override
   List<int>? get scout;
+  set scout(List<int>? value);
   @override
   List<int>? get luck;
+  set luck(List<int>? value);
   @override
   @JsonKey(ignore: true)
   _$$_ShipCopyWith<_$_Ship> get copyWith => throw _privateConstructorUsedError;
