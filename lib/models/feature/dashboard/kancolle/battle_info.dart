@@ -13,17 +13,20 @@ part 'battle_info.freezed.dart';
 class BattleInfo with _$BattleInfo {
   const BattleInfo._();
 
-  factory BattleInfo({
-    String? result,
-    String? dropName,
-    int? mvp,
-    int? dropItemId,
-    String? dropItemName,
-    List<Squad>? enemySquads,
-    List<Squad>? inBattleSquads,
-    Map<int, int>? dmgTakenMap,
-    Map<int, int>? dmgMap,
-  }) = _BattleInfo;
+  factory BattleInfo(
+      {String? result,
+      String? dropName,
+      int? mvp,
+      int? dropItemId,
+      String? dropItemName,
+      List<Squad>? enemySquads,
+      List<Squad>? inBattleSquads,
+      Map<int, int>? dmgTakenMap,
+      Map<int, int>? dmgMap,
+      int? airSuperiorityFlag,
+      int? formation,
+      int? eFormation,
+      int? contact}) = _BattleInfo;
 
   List<Ship> get allShips => inBattleSquads!
       .expand((squad) => squad.ships)
@@ -36,9 +39,79 @@ class BattleInfo with _$BattleInfo {
     mvp = null;
     dropItemId = null;
     dropItemName = null;
+    airSuperiorityFlag = null;
     enemySquads?.clear();
     dmgMap?.clear();
     dmgTakenMap?.clear();
+  }
+
+  String get contactStatus {
+    switch (contact) {
+      case 1:
+        return "同航戦";
+      case 2:
+        return "反航戦";
+      case 3:
+        return "T字有利";
+      case 4:
+        return "T字不利";
+      default:
+        return "N/A";
+    }
+  }
+
+  String get ourFormation {
+    return _getFormation(formation!);
+  }
+
+  String get enemyFormation {
+    return _getFormation(eFormation!);
+  }
+
+  String _getFormation(int flag) {
+    String formation;
+
+    switch(flag) {
+      case 1:
+        formation = "単縦陣";
+        break;
+      case 2:
+        formation = "複縦陣";
+        break;
+      case 3:
+        formation = "輪形陣";
+        break;
+      case 4:
+        formation = "梯形陣";
+        break;
+      case 5:
+        formation = "単横陣";
+        break;
+      case 6:
+        formation = "警戒陣";
+        break;
+      default:
+        formation = "N/A";
+    }
+
+    return formation;
+  }
+
+  String get airSuperiority {
+    switch (airSuperiorityFlag) {
+      case 0:
+        return '制空均衡';
+      case 1:
+        return '制空権確保';
+      case 2:
+        return '航空優勢';
+      case 3:
+        return '航空劣勢';
+      case 4:
+        return '制空権喪失';
+      default:
+        return 'N/A';
+    }
   }
 
   void parseReqSortieBattleResult(ReqSortieBattleResultApiDataEntity data) {
@@ -72,9 +145,20 @@ class BattleInfo with _$BattleInfo {
 
     /*
     TODO: api_air_base_injection, api_injection_kouku, api_air_base_attack,
-     api_friendly_battle, api_friendly_kouku, api_kouku, api_support_info,
-     api_opening_taisen, api_opening_atack
+     api_friendly_battle, api_friendly_kouku, api_support_info
     */
+    //api_kouku
+    aircraftRound1_1(data.apiStageFlag, data.apiKouku);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRoundSingleVsSingle(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundSingleVsSingle(data.apiOpeningAtack!);
+    }
 
     for (final (index, flag) in data.apiHouraiFlag.indexed) {
       if (flag == 1) {
@@ -90,6 +174,32 @@ class BattleInfo with _$BattleInfo {
 
     updateShipHP();
   }
+
+  void aircraftRound1_1(List<int> airStageFlag, ReqSortieBattleApiDataApiKoukuEntity airBattle) {
+    for (final (index, flag) in airStageFlag.indexed) {
+      if (flag == 1) {
+        switch (index) {
+          case 0:
+            airSuperiorityFlag = airBattle.apiStage1.apiDispSeiku;
+            break;
+          case 1:
+            log("stage2");
+            break;
+          case 2:
+            for (final (index, damage) in airBattle.apiStage3!.apiFdam.indexed) {
+              dmgTake(getOShip1_1(index).hashCode, damage);
+            }
+            for (final (index, damage) in airBattle.apiStage3!.apiEdam.indexed) {
+              dmgTake(getEShip1_1(index).hashCode, damage);
+            }
+        }
+      }
+    }
+  }
+
+  Ship getEShip1_1(int index) => enemySquads![0].ships[index];
+
+  Ship getOShip1_1(int index) => inBattleSquads![0].ships[index];
 
   void parseReqBattleMidnightBattle(
       ReqBattleMidnightBattleApiDataEntity data, Squad squad) {
@@ -124,13 +234,13 @@ class BattleInfo with _$BattleInfo {
       List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax) {
     for (final (index, now) in fNow.indexed) {
       final max = fMax[index];
-      final ship = inBattleSquads![0].ships[index];
+      final ship = getOShip1_1(index);
       ship.nowHP = now;
       ship.maxHP = max;
     }
     for (final (index, now) in eNow.indexed) {
       final max = eMax[index];
-      final ship = enemySquads![0].ships[index];
+      final ship = getEShip1_1(index);
       ship.nowHP = now;
       ship.maxHP = max;
     }
@@ -165,16 +275,15 @@ class BattleInfo with _$BattleInfo {
       ReqSortieBattleApiDataApiRaigekiEntity data) {
     for (final (index, eIndex) in data.apiFrai.indexed) {
       if (eIndex != -1) {
-        final actShipHash = inBattleSquads![0].ships[index].hashCode;
-        final defShipHash = enemySquads![0].ships[eIndex].hashCode;
+        final actShipHash = getOShip1_1(index).hashCode;
+        final defShipHash = getEShip1_1(eIndex).hashCode;
         dmgCount(actShipHash, data.apiFydam[index]);
         dmgTake(defShipHash, data.apiFydam[index]);
       }
 
       if (data.apiErai[index] != -1) {
-        final actShipHash = enemySquads![0].ships[index].hashCode;
-        final defShipHash =
-            inBattleSquads![0].ships[data.apiErai[index]].hashCode;
+        final actShipHash = getEShip1_1(index).hashCode;
+        final defShipHash = getOShip1_1(data.apiErai[index]).hashCode;
         dmgCount(actShipHash, data.apiEydam[index]);
         dmgTake(defShipHash, data.apiEydam[index]);
       }

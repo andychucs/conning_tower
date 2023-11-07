@@ -307,17 +307,22 @@ mixin _$ReqSortieBattleApiDataEntity {
   @JsonKey(name: 'api_opening_taisen_flag')
   set apiOpeningTaisenFlag(int value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_opening_taisen')
-  dynamic get apiOpeningTaisen => throw _privateConstructorUsedError;
+  ReqSortieBattleApiDataApiHougekiEntity? get apiOpeningTaisen =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_opening_taisen')
-  set apiOpeningTaisen(dynamic value) => throw _privateConstructorUsedError;
+  set apiOpeningTaisen(ReqSortieBattleApiDataApiHougekiEntity? value) =>
+      throw _privateConstructorUsedError; // antisub use same format with gunfire
   @JsonKey(name: 'api_opening_flag')
-  int get apiOpeningFlag => throw _privateConstructorUsedError;
+  int get apiOpeningFlag =>
+      throw _privateConstructorUsedError; // antisub use same format with gunfire
   @JsonKey(name: 'api_opening_flag')
   set apiOpeningFlag(int value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_opening_atack')
-  dynamic get apiOpeningAtack => throw _privateConstructorUsedError;
+  ReqSortieBattleApiDataApiRaigekiEntity? get apiOpeningAtack =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_opening_atack')
-  set apiOpeningAtack(dynamic value) => throw _privateConstructorUsedError;
+  set apiOpeningAtack(ReqSortieBattleApiDataApiRaigekiEntity? value) =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_hourai_flag')
   List<int> get apiHouraiFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_hourai_flag')
@@ -381,9 +386,11 @@ abstract class $ReqSortieBattleApiDataEntityCopyWith<$Res> {
       @JsonKey(name: 'api_support_flag') int apiSupportFlag,
       @JsonKey(name: 'api_support_info') dynamic apiSupportInfo,
       @JsonKey(name: 'api_opening_taisen_flag') int apiOpeningTaisenFlag,
-      @JsonKey(name: 'api_opening_taisen') dynamic apiOpeningTaisen,
+      @JsonKey(name: 'api_opening_taisen')
+      ReqSortieBattleApiDataApiHougekiEntity? apiOpeningTaisen,
       @JsonKey(name: 'api_opening_flag') int apiOpeningFlag,
-      @JsonKey(name: 'api_opening_atack') dynamic apiOpeningAtack,
+      @JsonKey(name: 'api_opening_atack')
+      ReqSortieBattleApiDataApiRaigekiEntity? apiOpeningAtack,
       @JsonKey(name: 'api_hourai_flag') List<int> apiHouraiFlag,
       @JsonKey(name: 'api_hougeki1')
       ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
@@ -395,6 +402,8 @@ abstract class $ReqSortieBattleApiDataEntityCopyWith<$Res> {
       ReqSortieBattleApiDataApiRaigekiEntity? apiRaigeki});
 
   $ReqSortieBattleApiDataApiKoukuEntityCopyWith<$Res> get apiKouku;
+  $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiOpeningTaisen;
+  $ReqSortieBattleApiDataApiRaigekiEntityCopyWith<$Res>? get apiOpeningAtack;
   $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiHougeki1;
   $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiHougeki2;
   $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiHougeki3;
@@ -523,7 +532,7 @@ class _$ReqSortieBattleApiDataEntityCopyWithImpl<$Res,
       apiOpeningTaisen: freezed == apiOpeningTaisen
           ? _value.apiOpeningTaisen
           : apiOpeningTaisen // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as ReqSortieBattleApiDataApiHougekiEntity?,
       apiOpeningFlag: null == apiOpeningFlag
           ? _value.apiOpeningFlag
           : apiOpeningFlag // ignore: cast_nullable_to_non_nullable
@@ -531,7 +540,7 @@ class _$ReqSortieBattleApiDataEntityCopyWithImpl<$Res,
       apiOpeningAtack: freezed == apiOpeningAtack
           ? _value.apiOpeningAtack
           : apiOpeningAtack // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as ReqSortieBattleApiDataApiRaigekiEntity?,
       apiHouraiFlag: null == apiHouraiFlag
           ? _value.apiHouraiFlag
           : apiHouraiFlag // ignore: cast_nullable_to_non_nullable
@@ -561,6 +570,32 @@ class _$ReqSortieBattleApiDataEntityCopyWithImpl<$Res,
     return $ReqSortieBattleApiDataApiKoukuEntityCopyWith<$Res>(_value.apiKouku,
         (value) {
       return _then(_value.copyWith(apiKouku: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiOpeningTaisen {
+    if (_value.apiOpeningTaisen == null) {
+      return null;
+    }
+
+    return $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>(
+        _value.apiOpeningTaisen!, (value) {
+      return _then(_value.copyWith(apiOpeningTaisen: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReqSortieBattleApiDataApiRaigekiEntityCopyWith<$Res>? get apiOpeningAtack {
+    if (_value.apiOpeningAtack == null) {
+      return null;
+    }
+
+    return $ReqSortieBattleApiDataApiRaigekiEntityCopyWith<$Res>(
+        _value.apiOpeningAtack!, (value) {
+      return _then(_value.copyWith(apiOpeningAtack: value) as $Val);
     });
   }
 
@@ -646,9 +681,11 @@ abstract class _$$_ReqSortieBattleApiDataEntityCopyWith<$Res>
       @JsonKey(name: 'api_support_flag') int apiSupportFlag,
       @JsonKey(name: 'api_support_info') dynamic apiSupportInfo,
       @JsonKey(name: 'api_opening_taisen_flag') int apiOpeningTaisenFlag,
-      @JsonKey(name: 'api_opening_taisen') dynamic apiOpeningTaisen,
+      @JsonKey(name: 'api_opening_taisen')
+      ReqSortieBattleApiDataApiHougekiEntity? apiOpeningTaisen,
       @JsonKey(name: 'api_opening_flag') int apiOpeningFlag,
-      @JsonKey(name: 'api_opening_atack') dynamic apiOpeningAtack,
+      @JsonKey(name: 'api_opening_atack')
+      ReqSortieBattleApiDataApiRaigekiEntity? apiOpeningAtack,
       @JsonKey(name: 'api_hourai_flag') List<int> apiHouraiFlag,
       @JsonKey(name: 'api_hougeki1')
       ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
@@ -661,6 +698,10 @@ abstract class _$$_ReqSortieBattleApiDataEntityCopyWith<$Res>
 
   @override
   $ReqSortieBattleApiDataApiKoukuEntityCopyWith<$Res> get apiKouku;
+  @override
+  $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiOpeningTaisen;
+  @override
+  $ReqSortieBattleApiDataApiRaigekiEntityCopyWith<$Res>? get apiOpeningAtack;
   @override
   $ReqSortieBattleApiDataApiHougekiEntityCopyWith<$Res>? get apiHougeki1;
   @override
@@ -792,7 +833,7 @@ class __$$_ReqSortieBattleApiDataEntityCopyWithImpl<$Res>
       apiOpeningTaisen: freezed == apiOpeningTaisen
           ? _value.apiOpeningTaisen
           : apiOpeningTaisen // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as ReqSortieBattleApiDataApiHougekiEntity?,
       apiOpeningFlag: null == apiOpeningFlag
           ? _value.apiOpeningFlag
           : apiOpeningFlag // ignore: cast_nullable_to_non_nullable
@@ -800,7 +841,7 @@ class __$$_ReqSortieBattleApiDataEntityCopyWithImpl<$Res>
       apiOpeningAtack: freezed == apiOpeningAtack
           ? _value.apiOpeningAtack
           : apiOpeningAtack // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as ReqSortieBattleApiDataApiRaigekiEntity?,
       apiHouraiFlag: null == apiHouraiFlag
           ? _value.apiHouraiFlag
           : apiHouraiFlag // ignore: cast_nullable_to_non_nullable
@@ -849,9 +890,9 @@ class _$_ReqSortieBattleApiDataEntity implements _ReqSortieBattleApiDataEntity {
       @JsonKey(name: 'api_support_info') required this.apiSupportInfo,
       @JsonKey(name: 'api_opening_taisen_flag')
       required this.apiOpeningTaisenFlag,
-      @JsonKey(name: 'api_opening_taisen') required this.apiOpeningTaisen,
+      @JsonKey(name: 'api_opening_taisen') this.apiOpeningTaisen,
       @JsonKey(name: 'api_opening_flag') required this.apiOpeningFlag,
-      @JsonKey(name: 'api_opening_atack') required this.apiOpeningAtack,
+      @JsonKey(name: 'api_opening_atack') this.apiOpeningAtack,
       @JsonKey(name: 'api_hourai_flag') required this.apiHouraiFlag,
       @JsonKey(name: 'api_hougeki1') this.apiHougeki1,
       @JsonKey(name: 'api_hougeki2') this.apiHougeki2,
@@ -920,13 +961,14 @@ class _$_ReqSortieBattleApiDataEntity implements _ReqSortieBattleApiDataEntity {
   int apiOpeningTaisenFlag;
   @override
   @JsonKey(name: 'api_opening_taisen')
-  dynamic apiOpeningTaisen;
+  ReqSortieBattleApiDataApiHougekiEntity? apiOpeningTaisen;
+// antisub use same format with gunfire
   @override
   @JsonKey(name: 'api_opening_flag')
   int apiOpeningFlag;
   @override
   @JsonKey(name: 'api_opening_atack')
-  dynamic apiOpeningAtack;
+  ReqSortieBattleApiDataApiRaigekiEntity? apiOpeningAtack;
   @override
   @JsonKey(name: 'api_hourai_flag')
   List<int> apiHouraiFlag;
@@ -966,40 +1008,42 @@ class _$_ReqSortieBattleApiDataEntity implements _ReqSortieBattleApiDataEntity {
 abstract class _ReqSortieBattleApiDataEntity
     implements ReqSortieBattleApiDataEntity {
   factory _ReqSortieBattleApiDataEntity(
-      {@JsonKey(name: 'api_deck_id') required int apiDeckId,
-      @JsonKey(name: 'api_formation') required List<int> apiFormation,
-      @JsonKey(name: 'api_f_nowhps') required List<int> apiFNowhps,
-      @JsonKey(name: 'api_f_maxhps') required List<int> apiFMaxhps,
-      @JsonKey(name: 'api_fParam') required List<dynamic> apiFParam,
-      @JsonKey(name: 'api_ship_ke') required List<int> apiShipKe,
-      @JsonKey(name: 'api_ship_lv') required List<int> apiShipLv,
-      @JsonKey(name: 'api_e_nowhps') required List<int> apiENowhps,
-      @JsonKey(name: 'api_e_maxhps') required List<int> apiEMaxhps,
-      @JsonKey(name: 'api_eSlot') required List<dynamic> apiESlot,
-      @JsonKey(name: 'api_eParam') required List<dynamic> apiEParam,
-      @JsonKey(name: 'api_smoke_type') required int apiSmokeType,
-      @JsonKey(name: 'api_midnight_flag') required int apiMidnightFlag,
-      @JsonKey(name: 'api_search') required List<int> apiSearch,
-      @JsonKey(name: 'api_stage_flag') required List<int> apiStageFlag,
-      @JsonKey(name: 'api_kouku')
-      required ReqSortieBattleApiDataApiKoukuEntity apiKouku,
-      @JsonKey(name: 'api_support_flag') required int apiSupportFlag,
-      @JsonKey(name: 'api_support_info') required dynamic apiSupportInfo,
-      @JsonKey(name: 'api_opening_taisen_flag')
-      required int apiOpeningTaisenFlag,
-      @JsonKey(name: 'api_opening_taisen') required dynamic apiOpeningTaisen,
-      @JsonKey(name: 'api_opening_flag') required int apiOpeningFlag,
-      @JsonKey(name: 'api_opening_atack') required dynamic apiOpeningAtack,
-      @JsonKey(name: 'api_hourai_flag') required List<int> apiHouraiFlag,
-      @JsonKey(name: 'api_hougeki1')
-      ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
-      @JsonKey(name: 'api_hougeki2')
-      ReqSortieBattleApiDataApiHougekiEntity? apiHougeki2,
-      @JsonKey(name: 'api_hougeki3')
-      ReqSortieBattleApiDataApiHougekiEntity? apiHougeki3,
-      @JsonKey(name: 'api_raigeki')
-      ReqSortieBattleApiDataApiRaigekiEntity?
-          apiRaigeki}) = _$_ReqSortieBattleApiDataEntity;
+          {@JsonKey(name: 'api_deck_id') required int apiDeckId,
+          @JsonKey(name: 'api_formation') required List<int> apiFormation,
+          @JsonKey(name: 'api_f_nowhps') required List<int> apiFNowhps,
+          @JsonKey(name: 'api_f_maxhps') required List<int> apiFMaxhps,
+          @JsonKey(name: 'api_fParam') required List<dynamic> apiFParam,
+          @JsonKey(name: 'api_ship_ke') required List<int> apiShipKe,
+          @JsonKey(name: 'api_ship_lv') required List<int> apiShipLv,
+          @JsonKey(name: 'api_e_nowhps') required List<int> apiENowhps,
+          @JsonKey(name: 'api_e_maxhps') required List<int> apiEMaxhps,
+          @JsonKey(name: 'api_eSlot') required List<dynamic> apiESlot,
+          @JsonKey(name: 'api_eParam') required List<dynamic> apiEParam,
+          @JsonKey(name: 'api_smoke_type') required int apiSmokeType,
+          @JsonKey(name: 'api_midnight_flag') required int apiMidnightFlag,
+          @JsonKey(name: 'api_search') required List<int> apiSearch,
+          @JsonKey(name: 'api_stage_flag') required List<int> apiStageFlag,
+          @JsonKey(name: 'api_kouku')
+          required ReqSortieBattleApiDataApiKoukuEntity apiKouku,
+          @JsonKey(name: 'api_support_flag') required int apiSupportFlag,
+          @JsonKey(name: 'api_support_info') required dynamic apiSupportInfo,
+          @JsonKey(name: 'api_opening_taisen_flag')
+          required int apiOpeningTaisenFlag,
+          @JsonKey(name: 'api_opening_taisen')
+          ReqSortieBattleApiDataApiHougekiEntity? apiOpeningTaisen,
+          @JsonKey(name: 'api_opening_flag') required int apiOpeningFlag,
+          @JsonKey(name: 'api_opening_atack')
+          ReqSortieBattleApiDataApiRaigekiEntity? apiOpeningAtack,
+          @JsonKey(name: 'api_hourai_flag') required List<int> apiHouraiFlag,
+          @JsonKey(name: 'api_hougeki1')
+          ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
+          @JsonKey(name: 'api_hougeki2')
+          ReqSortieBattleApiDataApiHougekiEntity? apiHougeki2,
+          @JsonKey(name: 'api_hougeki3')
+          ReqSortieBattleApiDataApiHougekiEntity? apiHougeki3,
+          @JsonKey(name: 'api_raigeki')
+          ReqSortieBattleApiDataApiRaigekiEntity? apiRaigeki}) =
+      _$_ReqSortieBattleApiDataEntity;
 
   factory _ReqSortieBattleApiDataEntity.fromJson(Map<String, dynamic> json) =
       _$_ReqSortieBattleApiDataEntity.fromJson;
@@ -1101,19 +1145,19 @@ abstract class _ReqSortieBattleApiDataEntity
   set apiOpeningTaisenFlag(int value);
   @override
   @JsonKey(name: 'api_opening_taisen')
-  dynamic get apiOpeningTaisen;
+  ReqSortieBattleApiDataApiHougekiEntity? get apiOpeningTaisen;
   @JsonKey(name: 'api_opening_taisen')
-  set apiOpeningTaisen(dynamic value);
-  @override
+  set apiOpeningTaisen(ReqSortieBattleApiDataApiHougekiEntity? value);
+  @override // antisub use same format with gunfire
   @JsonKey(name: 'api_opening_flag')
-  int get apiOpeningFlag;
+  int get apiOpeningFlag; // antisub use same format with gunfire
   @JsonKey(name: 'api_opening_flag')
   set apiOpeningFlag(int value);
   @override
   @JsonKey(name: 'api_opening_atack')
-  dynamic get apiOpeningAtack;
+  ReqSortieBattleApiDataApiRaigekiEntity? get apiOpeningAtack;
   @JsonKey(name: 'api_opening_atack')
-  set apiOpeningAtack(dynamic value);
+  set apiOpeningAtack(ReqSortieBattleApiDataApiRaigekiEntity? value);
   @override
   @JsonKey(name: 'api_hourai_flag')
   List<int> get apiHouraiFlag;
@@ -1153,23 +1197,28 @@ ReqSortieBattleApiDataApiKoukuEntity
 /// @nodoc
 mixin _$ReqSortieBattleApiDataApiKoukuEntity {
   @JsonKey(name: 'api_plane_from')
-  List<dynamic> get apiPlaneFrom => throw _privateConstructorUsedError;
+  List<List<int>?> get apiPlaneFrom => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_plane_from')
-  set apiPlaneFrom(List<dynamic> value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_stage1')
-  ReqSortieBattleApiDataApiKoukuApiStage1Entity get apiStage1 =>
+  set apiPlaneFrom(List<List<int>?> value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_stage1')
-  set apiStage1(ReqSortieBattleApiDataApiKoukuApiStage1Entity value) =>
+  BattleDataAircraftRoundStage1 get apiStage1 =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_stage1')
+  set apiStage1(BattleDataAircraftRoundStage1 value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_stage2')
-  dynamic get apiStage2 => throw _privateConstructorUsedError;
+  BattleDataAircraftRoundStage2? get apiStage2 =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_stage2')
-  set apiStage2(dynamic value) => throw _privateConstructorUsedError;
+  set apiStage2(BattleDataAircraftRoundStage2? value) =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_stage3')
-  dynamic get apiStage3 => throw _privateConstructorUsedError;
+  BattleDataAircraftRoundStage3? get apiStage3 =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'api_stage3')
-  set apiStage3(dynamic value) => throw _privateConstructorUsedError;
+  set apiStage3(BattleDataAircraftRoundStage3? value) =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1187,13 +1236,14 @@ abstract class $ReqSortieBattleApiDataApiKoukuEntityCopyWith<$Res> {
           ReqSortieBattleApiDataApiKoukuEntity>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'api_plane_from') List<dynamic> apiPlaneFrom,
-      @JsonKey(name: 'api_stage1')
-      ReqSortieBattleApiDataApiKoukuApiStage1Entity apiStage1,
-      @JsonKey(name: 'api_stage2') dynamic apiStage2,
-      @JsonKey(name: 'api_stage3') dynamic apiStage3});
+      {@JsonKey(name: 'api_plane_from') List<List<int>?> apiPlaneFrom,
+      @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1 apiStage1,
+      @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+      @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3});
 
-  $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> get apiStage1;
+  $BattleDataAircraftRoundStage1CopyWith<$Res> get apiStage1;
+  $BattleDataAircraftRoundStage2CopyWith<$Res>? get apiStage2;
+  $BattleDataAircraftRoundStage3CopyWith<$Res>? get apiStage3;
 }
 
 /// @nodoc
@@ -1219,28 +1269,54 @@ class _$ReqSortieBattleApiDataApiKoukuEntityCopyWithImpl<$Res,
       apiPlaneFrom: null == apiPlaneFrom
           ? _value.apiPlaneFrom
           : apiPlaneFrom // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<List<int>?>,
       apiStage1: null == apiStage1
           ? _value.apiStage1
           : apiStage1 // ignore: cast_nullable_to_non_nullable
-              as ReqSortieBattleApiDataApiKoukuApiStage1Entity,
+              as BattleDataAircraftRoundStage1,
       apiStage2: freezed == apiStage2
           ? _value.apiStage2
           : apiStage2 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as BattleDataAircraftRoundStage2?,
       apiStage3: freezed == apiStage3
           ? _value.apiStage3
           : apiStage3 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as BattleDataAircraftRoundStage3?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> get apiStage1 {
-    return $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res>(
-        _value.apiStage1, (value) {
+  $BattleDataAircraftRoundStage1CopyWith<$Res> get apiStage1 {
+    return $BattleDataAircraftRoundStage1CopyWith<$Res>(_value.apiStage1,
+        (value) {
       return _then(_value.copyWith(apiStage1: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BattleDataAircraftRoundStage2CopyWith<$Res>? get apiStage2 {
+    if (_value.apiStage2 == null) {
+      return null;
+    }
+
+    return $BattleDataAircraftRoundStage2CopyWith<$Res>(_value.apiStage2!,
+        (value) {
+      return _then(_value.copyWith(apiStage2: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BattleDataAircraftRoundStage3CopyWith<$Res>? get apiStage3 {
+    if (_value.apiStage3 == null) {
+      return null;
+    }
+
+    return $BattleDataAircraftRoundStage3CopyWith<$Res>(_value.apiStage3!,
+        (value) {
+      return _then(_value.copyWith(apiStage3: value) as $Val);
     });
   }
 }
@@ -1255,14 +1331,17 @@ abstract class _$$_ReqSortieBattleApiDataApiKoukuEntityCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'api_plane_from') List<dynamic> apiPlaneFrom,
-      @JsonKey(name: 'api_stage1')
-      ReqSortieBattleApiDataApiKoukuApiStage1Entity apiStage1,
-      @JsonKey(name: 'api_stage2') dynamic apiStage2,
-      @JsonKey(name: 'api_stage3') dynamic apiStage3});
+      {@JsonKey(name: 'api_plane_from') List<List<int>?> apiPlaneFrom,
+      @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1 apiStage1,
+      @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+      @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3});
 
   @override
-  $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> get apiStage1;
+  $BattleDataAircraftRoundStage1CopyWith<$Res> get apiStage1;
+  @override
+  $BattleDataAircraftRoundStage2CopyWith<$Res>? get apiStage2;
+  @override
+  $BattleDataAircraftRoundStage3CopyWith<$Res>? get apiStage3;
 }
 
 /// @nodoc
@@ -1287,19 +1366,19 @@ class __$$_ReqSortieBattleApiDataApiKoukuEntityCopyWithImpl<$Res>
       apiPlaneFrom: null == apiPlaneFrom
           ? _value.apiPlaneFrom
           : apiPlaneFrom // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<List<int>?>,
       apiStage1: null == apiStage1
           ? _value.apiStage1
           : apiStage1 // ignore: cast_nullable_to_non_nullable
-              as ReqSortieBattleApiDataApiKoukuApiStage1Entity,
+              as BattleDataAircraftRoundStage1,
       apiStage2: freezed == apiStage2
           ? _value.apiStage2
           : apiStage2 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as BattleDataAircraftRoundStage2?,
       apiStage3: freezed == apiStage3
           ? _value.apiStage3
           : apiStage3 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as BattleDataAircraftRoundStage3?,
     ));
   }
 }
@@ -1311,8 +1390,8 @@ class _$_ReqSortieBattleApiDataApiKoukuEntity
   _$_ReqSortieBattleApiDataApiKoukuEntity(
       {@JsonKey(name: 'api_plane_from') required this.apiPlaneFrom,
       @JsonKey(name: 'api_stage1') required this.apiStage1,
-      @JsonKey(name: 'api_stage2') required this.apiStage2,
-      @JsonKey(name: 'api_stage3') required this.apiStage3});
+      @JsonKey(name: 'api_stage2') this.apiStage2,
+      @JsonKey(name: 'api_stage3') this.apiStage3});
 
   factory _$_ReqSortieBattleApiDataApiKoukuEntity.fromJson(
           Map<String, dynamic> json) =>
@@ -1320,16 +1399,16 @@ class _$_ReqSortieBattleApiDataApiKoukuEntity
 
   @override
   @JsonKey(name: 'api_plane_from')
-  List<dynamic> apiPlaneFrom;
+  List<List<int>?> apiPlaneFrom;
   @override
   @JsonKey(name: 'api_stage1')
-  ReqSortieBattleApiDataApiKoukuApiStage1Entity apiStage1;
+  BattleDataAircraftRoundStage1 apiStage1;
   @override
   @JsonKey(name: 'api_stage2')
-  dynamic apiStage2;
+  BattleDataAircraftRoundStage2? apiStage2;
   @override
   @JsonKey(name: 'api_stage3')
-  dynamic apiStage3;
+  BattleDataAircraftRoundStage3? apiStage3;
 
   @override
   String toString() {
@@ -1355,12 +1434,13 @@ class _$_ReqSortieBattleApiDataApiKoukuEntity
 abstract class _ReqSortieBattleApiDataApiKoukuEntity
     implements ReqSortieBattleApiDataApiKoukuEntity {
   factory _ReqSortieBattleApiDataApiKoukuEntity(
-          {@JsonKey(name: 'api_plane_from') required List<dynamic> apiPlaneFrom,
-          @JsonKey(name: 'api_stage1')
-          required ReqSortieBattleApiDataApiKoukuApiStage1Entity apiStage1,
-          @JsonKey(name: 'api_stage2') required dynamic apiStage2,
-          @JsonKey(name: 'api_stage3') required dynamic apiStage3}) =
-      _$_ReqSortieBattleApiDataApiKoukuEntity;
+      {@JsonKey(name: 'api_plane_from') required List<List<int>?> apiPlaneFrom,
+      @JsonKey(name: 'api_stage1')
+      required BattleDataAircraftRoundStage1 apiStage1,
+      @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+      @JsonKey(name: 'api_stage3')
+      BattleDataAircraftRoundStage3?
+          apiStage3}) = _$_ReqSortieBattleApiDataApiKoukuEntity;
 
   factory _ReqSortieBattleApiDataApiKoukuEntity.fromJson(
           Map<String, dynamic> json) =
@@ -1368,24 +1448,24 @@ abstract class _ReqSortieBattleApiDataApiKoukuEntity
 
   @override
   @JsonKey(name: 'api_plane_from')
-  List<dynamic> get apiPlaneFrom;
+  List<List<int>?> get apiPlaneFrom;
   @JsonKey(name: 'api_plane_from')
-  set apiPlaneFrom(List<dynamic> value);
+  set apiPlaneFrom(List<List<int>?> value);
   @override
   @JsonKey(name: 'api_stage1')
-  ReqSortieBattleApiDataApiKoukuApiStage1Entity get apiStage1;
+  BattleDataAircraftRoundStage1 get apiStage1;
   @JsonKey(name: 'api_stage1')
-  set apiStage1(ReqSortieBattleApiDataApiKoukuApiStage1Entity value);
+  set apiStage1(BattleDataAircraftRoundStage1 value);
   @override
   @JsonKey(name: 'api_stage2')
-  dynamic get apiStage2;
+  BattleDataAircraftRoundStage2? get apiStage2;
   @JsonKey(name: 'api_stage2')
-  set apiStage2(dynamic value);
+  set apiStage2(BattleDataAircraftRoundStage2? value);
   @override
   @JsonKey(name: 'api_stage3')
-  dynamic get apiStage3;
+  BattleDataAircraftRoundStage3? get apiStage3;
   @JsonKey(name: 'api_stage3')
-  set apiStage3(dynamic value);
+  set apiStage3(BattleDataAircraftRoundStage3? value);
   @override
   @JsonKey(ignore: true)
   _$$_ReqSortieBattleApiDataApiKoukuEntityCopyWith<
@@ -1393,69 +1473,54 @@ abstract class _ReqSortieBattleApiDataApiKoukuEntity
       get copyWith => throw _privateConstructorUsedError;
 }
 
-ReqSortieBattleApiDataApiKoukuApiStage1Entity
-    _$ReqSortieBattleApiDataApiKoukuApiStage1EntityFromJson(
-        Map<String, dynamic> json) {
-  return _ReqSortieBattleApiDataApiKoukuApiStage1Entity.fromJson(json);
+BattleDataAircraftRoundStage1 _$BattleDataAircraftRoundStage1FromJson(
+    Map<String, dynamic> json) {
+  return _BattleDataAircraftRoundStage1.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ReqSortieBattleApiDataApiKoukuApiStage1Entity {
-  @JsonKey(name: 'api_f_count')
+mixin _$BattleDataAircraftRoundStage1 {
   int get apiFCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_f_count')
   set apiFCount(int value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_f_lostcount')
   int get apiFLostcount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_f_lostcount')
   set apiFLostcount(int value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_e_count')
   int get apiECount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_e_count')
   set apiECount(int value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_e_lostcount')
   int get apiELostcount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_e_lostcount')
   set apiELostcount(int value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_disp_seiku')
   int get apiDispSeiku => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_disp_seiku')
   set apiDispSeiku(int value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_touch_plane')
   List<int> get apiTouchPlane => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_touch_plane')
   set apiTouchPlane(List<int> value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<
-          ReqSortieBattleApiDataApiKoukuApiStage1Entity>
+  $BattleDataAircraftRoundStage1CopyWith<BattleDataAircraftRoundStage1>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> {
-  factory $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith(
-          ReqSortieBattleApiDataApiKoukuApiStage1Entity value,
-          $Res Function(ReqSortieBattleApiDataApiKoukuApiStage1Entity) then) =
-      _$ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res,
-          ReqSortieBattleApiDataApiKoukuApiStage1Entity>;
+abstract class $BattleDataAircraftRoundStage1CopyWith<$Res> {
+  factory $BattleDataAircraftRoundStage1CopyWith(
+          BattleDataAircraftRoundStage1 value,
+          $Res Function(BattleDataAircraftRoundStage1) then) =
+      _$BattleDataAircraftRoundStage1CopyWithImpl<$Res,
+          BattleDataAircraftRoundStage1>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'api_f_count') int apiFCount,
-      @JsonKey(name: 'api_f_lostcount') int apiFLostcount,
-      @JsonKey(name: 'api_e_count') int apiECount,
-      @JsonKey(name: 'api_e_lostcount') int apiELostcount,
-      @JsonKey(name: 'api_disp_seiku') int apiDispSeiku,
-      @JsonKey(name: 'api_touch_plane') List<int> apiTouchPlane});
+      {int apiFCount,
+      int apiFLostcount,
+      int apiECount,
+      int apiELostcount,
+      int apiDispSeiku,
+      List<int> apiTouchPlane});
 }
 
 /// @nodoc
-class _$ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res,
-        $Val extends ReqSortieBattleApiDataApiKoukuApiStage1Entity>
-    implements $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> {
-  _$ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl(
-      this._value, this._then);
+class _$BattleDataAircraftRoundStage1CopyWithImpl<$Res,
+        $Val extends BattleDataAircraftRoundStage1>
+    implements $BattleDataAircraftRoundStage1CopyWith<$Res> {
+  _$BattleDataAircraftRoundStage1CopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1502,32 +1567,31 @@ class _$ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res>
-    implements $ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> {
-  factory _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith(
-          _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity value,
-          $Res Function(_$_ReqSortieBattleApiDataApiKoukuApiStage1Entity)
-              then) =
-      __$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res>;
+abstract class _$$_BattleDataAircraftRoundStage1CopyWith<$Res>
+    implements $BattleDataAircraftRoundStage1CopyWith<$Res> {
+  factory _$$_BattleDataAircraftRoundStage1CopyWith(
+          _$_BattleDataAircraftRoundStage1 value,
+          $Res Function(_$_BattleDataAircraftRoundStage1) then) =
+      __$$_BattleDataAircraftRoundStage1CopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'api_f_count') int apiFCount,
-      @JsonKey(name: 'api_f_lostcount') int apiFLostcount,
-      @JsonKey(name: 'api_e_count') int apiECount,
-      @JsonKey(name: 'api_e_lostcount') int apiELostcount,
-      @JsonKey(name: 'api_disp_seiku') int apiDispSeiku,
-      @JsonKey(name: 'api_touch_plane') List<int> apiTouchPlane});
+      {int apiFCount,
+      int apiFLostcount,
+      int apiECount,
+      int apiELostcount,
+      int apiDispSeiku,
+      List<int> apiTouchPlane});
 }
 
 /// @nodoc
-class __$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res>
-    extends _$ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res,
-        _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity>
-    implements _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<$Res> {
-  __$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl(
-      _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity _value,
-      $Res Function(_$_ReqSortieBattleApiDataApiKoukuApiStage1Entity) _then)
+class __$$_BattleDataAircraftRoundStage1CopyWithImpl<$Res>
+    extends _$BattleDataAircraftRoundStage1CopyWithImpl<$Res,
+        _$_BattleDataAircraftRoundStage1>
+    implements _$$_BattleDataAircraftRoundStage1CopyWith<$Res> {
+  __$$_BattleDataAircraftRoundStage1CopyWithImpl(
+      _$_BattleDataAircraftRoundStage1 _value,
+      $Res Function(_$_BattleDataAircraftRoundStage1) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1540,7 +1604,7 @@ class __$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res>
     Object? apiDispSeiku = null,
     Object? apiTouchPlane = null,
   }) {
-    return _then(_$_ReqSortieBattleApiDataApiKoukuApiStage1Entity(
+    return _then(_$_BattleDataAircraftRoundStage1(
       apiFCount: null == apiFCount
           ? _value.apiFCount
           : apiFCount // ignore: cast_nullable_to_non_nullable
@@ -1571,111 +1635,573 @@ class __$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity
-    implements _ReqSortieBattleApiDataApiKoukuApiStage1Entity {
-  _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity(
-      {@JsonKey(name: 'api_f_count') required this.apiFCount,
-      @JsonKey(name: 'api_f_lostcount') required this.apiFLostcount,
-      @JsonKey(name: 'api_e_count') required this.apiECount,
-      @JsonKey(name: 'api_e_lostcount') required this.apiELostcount,
-      @JsonKey(name: 'api_disp_seiku') required this.apiDispSeiku,
-      @JsonKey(name: 'api_touch_plane') required this.apiTouchPlane});
+class _$_BattleDataAircraftRoundStage1
+    implements _BattleDataAircraftRoundStage1 {
+  _$_BattleDataAircraftRoundStage1(
+      {required this.apiFCount,
+      required this.apiFLostcount,
+      required this.apiECount,
+      required this.apiELostcount,
+      required this.apiDispSeiku,
+      required this.apiTouchPlane});
 
-  factory _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity.fromJson(
+  factory _$_BattleDataAircraftRoundStage1.fromJson(
           Map<String, dynamic> json) =>
-      _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityFromJson(json);
+      _$$_BattleDataAircraftRoundStage1FromJson(json);
 
   @override
-  @JsonKey(name: 'api_f_count')
   int apiFCount;
   @override
-  @JsonKey(name: 'api_f_lostcount')
   int apiFLostcount;
   @override
-  @JsonKey(name: 'api_e_count')
   int apiECount;
   @override
-  @JsonKey(name: 'api_e_lostcount')
   int apiELostcount;
   @override
-  @JsonKey(name: 'api_disp_seiku')
   int apiDispSeiku;
   @override
-  @JsonKey(name: 'api_touch_plane')
   List<int> apiTouchPlane;
 
   @override
   String toString() {
-    return 'ReqSortieBattleApiDataApiKoukuApiStage1Entity(apiFCount: $apiFCount, apiFLostcount: $apiFLostcount, apiECount: $apiECount, apiELostcount: $apiELostcount, apiDispSeiku: $apiDispSeiku, apiTouchPlane: $apiTouchPlane)';
+    return 'BattleDataAircraftRoundStage1(apiFCount: $apiFCount, apiFLostcount: $apiFLostcount, apiECount: $apiECount, apiELostcount: $apiELostcount, apiDispSeiku: $apiDispSeiku, apiTouchPlane: $apiTouchPlane)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<
-          _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity>
-      get copyWith =>
-          __$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWithImpl<
-                  _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity>(
-              this, _$identity);
+  _$$_BattleDataAircraftRoundStage1CopyWith<_$_BattleDataAircraftRoundStage1>
+      get copyWith => __$$_BattleDataAircraftRoundStage1CopyWithImpl<
+          _$_BattleDataAircraftRoundStage1>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityToJson(
+    return _$$_BattleDataAircraftRoundStage1ToJson(
       this,
     );
   }
 }
 
-abstract class _ReqSortieBattleApiDataApiKoukuApiStage1Entity
-    implements ReqSortieBattleApiDataApiKoukuApiStage1Entity {
-  factory _ReqSortieBattleApiDataApiKoukuApiStage1Entity(
-          {@JsonKey(name: 'api_f_count') required int apiFCount,
-          @JsonKey(name: 'api_f_lostcount') required int apiFLostcount,
-          @JsonKey(name: 'api_e_count') required int apiECount,
-          @JsonKey(name: 'api_e_lostcount') required int apiELostcount,
-          @JsonKey(name: 'api_disp_seiku') required int apiDispSeiku,
-          @JsonKey(name: 'api_touch_plane') required List<int> apiTouchPlane}) =
-      _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity;
+abstract class _BattleDataAircraftRoundStage1
+    implements BattleDataAircraftRoundStage1 {
+  factory _BattleDataAircraftRoundStage1(
+      {required int apiFCount,
+      required int apiFLostcount,
+      required int apiECount,
+      required int apiELostcount,
+      required int apiDispSeiku,
+      required List<int> apiTouchPlane}) = _$_BattleDataAircraftRoundStage1;
 
-  factory _ReqSortieBattleApiDataApiKoukuApiStage1Entity.fromJson(
-          Map<String, dynamic> json) =
-      _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity.fromJson;
+  factory _BattleDataAircraftRoundStage1.fromJson(Map<String, dynamic> json) =
+      _$_BattleDataAircraftRoundStage1.fromJson;
 
   @override
-  @JsonKey(name: 'api_f_count')
   int get apiFCount;
-  @JsonKey(name: 'api_f_count')
   set apiFCount(int value);
   @override
-  @JsonKey(name: 'api_f_lostcount')
   int get apiFLostcount;
-  @JsonKey(name: 'api_f_lostcount')
   set apiFLostcount(int value);
   @override
-  @JsonKey(name: 'api_e_count')
   int get apiECount;
-  @JsonKey(name: 'api_e_count')
   set apiECount(int value);
   @override
-  @JsonKey(name: 'api_e_lostcount')
   int get apiELostcount;
-  @JsonKey(name: 'api_e_lostcount')
   set apiELostcount(int value);
   @override
-  @JsonKey(name: 'api_disp_seiku')
   int get apiDispSeiku;
-  @JsonKey(name: 'api_disp_seiku')
   set apiDispSeiku(int value);
   @override
-  @JsonKey(name: 'api_touch_plane')
   List<int> get apiTouchPlane;
-  @JsonKey(name: 'api_touch_plane')
   set apiTouchPlane(List<int> value);
   @override
   @JsonKey(ignore: true)
-  _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityCopyWith<
-          _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity>
+  _$$_BattleDataAircraftRoundStage1CopyWith<_$_BattleDataAircraftRoundStage1>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BattleDataAircraftRoundStage2 _$BattleDataAircraftRoundStage2FromJson(
+    Map<String, dynamic> json) {
+  return _BattleDataAircraftRoundStage2.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BattleDataAircraftRoundStage2 {
+  int get apiFCount => throw _privateConstructorUsedError;
+  set apiFCount(int value) => throw _privateConstructorUsedError;
+  int get apiFLostcount => throw _privateConstructorUsedError;
+  set apiFLostcount(int value) => throw _privateConstructorUsedError;
+  int get apiECount => throw _privateConstructorUsedError;
+  set apiECount(int value) => throw _privateConstructorUsedError;
+  int get apiELostcount => throw _privateConstructorUsedError;
+  set apiELostcount(int value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BattleDataAircraftRoundStage2CopyWith<BattleDataAircraftRoundStage2>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BattleDataAircraftRoundStage2CopyWith<$Res> {
+  factory $BattleDataAircraftRoundStage2CopyWith(
+          BattleDataAircraftRoundStage2 value,
+          $Res Function(BattleDataAircraftRoundStage2) then) =
+      _$BattleDataAircraftRoundStage2CopyWithImpl<$Res,
+          BattleDataAircraftRoundStage2>;
+  @useResult
+  $Res call(
+      {int apiFCount, int apiFLostcount, int apiECount, int apiELostcount});
+}
+
+/// @nodoc
+class _$BattleDataAircraftRoundStage2CopyWithImpl<$Res,
+        $Val extends BattleDataAircraftRoundStage2>
+    implements $BattleDataAircraftRoundStage2CopyWith<$Res> {
+  _$BattleDataAircraftRoundStage2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiFCount = null,
+    Object? apiFLostcount = null,
+    Object? apiECount = null,
+    Object? apiELostcount = null,
+  }) {
+    return _then(_value.copyWith(
+      apiFCount: null == apiFCount
+          ? _value.apiFCount
+          : apiFCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiFLostcount: null == apiFLostcount
+          ? _value.apiFLostcount
+          : apiFLostcount // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiECount: null == apiECount
+          ? _value.apiECount
+          : apiECount // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiELostcount: null == apiELostcount
+          ? _value.apiELostcount
+          : apiELostcount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BattleDataAircraftRoundStage2CopyWith<$Res>
+    implements $BattleDataAircraftRoundStage2CopyWith<$Res> {
+  factory _$$_BattleDataAircraftRoundStage2CopyWith(
+          _$_BattleDataAircraftRoundStage2 value,
+          $Res Function(_$_BattleDataAircraftRoundStage2) then) =
+      __$$_BattleDataAircraftRoundStage2CopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int apiFCount, int apiFLostcount, int apiECount, int apiELostcount});
+}
+
+/// @nodoc
+class __$$_BattleDataAircraftRoundStage2CopyWithImpl<$Res>
+    extends _$BattleDataAircraftRoundStage2CopyWithImpl<$Res,
+        _$_BattleDataAircraftRoundStage2>
+    implements _$$_BattleDataAircraftRoundStage2CopyWith<$Res> {
+  __$$_BattleDataAircraftRoundStage2CopyWithImpl(
+      _$_BattleDataAircraftRoundStage2 _value,
+      $Res Function(_$_BattleDataAircraftRoundStage2) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiFCount = null,
+    Object? apiFLostcount = null,
+    Object? apiECount = null,
+    Object? apiELostcount = null,
+  }) {
+    return _then(_$_BattleDataAircraftRoundStage2(
+      apiFCount: null == apiFCount
+          ? _value.apiFCount
+          : apiFCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiFLostcount: null == apiFLostcount
+          ? _value.apiFLostcount
+          : apiFLostcount // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiECount: null == apiECount
+          ? _value.apiECount
+          : apiECount // ignore: cast_nullable_to_non_nullable
+              as int,
+      apiELostcount: null == apiELostcount
+          ? _value.apiELostcount
+          : apiELostcount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_BattleDataAircraftRoundStage2
+    implements _BattleDataAircraftRoundStage2 {
+  _$_BattleDataAircraftRoundStage2(
+      {required this.apiFCount,
+      required this.apiFLostcount,
+      required this.apiECount,
+      required this.apiELostcount});
+
+  factory _$_BattleDataAircraftRoundStage2.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_BattleDataAircraftRoundStage2FromJson(json);
+
+  @override
+  int apiFCount;
+  @override
+  int apiFLostcount;
+  @override
+  int apiECount;
+  @override
+  int apiELostcount;
+
+  @override
+  String toString() {
+    return 'BattleDataAircraftRoundStage2(apiFCount: $apiFCount, apiFLostcount: $apiFLostcount, apiECount: $apiECount, apiELostcount: $apiELostcount)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BattleDataAircraftRoundStage2CopyWith<_$_BattleDataAircraftRoundStage2>
+      get copyWith => __$$_BattleDataAircraftRoundStage2CopyWithImpl<
+          _$_BattleDataAircraftRoundStage2>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BattleDataAircraftRoundStage2ToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BattleDataAircraftRoundStage2
+    implements BattleDataAircraftRoundStage2 {
+  factory _BattleDataAircraftRoundStage2(
+      {required int apiFCount,
+      required int apiFLostcount,
+      required int apiECount,
+      required int apiELostcount}) = _$_BattleDataAircraftRoundStage2;
+
+  factory _BattleDataAircraftRoundStage2.fromJson(Map<String, dynamic> json) =
+      _$_BattleDataAircraftRoundStage2.fromJson;
+
+  @override
+  int get apiFCount;
+  set apiFCount(int value);
+  @override
+  int get apiFLostcount;
+  set apiFLostcount(int value);
+  @override
+  int get apiECount;
+  set apiECount(int value);
+  @override
+  int get apiELostcount;
+  set apiELostcount(int value);
+  @override
+  @JsonKey(ignore: true)
+  _$$_BattleDataAircraftRoundStage2CopyWith<_$_BattleDataAircraftRoundStage2>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BattleDataAircraftRoundStage3 _$BattleDataAircraftRoundStage3FromJson(
+    Map<String, dynamic> json) {
+  return _BattleDataAircraftRoundStage3.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BattleDataAircraftRoundStage3 {
+  List<int> get apiFraiFlag => throw _privateConstructorUsedError;
+  set apiFraiFlag(List<int> value) => throw _privateConstructorUsedError;
+  List<int> get apiEraiFlag => throw _privateConstructorUsedError;
+  set apiEraiFlag(List<int> value) => throw _privateConstructorUsedError;
+  List<int> get apiFbakFlag => throw _privateConstructorUsedError;
+  set apiFbakFlag(List<int> value) => throw _privateConstructorUsedError;
+  List<int> get apiEbakFlag => throw _privateConstructorUsedError;
+  set apiEbakFlag(List<int> value) => throw _privateConstructorUsedError;
+  List<int> get apiFclFlag => throw _privateConstructorUsedError;
+  set apiFclFlag(List<int> value) => throw _privateConstructorUsedError;
+  List<int> get apiEclFlag => throw _privateConstructorUsedError;
+  set apiEclFlag(List<int> value) => throw _privateConstructorUsedError;
+  List<num> get apiFdam => throw _privateConstructorUsedError;
+  set apiFdam(List<num> value) => throw _privateConstructorUsedError;
+  List<num> get apiEdam => throw _privateConstructorUsedError;
+  set apiEdam(List<num> value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BattleDataAircraftRoundStage3CopyWith<BattleDataAircraftRoundStage3>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BattleDataAircraftRoundStage3CopyWith<$Res> {
+  factory $BattleDataAircraftRoundStage3CopyWith(
+          BattleDataAircraftRoundStage3 value,
+          $Res Function(BattleDataAircraftRoundStage3) then) =
+      _$BattleDataAircraftRoundStage3CopyWithImpl<$Res,
+          BattleDataAircraftRoundStage3>;
+  @useResult
+  $Res call(
+      {List<int> apiFraiFlag,
+      List<int> apiEraiFlag,
+      List<int> apiFbakFlag,
+      List<int> apiEbakFlag,
+      List<int> apiFclFlag,
+      List<int> apiEclFlag,
+      List<num> apiFdam,
+      List<num> apiEdam});
+}
+
+/// @nodoc
+class _$BattleDataAircraftRoundStage3CopyWithImpl<$Res,
+        $Val extends BattleDataAircraftRoundStage3>
+    implements $BattleDataAircraftRoundStage3CopyWith<$Res> {
+  _$BattleDataAircraftRoundStage3CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiFraiFlag = null,
+    Object? apiEraiFlag = null,
+    Object? apiFbakFlag = null,
+    Object? apiEbakFlag = null,
+    Object? apiFclFlag = null,
+    Object? apiEclFlag = null,
+    Object? apiFdam = null,
+    Object? apiEdam = null,
+  }) {
+    return _then(_value.copyWith(
+      apiFraiFlag: null == apiFraiFlag
+          ? _value.apiFraiFlag
+          : apiFraiFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiEraiFlag: null == apiEraiFlag
+          ? _value.apiEraiFlag
+          : apiEraiFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiFbakFlag: null == apiFbakFlag
+          ? _value.apiFbakFlag
+          : apiFbakFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiEbakFlag: null == apiEbakFlag
+          ? _value.apiEbakFlag
+          : apiEbakFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiFclFlag: null == apiFclFlag
+          ? _value.apiFclFlag
+          : apiFclFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiEclFlag: null == apiEclFlag
+          ? _value.apiEclFlag
+          : apiEclFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiFdam: null == apiFdam
+          ? _value.apiFdam
+          : apiFdam // ignore: cast_nullable_to_non_nullable
+              as List<num>,
+      apiEdam: null == apiEdam
+          ? _value.apiEdam
+          : apiEdam // ignore: cast_nullable_to_non_nullable
+              as List<num>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BattleDataAircraftRoundStage3CopyWith<$Res>
+    implements $BattleDataAircraftRoundStage3CopyWith<$Res> {
+  factory _$$_BattleDataAircraftRoundStage3CopyWith(
+          _$_BattleDataAircraftRoundStage3 value,
+          $Res Function(_$_BattleDataAircraftRoundStage3) then) =
+      __$$_BattleDataAircraftRoundStage3CopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<int> apiFraiFlag,
+      List<int> apiEraiFlag,
+      List<int> apiFbakFlag,
+      List<int> apiEbakFlag,
+      List<int> apiFclFlag,
+      List<int> apiEclFlag,
+      List<num> apiFdam,
+      List<num> apiEdam});
+}
+
+/// @nodoc
+class __$$_BattleDataAircraftRoundStage3CopyWithImpl<$Res>
+    extends _$BattleDataAircraftRoundStage3CopyWithImpl<$Res,
+        _$_BattleDataAircraftRoundStage3>
+    implements _$$_BattleDataAircraftRoundStage3CopyWith<$Res> {
+  __$$_BattleDataAircraftRoundStage3CopyWithImpl(
+      _$_BattleDataAircraftRoundStage3 _value,
+      $Res Function(_$_BattleDataAircraftRoundStage3) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? apiFraiFlag = null,
+    Object? apiEraiFlag = null,
+    Object? apiFbakFlag = null,
+    Object? apiEbakFlag = null,
+    Object? apiFclFlag = null,
+    Object? apiEclFlag = null,
+    Object? apiFdam = null,
+    Object? apiEdam = null,
+  }) {
+    return _then(_$_BattleDataAircraftRoundStage3(
+      apiFraiFlag: null == apiFraiFlag
+          ? _value.apiFraiFlag
+          : apiFraiFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiEraiFlag: null == apiEraiFlag
+          ? _value.apiEraiFlag
+          : apiEraiFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiFbakFlag: null == apiFbakFlag
+          ? _value.apiFbakFlag
+          : apiFbakFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiEbakFlag: null == apiEbakFlag
+          ? _value.apiEbakFlag
+          : apiEbakFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiFclFlag: null == apiFclFlag
+          ? _value.apiFclFlag
+          : apiFclFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiEclFlag: null == apiEclFlag
+          ? _value.apiEclFlag
+          : apiEclFlag // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      apiFdam: null == apiFdam
+          ? _value.apiFdam
+          : apiFdam // ignore: cast_nullable_to_non_nullable
+              as List<num>,
+      apiEdam: null == apiEdam
+          ? _value.apiEdam
+          : apiEdam // ignore: cast_nullable_to_non_nullable
+              as List<num>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_BattleDataAircraftRoundStage3
+    implements _BattleDataAircraftRoundStage3 {
+  _$_BattleDataAircraftRoundStage3(
+      {required this.apiFraiFlag,
+      required this.apiEraiFlag,
+      required this.apiFbakFlag,
+      required this.apiEbakFlag,
+      required this.apiFclFlag,
+      required this.apiEclFlag,
+      required this.apiFdam,
+      required this.apiEdam});
+
+  factory _$_BattleDataAircraftRoundStage3.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_BattleDataAircraftRoundStage3FromJson(json);
+
+  @override
+  List<int> apiFraiFlag;
+  @override
+  List<int> apiEraiFlag;
+  @override
+  List<int> apiFbakFlag;
+  @override
+  List<int> apiEbakFlag;
+  @override
+  List<int> apiFclFlag;
+  @override
+  List<int> apiEclFlag;
+  @override
+  List<num> apiFdam;
+  @override
+  List<num> apiEdam;
+
+  @override
+  String toString() {
+    return 'BattleDataAircraftRoundStage3(apiFraiFlag: $apiFraiFlag, apiEraiFlag: $apiEraiFlag, apiFbakFlag: $apiFbakFlag, apiEbakFlag: $apiEbakFlag, apiFclFlag: $apiFclFlag, apiEclFlag: $apiEclFlag, apiFdam: $apiFdam, apiEdam: $apiEdam)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BattleDataAircraftRoundStage3CopyWith<_$_BattleDataAircraftRoundStage3>
+      get copyWith => __$$_BattleDataAircraftRoundStage3CopyWithImpl<
+          _$_BattleDataAircraftRoundStage3>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BattleDataAircraftRoundStage3ToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BattleDataAircraftRoundStage3
+    implements BattleDataAircraftRoundStage3 {
+  factory _BattleDataAircraftRoundStage3(
+      {required List<int> apiFraiFlag,
+      required List<int> apiEraiFlag,
+      required List<int> apiFbakFlag,
+      required List<int> apiEbakFlag,
+      required List<int> apiFclFlag,
+      required List<int> apiEclFlag,
+      required List<num> apiFdam,
+      required List<num> apiEdam}) = _$_BattleDataAircraftRoundStage3;
+
+  factory _BattleDataAircraftRoundStage3.fromJson(Map<String, dynamic> json) =
+      _$_BattleDataAircraftRoundStage3.fromJson;
+
+  @override
+  List<int> get apiFraiFlag;
+  set apiFraiFlag(List<int> value);
+  @override
+  List<int> get apiEraiFlag;
+  set apiEraiFlag(List<int> value);
+  @override
+  List<int> get apiFbakFlag;
+  set apiFbakFlag(List<int> value);
+  @override
+  List<int> get apiEbakFlag;
+  set apiEbakFlag(List<int> value);
+  @override
+  List<int> get apiFclFlag;
+  set apiFclFlag(List<int> value);
+  @override
+  List<int> get apiEclFlag;
+  set apiEclFlag(List<int> value);
+  @override
+  List<num> get apiFdam;
+  set apiFdam(List<num> value);
+  @override
+  List<num> get apiEdam;
+  set apiEdam(List<num> value);
+  @override
+  @JsonKey(ignore: true)
+  _$$_BattleDataAircraftRoundStage3CopyWith<_$_BattleDataAircraftRoundStage3>
       get copyWith => throw _privateConstructorUsedError;
 }
 

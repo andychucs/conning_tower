@@ -34,6 +34,14 @@ mixin _$BattleInfo {
   set dmgTakenMap(Map<int, int>? value) => throw _privateConstructorUsedError;
   Map<int, int>? get dmgMap => throw _privateConstructorUsedError;
   set dmgMap(Map<int, int>? value) => throw _privateConstructorUsedError;
+  int? get airSuperiorityFlag => throw _privateConstructorUsedError;
+  set airSuperiorityFlag(int? value) => throw _privateConstructorUsedError;
+  int? get formation => throw _privateConstructorUsedError;
+  set formation(int? value) => throw _privateConstructorUsedError;
+  int? get eFormation => throw _privateConstructorUsedError;
+  set eFormation(int? value) => throw _privateConstructorUsedError;
+  int? get contact => throw _privateConstructorUsedError;
+  set contact(int? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BattleInfoCopyWith<BattleInfo> get copyWith =>
@@ -55,7 +63,11 @@ abstract class $BattleInfoCopyWith<$Res> {
       List<Squad>? enemySquads,
       List<Squad>? inBattleSquads,
       Map<int, int>? dmgTakenMap,
-      Map<int, int>? dmgMap});
+      Map<int, int>? dmgMap,
+      int? airSuperiorityFlag,
+      int? formation,
+      int? eFormation,
+      int? contact});
 }
 
 /// @nodoc
@@ -80,6 +92,10 @@ class _$BattleInfoCopyWithImpl<$Res, $Val extends BattleInfo>
     Object? inBattleSquads = freezed,
     Object? dmgTakenMap = freezed,
     Object? dmgMap = freezed,
+    Object? airSuperiorityFlag = freezed,
+    Object? formation = freezed,
+    Object? eFormation = freezed,
+    Object? contact = freezed,
   }) {
     return _then(_value.copyWith(
       result: freezed == result
@@ -118,6 +134,22 @@ class _$BattleInfoCopyWithImpl<$Res, $Val extends BattleInfo>
           ? _value.dmgMap
           : dmgMap // ignore: cast_nullable_to_non_nullable
               as Map<int, int>?,
+      airSuperiorityFlag: freezed == airSuperiorityFlag
+          ? _value.airSuperiorityFlag
+          : airSuperiorityFlag // ignore: cast_nullable_to_non_nullable
+              as int?,
+      formation: freezed == formation
+          ? _value.formation
+          : formation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      eFormation: freezed == eFormation
+          ? _value.eFormation
+          : eFormation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      contact: freezed == contact
+          ? _value.contact
+          : contact // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -139,7 +171,11 @@ abstract class _$$_BattleInfoCopyWith<$Res>
       List<Squad>? enemySquads,
       List<Squad>? inBattleSquads,
       Map<int, int>? dmgTakenMap,
-      Map<int, int>? dmgMap});
+      Map<int, int>? dmgMap,
+      int? airSuperiorityFlag,
+      int? formation,
+      int? eFormation,
+      int? contact});
 }
 
 /// @nodoc
@@ -162,6 +198,10 @@ class __$$_BattleInfoCopyWithImpl<$Res>
     Object? inBattleSquads = freezed,
     Object? dmgTakenMap = freezed,
     Object? dmgMap = freezed,
+    Object? airSuperiorityFlag = freezed,
+    Object? formation = freezed,
+    Object? eFormation = freezed,
+    Object? contact = freezed,
   }) {
     return _then(_$_BattleInfo(
       result: freezed == result
@@ -200,6 +240,22 @@ class __$$_BattleInfoCopyWithImpl<$Res>
           ? _value.dmgMap
           : dmgMap // ignore: cast_nullable_to_non_nullable
               as Map<int, int>?,
+      airSuperiorityFlag: freezed == airSuperiorityFlag
+          ? _value.airSuperiorityFlag
+          : airSuperiorityFlag // ignore: cast_nullable_to_non_nullable
+              as int?,
+      formation: freezed == formation
+          ? _value.formation
+          : formation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      eFormation: freezed == eFormation
+          ? _value.eFormation
+          : eFormation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      contact: freezed == contact
+          ? _value.contact
+          : contact // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -216,7 +272,11 @@ class _$_BattleInfo extends _BattleInfo with DiagnosticableTreeMixin {
       this.enemySquads,
       this.inBattleSquads,
       this.dmgTakenMap,
-      this.dmgMap})
+      this.dmgMap,
+      this.airSuperiorityFlag,
+      this.formation,
+      this.eFormation,
+      this.contact})
       : super._();
 
   @override
@@ -237,10 +297,18 @@ class _$_BattleInfo extends _BattleInfo with DiagnosticableTreeMixin {
   Map<int, int>? dmgTakenMap;
   @override
   Map<int, int>? dmgMap;
+  @override
+  int? airSuperiorityFlag;
+  @override
+  int? formation;
+  @override
+  int? eFormation;
+  @override
+  int? contact;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BattleInfo(result: $result, dropName: $dropName, mvp: $mvp, dropItemId: $dropItemId, dropItemName: $dropItemName, enemySquads: $enemySquads, inBattleSquads: $inBattleSquads, dmgTakenMap: $dmgTakenMap, dmgMap: $dmgMap)';
+    return 'BattleInfo(result: $result, dropName: $dropName, mvp: $mvp, dropItemId: $dropItemId, dropItemName: $dropItemName, enemySquads: $enemySquads, inBattleSquads: $inBattleSquads, dmgTakenMap: $dmgTakenMap, dmgMap: $dmgMap, airSuperiorityFlag: $airSuperiorityFlag, formation: $formation, eFormation: $eFormation, contact: $contact)';
   }
 
   @override
@@ -256,7 +324,11 @@ class _$_BattleInfo extends _BattleInfo with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('enemySquads', enemySquads))
       ..add(DiagnosticsProperty('inBattleSquads', inBattleSquads))
       ..add(DiagnosticsProperty('dmgTakenMap', dmgTakenMap))
-      ..add(DiagnosticsProperty('dmgMap', dmgMap));
+      ..add(DiagnosticsProperty('dmgMap', dmgMap))
+      ..add(DiagnosticsProperty('airSuperiorityFlag', airSuperiorityFlag))
+      ..add(DiagnosticsProperty('formation', formation))
+      ..add(DiagnosticsProperty('eFormation', eFormation))
+      ..add(DiagnosticsProperty('contact', contact));
   }
 
   @JsonKey(ignore: true)
@@ -276,7 +348,11 @@ abstract class _BattleInfo extends BattleInfo {
       List<Squad>? enemySquads,
       List<Squad>? inBattleSquads,
       Map<int, int>? dmgTakenMap,
-      Map<int, int>? dmgMap}) = _$_BattleInfo;
+      Map<int, int>? dmgMap,
+      int? airSuperiorityFlag,
+      int? formation,
+      int? eFormation,
+      int? contact}) = _$_BattleInfo;
   _BattleInfo._() : super._();
 
   @override
@@ -306,6 +382,18 @@ abstract class _BattleInfo extends BattleInfo {
   @override
   Map<int, int>? get dmgMap;
   set dmgMap(Map<int, int>? value);
+  @override
+  int? get airSuperiorityFlag;
+  set airSuperiorityFlag(int? value);
+  @override
+  int? get formation;
+  set formation(int? value);
+  @override
+  int? get eFormation;
+  set eFormation(int? value);
+  @override
+  int? get contact;
+  set contact(int? value);
   @override
   @JsonKey(ignore: true)
   _$$_BattleInfoCopyWith<_$_BattleInfo> get copyWith =>

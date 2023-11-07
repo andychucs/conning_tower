@@ -20,22 +20,21 @@ class ReqSortieBattleEntity with _$ReqSortieBattleEntity {
 }
 
 @unfreezed
-class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity implements SingleVsSingleBaseModel{
+class ReqSortieBattleApiDataEntity
+    with _$ReqSortieBattleApiDataEntity
+    implements SingleVsSingleBaseModel {
   factory ReqSortieBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
     @JsonKey(name: 'api_f_nowhps') required List<int> apiFNowhps,
     @JsonKey(name: 'api_f_maxhps') required List<int> apiFMaxhps,
-    @JsonKey(name: 'api_fParam')
-    required List<dynamic> apiFParam,
+    @JsonKey(name: 'api_fParam') required List<dynamic> apiFParam,
     @JsonKey(name: 'api_ship_ke') required List<int> apiShipKe,
     @JsonKey(name: 'api_ship_lv') required List<int> apiShipLv,
     @JsonKey(name: 'api_e_nowhps') required List<int> apiENowhps,
     @JsonKey(name: 'api_e_maxhps') required List<int> apiEMaxhps,
-    @JsonKey(name: 'api_eSlot')
-    required List<dynamic> apiESlot,
-    @JsonKey(name: 'api_eParam')
-    required List<dynamic> apiEParam,
+    @JsonKey(name: 'api_eSlot') required List<dynamic> apiESlot,
+    @JsonKey(name: 'api_eParam') required List<dynamic> apiEParam,
     @JsonKey(name: 'api_smoke_type') required int apiSmokeType,
     @JsonKey(name: 'api_midnight_flag') required int apiMidnightFlag,
     @JsonKey(name: 'api_search') required List<int> apiSearch,
@@ -45,14 +44,21 @@ class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity implement
     @JsonKey(name: 'api_support_flag') required int apiSupportFlag,
     @JsonKey(name: 'api_support_info') required dynamic apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') required int apiOpeningTaisenFlag,
-    @JsonKey(name: 'api_opening_taisen') required dynamic apiOpeningTaisen,
+    @JsonKey(name: 'api_opening_taisen')
+    ReqSortieBattleApiDataApiHougekiEntity?
+        apiOpeningTaisen, // antisub use same format with gunfire
     @JsonKey(name: 'api_opening_flag') required int apiOpeningFlag,
-    @JsonKey(name: 'api_opening_atack') required dynamic apiOpeningAtack,
+    @JsonKey(name: 'api_opening_atack')
+    ReqSortieBattleApiDataApiRaigekiEntity? apiOpeningAtack,
     @JsonKey(name: 'api_hourai_flag') required List<int> apiHouraiFlag,
-    @JsonKey(name: 'api_hougeki1') ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
-    @JsonKey(name: 'api_hougeki2') ReqSortieBattleApiDataApiHougekiEntity? apiHougeki2,
-    @JsonKey(name: 'api_hougeki3') ReqSortieBattleApiDataApiHougekiEntity? apiHougeki3,
-    @JsonKey(name: 'api_raigeki') ReqSortieBattleApiDataApiRaigekiEntity? apiRaigeki,
+    @JsonKey(name: 'api_hougeki1')
+    ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
+    @JsonKey(name: 'api_hougeki2')
+    ReqSortieBattleApiDataApiHougekiEntity? apiHougeki2,
+    @JsonKey(name: 'api_hougeki3')
+    ReqSortieBattleApiDataApiHougekiEntity? apiHougeki3,
+    @JsonKey(name: 'api_raigeki')
+    ReqSortieBattleApiDataApiRaigekiEntity? apiRaigeki,
   }) = _ReqSortieBattleApiDataEntity;
 
   factory ReqSortieBattleApiDataEntity.fromJson(Map<String, dynamic> json) =>
@@ -63,13 +69,11 @@ class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity implement
 class ReqSortieBattleApiDataApiKoukuEntity
     with _$ReqSortieBattleApiDataApiKoukuEntity {
   factory ReqSortieBattleApiDataApiKoukuEntity({
-    @JsonKey(name: 'api_plane_from')
-    required List<dynamic>
-        apiPlaneFrom,
+    @JsonKey(name: 'api_plane_from') required List<List<int>?> apiPlaneFrom,
     @JsonKey(name: 'api_stage1')
-    required ReqSortieBattleApiDataApiKoukuApiStage1Entity apiStage1,
-    @JsonKey(name: 'api_stage2') required dynamic apiStage2,
-    @JsonKey(name: 'api_stage3') required dynamic apiStage3,
+    required BattleDataAircraftRoundStage1 apiStage1,
+    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
   }) = _ReqSortieBattleApiDataApiKoukuEntity;
 
   factory ReqSortieBattleApiDataApiKoukuEntity.fromJson(
@@ -78,25 +82,54 @@ class ReqSortieBattleApiDataApiKoukuEntity
 }
 
 @unfreezed
-class ReqSortieBattleApiDataApiKoukuApiStage1Entity
-    with _$ReqSortieBattleApiDataApiKoukuApiStage1Entity {
-  factory ReqSortieBattleApiDataApiKoukuApiStage1Entity({
-    @JsonKey(name: 'api_f_count') required int apiFCount,
-    @JsonKey(name: 'api_f_lostcount') required int apiFLostcount,
-    @JsonKey(name: 'api_e_count') required int apiECount,
-    @JsonKey(name: 'api_e_lostcount') required int apiELostcount,
-    @JsonKey(name: 'api_disp_seiku') required int apiDispSeiku,
-    @JsonKey(name: 'api_touch_plane') required List<int> apiTouchPlane,
-  }) = _ReqSortieBattleApiDataApiKoukuApiStage1Entity;
+class BattleDataAircraftRoundStage1 with _$BattleDataAircraftRoundStage1 {
+  factory BattleDataAircraftRoundStage1({
+    required int apiFCount,
+    required int apiFLostcount,
+    required int apiECount,
+    required int apiELostcount,
+    required int apiDispSeiku,
+    required List<int> apiTouchPlane,
+  }) = _BattleDataAircraftRoundStage1;
 
-  factory ReqSortieBattleApiDataApiKoukuApiStage1Entity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqSortieBattleApiDataApiKoukuApiStage1EntityFromJson(json);
+  factory BattleDataAircraftRoundStage1.fromJson(Map<String, dynamic> json) =>
+      _$BattleDataAircraftRoundStage1FromJson(json);
+}
+
+@unfreezed
+class BattleDataAircraftRoundStage2 with _$BattleDataAircraftRoundStage2 {
+  factory BattleDataAircraftRoundStage2({
+    required int apiFCount,
+    required int apiFLostcount,
+    required int apiECount,
+    required int apiELostcount,
+  }) = _BattleDataAircraftRoundStage2;
+
+  factory BattleDataAircraftRoundStage2.fromJson(Map<String, dynamic> json) =>
+      _$BattleDataAircraftRoundStage2FromJson(json);
+}
+
+@unfreezed
+class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
+  factory BattleDataAircraftRoundStage3({
+    required List<int> apiFraiFlag,
+    required List<int> apiEraiFlag,
+    required List<int> apiFbakFlag,
+    required List<int> apiEbakFlag,
+    required List<int> apiFclFlag,
+    required List<int> apiEclFlag,
+    required List<num> apiFdam,
+    required List<num> apiEdam,
+  }) = _BattleDataAircraftRoundStage3;
+
+  factory BattleDataAircraftRoundStage3.fromJson(Map<String, dynamic> json) =>
+      _$BattleDataAircraftRoundStage3FromJson(json);
 }
 
 @unfreezed
 class ReqSortieBattleApiDataApiHougekiEntity
-    with _$ReqSortieBattleApiDataApiHougekiEntity implements GunFireRound {
+    with _$ReqSortieBattleApiDataApiHougekiEntity
+    implements GunFireRound {
   factory ReqSortieBattleApiDataApiHougekiEntity({
     @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
     @JsonKey(name: 'api_at_list') List<int>? apiAtList,
