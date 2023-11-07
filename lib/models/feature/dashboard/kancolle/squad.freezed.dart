@@ -20,8 +20,8 @@ mixin _$Squad {
   set id(int value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
-  int get operation => throw _privateConstructorUsedError;
-  set operation(int value) => throw _privateConstructorUsedError;
+  int? get operation => throw _privateConstructorUsedError;
+  set operation(int? value) => throw _privateConstructorUsedError;
   List<Ship> get ships => throw _privateConstructorUsedError;
   set ships(List<Ship> value) => throw _privateConstructorUsedError;
 
@@ -34,7 +34,7 @@ abstract class $SquadCopyWith<$Res> {
   factory $SquadCopyWith(Squad value, $Res Function(Squad) then) =
       _$SquadCopyWithImpl<$Res, Squad>;
   @useResult
-  $Res call({int id, String name, int operation, List<Ship> ships});
+  $Res call({int id, String name, int? operation, List<Ship> ships});
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$SquadCopyWithImpl<$Res, $Val extends Squad>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? operation = null,
+    Object? operation = freezed,
     Object? ships = null,
   }) {
     return _then(_value.copyWith(
@@ -64,10 +64,10 @@ class _$SquadCopyWithImpl<$Res, $Val extends Squad>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      operation: null == operation
+      operation: freezed == operation
           ? _value.operation
           : operation // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       ships: null == ships
           ? _value.ships
           : ships // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$_SquadCopyWith<$Res> implements $SquadCopyWith<$Res> {
       __$$_SquadCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int operation, List<Ship> ships});
+  $Res call({int id, String name, int? operation, List<Ship> ships});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$_SquadCopyWithImpl<$Res> extends _$SquadCopyWithImpl<$Res, _$_Squad>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? operation = null,
+    Object? operation = freezed,
     Object? ships = null,
   }) {
     return _then(_$_Squad(
@@ -108,10 +108,10 @@ class __$$_SquadCopyWithImpl<$Res> extends _$SquadCopyWithImpl<$Res, _$_Squad>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      operation: null == operation
+      operation: freezed == operation
           ? _value.operation
           : operation // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       ships: null == ships
           ? _value.ships
           : ships // ignore: cast_nullable_to_non_nullable
@@ -126,7 +126,7 @@ class _$_Squad implements _Squad {
   _$_Squad(
       {required this.id,
       required this.name,
-      required this.operation,
+      this.operation,
       required this.ships});
 
   @override
@@ -134,7 +134,7 @@ class _$_Squad implements _Squad {
   @override
   String name;
   @override
-  int operation;
+  int? operation;
   @override
   List<Ship> ships;
 
@@ -154,7 +154,7 @@ abstract class _Squad implements Squad {
   factory _Squad(
       {required int id,
       required String name,
-      required int operation,
+      int? operation,
       required List<Ship> ships}) = _$_Squad;
 
   @override
@@ -164,8 +164,8 @@ abstract class _Squad implements Squad {
   String get name;
   set name(String value);
   @override
-  int get operation;
-  set operation(int value);
+  int? get operation;
+  set operation(int? value);
   @override
   List<Ship> get ships;
   set ships(List<Ship> value);

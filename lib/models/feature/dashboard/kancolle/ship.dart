@@ -6,17 +6,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ship.freezed.dart';
 
-@freezed
+@unfreezed
 class Ship with _$Ship {
   const Ship._();
 
-  const factory Ship({
+  factory Ship({
     required int uid,
     // required int sortNo,
     required int shipId,
-    required String name,
+    String? name,
     required int level,
-    required List<int> exp,
+    List<int>? exp,
     required int nowHP,
     required int maxHP,
     int? speed,
@@ -45,6 +45,13 @@ class Ship with _$Ship {
     // required int apiLockedEquip,
     // required int apiSallyArea,
   }) = _Ship;
+
+  void onHPChange(int damage) {
+    nowHP = nowHP + damage;
+    if (nowHP < 0) {
+      nowHP = 0;
+    }
+  }
 
   bool damaged() {
     if (nowHP <= maxHP * 0.25) {

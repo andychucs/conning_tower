@@ -42,6 +42,7 @@ class ReqSortieBattleResultApiDataEntity
     @JsonKey(name: 'api_mapcell_incentive') required int apiMapcellIncentive,
     @JsonKey(name: 'api_get_flag') List<int>? apiGetFlag,
     @JsonKey(name: 'api_get_ship') ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
+    ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
     @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
     @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
     @JsonKey(name: 'api_get_exmap_useitem_id')
@@ -67,6 +68,19 @@ class ReqSortieBattleResultApiDataApiEnemyInfoEntity
   factory ReqSortieBattleResultApiDataApiEnemyInfoEntity.fromJson(
           Map<String, dynamic> json) =>
       _$ReqSortieBattleResultApiDataApiEnemyInfoEntityFromJson(json);
+}
+
+@unfreezed
+class ReqSortieBattleResultApiDataApiGetUseitemEntity
+    with _$ReqSortieBattleResultApiDataApiGetUseitemEntity {
+  factory ReqSortieBattleResultApiDataApiGetUseitemEntity({
+    @JsonKey(name: 'api_useitem_id') int? apiUseitemId,
+    @JsonKey(name: 'api_useitem_name') String? apiUseitemName,
+  }) = _ReqSortieBattleResultApiDataApiGetUseitemEntity;
+
+  factory ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson(
+          Map<String, dynamic> json) =>
+      _$ReqSortieBattleResultApiDataApiGetUseitemEntityFromJson(json);
 }
 
 @unfreezed
