@@ -121,7 +121,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                     '索敵:${scoutList.reduce((value, element) => value + element)}\n'),
                                 GestureDetector(
                                   child: Icon(
-                                    CupertinoIcons.info,
+                                    CupertinoIcons.question_circle,
                                     size: 20,
                                     color: CupertinoDynamicColor.resolve(
                                         kHeaderFooterColor, context),
