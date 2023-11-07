@@ -670,6 +670,16 @@ class S {
     );
   }
 
+  /// `Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.`
+  String get KCDashboardBattleDescription {
+    return Intl.message(
+      'Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.',
+      name: 'KCDashboardBattleDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report`
   String get KCDashboardBattleReport {
     return Intl.message(
