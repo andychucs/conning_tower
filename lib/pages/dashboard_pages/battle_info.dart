@@ -63,6 +63,7 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                               child: ListView(
                                 children: [
                                   CupertinoListSection.insetGrouped(
+                                    header: CupertinoListSectionDescription(S.current.KCDashboardBattleDescription),
                                     footer: SelectableText(
                                         "BattleInfo:\n${battleInfo.toString()}\nData:\n${ref.watch(rawDataProvider).source}\n${jsonDecode(ref.watch(rawDataProvider).data)}"),
                                     children: [
