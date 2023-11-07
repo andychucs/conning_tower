@@ -1,10 +1,10 @@
 abstract class GunFireRound {
-  late List<int> apiAtEflag;
-  late List<int> apiAtList;
-  late List<List<int>> apiDfList;
-  late List<dynamic> apiSiList;
-  late List<List<int>> apiClList;
-  late List<List<num>> apiDamage;
+  late List<int>? apiAtEflag;
+  late List<int>? apiAtList;
+  late List<List<int>>? apiDfList;
+  late List<dynamic>? apiSiList;
+  late List<List<int>>? apiClList;
+  late List<List<num>>? apiDamage;
 }
 
 abstract class SingleVsSingleBaseModel {

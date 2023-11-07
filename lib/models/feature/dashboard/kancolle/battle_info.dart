@@ -181,19 +181,20 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void gunFireRoundSingleVsSingle(GunFireRound attackData) {
-    for (final (index, flag) in attackData.apiAtEflag.indexed) {
+  void gunFireRoundSingleVsSingle(GunFireRound data) {
+    if (data.apiAtEflag == null) return;
+    for (final (index, flag) in data.apiAtEflag!.indexed) {
       if (flag != 1 && flag != 0) {
         log("unhandled active flag");
         continue;
       }
-      final actIndex = attackData.apiAtList[index];
+      final actIndex = data.apiAtList![index];
 
       final actSquads = flag == 0 ? inBattleSquads! : enemySquads!;
       final defSquads = flag == 1 ? inBattleSquads! : enemySquads!;
 
-      final damages = attackData.apiDamage[index];
-      final defList = attackData.apiDfList[index];
+      final damages = data.apiDamage![index];
+      final defList = data.apiDfList![index];
 
       for (final (index, damage) in damages.indexed) {
         final defIndex = defList[index];

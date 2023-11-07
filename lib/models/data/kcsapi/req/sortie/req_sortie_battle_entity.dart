@@ -98,17 +98,13 @@ class ReqSortieBattleApiDataApiKoukuApiStage1Entity
 class ReqSortieBattleApiDataApiHougekiEntity
     with _$ReqSortieBattleApiDataApiHougekiEntity implements GunFireRound {
   factory ReqSortieBattleApiDataApiHougekiEntity({
-    @JsonKey(name: 'api_at_eflag') required List<int> apiAtEflag,
-    @JsonKey(name: 'api_at_list') required List<int> apiAtList,
-    @JsonKey(name: 'api_at_type') required List<int> apiAtType,
-    @JsonKey(name: 'api_df_list')
-    required List<List<int>> apiDfList,
-    @JsonKey(name: 'api_si_list')
-    required List<dynamic> apiSiList,
-    @JsonKey(name: 'api_cl_list')
-    required List<List<int>> apiClList,
-    @JsonKey(name: 'api_damage')
-    required List<List<num>> apiDamage,
+    @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
+    @JsonKey(name: 'api_at_list') List<int>? apiAtList,
+    @JsonKey(name: 'api_at_type') List<int>? apiAtType,
+    @JsonKey(name: 'api_df_list') List<List<int>>? apiDfList,
+    @JsonKey(name: 'api_si_list') List<dynamic>? apiSiList,
+    @JsonKey(name: 'api_cl_list') List<List<int>>? apiClList,
+    @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
   }) = _ReqSortieBattleApiDataApiHougekiEntity;
 
   factory ReqSortieBattleApiDataApiHougekiEntity.fromJson(

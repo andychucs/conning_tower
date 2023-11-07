@@ -54,14 +54,14 @@ class ReqBattleMidnightBattleApiDataApiHougekiEntity
     with _$ReqBattleMidnightBattleApiDataApiHougekiEntity
     implements GunFireRound {
   factory ReqBattleMidnightBattleApiDataApiHougekiEntity({
-    @JsonKey(name: 'api_at_eflag') required List<int> apiAtEflag,
-    @JsonKey(name: 'api_at_list') required List<int> apiAtList,
-    @JsonKey(name: 'api_n_mother_list') required List<int> apiNMotherList,
-    @JsonKey(name: 'api_df_list') required List<List<int>> apiDfList,
-    @JsonKey(name: 'api_si_list') required List<dynamic> apiSiList,
-    @JsonKey(name: 'api_cl_list') required List<List<int>> apiClList,
-    @JsonKey(name: 'api_sp_list') required List<int> apiSpList,
-    @JsonKey(name: 'api_damage') required List<List<num>> apiDamage,
+    @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
+    @JsonKey(name: 'api_at_list') List<int>? apiAtList,
+    @JsonKey(name: 'api_n_mother_list') List<int>? apiNMotherList,
+    @JsonKey(name: 'api_df_list') List<List<int>>? apiDfList,
+    @JsonKey(name: 'api_si_list') List<dynamic>? apiSiList,
+    @JsonKey(name: 'api_cl_list') List<List<int>>? apiClList,
+    @JsonKey(name: 'api_sp_list') List<int>? apiSpList,
+    @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
   }) = _ReqBattleMidnightBattleApiDataApiHougekiEntity;
 
   factory ReqBattleMidnightBattleApiDataApiHougekiEntity.fromJson(

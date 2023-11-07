@@ -91,27 +91,27 @@ _$_ReqBattleMidnightBattleApiDataApiHougekiEntity
     _$$_ReqBattleMidnightBattleApiDataApiHougekiEntityFromJson(
             Map<String, dynamic> json) =>
         _$_ReqBattleMidnightBattleApiDataApiHougekiEntity(
-          apiAtEflag: (json['api_at_eflag'] as List<dynamic>)
-              .map((e) => e as int)
+          apiAtEflag: (json['api_at_eflag'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiAtList: (json['api_at_list'] as List<dynamic>)
-              .map((e) => e as int)
+          apiAtList: (json['api_at_list'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiNMotherList: (json['api_n_mother_list'] as List<dynamic>)
-              .map((e) => e as int)
+          apiNMotherList: (json['api_n_mother_list'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiDfList: (json['api_df_list'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
+          apiDfList: (json['api_df_list'] as List<dynamic>?)
+              ?.map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
-          apiSiList: json['api_si_list'] as List<dynamic>,
-          apiClList: (json['api_cl_list'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
+          apiSiList: json['api_si_list'] as List<dynamic>?,
+          apiClList: (json['api_cl_list'] as List<dynamic>?)
+              ?.map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
-          apiSpList: (json['api_sp_list'] as List<dynamic>)
-              .map((e) => e as int)
+          apiSpList: (json['api_sp_list'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiDamage: (json['api_damage'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as num).toList())
+          apiDamage: (json['api_damage'] as List<dynamic>?)
+              ?.map((e) => (e as List<dynamic>).map((e) => e as num).toList())
               .toList(),
         );
 
