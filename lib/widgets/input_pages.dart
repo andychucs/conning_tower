@@ -115,11 +115,11 @@ class CupertinoListInputPage extends StatelessWidget {
 class CupertinoActionPage extends StatelessWidget {
   const CupertinoActionPage({
     super.key,
-    required this.title, required this.child, required this.previousPageTitle,
+    required this.title, required this.child, this.previousPageTitle = null,
   });
 
   final String title;
-  final String previousPageTitle;
+  final String? previousPageTitle;
   final Widget child;
 
   @override

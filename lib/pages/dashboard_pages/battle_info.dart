@@ -1,9 +1,16 @@
+import 'dart:convert';
+
+import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -36,7 +43,44 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
     for (final squad in squads) {
       items.add(CupertinoListSection.insetGrouped(
         margin: _kBattleInfoGridMargin,
-        header: CupertinoListSectionDescription(squad.name),
+        header: squads.first == squad
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    CupertinoListSectionDescription(squad.name),
+                    GestureDetector(
+                      child: Icon(
+                        CupertinoIcons.exclamationmark_circle,
+                        size: 20,
+                        color: CupertinoDynamicColor.resolve(
+                            kHeaderFooterColor, context),
+                      ),
+                      onTap: () => navigatorToCupertino(
+                          context,
+                          CupertinoActionPage(
+                              title: S.current.KCDashboardBattleReport,
+                              child: ListView(
+                                children: [
+                                  CupertinoListSection.insetGrouped(
+                                    footer: SelectableText(
+                                        "BattleInfo:\n${battleInfo.toString()}\nData:\n${ref.watch(rawDataProvider).source}\n${jsonDecode(ref.watch(rawDataProvider).data)}"),
+                                    children: [
+                                      CupertinoListTile(
+                                        title: const Text("Copy Data"),
+                                        onTap: () => Clipboard.setData(
+                                            ClipboardData(
+                                                text: ref
+                                                    .watch(rawDataProvider)
+                                                    .data)),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ))),
+                    ),
+                  ])
+            : CupertinoListSectionDescription(squad.name),
         children: List.generate(
             squad.ships.length,
             (index) => ShipInfoInBattle(
