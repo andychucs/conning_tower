@@ -122,9 +122,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("無効なYAML形式です。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON例："),
+        "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
+            "現在、通常艦隊対通常艦隊の昼戦と夜戦（開幕夜戦不能）の中で、航空戦、対潜戦、砲撃戦、雷撃戦のみが解析可能です。"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("艦隊"),
+        "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
+            "リストアイテムの右側にはステータスインジケータがあり、外環は疲労度を表します。浅黄色の場合、疲労度は49を示します。中心には燃料および弾薬のステータスが表示され、どちらも満タンの場合は緑色です。どちらかが満タンでない場合はオレンジ色です。アイテムをクリックして詳細な数値を表示できます。"),
         "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("遠征"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
@@ -252,6 +256,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UrlExample": MessageLookupByLibrary.simpleMessage("URL例："),
         "UrlRequestFormat": MessageLookupByLibrary.simpleMessage(
             "URLのリクエストの返り値はJSON形式である必要があり、上記URLのレスポンスと同じ構造である必要があります。"),
+        "UseEmojiForFatigue":
+            MessageLookupByLibrary.simpleMessage("疲労度の表示に絵文字を使用"),
         "VersionUpdateContent": MessageLookupByLibrary.simpleMessage(
             "ソフトウェアのバージョン更新が見つかりました。バージョン更新ドキュメントをご確認ください。"),
         "VersionUpdateLinkText":

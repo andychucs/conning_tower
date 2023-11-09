@@ -130,10 +130,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
+        "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
+            "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed."),
         "KCDashboardBattleReport":
             MessageLookupByLibrary.simpleMessage("Report"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("Command"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("Fleet"),
+        "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
+            "The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values."),
         "KCDashboardOperation":
             MessageLookupByLibrary.simpleMessage("Operation"),
         "KCViewFuncMsgAlreadyGameRedirect":
@@ -276,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UrlExample": MessageLookupByLibrary.simpleMessage("URL Example:"),
         "UrlRequestFormat": MessageLookupByLibrary.simpleMessage(
             "The response from the URL request must be in JSON format and have a structure consistent with the example response above."),
+        "UseEmojiForFatigue": MessageLookupByLibrary.simpleMessage(
+            "Use Emoji for Fatigue Display"),
         "VersionUpdateContent": MessageLookupByLibrary.simpleMessage(
             "Software version update found, please check the version update document."),
         "VersionUpdateLinkText":

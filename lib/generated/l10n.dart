@@ -670,6 +670,16 @@ class S {
     );
   }
 
+  /// `Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.`
+  String get KCDashboardBattleDescription {
+    return Intl.message(
+      'Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.',
+      name: 'KCDashboardBattleDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report`
   String get KCDashboardBattleReport {
     return Intl.message(
@@ -695,6 +705,16 @@ class S {
     return Intl.message(
       'Fleet',
       name: 'KCDashboardFleet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values.`
+  String get KCDashboardFleetDescription {
+    return Intl.message(
+      'The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values.',
+      name: 'KCDashboardFleetDescription',
       desc: '',
       args: [],
     );
@@ -1450,21 +1470,21 @@ class S {
     );
   }
 
-  /// `Super long+`
-  String get TextSuperLongRangePlus {
-    return Intl.message(
-      'Super long+',
-      name: 'TextSuperLongRangePlus',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Super long`
   String get TextSuperLongRange {
     return Intl.message(
       'Super long',
       name: 'TextSuperLongRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Super long+`
+  String get TextSuperLongRangePlus {
+    return Intl.message(
+      'Super long+',
+      name: 'TextSuperLongRangePlus',
       desc: '',
       args: [],
     );
@@ -1645,6 +1665,16 @@ class S {
     return Intl.message(
       'The response from the URL request must be in JSON format and have a structure consistent with the example response above.',
       name: 'UrlRequestFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use Emoji for Fatigue Display`
+  String get UseEmojiForFatigue {
+    return Intl.message(
+      'Use Emoji for Fatigue Display',
+      name: 'UseEmojiForFatigue',
       desc: '',
       args: [],
     );

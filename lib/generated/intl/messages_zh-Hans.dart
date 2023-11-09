@@ -112,9 +112,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidUrlError": MessageLookupByLibrary.simpleMessage("无效的URL。"),
         "InvalidYamlError": MessageLookupByLibrary.simpleMessage("无效的YAML格式。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON示例："),
+        "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
+            "目前只有通常舰队对通常舰队的一般战斗数据中的航空战、反潜战、炮击战、雷击战可以解析。"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("战斗报告"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("舰队"),
+        "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
+            "列表项目右侧圆环为状态指示，外环表示疲劳度，为浅黄色时表示疲劳度为49，圆心表示燃料和弹药状态，燃料和弹药全满时为绿色，任意一项不满时为橙色。项目可以点击查看详细数值。"),
         "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("远征"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
@@ -235,6 +239,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UrlExample": MessageLookupByLibrary.simpleMessage("URL示例："),
         "UrlRequestFormat": MessageLookupByLibrary.simpleMessage(
             "填入URL请求的返回必须为JSON，且结构与上述URL中的响应一致。"),
+        "UseEmojiForFatigue":
+            MessageLookupByLibrary.simpleMessage("使用emoji显示疲劳度"),
         "VersionUpdateContent":
             MessageLookupByLibrary.simpleMessage("发现软件版本已更新，请查看版本更新文档。"),
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("点击此处查看"),
