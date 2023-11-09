@@ -21,6 +21,8 @@ SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SettingsState {
   int get dashboardIndex => throw _privateConstructorUsedError;
+  bool get kcSparkEmoji => throw _privateConstructorUsedError;
+  bool get kcBattleReportEnable => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,7 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call({int dashboardIndex});
+  $Res call({int dashboardIndex, bool kcSparkEmoji, bool kcBattleReportEnable});
 }
 
 /// @nodoc
@@ -51,12 +53,22 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @override
   $Res call({
     Object? dashboardIndex = null,
+    Object? kcSparkEmoji = null,
+    Object? kcBattleReportEnable = null,
   }) {
     return _then(_value.copyWith(
       dashboardIndex: null == dashboardIndex
           ? _value.dashboardIndex
           : dashboardIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      kcSparkEmoji: null == kcSparkEmoji
+          ? _value.kcSparkEmoji
+          : kcSparkEmoji // ignore: cast_nullable_to_non_nullable
+              as bool,
+      kcBattleReportEnable: null == kcBattleReportEnable
+          ? _value.kcBattleReportEnable
+          : kcBattleReportEnable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -69,7 +81,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       __$$_SettingsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int dashboardIndex});
+  $Res call({int dashboardIndex, bool kcSparkEmoji, bool kcBattleReportEnable});
 }
 
 /// @nodoc
@@ -84,12 +96,22 @@ class __$$_SettingsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dashboardIndex = null,
+    Object? kcSparkEmoji = null,
+    Object? kcBattleReportEnable = null,
   }) {
     return _then(_$_SettingsState(
       dashboardIndex: null == dashboardIndex
           ? _value.dashboardIndex
           : dashboardIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      kcSparkEmoji: null == kcSparkEmoji
+          ? _value.kcSparkEmoji
+          : kcSparkEmoji // ignore: cast_nullable_to_non_nullable
+              as bool,
+      kcBattleReportEnable: null == kcBattleReportEnable
+          ? _value.kcBattleReportEnable
+          : kcBattleReportEnable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -97,17 +119,24 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SettingsState with DiagnosticableTreeMixin implements _SettingsState {
-  const _$_SettingsState({required this.dashboardIndex});
+  const _$_SettingsState(
+      {required this.dashboardIndex,
+      required this.kcSparkEmoji,
+      required this.kcBattleReportEnable});
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
 
   @override
   final int dashboardIndex;
+  @override
+  final bool kcSparkEmoji;
+  @override
+  final bool kcBattleReportEnable;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SettingsState(dashboardIndex: $dashboardIndex)';
+    return 'SettingsState(dashboardIndex: $dashboardIndex, kcSparkEmoji: $kcSparkEmoji, kcBattleReportEnable: $kcBattleReportEnable)';
   }
 
   @override
@@ -115,7 +144,9 @@ class _$_SettingsState with DiagnosticableTreeMixin implements _SettingsState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SettingsState'))
-      ..add(DiagnosticsProperty('dashboardIndex', dashboardIndex));
+      ..add(DiagnosticsProperty('dashboardIndex', dashboardIndex))
+      ..add(DiagnosticsProperty('kcSparkEmoji', kcSparkEmoji))
+      ..add(DiagnosticsProperty('kcBattleReportEnable', kcBattleReportEnable));
   }
 
   @override
@@ -124,12 +155,17 @@ class _$_SettingsState with DiagnosticableTreeMixin implements _SettingsState {
         (other.runtimeType == runtimeType &&
             other is _$_SettingsState &&
             (identical(other.dashboardIndex, dashboardIndex) ||
-                other.dashboardIndex == dashboardIndex));
+                other.dashboardIndex == dashboardIndex) &&
+            (identical(other.kcSparkEmoji, kcSparkEmoji) ||
+                other.kcSparkEmoji == kcSparkEmoji) &&
+            (identical(other.kcBattleReportEnable, kcBattleReportEnable) ||
+                other.kcBattleReportEnable == kcBattleReportEnable));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, dashboardIndex);
+  int get hashCode => Object.hash(
+      runtimeType, dashboardIndex, kcSparkEmoji, kcBattleReportEnable);
 
   @JsonKey(ignore: true)
   @override
@@ -146,14 +182,20 @@ class _$_SettingsState with DiagnosticableTreeMixin implements _SettingsState {
 }
 
 abstract class _SettingsState implements SettingsState {
-  const factory _SettingsState({required final int dashboardIndex}) =
-      _$_SettingsState;
+  const factory _SettingsState(
+      {required final int dashboardIndex,
+      required final bool kcSparkEmoji,
+      required final bool kcBattleReportEnable}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
 
   @override
   int get dashboardIndex;
+  @override
+  bool get kcSparkEmoji;
+  @override
+  bool get kcBattleReportEnable;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>

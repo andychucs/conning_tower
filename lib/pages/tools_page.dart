@@ -277,7 +277,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                 trailing: const CupertinoListTileChevron(),
                 onTap: () async {
                   await navigatorToCupertino(
-                      context, const KancollelistenSettings());
+                      context, const KancolleListenSettings());
                 },
               ),
             if (!kIsOpenSource)

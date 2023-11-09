@@ -4,6 +4,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/widgets/icons.dart';
@@ -12,15 +13,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class KancollelistenSettings extends ConsumerStatefulWidget {
-  const KancollelistenSettings({super.key});
+class KancolleListenSettings extends ConsumerStatefulWidget {
+  final bool showNavigatorBar;
+  const KancolleListenSettings({super.key, this.showNavigatorBar = true});
 
   @override
-  ConsumerState createState() => _KancollelistenSettingsState();
+  ConsumerState createState() => _KancolleListenSettingsState();
 }
 
-class _KancollelistenSettingsState
-    extends ConsumerState<KancollelistenSettings> {
+class _KancolleListenSettingsState
+    extends ConsumerState<KancolleListenSettings> {
   late bool enableAutoProcessSwitchValue;
 
   void _loadConfig() {
@@ -38,30 +40,75 @@ class _KancollelistenSettingsState
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoActionPage(
-        title: 'KC',
-        previousPageTitle: S.of(context).AdvancedGameSupport,
+    final settings = ref.watch(settingsProvider);
+
+    return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.systemGroupedBackground,
+      navigationBar: widget.showNavigatorBar
+          ? CupertinoNavigationBar(
+              backgroundColor: CupertinoColors.systemGroupedBackground,
+              middle: Text('KC'),
+              previousPageTitle: S.of(context).AdvancedGameSupport,
+            )
+          : null,
+      child: SafeArea(
+        bottom: false,
         child: ListView(
           children: [
             CupertinoListSection.insetGrouped(
-              header: const CupertinoListSectionDescription('KC'),
-              footer: CupertinoListSectionDescription(S.of(context).ToolUATip),
               children: [
                 CupertinoListTile(
                   title: Text(S.of(context).KanColleDataListener),
+                  subtitle: Text(S.of(context).ToolUATip),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeBlue,
+                      icon: CupertinoIcons.search),
                   trailing: CupertinoSwitch(
                     value: useKancolleListener,
                     onChanged: (value) async {
-                      HapticFeedback.heavyImpact();
+                      HapticFeedback.mediumImpact();
                       setState(() {
                         useKancolleListener = value;
                       });
-                      ref.watch(webControllerProvider).manageKCUserScript(value);
+                      ref
+                          .watch(webControllerProvider)
+                          .manageKCUserScript(value);
                       localStorage.setBool('useKancolleListener', value);
                       debugPrint("useKancolleListener:$useKancolleListener");
                     },
                   ),
                 ),
+              ],
+            ),
+            CupertinoListSection.insetGrouped(
+              header: CupertinoListSectionDescription(S.of(context).KCDashboardBattleReport),
+              children: [
+                CupertinoListTile(
+                  title: Text(S.of(context).KCDashboardBattleReport),
+                  subtitle: Text(S.of(context).KanColleDataListener),
+                  trailing: CupertinoSwitch(
+                    value: settings.kcBattleReportEnable,
+                    onChanged: (value) async {
+                      HapticFeedback.mediumImpact();
+                      ref.read(settingsProvider.notifier).seBool('kcBattleReportEnable', value);
+                    },
+                  ),
+                ),
+                CupertinoListTile(
+                  title: Text(S.of(context).UseEmojiForFatigue),
+                  trailing: CupertinoSwitch(
+                    value: settings.kcSparkEmoji,
+                    onChanged: (value) async {
+                      HapticFeedback.mediumImpact();
+                      ref.read(settingsProvider.notifier).seBool('kcSparkEmoji', value);
+                    },
+                  ),
+                ),
+              ],
+            ),
+            CupertinoListSection.insetGrouped(
+              header: const CupertinoListSectionDescription('Data'),
+              children: [
                 CupertinoListTile(
                   title: Text(S.of(context).FleetData),
                   trailing: const CupertinoListTileChevron(),
@@ -70,7 +117,8 @@ class _KancollelistenSettingsState
                         context,
                         FleetInfoPage(
                             title: S.of(context).FleetData,
-                            previousPageTitle: 'KC'));
+                            previousPageTitle:
+                                widget.showNavigatorBar ? 'KC' : null));
                   },
                 ),
                 CupertinoListTile(
@@ -81,84 +129,85 @@ class _KancollelistenSettingsState
                         context,
                         TaskInfoPage(
                             title: S.of(context).OperationData,
-                            previousPageTitle: 'KC'));
+                            previousPageTitle:
+                                widget.showNavigatorBar ? 'KC' : null));
                   },
                 ),
               ],
             ),
             CupertinoListSection.insetGrouped(
-                  header: CupertinoListSectionDescription(
-                      S.of(context).ToolTitleGameSound),
-                  children: [
-                    CupertinoListTile(
-                      title: Text(S.of(context).GameUnmute),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.activeBlue,
-                          icon: CupertinoIcons.volume_down),
-                      onTap: () async {
-                        HapticFeedback.mediumImpact();
-                        await ref.read(webControllerProvider).unmuteGame();
-                      },
-                    ),
-                    CupertinoListTile(
-                      title: Text(S.of(context).GameMute),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.activeOrange,
-                          icon: CupertinoIcons.volume_off),
-                      onTap: () async {
-                        HapticFeedback.mediumImpact();
-                        await ref.read(webControllerProvider).muteGame();
-
-                      },
-                    ),
-                  ]),
+                header: CupertinoListSectionDescription(
+                    S.of(context).ToolTitleGameSound),
+                children: [
+                  CupertinoListTile(
+                    title: Text(S.of(context).GameUnmute),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeBlue,
+                        icon: CupertinoIcons.volume_down),
+                    onTap: () async {
+                      HapticFeedback.mediumImpact();
+                      await ref.read(webControllerProvider).unmuteGame();
+                    },
+                  ),
+                  CupertinoListTile(
+                    title: Text(S.of(context).GameMute),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeOrange,
+                        icon: CupertinoIcons.volume_off),
+                    onTap: () async {
+                      HapticFeedback.mediumImpact();
+                      await ref.read(webControllerProvider).muteGame();
+                    },
+                  ),
+                ]),
             CupertinoListSection.insetGrouped(
                 header: CupertinoListSectionDescription(
                     S.of(context).ToolTitleGameScreen),
                 children: [
                   CupertinoListTile(
-                      title: Text(S.of(context).AppResize),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.activeBlue,
-                          icon: CupertinoIcons.fullscreen),
-                      onTap: () async {
-                        HapticFeedback.mediumImpact();
-                        await ref.read(webControllerProvider).adjustWindow();
-                      },
-                    ),
+                    title: Text(S.of(context).AppResize),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeBlue,
+                        icon: CupertinoIcons.fullscreen),
+                    onTap: () async {
+                      HapticFeedback.mediumImpact();
+                      await ref.read(webControllerProvider).adjustWindow();
+                    },
+                  ),
                   CupertinoListTile(
                     title: Text(S.of(context).AppRedirect),
                     leading: const DummyIcon(
-                        color: CupertinoColors.activeBlue,
+                        color: CupertinoColors.activeOrange,
                         icon: CupertinoIcons.rectangle_expand_vertical),
                     onTap: () async {
-                      HapticFeedback.heavyImpact();
                       HapticFeedback.mediumImpact();
                       await ref.read(webControllerProvider).httpRedirect();
                     },
                   ),
                   CupertinoListTile(
-                      title: Text(S.of(context).SettingsEnableAutoProcess),
-                      leading: const DummyIcon(
-                          color: CupertinoColors.activeBlue,
-                          icon: CupertinoIcons.fullscreen),
-                      trailing: CupertinoSwitch(
-                        value: enableAutoProcessSwitchValue,
-                        onChanged: (value) async {
-                          HapticFeedback.heavyImpact();
-                          setState(() {
-                            enableAutoProcessSwitchValue = value;
-                          });
-                          enableAutoProcess = value;
-                          localStorage.setBool('enableAutoProcess', value);
-                          debugPrint("enableAutoProcess:$enableAutoProcess");
-                          _loadConfig();
-                        },
-                      ),
+                    title: Text(S.of(context).SettingsEnableAutoProcess),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeGreen,
+                        icon: CupertinoIcons.fullscreen),
+                    trailing: CupertinoSwitch(
+                      value: enableAutoProcessSwitchValue,
+                      onChanged: (value) async {
+                        HapticFeedback.mediumImpact();
+                        setState(() {
+                          enableAutoProcessSwitchValue = value;
+                        });
+                        enableAutoProcess = value;
+                        localStorage.setBool('enableAutoProcess', value);
+                        debugPrint("enableAutoProcess:$enableAutoProcess");
+                        _loadConfig();
+                      },
                     ),
+                  ),
                 ]),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -170,7 +219,7 @@ class FleetInfoPage extends ConsumerWidget {
   });
 
   final String title;
-  final String previousPageTitle;
+  final String? previousPageTitle;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -290,7 +339,7 @@ class TaskInfoPage extends ConsumerWidget {
   });
 
   final String title;
-  final String previousPageTitle;
+  final String? previousPageTitle;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
