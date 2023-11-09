@@ -20,7 +20,7 @@ class ReqSortieBattleEntity with _$ReqSortieBattleEntity {
 }
 
 @unfreezed
-class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity {
+class ReqSortieBattleApiDataEntity with _$ReqSortieBattleApiDataEntity implements SingleVsSingleBaseModel{
   factory ReqSortieBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -104,7 +104,7 @@ class ReqSortieBattleApiDataApiHougekiEntity
     @JsonKey(name: 'api_df_list')
     required List<List<int>> apiDfList,
     @JsonKey(name: 'api_si_list')
-    required List<List<int>> apiSiList,
+    required List<dynamic> apiSiList,
     @JsonKey(name: 'api_cl_list')
     required List<List<int>> apiClList,
     @JsonKey(name: 'api_damage')
@@ -120,11 +120,11 @@ class ReqSortieBattleApiDataApiHougekiEntity
 class ReqSortieBattleApiDataApiRaigekiEntity
     with _$ReqSortieBattleApiDataApiRaigekiEntity {
   factory ReqSortieBattleApiDataApiRaigekiEntity({
-    @JsonKey(name: 'api_frai') required List<num> apiFrai,
+    @JsonKey(name: 'api_frai') required List<int> apiFrai,
     @JsonKey(name: 'api_fcl') required List<num> apiFcl,
     @JsonKey(name: 'api_fdam') required List<num> apiFdam,
     @JsonKey(name: 'api_fydam') required List<num> apiFydam,
-    @JsonKey(name: 'api_erai') required List<num> apiErai,
+    @JsonKey(name: 'api_erai') required List<int> apiErai,
     @JsonKey(name: 'api_ecl') required List<num> apiEcl,
     @JsonKey(name: 'api_edam') required List<num> apiEdam,
     @JsonKey(name: 'api_eydam') required List<num> apiEydam,

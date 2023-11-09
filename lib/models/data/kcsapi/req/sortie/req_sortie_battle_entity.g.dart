@@ -174,9 +174,7 @@ _$_ReqSortieBattleApiDataApiHougekiEntity
           apiDfList: (json['api_df_list'] as List<dynamic>)
               .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
-          apiSiList: (json['api_si_list'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
-              .toList(),
+          apiSiList: json['api_si_list'] as List<dynamic>,
           apiClList: (json['api_cl_list'] as List<dynamic>)
               .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
@@ -202,7 +200,7 @@ _$_ReqSortieBattleApiDataApiRaigekiEntity
             Map<String, dynamic> json) =>
         _$_ReqSortieBattleApiDataApiRaigekiEntity(
           apiFrai:
-              (json['api_frai'] as List<dynamic>).map((e) => e as num).toList(),
+              (json['api_frai'] as List<dynamic>).map((e) => e as int).toList(),
           apiFcl:
               (json['api_fcl'] as List<dynamic>).map((e) => e as num).toList(),
           apiFdam:
@@ -211,7 +209,7 @@ _$_ReqSortieBattleApiDataApiRaigekiEntity
               .map((e) => e as num)
               .toList(),
           apiErai:
-              (json['api_erai'] as List<dynamic>).map((e) => e as num).toList(),
+              (json['api_erai'] as List<dynamic>).map((e) => e as int).toList(),
           apiEcl:
               (json['api_ecl'] as List<dynamic>).map((e) => e as num).toList(),
           apiEdam:

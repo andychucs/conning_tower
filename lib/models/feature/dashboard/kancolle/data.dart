@@ -20,7 +20,8 @@ import 'operation_queue.dart';
 
 List<String> _battleAPI = [
   ReqSortieBattleEntity.source,
-  ReqSortieBattleResultEntity.source
+  ReqSortieBattleResultEntity.source,
+  ReqBattleMidnightBattleEntity.source,
 ];
 
 class KancolleData {
@@ -70,10 +71,14 @@ class KancolleData {
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+    if (model is ReqBattleMidnightBattleEntity) {
+      var squad = squads[model.apiData.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightBattle(model.apiData, squad);
+    }
+
     if (model is ReqSortieBattleEntity) {
       var squad = squads[model.apiData.apiDeckId - 1];
       battleInfo.parseReqSortieBattle(model.apiData, squad);
-      log(battleInfo.toString());
     }
 
     if (model is ReqSortieBattleResultEntity) {
