@@ -1,3 +1,4 @@
+import 'package:conning_tower/models/data/kcsapi/item_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'get_member_slot_item_entity.freezed.dart';
@@ -20,7 +21,9 @@ class GetMemberSlotItemEntity with _$GetMemberSlotItemEntity {
 }
 
 @unfreezed
-class GetMemberSlotItemApiDataEntity with _$GetMemberSlotItemApiDataEntity {
+class GetMemberSlotItemApiDataEntity
+    with _$GetMemberSlotItemApiDataEntity
+    implements SlotItem {
   factory GetMemberSlotItemApiDataEntity({
     @JsonKey(name: 'api_id') required int apiId,
     @JsonKey(name: 'api_slotitem_id') required int apiSlotitemId,

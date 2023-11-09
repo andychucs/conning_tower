@@ -241,44 +241,43 @@ mixin _$GetMemberRequireInfoApiDataEntity {
   set apiBasic(GetMemberRequireInfoApiDataApiBasicEntity value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_slot_item')
-  List<GetMemberRequireInfoApiDataApiSlotItemEntity> get apiSlotItem =>
+  List<GetMemberRequireInfoApiDataApiSlotItemEntity>? get apiSlotItem =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_slot_item')
-  set apiSlotItem(List<GetMemberRequireInfoApiDataApiSlotItemEntity> value) =>
+  set apiSlotItem(List<GetMemberRequireInfoApiDataApiSlotItemEntity>? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_unsetslot')
-  GetMemberRequireInfoApiDataApiUnsetslotEntity get apiUnsetslot =>
-      throw _privateConstructorUsedError;
+  dynamic get apiUnsetslot => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_unsetslot')
-  set apiUnsetslot(GetMemberRequireInfoApiDataApiUnsetslotEntity value) =>
+  set apiUnsetslot(dynamic value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'api_kdock')
+  List<GetMemberRequireInfoApiDataApiKdockEntity>? get apiKdock =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_kdock')
-  List<GetMemberRequireInfoApiDataApiKdockEntity> get apiKdock =>
-      throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_kdock')
-  set apiKdock(List<GetMemberRequireInfoApiDataApiKdockEntity> value) =>
+  set apiKdock(List<GetMemberRequireInfoApiDataApiKdockEntity>? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_useitem')
-  List<GetMemberRequireInfoApiDataApiUseitemEntity> get apiUseitem =>
+  List<GetMemberRequireInfoApiDataApiUseitemEntity>? get apiUseitem =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_useitem')
-  set apiUseitem(List<GetMemberRequireInfoApiDataApiUseitemEntity> value) =>
+  set apiUseitem(List<GetMemberRequireInfoApiDataApiUseitemEntity>? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_furniture')
-  List<GetMemberRequireInfoApiDataApiFurnitureEntity> get apiFurniture =>
+  List<GetMemberRequireInfoApiDataApiFurnitureEntity>? get apiFurniture =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_furniture')
-  set apiFurniture(List<GetMemberRequireInfoApiDataApiFurnitureEntity> value) =>
+  set apiFurniture(
+          List<GetMemberRequireInfoApiDataApiFurnitureEntity>? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_extra_supply')
-  List<int> get apiExtraSupply => throw _privateConstructorUsedError;
+  List<int>? get apiExtraSupply => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_extra_supply')
-  set apiExtraSupply(List<int> value) => throw _privateConstructorUsedError;
+  set apiExtraSupply(List<int>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_oss_setting')
-  GetMemberRequireInfoApiDataApiOssSettingEntity get apiOssSetting =>
+  GetMemberRequireInfoApiDataApiOssSettingEntity? get apiOssSetting =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_oss_setting')
-  set apiOssSetting(GetMemberRequireInfoApiDataApiOssSettingEntity value) =>
+  set apiOssSetting(GetMemberRequireInfoApiDataApiOssSettingEntity? value) =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'api_skin_id')
   int get apiSkinId => throw _privateConstructorUsedError;
@@ -307,24 +306,22 @@ abstract class $GetMemberRequireInfoApiDataEntityCopyWith<$Res> {
       {@JsonKey(name: 'api_basic')
       GetMemberRequireInfoApiDataApiBasicEntity apiBasic,
       @JsonKey(name: 'api_slot_item')
-      List<GetMemberRequireInfoApiDataApiSlotItemEntity> apiSlotItem,
-      @JsonKey(name: 'api_unsetslot')
-      GetMemberRequireInfoApiDataApiUnsetslotEntity apiUnsetslot,
+      List<GetMemberRequireInfoApiDataApiSlotItemEntity>? apiSlotItem,
+      @JsonKey(name: 'api_unsetslot') dynamic apiUnsetslot,
       @JsonKey(name: 'api_kdock')
-      List<GetMemberRequireInfoApiDataApiKdockEntity> apiKdock,
+      List<GetMemberRequireInfoApiDataApiKdockEntity>? apiKdock,
       @JsonKey(name: 'api_useitem')
-      List<GetMemberRequireInfoApiDataApiUseitemEntity> apiUseitem,
+      List<GetMemberRequireInfoApiDataApiUseitemEntity>? apiUseitem,
       @JsonKey(name: 'api_furniture')
-      List<GetMemberRequireInfoApiDataApiFurnitureEntity> apiFurniture,
-      @JsonKey(name: 'api_extra_supply') List<int> apiExtraSupply,
+      List<GetMemberRequireInfoApiDataApiFurnitureEntity>? apiFurniture,
+      @JsonKey(name: 'api_extra_supply') List<int>? apiExtraSupply,
       @JsonKey(name: 'api_oss_setting')
-      GetMemberRequireInfoApiDataApiOssSettingEntity apiOssSetting,
+      GetMemberRequireInfoApiDataApiOssSettingEntity? apiOssSetting,
       @JsonKey(name: 'api_skin_id') int apiSkinId,
       @JsonKey(name: 'api_position_id') int apiPositionId});
 
   $GetMemberRequireInfoApiDataApiBasicEntityCopyWith<$Res> get apiBasic;
-  $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res> get apiUnsetslot;
-  $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>
+  $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>?
       get apiOssSetting;
 }
 
@@ -343,13 +340,13 @@ class _$GetMemberRequireInfoApiDataEntityCopyWithImpl<$Res,
   @override
   $Res call({
     Object? apiBasic = null,
-    Object? apiSlotItem = null,
-    Object? apiUnsetslot = null,
-    Object? apiKdock = null,
-    Object? apiUseitem = null,
-    Object? apiFurniture = null,
-    Object? apiExtraSupply = null,
-    Object? apiOssSetting = null,
+    Object? apiSlotItem = freezed,
+    Object? apiUnsetslot = freezed,
+    Object? apiKdock = freezed,
+    Object? apiUseitem = freezed,
+    Object? apiFurniture = freezed,
+    Object? apiExtraSupply = freezed,
+    Object? apiOssSetting = freezed,
     Object? apiSkinId = null,
     Object? apiPositionId = null,
   }) {
@@ -358,34 +355,34 @@ class _$GetMemberRequireInfoApiDataEntityCopyWithImpl<$Res,
           ? _value.apiBasic
           : apiBasic // ignore: cast_nullable_to_non_nullable
               as GetMemberRequireInfoApiDataApiBasicEntity,
-      apiSlotItem: null == apiSlotItem
+      apiSlotItem: freezed == apiSlotItem
           ? _value.apiSlotItem
           : apiSlotItem // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiSlotItemEntity>,
-      apiUnsetslot: null == apiUnsetslot
+              as List<GetMemberRequireInfoApiDataApiSlotItemEntity>?,
+      apiUnsetslot: freezed == apiUnsetslot
           ? _value.apiUnsetslot
           : apiUnsetslot // ignore: cast_nullable_to_non_nullable
-              as GetMemberRequireInfoApiDataApiUnsetslotEntity,
-      apiKdock: null == apiKdock
+              as dynamic,
+      apiKdock: freezed == apiKdock
           ? _value.apiKdock
           : apiKdock // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiKdockEntity>,
-      apiUseitem: null == apiUseitem
+              as List<GetMemberRequireInfoApiDataApiKdockEntity>?,
+      apiUseitem: freezed == apiUseitem
           ? _value.apiUseitem
           : apiUseitem // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiUseitemEntity>,
-      apiFurniture: null == apiFurniture
+              as List<GetMemberRequireInfoApiDataApiUseitemEntity>?,
+      apiFurniture: freezed == apiFurniture
           ? _value.apiFurniture
           : apiFurniture // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiFurnitureEntity>,
-      apiExtraSupply: null == apiExtraSupply
+              as List<GetMemberRequireInfoApiDataApiFurnitureEntity>?,
+      apiExtraSupply: freezed == apiExtraSupply
           ? _value.apiExtraSupply
           : apiExtraSupply // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiOssSetting: null == apiOssSetting
+              as List<int>?,
+      apiOssSetting: freezed == apiOssSetting
           ? _value.apiOssSetting
           : apiOssSetting // ignore: cast_nullable_to_non_nullable
-              as GetMemberRequireInfoApiDataApiOssSettingEntity,
+              as GetMemberRequireInfoApiDataApiOssSettingEntity?,
       apiSkinId: null == apiSkinId
           ? _value.apiSkinId
           : apiSkinId // ignore: cast_nullable_to_non_nullable
@@ -408,20 +405,14 @@ class _$GetMemberRequireInfoApiDataEntityCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res>
-      get apiUnsetslot {
-    return $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res>(
-        _value.apiUnsetslot, (value) {
-      return _then(_value.copyWith(apiUnsetslot: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>
+  $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>?
       get apiOssSetting {
+    if (_value.apiOssSetting == null) {
+      return null;
+    }
+
     return $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>(
-        _value.apiOssSetting, (value) {
+        _value.apiOssSetting!, (value) {
       return _then(_value.copyWith(apiOssSetting: value) as $Val);
     });
   }
@@ -440,27 +431,24 @@ abstract class _$$_GetMemberRequireInfoApiDataEntityCopyWith<$Res>
       {@JsonKey(name: 'api_basic')
       GetMemberRequireInfoApiDataApiBasicEntity apiBasic,
       @JsonKey(name: 'api_slot_item')
-      List<GetMemberRequireInfoApiDataApiSlotItemEntity> apiSlotItem,
-      @JsonKey(name: 'api_unsetslot')
-      GetMemberRequireInfoApiDataApiUnsetslotEntity apiUnsetslot,
+      List<GetMemberRequireInfoApiDataApiSlotItemEntity>? apiSlotItem,
+      @JsonKey(name: 'api_unsetslot') dynamic apiUnsetslot,
       @JsonKey(name: 'api_kdock')
-      List<GetMemberRequireInfoApiDataApiKdockEntity> apiKdock,
+      List<GetMemberRequireInfoApiDataApiKdockEntity>? apiKdock,
       @JsonKey(name: 'api_useitem')
-      List<GetMemberRequireInfoApiDataApiUseitemEntity> apiUseitem,
+      List<GetMemberRequireInfoApiDataApiUseitemEntity>? apiUseitem,
       @JsonKey(name: 'api_furniture')
-      List<GetMemberRequireInfoApiDataApiFurnitureEntity> apiFurniture,
-      @JsonKey(name: 'api_extra_supply') List<int> apiExtraSupply,
+      List<GetMemberRequireInfoApiDataApiFurnitureEntity>? apiFurniture,
+      @JsonKey(name: 'api_extra_supply') List<int>? apiExtraSupply,
       @JsonKey(name: 'api_oss_setting')
-      GetMemberRequireInfoApiDataApiOssSettingEntity apiOssSetting,
+      GetMemberRequireInfoApiDataApiOssSettingEntity? apiOssSetting,
       @JsonKey(name: 'api_skin_id') int apiSkinId,
       @JsonKey(name: 'api_position_id') int apiPositionId});
 
   @override
   $GetMemberRequireInfoApiDataApiBasicEntityCopyWith<$Res> get apiBasic;
   @override
-  $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res> get apiUnsetslot;
-  @override
-  $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>
+  $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>?
       get apiOssSetting;
 }
 
@@ -478,13 +466,13 @@ class __$$_GetMemberRequireInfoApiDataEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? apiBasic = null,
-    Object? apiSlotItem = null,
-    Object? apiUnsetslot = null,
-    Object? apiKdock = null,
-    Object? apiUseitem = null,
-    Object? apiFurniture = null,
-    Object? apiExtraSupply = null,
-    Object? apiOssSetting = null,
+    Object? apiSlotItem = freezed,
+    Object? apiUnsetslot = freezed,
+    Object? apiKdock = freezed,
+    Object? apiUseitem = freezed,
+    Object? apiFurniture = freezed,
+    Object? apiExtraSupply = freezed,
+    Object? apiOssSetting = freezed,
     Object? apiSkinId = null,
     Object? apiPositionId = null,
   }) {
@@ -493,34 +481,34 @@ class __$$_GetMemberRequireInfoApiDataEntityCopyWithImpl<$Res>
           ? _value.apiBasic
           : apiBasic // ignore: cast_nullable_to_non_nullable
               as GetMemberRequireInfoApiDataApiBasicEntity,
-      apiSlotItem: null == apiSlotItem
+      apiSlotItem: freezed == apiSlotItem
           ? _value.apiSlotItem
           : apiSlotItem // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiSlotItemEntity>,
-      apiUnsetslot: null == apiUnsetslot
+              as List<GetMemberRequireInfoApiDataApiSlotItemEntity>?,
+      apiUnsetslot: freezed == apiUnsetslot
           ? _value.apiUnsetslot
           : apiUnsetslot // ignore: cast_nullable_to_non_nullable
-              as GetMemberRequireInfoApiDataApiUnsetslotEntity,
-      apiKdock: null == apiKdock
+              as dynamic,
+      apiKdock: freezed == apiKdock
           ? _value.apiKdock
           : apiKdock // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiKdockEntity>,
-      apiUseitem: null == apiUseitem
+              as List<GetMemberRequireInfoApiDataApiKdockEntity>?,
+      apiUseitem: freezed == apiUseitem
           ? _value.apiUseitem
           : apiUseitem // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiUseitemEntity>,
-      apiFurniture: null == apiFurniture
+              as List<GetMemberRequireInfoApiDataApiUseitemEntity>?,
+      apiFurniture: freezed == apiFurniture
           ? _value.apiFurniture
           : apiFurniture // ignore: cast_nullable_to_non_nullable
-              as List<GetMemberRequireInfoApiDataApiFurnitureEntity>,
-      apiExtraSupply: null == apiExtraSupply
+              as List<GetMemberRequireInfoApiDataApiFurnitureEntity>?,
+      apiExtraSupply: freezed == apiExtraSupply
           ? _value.apiExtraSupply
           : apiExtraSupply // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiOssSetting: null == apiOssSetting
+              as List<int>?,
+      apiOssSetting: freezed == apiOssSetting
           ? _value.apiOssSetting
           : apiOssSetting // ignore: cast_nullable_to_non_nullable
-              as GetMemberRequireInfoApiDataApiOssSettingEntity,
+              as GetMemberRequireInfoApiDataApiOssSettingEntity?,
       apiSkinId: null == apiSkinId
           ? _value.apiSkinId
           : apiSkinId // ignore: cast_nullable_to_non_nullable
@@ -539,13 +527,13 @@ class _$_GetMemberRequireInfoApiDataEntity
     implements _GetMemberRequireInfoApiDataEntity {
   _$_GetMemberRequireInfoApiDataEntity(
       {@JsonKey(name: 'api_basic') required this.apiBasic,
-      @JsonKey(name: 'api_slot_item') required this.apiSlotItem,
-      @JsonKey(name: 'api_unsetslot') required this.apiUnsetslot,
-      @JsonKey(name: 'api_kdock') required this.apiKdock,
-      @JsonKey(name: 'api_useitem') required this.apiUseitem,
-      @JsonKey(name: 'api_furniture') required this.apiFurniture,
-      @JsonKey(name: 'api_extra_supply') required this.apiExtraSupply,
-      @JsonKey(name: 'api_oss_setting') required this.apiOssSetting,
+      @JsonKey(name: 'api_slot_item') this.apiSlotItem,
+      @JsonKey(name: 'api_unsetslot') this.apiUnsetslot,
+      @JsonKey(name: 'api_kdock') this.apiKdock,
+      @JsonKey(name: 'api_useitem') this.apiUseitem,
+      @JsonKey(name: 'api_furniture') this.apiFurniture,
+      @JsonKey(name: 'api_extra_supply') this.apiExtraSupply,
+      @JsonKey(name: 'api_oss_setting') this.apiOssSetting,
       @JsonKey(name: 'api_skin_id') required this.apiSkinId,
       @JsonKey(name: 'api_position_id') required this.apiPositionId});
 
@@ -558,25 +546,25 @@ class _$_GetMemberRequireInfoApiDataEntity
   GetMemberRequireInfoApiDataApiBasicEntity apiBasic;
   @override
   @JsonKey(name: 'api_slot_item')
-  List<GetMemberRequireInfoApiDataApiSlotItemEntity> apiSlotItem;
+  List<GetMemberRequireInfoApiDataApiSlotItemEntity>? apiSlotItem;
   @override
   @JsonKey(name: 'api_unsetslot')
-  GetMemberRequireInfoApiDataApiUnsetslotEntity apiUnsetslot;
+  dynamic apiUnsetslot;
   @override
   @JsonKey(name: 'api_kdock')
-  List<GetMemberRequireInfoApiDataApiKdockEntity> apiKdock;
+  List<GetMemberRequireInfoApiDataApiKdockEntity>? apiKdock;
   @override
   @JsonKey(name: 'api_useitem')
-  List<GetMemberRequireInfoApiDataApiUseitemEntity> apiUseitem;
+  List<GetMemberRequireInfoApiDataApiUseitemEntity>? apiUseitem;
   @override
   @JsonKey(name: 'api_furniture')
-  List<GetMemberRequireInfoApiDataApiFurnitureEntity> apiFurniture;
+  List<GetMemberRequireInfoApiDataApiFurnitureEntity>? apiFurniture;
   @override
   @JsonKey(name: 'api_extra_supply')
-  List<int> apiExtraSupply;
+  List<int>? apiExtraSupply;
   @override
   @JsonKey(name: 'api_oss_setting')
-  GetMemberRequireInfoApiDataApiOssSettingEntity apiOssSetting;
+  GetMemberRequireInfoApiDataApiOssSettingEntity? apiOssSetting;
   @override
   @JsonKey(name: 'api_skin_id')
   int apiSkinId;
@@ -608,24 +596,23 @@ class _$_GetMemberRequireInfoApiDataEntity
 abstract class _GetMemberRequireInfoApiDataEntity
     implements GetMemberRequireInfoApiDataEntity {
   factory _GetMemberRequireInfoApiDataEntity(
-      {@JsonKey(name: 'api_basic')
-      required GetMemberRequireInfoApiDataApiBasicEntity apiBasic,
-      @JsonKey(name: 'api_slot_item')
-      required List<GetMemberRequireInfoApiDataApiSlotItemEntity> apiSlotItem,
-      @JsonKey(name: 'api_unsetslot')
-      required GetMemberRequireInfoApiDataApiUnsetslotEntity apiUnsetslot,
-      @JsonKey(name: 'api_kdock')
-      required List<GetMemberRequireInfoApiDataApiKdockEntity> apiKdock,
-      @JsonKey(name: 'api_useitem')
-      required List<GetMemberRequireInfoApiDataApiUseitemEntity> apiUseitem,
-      @JsonKey(name: 'api_furniture')
-      required List<GetMemberRequireInfoApiDataApiFurnitureEntity> apiFurniture,
-      @JsonKey(name: 'api_extra_supply') required List<int> apiExtraSupply,
-      @JsonKey(name: 'api_oss_setting')
-      required GetMemberRequireInfoApiDataApiOssSettingEntity apiOssSetting,
-      @JsonKey(name: 'api_skin_id') required int apiSkinId,
-      @JsonKey(name: 'api_position_id')
-      required int apiPositionId}) = _$_GetMemberRequireInfoApiDataEntity;
+          {@JsonKey(name: 'api_basic')
+          required GetMemberRequireInfoApiDataApiBasicEntity apiBasic,
+          @JsonKey(name: 'api_slot_item')
+          List<GetMemberRequireInfoApiDataApiSlotItemEntity>? apiSlotItem,
+          @JsonKey(name: 'api_unsetslot') dynamic apiUnsetslot,
+          @JsonKey(name: 'api_kdock')
+          List<GetMemberRequireInfoApiDataApiKdockEntity>? apiKdock,
+          @JsonKey(name: 'api_useitem')
+          List<GetMemberRequireInfoApiDataApiUseitemEntity>? apiUseitem,
+          @JsonKey(name: 'api_furniture')
+          List<GetMemberRequireInfoApiDataApiFurnitureEntity>? apiFurniture,
+          @JsonKey(name: 'api_extra_supply') List<int>? apiExtraSupply,
+          @JsonKey(name: 'api_oss_setting')
+          GetMemberRequireInfoApiDataApiOssSettingEntity? apiOssSetting,
+          @JsonKey(name: 'api_skin_id') required int apiSkinId,
+          @JsonKey(name: 'api_position_id') required int apiPositionId}) =
+      _$_GetMemberRequireInfoApiDataEntity;
 
   factory _GetMemberRequireInfoApiDataEntity.fromJson(
           Map<String, dynamic> json) =
@@ -638,39 +625,39 @@ abstract class _GetMemberRequireInfoApiDataEntity
   set apiBasic(GetMemberRequireInfoApiDataApiBasicEntity value);
   @override
   @JsonKey(name: 'api_slot_item')
-  List<GetMemberRequireInfoApiDataApiSlotItemEntity> get apiSlotItem;
+  List<GetMemberRequireInfoApiDataApiSlotItemEntity>? get apiSlotItem;
   @JsonKey(name: 'api_slot_item')
-  set apiSlotItem(List<GetMemberRequireInfoApiDataApiSlotItemEntity> value);
+  set apiSlotItem(List<GetMemberRequireInfoApiDataApiSlotItemEntity>? value);
   @override
   @JsonKey(name: 'api_unsetslot')
-  GetMemberRequireInfoApiDataApiUnsetslotEntity get apiUnsetslot;
+  dynamic get apiUnsetslot;
   @JsonKey(name: 'api_unsetslot')
-  set apiUnsetslot(GetMemberRequireInfoApiDataApiUnsetslotEntity value);
+  set apiUnsetslot(dynamic value);
   @override
   @JsonKey(name: 'api_kdock')
-  List<GetMemberRequireInfoApiDataApiKdockEntity> get apiKdock;
+  List<GetMemberRequireInfoApiDataApiKdockEntity>? get apiKdock;
   @JsonKey(name: 'api_kdock')
-  set apiKdock(List<GetMemberRequireInfoApiDataApiKdockEntity> value);
+  set apiKdock(List<GetMemberRequireInfoApiDataApiKdockEntity>? value);
   @override
   @JsonKey(name: 'api_useitem')
-  List<GetMemberRequireInfoApiDataApiUseitemEntity> get apiUseitem;
+  List<GetMemberRequireInfoApiDataApiUseitemEntity>? get apiUseitem;
   @JsonKey(name: 'api_useitem')
-  set apiUseitem(List<GetMemberRequireInfoApiDataApiUseitemEntity> value);
+  set apiUseitem(List<GetMemberRequireInfoApiDataApiUseitemEntity>? value);
   @override
   @JsonKey(name: 'api_furniture')
-  List<GetMemberRequireInfoApiDataApiFurnitureEntity> get apiFurniture;
+  List<GetMemberRequireInfoApiDataApiFurnitureEntity>? get apiFurniture;
   @JsonKey(name: 'api_furniture')
-  set apiFurniture(List<GetMemberRequireInfoApiDataApiFurnitureEntity> value);
+  set apiFurniture(List<GetMemberRequireInfoApiDataApiFurnitureEntity>? value);
   @override
   @JsonKey(name: 'api_extra_supply')
-  List<int> get apiExtraSupply;
+  List<int>? get apiExtraSupply;
   @JsonKey(name: 'api_extra_supply')
-  set apiExtraSupply(List<int> value);
+  set apiExtraSupply(List<int>? value);
   @override
   @JsonKey(name: 'api_oss_setting')
-  GetMemberRequireInfoApiDataApiOssSettingEntity get apiOssSetting;
+  GetMemberRequireInfoApiDataApiOssSettingEntity? get apiOssSetting;
   @JsonKey(name: 'api_oss_setting')
-  set apiOssSetting(GetMemberRequireInfoApiDataApiOssSettingEntity value);
+  set apiOssSetting(GetMemberRequireInfoApiDataApiOssSettingEntity? value);
   @override
   @JsonKey(name: 'api_skin_id')
   int get apiSkinId;
@@ -1098,240 +1085,6 @@ abstract class _GetMemberRequireInfoApiDataApiSlotItemEntity
   @JsonKey(ignore: true)
   _$$_GetMemberRequireInfoApiDataApiSlotItemEntityCopyWith<
           _$_GetMemberRequireInfoApiDataApiSlotItemEntity>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-GetMemberRequireInfoApiDataApiUnsetslotEntity
-    _$GetMemberRequireInfoApiDataApiUnsetslotEntityFromJson(
-        Map<String, dynamic> json) {
-  return _GetMemberRequireInfoApiDataApiUnsetslotEntity.fromJson(json);
-}
-
-/// @nodoc
-mixin _$GetMemberRequireInfoApiDataApiUnsetslotEntity {
-  @JsonKey(name: 'api_slottype23')
-  List<int> get apiSlottype23 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype23')
-  set apiSlottype23(List<int> value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype5')
-  List<int> get apiSlottype5 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype5')
-  set apiSlottype5(List<int> value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype30')
-  List<int> get apiSlottype30 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype30')
-  set apiSlottype30(List<int> value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype1')
-  List<int> get apiSlottype1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'api_slottype1')
-  set apiSlottype1(List<int> value) => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<
-          GetMemberRequireInfoApiDataApiUnsetslotEntity>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res> {
-  factory $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith(
-          GetMemberRequireInfoApiDataApiUnsetslotEntity value,
-          $Res Function(GetMemberRequireInfoApiDataApiUnsetslotEntity) then) =
-      _$GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl<$Res,
-          GetMemberRequireInfoApiDataApiUnsetslotEntity>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'api_slottype23') List<int> apiSlottype23,
-      @JsonKey(name: 'api_slottype5') List<int> apiSlottype5,
-      @JsonKey(name: 'api_slottype30') List<int> apiSlottype30,
-      @JsonKey(name: 'api_slottype1') List<int> apiSlottype1});
-}
-
-/// @nodoc
-class _$GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl<$Res,
-        $Val extends GetMemberRequireInfoApiDataApiUnsetslotEntity>
-    implements $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res> {
-  _$GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl(
-      this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? apiSlottype23 = null,
-    Object? apiSlottype5 = null,
-    Object? apiSlottype30 = null,
-    Object? apiSlottype1 = null,
-  }) {
-    return _then(_value.copyWith(
-      apiSlottype23: null == apiSlottype23
-          ? _value.apiSlottype23
-          : apiSlottype23 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSlottype5: null == apiSlottype5
-          ? _value.apiSlottype5
-          : apiSlottype5 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSlottype30: null == apiSlottype30
-          ? _value.apiSlottype30
-          : apiSlottype30 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSlottype1: null == apiSlottype1
-          ? _value.apiSlottype1
-          : apiSlottype1 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res>
-    implements $GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res> {
-  factory _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith(
-          _$_GetMemberRequireInfoApiDataApiUnsetslotEntity value,
-          $Res Function(_$_GetMemberRequireInfoApiDataApiUnsetslotEntity)
-              then) =
-      __$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'api_slottype23') List<int> apiSlottype23,
-      @JsonKey(name: 'api_slottype5') List<int> apiSlottype5,
-      @JsonKey(name: 'api_slottype30') List<int> apiSlottype30,
-      @JsonKey(name: 'api_slottype1') List<int> apiSlottype1});
-}
-
-/// @nodoc
-class __$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl<$Res>
-    extends _$GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl<$Res,
-        _$_GetMemberRequireInfoApiDataApiUnsetslotEntity>
-    implements _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<$Res> {
-  __$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl(
-      _$_GetMemberRequireInfoApiDataApiUnsetslotEntity _value,
-      $Res Function(_$_GetMemberRequireInfoApiDataApiUnsetslotEntity) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? apiSlottype23 = null,
-    Object? apiSlottype5 = null,
-    Object? apiSlottype30 = null,
-    Object? apiSlottype1 = null,
-  }) {
-    return _then(_$_GetMemberRequireInfoApiDataApiUnsetslotEntity(
-      apiSlottype23: null == apiSlottype23
-          ? _value.apiSlottype23
-          : apiSlottype23 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSlottype5: null == apiSlottype5
-          ? _value.apiSlottype5
-          : apiSlottype5 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSlottype30: null == apiSlottype30
-          ? _value.apiSlottype30
-          : apiSlottype30 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      apiSlottype1: null == apiSlottype1
-          ? _value.apiSlottype1
-          : apiSlottype1 // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_GetMemberRequireInfoApiDataApiUnsetslotEntity
-    implements _GetMemberRequireInfoApiDataApiUnsetslotEntity {
-  _$_GetMemberRequireInfoApiDataApiUnsetslotEntity(
-      {@JsonKey(name: 'api_slottype23') required this.apiSlottype23,
-      @JsonKey(name: 'api_slottype5') required this.apiSlottype5,
-      @JsonKey(name: 'api_slottype30') required this.apiSlottype30,
-      @JsonKey(name: 'api_slottype1') required this.apiSlottype1});
-
-  factory _$_GetMemberRequireInfoApiDataApiUnsetslotEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityFromJson(json);
-
-  @override
-  @JsonKey(name: 'api_slottype23')
-  List<int> apiSlottype23;
-  @override
-  @JsonKey(name: 'api_slottype5')
-  List<int> apiSlottype5;
-  @override
-  @JsonKey(name: 'api_slottype30')
-  List<int> apiSlottype30;
-  @override
-  @JsonKey(name: 'api_slottype1')
-  List<int> apiSlottype1;
-
-  @override
-  String toString() {
-    return 'GetMemberRequireInfoApiDataApiUnsetslotEntity(apiSlottype23: $apiSlottype23, apiSlottype5: $apiSlottype5, apiSlottype30: $apiSlottype30, apiSlottype1: $apiSlottype1)';
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<
-          _$_GetMemberRequireInfoApiDataApiUnsetslotEntity>
-      get copyWith =>
-          __$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWithImpl<
-                  _$_GetMemberRequireInfoApiDataApiUnsetslotEntity>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityToJson(
-      this,
-    );
-  }
-}
-
-abstract class _GetMemberRequireInfoApiDataApiUnsetslotEntity
-    implements GetMemberRequireInfoApiDataApiUnsetslotEntity {
-  factory _GetMemberRequireInfoApiDataApiUnsetslotEntity(
-          {@JsonKey(name: 'api_slottype23') required List<int> apiSlottype23,
-          @JsonKey(name: 'api_slottype5') required List<int> apiSlottype5,
-          @JsonKey(name: 'api_slottype30') required List<int> apiSlottype30,
-          @JsonKey(name: 'api_slottype1') required List<int> apiSlottype1}) =
-      _$_GetMemberRequireInfoApiDataApiUnsetslotEntity;
-
-  factory _GetMemberRequireInfoApiDataApiUnsetslotEntity.fromJson(
-          Map<String, dynamic> json) =
-      _$_GetMemberRequireInfoApiDataApiUnsetslotEntity.fromJson;
-
-  @override
-  @JsonKey(name: 'api_slottype23')
-  List<int> get apiSlottype23;
-  @JsonKey(name: 'api_slottype23')
-  set apiSlottype23(List<int> value);
-  @override
-  @JsonKey(name: 'api_slottype5')
-  List<int> get apiSlottype5;
-  @JsonKey(name: 'api_slottype5')
-  set apiSlottype5(List<int> value);
-  @override
-  @JsonKey(name: 'api_slottype30')
-  List<int> get apiSlottype30;
-  @JsonKey(name: 'api_slottype30')
-  set apiSlottype30(List<int> value);
-  @override
-  @JsonKey(name: 'api_slottype1')
-  List<int> get apiSlottype1;
-  @JsonKey(name: 'api_slottype1')
-  set apiSlottype1(List<int> value);
-  @override
-  @JsonKey(ignore: true)
-  _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityCopyWith<
-          _$_GetMemberRequireInfoApiDataApiUnsetslotEntity>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2151,9 +1904,9 @@ mixin _$GetMemberRequireInfoApiDataApiOssSettingEntity {
   @JsonKey(name: 'api_language_type')
   set apiLanguageType(int value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_oss_items')
-  List<int> get apiOssItems => throw _privateConstructorUsedError;
+  List<int>? get apiOssItems => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_oss_items')
-  set apiOssItems(List<int> value) => throw _privateConstructorUsedError;
+  set apiOssItems(List<int>? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2172,7 +1925,7 @@ abstract class $GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'api_language_type') int apiLanguageType,
-      @JsonKey(name: 'api_oss_items') List<int> apiOssItems});
+      @JsonKey(name: 'api_oss_items') List<int>? apiOssItems});
 }
 
 /// @nodoc
@@ -2191,17 +1944,17 @@ class _$GetMemberRequireInfoApiDataApiOssSettingEntityCopyWithImpl<$Res,
   @override
   $Res call({
     Object? apiLanguageType = null,
-    Object? apiOssItems = null,
+    Object? apiOssItems = freezed,
   }) {
     return _then(_value.copyWith(
       apiLanguageType: null == apiLanguageType
           ? _value.apiLanguageType
           : apiLanguageType // ignore: cast_nullable_to_non_nullable
               as int,
-      apiOssItems: null == apiOssItems
+      apiOssItems: freezed == apiOssItems
           ? _value.apiOssItems
           : apiOssItems // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
     ) as $Val);
   }
 }
@@ -2218,7 +1971,7 @@ abstract class _$$_GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'api_language_type') int apiLanguageType,
-      @JsonKey(name: 'api_oss_items') List<int> apiOssItems});
+      @JsonKey(name: 'api_oss_items') List<int>? apiOssItems});
 }
 
 /// @nodoc
@@ -2236,17 +1989,17 @@ class __$$_GetMemberRequireInfoApiDataApiOssSettingEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? apiLanguageType = null,
-    Object? apiOssItems = null,
+    Object? apiOssItems = freezed,
   }) {
     return _then(_$_GetMemberRequireInfoApiDataApiOssSettingEntity(
       apiLanguageType: null == apiLanguageType
           ? _value.apiLanguageType
           : apiLanguageType // ignore: cast_nullable_to_non_nullable
               as int,
-      apiOssItems: null == apiOssItems
+      apiOssItems: freezed == apiOssItems
           ? _value.apiOssItems
           : apiOssItems // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
     ));
   }
 }
@@ -2257,7 +2010,7 @@ class _$_GetMemberRequireInfoApiDataApiOssSettingEntity
     implements _GetMemberRequireInfoApiDataApiOssSettingEntity {
   _$_GetMemberRequireInfoApiDataApiOssSettingEntity(
       {@JsonKey(name: 'api_language_type') required this.apiLanguageType,
-      @JsonKey(name: 'api_oss_items') required this.apiOssItems});
+      @JsonKey(name: 'api_oss_items') this.apiOssItems});
 
   factory _$_GetMemberRequireInfoApiDataApiOssSettingEntity.fromJson(
           Map<String, dynamic> json) =>
@@ -2268,7 +2021,7 @@ class _$_GetMemberRequireInfoApiDataApiOssSettingEntity
   int apiLanguageType;
   @override
   @JsonKey(name: 'api_oss_items')
-  List<int> apiOssItems;
+  List<int>? apiOssItems;
 
   @override
   String toString() {
@@ -2297,7 +2050,7 @@ abstract class _GetMemberRequireInfoApiDataApiOssSettingEntity
     implements GetMemberRequireInfoApiDataApiOssSettingEntity {
   factory _GetMemberRequireInfoApiDataApiOssSettingEntity(
           {@JsonKey(name: 'api_language_type') required int apiLanguageType,
-          @JsonKey(name: 'api_oss_items') required List<int> apiOssItems}) =
+          @JsonKey(name: 'api_oss_items') List<int>? apiOssItems}) =
       _$_GetMemberRequireInfoApiDataApiOssSettingEntity;
 
   factory _GetMemberRequireInfoApiDataApiOssSettingEntity.fromJson(
@@ -2311,9 +2064,9 @@ abstract class _GetMemberRequireInfoApiDataApiOssSettingEntity
   set apiLanguageType(int value);
   @override
   @JsonKey(name: 'api_oss_items')
-  List<int> get apiOssItems;
+  List<int>? get apiOssItems;
   @JsonKey(name: 'api_oss_items')
-  set apiOssItems(List<int> value);
+  set apiOssItems(List<int>? value);
   @override
   @JsonKey(ignore: true)
   _$$_GetMemberRequireInfoApiDataApiOssSettingEntityCopyWith<

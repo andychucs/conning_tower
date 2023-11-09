@@ -1,3 +1,4 @@
+import 'package:conning_tower/models/data/kcsapi/item_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'get_member_require_info_entity.freezed.dart';
@@ -26,18 +27,17 @@ class GetMemberRequireInfoApiDataEntity
     @JsonKey(name: 'api_basic')
     required GetMemberRequireInfoApiDataApiBasicEntity apiBasic,
     @JsonKey(name: 'api_slot_item')
-    required List<GetMemberRequireInfoApiDataApiSlotItemEntity> apiSlotItem,
-    @JsonKey(name: 'api_unsetslot')
-    required GetMemberRequireInfoApiDataApiUnsetslotEntity apiUnsetslot,
+    List<GetMemberRequireInfoApiDataApiSlotItemEntity>? apiSlotItem,
+    @JsonKey(name: 'api_unsetslot') dynamic apiUnsetslot,
     @JsonKey(name: 'api_kdock')
-    required List<GetMemberRequireInfoApiDataApiKdockEntity> apiKdock,
+    List<GetMemberRequireInfoApiDataApiKdockEntity>? apiKdock,
     @JsonKey(name: 'api_useitem')
-    required List<GetMemberRequireInfoApiDataApiUseitemEntity> apiUseitem,
+    List<GetMemberRequireInfoApiDataApiUseitemEntity>? apiUseitem,
     @JsonKey(name: 'api_furniture')
-    required List<GetMemberRequireInfoApiDataApiFurnitureEntity> apiFurniture,
-    @JsonKey(name: 'api_extra_supply') required List<int> apiExtraSupply,
+    List<GetMemberRequireInfoApiDataApiFurnitureEntity>? apiFurniture,
+    @JsonKey(name: 'api_extra_supply') List<int>? apiExtraSupply,
     @JsonKey(name: 'api_oss_setting')
-    required GetMemberRequireInfoApiDataApiOssSettingEntity apiOssSetting,
+    GetMemberRequireInfoApiDataApiOssSettingEntity? apiOssSetting,
     @JsonKey(name: 'api_skin_id') required int apiSkinId,
     @JsonKey(name: 'api_position_id') required int apiPositionId,
   }) = _GetMemberRequireInfoApiDataEntity;
@@ -62,7 +62,8 @@ class GetMemberRequireInfoApiDataApiBasicEntity
 
 @unfreezed
 class GetMemberRequireInfoApiDataApiSlotItemEntity
-    with _$GetMemberRequireInfoApiDataApiSlotItemEntity {
+    with _$GetMemberRequireInfoApiDataApiSlotItemEntity
+    implements SlotItem {
   factory GetMemberRequireInfoApiDataApiSlotItemEntity({
     @JsonKey(name: 'api_id') required int apiId,
     @JsonKey(name: 'api_slotitem_id') required int apiSlotitemId,
@@ -73,21 +74,6 @@ class GetMemberRequireInfoApiDataApiSlotItemEntity
   factory GetMemberRequireInfoApiDataApiSlotItemEntity.fromJson(
           Map<String, dynamic> json) =>
       _$GetMemberRequireInfoApiDataApiSlotItemEntityFromJson(json);
-}
-
-@unfreezed
-class GetMemberRequireInfoApiDataApiUnsetslotEntity
-    with _$GetMemberRequireInfoApiDataApiUnsetslotEntity {
-  factory GetMemberRequireInfoApiDataApiUnsetslotEntity({
-    @JsonKey(name: 'api_slottype23') required List<int> apiSlottype23,
-    @JsonKey(name: 'api_slottype5') required List<int> apiSlottype5,
-    @JsonKey(name: 'api_slottype30') required List<int> apiSlottype30,
-    @JsonKey(name: 'api_slottype1') required List<int> apiSlottype1,
-  }) = _GetMemberRequireInfoApiDataApiUnsetslotEntity;
-
-  factory GetMemberRequireInfoApiDataApiUnsetslotEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetMemberRequireInfoApiDataApiUnsetslotEntityFromJson(json);
 }
 
 @unfreezed
@@ -144,7 +130,7 @@ class GetMemberRequireInfoApiDataApiOssSettingEntity
     with _$GetMemberRequireInfoApiDataApiOssSettingEntity {
   factory GetMemberRequireInfoApiDataApiOssSettingEntity({
     @JsonKey(name: 'api_language_type') required int apiLanguageType,
-    @JsonKey(name: 'api_oss_items') required List<int> apiOssItems,
+    @JsonKey(name: 'api_oss_items') List<int>? apiOssItems,
   }) = _GetMemberRequireInfoApiDataApiOssSettingEntity;
 
   factory GetMemberRequireInfoApiDataApiOssSettingEntity.fromJson(

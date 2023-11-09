@@ -28,30 +28,31 @@ _$_GetMemberRequireInfoApiDataEntity
         _$_GetMemberRequireInfoApiDataEntity(
           apiBasic: GetMemberRequireInfoApiDataApiBasicEntity.fromJson(
               json['api_basic'] as Map<String, dynamic>),
-          apiSlotItem: (json['api_slot_item'] as List<dynamic>)
-              .map((e) => GetMemberRequireInfoApiDataApiSlotItemEntity.fromJson(
+          apiSlotItem: (json['api_slot_item'] as List<dynamic>?)
+              ?.map((e) =>
+                  GetMemberRequireInfoApiDataApiSlotItemEntity.fromJson(
+                      e as Map<String, dynamic>))
+              .toList(),
+          apiUnsetslot: json['api_unsetslot'],
+          apiKdock: (json['api_kdock'] as List<dynamic>?)
+              ?.map((e) => GetMemberRequireInfoApiDataApiKdockEntity.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          apiUnsetslot: GetMemberRequireInfoApiDataApiUnsetslotEntity.fromJson(
-              json['api_unsetslot'] as Map<String, dynamic>),
-          apiKdock: (json['api_kdock'] as List<dynamic>)
-              .map((e) => GetMemberRequireInfoApiDataApiKdockEntity.fromJson(
+          apiUseitem: (json['api_useitem'] as List<dynamic>?)
+              ?.map((e) => GetMemberRequireInfoApiDataApiUseitemEntity.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          apiUseitem: (json['api_useitem'] as List<dynamic>)
-              .map((e) => GetMemberRequireInfoApiDataApiUseitemEntity.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
-          apiFurniture: (json['api_furniture'] as List<dynamic>)
-              .map((e) =>
+          apiFurniture: (json['api_furniture'] as List<dynamic>?)
+              ?.map((e) =>
                   GetMemberRequireInfoApiDataApiFurnitureEntity.fromJson(
                       e as Map<String, dynamic>))
               .toList(),
-          apiExtraSupply: (json['api_extra_supply'] as List<dynamic>)
-              .map((e) => e as int)
+          apiExtraSupply: (json['api_extra_supply'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiOssSetting:
-              GetMemberRequireInfoApiDataApiOssSettingEntity.fromJson(
+          apiOssSetting: json['api_oss_setting'] == null
+              ? null
+              : GetMemberRequireInfoApiDataApiOssSettingEntity.fromJson(
                   json['api_oss_setting'] as Map<String, dynamic>),
           apiSkinId: json['api_skin_id'] as int,
           apiPositionId: json['api_position_id'] as int,
@@ -104,33 +105,6 @@ Map<String, dynamic> _$$_GetMemberRequireInfoApiDataApiSlotItemEntityToJson(
       'api_slotitem_id': instance.apiSlotitemId,
       'api_locked': instance.apiLocked,
       'api_level': instance.apiLevel,
-    };
-
-_$_GetMemberRequireInfoApiDataApiUnsetslotEntity
-    _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityFromJson(
-            Map<String, dynamic> json) =>
-        _$_GetMemberRequireInfoApiDataApiUnsetslotEntity(
-          apiSlottype23: (json['api_slottype23'] as List<dynamic>)
-              .map((e) => e as int)
-              .toList(),
-          apiSlottype5: (json['api_slottype5'] as List<dynamic>)
-              .map((e) => e as int)
-              .toList(),
-          apiSlottype30: (json['api_slottype30'] as List<dynamic>)
-              .map((e) => e as int)
-              .toList(),
-          apiSlottype1: (json['api_slottype1'] as List<dynamic>)
-              .map((e) => e as int)
-              .toList(),
-        );
-
-Map<String, dynamic> _$$_GetMemberRequireInfoApiDataApiUnsetslotEntityToJson(
-        _$_GetMemberRequireInfoApiDataApiUnsetslotEntity instance) =>
-    <String, dynamic>{
-      'api_slottype23': instance.apiSlottype23,
-      'api_slottype5': instance.apiSlottype5,
-      'api_slottype30': instance.apiSlottype30,
-      'api_slottype1': instance.apiSlottype1,
     };
 
 _$_GetMemberRequireInfoApiDataApiKdockEntity
@@ -203,8 +177,8 @@ _$_GetMemberRequireInfoApiDataApiOssSettingEntity
             Map<String, dynamic> json) =>
         _$_GetMemberRequireInfoApiDataApiOssSettingEntity(
           apiLanguageType: json['api_language_type'] as int,
-          apiOssItems: (json['api_oss_items'] as List<dynamic>)
-              .map((e) => e as int)
+          apiOssItems: (json['api_oss_items'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
         );
 
