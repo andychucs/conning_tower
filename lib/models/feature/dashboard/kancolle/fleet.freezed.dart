@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Fleet {
   List<Ship> get ships => throw _privateConstructorUsedError;
   set ships(List<Ship> value) => throw _privateConstructorUsedError;
-  List<dynamic> get equipment => throw _privateConstructorUsedError;
-  set equipment(List<dynamic> value) => throw _privateConstructorUsedError;
+  List<SlotItem> get equipment => throw _privateConstructorUsedError;
+  set equipment(List<SlotItem> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FleetCopyWith<Fleet> get copyWith => throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ abstract class $FleetCopyWith<$Res> {
   factory $FleetCopyWith(Fleet value, $Res Function(Fleet) then) =
       _$FleetCopyWithImpl<$Res, Fleet>;
   @useResult
-  $Res call({List<Ship> ships, List<dynamic> equipment});
+  $Res call({List<Ship> ships, List<SlotItem> equipment});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$FleetCopyWithImpl<$Res, $Val extends Fleet>
       equipment: null == equipment
           ? _value.equipment
           : equipment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<SlotItem>,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_FleetCopyWith<$Res> implements $FleetCopyWith<$Res> {
       __$$_FleetCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Ship> ships, List<dynamic> equipment});
+  $Res call({List<Ship> ships, List<SlotItem> equipment});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class __$$_FleetCopyWithImpl<$Res> extends _$FleetCopyWithImpl<$Res, _$_Fleet>
       equipment: null == equipment
           ? _value.equipment
           : equipment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<SlotItem>,
     ));
   }
 }
@@ -104,7 +104,7 @@ class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
   @override
   List<Ship> ships;
   @override
-  List<dynamic> equipment;
+  List<SlotItem> equipment;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -129,14 +129,15 @@ class _$_Fleet with DiagnosticableTreeMixin implements _Fleet {
 
 abstract class _Fleet implements Fleet {
   factory _Fleet(
-      {required List<Ship> ships, required List<dynamic> equipment}) = _$_Fleet;
+      {required List<Ship> ships,
+      required List<SlotItem> equipment}) = _$_Fleet;
 
   @override
   List<Ship> get ships;
   set ships(List<Ship> value);
   @override
-  List<dynamic> get equipment;
-  set equipment(List<dynamic> value);
+  List<SlotItem> get equipment;
+  set equipment(List<SlotItem> value);
   @override
   @JsonKey(ignore: true)
   _$$_FleetCopyWith<_$_Fleet> get copyWith =>
