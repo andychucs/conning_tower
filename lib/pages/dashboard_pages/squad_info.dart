@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -5,13 +7,15 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/label.dart';
+import 'package:conning_tower/widgets/dialog.dart';
+import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0);
+const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 
 class SquadInfo extends ConsumerStatefulWidget {
   const SquadInfo({super.key});
@@ -23,6 +27,14 @@ class SquadInfo extends ConsumerStatefulWidget {
 class _SquadInfoState extends ConsumerState<SquadInfo> {
   int _selectedSegment = 0;
   late Map<int, Widget> segments;
+
+  String speedLevel(speed) {
+    if (speed == 5) return S.current.TextSlowSpeed;
+    if (speed == 10) return S.current.TextFastSpeed;
+    if (speed == 15) return S.current.TextFastPlusSpeed;
+    if (speed == 20) return S.current.TextFastestSpeed;
+    return 'N/A';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +90,63 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                   children: List.generate(squads.length, (index) {
                     var squad = squads[index];
                     if (squad.ships.isNotEmpty) {
+                      List<int> speedList = [];
+                      List<int> attackList = [];
+                      List<int> antiAircraftList = [];
+                      List<int> levelList = [];
+                      List<int> antiSubmarineList = [];
+                      List<int> scoutList = [];
+                      for (var ship in squad.ships) {
+                        speedList.add(ship.speed!);
+                        attackList.add(ship.attack![0]);
+                        antiAircraftList.add(ship.antiAircraft![0]);
+                        levelList.add(ship.level);
+                        antiSubmarineList.add(ship.antiSubmarine![0]);
+                        scoutList.add(ship.scout![0]);
+                      }
+
                       return ScrollViewPageWithScrollbar(
                         child: CupertinoListSection.insetGrouped(
                           margin: _sectionMargin,
+                          footer: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CupertinoListSectionDescription(
+                                    'Lv:${levelList.reduce((value, element) => value + element)}\n'
+                                    '速力:${speedLevel(speedList.reduce(min))}\n'
+                                    '火力:${attackList.reduce((value, element) => value + element)}\n'
+                                    '対空:${antiAircraftList.reduce((value, element) => value + element)}\n'
+                                    '対潜:${antiSubmarineList.reduce((value, element) => value + element)}\n'
+                                    '索敵:${scoutList.reduce((value, element) => value + element)}\n'),
+                                GestureDetector(
+                                  child: Icon(
+                                    CupertinoIcons.info,
+                                    size: 20,
+                                    color: CupertinoDynamicColor.resolve(
+                                        kHeaderFooterColor, context),
+                                  ),
+                                  onTap: () => showAdaptiveDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog.adaptive(
+                                          content: Text(S
+                                              .of(context)
+                                              .KCDashboardFleetDescription),
+                                          actions: [
+                                            adaptiveAction(
+                                              context: context,
+                                              child:
+                                                  Text(S.of(context).TextYes),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      }),
+                                ),
+                              ]),
                           children: [
                             for (final ship in squad.ships)
                               CupertinoListTile(
