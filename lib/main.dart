@@ -22,8 +22,6 @@ late bool autoAdjusted;
 late bool gameLoadCompleted;
 late bool inKancolleWindow;
 late bool beforeRedirect;
-late double kWebviewHeight;
-late double kWebviewWidth;
 late int selectedIndex;
 late bool showControls;
 late DeviceType deviceType;
@@ -84,8 +82,6 @@ Future<void> init() async {
   gameLoadCompleted = false;
   inKancolleWindow = false;
   autoAdjusted = false;
-  kWebviewHeight = 0.0;
-  kWebviewWidth = 0.0;
   safeNavi = false;
   selectedIndex = 0;
   showControls = true;
