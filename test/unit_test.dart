@@ -8,7 +8,6 @@
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:conning_tower/main.dart' as app_main;
 
 
 void main() {
@@ -20,9 +19,9 @@ void main() {
   group("helper function test", () {
     group("home url test", () {
       test("home url when default", () {
-        app_main.enableAutoLoadHomeUrl = false;
-        app_main.customHomeUrl = '';
-        var url = getHomeUrl();
+        var enableAutoLoadHomeUrl = false;
+        var customHomeUrl = '';
+        var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
         if (kIsOpenSource) {
           expect(url, kGameUrl);
         } else {
@@ -31,9 +30,9 @@ void main() {
       });
 
       test("home url when auto load enabled", () {
-        app_main.enableAutoLoadHomeUrl = true;
-        app_main.customHomeUrl = '';
-        var url = getHomeUrl();
+        var enableAutoLoadHomeUrl = true;
+        var customHomeUrl = '';
+        var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
         if (kIsOpenSource) {
           expect(url, kGameUrl);
         } else {
@@ -42,30 +41,30 @@ void main() {
       });
 
       test("home url when custom url provided", () {
-        app_main.enableAutoLoadHomeUrl = true;
-        app_main.customHomeUrl = 'example.com';
-        var url = getHomeUrl();
+        var enableAutoLoadHomeUrl = true;
+        var customHomeUrl = 'example.com';
+        var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
         expect(url, "https://example.com");
       });
 
       test("home url when custom url is set with http prefix", () {
-        app_main.enableAutoLoadHomeUrl = true;
-        app_main.customHomeUrl = 'http://example.com';
-        var url = getHomeUrl();
+        var enableAutoLoadHomeUrl = true;
+        var customHomeUrl = 'http://example.com';
+        var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
         expect(url, 'http://example.com');
       });
 
       test("home url when custom url is set with https prefix", () {
-        app_main.enableAutoLoadHomeUrl = true;
-        app_main.customHomeUrl = 'https://example.com';
-        var url = getHomeUrl();
+        var enableAutoLoadHomeUrl = true;
+        var customHomeUrl = 'https://example.com';
+        var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
         expect(url, "https://example.com");
       });
 
       test("home url when custom url provided auto load disabled", () {
-        app_main.enableAutoLoadHomeUrl = false;
-        app_main.customHomeUrl = 'example.com';
-        var url = getHomeUrl();
+        var enableAutoLoadHomeUrl = false;
+        var customHomeUrl = 'example.com';
+        var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
         if (kIsOpenSource) {
           expect(url, kGameUrl);
         } else {
