@@ -1996,9 +1996,9 @@ ReqSortieBattleApiDataApiRaigekiEntity
 /// @nodoc
 mixin _$ReqSortieBattleApiDataApiRaigekiEntity {
   @JsonKey(name: 'api_frai')
-  List<num> get apiFrai => throw _privateConstructorUsedError;
+  List<int> get apiFrai => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_frai')
-  set apiFrai(List<num> value) => throw _privateConstructorUsedError;
+  set apiFrai(List<int> value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_fcl')
   List<num> get apiFcl => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_fcl')
@@ -2012,9 +2012,9 @@ mixin _$ReqSortieBattleApiDataApiRaigekiEntity {
   @JsonKey(name: 'api_fydam')
   set apiFydam(List<num> value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_erai')
-  List<num> get apiErai => throw _privateConstructorUsedError;
+  List<int> get apiErai => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_erai')
-  set apiErai(List<num> value) => throw _privateConstructorUsedError;
+  set apiErai(List<int> value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ecl')
   List<num> get apiEcl => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_ecl')
@@ -2044,11 +2044,11 @@ abstract class $ReqSortieBattleApiDataApiRaigekiEntityCopyWith<$Res> {
           ReqSortieBattleApiDataApiRaigekiEntity>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'api_frai') List<num> apiFrai,
+      {@JsonKey(name: 'api_frai') List<int> apiFrai,
       @JsonKey(name: 'api_fcl') List<num> apiFcl,
       @JsonKey(name: 'api_fdam') List<num> apiFdam,
       @JsonKey(name: 'api_fydam') List<num> apiFydam,
-      @JsonKey(name: 'api_erai') List<num> apiErai,
+      @JsonKey(name: 'api_erai') List<int> apiErai,
       @JsonKey(name: 'api_ecl') List<num> apiEcl,
       @JsonKey(name: 'api_edam') List<num> apiEdam,
       @JsonKey(name: 'api_eydam') List<num> apiEydam});
@@ -2081,7 +2081,7 @@ class _$ReqSortieBattleApiDataApiRaigekiEntityCopyWithImpl<$Res,
       apiFrai: null == apiFrai
           ? _value.apiFrai
           : apiFrai // ignore: cast_nullable_to_non_nullable
-              as List<num>,
+              as List<int>,
       apiFcl: null == apiFcl
           ? _value.apiFcl
           : apiFcl // ignore: cast_nullable_to_non_nullable
@@ -2097,7 +2097,7 @@ class _$ReqSortieBattleApiDataApiRaigekiEntityCopyWithImpl<$Res,
       apiErai: null == apiErai
           ? _value.apiErai
           : apiErai // ignore: cast_nullable_to_non_nullable
-              as List<num>,
+              as List<int>,
       apiEcl: null == apiEcl
           ? _value.apiEcl
           : apiEcl // ignore: cast_nullable_to_non_nullable
@@ -2124,11 +2124,11 @@ abstract class _$$_ReqSortieBattleApiDataApiRaigekiEntityCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'api_frai') List<num> apiFrai,
+      {@JsonKey(name: 'api_frai') List<int> apiFrai,
       @JsonKey(name: 'api_fcl') List<num> apiFcl,
       @JsonKey(name: 'api_fdam') List<num> apiFdam,
       @JsonKey(name: 'api_fydam') List<num> apiFydam,
-      @JsonKey(name: 'api_erai') List<num> apiErai,
+      @JsonKey(name: 'api_erai') List<int> apiErai,
       @JsonKey(name: 'api_ecl') List<num> apiEcl,
       @JsonKey(name: 'api_edam') List<num> apiEdam,
       @JsonKey(name: 'api_eydam') List<num> apiEydam});
@@ -2160,7 +2160,7 @@ class __$$_ReqSortieBattleApiDataApiRaigekiEntityCopyWithImpl<$Res>
       apiFrai: null == apiFrai
           ? _value.apiFrai
           : apiFrai // ignore: cast_nullable_to_non_nullable
-              as List<num>,
+              as List<int>,
       apiFcl: null == apiFcl
           ? _value.apiFcl
           : apiFcl // ignore: cast_nullable_to_non_nullable
@@ -2176,7 +2176,7 @@ class __$$_ReqSortieBattleApiDataApiRaigekiEntityCopyWithImpl<$Res>
       apiErai: null == apiErai
           ? _value.apiErai
           : apiErai // ignore: cast_nullable_to_non_nullable
-              as List<num>,
+              as List<int>,
       apiEcl: null == apiEcl
           ? _value.apiEcl
           : apiEcl // ignore: cast_nullable_to_non_nullable
@@ -2213,7 +2213,7 @@ class _$_ReqSortieBattleApiDataApiRaigekiEntity
 
   @override
   @JsonKey(name: 'api_frai')
-  List<num> apiFrai;
+  List<int> apiFrai;
   @override
   @JsonKey(name: 'api_fcl')
   List<num> apiFcl;
@@ -2225,7 +2225,7 @@ class _$_ReqSortieBattleApiDataApiRaigekiEntity
   List<num> apiFydam;
   @override
   @JsonKey(name: 'api_erai')
-  List<num> apiErai;
+  List<int> apiErai;
   @override
   @JsonKey(name: 'api_ecl')
   List<num> apiEcl;
@@ -2260,11 +2260,11 @@ class _$_ReqSortieBattleApiDataApiRaigekiEntity
 abstract class _ReqSortieBattleApiDataApiRaigekiEntity
     implements ReqSortieBattleApiDataApiRaigekiEntity {
   factory _ReqSortieBattleApiDataApiRaigekiEntity(
-          {@JsonKey(name: 'api_frai') required List<num> apiFrai,
+          {@JsonKey(name: 'api_frai') required List<int> apiFrai,
           @JsonKey(name: 'api_fcl') required List<num> apiFcl,
           @JsonKey(name: 'api_fdam') required List<num> apiFdam,
           @JsonKey(name: 'api_fydam') required List<num> apiFydam,
-          @JsonKey(name: 'api_erai') required List<num> apiErai,
+          @JsonKey(name: 'api_erai') required List<int> apiErai,
           @JsonKey(name: 'api_ecl') required List<num> apiEcl,
           @JsonKey(name: 'api_edam') required List<num> apiEdam,
           @JsonKey(name: 'api_eydam') required List<num> apiEydam}) =
@@ -2276,9 +2276,9 @@ abstract class _ReqSortieBattleApiDataApiRaigekiEntity
 
   @override
   @JsonKey(name: 'api_frai')
-  List<num> get apiFrai;
+  List<int> get apiFrai;
   @JsonKey(name: 'api_frai')
-  set apiFrai(List<num> value);
+  set apiFrai(List<int> value);
   @override
   @JsonKey(name: 'api_fcl')
   List<num> get apiFcl;
@@ -2296,9 +2296,9 @@ abstract class _ReqSortieBattleApiDataApiRaigekiEntity
   set apiFydam(List<num> value);
   @override
   @JsonKey(name: 'api_erai')
-  List<num> get apiErai;
+  List<int> get apiErai;
   @JsonKey(name: 'api_erai')
-  set apiErai(List<num> value);
+  set apiErai(List<int> value);
   @override
   @JsonKey(name: 'api_ecl')
   List<num> get apiEcl;
