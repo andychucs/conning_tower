@@ -10,6 +10,8 @@ part 'settings_provider.g.dart';
 class SettingsState with _$SettingsState {
   const factory SettingsState({
     required int dashboardIndex,
+    required bool kcSparkEmoji,
+    required bool kcBattleReportEnable
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
@@ -21,16 +23,22 @@ class Settings extends _$Settings {
   @override
   SettingsState build() {
     int dashboardIndex = localStorage.getInt("dashboardIndex") ?? 0;
-    return SettingsState(dashboardIndex: dashboardIndex);
+    bool kcSparkEmoji = localStorage.getBool("kcSparkEmoji") ?? false;
+    bool kcBattleReportEnable = localStorage.getBool("kcBattleReportEnable") ?? true;
+    return SettingsState(dashboardIndex: dashboardIndex, kcSparkEmoji: kcSparkEmoji, kcBattleReportEnable: kcBattleReportEnable);
   }
 
   void rebuild() {
-    int dashboardIndex = localStorage.getInt("dashboardIndex") ?? 0;
-    state = state.copyWith(dashboardIndex: dashboardIndex);
+    state = build();
   }
 
   void setInt(String key, int value) {
     localStorage.setInt(key, value);
+    rebuild();
+  }
+
+  void seBool(String key, bool value) {
+    localStorage.setBool(key, value);
     rebuild();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
@@ -46,6 +47,7 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                   dmg: battleInfo.dmgMap?[squad.ships[index].hashCode] ?? 0,
                   dmgTaken:
                       battleInfo.dmgTakenMap?[squad.ships[index].hashCode] ?? 0,
+                  useEmoji: ref.read(settingsProvider).kcSparkEmoji,
                 )),
       ));
     }
@@ -105,6 +107,7 @@ class ShipInfoInBattle extends StatelessWidget {
   final String name;
   final int dmg;
   final int dmgTaken;
+  final bool useEmoji;
 
   const ShipInfoInBattle({
     super.key,
@@ -112,6 +115,7 @@ class ShipInfoInBattle extends StatelessWidget {
     required this.name,
     required this.dmg,
     required this.dmgTaken,
+    this.useEmoji = false,
   });
 
   @override
@@ -131,20 +135,22 @@ class ShipInfoInBattle extends StatelessWidget {
             if (ship.condition != null)
               Row(
                 children: [
-                  CircularPercentIndicator(
-                    backgroundColor: CupertinoDynamicColor.resolve(
-                        CupertinoColors.systemGroupedBackground, context),
-                    reverse: true,
-                    radius: 10.0,
-                    lineWidth: 5.0,
-                    animation: true,
-                    animationDuration: 500,
-                    animateFromLastPercent: true,
-                    circularStrokeCap: CircularStrokeCap.round,
-                    percent: ship.condition! / 100,
-                    progressColor: ship.sparkColor,
-                  ),
-                  const SizedBox(width: 5,),
+                  if (useEmoji) Text(ship.sparkEmoji),
+                  if (!useEmoji)
+                    CircularPercentIndicator(
+                      backgroundColor: CupertinoDynamicColor.resolve(
+                          CupertinoColors.systemGroupedBackground, context),
+                      reverse: true,
+                      radius: 10.0,
+                      lineWidth: 5.0,
+                      animation: true,
+                      animationDuration: 500,
+                      animateFromLastPercent: true,
+                      circularStrokeCap: CircularStrokeCap.round,
+                      percent: ship.condition! / 100,
+                      progressColor: ship.sparkColor,
+                    ),
+                  const SizedBox(width: 5),
                   Text(
                     '${ship.condition}',
                     style: const TextStyle(fontWeight: FontWeight.normal),

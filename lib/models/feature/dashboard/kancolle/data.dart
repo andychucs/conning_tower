@@ -11,11 +11,17 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.d
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'operation_queue.dart';
+
+List<String> _battleAPI = [
+  ReqSortieBattleEntity.source,
+  ReqSortieBattleResultEntity.source
+];
 
 class KancolleData {
   final OperationQueue queue;
@@ -26,24 +32,24 @@ class KancolleData {
   final DataInfo dataInfo;
   late BattleInfo battleInfo;
 
-  KancolleData({
-    required this.queue,
-    required this.squads,
-    required this.seaForceBase,
-    required this.fleet,
-    required this.ref,
-    required this.dataInfo,
-    required this.battleInfo
-  });
+  KancolleData(
+      {required this.queue,
+      required this.squads,
+      required this.seaForceBase,
+      required this.fleet,
+      required this.ref,
+      required this.dataInfo,
+      required this.battleInfo});
 
-  KancolleData copyWith(
-      {OperationQueue? queue,
-      List<Squad>? squads,
-      SeaForceBase? seaForceBase,
-      Fleet? fleet,
-      DataInfo? dataInfo,
-        BattleInfo? battleInfo,
-      Ref? ref,}) {
+  KancolleData copyWith({
+    OperationQueue? queue,
+    List<Squad>? squads,
+    SeaForceBase? seaForceBase,
+    Fleet? fleet,
+    DataInfo? dataInfo,
+    BattleInfo? battleInfo,
+    Ref? ref,
+  }) {
     return KancolleData(
       queue: queue ?? this.queue,
       squads: squads ?? this.squads,
@@ -57,6 +63,11 @@ class KancolleData {
 
   void parse(String source, String data) {
     String path = source.split("kcsapi").last;
+
+    if (_battleAPI.contains(path)) {
+      if (!ref.read(settingsProvider).kcBattleReportEnable) return;
+    }
+
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
     if (model is ReqSortieBattleEntity) {
@@ -71,9 +82,12 @@ class KancolleData {
 
     if (model is GetDataEntity) {
       log("GetDataEntity");
-      dataInfo.shipInfo = Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
-      dataInfo.missionInfo = Map.fromIterable(model.apiData.apiMstMission, key: (item) => item.apiId);
-      dataInfo.itemInfo = Map.fromIterable(model.apiData.apiMstUseitem, key: (item) => item.apiId);
+      dataInfo.shipInfo =
+          Map.fromIterable(model.apiData.apiMstShip, key: (item) => item.apiId);
+      dataInfo.missionInfo = Map.fromIterable(model.apiData.apiMstMission,
+          key: (item) => item.apiId);
+      dataInfo.itemInfo = Map.fromIterable(model.apiData.apiMstUseitem,
+          key: (item) => item.apiId);
     }
 
     if (model is ReqMissionStartEntity) {
@@ -108,10 +122,7 @@ class KancolleData {
           tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
               tz.local, data.apiMission[2]);
           queue.executeOperation(
-              key,
-              Operation(
-                  id: data.apiMission[1],
-                  endTime: endDatetime));
+              key, Operation(id: data.apiMission[1], endTime: endDatetime));
         }
       });
     }
@@ -208,8 +219,8 @@ class KancolleData {
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
     List<Ship> allShips = [];
     for (var data in apiShip) {
-      String shipName =
-          dataInfo.shipInfo?[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
+      String shipName = dataInfo.shipInfo?[data.apiShipId]?.apiName ??
+          "Ship No.${data.apiShipId}";
       allShips.add(Ship.fromApi(data, shipName));
     }
     fleet.ships = allShips;
@@ -220,10 +231,7 @@ class KancolleData {
       tz.TZDateTime endDatetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
           tz.local, data.apiMission[2]);
       queue.executeOperation(
-          id,
-          Operation(
-              id: data.apiMission[1],
-              endTime: endDatetime));
+          id, Operation(id: data.apiMission[1], endTime: endDatetime));
     }
   }
 
@@ -252,8 +260,8 @@ class KancolleData {
     Squad squad = squads[index].copyWith();
     squad.ships.clear();
     for (var data in apiShipData) {
-      String shipName =
-          dataInfo.shipInfo?[data.apiShipId]?.apiName ?? "Ship No.${data.apiShipId}";
+      String shipName = dataInfo.shipInfo?[data.apiShipId]?.apiName ??
+          "Ship No.${data.apiShipId}";
       Ship ship = Ship.fromApi(data, shipName);
       log(ship.toString());
       log(ship.damaged().toString());
@@ -281,7 +289,6 @@ class KancolleData {
     endTimeMap.forEach((key, value) {
       Operation operation = newData.queue.map[key]!;
       if (!value.isAtSameMomentAs(operation.endTime)) {
-
         log("before:$value");
         log("after:${operation.endTime}");
         log("End time change ${operation.id}");

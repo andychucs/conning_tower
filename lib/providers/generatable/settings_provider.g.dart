@@ -9,18 +9,22 @@ part of 'settings_provider.dart';
 _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
     _$_SettingsState(
       dashboardIndex: json['dashboard_index'] as int,
+      kcSparkEmoji: json['kc_spark_emoji'] as bool,
+      kcBattleReportEnable: json['kc_battle_report_enable'] as bool,
     );
 
 Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
     <String, dynamic>{
       'dashboard_index': instance.dashboardIndex,
+      'kc_spark_emoji': instance.kcSparkEmoji,
+      'kc_battle_report_enable': instance.kcBattleReportEnable,
     };
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsHash() => r'283689ecea05a5a6a5eb62c76aa2c2ebfd049931';
+String _$settingsHash() => r'd23588c4b69e5fe3f43589ba62a4db3d6dcc4109';
 
 /// See also [Settings].
 @ProviderFor(Settings)
