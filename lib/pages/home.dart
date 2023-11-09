@@ -46,6 +46,7 @@ class HomePageState extends ConsumerState<HomePage> {
   late Alignment fabAlignment;
   late bool bottomPadding;
   bool showNewVersion = false;
+  bool setUp = true;
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -251,7 +252,11 @@ class HomePageState extends ConsumerState<HomePage> {
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
     final settings = ref.watch(settingsProvider);
-    bottomPadding = settings.bottomPadding;
+
+    if (setUp) {
+      setUp = false;
+      bottomPadding = settings.bottomPadding;
+    }
 
     if (settings.useKancolleListener) {
       enableListener(ref, context);
