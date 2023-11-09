@@ -48,7 +48,7 @@ const String kSafariUA =
 
 const String kTaskChannelDescription = "Task Notification from ConningTower";
 
-const String kTaskChannelId = "com.conntower.conningtower.task";
+const String kTaskChannelId = "com.conntower.open.task";
 
 const String kTaskChannelName = "ConningTower Task Channel";
 
