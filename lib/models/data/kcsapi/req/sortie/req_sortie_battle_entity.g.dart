@@ -57,9 +57,15 @@ _$_ReqSortieBattleApiDataEntity _$$_ReqSortieBattleApiDataEntityFromJson(
       apiSupportFlag: json['api_support_flag'] as int,
       apiSupportInfo: json['api_support_info'],
       apiOpeningTaisenFlag: json['api_opening_taisen_flag'] as int,
-      apiOpeningTaisen: json['api_opening_taisen'],
+      apiOpeningTaisen: json['api_opening_taisen'] == null
+          ? null
+          : ReqSortieBattleApiDataApiHougekiEntity.fromJson(
+              json['api_opening_taisen'] as Map<String, dynamic>),
       apiOpeningFlag: json['api_opening_flag'] as int,
-      apiOpeningAtack: json['api_opening_atack'],
+      apiOpeningAtack: json['api_opening_atack'] == null
+          ? null
+          : ReqSortieBattleApiDataApiRaigekiEntity.fromJson(
+              json['api_opening_atack'] as Map<String, dynamic>),
       apiHouraiFlag: (json['api_hourai_flag'] as List<dynamic>)
           .map((e) => e as int)
           .toList(),
@@ -117,11 +123,19 @@ _$_ReqSortieBattleApiDataApiKoukuEntity
     _$$_ReqSortieBattleApiDataApiKoukuEntityFromJson(
             Map<String, dynamic> json) =>
         _$_ReqSortieBattleApiDataApiKoukuEntity(
-          apiPlaneFrom: json['api_plane_from'] as List<dynamic>,
-          apiStage1: ReqSortieBattleApiDataApiKoukuApiStage1Entity.fromJson(
+          apiPlaneFrom: (json['api_plane_from'] as List<dynamic>)
+              .map((e) => (e as List<dynamic>?)?.map((e) => e as int).toList())
+              .toList(),
+          apiStage1: BattleDataAircraftRoundStage1.fromJson(
               json['api_stage1'] as Map<String, dynamic>),
-          apiStage2: json['api_stage2'],
-          apiStage3: json['api_stage3'],
+          apiStage2: json['api_stage2'] == null
+              ? null
+              : BattleDataAircraftRoundStage2.fromJson(
+                  json['api_stage2'] as Map<String, dynamic>),
+          apiStage3: json['api_stage3'] == null
+              ? null
+              : BattleDataAircraftRoundStage3.fromJson(
+                  json['api_stage3'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$_ReqSortieBattleApiDataApiKoukuEntityToJson(
@@ -133,22 +147,21 @@ Map<String, dynamic> _$$_ReqSortieBattleApiDataApiKoukuEntityToJson(
       'api_stage3': instance.apiStage3,
     };
 
-_$_ReqSortieBattleApiDataApiKoukuApiStage1Entity
-    _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityFromJson(
-            Map<String, dynamic> json) =>
-        _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity(
-          apiFCount: json['api_f_count'] as int,
-          apiFLostcount: json['api_f_lostcount'] as int,
-          apiECount: json['api_e_count'] as int,
-          apiELostcount: json['api_e_lostcount'] as int,
-          apiDispSeiku: json['api_disp_seiku'] as int,
-          apiTouchPlane: (json['api_touch_plane'] as List<dynamic>)
-              .map((e) => e as int)
-              .toList(),
-        );
+_$_BattleDataAircraftRoundStage1 _$$_BattleDataAircraftRoundStage1FromJson(
+        Map<String, dynamic> json) =>
+    _$_BattleDataAircraftRoundStage1(
+      apiFCount: json['api_f_count'] as int,
+      apiFLostcount: json['api_f_lostcount'] as int,
+      apiECount: json['api_e_count'] as int,
+      apiELostcount: json['api_e_lostcount'] as int,
+      apiDispSeiku: json['api_disp_seiku'] as int,
+      apiTouchPlane: (json['api_touch_plane'] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+    );
 
-Map<String, dynamic> _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityToJson(
-        _$_ReqSortieBattleApiDataApiKoukuApiStage1Entity instance) =>
+Map<String, dynamic> _$$_BattleDataAircraftRoundStage1ToJson(
+        _$_BattleDataAircraftRoundStage1 instance) =>
     <String, dynamic>{
       'api_f_count': instance.apiFCount,
       'api_f_lostcount': instance.apiFLostcount,
@@ -158,28 +171,84 @@ Map<String, dynamic> _$$_ReqSortieBattleApiDataApiKoukuApiStage1EntityToJson(
       'api_touch_plane': instance.apiTouchPlane,
     };
 
+_$_BattleDataAircraftRoundStage2 _$$_BattleDataAircraftRoundStage2FromJson(
+        Map<String, dynamic> json) =>
+    _$_BattleDataAircraftRoundStage2(
+      apiFCount: json['api_f_count'] as int,
+      apiFLostcount: json['api_f_lostcount'] as int,
+      apiECount: json['api_e_count'] as int,
+      apiELostcount: json['api_e_lostcount'] as int,
+    );
+
+Map<String, dynamic> _$$_BattleDataAircraftRoundStage2ToJson(
+        _$_BattleDataAircraftRoundStage2 instance) =>
+    <String, dynamic>{
+      'api_f_count': instance.apiFCount,
+      'api_f_lostcount': instance.apiFLostcount,
+      'api_e_count': instance.apiECount,
+      'api_e_lostcount': instance.apiELostcount,
+    };
+
+_$_BattleDataAircraftRoundStage3 _$$_BattleDataAircraftRoundStage3FromJson(
+        Map<String, dynamic> json) =>
+    _$_BattleDataAircraftRoundStage3(
+      apiFraiFlag: (json['api_frai_flag'] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      apiEraiFlag: (json['api_erai_flag'] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      apiFbakFlag: (json['api_fbak_flag'] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      apiEbakFlag: (json['api_ebak_flag'] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      apiFclFlag:
+          (json['api_fcl_flag'] as List<dynamic>).map((e) => e as int).toList(),
+      apiEclFlag:
+          (json['api_ecl_flag'] as List<dynamic>).map((e) => e as int).toList(),
+      apiFdam:
+          (json['api_fdam'] as List<dynamic>).map((e) => e as num).toList(),
+      apiEdam:
+          (json['api_edam'] as List<dynamic>).map((e) => e as num).toList(),
+    );
+
+Map<String, dynamic> _$$_BattleDataAircraftRoundStage3ToJson(
+        _$_BattleDataAircraftRoundStage3 instance) =>
+    <String, dynamic>{
+      'api_frai_flag': instance.apiFraiFlag,
+      'api_erai_flag': instance.apiEraiFlag,
+      'api_fbak_flag': instance.apiFbakFlag,
+      'api_ebak_flag': instance.apiEbakFlag,
+      'api_fcl_flag': instance.apiFclFlag,
+      'api_ecl_flag': instance.apiEclFlag,
+      'api_fdam': instance.apiFdam,
+      'api_edam': instance.apiEdam,
+    };
+
 _$_ReqSortieBattleApiDataApiHougekiEntity
     _$$_ReqSortieBattleApiDataApiHougekiEntityFromJson(
             Map<String, dynamic> json) =>
         _$_ReqSortieBattleApiDataApiHougekiEntity(
-          apiAtEflag: (json['api_at_eflag'] as List<dynamic>)
-              .map((e) => e as int)
+          apiAtEflag: (json['api_at_eflag'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiAtList: (json['api_at_list'] as List<dynamic>)
-              .map((e) => e as int)
+          apiAtList: (json['api_at_list'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiAtType: (json['api_at_type'] as List<dynamic>)
-              .map((e) => e as int)
+          apiAtType: (json['api_at_type'] as List<dynamic>?)
+              ?.map((e) => e as int)
               .toList(),
-          apiDfList: (json['api_df_list'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
+          apiDfList: (json['api_df_list'] as List<dynamic>?)
+              ?.map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
-          apiSiList: json['api_si_list'] as List<dynamic>,
-          apiClList: (json['api_cl_list'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as int).toList())
+          apiSiList: json['api_si_list'] as List<dynamic>?,
+          apiClList: (json['api_cl_list'] as List<dynamic>?)
+              ?.map((e) => (e as List<dynamic>).map((e) => e as int).toList())
               .toList(),
-          apiDamage: (json['api_damage'] as List<dynamic>)
-              .map((e) => (e as List<dynamic>).map((e) => e as num).toList())
+          apiDamage: (json['api_damage'] as List<dynamic>?)
+              ?.map((e) => (e as List<dynamic>).map((e) => e as num).toList())
               .toList(),
         );
 
