@@ -91,11 +91,11 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
       setState(() {
         if (currentUrl.toString() == customHomeUrl) {
           customHomeUrl = '';
-          localStorage.setString('customHomeUrl', '');
+          ref.watch(settingsProvider.notifier).setString('customHomeUrl', '');
           Fluttertoast.showToast(msg: S.current.ToolSaveHomeCancel);
         } else {
           customHomeUrl = currentUrl.toString();
-          localStorage.setString('customHomeUrl', currentUrl.toString());
+          ref.watch(settingsProvider.notifier).setString('customHomeUrl', currentUrl.toString());
           Fluttertoast.showToast(msg: S.current.ToolSaveHomeSuccess);
         }
       });
