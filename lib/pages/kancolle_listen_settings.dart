@@ -1,8 +1,8 @@
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
-import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
+import 'package:conning_tower/pages/libs_info.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
@@ -189,6 +189,22 @@ class _KancolleListenSettingsState
                       },
                     ),
                   ),
+                ]),
+            CupertinoListSection.insetGrouped(
+                children: [
+                  CupertinoListTile(
+                    title: const Text("Libraries"),
+                    trailing: const CupertinoListTileChevron(),
+                    onTap: () => navigatorToCupertino(
+                        context,
+                        CupertinoPageScaffold(
+                            navigationBar: CupertinoNavigationBar(
+                              backgroundColor: CupertinoColors.systemGroupedBackground,
+                              middle: const Text('Libraries'),
+                              previousPageTitle: widget.showNavigatorBar ? 'KC' : null,
+                            ),
+                            child: const LibsInfo(assetsPath: 'assets/kc-libs-info/',))),
+                  )
                 ]),
           ],
         ),
