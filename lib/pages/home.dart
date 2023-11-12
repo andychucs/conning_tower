@@ -44,7 +44,6 @@ class HomePage extends ConsumerStatefulWidget {
 
 class HomePageState extends ConsumerState<HomePage> {
   late Alignment fabAlignment;
-  late bool bottomPadding;
   bool showNewVersion = false;
   bool setUp = true;
   PackageInfo _packageInfo = PackageInfo(
@@ -255,7 +254,6 @@ class HomePageState extends ConsumerState<HomePage> {
 
     if (setUp) {
       setUp = false;
-      bottomPadding = settings.bottomPadding;
     }
 
     if (settings.useKancolleListener) {
@@ -276,9 +274,7 @@ class HomePageState extends ConsumerState<HomePage> {
         );
       },
       FunctionName.bottomPadding: () {
-        setState(() {
-          bottomPadding = !bottomPadding;
-        });
+        ref.watch(settingsProvider.notifier).setBool('bottomPadding', !settings.bottomPadding);
       },
       FunctionName.hideControls: () {
         setState(() {
@@ -304,12 +300,10 @@ class HomePageState extends ConsumerState<HomePage> {
             leading: const Icon(CupertinoIcons.rectangle_dock),
             onTap: () {
               Navigator.of(context).pop();
-              setState(() {
-                bottomPadding = !bottomPadding;
-              });
+              ref.watch(settingsProvider.notifier).setBool('bottomPadding', !settings.bottomPadding);
             },
             trailing:
-                bottomPadding ? const Icon(CupertinoIcons.checkmark_alt) : null,
+              settings.bottomPadding ? const Icon(CupertinoIcons.checkmark_alt) : null,
           ),
         ];
         if (deviceType != DeviceType.iPad) {
@@ -370,7 +364,7 @@ class HomePageState extends ConsumerState<HomePage> {
     };
 
     return OrientationBuilder(builder: (context, orientation) {
-      bool enableBottomPadding = bottomPadding;
+      bool enableBottomPadding = settings.bottomPadding;
       double bottomPaddingHeight = MediaQuery.of(context).padding.bottom;
       if (orientation == Orientation.landscape) {
         fabAlignment = const Alignment(1.0, 0.3);
