@@ -44,7 +44,7 @@ dependencies:
   path_provider: ^2.1.1
   fluttertoast: ^8.2.2
   shared_preferences: ^2.2.2
-  url_launcher: ^6.1.7
+  url_launcher: ^6.2.1
   package_info_plus: ^4.0.2
   auto_size_text: ^3.0.0
   validators: ^3.0.0
