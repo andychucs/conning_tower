@@ -44,9 +44,9 @@ class ReqSortieBattleResultApiDataEntity
     @JsonKey(name: 'api_get_ship') ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
     ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
     @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
-    @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
+    @JsonKey(name: 'api_get_exmap_rate') dynamic apiGetExmapRate,
     @JsonKey(name: 'api_get_exmap_useitem_id')
-    int? apiGetExmapUseitemId,
+    dynamic apiGetExmapUseitemId,
     @JsonKey(name: 'api_escape_flag') int? apiEscapeFlag,
     @JsonKey(name: 'api_escape') dynamic apiEscape,
   }) = _ReqSortieBattleResultApiDataEntity;

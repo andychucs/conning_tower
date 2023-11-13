@@ -59,8 +59,8 @@ _$_ReqSortieBattleResultApiDataEntity
               : ReqSortieBattleResultApiDataApiGetUseitemEntity.fromJson(
                   json['api_get_useitem'] as Map<String, dynamic>),
           apiGetEventflag: json['api_get_eventflag'] as int?,
-          apiGetExmapRate: json['api_get_exmap_rate'] as int?,
-          apiGetExmapUseitemId: json['api_get_exmap_useitem_id'] as int?,
+          apiGetExmapRate: json['api_get_exmap_rate'],
+          apiGetExmapUseitemId: json['api_get_exmap_useitem_id'],
           apiEscapeFlag: json['api_escape_flag'] as int?,
           apiEscape: json['api_escape'],
         );
