@@ -320,13 +320,13 @@ mixin _$ReqSortieBattleResultApiDataEntity {
   @JsonKey(name: 'api_get_eventflag')
   set apiGetEventflag(int? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_get_exmap_rate')
-  int? get apiGetExmapRate => throw _privateConstructorUsedError;
+  dynamic get apiGetExmapRate => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_get_exmap_rate')
-  set apiGetExmapRate(int? value) => throw _privateConstructorUsedError;
+  set apiGetExmapRate(dynamic value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_get_exmap_useitem_id')
-  int? get apiGetExmapUseitemId => throw _privateConstructorUsedError;
+  dynamic get apiGetExmapUseitemId => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_get_exmap_useitem_id')
-  set apiGetExmapUseitemId(int? value) => throw _privateConstructorUsedError;
+  set apiGetExmapUseitemId(dynamic value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_escape_flag')
   int? get apiEscapeFlag => throw _privateConstructorUsedError;
   @JsonKey(name: 'api_escape_flag')
@@ -374,8 +374,8 @@ abstract class $ReqSortieBattleResultApiDataEntityCopyWith<$Res> {
       ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
       ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
-      @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
-      @JsonKey(name: 'api_get_exmap_useitem_id') int? apiGetExmapUseitemId,
+      @JsonKey(name: 'api_get_exmap_rate') dynamic apiGetExmapRate,
+      @JsonKey(name: 'api_get_exmap_useitem_id') dynamic apiGetExmapUseitemId,
       @JsonKey(name: 'api_escape_flag') int? apiEscapeFlag,
       @JsonKey(name: 'api_escape') dynamic apiEscape});
 
@@ -509,11 +509,11 @@ class _$ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res,
       apiGetExmapRate: freezed == apiGetExmapRate
           ? _value.apiGetExmapRate
           : apiGetExmapRate // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       apiGetExmapUseitemId: freezed == apiGetExmapUseitemId
           ? _value.apiGetExmapUseitemId
           : apiGetExmapUseitemId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       apiEscapeFlag: freezed == apiEscapeFlag
           ? _value.apiEscapeFlag
           : apiEscapeFlag // ignore: cast_nullable_to_non_nullable
@@ -595,8 +595,8 @@ abstract class _$$_ReqSortieBattleResultApiDataEntityCopyWith<$Res>
       ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
       ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
-      @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
-      @JsonKey(name: 'api_get_exmap_useitem_id') int? apiGetExmapUseitemId,
+      @JsonKey(name: 'api_get_exmap_rate') dynamic apiGetExmapRate,
+      @JsonKey(name: 'api_get_exmap_useitem_id') dynamic apiGetExmapUseitemId,
       @JsonKey(name: 'api_escape_flag') int? apiEscapeFlag,
       @JsonKey(name: 'api_escape') dynamic apiEscape});
 
@@ -732,11 +732,11 @@ class __$$_ReqSortieBattleResultApiDataEntityCopyWithImpl<$Res>
       apiGetExmapRate: freezed == apiGetExmapRate
           ? _value.apiGetExmapRate
           : apiGetExmapRate // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       apiGetExmapUseitemId: freezed == apiGetExmapUseitemId
           ? _value.apiGetExmapUseitemId
           : apiGetExmapUseitemId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       apiEscapeFlag: freezed == apiEscapeFlag
           ? _value.apiEscapeFlag
           : apiEscapeFlag // ignore: cast_nullable_to_non_nullable
@@ -844,10 +844,10 @@ class _$_ReqSortieBattleResultApiDataEntity
   int? apiGetEventflag;
   @override
   @JsonKey(name: 'api_get_exmap_rate')
-  int? apiGetExmapRate;
+  dynamic apiGetExmapRate;
   @override
   @JsonKey(name: 'api_get_exmap_useitem_id')
-  int? apiGetExmapUseitemId;
+  dynamic apiGetExmapUseitemId;
   @override
   @JsonKey(name: 'api_escape_flag')
   int? apiEscapeFlag;
@@ -901,8 +901,8 @@ abstract class _ReqSortieBattleResultApiDataEntity
       ReqSortieBattleResultApiDataApiGetShipEntity? apiGetShip,
       ReqSortieBattleResultApiDataApiGetUseitemEntity? apiGetUseitem,
       @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
-      @JsonKey(name: 'api_get_exmap_rate') int? apiGetExmapRate,
-      @JsonKey(name: 'api_get_exmap_useitem_id') int? apiGetExmapUseitemId,
+      @JsonKey(name: 'api_get_exmap_rate') dynamic apiGetExmapRate,
+      @JsonKey(name: 'api_get_exmap_useitem_id') dynamic apiGetExmapUseitemId,
       @JsonKey(name: 'api_escape_flag') int? apiEscapeFlag,
       @JsonKey(name: 'api_escape')
       dynamic apiEscape}) = _$_ReqSortieBattleResultApiDataEntity;
@@ -1011,14 +1011,14 @@ abstract class _ReqSortieBattleResultApiDataEntity
   set apiGetEventflag(int? value);
   @override
   @JsonKey(name: 'api_get_exmap_rate')
-  int? get apiGetExmapRate;
+  dynamic get apiGetExmapRate;
   @JsonKey(name: 'api_get_exmap_rate')
-  set apiGetExmapRate(int? value);
+  set apiGetExmapRate(dynamic value);
   @override
   @JsonKey(name: 'api_get_exmap_useitem_id')
-  int? get apiGetExmapUseitemId;
+  dynamic get apiGetExmapUseitemId;
   @JsonKey(name: 'api_get_exmap_useitem_id')
-  set apiGetExmapUseitemId(int? value);
+  set apiGetExmapUseitemId(dynamic value);
   @override
   @JsonKey(name: 'api_escape_flag')
   int? get apiEscapeFlag;
