@@ -7,6 +7,7 @@ import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
 import 'package:conning_tower/pages/dashboard_pages/port_info.dart';
 import 'package:conning_tower/pages/dashboard_pages/squad_info.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
 import 'package:conning_tower/pages/dashboard_pages/web_info_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,18 +80,18 @@ class _DashboardState extends ConsumerState<Dashboard> {
   }
 }
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key, required this.notifyParent});
   final VoidCallback notifyParent;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
           backgroundColor: CupertinoColors.systemGroupedBackground,
           border: null,
         ),
-        child: useKancolleListener
+        child: ref.watch(settingsProvider).useKancolleListener
             ? Dashboard.kancolle(notifyParent: notifyParent)
             : Dashboard.general(notifyParent: notifyParent));
   }

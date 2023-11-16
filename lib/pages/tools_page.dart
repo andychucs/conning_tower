@@ -4,6 +4,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/kancolle_listen_settings.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/utils/notification_util.dart';
@@ -24,15 +25,11 @@ import 'package:validators/validators.dart';
 class ToolsPage extends ConsumerStatefulWidget {
   ToolsPage(CookieManager? cookieManager,
       {Key? key,
-      required this.notifyParent,
-      required this.reloadConfig,
       this.isWideStyle = false})
       : cookieManager = cookieManager ?? CookieManager.instance(),
         super(key: key);
 
-  final Function() notifyParent;
   late final CookieManager cookieManager;
-  final Function() reloadConfig;
   final bool isWideStyle;
 
   @override
@@ -43,13 +40,11 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
   late TextEditingController _uaTextController;
   late TextEditingController _urlTextController;
   late InAppWebViewController controller;
+  late String customUA;
+  late String customHomeUrl;
 
   @override
   void initState() {
-    _uaTextController =
-        TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
-    _urlTextController = TextEditingController(
-        text: customHomeUrl.isNotEmpty ? customHomeUrl : '');
     super.initState();
   }
 
@@ -118,6 +113,12 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
       controller =
           ref.watch(webControllerProvider.select((value) => value.controller));
     }
+    customUA = ref.watch(settingsProvider.select((value) => value.customUA));
+    customHomeUrl = ref.watch(settingsProvider.select((value) => value.customHomeUrl));
+    _uaTextController =
+        TextEditingController(text: customUA.isNotEmpty ? customUA : kSafariUA);
+    _urlTextController = TextEditingController(
+        text: customHomeUrl.isNotEmpty ? customHomeUrl : '');
 
     return FunctionalPage(
       title: S.current.ToolsButton,
@@ -139,7 +140,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       title: S.of(context).ToolUASetting,
                       onSubmit: (content) {
                         customUA = content;
-                        localStorage.setString("customUA", customUA);
+                        ref.watch(settingsProvider.notifier).setString("customUA", customUA);
                       },
                       previousPageTitle: S.current.ToolsButton,
                       description: S.current.ToolUATip,
@@ -162,7 +163,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       onSubmit: (content) {
                         if (isURL(content)) {
                           customHomeUrl = content;
-                          localStorage.setString(
+                          ref.watch(settingsProvider.notifier).setString(
                               "customHomeUrl", customHomeUrl);
                         }
                       },
@@ -218,15 +219,10 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                     color: CupertinoColors.activeOrange,
                     icon: CupertinoIcons.rectangle_dock),
                 trailing: CupertinoSwitch(
-                    value: bottomPadding,
+                    value: ref.watch(settingsProvider).bottomPadding,
                     onChanged: (value) async {
                       HapticFeedback.heavyImpact();
-                      setState(() {
-                        bottomPadding = value;
-                      });
-                      localStorage.setBool('bottomPadding', value);
-                      widget.reloadConfig();
-                      widget.notifyParent();
+                      ref.watch(settingsProvider.notifier).setBool("bottomPadding", value);
                     }),
               ),
             ]),

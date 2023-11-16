@@ -8,6 +8,7 @@ import 'package:conning_tower/pages/about_page.dart';
 import 'package:conning_tower/pages/settings_page.dart';
 import 'package:conning_tower/pages/tools_page.dart';
 import 'package:conning_tower/providers/generatable/navigator_provider.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
@@ -60,6 +61,8 @@ class _ControlsState extends ConsumerState<Controls> {
   int _selectedIndex = 0;
   bool _compact = true;
   bool _isInit = false;
+  late String customHomeUrl;
+  late bool enableAutoLoadHomeUrl;
 
   final Map funcMap = {
     0: ConFunc.loadHome,
@@ -98,6 +101,8 @@ class _ControlsState extends ConsumerState<Controls> {
     _isInit = ref.watch(webControllerProvider.select((value) => value.isInit));
     late InAppWebViewController controller = ref.watch(webControllerProvider.select((value) => value.controller));
     final flnp = ref.watch(functionLayerNavigatorProvider);
+    enableAutoLoadHomeUrl = ref.watch(settingsProvider.select((value) => value.enableAutoLoadHomeUrl));
+    customHomeUrl = ref.watch(settingsProvider.select((value) => value.customHomeUrl));
 
     _selectedIndex = naviItems[flnp.index];
     if (selectedIndex == 0) _selectedIndex = 0;
@@ -304,16 +309,13 @@ class _ControlsState extends ConsumerState<Controls> {
             context,
             ToolsPage(
               widget.cookieManager,
-              notifyParent: widget.notifyParent,
-              reloadConfig: _loadConfig,
               isWideStyle: true,
             ));
         break;
       case ConFunc.navi2Settings:
         showPopoverPage(
             context,
-            SettingsPage(
-                reloadConfig: _loadConfig, notifyParent: widget.notifyParent));
+            const SettingsPage());
         break;
       case ConFunc.loadHome:
         _onLoadHome(context, controller);
@@ -336,20 +338,6 @@ class _ControlsState extends ConsumerState<Controls> {
         _onReload(context, controller);
         break;
     }
-  }
-
-  void _loadConfig() {
-    final prefs = localStorage;
-    setState(() {
-      enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
-      bottomPadding = (prefs.getBool('bottomPadding') ?? false);
-      enableAutoLoadHomeUrl = (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
-      customHomeUrl = (prefs.getString('customHomeUrl') ?? '');
-      enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
-      customUA = (prefs.getString('customUA') ?? '');
-      appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
-          AppLayout.values.indexOf(AppLayout.onlyFAB)];
-    });
   }
 
   void showPopoverPage(BuildContext context, Widget child) {
@@ -404,7 +392,7 @@ class _ControlsState extends ConsumerState<Controls> {
           return AdaptiveDialogWithBool(msg: S.current.AppHome);
         });
     if (value ?? false) {
-      String homeUrl = getHomeUrl();
+      String homeUrl = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
       safeNavi = false;
       if (homeUrl == kLocalHomeUrl) {
         await ref.read(webControllerProvider.notifier).startLocalServer();

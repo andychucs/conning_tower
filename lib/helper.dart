@@ -16,7 +16,7 @@ import 'package:yaml/yaml.dart';
 Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
     {bool force = false, bool needToaste = false}) async {
   //Adjust Kancolle window
-  if ((inKancolleWindow && !autoAdjusted && enableAutoProcess) ||
+  if ((inKancolleWindow && !autoAdjusted) ||
       (force && inKancolleWindow)) {
     if (Platform.isIOS) {
       await controller.injectJavascriptFileFromAsset(
@@ -110,7 +110,7 @@ getResizeScale(double height, double width) {
   }
 }
 
-String getHomeUrl() {
+String getHomeUrl(String customHomeUrl, bool enableAutoLoadHomeUrl) {
   String homeUrl = kLocalHomeUrl;
   if (kIsOpenSource) {
     homeUrl = kGameUrl;

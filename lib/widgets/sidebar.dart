@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/widgets/controls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class Sidebar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Size size = MediaQuery.of(context).size;
+    AppLayout appLayout = ref.watch(settingsProvider.select((value) => value.appLayout));
 
     if (appLayout == AppLayout.onlyJoystick ||
         appLayout == AppLayout.bothFABJoystick) {

@@ -14,11 +14,9 @@ class FunctionalLayer extends ConsumerWidget {
   const FunctionalLayer(
       {super.key,
       required this.notifyParent,
-      required this.reloadConfig,
       this.cookieManager});
   final Function() notifyParent;
   final CookieManager? cookieManager;
-  final Function() reloadConfig;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +39,6 @@ class FunctionalLayer extends ConsumerWidget {
       theme: theme,
       home: FunctionalLayerHome(
         notifyParent: notifyParent,
-        reloadConfig: reloadConfig,
         cookieManager: cookieManager,
       ),
     );
@@ -52,11 +49,9 @@ class FunctionalLayerHome extends ConsumerStatefulWidget {
   const FunctionalLayerHome(
       {super.key,
       required this.notifyParent,
-      required this.reloadConfig,
       this.cookieManager});
   final Function() notifyParent;
   final CookieManager? cookieManager;
-  final Function() reloadConfig;
 
   @override
   ConsumerState createState() => _FunctionalLayerHomeState();
@@ -77,19 +72,13 @@ class _FunctionalLayerHomeState extends ConsumerState<FunctionalLayerHome> {
     index = navigator.index;
     switch (index) {
       case 1:
-        return ToolsPage(widget.cookieManager,
-            notifyParent: widget.notifyParent,
-            reloadConfig: widget.reloadConfig);
+        return ToolsPage(widget.cookieManager);
       case 2:
-        return SettingsPage(
-            notifyParent: widget.notifyParent,
-            reloadConfig: widget.reloadConfig);
+        return const SettingsPage();
       case 3:
-        return AboutPage();
+        return const AboutPage();
       default:
-        return ToolsPage(widget.cookieManager,
-            notifyParent: widget.notifyParent,
-            reloadConfig: widget.reloadConfig);
+        return ToolsPage(widget.cookieManager);
     }
   }
 }

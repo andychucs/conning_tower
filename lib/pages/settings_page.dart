@@ -3,6 +3,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/theme_provider.dart';
 import 'package:conning_tower/routes/functional_layer.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
@@ -16,11 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
-  const SettingsPage(
-      {super.key, required this.reloadConfig, required this.notifyParent});
-
-  final Function() notifyParent;
-  final Function() reloadConfig;
+  const SettingsPage({super.key});
 
   @override
   ConsumerState<SettingsPage> createState() => SettingsPageState();
@@ -32,20 +29,15 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    _loadConfig();
   }
 
-  void _loadConfig() {
-    final prefs = localStorage;
-    setState(() {
-      enableAutoLoadHomeUrlSwitchValue =
-          (prefs.getBool('enableAutoLoadHomeUrl') ?? false);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     final deviceManager = ref.watch(deviceManagerProvider.notifier);
+    deviceManager.setPreferredDeviceOrientation();
+    final settings = ref.watch(settingsProvider);
+    enableAutoLoadHomeUrlSwitchValue = settings.enableAutoLoadHomeUrl;
 
     return FunctionalPage(
       title: S.current.SettingsButton,
@@ -65,8 +57,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                   setState(() {
                     enableAutoLoadHomeUrlSwitchValue = value;
                   });
-                  localStorage.setBool('enableAutoLoadHomeUrl', value);
-                  widget.reloadConfig();
+                  ref.watch(settingsProvider.notifier).setBool('enableAutoLoadHomeUrl', value);
                 },
               ),
             ),
@@ -101,8 +92,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                             CustomDeviceOrientation.all);
                       });
                     }
-                    _loadConfig();
-                    widget.reloadConfig();
                   },
                 ),
               ),
@@ -135,7 +124,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                   setState(() {
                     deviceManager.customDeviceOrientationByIndex(select);
                   });
-                  widget.notifyParent();
                 },
               ),
             CupertinoListTile(
@@ -146,7 +134,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
               trailing: const CupertinoListTileChevron(),
               onTap: () async {
                 List<AppLayout> layouts = AppLayout.values;
-                int select = layouts.indexOf(appLayout);
+                int select = layouts.indexOf(settings.appLayout);
                 Map<AppLayout, String> layoutName = {
                   AppLayout.pure: S.current.AppLayoutClean,
                   AppLayout.bothFABJoystick: S.current.AppLayoutJoystickAndFAB,
@@ -169,13 +157,9 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                               return;
                             }
                           }
-                          setState(() {
-                            appLayout = layouts[select];
-                            localStorage.setInt('appLayout', select);
-                          });
-                          widget.notifyParent();
+                          ref.watch(settingsProvider.notifier).setInt('appLayout', select);
                         }));
-                debugPrint(appLayout.name);
+                debugPrint(settings.appLayout.name);
               },
             ),
             CupertinoListTile(
@@ -204,7 +188,6 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                         onItemSelected: (index) {
                           select = index;
                           ref.read(themeProvider.notifier).update((state) => modes[select]);
-                          widget.notifyParent();
                         }));
               },
             ),
@@ -215,14 +198,9 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                   color: CupertinoColors.activeBlue,
                   icon: CupertinoIcons.slider_horizontal_below_rectangle),
               trailing: CupertinoSwitch(
-                value: showDashboardInHome,
+                value: settings.showDashboardInHome,
                 onChanged: (value) async {
-                  setState(() {
-                    showDashboardInHome = !showDashboardInHome;
-                  });
-                  localStorage.setBool('showDashboardInHome', value);
-                  widget.notifyParent();
-                  widget.reloadConfig();
+                  ref.watch(settingsProvider.notifier).setBool('showDashboardInHome', value);
                 },
               ),
             ),
@@ -238,8 +216,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                 localStorage.clear();
                 ref.watch(taskUtilProvider.notifier).deleteLocalTasks();
                 ref.watch(kcwikiDataStateProvider.notifier).deleteLocalFile();
-                _loadConfig();
-                widget.reloadConfig();
+                ref.watch(settingsProvider.notifier).rebuild();
               },
             ),
           ],

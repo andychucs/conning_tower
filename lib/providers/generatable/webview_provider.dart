@@ -9,6 +9,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/web_message_data.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/web_info_provider.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -52,6 +53,12 @@ class WebController extends _$WebController {
   List<WebUri> currPageUrls = [];
   bool isScreenResize = false;
   CookieManager cookieManager = CookieManager.instance();
+
+  get customHomeUrl => ref.watch(settingsProvider).customHomeUrl;
+
+  get enableAutoProcess => ref.watch(settingsProvider).enableAutoProcess;
+
+  bool get useKancolleListener => ref.watch(settingsProvider).useKancolleListener;
 
   @override
   WebController build() {
@@ -202,7 +209,9 @@ class WebController extends _$WebController {
     if (!state.isScreenResize) {
       log("screenResize");
       state.isScreenResize = true;
-      await autoAdjustWindowV2(controller);
+      if (enableAutoProcess) {
+        await autoAdjustWindowV2(controller);
+      }
       state.isScreenResize = false;
     }
   }
