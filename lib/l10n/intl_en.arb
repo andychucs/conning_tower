@@ -96,6 +96,8 @@
   "@DashboardSetting": {},
   "DataDownloadGuide": "To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.",
   "@DataDownloadGuide": {},
+  "DesktopMode": "Desktop Mode",
+  "@DesktopMode": {},
   "DocsNewUrl": "https://conntower.github.io/docs/en/new",
   "@DocsNewUrl": {},
   "DownloadFleetData": "Download Fleet Data",

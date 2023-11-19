@@ -95,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("在主页显示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "如需使用KanColle数据监听功能，为保证功能可用务必前往工具-高级游戏支持中下载数据并打开开关（如果没有打开），如遇异常请在设置中重置应用数据。"),
+        "DesktopMode": MessageLookupByLibrary.simpleMessage("桌面模式"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hans/new"),
         "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下载舰队数据"),

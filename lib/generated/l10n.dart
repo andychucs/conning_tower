@@ -530,6 +530,16 @@ class S {
     );
   }
 
+  /// `Desktop Mode`
+  String get DesktopMode {
+    return Intl.message(
+      'Desktop Mode',
+      name: 'DesktopMode',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `https://conntower.github.io/docs/en/new`
   String get DocsNewUrl {
     return Intl.message(
