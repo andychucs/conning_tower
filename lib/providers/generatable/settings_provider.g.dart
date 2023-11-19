@@ -11,6 +11,15 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
       dashboardIndex: json['dashboard_index'] as int,
       kcSparkEmoji: json['kc_spark_emoji'] as bool,
       kcBattleReportEnable: json['kc_battle_report_enable'] as bool,
+      enableAutoProcess: json['enable_auto_process'] as bool,
+      bottomPadding: json['bottom_padding'] as bool,
+      enableAutoLoadHomeUrl: json['enable_auto_load_home_url'] as bool,
+      customHomeUrl: json['custom_home_url'] as String,
+      enableHideFAB: json['enable_hide_f_a_b'] as bool,
+      customUA: json['custom_u_a'] as String,
+      appLayout: $enumDecode(_$AppLayoutEnumMap, json['app_layout']),
+      showDashboardInHome: json['show_dashboard_in_home'] as bool,
+      useKancolleListener: json['use_kancolle_listener'] as bool,
     );
 
 Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
@@ -18,13 +27,29 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
       'dashboard_index': instance.dashboardIndex,
       'kc_spark_emoji': instance.kcSparkEmoji,
       'kc_battle_report_enable': instance.kcBattleReportEnable,
+      'enable_auto_process': instance.enableAutoProcess,
+      'bottom_padding': instance.bottomPadding,
+      'enable_auto_load_home_url': instance.enableAutoLoadHomeUrl,
+      'custom_home_url': instance.customHomeUrl,
+      'enable_hide_f_a_b': instance.enableHideFAB,
+      'custom_u_a': instance.customUA,
+      'app_layout': _$AppLayoutEnumMap[instance.appLayout]!,
+      'show_dashboard_in_home': instance.showDashboardInHome,
+      'use_kancolle_listener': instance.useKancolleListener,
     };
+
+const _$AppLayoutEnumMap = {
+  AppLayout.onlyFAB: 'onlyFAB',
+  AppLayout.onlyJoystick: 'onlyJoystick',
+  AppLayout.bothFABJoystick: 'bothFABJoystick',
+  AppLayout.pure: 'pure',
+};
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$settingsHash() => r'd23588c4b69e5fe3f43589ba62a4db3d6dcc4109';
+String _$settingsHash() => r'51553617226940e509beb79ffa928b7c3b8f95eb';
 
 /// See also [Settings].
 @ProviderFor(Settings)

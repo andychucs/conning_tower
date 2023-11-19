@@ -7,7 +7,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:yaml/yaml.dart';
 
 class LibsInfo extends StatefulWidget {
-  const LibsInfo({Key? key}) : super(key: key);
+  final String assetsPath;
+  const LibsInfo({super.key, this.assetsPath = 'assets/libs-info/'});
 
   @override
   LibsInfoState createState() => LibsInfoState();
@@ -18,7 +19,7 @@ class LibsInfoState extends State<LibsInfo> {
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
     final List<String> yamlFilePaths = manifestMap.keys
-        .where((String key) => key.startsWith('assets/libs-info/'))
+        .where((String key) => key.startsWith(widget.assetsPath))
         .where((String key) => key.endsWith('.yaml'))
         .toList();
     final List<YamlMap> yamlFilesList = [];

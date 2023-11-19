@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/helper.dart';
-import 'package:conning_tower/main.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,25 +31,27 @@ class AppWebViewState extends ConsumerState<AppWebView> {
 
   @override
   void initState() {
-    beforeRedirect = false;
     super.initState();
   }
 
-  InAppWebViewSettings webViewSetting = InAppWebViewSettings(
-    javaScriptEnabled: true,
-    userAgent: customUA.isNotEmpty ? customUA : defaultUA,
-    preferredContentMode: UserPreferredContentMode.DESKTOP,
-    //Allow window.open JS
-    javaScriptCanOpenWindowsAutomatically: true,
-    //Android intercept kancolle API
-    useShouldInterceptRequest: false,
-    isElementFullscreenEnabled: false,
-    mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
-  );
-
   @override
   Widget build(BuildContext context) {
-    String homeUrl = getHomeUrl();
+    final settings = ref.watch(settingsProvider);
+    String customUA = settings.customUA;
+
+    InAppWebViewSettings webViewSetting = InAppWebViewSettings(
+        javaScriptEnabled: true,
+        userAgent: customUA.isNotEmpty ? customUA : defaultUA,
+        preferredContentMode: UserPreferredContentMode.DESKTOP,
+        //Allow window.open JS
+        javaScriptCanOpenWindowsAutomatically: true,
+        //Android intercept kancolle API
+        useShouldInterceptRequest: false,
+        isElementFullscreenEnabled: false,
+        mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
+    );
+
+    String homeUrl = getHomeUrl(settings.customHomeUrl, settings.enableAutoLoadHomeUrl);
     // final urlController = ref.watch(urlProvider);
     final webController = ref.watch(webControllerProvider);
     debugPrint("rebuild web");

@@ -18,28 +18,13 @@ late SharedPreferences localStorage;
 final InAppLocalhostServer localhostServer = InAppLocalhostServer(port: 8686,
     documentRoot: 'assets/www', directoryIndex: 'home.html');
 late bool safeNavi;
-late bool autoAdjusted;
-late bool bottomPadding;
-late bool gameLoadCompleted;
-late bool inKancolleWindow;
-late bool beforeRedirect;
-late double kWebviewHeight;
-late double kWebviewWidth;
 late int selectedIndex;
-late bool enableAutoProcess;
-late bool enableAutoLoadHomeUrl;
-late String customHomeUrl;
-late String customUA;
-late bool enableHideFAB;
 late bool showControls;
 late DeviceType deviceType;
-late AppLayout appLayout;
-late bool showDashboardInHome; //Canary Deployment
-late bool useKancolleListener;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb && !kIsOpenSource) {
+  if (!kIsWeb && kReleaseChannel == ReleaseChannel.store) {
     // start the localhost server
     await localhostServer.start();
   }
@@ -89,22 +74,8 @@ Future<void> init() async {
   localStorage = await SharedPreferences.getInstance();
 
   deviceType = await getDeviceType();
-  appLayout = AppLayout.onlyFAB;
 
-  gameLoadCompleted = false;
-  inKancolleWindow = false;
-  autoAdjusted = false;
-  kWebviewHeight = 0.0;
-  kWebviewWidth = 0.0;
   safeNavi = false;
-  bottomPadding = false;
   selectedIndex = 0;
-  enableAutoLoadHomeUrl = true;
-  customHomeUrl = kGameUrl;
-  customUA = '';
-  enableAutoProcess = true;
-  enableHideFAB = false;
   showControls = true;
-  showDashboardInHome = true;
-  useKancolleListener = false;
 }

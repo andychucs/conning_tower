@@ -9,6 +9,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart' as app_main;
 import 'package:conning_tower/pages/tools_page.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -21,7 +22,7 @@ void main() {
   setUp(() {});
 
   group("smoke test", () {
-    test("channel flag check", () => expect(kIsOpenSource, isTrue));
+    test("channel flag check", () => expect(kReleaseChannel, ReleaseChannel.github));
 
     testWidgets("ToolsPage smoke", (tester) async {
       SharedPreferences.setMockInitialValues({});
@@ -36,37 +37,43 @@ void main() {
             S.delegate
           ],
           supportedLocales: S.delegate.supportedLocales,
-          home: ToolsPage(cookieManager, notifyParent: () { }, reloadConfig: () {  },))));
+          home: ToolsPage(cookieManager))));
+
+      final element = tester.element(find.byType(MaterialApp));
+      final container = ProviderScope.containerOf(element);
 
       await tester.tap(find.text(S.current.ToolUASetting));
       await tester.pumpAndSettle();
       await tester.enterText(find.byType(CupertinoTextField), "test");
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(app_main.customUA, "test");
+      expect(container.read(settingsProvider).customUA, "test");
       await tester.pumpAndSettle();
 
       await tester.tap(find.text(S.current.ToolUASetting));
       await tester.pumpAndSettle();
       await tester.enterText(find.byType(CupertinoTextField), "not submit");
       await tester.pageBack();
-      expect(app_main.customUA, "not submit");
+      expect(container.read(settingsProvider).customUA, "not submit");
       await tester.pumpAndSettle();
 
       await tester.tap(find.text(S.current.ToolSearchBarURLSetting));
       await tester.pumpAndSettle();
+      if (kReleaseChannel == ReleaseChannel.store) {
+        expect(container.read(settingsProvider).customHomeUrl, '');
+      }
       await tester.enterText(find.byType(CupertinoTextField), kGameUrl);
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(app_main.customHomeUrl, kGameUrl);
+      expect(container.read(settingsProvider).customHomeUrl, kGameUrl);
       await tester.pumpAndSettle();
 
       await tester.tap(find.text(S.current.ToolSearchBarURLSetting));
       await tester.pumpAndSettle();
       await tester.enterText(find.byType(CupertinoTextField), "not submit");
       await tester.pageBack();
-      expect(app_main.customHomeUrl, kGameUrl);
+      expect(container.read(settingsProvider).customHomeUrl, kGameUrl);
       await tester.pumpAndSettle();
 
-      if (!kIsOpenSource) {
+      if (kReleaseChannel == ReleaseChannel.store) {
         await tester.ensureVisible(find.text(S.current.AdvancedGameSupport));
         await tester.pumpAndSettle();
         expect(find.text('KC'), findsNothing);
@@ -81,7 +88,7 @@ void main() {
       }
 
 
-      if (kIsOpenSource) {
+      if (kReleaseChannel == ReleaseChannel.github) {
         expect(find.byIcon(Icons.anchor), findsOneWidget);
         expect(find.text(S.current.AdvancedGameSupport), findsNothing);
       } else {

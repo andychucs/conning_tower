@@ -1,0 +1,7 @@
+name: kcanotify-gamedata
+description: gamedata dump for kcanotify
+version: 1.0.0
+author: antest1
+homepage: https://github.com/antest1/kcanotify-gamedata
+license: Copyright (c) 2021 antest1 - MIT License
+used: false

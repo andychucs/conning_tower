@@ -60,7 +60,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
               navigationBar: CupertinoNavigationBar(
                 automaticallyImplyLeading: false,
                 transitionBetweenRoutes: false,
-                backgroundColor: Colors.transparent,
+                backgroundColor: CupertinoColors.systemGroupedBackground.resolveFrom(context),
                 border: null,
                 middle: segments.length >= 2
                     ? CupertinoSlidingSegmentedControl(

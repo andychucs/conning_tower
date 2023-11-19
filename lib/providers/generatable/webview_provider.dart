@@ -9,6 +9,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/web_message_data.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/web_info_provider.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -52,6 +53,18 @@ class WebController extends _$WebController {
   List<WebUri> currPageUrls = [];
   bool isScreenResize = false;
   CookieManager cookieManager = CookieManager.instance();
+
+  bool inKancolleWindow = false;
+
+  bool autoAdjusted = false;
+
+  bool gameLoadCompleted = false;
+
+  get customHomeUrl => ref.watch(settingsProvider).customHomeUrl;
+
+  get enableAutoProcess => ref.watch(settingsProvider).enableAutoProcess;
+
+  bool get useKancolleListener => ref.watch(settingsProvider).useKancolleListener;
 
   @override
   WebController build() {
@@ -120,14 +133,12 @@ class WebController extends _$WebController {
       await closeLocalServer();
     }
 
-    beforeRedirect = false;
     inKancolleWindow = false;
+    autoAdjusted = false;
     if (uri.path.startsWith(gameUrlPath)) {
-      beforeRedirect = true;
-      autoAdjusted = false;
+      log("game load start");
     } else if (uri.host == kDMMOSAPIDomain) {
       inKancolleWindow = true;
-      autoAdjusted = false;
     }
   }
 
@@ -197,12 +208,38 @@ class WebController extends _$WebController {
     }
   }
 
+  Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
+      {bool force = false, bool needToaste = false}) async {
+    //Adjust Kancolle window
+    if ((inKancolleWindow && !autoAdjusted) ||
+        (force && inKancolleWindow)) {
+      if (Platform.isIOS) {
+        await controller.injectJavascriptFileFromAsset(
+            assetFilePath: autoScaleIOSJS);
+      } else if (Platform.isAndroid) {
+        await controller.injectJavascriptFileFromAsset(
+            assetFilePath: autoScaleAndroidJS);
+      }
+      autoAdjusted = true;
+      log("Auto adjust success");
+      if (needToaste)
+        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+      return true;
+    }
+    log("autoAdjustWindow fail");
+    if (needToaste)
+      Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+    return false;
+  }
+
   Future<void> screenResize() async {
     if (!state.isInit) return;
     if (!state.isScreenResize) {
       log("screenResize");
       state.isScreenResize = true;
-      await autoAdjustWindowV2(controller);
+      if (enableAutoProcess) {
+        await autoAdjustWindowV2(controller);
+      }
       state.isScreenResize = false;
     }
   }

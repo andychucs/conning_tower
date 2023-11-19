@@ -1,8 +1,8 @@
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
-import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
+import 'package:conning_tower/pages/libs_info.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/task_provider.dart';
@@ -25,22 +25,15 @@ class _KancolleListenSettingsState
     extends ConsumerState<KancolleListenSettings> {
   late bool enableAutoProcessSwitchValue;
 
-  void _loadConfig() {
-    setState(() {
-      enableAutoProcess = (localStorage.getBool('enableAutoProcess') ?? true);
-      enableAutoProcessSwitchValue = enableAutoProcess;
-    });
-  }
-
   @override
   void initState() {
-    _loadConfig();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
+    enableAutoProcessSwitchValue = settings.enableAutoProcess;
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
@@ -64,17 +57,13 @@ class _KancolleListenSettingsState
                       color: CupertinoColors.activeBlue,
                       icon: CupertinoIcons.search),
                   trailing: CupertinoSwitch(
-                    value: useKancolleListener,
+                    value: settings.useKancolleListener,
                     onChanged: (value) async {
                       HapticFeedback.mediumImpact();
-                      setState(() {
-                        useKancolleListener = value;
-                      });
                       ref
                           .watch(webControllerProvider)
                           .manageKCUserScript(value);
-                      localStorage.setBool('useKancolleListener', value);
-                      debugPrint("useKancolleListener:$useKancolleListener");
+                      ref.watch(settingsProvider.notifier).setBool('useKancolleListener', value);
                     },
                   ),
                 ),
@@ -90,7 +79,7 @@ class _KancolleListenSettingsState
                     value: settings.kcBattleReportEnable,
                     onChanged: (value) async {
                       HapticFeedback.mediumImpact();
-                      ref.read(settingsProvider.notifier).seBool('kcBattleReportEnable', value);
+                      ref.read(settingsProvider.notifier).setBool('kcBattleReportEnable', value);
                     },
                   ),
                 ),
@@ -100,7 +89,7 @@ class _KancolleListenSettingsState
                     value: settings.kcSparkEmoji,
                     onChanged: (value) async {
                       HapticFeedback.mediumImpact();
-                      ref.read(settingsProvider.notifier).seBool('kcSparkEmoji', value);
+                      ref.read(settingsProvider.notifier).setBool('kcSparkEmoji', value);
                     },
                   ),
                 ),
@@ -196,13 +185,26 @@ class _KancolleListenSettingsState
                         setState(() {
                           enableAutoProcessSwitchValue = value;
                         });
-                        enableAutoProcess = value;
-                        localStorage.setBool('enableAutoProcess', value);
-                        debugPrint("enableAutoProcess:$enableAutoProcess");
-                        _loadConfig();
+                        ref.watch(settingsProvider.notifier).setBool('enableAutoProcess', value);
                       },
                     ),
                   ),
+                ]),
+            CupertinoListSection.insetGrouped(
+                children: [
+                  CupertinoListTile(
+                    title: const Text("Libraries"),
+                    trailing: const CupertinoListTileChevron(),
+                    onTap: () => navigatorToCupertino(
+                        context,
+                        CupertinoPageScaffold(
+                            navigationBar: CupertinoNavigationBar(
+                              backgroundColor: CupertinoColors.systemGroupedBackground,
+                              middle: const Text('Libraries'),
+                              previousPageTitle: widget.showNavigatorBar ? 'KC' : null,
+                            ),
+                            child: const LibsInfo(assetsPath: 'assets/kc-libs-info/',))),
+                  )
                 ]),
           ],
         ),

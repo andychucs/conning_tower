@@ -14,6 +14,7 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/pages/webview.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
+import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
@@ -44,6 +45,7 @@ class HomePage extends ConsumerStatefulWidget {
 class HomePageState extends ConsumerState<HomePage> {
   late Alignment fabAlignment;
   bool showNewVersion = false;
+  bool setUp = true;
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -57,7 +59,6 @@ class HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
 
-    _loadConfig();
 
     _initPackageInfo();
 
@@ -103,7 +104,7 @@ class HomePageState extends ConsumerState<HomePage> {
   }
 
   Future<void> showNewVersionInfo() async {
-    if (showNewVersion && !kIsOpenSource) {
+    if (showNewVersion && kReleaseChannel == ReleaseChannel.store) {
       showAdaptiveDialog(
           context: context,
           barrierDismissible: true,
@@ -134,23 +135,6 @@ class HomePageState extends ConsumerState<HomePage> {
     }
   }
 
-  void _loadConfig() {
-    final prefs = localStorage;
-    setState(() {
-      enableAutoProcess = (prefs.getBool('enableAutoProcess') ?? true);
-      bottomPadding = (prefs.getBool('bottomPadding') ?? false);
-      enableAutoLoadHomeUrl = (prefs.getBool('enableAutoLoadHomeUrl') ?? true);
-      customHomeUrl = (prefs.getString('customHomeUrl') ?? kGameUrl);
-      enableHideFAB = (prefs.getBool('enableHideFAB') ?? false);
-      customUA = (prefs.getString('customUA') ?? '');
-      appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
-          AppLayout.values.indexOf(AppLayout.onlyFAB)];
-      showDashboardInHome =
-          localStorage.getBool('showDashboardInHome') ?? false;
-      useKancolleListener =
-          localStorage.getBool("useKancolleListener") ?? false;
-    });
-  }
 
   final Map<FunctionName, String> _functionName = {
     FunctionName.portrait: S.current.SettingsPortrait,
@@ -266,8 +250,13 @@ class HomePageState extends ConsumerState<HomePage> {
     deviceManager.setPreferredDeviceOrientation();
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
+    final settings = ref.watch(settingsProvider);
 
-    if (useKancolleListener) {
+    if (setUp) {
+      setUp = false;
+    }
+
+    if (settings.useKancolleListener) {
       enableListener(ref, context);
     }
 
@@ -285,9 +274,7 @@ class HomePageState extends ConsumerState<HomePage> {
         );
       },
       FunctionName.bottomPadding: () {
-        setState(() {
-          bottomPadding = !bottomPadding;
-        });
+        ref.watch(settingsProvider.notifier).setBool('bottomPadding', !settings.bottomPadding);
       },
       FunctionName.hideControls: () {
         setState(() {
@@ -313,12 +300,10 @@ class HomePageState extends ConsumerState<HomePage> {
             leading: const Icon(CupertinoIcons.rectangle_dock),
             onTap: () {
               Navigator.of(context).pop();
-              setState(() {
-                bottomPadding = !bottomPadding;
-              });
+              ref.watch(settingsProvider.notifier).setBool('bottomPadding', !settings.bottomPadding);
             },
             trailing:
-                bottomPadding ? const Icon(CupertinoIcons.checkmark_alt) : null,
+              settings.bottomPadding ? const Icon(CupertinoIcons.checkmark_alt) : null,
           ),
         ];
         if (deviceType != DeviceType.iPad) {
@@ -379,7 +364,7 @@ class HomePageState extends ConsumerState<HomePage> {
     };
 
     return OrientationBuilder(builder: (context, orientation) {
-      bool enableBottomPadding = bottomPadding;
+      bool enableBottomPadding = settings.bottomPadding;
       double bottomPaddingHeight = MediaQuery.of(context).padding.bottom;
       if (orientation == Orientation.landscape) {
         fabAlignment = const Alignment(1.0, 0.3);
@@ -413,8 +398,8 @@ class HomePageState extends ConsumerState<HomePage> {
               toggleButtonOnPressed: () {
                 HapticFeedback.mediumImpact();
               },
-              showMenu: appLayout == AppLayout.bothFABJoystick ||
-                  appLayout == AppLayout.onlyFAB,
+              showMenu: settings.appLayout == AppLayout.bothFABJoystick ||
+                  settings.appLayout == AppLayout.onlyFAB,
               animationDuration: const Duration(milliseconds: 240),
               items: [
                 CircularMenuItem(
@@ -516,7 +501,7 @@ class HomePageState extends ConsumerState<HomePage> {
                     //  10.9 inch iPad Air (5th): 146.2
 
                     if (parentAspectRatio < aspectRatio &&
-                        !showDashboardInHome) {
+                        !settings.showDashboardInHome) {
                       enableBottomPadding = false;
                     }
 
@@ -536,9 +521,9 @@ class HomePageState extends ConsumerState<HomePage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              if (enableDashboard && showDashboardInHome)
+                              if (enableDashboard && settings.showDashboardInHome)
                                 Expanded(
-                                    child: useKancolleListener
+                                    child: settings.useKancolleListener
                                         ? Dashboard.kancolle(notifyParent: () => setState(() {}))
                                         : Dashboard.general(notifyParent: () => setState(() {}))),
                               Padding(
@@ -556,7 +541,6 @@ class HomePageState extends ConsumerState<HomePage> {
                           FunctionalLayer(
                             cookieManager: widget.cookieManager,
                             notifyParent: () => setState(() {}),
-                            reloadConfig: () => _loadConfig(),
                           ),
                       ],
                     );
