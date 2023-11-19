@@ -146,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏将静音"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏声音将打开"),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("打开Dashboard"),
         "OperationData": MessageLookupByLibrary.simpleMessage("远征数据"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知数量"),

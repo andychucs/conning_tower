@@ -159,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ミュートします。変更を適用するにはリロードを行ってください。"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "ミュートを解除します。変更を適用するにはリロードを行ってください。"),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("ダッシュボードを開く"),
         "OperationData": MessageLookupByLibrary.simpleMessage("遠征データ"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("保留中の通知の数"),

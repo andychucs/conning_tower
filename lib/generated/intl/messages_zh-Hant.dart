@@ -147,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後靜音。"),
         "MsgUnmuteGame":
             MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後解除靜音。"),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("開啟Dashboard"),
         "OperationData": MessageLookupByLibrary.simpleMessage("遠征資料"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知數量"),

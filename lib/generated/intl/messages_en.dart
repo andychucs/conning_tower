@@ -170,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The game will be muted after refreshing."),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "The game will be unmuted after refreshing."),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("Open Dashboard"),
         "OperationData":
             MessageLookupByLibrary.simpleMessage("Expedition Data"),
         "PendingNotificationCount":

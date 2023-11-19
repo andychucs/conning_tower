@@ -900,6 +900,16 @@ class S {
     );
   }
 
+  /// `Open Dashboard`
+  String get OpenDashboard {
+    return Intl.message(
+      'Open Dashboard',
+      name: 'OpenDashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Expedition Data`
   String get OperationData {
     return Intl.message(

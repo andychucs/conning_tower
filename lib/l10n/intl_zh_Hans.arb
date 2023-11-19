@@ -170,6 +170,8 @@
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "刷新后游戏声音将打开",
   "@MsgUnmuteGame": {},
+  "OpenDashboard": "打开Dashboard",
+  "@OpenDashboard": {},
   "OperationData": "远征数据",
   "@OperationData": {},
   "PendingNotificationCount": "等待中的通知数量",

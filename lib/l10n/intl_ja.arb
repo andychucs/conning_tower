@@ -170,6 +170,8 @@
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "ミュートを解除します。変更を適用するにはリロードを行ってください。",
   "@MsgUnmuteGame": {},
+  "OpenDashboard": "ダッシュボードを開く",
+  "@OpenDashboard": {},
   "OperationData": "遠征データ",
   "@OperationData": {},
   "PendingNotificationCount": "保留中の通知の数",

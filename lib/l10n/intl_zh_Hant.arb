@@ -170,6 +170,8 @@
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "遊戲將會在重新載入後解除靜音。",
   "@MsgUnmuteGame": {},
+  "OpenDashboard": "開啟Dashboard",
+  "@OpenDashboard": {},
   "OperationData": "遠征資料",
   "@OperationData": {},
   "PendingNotificationCount": "等待中的通知數量",

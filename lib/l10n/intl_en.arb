@@ -170,6 +170,8 @@
   "@MsgMuteGame": {},
   "MsgUnmuteGame": "The game will be unmuted after refreshing.",
   "@MsgUnmuteGame": {},
+  "OpenDashboard": "Open Dashboard",
+  "@OpenDashboard": {},
   "OperationData": "Expedition Data",
   "@OperationData": {},
   "PendingNotificationCount": "Pending Notifications Count",
