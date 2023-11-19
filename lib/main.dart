@@ -1,5 +1,6 @@
 import 'package:conning_tower/app.dart';
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/firebase_options.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/utils/logger.dart';
 import 'package:conning_tower/utils/notification_util.dart';
