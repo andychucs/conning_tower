@@ -50,8 +50,8 @@ Best platform suggest is iPad.
 Will support macOS, Windows and Linux in the future.
 
 ## Previews
-![Simulator Screenshot - iPhone 15 Pro Max - 2023-10-05 at 23 28 43](https://github.com/andychucs/conning_tower/assets/24852023/24dc2a41-82dc-4cd4-925c-b4c3b54c66d1) | ![Simulator Screenshot - iPhone 15 Pro Max - 2023-10-05 at 23 28 37](https://github.com/andychucs/conning_tower/assets/24852023/5583c76d-6c94-4dd4-9dc8-94c826b74dda) | ![Simulator Screenshot - iPhone 15 Pro Max - 2023-10-05 at 23 28 33](https://github.com/andychucs/conning_tower/assets/24852023/791bbce5-f808-4bc6-9a13-47805c53c7ec)
---- | --- | ---
+| ![CC7B1141-A925-4C8D-BC7E-B562CB4BFC23_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/9241c616-588f-4479-bdff-186e9ebefe13) | ![5C479DA8-B96E-4ED7-9258-9D2E93D0AC85_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/c3cb6c79-777b-40bc-88b5-66dcd0a2678e) | ![28833525-0862-471D-AC13-ECE53280068D_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/1a96640d-e070-4d34-9985-83112a2a6580) | ![E176BCED-6F47-4FE4-A5FF-9DDA1D62C26A_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/510b1046-2d0c-4938-982f-f74f7c2344c6) |
+| --- | --- | --- | --- |
 
 
 
