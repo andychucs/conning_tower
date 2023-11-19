@@ -18,10 +18,6 @@ late SharedPreferences localStorage;
 final InAppLocalhostServer localhostServer = InAppLocalhostServer(port: 8686,
     documentRoot: 'assets/www', directoryIndex: 'home.html');
 late bool safeNavi;
-late bool autoAdjusted;
-late bool gameLoadCompleted;
-late bool inKancolleWindow;
-late bool beforeRedirect;
 late int selectedIndex;
 late bool showControls;
 late DeviceType deviceType;
@@ -79,9 +75,6 @@ Future<void> init() async {
 
   deviceType = await getDeviceType();
 
-  gameLoadCompleted = false;
-  inKancolleWindow = false;
-  autoAdjusted = false;
   safeNavi = false;
   selectedIndex = 0;
   showControls = true;

@@ -54,6 +54,12 @@ class WebController extends _$WebController {
   bool isScreenResize = false;
   CookieManager cookieManager = CookieManager.instance();
 
+  bool inKancolleWindow = false;
+
+  bool autoAdjusted = false;
+
+  bool gameLoadCompleted = false;
+
   get customHomeUrl => ref.watch(settingsProvider).customHomeUrl;
 
   get enableAutoProcess => ref.watch(settingsProvider).enableAutoProcess;
@@ -127,14 +133,12 @@ class WebController extends _$WebController {
       await closeLocalServer();
     }
 
-    beforeRedirect = false;
     inKancolleWindow = false;
+    autoAdjusted = false;
     if (uri.path.startsWith(gameUrlPath)) {
-      beforeRedirect = true;
-      autoAdjusted = false;
+      log("game load start");
     } else if (uri.host == kDMMOSAPIDomain) {
       inKancolleWindow = true;
-      autoAdjusted = false;
     }
   }
 
@@ -202,6 +206,30 @@ class WebController extends _$WebController {
       EasyDebounce.debounce('resize-debounce',
           const Duration(milliseconds: 800), () => screenResize());
     }
+  }
+
+  Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
+      {bool force = false, bool needToaste = false}) async {
+    //Adjust Kancolle window
+    if ((inKancolleWindow && !autoAdjusted) ||
+        (force && inKancolleWindow)) {
+      if (Platform.isIOS) {
+        await controller.injectJavascriptFileFromAsset(
+            assetFilePath: autoScaleIOSJS);
+      } else if (Platform.isAndroid) {
+        await controller.injectJavascriptFileFromAsset(
+            assetFilePath: autoScaleAndroidJS);
+      }
+      autoAdjusted = true;
+      log("Auto adjust success");
+      if (needToaste)
+        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+      return true;
+    }
+    log("autoAdjustWindow fail");
+    if (needToaste)
+      Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+    return false;
   }
 
   Future<void> screenResize() async {

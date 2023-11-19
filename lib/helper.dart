@@ -13,29 +13,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:yaml/yaml.dart';
 
-Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
-    {bool force = false, bool needToaste = false}) async {
-  //Adjust Kancolle window
-  if ((inKancolleWindow && !autoAdjusted) ||
-      (force && inKancolleWindow)) {
-    if (Platform.isIOS) {
-      await controller.injectJavascriptFileFromAsset(
-          assetFilePath: autoScaleIOSJS);
-    } else if (Platform.isAndroid) {
-      await controller.injectJavascriptFileFromAsset(
-          assetFilePath: autoScaleAndroidJS);
-    }
-    autoAdjusted = true;
-    log("Auto adjust success");
-    if (needToaste)
-      Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
-    return true;
-  }
-  log("autoAdjustWindow fail");
-  if (needToaste)
-    Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
-  return false;
-}
 
 String getHomeUrl(String customHomeUrl, bool enableAutoLoadHomeUrl) {
   String homeUrl = kLocalHomeUrl;

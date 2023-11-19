@@ -32,7 +32,6 @@ class AppWebViewState extends ConsumerState<AppWebView> {
 
   @override
   void initState() {
-    beforeRedirect = false;
     super.initState();
   }
 
