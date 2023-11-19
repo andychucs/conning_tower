@@ -10,6 +10,8 @@
   "@AboutDescriptionStore": {},
   "AboutVersion": "バージョン",
   "@AboutVersion": {},
+  "ActiveMainWebPage": "アクティブなメインウェブページ",
+  "@ActiveMainWebPage": {},
   "AddDataSource": "データソースを追加",
   "@AddDataSource": {},
   "AdvancedGameSupport": "高度なゲームサポート",

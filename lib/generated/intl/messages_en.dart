@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "ConningTower for iOS is a browser designed specifically for playing browser games. It lets you customize your screen and stay in landscape mode with desktop view at all times."),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("Version"),
+        "ActiveMainWebPage":
+            MessageLookupByLibrary.simpleMessage("Active Main Web Page"),
         "AddDataSource":
             MessageLookupByLibrary.simpleMessage("Add Data Source"),
         "AdvancedGameSupport":

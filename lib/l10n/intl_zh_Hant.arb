@@ -10,6 +10,8 @@
   "@AboutDescriptionStore": {},
   "AboutVersion": "版本",
   "@AboutVersion": {},
+  "ActiveMainWebPage": "目前啟用的主要網頁",
+  "@ActiveMainWebPage": {},
   "AddDataSource": "添加數據源",
   "@AddDataSource": {},
   "AdvancedGameSupport": "高級遊戲支援",

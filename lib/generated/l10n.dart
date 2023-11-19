@@ -100,6 +100,16 @@ class S {
     );
   }
 
+  /// `Active Main Web Page`
+  String get ActiveMainWebPage {
+    return Intl.message(
+      'Active Main Web Page',
+      name: 'ActiveMainWebPage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Add Data Source`
   String get AddDataSource {
     return Intl.message(

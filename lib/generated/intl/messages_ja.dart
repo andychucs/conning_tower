@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "「ConningTower for iOS」は、ブラウザゲーム専用のブラウザで、画面をカスタマイズして、デスクトップビューで常に横向き画面を保持することができます。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("バージョン"),
+        "ActiveMainWebPage":
+            MessageLookupByLibrary.simpleMessage("アクティブなメインウェブページ"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("データソースを追加"),
         "AdvancedGameSupport":
             MessageLookupByLibrary.simpleMessage("高度なゲームサポート"),

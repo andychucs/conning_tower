@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "舰桥是一款可定制屏幕并保持电脑模式横向画面使用的网页游戏专用浏览器。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
+        "ActiveMainWebPage": MessageLookupByLibrary.simpleMessage("当前使用的主要网页"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加数据源"),
         "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高级游戏支持"),
         "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(

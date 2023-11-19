@@ -10,6 +10,8 @@
   "@AboutDescriptionStore": {},
   "AboutVersion": "版本",
   "@AboutVersion": {},
+  "ActiveMainWebPage": "当前使用的主要网页",
+  "@ActiveMainWebPage": {},
   "AddDataSource": "添加数据源",
   "@AddDataSource": {},
   "AdvancedGameSupport": "高级游戏支持",

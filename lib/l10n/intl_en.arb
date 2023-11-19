@@ -10,6 +10,8 @@
   "@AboutDescriptionStore": {},
   "AboutVersion": "Version",
   "@AboutVersion": {},
+  "ActiveMainWebPage": "Active Main Web Page",
+  "@ActiveMainWebPage": {},
   "AddDataSource": "Add Data Source",
   "@AddDataSource": {},
   "AdvancedGameSupport": "Advanced Game Support",

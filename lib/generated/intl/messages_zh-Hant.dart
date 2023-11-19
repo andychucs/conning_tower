@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "艦橋是一款為瀏覽器遊戲設計的瀏覽器，可以定制您的屏幕並保持橫向桌面視圖。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
+        "ActiveMainWebPage": MessageLookupByLibrary.simpleMessage("目前啟用的主要網頁"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加數據源"),
         "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高級遊戲支援"),
         "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
