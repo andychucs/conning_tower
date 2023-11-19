@@ -30,7 +30,7 @@ late DeviceType deviceType;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb && !kIsOpenSource) {
+  if (!kIsWeb && kReleaseChannel == ReleaseChannel.store) {
     // start the localhost server
     await localhostServer.start();
   }

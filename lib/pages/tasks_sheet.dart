@@ -123,7 +123,7 @@ class _TasksSheetState extends ConsumerState<TasksSheet> {
                         color: Theme.of(context).primaryColor,
                       ),
                       onTap: () {
-                        if (kIsOpenSource) {
+                        if (kReleaseChannel == ReleaseChannel.github) {
                           ref.read(taskUtilProvider.notifier).onDownloadData(url: kTaskUrlKC);
                           return;
                         }

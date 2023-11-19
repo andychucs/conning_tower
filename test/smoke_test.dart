@@ -22,7 +22,7 @@ void main() {
   setUp(() {});
 
   group("smoke test", () {
-    test("channel flag check", () => expect(kIsOpenSource, isTrue));
+    test("channel flag check", () => expect(kReleaseChannel, ReleaseChannel.github));
 
     testWidgets("ToolsPage smoke", (tester) async {
       SharedPreferences.setMockInitialValues({});
@@ -58,7 +58,9 @@ void main() {
 
       await tester.tap(find.text(S.current.ToolSearchBarURLSetting));
       await tester.pumpAndSettle();
-      expect(container.read(settingsProvider).customHomeUrl, '');
+      if (kReleaseChannel == ReleaseChannel.store) {
+        expect(container.read(settingsProvider).customHomeUrl, '');
+      }
       await tester.enterText(find.byType(CupertinoTextField), kGameUrl);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       expect(container.read(settingsProvider).customHomeUrl, kGameUrl);
@@ -71,7 +73,7 @@ void main() {
       expect(container.read(settingsProvider).customHomeUrl, kGameUrl);
       await tester.pumpAndSettle();
 
-      if (!kIsOpenSource) {
+      if (kReleaseChannel == ReleaseChannel.store) {
         await tester.ensureVisible(find.text(S.current.AdvancedGameSupport));
         await tester.pumpAndSettle();
         expect(find.text('KC'), findsNothing);
@@ -86,7 +88,7 @@ void main() {
       }
 
 
-      if (kIsOpenSource) {
+      if (kReleaseChannel == ReleaseChannel.github) {
         expect(find.byIcon(Icons.anchor), findsOneWidget);
         expect(find.text(S.current.AdvancedGameSupport), findsNothing);
       } else {

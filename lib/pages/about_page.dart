@@ -71,7 +71,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                   CupertinoListSection.insetGrouped(
                     footer: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(kIsOpenSource
+                      child: Text(kReleaseChannel == ReleaseChannel.github
                           ? S.of(context).AboutDescriptionOpen
                           : S.of(context).AboutDescriptionStore),
                     ),
@@ -83,7 +83,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                       ),
                       const CupertinoListTile(
                         title: Text("Channel"),
-                        additionalInfo: Text(kIsOpenSource ? "GitHub" : "AppStore"),
+                        additionalInfo: Text(kReleaseChannel == ReleaseChannel.github ? "GitHub" : "AppStore"),
                       )
                     ],
                   ),
@@ -109,7 +109,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                         trailing: const CupertinoListTileChevron(),
                         onTap: () => launchUrl(Uri.parse(kXUrl)),
                       ),
-                      if (kIsOpenSource)
+                      if (kReleaseChannel == ReleaseChannel.github)
                         CupertinoListTile(
                           title: const Text("GitHub"),
                           leading: const DummyIcon(
@@ -133,7 +133,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                     children: [
                       CupertinoListTile(
                         title: const Text('AndyChu'),
-                        leading: kIsOpenSource
+                        leading: kReleaseChannel == ReleaseChannel.github
                             ? FadeInImage(
                                 fadeInDuration: const Duration(milliseconds: 500),
                                 fadeInCurve: Curves.easeInExpo,
@@ -151,7 +151,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                       ),
                       CupertinoListTile(
                         title: const Text('Angus'),
-                        leading: kIsOpenSource
+                        leading: kReleaseChannel == ReleaseChannel.github
                             ? FadeInImage(
                                 fadeInDuration: const Duration(milliseconds: 500),
                                 fadeInCurve: Curves.easeInExpo,
@@ -169,7 +169,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                       ),
                       CupertinoListTile(
                         title: const Text('naayu'),
-                        leading: kIsOpenSource
+                        leading: kReleaseChannel == ReleaseChannel.github
                             ? FadeInImage(
                                 fadeInDuration: const Duration(milliseconds: 500),
                                 fadeInCurve: Curves.easeInExpo,

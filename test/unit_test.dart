@@ -22,7 +22,7 @@ void main() {
         var enableAutoLoadHomeUrl = false;
         var customHomeUrl = '';
         var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
-        if (kIsOpenSource) {
+        if (kReleaseChannel == ReleaseChannel.github) {
           expect(url, kGameUrl);
         } else {
           expect(url, kLocalHomeUrl);
@@ -33,7 +33,7 @@ void main() {
         var enableAutoLoadHomeUrl = true;
         var customHomeUrl = '';
         var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
-        if (kIsOpenSource) {
+        if (kReleaseChannel == ReleaseChannel.github) {
           expect(url, kGameUrl);
         } else {
           expect(url, kLocalHomeUrl);
@@ -65,7 +65,7 @@ void main() {
         var enableAutoLoadHomeUrl = false;
         var customHomeUrl = 'example.com';
         var url = getHomeUrl(customHomeUrl, enableAutoLoadHomeUrl);
-        if (kIsOpenSource) {
+        if (kReleaseChannel == ReleaseChannel.github) {
           expect(url, kGameUrl);
         } else {
           expect(url, kLocalHomeUrl);

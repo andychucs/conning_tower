@@ -265,7 +265,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
               },
               trailing: const CupertinoListTileChevron(),
             ),
-            if (kIsOpenSource)
+            if (kReleaseChannel == ReleaseChannel.github)
               CupertinoListTile(
                 title: Text("KC"),
                 leading: const DummyIcon(
@@ -276,7 +276,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
                       context, const KancolleListenSettings());
                 },
               ),
-            if (!kIsOpenSource)
+            if (kReleaseChannel == ReleaseChannel.store)
               CupertinoListTile(
                 title: Text(S.of(context).AdvancedGameSupport),
                 leading: const DummyIcon(

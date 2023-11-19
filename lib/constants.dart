@@ -36,7 +36,6 @@ function KcapiToFlutter(data) {
 }
 
 ''';
-const bool kIsOpenSource = true;
 const kKancolleHeight = 720;
 const kKancollePixel = kKancolleHeight * kKancolleWidth;
 const kKancolleWidth = 1200;
@@ -54,7 +53,7 @@ const String kTaskChannelName = "ConningTower Task Channel";
 
 const String kTaskJsonExample =
     "https://github.com/conntower/data/blob/main/json/CT_tasks.json";
-const String kTaskUrlExample = kIsOpenSource ? "https://andychucs.github.io/kcdata/json/CT_tasks.json" :
+const String kTaskUrlExample = kReleaseChannel == ReleaseChannel.github ? "https://andychucs.github.io/kcdata/json/CT_tasks.json" :
     "https://conntower.github.io/data/json/CT_tasks.json";
 const String kTaskUrlKC = "https://andychucs.github.io/kcdata/json/CT_tasks.json";
 const String kTaskYamlExample =
@@ -102,3 +101,7 @@ enum JoystickAct {
 enum JoystickDir { up, down, left, right, center }
 
 enum AppLayout { onlyFAB, onlyJoystick, bothFABJoystick, pure }
+
+enum ReleaseChannel { store, github }
+
+const kReleaseChannel = ReleaseChannel.github;

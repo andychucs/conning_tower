@@ -104,7 +104,7 @@ class HomePageState extends ConsumerState<HomePage> {
   }
 
   Future<void> showNewVersionInfo() async {
-    if (showNewVersion && !kIsOpenSource) {
+    if (showNewVersion && kReleaseChannel == ReleaseChannel.store) {
       showAdaptiveDialog(
           context: context,
           barrierDismissible: true,

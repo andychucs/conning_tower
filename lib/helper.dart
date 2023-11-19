@@ -112,7 +112,7 @@ getResizeScale(double height, double width) {
 
 String getHomeUrl(String customHomeUrl, bool enableAutoLoadHomeUrl) {
   String homeUrl = kLocalHomeUrl;
-  if (kIsOpenSource) {
+  if (kReleaseChannel == ReleaseChannel.github) {
     homeUrl = kGameUrl;
   }
   if (enableAutoLoadHomeUrl && customHomeUrl.isNotEmpty) {

@@ -151,7 +151,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                         selected: select,
                         onItemSelected: (index) {
                           select = index;
-                          if (kIsOpenSource) {
+                          if (kReleaseChannel == ReleaseChannel.github) {
                             if (layouts[select].name.toLowerCase().contains("joystick")) {
                               Fluttertoast.showToast(msg: "Not available");
                               return;
