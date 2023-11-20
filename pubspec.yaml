@@ -54,7 +54,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0-pre
   yaml: ^3.1.2
   flutter_riverpod: ^2.3.6
-  riverpod_annotation: ^2.1.1
+  riverpod_annotation: ^2.3.1
   image_gallery_saver: ^2.0.1
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
