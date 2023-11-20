@@ -309,8 +309,8 @@ class WebController extends _$WebController {
     Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
   }
 
-  void _kancolleMessageHandle(String message) {
-    var json = jsonDecode(message);
+  void _kancolleMessageHandle(WebMessage message) {
+    var json = jsonDecode(message.data);
     var messageData = WebMessageData.fromJson(json);
     String result = messageData.responseText.replaceAll('svdata=', '');
 
