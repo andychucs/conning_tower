@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:conning_tower/models/data/kcsapi/battle_data.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter/foundation.dart';
@@ -13,20 +14,22 @@ part 'battle_info.freezed.dart';
 class BattleInfo with _$BattleInfo {
   const BattleInfo._();
 
-  factory BattleInfo(
-      {String? result,
-      String? dropName,
-      int? mvp,
-      int? dropItemId,
-      String? dropItemName,
-      List<Squad>? enemySquads,
-      List<Squad>? inBattleSquads,
-      Map<int, int>? dmgTakenMap,
-      Map<int, int>? dmgMap,
-      int? airSuperiorityFlag,
-      int? formation,
-      int? eFormation,
-      int? contact}) = _BattleInfo;
+  factory BattleInfo({
+    String? result,
+    String? dropName,
+    int? mvp,
+    int? dropItemId,
+    String? dropItemName,
+    List<Squad>? enemySquads,
+    List<Squad>? inBattleSquads,
+    Map<int, int>? dmgTakenMap,
+    Map<int, int>? dmgMap,
+    int? airSuperiorityFlag,
+    int? formation,
+    int? eFormation,
+    int? contact,
+    MapInfo? mapInfo,
+  }) = _BattleInfo;
 
   List<Ship> get allShips => inBattleSquads!
       .expand((squad) => squad.ships)
@@ -71,7 +74,7 @@ class BattleInfo with _$BattleInfo {
   String _getFormation(int flag) {
     String formation;
 
-    switch(flag) {
+    switch (flag) {
       case 1:
         formation = "単縦陣";
         break;
