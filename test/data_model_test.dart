@@ -67,7 +67,7 @@ main(){
     var jsonData = jsonDecode(jsonString);
 
     final List<dynamic> mapAreas = jsonData.map((mapData) {
-      return MapArea.fromJson(mapData);
+      return KcwikiMapArea.fromJson(mapData);
     }).toList();
 
     print(mapAreas);
