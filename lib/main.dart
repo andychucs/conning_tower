@@ -2,6 +2,7 @@ import 'package:conning_tower/app.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/firebase_options.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/utils/objectbox.dart';
 import 'package:conning_tower/utils/logger.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,9 +22,11 @@ late bool safeNavi;
 late int selectedIndex;
 late bool showControls;
 late DeviceType deviceType;
+late ObjectBox objectbox;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  objectbox = await ObjectBox.create();
   if (!kIsWeb && kReleaseChannel == ReleaseChannel.store) {
     // start the localhost server
     await localhostServer.start();
