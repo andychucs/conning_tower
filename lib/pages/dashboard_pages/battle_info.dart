@@ -125,23 +125,36 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
             ],
           ),
         ),
-        child: items.isNotEmpty
-            ? LayoutBuilder(
-                builder: (context, constraints) {
-                  debugPrint(constraints.maxWidth.toString());
-                  if (constraints.maxWidth >= 600) {
-                    crossAxisCount = 2;
-                  }
-                  return MasonryGridView.count(
-                    crossAxisCount: crossAxisCount,
-                    itemCount: items.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return items[index];
-                    },
-                  );
-                },
-              )
-            : Container(),
+        child: Column(
+          children: [
+            if (items.isNotEmpty)
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    debugPrint(constraints.maxWidth.toString());
+                    if (constraints.maxWidth >= 600) {
+                      crossAxisCount = 2;
+                    }
+                    return MasonryGridView.count(
+                      crossAxisCount: crossAxisCount,
+                      itemCount: items.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return items[index];
+                      },
+                    );
+                  },
+                ),
+              ),
+            if (battleInfo.mapInfo != null)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num} ${battleInfo.mapInfo?.name}"),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

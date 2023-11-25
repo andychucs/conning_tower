@@ -7,6 +7,7 @@ import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
@@ -93,6 +94,10 @@ class KancolleData {
           key: (item) => item.apiId);
       dataInfo.itemInfo = Map.fromIterable(model.apiData.apiMstUseitem,
           key: (item) => item.apiId);
+      dataInfo.mapAreaInfo = {
+        for (var item in model.apiData.apiMstMaparea)
+          item.apiId: MapArea.fromApi(item, model.apiData.apiMstMapinfo)
+      };
     }
 
     if (model is ReqMissionStartEntity) {
@@ -107,6 +112,9 @@ class KancolleData {
     if (model is ReqMapStartEntity) {
       log("Start");
       battleInfo.clear();
+      battleInfo.mapInfo = dataInfo
+          .mapAreaInfo?[model.apiData.apiMapareaId]?.map
+          .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.inBattleSquads?.clear();
     }
 
