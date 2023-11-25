@@ -36,6 +36,10 @@ jobs:
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: pub get
         run: flutter pub get
+
+      - name: dart run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
       - name: Create files
         env:
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
