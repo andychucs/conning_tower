@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "艦橋是一款為瀏覽器遊戲設計的瀏覽器，可以定制您的屏幕並保持橫向桌面視圖。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
+        "ActiveMainWebPage": MessageLookupByLibrary.simpleMessage("目前啟用的主要網頁"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加數據源"),
         "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高級遊戲支援"),
         "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
@@ -94,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("在主頁顯示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "如需使用KanColle數據監聽功能，為保證功能可用務必前往工具-高級遊戲支援中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
+        "DesktopMode": MessageLookupByLibrary.simpleMessage("桌面模式"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hant/new"),
         "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下載艦隊資料"),
@@ -146,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後靜音。"),
         "MsgUnmuteGame":
             MessageLookupByLibrary.simpleMessage("遊戲將會在重新載入後解除靜音。"),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("開啟Dashboard"),
         "OperationData": MessageLookupByLibrary.simpleMessage("遠征資料"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知數量"),

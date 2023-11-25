@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "舰桥是一款可定制屏幕并保持电脑模式横向画面使用的网页游戏专用浏览器。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("版本"),
+        "ActiveMainWebPage": MessageLookupByLibrary.simpleMessage("当前使用的主要网页"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("添加数据源"),
         "AdvancedGameSupport": MessageLookupByLibrary.simpleMessage("高级游戏支持"),
         "AdvancedGameSupportDescription": MessageLookupByLibrary.simpleMessage(
@@ -94,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("在主页显示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "如需使用KanColle数据监听功能，为保证功能可用务必前往工具-高级游戏支持中下载数据并打开开关（如果没有打开），如遇异常请在设置中重置应用数据。"),
+        "DesktopMode": MessageLookupByLibrary.simpleMessage("桌面模式"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hans/new"),
         "DownloadFleetData": MessageLookupByLibrary.simpleMessage("下载舰队数据"),
@@ -145,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),
         "MsgMuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏将静音"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage("刷新后游戏声音将打开"),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("打开Dashboard"),
         "OperationData": MessageLookupByLibrary.simpleMessage("远征数据"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("等待中的通知数量"),

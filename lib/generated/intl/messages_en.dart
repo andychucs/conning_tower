@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "ConningTower for iOS is a browser designed specifically for playing browser games. It lets you customize your screen and stay in landscape mode with desktop view at all times."),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("Version"),
+        "ActiveMainWebPage":
+            MessageLookupByLibrary.simpleMessage("Active Main Web Page"),
         "AddDataSource":
             MessageLookupByLibrary.simpleMessage("Add Data Source"),
         "AdvancedGameSupport":
@@ -107,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Show Dashboard on Homepage"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings."),
+        "DesktopMode": MessageLookupByLibrary.simpleMessage("Desktop Mode"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/en/new"),
         "DownloadFleetData":
@@ -168,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The game will be muted after refreshing."),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "The game will be unmuted after refreshing."),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("Open Dashboard"),
         "OperationData":
             MessageLookupByLibrary.simpleMessage("Expedition Data"),
         "PendingNotificationCount":

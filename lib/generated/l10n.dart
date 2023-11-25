@@ -100,6 +100,16 @@ class S {
     );
   }
 
+  /// `Active Main Web Page`
+  String get ActiveMainWebPage {
+    return Intl.message(
+      'Active Main Web Page',
+      name: 'ActiveMainWebPage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Add Data Source`
   String get AddDataSource {
     return Intl.message(
@@ -520,6 +530,16 @@ class S {
     );
   }
 
+  /// `Desktop Mode`
+  String get DesktopMode {
+    return Intl.message(
+      'Desktop Mode',
+      name: 'DesktopMode',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `https://conntower.github.io/docs/en/new`
   String get DocsNewUrl {
     return Intl.message(
@@ -885,6 +905,16 @@ class S {
     return Intl.message(
       'The game will be unmuted after refreshing.',
       name: 'MsgUnmuteGame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Dashboard`
+  String get OpenDashboard {
+    return Intl.message(
+      'Open Dashboard',
+      name: 'OpenDashboard',
       desc: '',
       args: [],
     );

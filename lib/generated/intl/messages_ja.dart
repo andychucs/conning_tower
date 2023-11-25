@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "AboutDescriptionStore": MessageLookupByLibrary.simpleMessage(
             "「ConningTower for iOS」は、ブラウザゲーム専用のブラウザで、画面をカスタマイズして、デスクトップビューで常に横向き画面を保持することができます。"),
         "AboutVersion": MessageLookupByLibrary.simpleMessage("バージョン"),
+        "ActiveMainWebPage":
+            MessageLookupByLibrary.simpleMessage("アクティブなメインウェブページ"),
         "AddDataSource": MessageLookupByLibrary.simpleMessage("データソースを追加"),
         "AdvancedGameSupport":
             MessageLookupByLibrary.simpleMessage("高度なゲームサポート"),
@@ -99,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ホームページでダッシュボードを表示"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "艦これデータリスナー機能を使用するには、ツール→高度なゲームサポートに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。"),
+        "DesktopMode": MessageLookupByLibrary.simpleMessage("デスクトップモード"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/ja/new"),
         "DownloadFleetData":
@@ -157,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ミュートします。変更を適用するにはリロードを行ってください。"),
         "MsgUnmuteGame": MessageLookupByLibrary.simpleMessage(
             "ミュートを解除します。変更を適用するにはリロードを行ってください。"),
+        "OpenDashboard": MessageLookupByLibrary.simpleMessage("ダッシュボードを開く"),
         "OperationData": MessageLookupByLibrary.simpleMessage("遠征データ"),
         "PendingNotificationCount":
             MessageLookupByLibrary.simpleMessage("保留中の通知の数"),
