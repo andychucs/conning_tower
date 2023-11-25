@@ -171,7 +171,7 @@ class HomePageState extends ConsumerState<HomePage> {
       log(next.data);
       ref
           .watch(kancolleDataProvider.notifier)
-          .update((state) => state.parseWith(next.source, next.data));
+          .update((state) => state.parseWith(next));
     });
 
     ref.listen(kancolleDataProvider,

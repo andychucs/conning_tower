@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
@@ -8,12 +9,15 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/fleet.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -23,6 +27,8 @@ List<String> _battleAPI = [
   ReqSortieBattleEntity.source,
   ReqSortieBattleResultEntity.source,
   ReqBattleMidnightBattleEntity.source,
+  ReqMapNextEntity.source,
+  ReqMapStartEntity.source,
 ];
 
 class KancolleData {
@@ -32,16 +38,19 @@ class KancolleData {
   final Fleet fleet;
   final Ref ref;
   final DataInfo dataInfo;
-  late BattleInfo battleInfo;
+  final BattleInfo battleInfo;
+  KancolleBattleLog? battleLog;
 
-  KancolleData(
-      {required this.queue,
-      required this.squads,
-      required this.seaForceBase,
-      required this.fleet,
-      required this.ref,
-      required this.dataInfo,
-      required this.battleInfo});
+  KancolleData({
+    required this.queue,
+    required this.squads,
+    required this.seaForceBase,
+    required this.fleet,
+    required this.ref,
+    required this.dataInfo,
+    required this.battleInfo,
+    this.battleLog,
+  });
 
   KancolleData copyWith({
     OperationQueue? queue,
@@ -60,14 +69,28 @@ class KancolleData {
       dataInfo: dataInfo ?? this.dataInfo,
       battleInfo: battleInfo ?? this.battleInfo,
       ref: ref ?? this.ref,
+      battleLog: battleLog
     );
   }
 
-  void parse(String source, String data) {
+  bool isBattleAPI(String path) {
+    return _battleAPI.contains(path) ||
+        path.startsWith('/api_req_battle_midnight') ||
+        path.startsWith('/api_req_sortie') ||
+        path.startsWith('/api_req_combined_battle');
+  }
+
+  void parse(RawData rawData) {
+    String source = rawData.source;
+    String data = rawData.data;
+    int timestamp = rawData.timestamp;
     String path = source.split("kcsapi").last;
 
-    if (_battleAPI.contains(path)) {
+    if (isBattleAPI(path)) {
       if (!ref.read(settingsProvider).kcBattleReportEnable) return;
+      if (battleLog != null) {
+        battleLog?.data.add(rawData.toDecoded());
+      }
     }
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
@@ -116,6 +139,7 @@ class KancolleData {
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.inBattleSquads?.clear();
+      battleLog = KancolleBattleLog(id: timestamp, mapInfo: battleInfo.mapInfo!, squads: squads, data: [rawData.toDecoded()]);
     }
 
     if (model is GetMemberDeckEntity) {
@@ -158,6 +182,11 @@ class KancolleData {
     }
 
     if (model is PortEntity) {
+      if (battleLog != null) {
+        log("save battle log");
+        objectbox.battleLog.put(KancolleBattleLogEntity.fromLog(battleLog!));
+      }
+      battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);
 
       seaForceBase.updateCommanderInfo(model.apiData.apiBasic);
@@ -181,22 +210,28 @@ class KancolleData {
     }
   }
 
-  KancolleData parseWith(String source, String data) {
-    KancolleData newData = copyWith();
+  KancolleData parseWith(RawData rawData) {
+    String source = rawData.source;
+    String data = rawData.data;
+    late KancolleData newData;
     try {
       if (_operationSource(source)) {
         Map<int, tz.TZDateTime> endTimeMap = {
-          for (int i in [2, 3, 4]) i: newData.queue.map[i]!.endTime
+          for (int i in [2, 3, 4]) i: queue.map[i]!.endTime
         };
-        parse(source, data);
+        parse(rawData);
+        newData = copyWith();
         _setNotification(endTimeMap, newData);
       } else {
-        parse(source, data);
-        // newData = this;
+        parse(rawData);
+        newData = copyWith();
       }
 
       if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
+      if (kDebugMode) {
+        rethrow;
+      }
       String errorMsg = e.toString();
       String st = '';
       if (s.toString().contains('\n')) {

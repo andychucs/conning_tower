@@ -2,6 +2,7 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'squad.freezed.dart';
+part 'squad.g.dart';
 
 @unfreezed
 class Squad with _$Squad {
@@ -25,4 +26,6 @@ class Squad with _$Squad {
     return Squad(id: 1, name: '', ships: ships);
   }
 
+  factory Squad.fromJson(Map<String, dynamic> json) =>
+      _$SquadFromJson(json);
 }

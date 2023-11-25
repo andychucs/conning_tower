@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -6,22 +8,31 @@ part 'raw_data.g.dart';
 
 @freezed
 class RawData with _$RawData {
-  const factory RawData(
-      {required String source,
-      required String data,
-      required int timestamp}) = _RawData;
+  const RawData._();
+
+  const factory RawData({
+    required String source,
+    required String data,
+    required int timestamp,
+  }) = _RawData;
 
   factory RawData.fromJson(Map<String, dynamic> json) =>
       _$RawDataFromJson(json);
+
+  DataLogEntity toDecoded() {
+    return DataLogEntity(
+        timestamp: timestamp, source: source, data: jsonDecode(data));
+  }
 }
 
 @freezed
-class RawDataLog with _$RawDataLog {
-  const factory RawDataLog({
-    required int time,
-    required List<RawData> data
-  }) = _RawDataLog;
+class DataLogEntity with _$DataLogEntity {
+  const factory DataLogEntity({
+    required int timestamp,
+    required String source,
+    required Map<String, dynamic> data,
+  }) = _DataLogEntity;
 
-  factory RawDataLog.fromJson(Map<String, dynamic> json) =>
-      _$RawDataLogFromJson(json);
+  factory DataLogEntity.fromJson(Map<String, dynamic> json) =>
+      _$DataLogEntityFromJson(json);
 }
