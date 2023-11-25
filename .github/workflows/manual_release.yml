@@ -13,11 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create Sentry
-        env:
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-        run: |
-          echo $SENTRY_DSN | base64 -d > assets/config/sentry
+
       - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
@@ -27,6 +23,10 @@ jobs:
         with:
           flutter-version: '3.13.8'
       - run: flutter pub get
+
+      - name: dart run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
       - name: Create the Keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
