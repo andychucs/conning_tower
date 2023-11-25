@@ -15,7 +15,7 @@ targets:
           create_per_field_to_json: false
           create_to_json: true
           disallow_unrecognized_keys: false
-          explicit_to_json: false
+          explicit_to_json: true # make nested class can gen toJson on each vars
           field_rename: snake  # apiResult -> api_result
           generic_argument_factories: false
           ignore_unannotated: false

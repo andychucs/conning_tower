@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ship.freezed.dart';
+part 'ship.g.dart';
 
 @unfreezed
 class Ship with _$Ship {
@@ -17,8 +18,8 @@ class Ship with _$Ship {
     String? name,
     required int level,
     List<int>? exp,
-    required int nowHP,
-    required int maxHP,
+    @JsonKey(name: "now_hp") required int nowHP,
+    @JsonKey(name: "max_hp") required int maxHP,
     int? speed,
     int? attackRange,
     // required List<int> apiSlot,
@@ -45,6 +46,9 @@ class Ship with _$Ship {
     // required int apiLockedEquip,
     // required int apiSallyArea,
   }) = _Ship;
+
+  factory Ship.fromJson(Map<String, dynamic> json) =>
+      _$ShipFromJson(json);
 
   void onHPChange(int damage) {
     nowHP = nowHP + damage;

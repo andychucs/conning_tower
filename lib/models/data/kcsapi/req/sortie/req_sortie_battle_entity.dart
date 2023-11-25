@@ -5,6 +5,17 @@ part 'req_sortie_battle_entity.freezed.dart';
 
 part 'req_sortie_battle_entity.g.dart';
 
+@freezed
+class ReqSortieBattleLog with _$ReqSortieBattleLog {
+  const factory ReqSortieBattleLog({
+    required int mapArea,
+    required int mapNum,
+    required ReqSortieBattleApiDataEntity apiData,
+}) = _ReqSortieBattleLog;
+
+}
+
+
 @unfreezed
 class ReqSortieBattleEntity with _$ReqSortieBattleEntity {
   static get source => "/api_req_sortie/battle";

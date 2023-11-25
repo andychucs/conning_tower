@@ -2,6 +2,7 @@ import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'map_info.freezed.dart';
+part 'map_info.g.dart';
 
 enum AreaType { normal, event }
 
@@ -49,4 +50,7 @@ class MapInfo with _$MapInfo {
       operationName: data.apiOpetext,
     );
   }
+
+  factory MapInfo.fromJson(Map<String, dynamic> json) =>
+      _$MapInfoFromJson(json);
 }
