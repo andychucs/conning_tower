@@ -88,7 +88,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   custom_lint: ^0.5.1
-  riverpod_lint: ^2.0.0
+  riverpod_lint: ^2.3.7
   build_runner: ^2.4.5
   riverpod_generator: ^2.2.5
   freezed: ^2.4.2
