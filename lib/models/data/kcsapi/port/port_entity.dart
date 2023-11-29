@@ -38,8 +38,8 @@ class PortApiDataEntity with _$PortApiDataEntity {
     @JsonKey(name: 'api_p_bgm_id') required int apiPBgmId,
     @JsonKey(name: 'api_parallel_quest_count')
     required int apiParallelQuestCount,
-    @JsonKey(name: 'api_dest_ship_slot') required int apiDestShipSlot,
-    @JsonKey(name: 'api_c_flags') required List<int> apiCFlags,
+    // @JsonKey(name: 'api_dest_ship_slot') required int apiDestShipSlot,
+    // @JsonKey(name: 'api_c_flags') List<int>? apiCFlags,
   }) = _PortApiDataEntity;
 
   factory PortApiDataEntity.fromJson(Map<String, dynamic> json) =>
