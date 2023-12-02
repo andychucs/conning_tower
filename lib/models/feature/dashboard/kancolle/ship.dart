@@ -22,9 +22,9 @@ class Ship with _$Ship {
     @JsonKey(name: "max_hp") required int maxHP,
     int? speed,
     int? attackRange,
-    // required List<int> apiSlot,
-    // required List<int> apiOnslot,
-    // required int apiSlotEx,
+    List<int>? slot,
+    List<int>? onSlot,
+    int? slotEx,
     // required List<int> apiKyouka,
     // required int apiBacks,
     int? fuel,
@@ -47,8 +47,7 @@ class Ship with _$Ship {
     // required int apiSallyArea,
   }) = _Ship;
 
-  factory Ship.fromJson(Map<String, dynamic> json) =>
-      _$ShipFromJson(json);
+  factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
 
   void onHPChange(int damage) {
     nowHP = nowHP + damage;
@@ -125,27 +124,30 @@ class Ship with _$Ship {
 
   factory Ship.fromApi(ShipData data, String shipName) {
     return Ship(
-        uid: data.apiId,
-        shipId: data.apiShipId,
-        name: shipName,
-        level: data.apiLv,
-        exp: data.apiExp,
-        nowHP: data.apiNowhp,
-        maxHP: data.apiMaxhp,
-        // sortNo: data.apiSortno,
-        speed: data.apiSoku,
-        condition: data.apiCond,
-        attack: data.apiKaryoku,
-        attackT: data.apiRaisou,
-        antiAircraft: data.apiTaiku,
-        armor: data.apiSoukou,
-        evasion: data.apiKaihi,
-        antiSubmarine: data.apiTaisen,
-        scout: data.apiSakuteki,
-        luck: data.apiLucky,
-        attackRange: data.apiLeng,
-        fuel: data.apiFuel,
-        bull: data.apiBull,
+      uid: data.apiId,
+      shipId: data.apiShipId,
+      name: shipName,
+      level: data.apiLv,
+      exp: data.apiExp,
+      nowHP: data.apiNowhp,
+      maxHP: data.apiMaxhp,
+      // sortNo: data.apiSortno,
+      speed: data.apiSoku,
+      condition: data.apiCond,
+      attack: data.apiKaryoku,
+      attackT: data.apiRaisou,
+      antiAircraft: data.apiTaiku,
+      armor: data.apiSoukou,
+      evasion: data.apiKaihi,
+      antiSubmarine: data.apiTaisen,
+      scout: data.apiSakuteki,
+      luck: data.apiLucky,
+      attackRange: data.apiLeng,
+      fuel: data.apiFuel,
+      bull: data.apiBull,
+      slot: data.apiSlot,
+      slotEx: data.apiSlotEx,
+      onSlot: data.apiOnslot,
     );
   }
 }
