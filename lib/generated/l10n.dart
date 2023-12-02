@@ -870,6 +870,16 @@ class S {
     );
   }
 
+  /// `Logbook`
+  String get KanColleLogbook {
+    return Intl.message(
+      'Logbook',
+      name: 'KanColleLogbook',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Light Theme`
   String get LightTheme {
     return Intl.message(
