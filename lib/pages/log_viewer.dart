@@ -5,6 +5,8 @@ import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/objectbox.g.dart';
+import 'package:conning_tower/utils/objectbox.dart';
+import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +65,21 @@ class LogViewer extends ConsumerWidget {
                   //   trailing: CupertinoListTileChevron(),
                   // ),
                 ],
+              ),
+              CupertinoListSection.insetGrouped(
+                children: [
+                  CupertinoListTile(
+                    leading: const DummyIcon(
+                        color: CupertinoColors.destructiveRed,
+                        icon: CupertinoIcons.trash),
+                    title: Text("Clear"),
+                    onTap: () async {
+                      await objectbox.clear();
+                      objectbox = await ObjectBox.create();
+                      Fluttertoast.showToast(msg: "All log cleared");
+                    },
+                  )
+                ],
               )
             ],
           ),
@@ -116,7 +133,6 @@ class _LogDataPageState extends State<LogDataPage> {
         }
       }
     });
-
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,

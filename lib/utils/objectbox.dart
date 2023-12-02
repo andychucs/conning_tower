@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +30,17 @@ class ObjectBox {
 
   void close() {
     store.close();
+  }
+
+  Future<void> clear() async {
+    close();
+    final docsDir = await getApplicationDocumentsDirectory();
+    final objBoxDirectory =  Directory(p.join(docsDir.path, "obx"));
+    final isExists = await objBoxDirectory.exists();
+    if(isExists){
+      debugPrint("obx path exists: $isExists");
+      await objBoxDirectory.delete(recursive: true);
+    }
   }
 
   Future<String> storeSize() async {
