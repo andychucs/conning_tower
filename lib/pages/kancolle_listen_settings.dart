@@ -69,7 +69,7 @@ class _KancolleListenSettingsState
                   ),
                 ),
                 CupertinoListTile(
-                  title: const Text("LogViewer"),
+                  title: Text(S.of(context).KanColleLogbook),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () => navigatorToCupertino(context, LogViewer(previousPageTitle: widget.showNavigatorBar ? 'KC' : null)),
                 )
