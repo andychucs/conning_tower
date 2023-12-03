@@ -57,7 +57,7 @@ class _TaskDashboardState extends ConsumerState<TaskDashboard> {
 
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(S.of(context).TaskNotAdded),
           CupertinoButton(
