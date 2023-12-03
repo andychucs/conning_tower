@@ -153,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
         "KCViewFuncMsgPageStart": m3,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("データリスナー"),
+        "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日誌"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、「ツール-Web-HTTPリダイレクト」を押すことでプレイ可能な状態になります。"),

@@ -164,6 +164,8 @@
   "@KCViewFuncMsgPageStart": {},
   "KanColleDataListener": "資料監聽",
   "@KanColleDataListener": {},
+  "KanColleLogbook": "航海日誌",
+  "@KanColleLogbook": {},
   "LightTheme": "淺色主題",
   "@LightTheme": {},
   "MsgIOSNote": "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊「工具-Web-重定向」。",

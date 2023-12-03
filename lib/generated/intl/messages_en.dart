@@ -164,6 +164,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCViewFuncMsgPageStart": m3,
         "KanColleDataListener":
             MessageLookupByLibrary.simpleMessage("Data Listener"),
+        "KanColleLogbook": MessageLookupByLibrary.simpleMessage("Logbook"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click \'Tools-Web-HTTP Redirect\' button."),

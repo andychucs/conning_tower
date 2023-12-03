@@ -1,8 +1,10 @@
-import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
+import 'dart:io';
+
+import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/objectbox.g.dart'; // created by `flutter pub run build_runner build`
 
 class ObjectBox {
@@ -10,11 +12,11 @@ class ObjectBox {
   /// The Store of this app.
   late final Store store;
 
-  late final Box<KancolleBattleLogEntity> battleLog;
+  late final Box<KancolleLogEntity> battleLog;
 
   ObjectBox._create(this.store) {
     // Add any additional setup code, e.g. build queries.
-    battleLog = Box<KancolleBattleLogEntity>(store);
+    battleLog = Box<KancolleLogEntity>(store);
   }
 
   /// Create an instance of ObjectBox to use throughout the app.
@@ -28,5 +30,21 @@ class ObjectBox {
 
   void close() {
     store.close();
+  }
+
+  Future<void> clear() async {
+    close();
+    final docsDir = await getApplicationDocumentsDirectory();
+    final objBoxDirectory =  Directory(p.join(docsDir.path, "obx"));
+    final isExists = await objBoxDirectory.exists();
+    if(isExists){
+      debugPrint("obx path exists: $isExists");
+      await objBoxDirectory.delete(recursive: true);
+    }
+  }
+
+  Future<String> storeSize() async {
+    final docsDir = await getApplicationDocumentsDirectory();
+    return getFileSize(p.join(docsDir.path, "obx", 'data.mdb'), 2);
   }
 }

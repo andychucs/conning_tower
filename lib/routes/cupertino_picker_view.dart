@@ -26,10 +26,16 @@ class CupertinoPickerView extends ConsumerStatefulWidget {
 
 class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
   late int _selectIndex;
+  FixedExtentScrollController scrollController = FixedExtentScrollController();
 
   @override
   Widget build(BuildContext context) {
     _selectIndex = ref.watch(settingsProvider).dashboardIndex;
+    Future(() {
+      if (scrollController.selectedItem != _selectIndex) {
+        scrollController.jumpToItem(_selectIndex);
+      }
+    });
     if (_selectIndex < 0) {
       _selectIndex = 0;
     }
@@ -46,12 +52,12 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
                 flex: widget.wideStyle ? 5 : 7,
                 child: CupertinoGroupedSection(
                   child: CupertinoPicker(
-                    scrollController:
-                        FixedExtentScrollController(initialItem: _selectIndex),
+                    scrollController: scrollController,
                     useMagnifier: true,
                     itemExtent: widget.wideStyle ? 45 : 40,
                     onSelectedItemChanged: (int value) {
                       setState(() {
+                        _selectIndex = value;
                         if (deviceType == DeviceType.iPad)
                           SystemSound.play(SystemSoundType.click);
                         HapticFeedback.lightImpact();

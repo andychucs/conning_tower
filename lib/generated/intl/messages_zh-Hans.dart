@@ -142,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
         "KCViewFuncMsgPageStart": m3,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("数据监听"),
+        "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日志"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),

@@ -14,6 +14,7 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.d
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
+import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
@@ -93,6 +94,10 @@ class KancolleData {
       }
     }
 
+    if (path == GetMemberShipDeckEntity.source) {
+      battleLog?.data.add(rawData.toDecoded());
+    }
+
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
     if (model is ReqBattleMidnightBattleEntity) {
@@ -134,12 +139,13 @@ class KancolleData {
 
     if (model is ReqMapStartEntity) {
       log("Start");
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       battleInfo.clear();
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.inBattleSquads?.clear();
-      battleLog = KancolleBattleLog(id: timestamp, mapInfo: battleInfo.mapInfo!, squads: squads, data: [rawData.toDecoded()]);
+      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.toDecoded()]);
     }
 
     if (model is GetMemberDeckEntity) {
@@ -184,7 +190,7 @@ class KancolleData {
     if (model is PortEntity) {
       if (battleLog != null) {
         log("save battle log");
-        objectbox.battleLog.put(KancolleBattleLogEntity.fromLog(battleLog!));
+        objectbox.battleLog.put(KancolleLogEntity.fromLog(battleLog!));
       }
       battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);

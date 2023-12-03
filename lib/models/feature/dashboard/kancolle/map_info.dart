@@ -54,3 +54,22 @@ class MapInfo with _$MapInfo {
   factory MapInfo.fromJson(Map<String, dynamic> json) =>
       _$MapInfoFromJson(json);
 }
+
+@freezed
+class MapInfoLog with _$MapInfoLog {
+  const factory MapInfoLog({
+    required int id,
+    required int num,
+    required int areaId,
+    required String name,
+  }) = _MapInfoLog;
+
+  factory MapInfoLog.fromJson(Map<String, dynamic> json) =>
+      _$MapInfoLogFromJson(json);
+
+  factory MapInfoLog.fromEntity(MapInfo mapInfo) => MapInfoLog(
+      id: mapInfo.id,
+      num: mapInfo.num,
+      areaId: mapInfo.areaId,
+      name: mapInfo.name);
+}

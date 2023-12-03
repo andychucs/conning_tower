@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:conning_tower/constants.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -103,4 +106,14 @@ Duration parseTimeToDuration(String timeStr) {
   int seconds = int.parse(parts[2]);
 
   return Duration(hours: hours, minutes: minutes, seconds: seconds);
+}
+
+Future<String> getFileSize(String filepath, int decimals) async {
+  var file = File(filepath);
+  int bytes = await file.length();
+  if (bytes <= 0) return "0 B";
+  const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  var i = (log(bytes) / log(1024)).floor();
+  debugPrint('${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}');
+  return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
 }

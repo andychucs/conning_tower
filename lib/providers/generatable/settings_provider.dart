@@ -81,4 +81,8 @@ class Settings extends _$Settings {
     localStorage.setString(key, value);
     rebuild();
   }
+
+  void changeDashboardIndex(int index) {
+    state = state.copyWith(dashboardIndex: index);
+  }
 }

@@ -4,25 +4,25 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "4:2265894510803848721",
-      "lastPropertyId": "4:5304015277603093750",
-      "name": "KancolleBattleLogEntity",
+      "id": "5:332593390095459654",
+      "lastPropertyId": "3:9007309411239632074",
+      "name": "KancolleLogEntity",
       "properties": [
         {
-          "id": "1:7498166620387474385",
+          "id": "1:8473222510133652970",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:8484803732246975237",
+          "id": "2:4739138604652193990",
           "name": "timestamp",
           "type": 6,
           "flags": 8,
-          "indexId": "3:5882881556838287461"
+          "indexId": "4:4508818424622429566"
         },
         {
-          "id": "4:5304015277603093750",
+          "id": "3:9007309411239632074",
           "name": "logStr",
           "type": 9
         }
@@ -30,8 +30,8 @@
       "relations": []
     }
   ],
-  "lastEntityId": "4:2265894510803848721",
-  "lastIndexId": "3:5882881556838287461",
+  "lastEntityId": "5:332593390095459654",
+  "lastIndexId": "4:4508818424622429566",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -39,7 +39,8 @@
   "retiredEntityUids": [
     1508614591597237540,
     5996430219067594460,
-    6545362025166684393
+    6545362025166684393,
+    2265894510803848721
   ],
   "retiredIndexUids": [],
   "retiredPropertyUids": [
@@ -53,7 +54,10 @@
     4745953100383400084,
     2874593659580026339,
     1011897597590538300,
-    8044150685148489263
+    8044150685148489263,
+    7498166620387474385,
+    8484803732246975237,
+    5304015277603093750
   ],
   "retiredRelationUids": [],
   "version": 1
