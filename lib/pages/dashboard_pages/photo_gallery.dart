@@ -142,10 +142,11 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
     } else {
       return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CupertinoActivityIndicator(),
             CupertinoButton(
+              color: CupertinoColors.activeBlue,
               onPressed: () async {
                 await PhotoManager.openSetting();
                 await _fetchImages();

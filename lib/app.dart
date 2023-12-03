@@ -36,7 +36,7 @@ class ConnTowerApp extends ConsumerWidget {
         scaffoldBackgroundColor: CupertinoColors.systemGroupedBackground,
         navigationRailTheme: const NavigationRailThemeData(
           backgroundColor: CupertinoColors.systemGroupedBackground,
-          indicatorColor: CupertinoColors.systemBlue,
+          indicatorColor: CupertinoColors.lightBackgroundGray,
           selectedIconTheme: IconThemeData(color: CupertinoColors.systemBlue),
           selectedLabelTextStyle: TextStyle(color: CupertinoColors.systemBlue),
           unselectedIconTheme: IconThemeData(color: CupertinoColors.inactiveGray),
@@ -47,17 +47,19 @@ class ConnTowerApp extends ConsumerWidget {
           selectedItemColor: CupertinoColors.systemBlue,
           backgroundColor: Color(0xF0F9F9F9),
         ),
+        dividerTheme: DividerThemeData(color: CupertinoColors.secondarySystemFill),
       ),
       darkTheme: ThemeData(
+        useMaterial3: false,
         platform: TargetPlatform.iOS,
         cupertinoOverrideTheme: const CupertinoThemeData(
-            barBackgroundColor: Color(0xD8000000),
-            brightness: Brightness.dark,
-            textTheme: CupertinoTextThemeData(),
+          barBackgroundColor: Color(0xD8000000),
+          brightness: Brightness.dark,
+          textTheme: CupertinoTextThemeData(),
         ),
         navigationRailTheme: const NavigationRailThemeData(
           backgroundColor: CupertinoColors.black,
-          indicatorColor: CupertinoColors.systemBlue,
+          indicatorColor: CupertinoColors.darkBackgroundGray,
           selectedIconTheme: IconThemeData(color: CupertinoColors.systemBlue),
           selectedLabelTextStyle: TextStyle(color: CupertinoColors.systemBlue),
           unselectedIconTheme: IconThemeData(color: CupertinoColors.inactiveGray),
@@ -67,17 +69,18 @@ class ConnTowerApp extends ConsumerWidget {
           unselectedItemColor: CupertinoColors.inactiveGray,
           selectedItemColor: CupertinoColors.systemBlue,
           backgroundColor: Color(0xF0161616),
-              // Values extracted from navigation bar. For toolbar or tabbar the dark color is 0xF0161616.
+          // Values extracted from navigation bar. For toolbar or tabbar the dark color is 0xF0161616.
         ),
         brightness: Brightness.dark,
         primaryColor: CupertinoColors.systemBlue,
         scaffoldBackgroundColor: CupertinoColors.black,
         dialogBackgroundColor: CupertinoColors.black,
         dividerColor: CupertinoColors.systemFill,
+        dividerTheme: DividerThemeData(color: CupertinoColors.systemFill),
       ),
       themeMode: themeMode,
       onGenerateRoute: (_) => MaterialWithModalsPageRoute(
-            builder: (_) => const HomePage(),),
+        builder: (_) => const HomePage(),),
     );
   }
 }
