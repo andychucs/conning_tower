@@ -139,6 +139,7 @@ class KancolleData {
 
     if (model is ReqMapStartEntity) {
       log("Start");
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       battleInfo.clear();
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
