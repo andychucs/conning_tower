@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/data/kcsapi/req/battle/req_practice_midnight_battle_entity.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
@@ -99,6 +100,16 @@ class KancolleData {
     }
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
+
+    if (model is ReqPracticeMidnightBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqPracticeBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeBattle(model.apiData!, squad);
+    }
 
     if (model is ReqBattleMidnightBattleEntity) {
       var squad = squads[model.apiData.apiDeckId - 1];

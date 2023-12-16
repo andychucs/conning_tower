@@ -1,5 +1,6 @@
-import 'package:conning_tower/models/data/kcsapi/battle_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'battle.dart';
 
 part 'req_sortie_battle_entity.freezed.dart';
 
@@ -22,7 +23,7 @@ class ReqSortieBattleEntity with _$ReqSortieBattleEntity {
 @unfreezed
 class ReqSortieBattleApiDataEntity
     with _$ReqSortieBattleApiDataEntity
-    implements SingleVsSingleBaseModel {
+    implements SingleVsSingleBattleData {
   factory ReqSortieBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -45,20 +46,15 @@ class ReqSortieBattleApiDataEntity
     @JsonKey(name: 'api_support_info') required dynamic apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') required int apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen')
-    ReqSortieBattleApiDataApiHougekiEntity?
+    GunFireRoundEntity?
         apiOpeningTaisen, // antisub use same format with gunfire
     @JsonKey(name: 'api_opening_flag') required int apiOpeningFlag,
-    @JsonKey(name: 'api_opening_atack')
-    ReqSortieBattleApiDataApiRaigekiEntity? apiOpeningAtack,
+    @JsonKey(name: 'api_opening_atack') TorpedoRoundEntity? apiOpeningAtack,
     @JsonKey(name: 'api_hourai_flag') required List<int> apiHouraiFlag,
-    @JsonKey(name: 'api_hougeki1')
-    ReqSortieBattleApiDataApiHougekiEntity? apiHougeki1,
-    @JsonKey(name: 'api_hougeki2')
-    ReqSortieBattleApiDataApiHougekiEntity? apiHougeki2,
-    @JsonKey(name: 'api_hougeki3')
-    ReqSortieBattleApiDataApiHougekiEntity? apiHougeki3,
-    @JsonKey(name: 'api_raigeki')
-    ReqSortieBattleApiDataApiRaigekiEntity? apiRaigeki,
+    @JsonKey(name: 'api_hougeki1') GunFireRoundEntity? apiHougeki1,
+    @JsonKey(name: 'api_hougeki2') GunFireRoundEntity? apiHougeki2,
+    @JsonKey(name: 'api_hougeki3') GunFireRoundEntity? apiHougeki3,
+    @JsonKey(name: 'api_raigeki') TorpedoRoundEntity? apiRaigeki,
   }) = _ReqSortieBattleApiDataEntity;
 
   factory ReqSortieBattleApiDataEntity.fromJson(Map<String, dynamic> json) =>
@@ -69,9 +65,8 @@ class ReqSortieBattleApiDataEntity
 class ReqSortieBattleApiDataApiKoukuEntity
     with _$ReqSortieBattleApiDataApiKoukuEntity {
   factory ReqSortieBattleApiDataApiKoukuEntity({
-    @JsonKey(name: 'api_plane_from') required List<List<int>?> apiPlaneFrom,
-    @JsonKey(name: 'api_stage1')
-    required BattleDataAircraftRoundStage1 apiStage1,
+    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
+    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
     @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
     @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
   }) = _ReqSortieBattleApiDataApiKoukuEntity;
@@ -120,46 +115,10 @@ class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
     required List<int> apiEclFlag,
     required List<num> apiFdam,
     required List<num> apiEdam,
+    List<dynamic>? apiFSpList,
+    List<dynamic>? apiESpList,
   }) = _BattleDataAircraftRoundStage3;
 
   factory BattleDataAircraftRoundStage3.fromJson(Map<String, dynamic> json) =>
       _$BattleDataAircraftRoundStage3FromJson(json);
-}
-
-@unfreezed
-class ReqSortieBattleApiDataApiHougekiEntity
-    with _$ReqSortieBattleApiDataApiHougekiEntity
-    implements GunFireRound {
-  factory ReqSortieBattleApiDataApiHougekiEntity({
-    @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
-    @JsonKey(name: 'api_at_list') List<int>? apiAtList,
-    @JsonKey(name: 'api_at_type') List<int>? apiAtType,
-    @JsonKey(name: 'api_df_list') List<List<int>>? apiDfList,
-    @JsonKey(name: 'api_si_list') List<dynamic>? apiSiList,
-    @JsonKey(name: 'api_cl_list') List<List<int>>? apiClList,
-    @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
-  }) = _ReqSortieBattleApiDataApiHougekiEntity;
-
-  factory ReqSortieBattleApiDataApiHougekiEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqSortieBattleApiDataApiHougekiEntityFromJson(json);
-}
-
-@unfreezed
-class ReqSortieBattleApiDataApiRaigekiEntity
-    with _$ReqSortieBattleApiDataApiRaigekiEntity {
-  factory ReqSortieBattleApiDataApiRaigekiEntity({
-    @JsonKey(name: 'api_frai') required List<int> apiFrai,
-    @JsonKey(name: 'api_fcl') required List<num> apiFcl,
-    @JsonKey(name: 'api_fdam') required List<num> apiFdam,
-    @JsonKey(name: 'api_fydam') required List<num> apiFydam,
-    @JsonKey(name: 'api_erai') required List<int> apiErai,
-    @JsonKey(name: 'api_ecl') required List<num> apiEcl,
-    @JsonKey(name: 'api_edam') required List<num> apiEdam,
-    @JsonKey(name: 'api_eydam') required List<num> apiEydam,
-  }) = _ReqSortieBattleApiDataApiRaigekiEntity;
-
-  factory ReqSortieBattleApiDataApiRaigekiEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqSortieBattleApiDataApiRaigekiEntityFromJson(json);
 }

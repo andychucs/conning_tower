@@ -1,5 +1,6 @@
-import 'package:conning_tower/models/data/kcsapi/battle_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'battle.dart';
 
 part 'req_battle_midnight_battle_entity.freezed.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:conning_tower/models/data/kcsapi/battle_data.dart';
+import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
@@ -139,6 +139,68 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
+  void parsePracticeMidnightBattle(
+      ReqPracticeMidnightBattleApiDataEntity data, Squad squad) {
+    clear();
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [squad];
+
+    initDMGMap();
+
+    initShipHPSingleVsSingle(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    setFormation(data.apiFormation);
+
+    gunFireRoundSingleVsSingle(data.apiHougeki!);
+
+    updateShipHP();
+  }
+
+  void parsePracticeBattle(ReqPracticeBattleApiDataEntity data, Squad squad) {
+
+    clear();
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
+
+    initDMGMap();
+
+    initShipHPSingleVsSingle(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    setFormation(data.apiFormation);
+
+    //api_kouku
+    aircraftRound1_1(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRoundSingleVsSingle(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundSingleVsSingle(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag.indexed) {
+      if (flag == 1) {
+        if (index >= 0 && index <= 2) {
+          gunFireRoundSingleVsSingle(getGunFireData(data, index));
+        } else if (index == 3) {
+          torpedoFireRoundSingleVsSingle(data.apiRaigeki!);
+        } else {
+          log("unhandled hourai flag");
+        }
+      }
+    }
+
+    updateShipHP();
+
+  }
+
   void parseReqSortieBattle(ReqSortieBattleApiDataEntity data, Squad squad) {
     clear();
     initSingleEnemySquads(data);
@@ -195,7 +257,7 @@ class BattleInfo with _$BattleInfo {
       if (flag == 1) {
         switch (index) {
           case 0:
-            airSuperiorityFlag = airBattle.apiStage1.apiDispSeiku;
+            airSuperiorityFlag = airBattle.apiStage1?.apiDispSeiku;
             break;
           case 1:
             log("stage2");
@@ -263,7 +325,7 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  GunFireRound getGunFireData(ReqSortieBattleApiDataEntity data, int index) {
+  GunFireRound getGunFireData(SingleVsSingleBattleData data, int index) {
     switch (index) {
       case 0:
         return data.apiHougeki1!;
@@ -289,7 +351,7 @@ class BattleInfo with _$BattleInfo {
   }
 
   void torpedoFireRoundSingleVsSingle(
-      ReqSortieBattleApiDataApiRaigekiEntity data) {
+      TorpedoRoundEntity data) {
     for (final (index, eIndex) in data.apiFrai.indexed) {
       if (eIndex != -1) {
         final actShipHash = getOShip1_1(index).hashCode;
@@ -324,6 +386,8 @@ class BattleInfo with _$BattleInfo {
 
       for (final (index, damage) in damages.indexed) {
         final defIndex = defList[index];
+        // "防御艦のインデックス　[][攻撃対象数]　0基点　単発カットイン攻撃では [防御艦, -1, -1] になる" Not Understand this case yet
+        if (defIndex == -1) continue;
         final defShipHash = defSquads[0].ships[defIndex].hashCode;
         final actShipHash = actSquads[0].ships[actIndex].hashCode;
         dmgTake(defShipHash, damage);
