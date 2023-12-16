@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
@@ -32,9 +33,18 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
     bool combinedFleet = true;
     int crossAxisCount = 1;
     final data = ref.watch(kancolleDataProvider);
+    final kcWikiMapData = ref.watch(kcWikiDataStateProvider).value?.maps;
     final battleInfo = data.battleInfo;
     final useItemData = data.dataInfo.itemInfo;
     final shipInfo = data.dataInfo.shipInfo;
+    String routeName = '';
+    if (kcWikiMapData != null && battleInfo.mapRoute != null  && battleInfo.mapInfo != null) {
+      final map = kcWikiMapData.firstWhere((element) => element.id == battleInfo.mapInfo!.id);
+      final route = map.routes[battleInfo.mapRoute.toString()];
+      if (route != null) {
+        routeName = ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+      }
+    }
 
     var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
 
@@ -150,7 +160,7 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                      "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num} ${battleInfo.mapInfo?.name}"),
+                      "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num} ${battleInfo.mapInfo?.name}$routeName"),
                 ),
               ),
           ],

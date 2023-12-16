@@ -29,6 +29,7 @@ class BattleInfo with _$BattleInfo {
     int? eFormation,
     int? contact,
     MapInfo? mapInfo,
+    int? mapRoute,
   }) = _BattleInfo;
 
   List<Ship> get allShips => inBattleSquads!

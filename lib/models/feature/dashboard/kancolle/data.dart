@@ -135,6 +135,7 @@ class KancolleData {
     if (model is ReqMapNextEntity) {
       log("Next");
       battleInfo.clear();
+      battleInfo.mapRoute = model.apiData.apiNo;
     }
 
     if (model is ReqMapStartEntity) {
@@ -144,6 +145,7 @@ class KancolleData {
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
+      battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.inBattleSquads?.clear();
       battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.toDecoded()]);
     }
