@@ -19,6 +19,15 @@ Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-�
 
 Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。
 
+## MAJOR FEATURE
+
+* KanColle logbook.
+* Battle result preview.
+* Fleet grils info viewer.
+* Expedition mission notification.
+* Teitoku & port info viewer.
+* Screenshot save to os album.
+
 ## 安装 Installation インスタレーション
 
 Donwload :[Home Page](https://conntower.github.io/#/)
