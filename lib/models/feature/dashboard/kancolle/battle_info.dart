@@ -44,6 +44,9 @@ class BattleInfo with _$BattleInfo {
     dropItemId = null;
     dropItemName = null;
     airSuperiorityFlag = null;
+    formation = null;
+    eFormation = null;
+    contact = null;
     enemySquads?.clear();
     dmgMap?.clear();
     dmgTakenMap?.clear();
@@ -60,7 +63,7 @@ class BattleInfo with _$BattleInfo {
       case 4:
         return "T字不利";
       default:
-        return "N/A";
+        return "";
     }
   }
 
@@ -147,8 +150,7 @@ class BattleInfo with _$BattleInfo {
     initShipHPSingleVsSingle(
         data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
 
-    formation = data.apiFormation[0];
-    eFormation = data.apiFormation[1];
+    setFormation(data.apiFormation);
 
     /*
     TODO: api_air_base_injection, api_injection_kouku, api_air_base_attack,
@@ -180,6 +182,12 @@ class BattleInfo with _$BattleInfo {
     }
 
     updateShipHP();
+  }
+
+  void setFormation(List<int> apiFormation) {
+    formation = apiFormation[0];
+    eFormation = apiFormation[1];
+    contact = apiFormation[2];
   }
 
   void aircraftRound1_1(List<int> airStageFlag, ReqSortieBattleApiDataApiKoukuEntity airBattle) {
@@ -220,8 +228,7 @@ class BattleInfo with _$BattleInfo {
     initShipHPSingleVsSingle(
         data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
 
-    formation = data.apiFormation[0];
-    eFormation = data.apiFormation[1];
+    setFormation(data.apiFormation);
 
     gunFireRoundSingleVsSingle(data.apiHougeki!);
 

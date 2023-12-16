@@ -33,17 +33,25 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
     bool combinedFleet = true;
     int crossAxisCount = 1;
     final data = ref.watch(kancolleDataProvider);
-    final kcWikiMapData = ref.watch(kcWikiDataStateProvider).value?.maps;
+    final kcWikiData = ref.watch(kcWikiDataStateProvider);
     final battleInfo = data.battleInfo;
     final useItemData = data.dataInfo.itemInfo;
     final shipInfo = data.dataInfo.shipInfo;
     String routeName = '';
-    if (kcWikiMapData != null && battleInfo.mapRoute != null  && battleInfo.mapInfo != null) {
-      final map = kcWikiMapData.firstWhere((element) => element.id == battleInfo.mapInfo!.id);
-      final route = map.routes[battleInfo.mapRoute.toString()];
-      if (route != null) {
-        routeName = ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
-      }
+    if (battleInfo.mapRoute != null && battleInfo.mapInfo != null) {
+      kcWikiData.when(
+          data: (data) {
+            final kcWikiMapData = data.maps;
+            final map = kcWikiMapData
+                .firstWhere((element) => element.id == battleInfo.mapInfo!.id);
+            final route = map.routes[battleInfo.mapRoute.toString()];
+            if (route != null) {
+              routeName =
+                  ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+            }
+          },
+          error: (e, s) {},
+          loading: () {});
     }
 
     // var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
@@ -144,6 +152,11 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
           middle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              if (battleInfo.result == null)
+                Text(
+                  battleInfo.contactStatus,
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
               if (battleInfo.result != null)
                 Text(
                   '${battleInfo.result}',
@@ -186,8 +199,20 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num} ${battleInfo.mapInfo?.name}$routeName"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
+                      ),
+                      Text(
+                        "${battleInfo.mapInfo?.name}",
+                      ),
+                      Text(
+                        routeName
+                      )
+                    ]
+                  ),
                 ),
               ),
           ],
