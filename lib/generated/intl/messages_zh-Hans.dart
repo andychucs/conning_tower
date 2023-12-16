@@ -221,6 +221,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextShortRange": MessageLookupByLibrary.simpleMessage("短"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("要关闭吗？"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("低速"),
+        "TextStatus": MessageLookupByLibrary.simpleMessage("状态"),
         "TextSunken": MessageLookupByLibrary.simpleMessage("击沉"),
         "TextSuperLongRange": MessageLookupByLibrary.simpleMessage("超长"),
         "TextSuperLongRangePlus": MessageLookupByLibrary.simpleMessage("超长+"),

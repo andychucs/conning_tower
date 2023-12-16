@@ -101,6 +101,20 @@ class KancolleData {
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+    if (model is ReqCombinedBattleResultEntity) {
+      battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
+    }
+
+    if (model is ReqSortieLdAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
+    }
+
     if (model is ReqPracticeMidnightBattleEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
@@ -136,6 +150,10 @@ class KancolleData {
       dataInfo.mapAreaInfo = {
         for (var item in model.apiData.apiMstMaparea)
           item.apiId: MapArea.fromApi(item, model.apiData.apiMstMapinfo)
+      };
+      dataInfo.slotItemInfo = {
+        for (var item in model.apiData.apiMstSlotitem)
+          item.apiId: item
       };
     }
 

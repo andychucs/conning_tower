@@ -39,6 +39,7 @@ class ReqSortieBattleApiDataEntity
     @JsonKey(name: 'api_smoke_type') required int apiSmokeType,
     @JsonKey(name: 'api_midnight_flag') required int apiMidnightFlag,
     @JsonKey(name: 'api_search') required List<int> apiSearch,
+    @JsonKey(name: 'api_air_base_attack') List<AirBaseAttackRound?>? apiAirBaseAttack,
     @JsonKey(name: 'api_stage_flag') required List<int> apiStageFlag,
     @JsonKey(name: 'api_kouku')
     required ReqSortieBattleApiDataApiKoukuEntity apiKouku,
@@ -63,7 +64,7 @@ class ReqSortieBattleApiDataEntity
 
 @unfreezed
 class ReqSortieBattleApiDataApiKoukuEntity
-    with _$ReqSortieBattleApiDataApiKoukuEntity {
+    with _$ReqSortieBattleApiDataApiKoukuEntity implements AircraftRound{
   factory ReqSortieBattleApiDataApiKoukuEntity({
     @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
     @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
@@ -76,49 +77,4 @@ class ReqSortieBattleApiDataApiKoukuEntity
       _$ReqSortieBattleApiDataApiKoukuEntityFromJson(json);
 }
 
-@unfreezed
-class BattleDataAircraftRoundStage1 with _$BattleDataAircraftRoundStage1 {
-  factory BattleDataAircraftRoundStage1({
-    required int apiFCount,
-    required int apiFLostcount,
-    required int apiECount,
-    required int apiELostcount,
-    required int apiDispSeiku,
-    required List<int> apiTouchPlane,
-  }) = _BattleDataAircraftRoundStage1;
 
-  factory BattleDataAircraftRoundStage1.fromJson(Map<String, dynamic> json) =>
-      _$BattleDataAircraftRoundStage1FromJson(json);
-}
-
-@unfreezed
-class BattleDataAircraftRoundStage2 with _$BattleDataAircraftRoundStage2 {
-  factory BattleDataAircraftRoundStage2({
-    required int apiFCount,
-    required int apiFLostcount,
-    required int apiECount,
-    required int apiELostcount,
-  }) = _BattleDataAircraftRoundStage2;
-
-  factory BattleDataAircraftRoundStage2.fromJson(Map<String, dynamic> json) =>
-      _$BattleDataAircraftRoundStage2FromJson(json);
-}
-
-@unfreezed
-class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
-  factory BattleDataAircraftRoundStage3({
-    required List<int> apiFraiFlag,
-    required List<int> apiEraiFlag,
-    required List<int> apiFbakFlag,
-    required List<int> apiEbakFlag,
-    required List<int> apiFclFlag,
-    required List<int> apiEclFlag,
-    required List<num> apiFdam,
-    required List<num> apiEdam,
-    List<dynamic>? apiFSpList,
-    List<dynamic>? apiESpList,
-  }) = _BattleDataAircraftRoundStage3;
-
-  factory BattleDataAircraftRoundStage3.fromJson(Map<String, dynamic> json) =>
-      _$BattleDataAircraftRoundStage3FromJson(json);
-}

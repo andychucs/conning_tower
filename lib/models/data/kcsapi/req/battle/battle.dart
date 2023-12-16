@@ -8,6 +8,8 @@ export 'req_practice_battle_entity.dart';
 export 'req_sortie_battle_entity.dart';
 export 'req_sortie_battle_result_entity.dart';
 export 'req_practice_midnight_battle_entity.dart';
+export 'req_sortie_ld_airbattle_entity.dart';
+export 'req_combined_battle_result_entity.dart';
 
 part 'battle.freezed.dart';
 
@@ -20,6 +22,16 @@ abstract class GunFireRound {
   late List<dynamic>? apiSiList;
   late List<List<int>>? apiClList;
   late List<List<num>>? apiDamage;
+}
+
+abstract class AircraftRound {
+  late BattleDataAircraftRoundStage1? apiStage1;
+  late BattleDataAircraftRoundStage2? apiStage2;
+  late BattleDataAircraftRoundStage3? apiStage3;
+}
+
+abstract class AircraftRoundDoubleEnemy extends AircraftRound {
+  late BattleDataAircraftRoundStage3? apiStage3Combined;
 }
 
 abstract class SingleVsSingleBaseModel {
@@ -37,6 +49,13 @@ abstract class SingleVsSingleBattleData extends SingleVsSingleBaseModel {
   late GunFireRoundEntity? apiHougeki1;
   late GunFireRoundEntity? apiHougeki2;
   late GunFireRoundEntity? apiHougeki3;
+}
+
+abstract class SingleVsDoubleBattleData extends SingleVsSingleBaseModel {
+  late List<int>? apiShipKeCombined;
+  late List<int>? apiShipLvCombined;
+  late List<int>? apiENowhpsCombined;
+  late List<int>? apiEMaxhpsCombined;
 }
 
 @unfreezed
@@ -70,4 +89,82 @@ class TorpedoRoundEntity with _$TorpedoRoundEntity {
 
   factory TorpedoRoundEntity.fromJson(Map<String, dynamic> json) =>
       _$TorpedoRoundEntityFromJson(json);
+}
+
+@unfreezed
+class BattleDataAircraftRoundStage1 with _$BattleDataAircraftRoundStage1 {
+  factory BattleDataAircraftRoundStage1({
+    required int? apiFCount,
+    required int? apiFLostcount,
+    required int? apiECount,
+    required int? apiELostcount,
+    required int? apiDispSeiku,
+    required List<int>? apiTouchPlane,
+  }) = _BattleDataAircraftRoundStage1;
+
+  factory BattleDataAircraftRoundStage1.fromJson(Map<String, dynamic> json) =>
+      _$BattleDataAircraftRoundStage1FromJson(json);
+}
+
+@unfreezed
+class BattleDataAircraftRoundStage2 with _$BattleDataAircraftRoundStage2 {
+  factory BattleDataAircraftRoundStage2({
+    required int? apiFCount,
+    required int? apiFLostcount,
+    required int? apiECount,
+    required int? apiELostcount,
+  }) = _BattleDataAircraftRoundStage2;
+
+  factory BattleDataAircraftRoundStage2.fromJson(Map<String, dynamic> json) =>
+      _$BattleDataAircraftRoundStage2FromJson(json);
+}
+
+@unfreezed
+class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
+  factory BattleDataAircraftRoundStage3({
+    required List<int>? apiFraiFlag,
+    required List<int>? apiEraiFlag,
+    required List<int>? apiFbakFlag,
+    required List<int>? apiEbakFlag,
+    required List<int>? apiFclFlag,
+    required List<int>? apiEclFlag,
+    required List<num>? apiFdam,
+    required List<num>? apiEdam,
+    List<dynamic>? apiFSpList,
+    List<dynamic>? apiESpList,
+  }) = _BattleDataAircraftRoundStage3;
+
+  factory BattleDataAircraftRoundStage3.fromJson(Map<String, dynamic> json) =>
+      _$BattleDataAircraftRoundStage3FromJson(json);
+}
+
+@unfreezed
+class AirBaseAttackRound
+    with _$AirBaseAttackRound {
+  factory AirBaseAttackRound({
+    @JsonKey(name: 'api_base_id') int? apiBaseId,
+    @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
+    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
+    @JsonKey(name: 'api_squadron_plane') List<AirBasePlane?>? apiSquadronPlane,
+    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
+    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
+    @JsonKey(name: 'api_stage3_combined')
+    BattleDataAircraftRoundStage3? apiStage3Combined,
+  }) = _AirBaseAttackRound;
+
+  factory AirBaseAttackRound.fromJson(
+      Map<String, dynamic> json) =>
+      _$AirBaseAttackRoundFromJson(json);
+}
+
+@unfreezed
+class AirBasePlane with _$AirBasePlane {
+  factory AirBasePlane({
+    @JsonKey(name: 'api_mst_id') int? apiMstId,
+    @JsonKey(name: 'api_count') int? apiCount,
+  }) = _AirBasePlane;
+
+  factory AirBasePlane.fromJson(Map<String, dynamic> json) =>
+      _$AirBasePlaneFromJson(json);
 }

@@ -42,7 +42,7 @@ class ReqPracticeBattleApiDataEntity
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku') ReqSortieBattleApiDataApiKoukuEntity? apiKouku,
+    @JsonKey(name: 'api_kouku') ReqPracticeBattleApiDataApiKoukuEntity? apiKouku,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,
     @JsonKey(name: 'api_opening_flag') int? apiOpeningFlag,
@@ -56,4 +56,19 @@ class ReqPracticeBattleApiDataEntity
 
   factory ReqPracticeBattleApiDataEntity.fromJson(Map<String, dynamic> json) =>
       _$ReqPracticeBattleApiDataEntityFromJson(json);
+}
+
+@unfreezed
+class ReqPracticeBattleApiDataApiKoukuEntity
+    with _$ReqPracticeBattleApiDataApiKoukuEntity implements AircraftRound{
+  factory ReqPracticeBattleApiDataApiKoukuEntity({
+    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
+    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
+    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
+  }) = _ReqPracticeBattleApiDataApiKoukuEntity;
+
+  factory ReqPracticeBattleApiDataApiKoukuEntity.fromJson(
+      Map<String, dynamic> json) =>
+      _$ReqPracticeBattleApiDataApiKoukuEntityFromJson(json);
 }

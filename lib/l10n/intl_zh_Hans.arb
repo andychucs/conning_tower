@@ -290,6 +290,8 @@
   "@TextShouldClose": {},
   "TextSlowSpeed": "低速",
   "@TextSlowSpeed": {},
+  "TextStatus": "状态",
+  "@TextStatus": {},
   "TextSunken": "击沉",
   "@TextSunken": {},
   "TextSuperLongRange": "超长",
