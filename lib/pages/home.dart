@@ -7,6 +7,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
 import 'package:conning_tower/pages/dashboard.dart';
@@ -14,6 +15,7 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/pages/webview.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
@@ -157,13 +159,11 @@ class HomePageState extends ConsumerState<HomePage> {
   };
 
   void enableListener(WidgetRef ref, BuildContext context) {
-    // ref.listen(kcwikiDataStateProvider,
-    //     (previous, AsyncValue<KcwikiData> next) {
-    //   log("kcwiki Loading:${next.isLoading}");
-    //   ref
-    //       .watch(kancolleDataProvider.notifier)
-    //       .update((state) => state.copyWith(kcwikiData: next.value));
-    // });
+    // listen the provider to make it not disposed
+    ref.listen(kcWikiDataStateProvider,
+        (previous, AsyncValue<KcWikiData> next) {
+      log("kcwiki rebuild");
+    });
 
     ref.listen(rawDataProvider, (previous, RawData next) {
       debugPrint('listen.rawDataProvider');

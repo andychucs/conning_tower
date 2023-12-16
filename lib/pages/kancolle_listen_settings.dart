@@ -231,7 +231,7 @@ class FleetInfoPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final kcwikiData = ref.watch(kcwikiDataStateProvider);
+    final kcWikiData = ref.watch(kcWikiDataStateProvider);
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
@@ -241,7 +241,7 @@ class FleetInfoPage extends ConsumerWidget {
         previousPageTitle: previousPageTitle,
         trailing: GestureDetector(
           onTap: () async {
-            await ref.watch(kcwikiDataStateProvider.notifier).fetchData();
+            await ref.watch(kcWikiDataStateProvider.notifier).fetchData();
           },
           child: const Icon(CupertinoIcons.refresh),
         ),
@@ -256,7 +256,7 @@ class FleetInfoPage extends ConsumerWidget {
                     children: [
                       CupertinoListTile(
                         title: Text(S.of(context).ShipData),
-                        additionalInfo: kcwikiData.when(
+                        additionalInfo: kcWikiData.when(
                           data: (data) {
                             return Text("${data.ships.length}");
                           },
@@ -265,8 +265,8 @@ class FleetInfoPage extends ConsumerWidget {
                         ),
                         trailing: const CupertinoListTileChevron(),
                         onTap: () {
-                          if (kcwikiData.hasValue) {
-                            final ships = kcwikiData.value!.ships;
+                          if (kcWikiData.hasValue) {
+                            final ships = kcWikiData.value!.ships;
                             navigatorToCupertino(
                                 context, ShipDataItemsList(ships: ships));
                           }
