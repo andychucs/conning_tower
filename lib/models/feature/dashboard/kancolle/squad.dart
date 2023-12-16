@@ -23,7 +23,7 @@ class Squad with _$Squad {
       var maxHP = enemyMaxHP[i];
       ships.add(Ship(uid: -1, shipId: id, level: level, nowHP: nowHP, maxHP: maxHP));
     }
-    return Squad(id: 1, name: '', ships: ships);
+    return Squad(id: 1, name: '敵艦隊', ships: ships);
   }
 
   factory Squad.fromJson(Map<String, dynamic> json) =>

@@ -46,19 +46,20 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
       }
     }
 
-    var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
+    // var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
 
     var items = [];
 
-    for (final squad in squads) {
+    for (final squad in [...?battleInfo.inBattleSquads]) {
       items.add(CupertinoListSection.insetGrouped(
         margin: _kBattleInfoGridMargin,
-        header: squads.first == squad
+        header: battleInfo.inBattleSquads?.first == squad
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    CupertinoListSectionDescription(squad.name),
+                    CupertinoListSectionDescription(
+                        '${squad.name} ${battleInfo.ourFormation}'),
                     GestureDetector(
                       child: Icon(
                         CupertinoIcons.exclamationmark_circle,
@@ -90,6 +91,32 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                                 ],
                               ))),
                     ),
+                  ])
+            : CupertinoListSectionDescription(squad.name),
+        children: List.generate(
+            squad.ships.length,
+            (index) => ShipInfoInBattle(
+                  ship: squad.ships[index],
+                  name: squad.ships[index].name ??
+                      shipInfo?[squad.ships[index].shipId]?.apiName ??
+                      'N/A',
+                  dmg: battleInfo.dmgMap?[squad.ships[index].hashCode] ?? 0,
+                  dmgTaken:
+                      battleInfo.dmgTakenMap?[squad.ships[index].hashCode] ?? 0,
+                  useEmoji: ref.read(settingsProvider).kcSparkEmoji,
+                )),
+      ));
+    }
+    for (final squad in [...?battleInfo.enemySquads]) {
+      items.add(CupertinoListSection.insetGrouped(
+        margin: _kBattleInfoGridMargin,
+        header: battleInfo.enemySquads?.first == squad
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    CupertinoListSectionDescription(
+                        '${squad.name} ${battleInfo.enemyFormation}'),
                   ])
             : CupertinoListSectionDescription(squad.name),
         children: List.generate(

@@ -65,11 +65,11 @@ class BattleInfo with _$BattleInfo {
   }
 
   String get ourFormation {
-    return _getFormation(formation!);
+    return _getFormation(formation ?? 0);
   }
 
   String get enemyFormation {
-    return _getFormation(eFormation!);
+    return _getFormation(eFormation ?? 0);
   }
 
   String _getFormation(int flag) {
@@ -95,7 +95,7 @@ class BattleInfo with _$BattleInfo {
         formation = "警戒陣";
         break;
       default:
-        formation = "N/A";
+        formation = "";
     }
 
     return formation;
@@ -146,6 +146,9 @@ class BattleInfo with _$BattleInfo {
 
     initShipHPSingleVsSingle(
         data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    formation = data.apiFormation[0];
+    eFormation = data.apiFormation[1];
 
     /*
     TODO: api_air_base_injection, api_injection_kouku, api_air_base_attack,
@@ -216,6 +219,9 @@ class BattleInfo with _$BattleInfo {
 
     initShipHPSingleVsSingle(
         data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    formation = data.apiFormation[0];
+    eFormation = data.apiFormation[1];
 
     gunFireRoundSingleVsSingle(data.apiHougeki!);
 
