@@ -290,6 +290,8 @@
   "@TextShouldClose": {},
   "TextSlowSpeed": "低速",
   "@TextSlowSpeed": {},
+  "TextStatus": "状態",
+  "@TextStatus": {},
   "TextSunken": "撃沈",
   "@TextSunken": {},
   "TextSuperLongRange": "超長",

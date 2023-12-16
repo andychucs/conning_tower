@@ -3,15 +3,18 @@ import 'package:conning_tower/models/data/kcwiki/ship.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'map_data.dart';
+
 part 'kcwiki_data.freezed.dart';
 part 'kcwiki_data.g.dart';
 
 @freezed
-class KcwikiData with _$KcwikiData {
-  const factory KcwikiData({
+class KcWikiData with _$KcWikiData {
+  const factory KcWikiData({
     required List<Ship> ships,
-  }) = _KcwikiData;
+    required List<MapData> maps,
+  }) = _KcWikiData;
 
-  factory KcwikiData.fromJson(Map<String, dynamic> json) =>
-      _$KcwikiDataFromJson(json);
+  factory KcWikiData.fromJson(Map<String, dynamic> json) =>
+      _$KcWikiDataFromJson(json);
 }

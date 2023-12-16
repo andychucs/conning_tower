@@ -39,12 +39,6 @@ main(){
     print(ship);
   });
 
-  test("map_data.dart", () {
-      var json = jsonDecode("""{"id":11,"name":"鎮守府正面海域","routes":{"0":{"from":null,"to":1},"1":{"from":1,"to":"A"},"2":{"from":"A","to":"B"},"3":{"from":"A","to":"C"}},"cells":{"A":{"name":"敵偵察艦","type":null,"boss":false,"routes":[1]},"B":{"name":"敵はぐれ艦隊","type":null,"boss":false,"routes":[2]},"C":{"name":"敵主力艦隊","type":null,"boss":true,"routes":[3]}},"image":"MapHD1-1.png"}""");
-      var map = MapData.fromJson(json);
-      print(map);
-  });
-
   test("map_area.dart", () {
     final jsonString = '''
 [

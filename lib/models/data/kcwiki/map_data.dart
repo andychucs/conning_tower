@@ -10,7 +10,7 @@ class MapData with _$MapData {
     required String name,
     required Map<String, Route> routes,
     required Map<String, Cell> cells,
-    required String image,
+    String? image,
   }) = _MapData;
 
   factory MapData.fromJson(Map<String, dynamic> json) =>
@@ -30,7 +30,7 @@ class Route with _$Route {
 @freezed
 class Cell with _$Cell {
   factory Cell({
-    required String name,
+    String? name,
     dynamic type,
     required bool boss,
     required List<int> routes,

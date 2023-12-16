@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/data/kcsapi/req/battle/req_practice_midnight_battle_entity.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
@@ -90,15 +91,39 @@ class KancolleData {
     if (isBattleAPI(path)) {
       if (!ref.read(settingsProvider).kcBattleReportEnable) return;
       if (battleLog != null) {
-        battleLog?.data.add(rawData.toDecoded());
+        battleLog?.data.add(rawData.decoded);
       }
     }
 
     if (path == GetMemberShipDeckEntity.source) {
-      battleLog?.data.add(rawData.toDecoded());
+      battleLog?.data.add(rawData.decoded);
     }
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
+
+    if (model is ReqCombinedBattleResultEntity) {
+      battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
+    }
+
+    if (model is ReqSortieLdAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqPracticeMidnightBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqPracticeBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeBattle(model.apiData!, squad);
+    }
 
     if (model is ReqBattleMidnightBattleEntity) {
       var squad = squads[model.apiData.apiDeckId - 1];
@@ -126,6 +151,10 @@ class KancolleData {
         for (var item in model.apiData.apiMstMaparea)
           item.apiId: MapArea.fromApi(item, model.apiData.apiMstMapinfo)
       };
+      dataInfo.slotItemInfo = {
+        for (var item in model.apiData.apiMstSlotitem)
+          item.apiId: item
+      };
     }
 
     if (model is ReqMissionStartEntity) {
@@ -135,6 +164,7 @@ class KancolleData {
     if (model is ReqMapNextEntity) {
       log("Next");
       battleInfo.clear();
+      battleInfo.mapRoute = model.apiData.apiNo;
     }
 
     if (model is ReqMapStartEntity) {
@@ -144,8 +174,9 @@ class KancolleData {
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
+      battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.inBattleSquads?.clear();
-      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.toDecoded()]);
+      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
     }
 
     if (model is GetMemberDeckEntity) {

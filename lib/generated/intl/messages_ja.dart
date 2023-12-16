@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextShortRange": MessageLookupByLibrary.simpleMessage("短"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("閉じてよろしいですか？"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("低速"),
+        "TextStatus": MessageLookupByLibrary.simpleMessage("状態"),
         "TextSunken": MessageLookupByLibrary.simpleMessage("撃沈"),
         "TextSuperLongRange": MessageLookupByLibrary.simpleMessage("超長"),
         "TextSuperLongRangePlus": MessageLookupByLibrary.simpleMessage("超長+"),

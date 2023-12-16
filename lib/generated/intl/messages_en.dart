@@ -255,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextShouldClose":
             MessageLookupByLibrary.simpleMessage("Should Close?"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("Slow"),
+        "TextStatus": MessageLookupByLibrary.simpleMessage("Status"),
         "TextSunken": MessageLookupByLibrary.simpleMessage("Sunken"),
         "TextSuperLongRange":
             MessageLookupByLibrary.simpleMessage("Super long"),

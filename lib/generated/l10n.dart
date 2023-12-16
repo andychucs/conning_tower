@@ -1500,6 +1500,16 @@ class S {
     );
   }
 
+  /// `Status`
+  String get TextStatus {
+    return Intl.message(
+      'Status',
+      name: 'TextStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sunken`
   String get TextSunken {
     return Intl.message(

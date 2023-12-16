@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/data/kcsapi/req/sortie/req_sortie_battle_entity.dart';
+import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
+import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
@@ -20,23 +22,40 @@ class LogDetailBattle extends ConsumerWidget {
   const LogDetailBattle({
     super.key,
     required this.log,
+    this.kcWikiData,
   });
 
   final KancolleLogEntity log;
+  final KcWikiData? kcWikiData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var battleData = KancolleBattleLog.fromJson(jsonDecode(log.logStr));
     var squads = battleData.squads;
-    // var runtimeData = ref.watch(kancolleDataProvider);
+    final runtimeData = ref.watch(kancolleDataProvider);
     // final shipInfo = runtimeData.dataInfo.shipInfo;
-
+    final mapArea =
+        runtimeData.dataInfo.mapAreaInfo?[battleData.mapInfo.id ~/ 10];
+    var map = mapArea?.map
+        .firstWhere((element) => element.id == battleData.mapInfo.id);
+    if (map == null) {
+      final kcMapData = kcWikiData?.maps
+          .firstWhere((element) => element.id == battleData.mapInfo.id);
+      if (kcMapData != null) {
+        map = MapInfo(
+            id: kcMapData.id,
+            num: kcMapData.id ~/ 10,
+            areaId: kcMapData.id % 10,
+            name: kcMapData.name,
+            operationName: '');
+      }
+    }
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.systemGroupedBackground,
-        middle: Text(battleData.mapInfo.name),
+        middle: Text(map?.name ?? ''),
         previousPageTitle: "戦闘",
         trailing: GestureDetector(
           onTap: () async {
@@ -59,34 +78,34 @@ class LogDetailBattle extends ConsumerWidget {
                   String path = log.source.split("kcsapi").last;
                   dynamic model = DataModelAdapter().parseData(path, log.data);
 
-                  if (model is ReqSortieBattleEntity || model is ReqBattleMidnightBattleEntity) {
-                    var squad = Squad.fromJson(squads[model.apiData.apiDeckId - 1].toJson());
+                  if (model is ReqSortieBattleEntity ||
+                      model is ReqBattleMidnightBattleEntity) {
+                    var squad = Squad.fromJson(
+                        squads[model.apiData.apiDeckId - 1].toJson());
                     for (var (index, element) in squad.ships.indexed) {
                       element.nowHP = model.apiData.apiFNowhps[index];
                     }
                     return BattleLogFleet(squad: squad);
                   }
-                  
+
                   if (model is ReqSortieBattleResultEntity) {
                     String? dropName = model.apiData.apiGetShip?.apiShipName;
-                    
+
                     return CupertinoListSection.insetGrouped(
                       children: [
                         CupertinoListTile(
-                            title: Text(model.apiData.apiWinRank),
-                          additionalInfo: dropName != null ? Text("$dropName GET!") : null,
+                          title: Text(model.apiData.apiWinRank),
+                          additionalInfo:
+                              dropName != null ? Text("$dropName GET!") : null,
                         ),
                       ],
                     );
                   }
 
                   return CupertinoListSection.insetGrouped(
-                    children: [
-                      CupertinoListTile(title: Text(path))
-                    ],
+                    children: [CupertinoListTile(title: Text(path))],
                   );
                 }),
-
               ]),
             ),
           ]),
@@ -121,11 +140,8 @@ class BattleLogFleet extends StatelessWidget {
                   textAlign: TextAlign.end,
                 )),
             subtitle: LinearPercentIndicator(
-              backgroundColor:
-              CupertinoDynamicColor.resolve(
-                  CupertinoColors
-                      .systemGroupedBackground,
-                  context),
+              backgroundColor: CupertinoDynamicColor.resolve(
+                  CupertinoColors.systemGroupedBackground, context),
               animation: true,
               animationDuration: 500,
               barRadius: const Radius.circular(2.5),
@@ -135,11 +151,8 @@ class BattleLogFleet extends StatelessWidget {
               progressColor: ship.damageColor,
             ),
             trailing: CircularPercentIndicator(
-              backgroundColor:
-              CupertinoDynamicColor.resolve(
-                  CupertinoColors
-                      .systemGroupedBackground,
-                  context),
+              backgroundColor: CupertinoDynamicColor.resolve(
+                  CupertinoColors.systemGroupedBackground, context),
               reverse: true,
               radius: 12.0,
               lineWidth: 5.0,

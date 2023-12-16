@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
@@ -32,23 +33,41 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
     bool combinedFleet = true;
     int crossAxisCount = 1;
     final data = ref.watch(kancolleDataProvider);
+    final kcWikiData = ref.watch(kcWikiDataStateProvider);
     final battleInfo = data.battleInfo;
     final useItemData = data.dataInfo.itemInfo;
     final shipInfo = data.dataInfo.shipInfo;
+    String routeName = '';
+    if (battleInfo.mapRoute != null && battleInfo.mapInfo != null) {
+      kcWikiData.when(
+          data: (data) {
+            final kcWikiMapData = data.maps;
+            final map = kcWikiMapData
+                .firstWhere((element) => element.id == battleInfo.mapInfo!.id);
+            final route = map.routes[battleInfo.mapRoute.toString()];
+            if (route != null) {
+              routeName =
+                  ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+            }
+          },
+          error: (e, s) {},
+          loading: () {});
+    }
 
-    var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
+    // var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
 
     var items = [];
 
-    for (final squad in squads) {
+    for (final squad in [...?battleInfo.inBattleSquads]) {
       items.add(CupertinoListSection.insetGrouped(
         margin: _kBattleInfoGridMargin,
-        header: squads.first == squad
+        header: battleInfo.inBattleSquads?.first == squad
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    CupertinoListSectionDescription(squad.name),
+                    CupertinoListSectionDescription(
+                        '${squad.name} ${battleInfo.ourFormation}'),
                     GestureDetector(
                       child: Icon(
                         CupertinoIcons.exclamationmark_circle,
@@ -96,6 +115,32 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                 )),
       ));
     }
+    for (final squad in [...?battleInfo.enemySquads]) {
+      items.add(CupertinoListSection.insetGrouped(
+        margin: _kBattleInfoGridMargin,
+        header: battleInfo.enemySquads?.first == squad
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    CupertinoListSectionDescription(
+                        '${squad.name} ${battleInfo.enemyFormation}'),
+                  ])
+            : CupertinoListSectionDescription(squad.name),
+        children: List.generate(
+            squad.ships.length,
+            (index) => ShipInfoInBattle(
+                  ship: squad.ships[index],
+                  name: squad.ships[index].name ??
+                      shipInfo?[squad.ships[index].shipId]?.apiName ??
+                      'N/A',
+                  dmg: battleInfo.dmgMap?[squad.ships[index].hashCode] ?? 0,
+                  dmgTaken:
+                      battleInfo.dmgTakenMap?[squad.ships[index].hashCode] ?? 0,
+                  useEmoji: ref.read(settingsProvider).kcSparkEmoji,
+                )),
+      ));
+    }
 
     return SafeArea(
       child: CupertinoPageScaffold(
@@ -107,6 +152,11 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
           middle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              if (battleInfo.result == null)
+                Text(
+                  battleInfo.contactStatus,
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
               if (battleInfo.result != null)
                 Text(
                   '${battleInfo.result}',
@@ -149,8 +199,20 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num} ${battleInfo.mapInfo?.name}"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
+                      ),
+                      Text(
+                        "${battleInfo.mapInfo?.name}",
+                      ),
+                      Text(
+                        routeName
+                      )
+                    ]
+                  ),
                 ),
               ),
           ],

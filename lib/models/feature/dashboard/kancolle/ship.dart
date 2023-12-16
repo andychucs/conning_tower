@@ -91,8 +91,8 @@ class Ship with _$Ship {
   }
 
   Color? get damageColor {
-    if (nowHP <= maxHP * 0.25) return const Color(0xFFEF471C);
-    if (nowHP <= maxHP * 0.50) return const Color(0xFFF06F23);
+    if (nowHP <= maxHP * 0.25) return const Color(0xFFDE3C14);
+    if (nowHP <= maxHP * 0.50) return const Color(0xFFFFB616);
     if (nowHP <= maxHP * 0.75) return const Color(0xFFD0FD3D);
     return Colors.lightGreenAccent[700];
   }

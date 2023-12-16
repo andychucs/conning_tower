@@ -215,7 +215,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                 HapticFeedback.heavyImpact();
                 localStorage.clear();
                 ref.watch(taskUtilProvider.notifier).deleteLocalTasks();
-                ref.watch(kcwikiDataStateProvider.notifier).deleteLocalFile();
+                ref.watch(kcWikiDataStateProvider.notifier).deleteLocalFile();
                 ref.watch(settingsProvider.notifier).rebuild();
               },
             ),
