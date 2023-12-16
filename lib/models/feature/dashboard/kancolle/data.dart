@@ -91,12 +91,12 @@ class KancolleData {
     if (isBattleAPI(path)) {
       if (!ref.read(settingsProvider).kcBattleReportEnable) return;
       if (battleLog != null) {
-        battleLog?.data.add(rawData.toDecoded());
+        battleLog?.data.add(rawData.decoded);
       }
     }
 
     if (path == GetMemberShipDeckEntity.source) {
-      battleLog?.data.add(rawData.toDecoded());
+      battleLog?.data.add(rawData.decoded);
     }
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
@@ -158,7 +158,7 @@ class KancolleData {
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.inBattleSquads?.clear();
-      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.toDecoded()]);
+      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
     }
 
     if (model is GetMemberDeckEntity) {

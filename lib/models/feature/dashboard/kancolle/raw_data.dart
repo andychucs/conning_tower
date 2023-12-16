@@ -19,10 +19,8 @@ class RawData with _$RawData {
   factory RawData.fromJson(Map<String, dynamic> json) =>
       _$RawDataFromJson(json);
 
-  DataLogEntity toDecoded() {
-    return DataLogEntity(
-        timestamp: timestamp, source: source, data: jsonDecode(data));
-  }
+  DataLogEntity get decoded => DataLogEntity(
+      timestamp: timestamp, source: source, data: jsonDecode(data));
 }
 
 @freezed
