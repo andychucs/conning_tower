@@ -269,7 +269,7 @@ class KancolleData {
     } catch (e, s) {
       FirebaseCrashlytics.instance.log(source);
       FirebaseCrashlytics.instance.log(data);
-      FirebaseCrashlytics.instance.recordError(e, s);
+      FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error");
       if (kDebugMode) {
         rethrow;
       }
