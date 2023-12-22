@@ -248,7 +248,7 @@ class KancolleData {
     }
   }
 
-  Future<KancolleData> parseWith(RawData rawData) async {
+  KancolleData parseWith(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
     late KancolleData newData;
@@ -267,9 +267,9 @@ class KancolleData {
 
       if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
-      await FirebaseCrashlytics.instance.log(source);
-      await FirebaseCrashlytics.instance.log(data);
-      await FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error");
+      FirebaseCrashlytics.instance.log(source);
+      FirebaseCrashlytics.instance.log(data);
+      FirebaseCrashlytics.instance.recordError(e, s);
       if (kDebugMode) {
         rethrow;
       }
