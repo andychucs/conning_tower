@@ -189,8 +189,8 @@ class HomePageState extends ConsumerState<HomePage> {
               barrierDismissible: false,
               builder: (builder) {
                 return AlertDialog.adaptive(
-                  title: Text(next["title"]!),
-                  content: SelectableText(next["content"]!),
+                  title: Text(next["title"] ?? "empty error title"),
+                  content: SelectableText(next["content"] ?? "empty error content"),
                   actions: [
                     adaptiveAction(
                       context: context,
