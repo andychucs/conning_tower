@@ -19,6 +19,7 @@ import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -266,6 +267,9 @@ class KancolleData {
 
       if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
+      FirebaseCrashlytics.instance.log(source);
+      FirebaseCrashlytics.instance.log(data);
+      FirebaseCrashlytics.instance.recordError(e, s);
       if (kDebugMode) {
         rethrow;
       }
