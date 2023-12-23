@@ -1,5 +1,6 @@
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/main.dart';
+import 'package:conning_tower/providers/dashboard_controller.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,22 +27,17 @@ class CupertinoPickerView extends ConsumerStatefulWidget {
 
 class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
   late int _selectIndex;
-  FixedExtentScrollController scrollController = FixedExtentScrollController();
 
   @override
   Widget build(BuildContext context) {
     _selectIndex = ref.watch(settingsProvider).dashboardIndex;
-    Future(() {
-      if (scrollController.selectedItem != _selectIndex) {
-        scrollController.jumpToItem(_selectIndex);
-      }
-    });
     if (_selectIndex < 0) {
       _selectIndex = 0;
     }
     if (_selectIndex >= widget.items.length) {
       _selectIndex = widget.items.length - 1;
     }
+    final scrollController = ref.watch(dashboardControllerProvider(_selectIndex));
     return OrientationBuilder(
       builder: (context, orientation) {
         return SafeArea(
