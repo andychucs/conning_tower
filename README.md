@@ -36,10 +36,10 @@ APK for Android, IPA for for iOS/iPadOS/macOS(as iPad) need sideloading.
 
 |  Device   | Require  |
 |  ----  | ----  |
-| iPhone  | Requires iOS 11.0 or later. |
-| iPad  | Requires iPadOS 11.0 or later. |
-| iPod touch | Requires iOS 11.0 or later.|
-| Mac | Requires macOS 11.0 or later and a Mac with Apple M1 chip or later. |
+| iPhone  | Requires iOS 12.0 or later. |
+| iPad  | Requires iPadOS 12.0 or later. |
+| iPod touch | Requires iOS 12.0 or later.|
+| Mac | Requires macOS 12.0 or later and a Mac with Apple M1 chip or later. |
 | Android | Requires Android 4.4 (API level 19) or later. |
 
 ## 本地化 地域化 Localization 
@@ -54,7 +54,7 @@ Also welcome other language. Add new file as `lib/l10n/intl_<language code>.arb`
 
 Conning Tower is design to play KanColle on single app include assistant utilities.
 Now available on iOS and Android.
-The minimum OS versions are iOS 11.0 and Android 4.4.
+The minimum OS versions are iOS 12.0 and Android 4.4.
 Best platform suggest is iPad.
 Will support macOS, Windows and Linux in the future.
 
