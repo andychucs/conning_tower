@@ -74,8 +74,8 @@ dependencies:
   carousel_slider: ^4.2.1
   firebase_core: ^2.22.0
   firebase_crashlytics: ^3.4.2
-  objectbox: ^2.3.1
-  objectbox_flutter_libs: any
+  objectbox: ^2.4.0
+  objectbox_flutter_libs: ^2.4.0
 
 dev_dependencies:
   flutter_test:
