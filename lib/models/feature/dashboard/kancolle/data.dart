@@ -17,8 +17,10 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
+import 'package:conning_tower/providers/dashboard_controller.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:flutter/animation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -170,7 +172,8 @@ class KancolleData {
 
     if (model is ReqMapStartEntity) {
       log("Start");
-      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
+      final index = ref.read(settingsProvider).dashboardIndex;
+      ref.read(dashboardControllerProvider(index)).animateToItem(5, duration: const Duration(milliseconds: 200), curve: Curves.ease);
       battleInfo.clear();
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
