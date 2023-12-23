@@ -29,7 +29,7 @@ class ConnTowerApp extends ConsumerWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       theme: ThemeData(
-        platform: TargetPlatform.iOS,
+        // platform: TargetPlatform.iOS,
         brightness: Brightness.light,
         primaryColor: CupertinoColors.systemBlue,
         dividerColor: CupertinoColors.secondarySystemFill,
@@ -51,7 +51,7 @@ class ConnTowerApp extends ConsumerWidget {
       ),
       darkTheme: ThemeData(
         useMaterial3: false,
-        platform: TargetPlatform.iOS,
+        // platform: TargetPlatform.iOS,
         cupertinoOverrideTheme: const CupertinoThemeData(
           barBackgroundColor: Color(0xD8000000),
           brightness: Brightness.dark,
