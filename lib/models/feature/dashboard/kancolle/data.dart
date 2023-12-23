@@ -251,6 +251,8 @@ class KancolleData {
   KancolleData parseWith(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
+    FirebaseCrashlytics.instance.log(source);
+    FirebaseCrashlytics.instance.log(data);
     late KancolleData newData;
     try {
       if (_operationSource(source)) {
@@ -267,9 +269,7 @@ class KancolleData {
 
       if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
-      FirebaseCrashlytics.instance.log(source);
-      FirebaseCrashlytics.instance.log(data);
-      FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error");
+      FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error", fatal: true);
       if (kDebugMode) {
         rethrow;
       }
@@ -294,11 +294,14 @@ class KancolleData {
         if (ship.damaged()) {
           sb.write("${squad.name}-${ship.name} 大破\n");
           log("${squad.name}-${ship.name} 大破");
+          FirebaseCrashlytics.instance.log("${squad.name}-${ship.name} 大破");
           // break;
         }
       }
     }
     if (sb.isNotEmpty) {
+      FirebaseCrashlytics.instance.log(squads.toString());
+      FirebaseCrashlytics.instance.log(sb.toString());
       ref
           .watch(alertStateProvider.notifier)
           .update((state) => {"title": "大破", "content": sb.toString()});

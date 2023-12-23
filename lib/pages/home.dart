@@ -27,6 +27,7 @@ import 'package:conning_tower/widgets/indexed_stack.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
 import 'package:conning_tower/widgets/texts.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -182,6 +183,10 @@ class HomePageState extends ConsumerState<HomePage> {
     ref.listen(alertStateProvider, (previous, Map<String, String> next) {
       log(next.toString());
       if (next.isNotEmpty) {
+        if (next['title'] == null) {
+          FirebaseCrashlytics.instance.log(next.toString());
+          FirebaseCrashlytics.instance.recordError("alert no title", null);
+        }
         HapticFeedback.heavyImpact();
         if (Platform.isAndroid) {
           showAdaptiveDialog(
