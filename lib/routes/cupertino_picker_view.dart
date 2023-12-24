@@ -29,6 +29,12 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
   int _selectIndex = -1;
 
   @override
+  void dispose() {
+    _selectIndex = -1;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (_selectIndex == -1) {
       _selectIndex = ref.watch(settingsProvider).dashboardIndex;
@@ -57,7 +63,9 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
                       setState(() {
                         _selectIndex = value;
                         HapticFeedback.lightImpact();
-                        localStorage.setInt("dashboardIndex", value);
+                        ref
+                            .watch(settingsProvider.notifier)
+                            .setInt("dashboardIndex", value);
                       });
                     },
                     children: widget.items,
