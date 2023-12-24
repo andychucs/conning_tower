@@ -26,16 +26,24 @@ class CupertinoPickerView extends ConsumerStatefulWidget {
 }
 
 class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
-  late int _selectIndex;
+  int _selectIndex = -1;
+
+  @override
+  void dispose() {
+    _selectIndex = -1;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _selectIndex = ref.watch(settingsProvider).dashboardIndex;
-    if (_selectIndex < 0) {
-      _selectIndex = 0;
+    if (_selectIndex == -1) {
+      _selectIndex = ref.watch(settingsProvider).dashboardIndex;
     }
     if (_selectIndex >= widget.items.length) {
       _selectIndex = widget.items.length - 1;
+    }
+    if (_selectIndex < 0) {
+      _selectIndex = 0;
     }
     final scrollController = ref.watch(dashboardControllerProvider(_selectIndex));
     return OrientationBuilder(
@@ -54,8 +62,6 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
                     onSelectedItemChanged: (int value) {
                       setState(() {
                         _selectIndex = value;
-                        if (deviceType == DeviceType.iPad)
-                          SystemSound.play(SystemSoundType.click);
                         HapticFeedback.lightImpact();
                         ref
                             .watch(settingsProvider.notifier)
