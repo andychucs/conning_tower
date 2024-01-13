@@ -113,7 +113,9 @@ class KancolleData {
         questAssistant = QuestAssistant.fromApi(model.apiData);
         questAssistant?.update();
       } else {
-        questAssistant?.extend(model.apiData.apiList?.map((e) => Quest.fromApi(e)).toList());
+        if (model.apiData.apiList == null) return;
+        if (model.apiData.apiList!.isEmpty) return;
+        questAssistant = questAssistant?.copyWith(ready: model.apiData.apiList!.map((e) => Quest.fromApi(e)).toList());
         questAssistant?.update();
       }
     }

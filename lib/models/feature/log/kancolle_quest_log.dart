@@ -12,6 +12,7 @@ class KancolleQuestLog with _$KancolleQuestLog{
   factory KancolleQuestLog({
     required int id, // quest id
     String? title,
+    int? state,
     required List<QuestMission> mission,
   }) = _KancolleQuestLog;
 

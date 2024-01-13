@@ -76,7 +76,7 @@ class QuestAssistant with _$QuestAssistant {
 
     List<int> readyQuestId = ready.map((e) => e.id).toList();
 
-    List<Quest> doneQuests = inLogQuests.where((quest) => !readyQuestId.contains(quest.id)).toList();
+    List<Quest> doneQuests = inLogQuests.where((quest) => !readyQuestId.contains(quest.id) && quest.isCompleted).toList();
 
     done = doneQuests;
 
@@ -172,11 +172,11 @@ class Quest with _$Quest {
   factory Quest.fromLog(KancolleQuestLogEntity log) {
     KancolleQuestLog questLog =
         KancolleQuestLog.fromJson(jsonDecode(log.logStr));
-    return Quest(id: questLog.id, mission: questLog.mission, title: questLog.title);
+    return Quest(id: questLog.id, mission: questLog.mission, title: questLog.title, state: questLog.state);
   }
 
   KancolleQuestLog toLog() {
-    return KancolleQuestLog(id: id, mission: mission ?? [], title: title);
+    return KancolleQuestLog(id: id, mission: mission ?? [], title: title, state: state);
   }
 }
 
