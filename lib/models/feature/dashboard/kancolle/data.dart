@@ -108,6 +108,12 @@ class KancolleData {
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+
+    if (model is ReqBattleMidnightSpMidnightEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
+    }
+
     if (model is GetMemberQuestListEntity) {
       if (questAssistant == null) {
         questAssistant = QuestAssistant.fromApi(model.apiData);

@@ -422,6 +422,25 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
+  void parseReqBattleMidnightSpMidnight(
+      ReqBattleMidnightSpMidnightDataApiDataEntity data, Squad squad) {
+    clear();
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [squad];
+
+    initDMGMap();
+
+    initShipHPSingleVsSingle(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    setFormation(data.apiFormation);
+
+    gunFireRound(data.apiHougeki!);
+
+    updateShipHP();
+  }
+
   void parseReqCombinedBattleResultEntity(ReqCombinedBattleResultApiDataEntity data) {
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
