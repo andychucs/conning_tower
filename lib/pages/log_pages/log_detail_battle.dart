@@ -25,7 +25,7 @@ class LogDetailBattle extends ConsumerWidget {
     this.kcWikiData,
   });
 
-  final KancolleLogEntity log;
+  final KancolleBattleLogEntity log;
   final KcWikiData? kcWikiData;
 
   @override

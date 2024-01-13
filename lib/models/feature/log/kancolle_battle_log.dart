@@ -8,7 +8,7 @@ part 'kancolle_battle_log.freezed.dart';
 part 'kancolle_battle_log.g.dart';
 
 @unfreezed
-class KancolleBattleLog with _$KancolleBattleLog implements KancolleLog{
+class KancolleBattleLog with _$KancolleBattleLog{
   factory KancolleBattleLog({
     required int id, // timestamp
     required MapInfoLog mapInfo,
