@@ -143,6 +143,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "The circular indicator on the right side of list items represents the status. The outer circle indicates fatigue, and when it is light yellow, it indicates a fatigue of 49. The center represents the fuel and ammunition status, which is green when both are full. When either is not full, it is orange. Click on an item to view detailed values."),
         "KCDashboardOperation":
             MessageLookupByLibrary.simpleMessage("Operation"),
+        "KCDashboardQuest": MessageLookupByLibrary.simpleMessage("Quest"),
+        "KCDashboardQuestCompleted":
+            MessageLookupByLibrary.simpleMessage("Completed"),
+        "KCDashboardQuestDone": MessageLookupByLibrary.simpleMessage("Done"),
+        "KCDashboardQuestInProgress":
+            MessageLookupByLibrary.simpleMessage("In Progress"),
+        "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("To Do"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":

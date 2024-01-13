@@ -12,11 +12,13 @@ class ObjectBox {
   /// The Store of this app.
   late final Store store;
 
-  late final Box<KancolleLogEntity> battleLog;
+  late final Box<KancolleBattleLogEntity> battleLog;
+  late final Box<KancolleQuestLogEntity> questLog;
 
   ObjectBox._create(this.store) {
     // Add any additional setup code, e.g. build queries.
-    battleLog = Box<KancolleLogEntity>(store);
+    battleLog = Box<KancolleBattleLogEntity>(store);
+    questLog = Box<KancolleQuestLogEntity>(store);
   }
 
   /// Create an instance of ObjectBox to use throughout the app.
@@ -47,4 +49,21 @@ class ObjectBox {
     final docsDir = await getApplicationDocumentsDirectory();
     return getFileSize(p.join(docsDir.path, "obx", 'data.mdb'), 2);
   }
+
+  void saveQuest(int id, String logStr) {
+    Query<KancolleQuestLogEntity> query = questLog.query(KancolleQuestLogEntity_.questId.equals(id)).build();
+    KancolleQuestLogEntity? log = query.findUnique();
+    if (log != null) {
+      if (log.logStr == logStr) {
+        return;
+      }
+      log.logStr = logStr;
+      log.timestamp = DateTime.now().millisecondsSinceEpoch;
+    } else {
+      log = KancolleQuestLogEntity(questId: id, timestamp: DateTime.now().millisecondsSinceEpoch, logStr: logStr);
+    }
+    questLog.putAsync(log);
+    print("put $id");
+  }
+
 }

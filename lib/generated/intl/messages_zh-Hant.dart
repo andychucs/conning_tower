@@ -122,6 +122,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(
             "列表項目右側圓環為狀態指示，外環表示疲勞度，為淺黃色時表示疲勞度為49，圓心表示燃料和彈藥狀態，燃料和彈藥全滿時為綠色，任意一項不滿時為橙色。項目可以點擊查看詳細數值。"),
         "KCDashboardOperation": MessageLookupByLibrary.simpleMessage("遠征"),
+        "KCDashboardQuest": MessageLookupByLibrary.simpleMessage("任務"),
+        "KCDashboardQuestCompleted": MessageLookupByLibrary.simpleMessage("完成"),
+        "KCDashboardQuestDone": MessageLookupByLibrary.simpleMessage("已完結"),
+        "KCDashboardQuestInProgress":
+            MessageLookupByLibrary.simpleMessage("進行中"),
+        "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("待進行"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已載入遊戲視窗，無需執行"),
         "KCViewFuncMsgAutoGameRedirect":

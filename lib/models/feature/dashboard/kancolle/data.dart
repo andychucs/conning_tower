@@ -27,6 +27,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'operation_queue.dart';
+import 'quest_assistant.dart';
 
 List<String> _battleAPI = [
   ReqSortieBattleEntity.source,
@@ -45,6 +46,7 @@ class KancolleData {
   final DataInfo dataInfo;
   final BattleInfo battleInfo;
   KancolleBattleLog? battleLog;
+  QuestAssistant? questAssistant;
 
   KancolleData({
     required this.queue,
@@ -55,6 +57,7 @@ class KancolleData {
     required this.dataInfo,
     required this.battleInfo,
     this.battleLog,
+    this.questAssistant,
   });
 
   KancolleData copyWith({
@@ -74,7 +77,8 @@ class KancolleData {
       dataInfo: dataInfo ?? this.dataInfo,
       battleInfo: battleInfo ?? this.battleInfo,
       ref: ref ?? this.ref,
-      battleLog: battleLog
+      battleLog: battleLog,
+      questAssistant: questAssistant,
     );
   }
 
@@ -103,6 +107,24 @@ class KancolleData {
     }
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
+
+
+    if (model is ReqBattleMidnightSpMidnightEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
+    }
+
+    if (model is GetMemberQuestListEntity) {
+      if (questAssistant == null) {
+        questAssistant = QuestAssistant.fromApi(model.apiData);
+        questAssistant?.update();
+      } else {
+        if (model.apiData.apiList == null) return;
+        if (model.apiData.apiList!.isEmpty) return;
+        questAssistant = questAssistant?.copyWith(ready: model.apiData.apiList!.map((e) => Quest.fromApi(e)).toList());
+        questAssistant?.update();
+      }
+    }
 
     if (model is ReqCombinedBattleResultEntity) {
       battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
@@ -225,7 +247,7 @@ class KancolleData {
     if (model is PortEntity) {
       if (battleLog != null) {
         log("save battle log");
-        objectbox.battleLog.put(KancolleLogEntity.fromLog(battleLog!));
+        objectbox.battleLog.put(KancolleBattleLogEntity.fromLog(battleLog!));
       }
       battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);

@@ -38,17 +38,17 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
 
     ScrollController scrollController = ScrollController();
 
-    Box<KancolleLogEntity> dataBox = objectbox.battleLog;
+    Box<KancolleBattleLogEntity> dataBox = objectbox.battleLog;
 
-    Query<KancolleLogEntity> query = dataBox
+    Query<KancolleBattleLogEntity> query = dataBox
         .query()
-        .order(KancolleLogEntity_.id, flags: Order.descending)
+        .order(KancolleBattleLogEntity_.id, flags: Order.descending)
         .build();
     query
       ..offset = 0
       ..limit = queryLimit;
 
-    List<KancolleLogEntity> data = query.find();
+    List<KancolleBattleLogEntity> data = query.find();
 
     debugPrint("num:${data.length}");
 
@@ -107,7 +107,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
     );
   }
 
-  Widget kcWikiDataBody(ScrollController scrollController, List<KancolleLogEntity> data, KcWikiData kcWikiData) {
+  Widget kcWikiDataBody(ScrollController scrollController, List<KancolleBattleLogEntity> data, KcWikiData kcWikiData) {
     dev.log("use kcwiki data");
     return CupertinoScrollbar(
       controller: scrollController,
@@ -141,7 +141,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
     );
   }
 
-  Widget runtimeDataBody(ScrollController scrollController, List<KancolleLogEntity> data, KancolleData runtimeData) {
+  Widget runtimeDataBody(ScrollController scrollController, List<KancolleBattleLogEntity> data, KancolleData runtimeData) {
     dev.log("use runtime data");
     return CupertinoScrollbar(
       controller: scrollController,

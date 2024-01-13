@@ -15,6 +15,7 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/pages/webview.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
+import 'package:conning_tower/providers/generatable/kancolle_localization_provider.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
@@ -256,6 +257,8 @@ class HomePageState extends ConsumerState<HomePage> {
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
     final settings = ref.watch(settingsProvider);
+    Locale locale = Localizations.localeOf(context);
+    final kcL10n = ref.watch(kancolleLocalizationProvider(locale));
 
     if (setUp) {
       setUp = false;

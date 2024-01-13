@@ -20,7 +20,7 @@ class LogItem extends StatelessWidget {
     this.kcWikiData,
   });
 
-  final KancolleLogEntity log;
+  final KancolleBattleLogEntity log;
   final LogType logType;
   final Widget? leading;
   final Widget title;

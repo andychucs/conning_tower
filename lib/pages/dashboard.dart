@@ -1,10 +1,10 @@
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/main.dart';
 import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
 import 'package:conning_tower/pages/dashboard_pages/dashboard_settings.dart';
 import 'package:conning_tower/pages/dashboard_pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
 import 'package:conning_tower/pages/dashboard_pages/port_info.dart';
+import 'package:conning_tower/pages/dashboard_pages/quest_info.dart';
 import 'package:conning_tower/pages/dashboard_pages/squad_info.dart';
 import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
@@ -33,6 +33,7 @@ class Dashboard extends ConsumerStatefulWidget {
           S.current.KCDashboardOperation,
           S.current.KCDashboardFleet,
           S.current.KCDashboardBattleReport,
+          S.current.KCDashboardQuest,
           S.current.SettingsButton
         ],
         children = [
@@ -42,6 +43,7 @@ class Dashboard extends ConsumerStatefulWidget {
           const OperationPage(),
           const SquadInfo(),
           const BattleInfo(),
+          const QuestInfoPage(),
           const DashboardSettings()
         ];
 

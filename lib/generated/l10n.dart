@@ -750,6 +750,56 @@ class S {
     );
   }
 
+  /// `Quest`
+  String get KCDashboardQuest {
+    return Intl.message(
+      'Quest',
+      name: 'KCDashboardQuest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get KCDashboardQuestCompleted {
+    return Intl.message(
+      'Completed',
+      name: 'KCDashboardQuestCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get KCDashboardQuestDone {
+    return Intl.message(
+      'Done',
+      name: 'KCDashboardQuestDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In Progress`
+  String get KCDashboardQuestInProgress {
+    return Intl.message(
+      'In Progress',
+      name: 'KCDashboardQuestInProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To Do`
+  String get KCDashboardQuestToDo {
+    return Intl.message(
+      'To Do',
+      name: 'KCDashboardQuestToDo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Already in game window!`
   String get KCViewFuncMsgAlreadyGameRedirect {
     return Intl.message(

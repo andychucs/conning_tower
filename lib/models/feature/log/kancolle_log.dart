@@ -1,17 +1,12 @@
 import 'dart:convert';
 
+import 'kancolle_battle_log.dart';
 import 'package:objectbox/objectbox.dart';
 
-abstract class KancolleLog {
-  late int id;
+import 'kancolle_quest_log.dart';
 
-  Map<String, dynamic>? toJson() {
-    return null;
-  }
-}
-
-@Entity()
-class KancolleLogEntity {
+@Entity(uid: 332593390095459654)
+class KancolleBattleLogEntity {
   int id;
 
   @Index()
@@ -19,11 +14,27 @@ class KancolleLogEntity {
 
   String logStr;
 
-  KancolleLogEntity({this.id = 0, required this.timestamp, required this.logStr});
+  KancolleBattleLogEntity({this.id = 0, required this.timestamp, required this.logStr});
 
 
-  factory KancolleLogEntity.fromLog(KancolleLog log) {
-    return KancolleLogEntity(timestamp: log.id, logStr: jsonEncode(log.toJson()));
+  factory KancolleBattleLogEntity.fromLog(KancolleBattleLog log) {
+    return KancolleBattleLogEntity(timestamp: log.id, logStr: jsonEncode(log.toJson()));
+  }
+
+}
+
+@Entity()
+class KancolleQuestLogEntity {
+  int id;
+  int questId;
+  int timestamp;
+  String logStr;
+
+  KancolleQuestLogEntity({this.id = 0, required this.questId, required this.timestamp, required this.logStr});
+
+
+  factory KancolleQuestLogEntity.fromLog(KancolleQuestLog log, {int? timestamp}) {
+    return KancolleQuestLogEntity(questId: log.id, timestamp: timestamp ?? DateTime.now().millisecondsSinceEpoch, logStr: jsonEncode(log.toJson()));
   }
 
 }

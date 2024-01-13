@@ -6,7 +6,7 @@
     {
       "id": "5:332593390095459654",
       "lastPropertyId": "3:9007309411239632074",
-      "name": "KancolleLogEntity",
+      "name": "KancolleBattleLogEntity",
       "properties": [
         {
           "id": "1:8473222510133652970",
@@ -28,9 +28,38 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "6:6110568053115888254",
+      "lastPropertyId": "5:6519288307139870879",
+      "name": "KancolleQuestLogEntity",
+      "properties": [
+        {
+          "id": "1:3439133178905322795",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4976699114601546449",
+          "name": "timestamp",
+          "type": 6
+        },
+        {
+          "id": "3:2483954154650167990",
+          "name": "logStr",
+          "type": 9
+        },
+        {
+          "id": "5:6519288307139870879",
+          "name": "questId",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:332593390095459654",
+  "lastEntityId": "6:6110568053115888254",
   "lastIndexId": "4:4508818424622429566",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
@@ -57,7 +86,8 @@
     8044150685148489263,
     7498166620387474385,
     8484803732246975237,
-    5304015277603093750
+    5304015277603093750,
+    2791579880789739608
   ],
   "retiredRelationUids": [],
   "version": 1
