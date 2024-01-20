@@ -45,7 +45,7 @@ dependencies:
   fluttertoast: ^8.2.4
   shared_preferences: ^2.2.2
   url_launcher: ^6.2.1
-  package_info_plus: ^4.0.2
+  package_info_plus: ^5.0.1
   auto_size_text: ^3.0.0
   validators: ^3.0.0
   font_awesome_flutter: ^10.6.0
