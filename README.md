@@ -62,7 +62,9 @@ Will support macOS, Windows and Linux in the future.
 | ![CC7B1141-A925-4C8D-BC7E-B562CB4BFC23_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/9241c616-588f-4479-bdff-186e9ebefe13) | ![5C479DA8-B96E-4ED7-9258-9D2E93D0AC85_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/c3cb6c79-777b-40bc-88b5-66dcd0a2678e) | ![28833525-0862-471D-AC13-ECE53280068D_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/1a96640d-e070-4d34-9985-83112a2a6580) | ![E176BCED-6F47-4FE4-A5FF-9DDA1D62C26A_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/510b1046-2d0c-4938-982f-f74f7c2344c6) |
 | --- | --- | --- | --- |
 
+## Privacy Statement
 
+ConningTower in the repo's releases utilizes Firebase for the purpose of collecting crash logs through Google's services after v1.8.8. These logs may include parts of the website request URLs and some content from the responses. We do not collect any information that can specifically identify you or your personal data. However, please be aware that the web page information may display some private data. We strongly advise against sharing screenshots of these pages on the internet to protect your privacy.
 
 ## Why start this project
 
