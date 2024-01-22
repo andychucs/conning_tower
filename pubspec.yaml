@@ -91,7 +91,7 @@ dev_dependencies:
   riverpod_lint: ^2.3.7
   build_runner: ^2.4.8
   riverpod_generator: ^2.2.5
-  freezed: ^2.4.2
+  freezed: ^2.4.6
   json_serializable: ^6.7.0
   objectbox_generator: any
 
