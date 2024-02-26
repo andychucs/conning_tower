@@ -73,7 +73,7 @@ dependencies:
   percent_indicator: ^4.2.3
   carousel_slider: ^4.2.1
   firebase_core: ^2.22.0
-  firebase_crashlytics: ^3.4.2
+  firebase_crashlytics: ^3.4.15
   objectbox: ^2.4.0
   objectbox_flutter_libs: ^2.4.0
 
