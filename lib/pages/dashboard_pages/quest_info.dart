@@ -93,7 +93,7 @@ class _QuestInfoPageState extends ConsumerState<QuestInfoPage> {
                               ? Text(
                                   questList[index]
                                       .detail!
-                                      .replaceAll("<br>", "\n"),
+                                      .replaceAll("<br>", ""),
                                   softWrap: true,
                                   maxLines: 6,
                                 )
