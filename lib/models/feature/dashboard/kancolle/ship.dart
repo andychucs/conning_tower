@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'equipment.dart';
+
 part 'ship.freezed.dart';
 part 'ship.g.dart';
 
@@ -48,6 +50,8 @@ class Ship with _$Ship {
     List<int>? afterIds,
     int? upgradeLevel,
     int? shipType,
+    List<Equipment>? equipment,
+    List<Equipment>? exEquipment,
   }) = _Ship;
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
