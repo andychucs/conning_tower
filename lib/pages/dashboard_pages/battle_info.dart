@@ -245,13 +245,21 @@ class ShipInfoInBattle extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              name,
-              style: const TextStyle(fontWeight: FontWeight.normal),
+            Expanded(
+              child: Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.normal),
+                textAlign: TextAlign.start,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            Text(
-              "Lv.${ship.level}",
-              style: const TextStyle(fontWeight: FontWeight.normal),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Text(
+                "Lv.${ship.level}",
+                style: const TextStyle(fontWeight: FontWeight.normal),
+              ),
             ),
             if (ship.condition != null)
               Row(
