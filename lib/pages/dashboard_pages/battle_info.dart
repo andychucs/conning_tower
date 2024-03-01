@@ -157,6 +157,11 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                   battleInfo.contactStatus,
                   style: TextStyle(fontWeight: FontWeight.normal),
                 ),
+              if (battleInfo.result == null && battleInfo.airSuperiority != '')
+                Text(
+                  battleInfo.airSuperiority,
+                  style: TextStyle(fontWeight: FontWeight.normal),
+                ),
               if (battleInfo.result != null)
                 Text(
                   '${battleInfo.result}',

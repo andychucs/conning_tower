@@ -45,7 +45,7 @@ class BattleInfo with _$BattleInfo {
       case 4:
         return '制空権喪失';
       default:
-        return 'N/A';
+        return '';
     }
   }
 
