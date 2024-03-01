@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/data/kcsapi/req/battle/req_practice_midnight_battle_entity.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
@@ -26,6 +25,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+import 'equipment.dart';
 import 'operation_queue.dart';
 import 'quest_assistant.dart';
 
@@ -286,11 +286,13 @@ class KancolleData {
     }
 
     if (model is GetMemberRequireInfoEntity) {
-      fleet.equipment = model.apiData.apiSlotItem ?? [];
+      final Iterable<Equipment> equipments = (model.apiData.apiSlotItem ?? []).map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
 
     if (model is GetMemberSlotItemEntity) {
-      fleet.equipment = model.apiData;
+      final Iterable<Equipment> equipments = model.apiData.map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
   }
 
@@ -373,6 +375,7 @@ class KancolleData {
         afterIds: afterIds,
         upgradeLevel: shipData?.apiAfterlv,
         shipType: shipData?.apiStype,
+        equipment: fleet.equipment
       ));
     }
     fleet.ships = allShips;
@@ -418,9 +421,16 @@ class KancolleData {
     Squad squad = squads[index].copyWith();
     squad.ships.clear();
     for (var data in apiShipData) {
-      String shipName = dataInfo.shipInfo?[data.apiShipId]?.apiName ??
+      final shipData = dataInfo.shipInfo?[data.apiShipId];
+
+      final afterId = int.parse(shipData?.apiAftershipid ?? '0');
+      List<int> afterIds = getAfterIds([data.apiShipId], afterId);
+      afterIds.remove(data.apiShipId);
+
+      String shipName = shipData?.apiName ??
           "Ship No.${data.apiShipId}";
-      Ship ship = Ship.fromApi(data, shipName);
+
+      Ship ship = Ship.fromApi(data, shipName, afterIds: afterIds, upgradeLevel: shipData?.apiAfterlv, shipType: shipData?.apiStype, equipment: fleet.equipment);
       log(ship.toString());
       log(ship.damaged().toString());
       squad.ships.add(ship);

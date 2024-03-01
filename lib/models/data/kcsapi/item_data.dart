@@ -3,4 +3,5 @@ abstract class SlotItem {
   late int apiSlotitemId;
   late int apiLocked;
   late int apiLevel;
+  late int? apiAlv;
 }
