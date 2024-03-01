@@ -108,6 +108,16 @@ class KancolleData {
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+    if (model == null) {
+      if (isBattleAPI(path)) {
+        FirebaseCrashlytics.instance.log('no handler data $path : $data');
+        try {
+          FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null);
+        } catch (e) {
+          FirebaseCrashlytics.instance.log(e.toString());
+        }
+      }
+    }
 
     if (model is ReqBattleMidnightSpMidnightEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
@@ -276,8 +286,8 @@ class KancolleData {
   KancolleData parseWith(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
-    FirebaseCrashlytics.instance.log(source);
-    FirebaseCrashlytics.instance.log(data);
+    String path = source.split("kcsapi").last;
+    FirebaseCrashlytics.instance.log('$path data: $data');
     late KancolleData newData;
     try {
       if (_operationSource(source)) {
@@ -294,6 +304,7 @@ class KancolleData {
 
       if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
+      FirebaseCrashlytics.instance.log('Kancolle Data Parse Error at $source');
       FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error", fatal: true);
       if (kDebugMode) {
         rethrow;
