@@ -313,7 +313,7 @@ class BattleInfo with _$BattleInfo {
 
     //api_opening_atack
     if (data.apiOpeningFlag == 1) {
-      torpedoFireRound(data.apiOpeningAtack!);
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
     }
 
     for (final (index, flag) in data.apiHouraiFlag!.indexed) {
@@ -365,7 +365,7 @@ class BattleInfo with _$BattleInfo {
 
     //api_opening_atack
     if (data.apiOpeningFlag == 1) {
-      torpedoFireRound(data.apiOpeningAtack!);
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
     }
 
     for (final (index, flag) in data.apiHouraiFlag.indexed) {
@@ -500,7 +500,7 @@ class BattleInfo with _$BattleInfo {
 
     //api_opening_atack
     if (data.apiOpeningFlag == 1) {
-      torpedoFireRound(data.apiOpeningAtack!);
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
     }
 
     for (final (index, flag) in data.apiHouraiFlag.indexed) {
@@ -571,6 +571,44 @@ class BattleInfo with _$BattleInfo {
     formation = apiFormation[0];
     eFormation = apiFormation[1];
     contact = apiFormation[2];
+  }
+
+  void torpedoFireRoundWithItem(
+      OpeningTorpedoRoundEntity data) {
+    for (final (actIndex, defIndexList) in data.apiFraiListItems.indexed) {
+      if (defIndexList != null) {
+        final Ship actShip = getShip(FleetSide.our, actIndex);
+        final actShipHash = actShip.hashCode;
+        final dmgList = data.apiFydamListItems[actIndex];
+        assert (dmgList?.length == defIndexList.length, "Opening torpedo calc error, data not match: $dmgList & $defIndexList");
+        for (final (itemIndex, defIndex) in defIndexList.indexed) {
+          if (defIndex > -1) {
+            final Ship defShip = getShip(FleetSide.enemy, defIndex);
+            final defShipHash = defShip.hashCode;
+            final dmg = dmgList![itemIndex];
+            dmgCount(actShipHash, dmg);
+            dmgTake(defShipHash, dmg);
+          }
+        }
+      }
+    }
+    for (final (actIndex, defIndexList) in data.apiEraiListItems.indexed) {
+      if (defIndexList != null) {
+        final Ship actShip = getShip(FleetSide.enemy, actIndex);
+        final actShipHash = actShip.hashCode;
+        final dmgList = data.apiEydamListItems[actIndex];
+        assert (dmgList?.length == defIndexList.length, "Opening torpedo calc error, data not match: $dmgList & $defIndexList");
+        for (final (itemIndex, defIndex) in defIndexList.indexed) {
+          if (defIndex > -1) {
+            final Ship defShip = getShip(FleetSide.our, defIndex);
+            final defShipHash = defShip.hashCode;
+            final dmg = dmgList![itemIndex];
+            dmgCount(actShipHash, dmg);
+            dmgTake(defShipHash, dmg);
+          }
+        }
+      }
+    }
   }
 
   void torpedoFireRound(
