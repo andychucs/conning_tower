@@ -60,7 +60,7 @@ class Ship with _$Ship {
 
   bool waitUpgrade() {
     if (upgradeLevel != null) {
-      if (level > upgradeLevel! && upgradeLevel != 0) {
+      if (level >= upgradeLevel! && upgradeLevel != 0) {
         return true;
       }
     }
