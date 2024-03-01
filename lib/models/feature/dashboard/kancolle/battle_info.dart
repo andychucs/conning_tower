@@ -687,6 +687,32 @@ class BattleInfo with _$BattleInfo {
 
     return formation;
   }
+
+  void parseReqSortieAirbattle(ReqSortieAirbattleApiDataEntity data, Squad squad) {
+    clear();
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [squad];
+
+    initDMGMap();
+
+    initShipHPSingleVsSingle(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+
+    setFormation(data.apiFormation);
+
+    //api_kouku
+    if (data.apiStageFlag != null) {
+      aircraftRound(data.apiStageFlag!, data.apiKouku!);
+    }
+
+    //api_kouku2
+    if (data.apiStageFlag2 != null) {
+      aircraftRound(data.apiStageFlag2!, data.apiKouku2!);
+    }
+
+    updateShipHP();
+  }
 }
 
 enum FleetSide { our, enemy }

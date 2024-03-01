@@ -11,6 +11,7 @@ export 'req_practice_midnight_battle_entity.dart';
 export 'req_sortie_ld_airbattle_entity.dart';
 export 'req_combined_battle_result_entity.dart';
 export 'req_battle_midnight_sp_midnight_entity.dart';
+export 'req_sortie_airbattle_entity.dart';
 
 part 'battle.freezed.dart';
 
