@@ -389,7 +389,7 @@ class BattleInfo with _$BattleInfo {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
 
     initDMGMap();
 
