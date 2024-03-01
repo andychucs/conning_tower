@@ -200,19 +200,16 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
-                      ),
-                      Text(
-                        "${battleInfo.mapInfo?.name}",
-                      ),
-                      Text(
-                        routeName
-                      )
-                    ]
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
+                        ),
+                        Text(
+                          "${battleInfo.mapInfo?.name}",
+                        ),
+                        Text(routeName)
+                      ]),
                 ),
               ),
           ],
@@ -252,9 +249,20 @@ class ShipInfoInBattle extends StatelessWidget {
               name,
               style: const TextStyle(fontWeight: FontWeight.normal),
             ),
+            Text(
+              "Lv.${ship.level}",
+              style: const TextStyle(fontWeight: FontWeight.normal),
+            ),
             if (ship.condition != null)
               Row(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Text(
+                      '${ship.condition}',
+                      style: const TextStyle(fontWeight: FontWeight.normal),
+                    ),
+                  ),
                   if (useEmoji) Text(ship.sparkEmoji),
                   if (!useEmoji)
                     CircularPercentIndicator(
@@ -270,17 +278,8 @@ class ShipInfoInBattle extends StatelessWidget {
                       percent: ship.condition! / 100,
                       progressColor: ship.sparkColor,
                     ),
-                  const SizedBox(width: 5),
-                  Text(
-                    '${ship.condition}',
-                    style: const TextStyle(fontWeight: FontWeight.normal),
-                  )
                 ],
               ),
-            Text(
-              "${(ship.nowHP >= 0 ? ship.nowHP : 0)}/${ship.maxHP}",
-              style: const TextStyle(fontWeight: FontWeight.normal),
-            )
           ],
         ),
       ),
@@ -294,14 +293,18 @@ class ShipInfoInBattle extends StatelessWidget {
         lineHeight: 12.0,
         percent: (ship.nowHP >= 0 ? ship.nowHP : 0) / ship.maxHP,
         progressColor: ship.damageColor,
+        center: dmgTaken < 0
+            ? Text(
+                "$dmgTaken",
+                style: const TextStyle(fontSize: 10),
+              )
+            : null,
         trailing: SizedBox(
           width: 50,
-          child: dmgTaken < 0
-              ? Text(
-                  "$dmgTaken",
-                  textAlign: TextAlign.right,
-                )
-              : null,
+          child: Text(
+            "${(ship.nowHP >= 0 ? ship.nowHP : 0)}/${ship.maxHP}",
+            textAlign: TextAlign.right,
+          ),
         ),
       ),
     );
