@@ -22,13 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "Load URL: ${url}";
 
-  static String m1(url) => "Now navigation to ${url}";
+  static String m1(count) => "Fleet Girls: ${count}";
 
-  static String m2(url) => "Page finished loading: ${url}";
+  static String m2(url) => "Now navigation to ${url}";
 
-  static String m3(url) => "Page started loading: ${url}";
+  static String m3(url) => "Page finished loading: ${url}";
 
-  static String m4(taskTitle) => "${taskTitle} has been completed.";
+  static String m4(url) => "Page started loading: ${url}";
+
+  static String m5(taskTitle) => "${taskTitle} has been completed.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -150,6 +152,86 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardQuestInProgress":
             MessageLookupByLibrary.simpleMessage("In Progress"),
         "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("To Do"),
+        "KCDashboardShipAA": MessageLookupByLibrary.simpleMessage("Anti-Air"),
+        "KCDashboardShipASW":
+            MessageLookupByLibrary.simpleMessage("Anti-Sub Warfare"),
+        "KCDashboardShipAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
+        "KCDashboardShipArmor": MessageLookupByLibrary.simpleMessage("Armor"),
+        "KCDashboardShipCondition":
+            MessageLookupByLibrary.simpleMessage("Condition"),
+        "KCDashboardShipEvasion":
+            MessageLookupByLibrary.simpleMessage("Evasion"),
+        "KCDashboardShipFirepower":
+            MessageLookupByLibrary.simpleMessage("Firepower"),
+        "KCDashboardShipFuel": MessageLookupByLibrary.simpleMessage("Fuel"),
+        "KCDashboardShipHP": MessageLookupByLibrary.simpleMessage("HP"),
+        "KCDashboardShipLuck": MessageLookupByLibrary.simpleMessage("Luck"),
+        "KCDashboardShipPlaneCapacity":
+            MessageLookupByLibrary.simpleMessage("Plane Capacity"),
+        "KCDashboardShipRange": MessageLookupByLibrary.simpleMessage("Range"),
+        "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("LoS"),
+        "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("Speed"),
+        "KCDashboardShipTorpedo":
+            MessageLookupByLibrary.simpleMessage("Torpedo"),
+        "KCDashboardShipTotalAttack":
+            MessageLookupByLibrary.simpleMessage("Firepower and Torpedo"),
+        "KCDashboardShipUpgradeLevel":
+            MessageLookupByLibrary.simpleMessage("Remodel Level"),
+        "KCDashboardShipViewerCount": m1,
+        "KCDashboardShipViewerFilterShipClass":
+            MessageLookupByLibrary.simpleMessage("Ship Class"),
+        "KCDashboardShipViewerFilterShipSlot":
+            MessageLookupByLibrary.simpleMessage("Ship Slot"),
+        "KCDashboardShipViewerFilterShipSlotHaveExSlot":
+            MessageLookupByLibrary.simpleMessage("Ex Slot"),
+        "KCDashboardShipViewerFilterShipSlotNoExSlot":
+            MessageLookupByLibrary.simpleMessage("No Ex Slot"),
+        "KCDashboardShipViewerFilterShipStatus":
+            MessageLookupByLibrary.simpleMessage("Ship Status"),
+        "KCDashboardShipViewerFilterShipStatusCanUpgrade":
+            MessageLookupByLibrary.simpleMessage("Not Ready to Remodel"),
+        "KCDashboardShipViewerFilterShipStatusUpgraded":
+            MessageLookupByLibrary.simpleMessage("Remodeled"),
+        "KCDashboardShipViewerFilterShipStatusWaitUpgrade":
+            MessageLookupByLibrary.simpleMessage("Ready to Remodel"),
+        "KCDashboardShipViewerFilterShipType":
+            MessageLookupByLibrary.simpleMessage("Ship Type"),
+        "KCDashboardShipViewerFilterSpeed":
+            MessageLookupByLibrary.simpleMessage("Speed"),
+        "KCDashboardShipViewerSortAAAsc":
+            MessageLookupByLibrary.simpleMessage("AA Ascending"),
+        "KCDashboardShipViewerSortAADesc":
+            MessageLookupByLibrary.simpleMessage("AA Descending"),
+        "KCDashboardShipViewerSortASWAsc":
+            MessageLookupByLibrary.simpleMessage("ASW Ascending"),
+        "KCDashboardShipViewerSortASWDesc":
+            MessageLookupByLibrary.simpleMessage("ASW Descending"),
+        "KCDashboardShipViewerSortArmorAsc":
+            MessageLookupByLibrary.simpleMessage("Armor Ascending"),
+        "KCDashboardShipViewerSortArmorDesc":
+            MessageLookupByLibrary.simpleMessage("Armor Descending"),
+        "KCDashboardShipViewerSortAttackAsc":
+            MessageLookupByLibrary.simpleMessage("Total Attack Ascending"),
+        "KCDashboardShipViewerSortAttackDesc":
+            MessageLookupByLibrary.simpleMessage("Total Attack Descending"),
+        "KCDashboardShipViewerSortConditionAsc":
+            MessageLookupByLibrary.simpleMessage("Condition Ascending"),
+        "KCDashboardShipViewerSortConditionDesc":
+            MessageLookupByLibrary.simpleMessage("Condition Descending"),
+        "KCDashboardShipViewerSortLevelAsc":
+            MessageLookupByLibrary.simpleMessage("Level Ascending"),
+        "KCDashboardShipViewerSortLevelDesc":
+            MessageLookupByLibrary.simpleMessage("Level Descending"),
+        "KCDashboardShipViewerSortLuckAsc":
+            MessageLookupByLibrary.simpleMessage("Luck Ascending"),
+        "KCDashboardShipViewerSortLuckDesc":
+            MessageLookupByLibrary.simpleMessage("Luck Descending"),
+        "KCDashboardShipViewerSortUIDAsc":
+            MessageLookupByLibrary.simpleMessage("Oldest First"),
+        "KCDashboardShipViewerSortUIDDesc":
+            MessageLookupByLibrary.simpleMessage("Newest First"),
+        "KCDashboardShipViewerTitle":
+            MessageLookupByLibrary.simpleMessage("Fleet Girls"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -158,17 +240,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Game homepage is loading"),
         "KCViewFuncMsgGameNaviBlock": MessageLookupByLibrary.simpleMessage(
             "refresh on game homepage is block"),
-        "KCViewFuncMsgNavi": m1,
+        "KCViewFuncMsgNavi": m2,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("Game load completed"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("Game load failed"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("Game not load complete yet"),
-        "KCViewFuncMsgPageFinished": m2,
+        "KCViewFuncMsgPageFinished": m3,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),
-        "KCViewFuncMsgPageStart": m3,
+        "KCViewFuncMsgPageStart": m4,
         "KanColleDataListener":
             MessageLookupByLibrary.simpleMessage("Data Listener"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("Logbook"),
@@ -227,7 +309,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
-        "TaskCompleted": m4,
+        "TaskCompleted": m5,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("Tasks"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("Task Not Added"),
         "TaskNotificationAdded": MessageLookupByLibrary.simpleMessage(
@@ -240,6 +322,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Task Reminders feature allows you to add and manage task reminders.\n\n- To add a data source, click the Add data source button in the top right corner and enter a valid URL or YAML/JSON content.\n\n- To save changes, click the Save button.\n\n- Added tasks will be displayed in the list.\n\n- Double clicking on a task will add a reminder notification for that task.\n\n- Clicking on a task to enter the task information page where you can view detailed information.\n\n- In the task information page, click the Up-Arrow button in the top right corner to pin the task at the top of the task list.\n\n- If you encounter any issues, please contact our support team.\n\nEnjoy using it!"),
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage(
             "request tasks number over limit."),
+        "TextAll": MessageLookupByLibrary.simpleMessage("All"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("Equipment"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("Fast+"),

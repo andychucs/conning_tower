@@ -108,6 +108,26 @@ class KancolleData {
 
     dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
 
+    if (model == null) {
+      if (isBattleAPI(path)) {
+        FirebaseCrashlytics.instance.log('no handler data $path : $data');
+        try {
+          FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null);
+        } catch (e) {
+          FirebaseCrashlytics.instance.log(e.toString());
+        }
+      }
+    }
+
+    if (model is ReqSortieAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECMidnightBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squad);
+    }
 
     if (model is ReqBattleMidnightSpMidnightEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
@@ -180,6 +200,7 @@ class KancolleData {
         for (var item in model.apiData.apiMstSlotitem)
           item.apiId: item
       };
+      dataInfo.shipTypeList = model.apiData.apiMstStype;
     }
 
     if (model is ReqMissionStartEntity) {
@@ -276,8 +297,8 @@ class KancolleData {
   KancolleData parseWith(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
-    FirebaseCrashlytics.instance.log(source);
-    FirebaseCrashlytics.instance.log(data);
+    String path = source.split("kcsapi").last;
+    FirebaseCrashlytics.instance.log('$path data: $data');
     late KancolleData newData;
     try {
       if (_operationSource(source)) {
@@ -294,6 +315,7 @@ class KancolleData {
 
       if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
+      FirebaseCrashlytics.instance.log('Kancolle Data Parse Error at $source');
       FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error", fatal: true);
       if (kDebugMode) {
         rethrow;
@@ -336,11 +358,30 @@ class KancolleData {
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
     List<Ship> allShips = [];
     for (var data in apiShip) {
-      String shipName = dataInfo.shipInfo?[data.apiShipId]?.apiName ??
+      final shipData = dataInfo.shipInfo?[data.apiShipId];
+
+      final afterId = int.parse(shipData?.apiAftershipid ?? '0');
+      List<int> afterIds = getAfterIds([data.apiShipId], afterId);
+      afterIds.remove(data.apiShipId);
+
+      String shipName = shipData?.apiName ??
           "Ship No.${data.apiShipId}";
-      allShips.add(Ship.fromApi(data, shipName));
+
+      allShips.add(Ship.fromApi(
+        data,
+        shipName,
+        afterIds: afterIds,
+        upgradeLevel: shipData?.apiAfterlv,
+        shipType: shipData?.apiStype,
+      ));
     }
     fleet.ships = allShips;
+  }
+
+  List<int> getAfterIds(List<int> ids, int nextId){
+    if (ids.contains(nextId) || nextId == 0) return ids;
+    ids.add(nextId);
+    return getAfterIds(ids, nextId);
   }
 
   void updateOperationQueue(DeckData data, int id) {

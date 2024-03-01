@@ -106,7 +106,11 @@ class KcWikiDataState extends _$KcWikiDataState {
 
       final kcWikiData = KcWikiData.fromJson(json);
 
-      if (getDataRefSha() != await _fetchDataRefSha()) {
+      final refSha = await _fetchDataRefSha();
+      if (refSha == null) {
+        return kcWikiData;
+      }
+      if (refSha != getDataRefSha()) {
         return _fetchData();
       }
 

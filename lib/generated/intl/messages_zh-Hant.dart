@@ -22,13 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "載入網址: ${url}";
 
-  static String m1(url) => "正在加載 ${url}";
+  static String m1(count) => "艦娘數: ${count}";
 
-  static String m2(url) => "頁面加載完畢: ${url}";
+  static String m2(url) => "正在加載 ${url}";
 
-  static String m3(url) => "頁面開始載入 ${url}";
+  static String m3(url) => "頁面加載完畢: ${url}";
 
-  static String m4(taskTitle) => "${taskTitle} 已完成。";
+  static String m4(url) => "頁面開始載入 ${url}";
+
+  static String m5(taskTitle) => "${taskTitle} 已完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -128,6 +130,81 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardQuestInProgress":
             MessageLookupByLibrary.simpleMessage("進行中"),
         "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("待進行"),
+        "KCDashboardShipAA": MessageLookupByLibrary.simpleMessage("對空"),
+        "KCDashboardShipASW": MessageLookupByLibrary.simpleMessage("對潜"),
+        "KCDashboardShipAmmo": MessageLookupByLibrary.simpleMessage("彈藥"),
+        "KCDashboardShipArmor": MessageLookupByLibrary.simpleMessage("护甲"),
+        "KCDashboardShipCondition": MessageLookupByLibrary.simpleMessage("疲劳度"),
+        "KCDashboardShipEvasion": MessageLookupByLibrary.simpleMessage("回避"),
+        "KCDashboardShipFirepower": MessageLookupByLibrary.simpleMessage("火力"),
+        "KCDashboardShipFuel": MessageLookupByLibrary.simpleMessage("燃料"),
+        "KCDashboardShipHP": MessageLookupByLibrary.simpleMessage("耐久"),
+        "KCDashboardShipLuck": MessageLookupByLibrary.simpleMessage("運"),
+        "KCDashboardShipPlaneCapacity":
+            MessageLookupByLibrary.simpleMessage("搭載"),
+        "KCDashboardShipRange": MessageLookupByLibrary.simpleMessage("射程"),
+        "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("索敵"),
+        "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("速度"),
+        "KCDashboardShipTorpedo": MessageLookupByLibrary.simpleMessage("雷裝"),
+        "KCDashboardShipTotalAttack":
+            MessageLookupByLibrary.simpleMessage("火雷值"),
+        "KCDashboardShipUpgradeLevel":
+            MessageLookupByLibrary.simpleMessage("改造等級"),
+        "KCDashboardShipViewerCount": m1,
+        "KCDashboardShipViewerFilterShipClass":
+            MessageLookupByLibrary.simpleMessage("艦級"),
+        "KCDashboardShipViewerFilterShipSlot":
+            MessageLookupByLibrary.simpleMessage("裝備"),
+        "KCDashboardShipViewerFilterShipSlotHaveExSlot":
+            MessageLookupByLibrary.simpleMessage("补强增设已使用"),
+        "KCDashboardShipViewerFilterShipSlotNoExSlot":
+            MessageLookupByLibrary.simpleMessage("补强增设未使用"),
+        "KCDashboardShipViewerFilterShipStatus":
+            MessageLookupByLibrary.simpleMessage("狀態"),
+        "KCDashboardShipViewerFilterShipStatusCanUpgrade":
+            MessageLookupByLibrary.simpleMessage("尚不可改造"),
+        "KCDashboardShipViewerFilterShipStatusUpgraded":
+            MessageLookupByLibrary.simpleMessage("已改造"),
+        "KCDashboardShipViewerFilterShipStatusWaitUpgrade":
+            MessageLookupByLibrary.simpleMessage("等待改造"),
+        "KCDashboardShipViewerFilterShipType":
+            MessageLookupByLibrary.simpleMessage("艦種"),
+        "KCDashboardShipViewerFilterSpeed":
+            MessageLookupByLibrary.simpleMessage("速度"),
+        "KCDashboardShipViewerSortAAAsc":
+            MessageLookupByLibrary.simpleMessage("對空升序"),
+        "KCDashboardShipViewerSortAADesc":
+            MessageLookupByLibrary.simpleMessage("對空降序"),
+        "KCDashboardShipViewerSortASWAsc":
+            MessageLookupByLibrary.simpleMessage("對潜升序"),
+        "KCDashboardShipViewerSortASWDesc":
+            MessageLookupByLibrary.simpleMessage("對潜降序"),
+        "KCDashboardShipViewerSortArmorAsc":
+            MessageLookupByLibrary.simpleMessage("护甲升序"),
+        "KCDashboardShipViewerSortArmorDesc":
+            MessageLookupByLibrary.simpleMessage("护甲降序"),
+        "KCDashboardShipViewerSortAttackAsc":
+            MessageLookupByLibrary.simpleMessage("火雷值升序"),
+        "KCDashboardShipViewerSortAttackDesc":
+            MessageLookupByLibrary.simpleMessage("火雷值降序"),
+        "KCDashboardShipViewerSortConditionAsc":
+            MessageLookupByLibrary.simpleMessage("疲劳度升序"),
+        "KCDashboardShipViewerSortConditionDesc":
+            MessageLookupByLibrary.simpleMessage("疲劳度降序"),
+        "KCDashboardShipViewerSortLevelAsc":
+            MessageLookupByLibrary.simpleMessage("等級升序"),
+        "KCDashboardShipViewerSortLevelDesc":
+            MessageLookupByLibrary.simpleMessage("等級降序"),
+        "KCDashboardShipViewerSortLuckAsc":
+            MessageLookupByLibrary.simpleMessage("運值升序"),
+        "KCDashboardShipViewerSortLuckDesc":
+            MessageLookupByLibrary.simpleMessage("運值降序"),
+        "KCDashboardShipViewerSortUIDAsc":
+            MessageLookupByLibrary.simpleMessage("從舊到新"),
+        "KCDashboardShipViewerSortUIDDesc":
+            MessageLookupByLibrary.simpleMessage("從新到舊"),
+        "KCDashboardShipViewerTitle":
+            MessageLookupByLibrary.simpleMessage("艦娘"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已載入遊戲視窗，無需執行"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -136,17 +213,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("遊戲視窗載入中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("遊戲視窗的重載已被攔截"),
-        "KCViewFuncMsgNavi": m1,
+        "KCViewFuncMsgNavi": m2,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("遊戲加載完成"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("遊戲加載失敗"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("遊戲未加載完畢"),
-        "KCViewFuncMsgPageFinished": m2,
+        "KCViewFuncMsgPageFinished": m3,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
-        "KCViewFuncMsgPageStart": m3,
+        "KCViewFuncMsgPageStart": m4,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("資料監聽"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日誌"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("淺色主題"),
@@ -196,7 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("狀態碼"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),
-        "TaskCompleted": m4,
+        "TaskCompleted": m5,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任務"),
         "TaskNotificationAdded":
@@ -208,6 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(
             "任務提醒功能允許您添加和管理任務提醒。\n\n- 要添加數據源，請點擊右上角的“添加數據源”按鈕，並輸入有效的URL或YAML/JSON內容。\n\n- 要保存更改，請點擊“保存”按鈕。\n\n- 已添加的任務將顯示在列表中。\n\n- 雙擊任務即可添加該任務的提醒推送。\n\n- 點擊進入任務信息頁，您可以查看詳細信息。\n\n- 在任務信息頁中，點擊右上角的向上箭頭按鈕可以將該任務在任務列表中置頂。\n\n- 如果您遇到任何問題，請聯繫我們的支援團隊。\n\n祝您使用愉快!"),
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage("導入任務數量超出限制"),
+        "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("裝備"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("高速+"),

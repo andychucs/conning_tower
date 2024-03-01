@@ -10,6 +10,7 @@ import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
+import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -119,7 +120,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                               scoutList.add(ship.scout![0]);
                             }
 
-                            return ScrollViewPageWithScrollbar(
+                            return ScrollViewWithCupertinoScrollbar(
                               child: _displayedSegment == 0
                                   ? CupertinoListSection.insetGrouped(
                                       margin: _sectionMargin,
@@ -131,11 +132,11 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                           children: [
                                             CupertinoListSectionDescription(
                                                 'Lv:${levelList.reduce((value, element) => value + element)}\n'
-                                                '速力:${speedLevel(speedList.reduce(min))}\n'
-                                                '火力:${attackList.reduce((value, element) => value + element)}\n'
-                                                '対空:${antiAircraftList.reduce((value, element) => value + element)}\n'
-                                                '対潜:${antiSubmarineList.reduce((value, element) => value + element)}\n'
-                                                '索敵:${scoutList.reduce((value, element) => value + element)}\n'),
+                                                '${S.current.KCDashboardShipSpeed}:${speedLevel(speedList.reduce(min))}\n'
+                                                '${S.current.KCDashboardShipFirepower}:${attackList.reduce((value, element) => value + element)}\n'
+                                                '${S.current.KCDashboardShipAA}:${antiAircraftList.reduce((value, element) => value + element)}\n'
+                                                '${S.current.KCDashboardShipASW}:${antiSubmarineList.reduce((value, element) => value + element)}\n'
+                                                '${S.current.KCDashboardShipScout}:${scoutList.reduce((value, element) => value + element)}\n'),
                                             GestureDetector(
                                               child: Icon(
                                                 CupertinoIcons.question_circle,
@@ -429,7 +430,7 @@ class ShipInfo extends StatelessWidget {
         middle: Text(ship.name!),
         previousPageTitle: squadName,
       ),
-      child: ScrollViewPageWithScrollbar(
+      child: ScrollViewWithCupertinoScrollbar(
         child: CupertinoListSection.insetGrouped(
           margin: _sectionMargin,
           children: [
@@ -442,53 +443,53 @@ class ShipInfo extends StatelessWidget {
               additionalInfo: Text('${ship.exp?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("疲労度"),
+              title: Text(S.current.KCDashboardShipCondition),
               additionalInfo: Text('${ship.condition}'),
             ),
             CupertinoListTile(
-              title: Text("損傷"),
+              title: Text(S.current.KCDashboardShipHP),
               additionalInfo: Text(ship.damageLevel),
             ),
             CupertinoListTile(
-              title: Text("速力"),
+              title: Text(S.current.KCDashboardShipSpeed),
               additionalInfo: Text(ship.speedLevel),
             ),
             CupertinoListTile(
-              title: Text("火力"),
+              title: Text(S.current.KCDashboardShipFirepower),
               additionalInfo: Text('${ship.attack?[0]}/${ship.attack?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("雷装"),
+              title: Text(S.current.KCDashboardShipTorpedo),
               additionalInfo: Text('${ship.attackT?[0]}/${ship.attackT?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("対空"),
+              title: Text(S.current.KCDashboardShipAA),
               additionalInfo:
                   Text('${ship.antiAircraft?[0]}/${ship.antiAircraft?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("装甲"),
+              title: Text(S.current.KCDashboardShipArmor),
               additionalInfo: Text('${ship.armor?[0]}/${ship.armor?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("回避"),
+              title: Text(S.current.KCDashboardShipEvasion),
               additionalInfo: Text('${ship.evasion?[0]}/${ship.evasion?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("対潜"),
+              title: Text(S.current.KCDashboardShipASW),
               additionalInfo:
                   Text('${ship.antiSubmarine?[0]}/${ship.antiSubmarine?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("索敵"),
+              title: Text(S.current.KCDashboardShipScout),
               additionalInfo: Text('${ship.scout?[0]}/${ship.scout?[1]}'),
             ),
             CupertinoListTile(
-              title: Text("射程"),
+              title: Text(S.current.KCDashboardShipRange),
               additionalInfo: Text(ship.attackRangeLevel),
             ),
             CupertinoListTile(
-              title: Text("運"),
+              title: Text(S.current.KCDashboardShipLuck),
               additionalInfo: Text('${ship.luck?[0]}/${ship.luck?[1]}'),
             ),
             CupertinoListTile(
@@ -509,19 +510,3 @@ class ShipInfo extends StatelessWidget {
   }
 }
 
-class ScrollViewPageWithScrollbar extends StatelessWidget {
-  const ScrollViewPageWithScrollbar({super.key, required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoScrollbar(
-      child: CustomScrollView(slivers: [
-        SliverList(
-          delegate: SliverChildListDelegate([child]),
-        ),
-      ]),
-    );
-  }
-}

@@ -48,8 +48,7 @@ class ReqCombinedBattleECBattleApiDataEntity
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_air_base_attack') List<AirBaseAttackRound?>? apiAirBaseAttack,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku')
-    ReqCombinedBattleECBattleApiDataApiKoukuEntity? apiKouku,
+    @JsonKey(name: 'api_kouku') CombineAircraftRound? apiKouku,
     @JsonKey(name: 'api_support_flag') int? apiSupportFlag,
     @JsonKey(name: 'api_support_info') dynamic apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
@@ -61,6 +60,8 @@ class ReqCombinedBattleECBattleApiDataEntity
     @JsonKey(name: 'api_raigeki') TorpedoRoundEntity? apiRaigeki,
     @JsonKey(name: 'api_hougeki2') GunFireRoundEntity? apiHougeki2,
     @JsonKey(name: 'api_hougeki3') GunFireRoundEntity? apiHougeki3,
+    AirBaseJetAircraftRound? apiAirBaseInjection,
+    CombineAircraftRound? apiInjectionKouku,
   }) = _ReqCombinedBattleECBattleApiDataEntity;
 
   factory ReqCombinedBattleECBattleApiDataEntity.fromJson(
@@ -68,20 +69,4 @@ class ReqCombinedBattleECBattleApiDataEntity
       _$ReqCombinedBattleECBattleApiDataEntityFromJson(json);
 }
 
-@unfreezed
-class ReqCombinedBattleECBattleApiDataApiKoukuEntity
-    with _$ReqCombinedBattleECBattleApiDataApiKoukuEntity
-    implements AircraftRoundDoubleEnemy {
-  factory ReqCombinedBattleECBattleApiDataApiKoukuEntity({
-    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
-    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
-    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
-    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
-    @JsonKey(name: 'api_stage3_combined')
-    BattleDataAircraftRoundStage3? apiStage3Combined,
-  }) = _ReqCombinedBattleECBattleApiDataApiKoukuEntity;
 
-  factory ReqCombinedBattleECBattleApiDataApiKoukuEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqCombinedBattleECBattleApiDataApiKoukuEntityFromJson(json);
-}

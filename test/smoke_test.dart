@@ -13,6 +13,7 @@ import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_inappwebview_ios/flutter_inappwebview_ios.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,6 +28,7 @@ void main() {
     testWidgets("ToolsPage smoke", (tester) async {
       SharedPreferences.setMockInitialValues({});
       await app_main.init();
+      InAppWebViewPlatform.instance = IOSInAppWebViewPlatform();
       final CookieManager cookieManager = CookieManager.instance();
       await tester.pumpWidget(ProviderScope(child: MaterialApp(
           locale: const Locale.fromSubtags(),

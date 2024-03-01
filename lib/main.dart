@@ -35,7 +35,6 @@ Future<void> main() async {
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
     await InAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
-  WebView.debugLoggingSettings.enabled = false;
   await notification.init();
 
   await init();

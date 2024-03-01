@@ -2,6 +2,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/quest_assistant.dart';
 import 'package:conning_tower/pages/dashboard_pages/squad_info.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -79,7 +80,7 @@ class _QuestInfoPageState extends ConsumerState<QuestInfoPage> {
                   if (questList.isEmpty) {
                     return Container();
                   }
-                  return ScrollViewPageWithScrollbar(
+                  return ScrollViewWithCupertinoScrollbar(
                     child: CupertinoListSection.insetGrouped(
                       margin: _sectionMargin,
                       children: List.generate(

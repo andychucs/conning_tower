@@ -22,13 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "URLをロード: ${url}";
 
-  static String m1(url) => "Now navigation to ${url}";
+  static String m1(count) => "艦娘数: ${count}";
 
-  static String m2(url) => "ページの読み込みが完了しました: ${url}";
+  static String m2(url) => "Now navigation to ${url}";
 
-  static String m3(url) => "ページの読み込み開始:${url}";
+  static String m3(url) => "ページの読み込みが完了しました: ${url}";
 
-  static String m4(taskTitle) => "${taskTitle} が完了しました。";
+  static String m4(url) => "ページの読み込み開始:${url}";
+
+  static String m5(taskTitle) => "${taskTitle} が完了しました。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -139,6 +141,81 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardQuestInProgress":
             MessageLookupByLibrary.simpleMessage("遂行中"),
         "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("未受諾"),
+        "KCDashboardShipAA": MessageLookupByLibrary.simpleMessage("対空"),
+        "KCDashboardShipASW": MessageLookupByLibrary.simpleMessage("対潜"),
+        "KCDashboardShipAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
+        "KCDashboardShipArmor": MessageLookupByLibrary.simpleMessage("装甲"),
+        "KCDashboardShipCondition": MessageLookupByLibrary.simpleMessage("疲労度"),
+        "KCDashboardShipEvasion": MessageLookupByLibrary.simpleMessage("回避"),
+        "KCDashboardShipFirepower": MessageLookupByLibrary.simpleMessage("火力"),
+        "KCDashboardShipFuel": MessageLookupByLibrary.simpleMessage("燃料"),
+        "KCDashboardShipHP": MessageLookupByLibrary.simpleMessage("耐久"),
+        "KCDashboardShipLuck": MessageLookupByLibrary.simpleMessage("運"),
+        "KCDashboardShipPlaneCapacity":
+            MessageLookupByLibrary.simpleMessage("搭載"),
+        "KCDashboardShipRange": MessageLookupByLibrary.simpleMessage("射程"),
+        "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("索敵"),
+        "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("速力"),
+        "KCDashboardShipTorpedo": MessageLookupByLibrary.simpleMessage("雷装"),
+        "KCDashboardShipTotalAttack":
+            MessageLookupByLibrary.simpleMessage("火力雷装合計"),
+        "KCDashboardShipUpgradeLevel":
+            MessageLookupByLibrary.simpleMessage("改造レベル"),
+        "KCDashboardShipViewerCount": m1,
+        "KCDashboardShipViewerFilterShipClass":
+            MessageLookupByLibrary.simpleMessage("艦級"),
+        "KCDashboardShipViewerFilterShipSlot":
+            MessageLookupByLibrary.simpleMessage("装備"),
+        "KCDashboardShipViewerFilterShipSlotHaveExSlot":
+            MessageLookupByLibrary.simpleMessage("補強増設済み"),
+        "KCDashboardShipViewerFilterShipSlotNoExSlot":
+            MessageLookupByLibrary.simpleMessage("補強増設していない"),
+        "KCDashboardShipViewerFilterShipStatus":
+            MessageLookupByLibrary.simpleMessage("状態"),
+        "KCDashboardShipViewerFilterShipStatusCanUpgrade":
+            MessageLookupByLibrary.simpleMessage("改造可能"),
+        "KCDashboardShipViewerFilterShipStatusUpgraded":
+            MessageLookupByLibrary.simpleMessage("改造済み"),
+        "KCDashboardShipViewerFilterShipStatusWaitUpgrade":
+            MessageLookupByLibrary.simpleMessage("改造準備完了"),
+        "KCDashboardShipViewerFilterShipType":
+            MessageLookupByLibrary.simpleMessage("艦種"),
+        "KCDashboardShipViewerFilterSpeed":
+            MessageLookupByLibrary.simpleMessage("速力"),
+        "KCDashboardShipViewerSortAAAsc":
+            MessageLookupByLibrary.simpleMessage("対空昇順"),
+        "KCDashboardShipViewerSortAADesc":
+            MessageLookupByLibrary.simpleMessage("対空降順"),
+        "KCDashboardShipViewerSortASWAsc":
+            MessageLookupByLibrary.simpleMessage("対潜昇順"),
+        "KCDashboardShipViewerSortASWDesc":
+            MessageLookupByLibrary.simpleMessage("対潜降順"),
+        "KCDashboardShipViewerSortArmorAsc":
+            MessageLookupByLibrary.simpleMessage("装甲昇順"),
+        "KCDashboardShipViewerSortArmorDesc":
+            MessageLookupByLibrary.simpleMessage("装甲降順"),
+        "KCDashboardShipViewerSortAttackAsc":
+            MessageLookupByLibrary.simpleMessage("火力雷装昇順"),
+        "KCDashboardShipViewerSortAttackDesc":
+            MessageLookupByLibrary.simpleMessage("火力雷装降順"),
+        "KCDashboardShipViewerSortConditionAsc":
+            MessageLookupByLibrary.simpleMessage("疲労度昇順"),
+        "KCDashboardShipViewerSortConditionDesc":
+            MessageLookupByLibrary.simpleMessage("疲労度降順"),
+        "KCDashboardShipViewerSortLevelAsc":
+            MessageLookupByLibrary.simpleMessage("レベル昇順"),
+        "KCDashboardShipViewerSortLevelDesc":
+            MessageLookupByLibrary.simpleMessage("レベル降順"),
+        "KCDashboardShipViewerSortLuckAsc":
+            MessageLookupByLibrary.simpleMessage("運昇順"),
+        "KCDashboardShipViewerSortLuckDesc":
+            MessageLookupByLibrary.simpleMessage("運降順"),
+        "KCDashboardShipViewerSortUIDAsc":
+            MessageLookupByLibrary.simpleMessage("獲得日昇順"),
+        "KCDashboardShipViewerSortUIDDesc":
+            MessageLookupByLibrary.simpleMessage("獲得日降順"),
+        "KCDashboardShipViewerTitle":
+            MessageLookupByLibrary.simpleMessage("艦娘"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -147,17 +224,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームのロード中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("ゲームのリフレッシュは中断されました"),
-        "KCViewFuncMsgNavi": m1,
+        "KCViewFuncMsgNavi": m2,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("ゲームの読み込みに失敗しました"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードはまだ完了しません"),
-        "KCViewFuncMsgPageFinished": m2,
+        "KCViewFuncMsgPageFinished": m3,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
-        "KCViewFuncMsgPageStart": m3,
+        "KCViewFuncMsgPageStart": m4,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("データリスナー"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日誌"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
@@ -209,7 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
-        "TaskCompleted": m4,
+        "TaskCompleted": m5,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("タスク"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("タスクが追加されていません"),
         "TaskNotificationAdded":
@@ -222,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "タスクリマインダー機能により、タスクのリマインダーを追加および管理できます。\n\n- データソースを追加するには、右上隅の[データソースの追加]ボタンをクリックし、有効なURLまたはYAML/JSONの内容を入力します。\n\n- 変更を保存するには、「保存」ボタンをクリックしてください。\n\n- 追加されたタスクはリストに表示されます。\n\n- タスクをダブルクリックすると、そのタスクのリマインダー通知が追加されます。\n\n- タスク情報ページに入るには、タスクをクリックして詳細情報を表示します。\n\n- タスク情報ページで、右上隅の上向き矢印ボタンをクリックすると、タスクをタスクリストのトップに固定できます。\n\n- 何か問題がある場合は、サポートチームにお問い合わせください。\n\nお楽しみください！"),
         "TasksNumOverLimit":
             MessageLookupByLibrary.simpleMessage("タスク数が制限を超えています。"),
+        "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("装備"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("高速+"),

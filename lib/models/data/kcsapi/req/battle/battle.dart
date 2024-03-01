@@ -11,6 +11,8 @@ export 'req_practice_midnight_battle_entity.dart';
 export 'req_sortie_ld_airbattle_entity.dart';
 export 'req_combined_battle_result_entity.dart';
 export 'req_battle_midnight_sp_midnight_entity.dart';
+export 'req_sortie_airbattle_entity.dart';
+export 'req_combined_battle_ec_midnight_battle_entity.dart';
 
 part 'battle.freezed.dart';
 
@@ -199,4 +201,73 @@ class AirBasePlane with _$AirBasePlane {
 
   factory AirBasePlane.fromJson(Map<String, dynamic> json) =>
       _$AirBasePlaneFromJson(json);
+}
+
+@unfreezed
+class NightBattleGunFireRoundEntity
+    with _$NightBattleGunFireRoundEntity
+    implements GunFireRound {
+  factory NightBattleGunFireRoundEntity({
+    @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
+    @JsonKey(name: 'api_at_list') List<int>? apiAtList,
+    @JsonKey(name: 'api_n_mother_list') List<int>? apiNMotherList,
+    @JsonKey(name: 'api_df_list') List<List<int>>? apiDfList,
+    @JsonKey(name: 'api_si_list') List<dynamic>? apiSiList,
+    @JsonKey(name: 'api_cl_list') List<List<int>>? apiClList,
+    @JsonKey(name: 'api_sp_list') List<int>? apiSpList,
+    @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
+  }) = _NightBattleGunFireRoundEntity;
+
+  factory NightBattleGunFireRoundEntity.fromJson(
+      Map<String, dynamic> json) =>
+      _$NightBattleGunFireRoundEntityFromJson(json);
+}
+
+
+@unfreezed
+class AirBaseJetAircraftRound with _$AirBaseJetAircraftRound {
+  factory AirBaseJetAircraftRound({
+    dynamic apiPlaneFrom,
+    List<AirBasePlane?>? apiAirBaseData,
+    BattleDataAircraftRoundStage1? apiStage1,
+    BattleDataAircraftRoundStage2? apiStage2,
+    BattleDataAircraftRoundStage3? apiStage3,
+    BattleDataAircraftRoundStage3? apiStage3Combined,
+  }) = _AirBaseJetAircraftRound;
+
+  factory AirBaseJetAircraftRound.fromJson(Map<String, dynamic> json) =>
+      _$AirBaseJetAircraftRoundFromJson(json);
+}
+
+@unfreezed
+class NormalAircraftRound
+    with _$NormalAircraftRound implements AircraftRound{
+  factory NormalAircraftRound({
+    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
+    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
+    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
+  }) = _NormalAircraftRound;
+
+  factory NormalAircraftRound.fromJson(
+      Map<String, dynamic> json) =>
+      _$NormalAircraftRoundFromJson(json);
+}
+
+@unfreezed
+class CombineAircraftRound
+    with _$CombineAircraftRound
+    implements AircraftRoundDoubleEnemy {
+  factory CombineAircraftRound({
+    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
+    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
+    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
+    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
+    @JsonKey(name: 'api_stage3_combined')
+    BattleDataAircraftRoundStage3? apiStage3Combined,
+  }) = _CombineAircraftRound;
+
+  factory CombineAircraftRound.fromJson(
+      Map<String, dynamic> json) =>
+      _$CombineAircraftRoundFromJson(json);
 }

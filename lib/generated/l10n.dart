@@ -800,6 +800,456 @@ class S {
     );
   }
 
+  /// `Anti-Air`
+  String get KCDashboardShipAA {
+    return Intl.message(
+      'Anti-Air',
+      name: 'KCDashboardShipAA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Anti-Sub Warfare`
+  String get KCDashboardShipASW {
+    return Intl.message(
+      'Anti-Sub Warfare',
+      name: 'KCDashboardShipASW',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ammo`
+  String get KCDashboardShipAmmo {
+    return Intl.message(
+      'Ammo',
+      name: 'KCDashboardShipAmmo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Armor`
+  String get KCDashboardShipArmor {
+    return Intl.message(
+      'Armor',
+      name: 'KCDashboardShipArmor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Condition`
+  String get KCDashboardShipCondition {
+    return Intl.message(
+      'Condition',
+      name: 'KCDashboardShipCondition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Evasion`
+  String get KCDashboardShipEvasion {
+    return Intl.message(
+      'Evasion',
+      name: 'KCDashboardShipEvasion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Firepower`
+  String get KCDashboardShipFirepower {
+    return Intl.message(
+      'Firepower',
+      name: 'KCDashboardShipFirepower',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fuel`
+  String get KCDashboardShipFuel {
+    return Intl.message(
+      'Fuel',
+      name: 'KCDashboardShipFuel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HP`
+  String get KCDashboardShipHP {
+    return Intl.message(
+      'HP',
+      name: 'KCDashboardShipHP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Luck`
+  String get KCDashboardShipLuck {
+    return Intl.message(
+      'Luck',
+      name: 'KCDashboardShipLuck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plane Capacity`
+  String get KCDashboardShipPlaneCapacity {
+    return Intl.message(
+      'Plane Capacity',
+      name: 'KCDashboardShipPlaneCapacity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Range`
+  String get KCDashboardShipRange {
+    return Intl.message(
+      'Range',
+      name: 'KCDashboardShipRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LoS`
+  String get KCDashboardShipScout {
+    return Intl.message(
+      'LoS',
+      name: 'KCDashboardShipScout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speed`
+  String get KCDashboardShipSpeed {
+    return Intl.message(
+      'Speed',
+      name: 'KCDashboardShipSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Torpedo`
+  String get KCDashboardShipTorpedo {
+    return Intl.message(
+      'Torpedo',
+      name: 'KCDashboardShipTorpedo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Firepower and Torpedo`
+  String get KCDashboardShipTotalAttack {
+    return Intl.message(
+      'Firepower and Torpedo',
+      name: 'KCDashboardShipTotalAttack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remodel Level`
+  String get KCDashboardShipUpgradeLevel {
+    return Intl.message(
+      'Remodel Level',
+      name: 'KCDashboardShipUpgradeLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fleet Girls: {count}`
+  String KCDashboardShipViewerCount(Object count) {
+    return Intl.message(
+      'Fleet Girls: $count',
+      name: 'KCDashboardShipViewerCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Ship Class`
+  String get KCDashboardShipViewerFilterShipClass {
+    return Intl.message(
+      'Ship Class',
+      name: 'KCDashboardShipViewerFilterShipClass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ship Slot`
+  String get KCDashboardShipViewerFilterShipSlot {
+    return Intl.message(
+      'Ship Slot',
+      name: 'KCDashboardShipViewerFilterShipSlot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ex Slot`
+  String get KCDashboardShipViewerFilterShipSlotHaveExSlot {
+    return Intl.message(
+      'Ex Slot',
+      name: 'KCDashboardShipViewerFilterShipSlotHaveExSlot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Ex Slot`
+  String get KCDashboardShipViewerFilterShipSlotNoExSlot {
+    return Intl.message(
+      'No Ex Slot',
+      name: 'KCDashboardShipViewerFilterShipSlotNoExSlot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ship Status`
+  String get KCDashboardShipViewerFilterShipStatus {
+    return Intl.message(
+      'Ship Status',
+      name: 'KCDashboardShipViewerFilterShipStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Ready to Remodel`
+  String get KCDashboardShipViewerFilterShipStatusCanUpgrade {
+    return Intl.message(
+      'Not Ready to Remodel',
+      name: 'KCDashboardShipViewerFilterShipStatusCanUpgrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remodeled`
+  String get KCDashboardShipViewerFilterShipStatusUpgraded {
+    return Intl.message(
+      'Remodeled',
+      name: 'KCDashboardShipViewerFilterShipStatusUpgraded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready to Remodel`
+  String get KCDashboardShipViewerFilterShipStatusWaitUpgrade {
+    return Intl.message(
+      'Ready to Remodel',
+      name: 'KCDashboardShipViewerFilterShipStatusWaitUpgrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ship Type`
+  String get KCDashboardShipViewerFilterShipType {
+    return Intl.message(
+      'Ship Type',
+      name: 'KCDashboardShipViewerFilterShipType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speed`
+  String get KCDashboardShipViewerFilterSpeed {
+    return Intl.message(
+      'Speed',
+      name: 'KCDashboardShipViewerFilterSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AA Ascending`
+  String get KCDashboardShipViewerSortAAAsc {
+    return Intl.message(
+      'AA Ascending',
+      name: 'KCDashboardShipViewerSortAAAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AA Descending`
+  String get KCDashboardShipViewerSortAADesc {
+    return Intl.message(
+      'AA Descending',
+      name: 'KCDashboardShipViewerSortAADesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ASW Ascending`
+  String get KCDashboardShipViewerSortASWAsc {
+    return Intl.message(
+      'ASW Ascending',
+      name: 'KCDashboardShipViewerSortASWAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ASW Descending`
+  String get KCDashboardShipViewerSortASWDesc {
+    return Intl.message(
+      'ASW Descending',
+      name: 'KCDashboardShipViewerSortASWDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Armor Ascending`
+  String get KCDashboardShipViewerSortArmorAsc {
+    return Intl.message(
+      'Armor Ascending',
+      name: 'KCDashboardShipViewerSortArmorAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Armor Descending`
+  String get KCDashboardShipViewerSortArmorDesc {
+    return Intl.message(
+      'Armor Descending',
+      name: 'KCDashboardShipViewerSortArmorDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Attack Ascending`
+  String get KCDashboardShipViewerSortAttackAsc {
+    return Intl.message(
+      'Total Attack Ascending',
+      name: 'KCDashboardShipViewerSortAttackAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Attack Descending`
+  String get KCDashboardShipViewerSortAttackDesc {
+    return Intl.message(
+      'Total Attack Descending',
+      name: 'KCDashboardShipViewerSortAttackDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Condition Ascending`
+  String get KCDashboardShipViewerSortConditionAsc {
+    return Intl.message(
+      'Condition Ascending',
+      name: 'KCDashboardShipViewerSortConditionAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Condition Descending`
+  String get KCDashboardShipViewerSortConditionDesc {
+    return Intl.message(
+      'Condition Descending',
+      name: 'KCDashboardShipViewerSortConditionDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level Ascending`
+  String get KCDashboardShipViewerSortLevelAsc {
+    return Intl.message(
+      'Level Ascending',
+      name: 'KCDashboardShipViewerSortLevelAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level Descending`
+  String get KCDashboardShipViewerSortLevelDesc {
+    return Intl.message(
+      'Level Descending',
+      name: 'KCDashboardShipViewerSortLevelDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Luck Ascending`
+  String get KCDashboardShipViewerSortLuckAsc {
+    return Intl.message(
+      'Luck Ascending',
+      name: 'KCDashboardShipViewerSortLuckAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Luck Descending`
+  String get KCDashboardShipViewerSortLuckDesc {
+    return Intl.message(
+      'Luck Descending',
+      name: 'KCDashboardShipViewerSortLuckDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oldest First`
+  String get KCDashboardShipViewerSortUIDAsc {
+    return Intl.message(
+      'Oldest First',
+      name: 'KCDashboardShipViewerSortUIDAsc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Newest First`
+  String get KCDashboardShipViewerSortUIDDesc {
+    return Intl.message(
+      'Newest First',
+      name: 'KCDashboardShipViewerSortUIDDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fleet Girls`
+  String get KCDashboardShipViewerTitle {
+    return Intl.message(
+      'Fleet Girls',
+      name: 'KCDashboardShipViewerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Already in game window!`
   String get KCViewFuncMsgAlreadyGameRedirect {
     return Intl.message(
@@ -1345,6 +1795,16 @@ class S {
     return Intl.message(
       'request tasks number over limit.',
       name: 'TasksNumOverLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get TextAll {
+    return Intl.message(
+      'All',
+      name: 'TextAll',
       desc: '',
       args: [],
     );
