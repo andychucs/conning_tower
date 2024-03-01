@@ -13,5 +13,6 @@ class DataInfo with _$DataInfo {
     Map<int, GetDataApiDataApiMstMissionEntity>? missionInfo,
     Map<int, MapArea>? mapAreaInfo,
     Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo,
+    List<GetDataApiDataApiMstStypeEntity>? shipTypeList,
   }) = _DataInfo;
 }

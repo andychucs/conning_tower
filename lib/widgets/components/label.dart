@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AttributeLabel extends StatelessWidget {
   const AttributeLabel.vertical({
@@ -48,6 +49,36 @@ class AttributeLabel extends StatelessWidget {
           maxLines: 1,
         )
       ],
+    );
+  }
+}
+
+
+class BorderLabel extends StatelessWidget {
+  final String text;
+  final BorderRadius? borderRadius;
+  final Color color;
+
+  const BorderLabel({
+    super.key,
+    required this.text,
+    required this.color,
+    this.borderRadius,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: color),
+        borderRadius: borderRadius,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: color),
+      ),
     );
   }
 }

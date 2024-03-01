@@ -45,9 +45,27 @@ class Ship with _$Ship {
     // required int apiLocked,
     // required int apiLockedEquip,
     // required int apiSallyArea,
+    List<int>? afterIds,
+    int? upgradeLevel,
+    int? shipType,
   }) = _Ship;
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
+
+  bool get haveSlotEx => slotEx != 0 && slotEx != null;
+
+  int get totalAttack => (attack?[0] ?? 0) + (attackT?[0] ?? 0);
+
+  bool get canUpgrade => (afterIds ?? []).isNotEmpty;
+
+  bool waitUpgrade() {
+    if (upgradeLevel != null) {
+      if (level > upgradeLevel! && upgradeLevel != 0) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   void onHPChange(int damage) {
     nowHP = nowHP + damage;
@@ -122,7 +140,7 @@ class Ship with _$Ship {
     return 'N/A';
   }
 
-  factory Ship.fromApi(ShipData data, String shipName) {
+  factory Ship.fromApi(ShipData data, String shipName, {List<int>? afterIds, int? upgradeLevel, int? shipType}) {
     return Ship(
       uid: data.apiId,
       shipId: data.apiShipId,
@@ -148,6 +166,9 @@ class Ship with _$Ship {
       slot: data.apiSlot,
       slotEx: data.apiSlotEx,
       onSlot: data.apiOnslot,
+      afterIds: afterIds,
+      upgradeLevel: upgradeLevel,
+      shipType: shipType,
     );
   }
 }

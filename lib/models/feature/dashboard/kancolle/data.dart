@@ -190,6 +190,7 @@ class KancolleData {
         for (var item in model.apiData.apiMstSlotitem)
           item.apiId: item
       };
+      dataInfo.shipTypeList = model.apiData.apiMstStype;
     }
 
     if (model is ReqMissionStartEntity) {
@@ -347,11 +348,30 @@ class KancolleData {
   void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
     List<Ship> allShips = [];
     for (var data in apiShip) {
-      String shipName = dataInfo.shipInfo?[data.apiShipId]?.apiName ??
+      final shipData = dataInfo.shipInfo?[data.apiShipId];
+
+      final afterId = int.parse(shipData?.apiAftershipid ?? '0');
+      List<int> afterIds = getAfterIds([data.apiShipId], afterId);
+      afterIds.remove(data.apiShipId);
+
+      String shipName = shipData?.apiName ??
           "Ship No.${data.apiShipId}";
-      allShips.add(Ship.fromApi(data, shipName));
+
+      allShips.add(Ship.fromApi(
+        data,
+        shipName,
+        afterIds: afterIds,
+        upgradeLevel: shipData?.apiAfterlv,
+        shipType: shipData?.apiStype,
+      ));
     }
     fleet.ships = allShips;
+  }
+
+  List<int> getAfterIds(List<int> ids, int nextId){
+    if (ids.contains(nextId) || nextId == 0) return ids;
+    ids.add(nextId);
+    return getAfterIds(ids, nextId);
   }
 
   void updateOperationQueue(DeckData data, int id) {
