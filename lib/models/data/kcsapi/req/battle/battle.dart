@@ -12,6 +12,7 @@ export 'req_sortie_ld_airbattle_entity.dart';
 export 'req_combined_battle_result_entity.dart';
 export 'req_battle_midnight_sp_midnight_entity.dart';
 export 'req_sortie_airbattle_entity.dart';
+export 'req_combined_battle_ec_midnight_battle_entity.dart';
 
 part 'battle.freezed.dart';
 
@@ -200,4 +201,24 @@ class AirBasePlane with _$AirBasePlane {
 
   factory AirBasePlane.fromJson(Map<String, dynamic> json) =>
       _$AirBasePlaneFromJson(json);
+}
+
+@unfreezed
+class NightBattleGunFireRoundEntity
+    with _$NightBattleGunFireRoundEntity
+    implements GunFireRound {
+  factory NightBattleGunFireRoundEntity({
+    @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
+    @JsonKey(name: 'api_at_list') List<int>? apiAtList,
+    @JsonKey(name: 'api_n_mother_list') List<int>? apiNMotherList,
+    @JsonKey(name: 'api_df_list') List<List<int>>? apiDfList,
+    @JsonKey(name: 'api_si_list') List<dynamic>? apiSiList,
+    @JsonKey(name: 'api_cl_list') List<List<int>>? apiClList,
+    @JsonKey(name: 'api_sp_list') List<int>? apiSpList,
+    @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
+  }) = _NightBattleGunFireRoundEntity;
+
+  factory NightBattleGunFireRoundEntity.fromJson(
+      Map<String, dynamic> json) =>
+      _$NightBattleGunFireRoundEntityFromJson(json);
 }

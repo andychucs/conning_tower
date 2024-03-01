@@ -41,8 +41,7 @@ class ReqBattleMidnightBattleApiDataEntity
     @JsonKey(name: 'api_balloon_cell') required int apiBalloonCell,
     @JsonKey(name: 'api_touch_plane') required List<int> apiTouchPlane,
     @JsonKey(name: 'api_flare_pos') required List<int> apiFlarePos,
-    @JsonKey(name: 'api_hougeki')
-    ReqBattleMidnightBattleApiDataApiHougekiEntity? apiHougeki,
+    @JsonKey(name: 'api_hougeki') NightBattleGunFireRoundEntity? apiHougeki,
   }) = _ReqBattleMidnightBattleApiDataEntity;
 
   factory ReqBattleMidnightBattleApiDataEntity.fromJson(
@@ -50,22 +49,4 @@ class ReqBattleMidnightBattleApiDataEntity
       _$ReqBattleMidnightBattleApiDataEntityFromJson(json);
 }
 
-@unfreezed
-class ReqBattleMidnightBattleApiDataApiHougekiEntity
-    with _$ReqBattleMidnightBattleApiDataApiHougekiEntity
-    implements GunFireRound {
-  factory ReqBattleMidnightBattleApiDataApiHougekiEntity({
-    @JsonKey(name: 'api_at_eflag') List<int>? apiAtEflag,
-    @JsonKey(name: 'api_at_list') List<int>? apiAtList,
-    @JsonKey(name: 'api_n_mother_list') List<int>? apiNMotherList,
-    @JsonKey(name: 'api_df_list') List<List<int>>? apiDfList,
-    @JsonKey(name: 'api_si_list') List<dynamic>? apiSiList,
-    @JsonKey(name: 'api_cl_list') List<List<int>>? apiClList,
-    @JsonKey(name: 'api_sp_list') List<int>? apiSpList,
-    @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
-  }) = _ReqBattleMidnightBattleApiDataApiHougekiEntity;
 
-  factory ReqBattleMidnightBattleApiDataApiHougekiEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqBattleMidnightBattleApiDataApiHougekiEntityFromJson(json);
-}

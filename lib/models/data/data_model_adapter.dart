@@ -28,6 +28,7 @@ class DataModelAdapter {
     GetMemberQuestListEntity.source: (json) => GetMemberQuestListEntity.fromJson(json),
     ReqBattleMidnightSpMidnightEntity.source: (json) => ReqBattleMidnightSpMidnightEntity.fromJson(json),
     ReqSortieAirbattleEntity.source: (json) => ReqSortieAirbattleEntity.fromJson(json),
+    ReqCombinedBattleECMidnightBattleEntity.source: (json) => ReqCombinedBattleECMidnightBattleEntity.fromJson(json),
   };
 
   dynamic parseData(String source, Map<String, dynamic> json) {
