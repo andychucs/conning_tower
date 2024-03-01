@@ -300,10 +300,12 @@ class ShipInfoInBattle extends StatelessWidget {
               )
             : null,
         trailing: SizedBox(
-          width: 50,
+          width: 56,
           child: Text(
             "${(ship.nowHP >= 0 ? ship.nowHP : 0)}/${ship.maxHP}",
             textAlign: TextAlign.right,
+            maxLines: 1,
+            overflow: TextOverflow.clip,
           ),
         ),
       ),
