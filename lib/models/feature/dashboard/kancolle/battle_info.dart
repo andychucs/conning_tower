@@ -88,21 +88,28 @@ class BattleInfo with _$BattleInfo {
           case 1:
             break;
           case 2:
-            if (data.apiStage3?.apiEdam != null) {
-              for (final (index, damage) in data.apiStage3!.apiEdam!.indexed) {
-                dmgTake(getEShip1(index).hashCode, damage);
-              }
-            }
             if (data.apiStage3Combined != null) {
-              if (data.apiStage3Combined!.apiEdam != null) {
-                for (final (index, damage) in data.apiStage3Combined!.apiEdam!.indexed) {
-                  dmgTake(getEShip2(index).hashCode, damage);
-                }
-              }
+              airBaseDamageCount(data.apiStage3?.apiEdam, data.apiStage3Combined?.apiEdam);
+            } else {
+              airBaseDamageCount(data.apiStage3?.apiEdam, null);
             }
         }
       }
     }
+  }
+
+  void airBaseDamageCount(List<num>? enemyDamageList, List<num>? enemyCombinedDamageList) {
+    if (enemyDamageList != null) {
+      for (final (index, damage) in enemyDamageList.indexed) {
+        dmgTake(getEShip1(index).hashCode, damage);
+      }
+    }
+    if (enemyCombinedDamageList != null) {
+      for (final (index, damage) in enemyCombinedDamageList.indexed) {
+        dmgTake(getEShip2(index).hashCode, damage);
+      }
+    }
+
   }
 
   void aircraftRound(List<int> airStageFlag, AircraftRound airBattle) {
@@ -116,28 +123,32 @@ class BattleInfo with _$BattleInfo {
             log("stage2");
             break;
           case 2:
-            if (airBattle.apiStage3?.apiFdam != null) {
-              for (final (index, damage) in airBattle.apiStage3!.apiFdam!.indexed) {
-                dmgTake(getOShip1(index).hashCode, damage);
-              }
-            }
-            if (airBattle.apiStage3?.apiEdam != null) {
-              for (final (index, damage) in airBattle.apiStage3!.apiEdam!.indexed) {
-                dmgTake(getEShip1(index).hashCode, damage);
-              }
-            }
-            if (airBattle is AircraftRoundDoubleEnemy) {
-              if (airBattle.apiStage3Combined?.apiFdam != null) {
-                for (final (index, damage) in airBattle.apiStage3Combined!.apiFdam!.indexed) {
-                  dmgTake(getOShip2(index).hashCode, damage);
-                }
-              }
-              if (airBattle.apiStage3Combined?.apiEdam != null) {
-                for (final (index, damage) in airBattle.apiStage3Combined!.apiEdam!.indexed) {
-                  dmgTake(getEShip2(index).hashCode, damage);
-                }
-              }
-            }
+            aircraftRoundDamageCount(airBattle);
+        }
+      }
+    }
+  }
+
+  void aircraftRoundDamageCount(AircraftRound airBattle) {
+    if (airBattle.apiStage3?.apiFdam != null) {
+      for (final (index, damage) in airBattle.apiStage3!.apiFdam!.indexed) {
+        dmgTake(getOShip1(index).hashCode, damage);
+      }
+    }
+    if (airBattle.apiStage3?.apiEdam != null) {
+      for (final (index, damage) in airBattle.apiStage3!.apiEdam!.indexed) {
+        dmgTake(getEShip1(index).hashCode, damage);
+      }
+    }
+    if (airBattle is AircraftRoundDoubleEnemy) {
+      if (airBattle.apiStage3Combined?.apiFdam != null) {
+        for (final (index, damage) in airBattle.apiStage3Combined!.apiFdam!.indexed) {
+          dmgTake(getOShip2(index).hashCode, damage);
+        }
+      }
+      if (airBattle.apiStage3Combined?.apiEdam != null) {
+        for (final (index, damage) in airBattle.apiStage3Combined!.apiEdam!.indexed) {
+          dmgTake(getEShip2(index).hashCode, damage);
         }
       }
     }
@@ -480,9 +491,20 @@ class BattleInfo with _$BattleInfo {
     setFormation(data.apiFormation);
 
     /*
-    TODO: api_air_base_injection, api_injection_kouku,
-     api_friendly_battle, api_friendly_kouku, api_support_info
+    TODO: api_friendly_battle, api_friendly_kouku, api_support_info
     */
+
+    //api_air_base_injection
+    if (data.apiAirBaseInjection != null) {
+      assert (data.apiAirBaseInjection?.apiStage3Combined == null);
+      airBaseDamageCount(data.apiAirBaseInjection?.apiStage3?.apiEdam, null);
+    }
+
+    //api_injection_kouku
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
     //api_air_base_attack
     if (data.apiAirBaseAttack != null) {
       for (final airBaseAttack in data.apiAirBaseAttack!) {
