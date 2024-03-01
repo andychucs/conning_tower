@@ -76,6 +76,7 @@ dependencies:
   firebase_crashlytics: ^3.4.2
   objectbox: ^2.4.0
   objectbox_flutter_libs: ^2.4.0
+  pull_down_button: ^0.9.3
 
 dev_dependencies:
   flutter_test:
