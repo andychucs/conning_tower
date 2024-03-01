@@ -76,6 +76,23 @@ class GunFireRoundEntity with _$GunFireRoundEntity implements GunFireRound {
 }
 
 @unfreezed
+class OpeningTorpedoRoundEntity with _$OpeningTorpedoRoundEntity {
+  factory OpeningTorpedoRoundEntity({
+    @JsonKey(name: 'api_frai_list_items') required List<List<int>?> apiFraiListItems,
+    @JsonKey(name: 'api_fcl_list_items') required List<List<num>?> apiFclListItems,
+    @JsonKey(name: 'api_fdam') required List<num> apiFdam,
+    @JsonKey(name: 'api_fydam_list_items') required List<List<num>?> apiFydamListItems,
+    @JsonKey(name: 'api_erai_list_items') required List<List<int>?> apiEraiListItems,
+    @JsonKey(name: 'api_ecl_list_items') required List<List<num>?> apiEclListItems,
+    @JsonKey(name: 'api_edam') required List<num> apiEdam,
+    @JsonKey(name: 'api_eydam_list_items') required List<List<num>?> apiEydamListItems,
+  }) = _OpeningTorpedoRoundEntity;
+
+  factory OpeningTorpedoRoundEntity.fromJson(Map<String, dynamic> json) =>
+      _$OpeningTorpedoRoundEntityFromJson(json);
+}
+
+@unfreezed
 class TorpedoRoundEntity with _$TorpedoRoundEntity {
   factory TorpedoRoundEntity({
     @JsonKey(name: 'api_frai') required List<int> apiFrai,
@@ -90,6 +107,20 @@ class TorpedoRoundEntity with _$TorpedoRoundEntity {
 
   factory TorpedoRoundEntity.fromJson(Map<String, dynamic> json) =>
       _$TorpedoRoundEntityFromJson(json);
+
+  @Deprecated('Use torpedoFireRoundWithItem instead covert to torpedoFireRound')
+  factory TorpedoRoundEntity.fromOpening(OpeningTorpedoRoundEntity opening) {
+    return TorpedoRoundEntity(
+      apiFrai: opening.apiFraiListItems.map((e) => e != null ? e.first : -1).toList(),
+      apiFcl: opening.apiFclListItems.map((e) => e != null ? e.first : 0).toList(),
+      apiFdam: opening.apiFdam,
+      apiFydam: opening.apiFydamListItems.map((e) => e != null ? e.reduce((value, element) => value + element) : 0).toList(),
+      apiErai: opening.apiEraiListItems.map((e) => e != null ? e.first : -1).toList(),
+      apiEcl: opening.apiEclListItems.map((e) => e != null ? e.first : 0).toList(),
+      apiEdam: opening.apiEdam,
+      apiEydam: opening.apiEydamListItems.map((e) => e != null ? e.first : 0).toList(),
+    );
+  }
 }
 
 @unfreezed
