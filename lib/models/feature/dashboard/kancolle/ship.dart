@@ -277,6 +277,49 @@ class Ship with _$Ship {
     );
   }
 
+  num get losShip {
+    num count = scout?[0] ?? 0;
+    final allEquipment = [...equipment ?? [], ...exEquipment ?? []];
+    for (final equip in allEquipment) {
+      if (equip.los != null) {
+        count -= equip.los!;
+      }
+    }
+    return count;
+  }
+
+  num get losEquip {
+    num count = 0;
+    final allEquipment = [...equipment ?? [], ...exEquipment ?? []];
+    for (final equip in allEquipment) {
+      switch (equip.type?[2]) {
+        case 8:
+          count += equip.los! * 0.8;
+          break;
+        case 9:
+          count += equip.los! * 1.0;
+          break;
+        case 10:
+          count += (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2;
+          break;
+        case 11:
+          count += (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1;
+          break;
+        case 12:
+          count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
+          break;
+        case 13:
+          count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
+          break;
+        default:
+          count += equip.los! * 0.6;
+          break;
+      }
+    }
+
+    return count;
+  }
+
   factory Ship.fromApi(ShipData data, String shipName,
       {List<int>? afterIds,
       int? upgradeLevel,
@@ -346,5 +389,4 @@ class AircraftPower {
   AircraftPower({required this.basic, required this.min, required this.max});
 
   String get text => max == min ? "$min" : "$min~$max";
-
 }
