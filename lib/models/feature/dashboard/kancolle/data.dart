@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
@@ -23,6 +24,7 @@ import 'package:flutter/animation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'equipment.dart';
@@ -92,6 +94,14 @@ class KancolleData {
   void parse(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
+    final json = jsonDecode(data);
+    if (json is Map) {
+      if (json['api_result'] != 1) {
+        final msg = json['api_result_msg'];
+        Fluttertoast.showToast(msg: "$msg");
+        return;
+      }
+    }
     int timestamp = rawData.timestamp;
     String path = source.split("kcsapi").last;
 
@@ -106,13 +116,13 @@ class KancolleData {
       battleLog?.data.add(rawData.decoded);
     }
 
-    dynamic model = DataModelAdapter().parseData(path, jsonDecode(data));
+    dynamic model = DataModelAdapter().parseData(path, json);
 
     if (model == null) {
       if (isBattleAPI(path)) {
         FirebaseCrashlytics.instance.log('no handler data $path : $data');
         try {
-          FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null);
+          FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null, fatal: true);
         } catch (e) {
           FirebaseCrashlytics.instance.log(e.toString());
         }
@@ -327,7 +337,7 @@ class KancolleData {
       if (s.toString().contains('\n')) {
         st = s.toString().split('\n').first;
       }
-      errorMsg = '$errorMsg\n$st\nsource:$source\ndata:$data';
+      errorMsg = '${S.current.DataErrorNotice}\n$errorMsg\n$st\nsource:$source\ndata:$data';
       log(s.toString());
       ref
           .watch(alertStateProvider.notifier)

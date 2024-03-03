@@ -96,6 +96,8 @@
   "@DashboardSetting": {},
   "DataDownloadGuide": "To use the KanColle Data Listener feature, go to Tools → Advanced Game Support, download the data, and turn on the switch (if not already on). In case of any issues, reset the app data in Settings.",
   "@DataDownloadGuide": {},
+  "DataErrorNotice": "Error occurred while parsing data.The data features will not work well. Please contact developer. Also, it may be caused by a network error.",
+  "@DataErrorNotice": {},
   "DesktopMode": "Desktop Mode",
   "@DesktopMode": {},
   "DocsNewUrl": "https://conntower.github.io/docs/en/new",

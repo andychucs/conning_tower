@@ -103,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ホームページでダッシュボードを表示"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "艦これデータリスナー機能を使用するには、ツール→高度なゲームサポートに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。"),
+        "DataErrorNotice": MessageLookupByLibrary.simpleMessage(
+            "データの解析に失敗しました。データに関する機能は正しく動作しません。デバッグを開き、エラーを修正するか、開発者に連絡してください。また、ネットワークエラーが発生した場合は、リロードしてください。"),
         "DesktopMode": MessageLookupByLibrary.simpleMessage("デスクトップモード"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/ja/new"),

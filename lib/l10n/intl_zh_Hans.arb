@@ -96,6 +96,8 @@
   "@DashboardSetting": {},
   "DataDownloadGuide": "如需使用KanColle数据监听功能，为保证功能可用务必前往工具-高级游戏支持中下载数据并打开开关（如果没有打开），如遇异常请在设置中重置应用数据。",
   "@DataDownloadGuide": {},
+  "DataErrorNotice": "解析数据时发生错误，数据功能将不可靠。请联系开发者。也可能是由于网络错误引起的，请尝试刷新。",
+  "@DataErrorNotice": {},
   "DesktopMode": "桌面模式",
   "@DesktopMode": {},
   "DocsNewUrl": "https://conntower.github.io/docs/zh_Hans/new",

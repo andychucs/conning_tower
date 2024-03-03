@@ -97,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("在主頁顯示 Dashboard"),
         "DataDownloadGuide": MessageLookupByLibrary.simpleMessage(
             "如需使用KanColle數據監聽功能，為保證功能可用務必前往工具-高級遊戲支援中下載數據並打開開關（如果沒有打開），如遇異常請在設定中重置應用數據。"),
+        "DataErrorNotice": MessageLookupByLibrary.simpleMessage(
+            "解析數據時發生錯誤，數據功能將不可靠。請與開發者聯繫。也可能是由於網絡錯誤引起的，請嘗試重新載入。"),
         "DesktopMode": MessageLookupByLibrary.simpleMessage("桌面模式"),
         "DocsNewUrl": MessageLookupByLibrary.simpleMessage(
             "https://conntower.github.io/docs/zh_Hant/new"),
