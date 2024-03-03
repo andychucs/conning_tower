@@ -17,6 +17,17 @@ class Squad with _$Squad {
     required List<Ship> ships,
   }) = _Squad;
 
+  String get aircraftPower {
+    num sum = 0;
+    for (final ship in ships) {
+      sum += ship.aircraftPower().min;
+    }
+    if (sum == 0) {
+      return '0';
+    }
+    return '$sum+';
+  }
+
   /* rebuild from poi javascript function: getSaku33(shipsData, equipsData, teitokuLv, mapModifier = 1.0, slotCount = 6)
   views/utils/game-utils.es
   */

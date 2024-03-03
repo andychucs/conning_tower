@@ -147,8 +147,8 @@ class Ship with _$Ship {
   }
 
   List<AircraftCarry> get aircraftCarry {
+    List<AircraftCarry> aircraftCarry = [];
     if (equipment != null) {
-      List<AircraftCarry> aircraftCarry = [];
       for (final (index, equip) in equipment!.indexed) {
         if (onSlot == null) {
           return [];
@@ -162,7 +162,7 @@ class Ship with _$Ship {
         }
       }
     }
-    return [];
+    return aircraftCarry;
   }
 
   /*

@@ -111,7 +111,6 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                             List<int> levelList = [];
                             List<int> antiSubmarineList = [];
                             List<int> scoutList = [];
-                            List<int> apMinList = [];
                             for (var ship in squad.ships) {
                               speedList.add(ship.speed!);
                               attackList.add(ship.attack![0]);
@@ -119,10 +118,6 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                               levelList.add(ship.level);
                               antiSubmarineList.add(ship.antiSubmarine![0]);
                               scoutList.add(ship.scout![0]);
-                              var ap = ship.aircraftPower();
-                              if (ap.min != 0) {
-                                apMinList.add(ship.aircraftPower().min);
-                              }
                             }
 
                             return ScrollViewWithCupertinoScrollbar(
@@ -142,7 +137,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                                 '${S.current.KCDashboardShipAA}:${antiAircraftList.reduce((value, element) => value + element)}\n'
                                                 '${S.current.KCDashboardShipASW}:${antiSubmarineList.reduce((value, element) => value + element)}\n'
                                                 '${S.current.KCDashboardShipScout}:${scoutList.reduce((value, element) => value + element)}\n'
-                                                '${S.current.KCDashboardShipAircraftPower}:${apMinList.isNotEmpty ? '${apMinList.reduce((value, element) => value + element)}+' : 0}\n'
+                                                '${S.current.KCDashboardShipAircraftPower}:${squad.aircraftPower}\n'
                                                 '${S.current.KCDashboardShipScoutScore}(33式):${squad.los(admiralLevel: data.seaForceBase.commander.level).total.toStringAsFixed(2)}'),
                                             GestureDetector(
                                               child: Icon(
