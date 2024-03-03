@@ -530,6 +530,16 @@ class S {
     );
   }
 
+  /// `Error occurred while parsing data.The data features will not work well. Please contact developer. Also, it may be caused by a network error.`
+  String get DataErrorNotice {
+    return Intl.message(
+      'Error occurred while parsing data.The data features will not work well. Please contact developer. Also, it may be caused by a network error.',
+      name: 'DataErrorNotice',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Desktop Mode`
   String get DesktopMode {
     return Intl.message(
