@@ -98,15 +98,15 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void airBaseDamageCount(List<num>? enemyDamageList, List<num>? enemyCombinedDamageList) {
+  void airBaseDamageCount(List<num?>? enemyDamageList, List<num?>? enemyCombinedDamageList) {
     if (enemyDamageList != null) {
       for (final (index, damage) in enemyDamageList.indexed) {
-        dmgTake(getEShip1(index).hashCode, damage);
+        dmgTake(getEShip1(index).hashCode, damage!);
       }
     }
     if (enemyCombinedDamageList != null) {
       for (final (index, damage) in enemyCombinedDamageList.indexed) {
-        dmgTake(getEShip2(index).hashCode, damage);
+        dmgTake(getEShip2(index).hashCode, damage!);
       }
     }
 
@@ -132,23 +132,23 @@ class BattleInfo with _$BattleInfo {
   void aircraftRoundDamageCount(AircraftRound airBattle) {
     if (airBattle.apiStage3?.apiFdam != null) {
       for (final (index, damage) in airBattle.apiStage3!.apiFdam!.indexed) {
-        dmgTake(getOShip1(index).hashCode, damage);
+        dmgTake(getOShip1(index).hashCode, damage!);
       }
     }
     if (airBattle.apiStage3?.apiEdam != null) {
       for (final (index, damage) in airBattle.apiStage3!.apiEdam!.indexed) {
-        dmgTake(getEShip1(index).hashCode, damage);
+        dmgTake(getEShip1(index).hashCode, damage!);
       }
     }
     if (airBattle is AircraftRoundDoubleEnemy) {
       if (airBattle.apiStage3Combined?.apiFdam != null) {
         for (final (index, damage) in airBattle.apiStage3Combined!.apiFdam!.indexed) {
-          dmgTake(getOShip2(index).hashCode, damage);
+          dmgTake(getOShip2(index).hashCode, damage!);
         }
       }
       if (airBattle.apiStage3Combined?.apiEdam != null) {
         for (final (index, damage) in airBattle.apiStage3Combined!.apiEdam!.indexed) {
-          dmgTake(getEShip2(index).hashCode, damage);
+          dmgTake(getEShip2(index).hashCode, damage!);
         }
       }
     }
