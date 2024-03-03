@@ -161,6 +161,8 @@ class GetDataApiDataApiMstSlotitemEntity
     @JsonKey(name: 'api_luck') required int apiLuck,
     @JsonKey(name: 'api_leng') required int apiLeng,
     @JsonKey(name: 'api_rare') required int apiRare,
+    @JsonKey(name: 'api_cost') int? apiCost,
+    @JsonKey(name: 'api_distance') int? apiDistance,
     @JsonKey(name: 'api_broken') required List<int> apiBroken,
     @JsonKey(name: 'api_usebull') required String apiUsebull,
     @JsonKey(name: 'api_version') int? apiVersion,

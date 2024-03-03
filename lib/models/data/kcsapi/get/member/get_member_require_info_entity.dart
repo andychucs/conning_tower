@@ -69,6 +69,7 @@ class GetMemberRequireInfoApiDataApiSlotItemEntity
     @JsonKey(name: 'api_slotitem_id') required int apiSlotitemId,
     @JsonKey(name: 'api_locked') required int apiLocked,
     @JsonKey(name: 'api_level') required int apiLevel,
+    @JsonKey(name: 'api_alv') int? apiAlv,
   }) = _GetMemberRequireInfoApiDataApiSlotItemEntity;
 
   factory GetMemberRequireInfoApiDataApiSlotItemEntity.fromJson(

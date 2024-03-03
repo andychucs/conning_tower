@@ -820,6 +820,16 @@ class S {
     );
   }
 
+  /// `Aircraft　Power`
+  String get KCDashboardShipAircraftPower {
+    return Intl.message(
+      'Aircraft　Power',
+      name: 'KCDashboardShipAircraftPower',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ammo`
   String get KCDashboardShipAmmo {
     return Intl.message(
@@ -925,6 +935,16 @@ class S {
     return Intl.message(
       'LoS',
       name: 'KCDashboardShipScout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LoS Score`
+  String get KCDashboardShipScoutScore {
+    return Intl.message(
+      'LoS Score',
+      name: 'KCDashboardShipScoutScore',
       desc: '',
       args: [],
     );

@@ -132,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("待执行"),
         "KCDashboardShipAA": MessageLookupByLibrary.simpleMessage("对空"),
         "KCDashboardShipASW": MessageLookupByLibrary.simpleMessage("对潜"),
+        "KCDashboardShipAircraftPower":
+            MessageLookupByLibrary.simpleMessage("制空"),
         "KCDashboardShipAmmo": MessageLookupByLibrary.simpleMessage("弹药"),
         "KCDashboardShipArmor": MessageLookupByLibrary.simpleMessage("护甲"),
         "KCDashboardShipCondition": MessageLookupByLibrary.simpleMessage("疲劳度"),
@@ -144,6 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("搭载"),
         "KCDashboardShipRange": MessageLookupByLibrary.simpleMessage("射程"),
         "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("索敌"),
+        "KCDashboardShipScoutScore":
+            MessageLookupByLibrary.simpleMessage("索敌值"),
         "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("速度"),
         "KCDashboardShipTorpedo": MessageLookupByLibrary.simpleMessage("雷装"),
         "KCDashboardShipTotalAttack":
