@@ -80,6 +80,31 @@ class Equipment with _$Equipment {
 
   bool get isAirCraft => (type?[4] ?? 0) > 0;
 
+  String text({int? onSlot}) {
+    final name = this.name ?? "N/A";
+    late String info;
+
+    if (level! > 0) {
+      info = "$name - ★$level";
+    } else {
+      info = name;
+    }
+
+    if (onSlot == null) {
+      return info;
+    } else {
+      if (onSlot > 0 && isAirCraft) {
+        // aircraft
+        info = "$name : $onSlot";
+        if (level! > 0) {
+          info = "$name - ★$level : $onSlot";
+        }
+      }
+    }
+
+    return info;
+  }
+
 }
 
 

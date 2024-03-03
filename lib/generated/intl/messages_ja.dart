@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardQuestToDo": MessageLookupByLibrary.simpleMessage("未受諾"),
         "KCDashboardShipAA": MessageLookupByLibrary.simpleMessage("対空"),
         "KCDashboardShipASW": MessageLookupByLibrary.simpleMessage("対潜"),
+        "KCDashboardShipAircraftPower":
+            MessageLookupByLibrary.simpleMessage("制空"),
         "KCDashboardShipAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
         "KCDashboardShipArmor": MessageLookupByLibrary.simpleMessage("装甲"),
         "KCDashboardShipCondition": MessageLookupByLibrary.simpleMessage("疲労度"),

@@ -154,6 +154,8 @@
   "@KCDashboardShipAA": {},
   "KCDashboardShipASW": "对潜",
   "@KCDashboardShipASW": {},
+  "KCDashboardShipAircraftPower": "制空",
+  "@KCDashboardShipAircraftPower": {},
   "KCDashboardShipAmmo": "弹药",
   "@KCDashboardShipAmmo": {},
   "KCDashboardShipArmor": "护甲",

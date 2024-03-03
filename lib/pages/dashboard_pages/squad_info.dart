@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
-import 'package:conning_tower/models/data/kcsapi/item_data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/equipment.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
@@ -111,6 +111,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                             List<int> levelList = [];
                             List<int> antiSubmarineList = [];
                             List<int> scoutList = [];
+                            List<int> apMinList = [];
                             for (var ship in squad.ships) {
                               speedList.add(ship.speed!);
                               attackList.add(ship.attack![0]);
@@ -118,6 +119,10 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                               levelList.add(ship.level);
                               antiSubmarineList.add(ship.antiSubmarine![0]);
                               scoutList.add(ship.scout![0]);
+                              var ap = ship.aircraftPower();
+                              if (ap.min != 0) {
+                                apMinList.add(ship.aircraftPower().min);
+                              }
                             }
 
                             return ScrollViewWithCupertinoScrollbar(
@@ -136,7 +141,9 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                                 '${S.current.KCDashboardShipFirepower}:${attackList.reduce((value, element) => value + element)}\n'
                                                 '${S.current.KCDashboardShipAA}:${antiAircraftList.reduce((value, element) => value + element)}\n'
                                                 '${S.current.KCDashboardShipASW}:${antiSubmarineList.reduce((value, element) => value + element)}\n'
-                                                '${S.current.KCDashboardShipScout}:${scoutList.reduce((value, element) => value + element)}\n'),
+                                                '${S.current.KCDashboardShipScout}:${scoutList.reduce((value, element) => value + element)}\n'
+                                                '${S.current.KCDashboardShipAircraftPower}:${apMinList.reduce((value, element) => value + element)}+\n'
+                                                '${S.current.KCDashboardShipScout}:${squad.los(admiralLevel: data.seaForceBase.commander.level)}'),
                                             GestureDetector(
                                               child: Icon(
                                                 CupertinoIcons.question_circle,
@@ -265,7 +272,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                     )
                                   : SlotItemPage(
                                       squad: squad,
-                                      slotItems: data.fleet.equipment,
+                                      slotMap: data.fleet.equipment,
                                       slotItemInfo: data.dataInfo.slotItemInfo),
                             );
                           }
@@ -306,12 +313,12 @@ class SlotItemPage extends StatelessWidget {
   const SlotItemPage({
     super.key,
     required this.squad,
-    required this.slotItems,
+    required this.slotMap,
     this.slotItemInfo,
   });
 
   final Squad squad;
-  final List<SlotItem> slotItems;
+  final Map<int, Equipment> slotMap;
   final Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo;
 
   @override
@@ -319,9 +326,6 @@ class SlotItemPage extends StatelessWidget {
     final Color dividerColor = CupertinoColors.separator.resolveFrom(context);
     final double dividerHeight = 1.0 / MediaQuery.devicePixelRatioOf(context);
 
-    Map<int, SlotItem> slotMap = {
-      for (final item in slotItems) item.apiId: item
-    };
 
     return CupertinoGroupedSection(
       padding: _sectionMargin,
@@ -352,13 +356,11 @@ class SlotItemPage extends StatelessWidget {
                       children: [
                         for (final (index, item) in ship.slot!.indexed)
                           if (item != -1)
-                            Text(_slotItemInfoText(slotMap[item], slotItemInfo,
-                                onSlot: ship.onSlot?[index])),
+                            Text(slotMap[item]?.text(onSlot: ship.onSlot?[index]) ?? "N/A"),
                         if (ship.slotEx != null &&
                             ship.slotEx != -1 &&
                             ship.slotEx != 0)
-                          Text(_slotItemInfoText(
-                              slotMap[ship.slotEx], slotItemInfo)),
+                          Text(slotMap[ship.slotEx]?.text() ?? "N/A"),
                       ],
                     ),
                   )
@@ -379,18 +381,16 @@ class SlotItemPage extends StatelessWidget {
   }
 }
 
-String _slotItemInfoText(SlotItem? slotItem,
-    Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo,
-    {int? onSlot}) {
-  if (slotItem == null || slotItemInfo == null) {
+@Deprecated("Use Equipment.text instead")
+String _slotItemInfoText(Equipment? slotItem, {int? onSlot}) {
+  if (slotItem == null) {
     return "";
   }
-  final itemInfo = slotItemInfo[slotItem.apiSlotitemId];
-  final name = itemInfo?.apiName ?? "N/A";
+  final name = slotItem.name ?? "N/A";
   late String info;
 
-  if (slotItem.apiLevel > 0) {
-    info = "$name - ★${slotItem.apiLevel}";
+  if (slotItem.level! > 0) {
+    info = "$name - ★${slotItem.level}";
   } else {
     info = name;
   }
@@ -398,11 +398,11 @@ String _slotItemInfoText(SlotItem? slotItem,
   if (onSlot == null) {
     return info;
   } else {
-    if (onSlot > 0 && (itemInfo?.apiType[4] ?? 0) > 0) {
+    if (onSlot > 0 && slotItem.isAirCraft) {
       // aircraft
       info = "$name : $onSlot";
-      if (slotItem.apiLevel > 0) {
-        info = "$name - ★${slotItem.apiLevel} : $onSlot";
+      if (slotItem.level! > 0) {
+        info = "$name - ★${slotItem.level} : $onSlot";
       }
     }
   }
@@ -461,6 +461,10 @@ class ShipInfo extends StatelessWidget {
             CupertinoListTile(
               title: Text(S.current.KCDashboardShipTorpedo),
               additionalInfo: Text('${ship.attackT?[0]}/${ship.attackT?[1]}'),
+            ),
+            CupertinoListTile(
+              title: Text(S.current.KCDashboardShipAircraftPower),
+              additionalInfo: Text(ship.aircraftPower().text)
             ),
             CupertinoListTile(
               title: Text(S.current.KCDashboardShipAA),

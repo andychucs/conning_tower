@@ -155,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardShipAA": MessageLookupByLibrary.simpleMessage("Anti-Air"),
         "KCDashboardShipASW":
             MessageLookupByLibrary.simpleMessage("Anti-Sub Warfare"),
+        "KCDashboardShipAircraftPower":
+            MessageLookupByLibrary.simpleMessage("Aircraft　Power"),
         "KCDashboardShipAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
         "KCDashboardShipArmor": MessageLookupByLibrary.simpleMessage("Armor"),
         "KCDashboardShipCondition":

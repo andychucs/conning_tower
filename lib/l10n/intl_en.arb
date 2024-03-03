@@ -154,6 +154,8 @@
   "@KCDashboardShipAA": {},
   "KCDashboardShipASW": "Anti-Sub Warfare",
   "@KCDashboardShipASW": {},
+  "KCDashboardShipAircraftPower": "Aircraft　Power",
+  "@KCDashboardShipAircraftPower": {},
   "KCDashboardShipAmmo": "Ammo",
   "@KCDashboardShipAmmo": {},
   "KCDashboardShipArmor": "Armor",
