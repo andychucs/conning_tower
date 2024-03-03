@@ -156,14 +156,14 @@ class BattleDataAircraftRoundStage2 with _$BattleDataAircraftRoundStage2 {
 @unfreezed
 class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
   factory BattleDataAircraftRoundStage3({
-    required List<int>? apiFraiFlag,
-    required List<int>? apiEraiFlag,
-    required List<int>? apiFbakFlag,
-    required List<int>? apiEbakFlag,
-    required List<int>? apiFclFlag,
-    required List<int>? apiEclFlag,
-    required List<num>? apiFdam,
-    required List<num>? apiEdam,
+    required List<int?>? apiFraiFlag,
+    required List<int?>? apiEraiFlag,
+    required List<int?>? apiFbakFlag,
+    required List<int?>? apiEbakFlag,
+    required List<int?>? apiFclFlag,
+    required List<int?>? apiEclFlag,
+    required List<num?>? apiFdam,
+    required List<num?>? apiEdam,
     List<dynamic>? apiFSpList,
     List<dynamic>? apiESpList,
   }) = _BattleDataAircraftRoundStage3;
