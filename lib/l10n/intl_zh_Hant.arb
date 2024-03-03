@@ -178,6 +178,8 @@
   "@KCDashboardShipRange": {},
   "KCDashboardShipScout": "索敵",
   "@KCDashboardShipScout": {},
+  "KCDashboardShipScoutScore": "索敵值",
+  "@KCDashboardShipScoutScore": {},
   "KCDashboardShipSpeed": "速度",
   "@KCDashboardShipSpeed": {},
   "KCDashboardShipTorpedo": "雷裝",

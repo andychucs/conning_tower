@@ -142,8 +142,8 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                                 '${S.current.KCDashboardShipAA}:${antiAircraftList.reduce((value, element) => value + element)}\n'
                                                 '${S.current.KCDashboardShipASW}:${antiSubmarineList.reduce((value, element) => value + element)}\n'
                                                 '${S.current.KCDashboardShipScout}:${scoutList.reduce((value, element) => value + element)}\n'
-                                                '${S.current.KCDashboardShipAircraftPower}:${apMinList.reduce((value, element) => value + element)}+\n'
-                                                '${S.current.KCDashboardShipScout}:${squad.los(admiralLevel: data.seaForceBase.commander.level)}'),
+                                                '${S.current.KCDashboardShipAircraftPower}:${apMinList.isNotEmpty ? '${apMinList.reduce((value, element) => value + element)}+' : 0}\n'
+                                                '${S.current.KCDashboardShipScoutScore}(33式):${squad.los(admiralLevel: data.seaForceBase.commander.level).total.toStringAsFixed(2)}'),
                                             GestureDetector(
                                               child: Icon(
                                                 CupertinoIcons.question_circle,

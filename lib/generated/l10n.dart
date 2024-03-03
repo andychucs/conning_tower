@@ -940,6 +940,16 @@ class S {
     );
   }
 
+  /// `LoS Score`
+  String get KCDashboardShipScoutScore {
+    return Intl.message(
+      'LoS Score',
+      name: 'KCDashboardShipScoutScore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Speed`
   String get KCDashboardShipSpeed {
     return Intl.message(

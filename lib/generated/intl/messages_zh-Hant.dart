@@ -146,6 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("搭載"),
         "KCDashboardShipRange": MessageLookupByLibrary.simpleMessage("射程"),
         "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("索敵"),
+        "KCDashboardShipScoutScore":
+            MessageLookupByLibrary.simpleMessage("索敵值"),
         "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("速度"),
         "KCDashboardShipTorpedo": MessageLookupByLibrary.simpleMessage("雷裝"),
         "KCDashboardShipTotalAttack":

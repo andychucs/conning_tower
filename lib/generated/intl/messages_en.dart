@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plane Capacity"),
         "KCDashboardShipRange": MessageLookupByLibrary.simpleMessage("Range"),
         "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("LoS"),
+        "KCDashboardShipScoutScore":
+            MessageLookupByLibrary.simpleMessage("LoS Score"),
         "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("Speed"),
         "KCDashboardShipTorpedo":
             MessageLookupByLibrary.simpleMessage("Torpedo"),

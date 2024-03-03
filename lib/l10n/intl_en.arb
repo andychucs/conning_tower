@@ -178,6 +178,8 @@
   "@KCDashboardShipRange": {},
   "KCDashboardShipScout": "LoS",
   "@KCDashboardShipScout": {},
+  "KCDashboardShipScoutScore": "LoS Score",
+  "@KCDashboardShipScoutScore": {},
   "KCDashboardShipSpeed": "Speed",
   "@KCDashboardShipSpeed": {},
   "KCDashboardShipTorpedo": "Torpedo",
