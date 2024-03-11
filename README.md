@@ -89,5 +89,6 @@ HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.
 ### Gold Sponsors
 
 - None
-
+  
+<a href="https://www.buymeacoffee.com/vk8pdcwxyjy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 <!--- Support Project by [afdian](https://afdian.net/a/conntower) --> 
