@@ -50,9 +50,6 @@ class KancolleShipViewer extends ConsumerStatefulWidget {
 class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
   ScrollController scrollController = ScrollController();
 
-  @Deprecated("Use shipTypeMap and selectedShipType instead")
-  List<int> shipType = [];
-
   ShipStatus shipStatus = ShipStatus.all;
 
   ShipSlot shipSlot = ShipSlot.all;
@@ -158,7 +155,6 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
     updateShipTypeMap(data);
     sortShips();
     log("shipTypeMap: $shipTypeMap");
-    log("shipType: $shipType");
     log("shipStatus: $shipStatus");
     log("shipSort: $shipSort");
     log("shipSlot: $shipSlot");
@@ -180,7 +176,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
               }
               return Container();
             }),
-        trailing: buildPopupMenu(
+        trailing: pullDownButtonFilter(
           child: Icon(
             CupertinoIcons.line_horizontal_3_decrease_circle,
             color: Theme.of(context).primaryColor,
@@ -202,7 +198,8 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
             S.current.KCDashboardShipViewerSortLuckAsc: ShipSort.luck,
             S.current.KCDashboardShipViewerSortLuckDesc: ShipSort.luckDesc,
             S.current.KCDashboardShipViewerSortConditionAsc: ShipSort.condition,
-            S.current.KCDashboardShipViewerSortConditionDesc: ShipSort.conditionDesc,
+            S.current.KCDashboardShipViewerSortConditionDesc:
+                ShipSort.conditionDesc,
           },
         ),
       ),
@@ -221,7 +218,9 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
                       if (snapshot.data!.isEmpty) {
                         return CupertinoListSection.insetGrouped(
                           margin: _sectionMargin,
-                          children: const [CupertinoListTile(title: Text('N/A'))],
+                          children: const [
+                            CupertinoListTile(title: Text('N/A'))
+                          ],
                         );
                       }
                       final count = snapshot.data!.length;
@@ -247,9 +246,11 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
                                   children: [
                                     Text('ID:${ship.uid}'),
                                     if (shipSort.name.startsWith('level'))
-                                      Text('${S.current.KCDashboardShipUpgradeLevel}:${ship.upgradeLevel}'),
+                                      Text(
+                                          '${S.current.KCDashboardShipUpgradeLevel}:${ship.upgradeLevel}'),
                                     if (shipSort.name.startsWith('attack'))
-                                      Text('${S.current.KCDashboardShipTotalAttack}:${ship.totalAttack}'),
+                                      Text(
+                                          '${S.current.KCDashboardShipTotalAttack}:${ship.totalAttack}'),
                                     if (shipSort.name.startsWith('aa'))
                                       Text(
                                           '${S.current.KCDashboardShipAA}:${ship.antiAircraft?[0]}'),
@@ -257,11 +258,14 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
                                       Text(
                                           '${S.current.KCDashboardShipASW}:${ship.antiSubmarine?[0]}'),
                                     if (shipSort.name.startsWith('armor'))
-                                      Text('${S.current.KCDashboardShipArmor}:${ship.armor?[0]}'),
+                                      Text(
+                                          '${S.current.KCDashboardShipArmor}:${ship.armor?[0]}'),
                                     if (shipSort.name.startsWith('luck'))
-                                      Text('${S.current.KCDashboardShipLuck}:${ship.luck?[0]}'),
+                                      Text(
+                                          '${S.current.KCDashboardShipLuck}:${ship.luck?[0]}'),
                                     if (shipSort.name.startsWith('condition'))
-                                      Text('${S.current.KCDashboardShipCondition}:${ship.condition}'),
+                                      Text(
+                                          '${S.current.KCDashboardShipCondition}:${ship.condition}'),
                                   ],
                                 ),
                               ),
@@ -353,14 +357,14 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildPopupMenu(
+            pullDownButtonFilter(
                 child: FilterButton(title: _shipTypeTitle),
                 option: MenuOption.shipType,
                 items: shipTypeMap),
             const SizedBox(
               width: 10,
             ),
-            buildPopupMenu(
+            pullDownButtonFilter(
                 child: FilterButton(title: _shipStatusTitle),
                 option: MenuOption.shipStatus,
                 items: {
@@ -375,7 +379,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
             const SizedBox(
               width: 10,
             ),
-            buildPopupMenu(
+            pullDownButtonFilter(
                 child: FilterButton(title: _shipSlotTitle),
                 option: MenuOption.shipSlot,
                 items: {
@@ -388,7 +392,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
             const SizedBox(
               width: 10,
             ),
-            buildPopupMenu(
+            pullDownButtonFilter(
                 child: FilterButton(title: _shipSpeedTitle),
                 option: MenuOption.shipSpeed,
                 items: {
@@ -397,8 +401,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
                   S.current.TextFastSpeed: ShipSpeed.fast,
                   S.current.TextFastPlusSpeed: ShipSpeed.fastPlus,
                   S.current.TextFastestSpeed: ShipSpeed.fastest
-                }
-            )
+                })
           ],
         ),
       ),
@@ -450,17 +453,26 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
     if (shipSpeed != ShipSpeed.all) {
       switch (shipSpeed) {
         case ShipSpeed.slow:
-          filterShips = filterShips.where((element) => element.speedLevel == S.current.TextSlowSpeed).toList();
+          filterShips = filterShips
+              .where((element) => element.speedLevel == S.current.TextSlowSpeed)
+              .toList();
           break;
         case ShipSpeed.fast:
-          filterShips =
-              filterShips.where((element) => element.speedLevel == S.current.TextFastSpeed).toList();
+          filterShips = filterShips
+              .where((element) => element.speedLevel == S.current.TextFastSpeed)
+              .toList();
           break;
         case ShipSpeed.fastPlus:
-          filterShips = filterShips.where((element) => element.speedLevel == S.current.TextFastPlusSpeed).toList();
+          filterShips = filterShips
+              .where((element) =>
+                  element.speedLevel == S.current.TextFastPlusSpeed)
+              .toList();
           break;
         case ShipSpeed.fastest:
-          filterShips = filterShips.where((element) => element.speedLevel == S.current.TextFastestSpeed).toList();
+          filterShips = filterShips
+              .where(
+                  (element) => element.speedLevel == S.current.TextFastestSpeed)
+              .toList();
           break;
         default:
           break;
@@ -469,10 +481,9 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
     return filterShips;
   }
 
-  @Deprecated("PullDownButton low performance. Temporarily use buildPopupMenu")
   Widget pullDownButtonFilter(
       {required Widget child,
-      required MenuOption type,
+      required MenuOption option,
       required Map<String, Object?> items}) {
     return PullDownButton(
       position: PullDownMenuPosition.over,
@@ -480,23 +491,42 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
       itemBuilder: (context) {
         List<PullDownMenuItem> menuItems = [];
         items.forEach((key, value) {
-          menuItems.add(
-            PullDownMenuItem(
+          if (option == MenuOption.shipType) {
+            menuItems.add(PullDownMenuItem.selectable(
+              selected: selectedShipType.isNotEmpty &&
+                  (selectedShipType.contains(key) ||
+                      selectedShipType.first == S.current.TextAll),
               onTap: () {
-                setState(() {
-                  if (type == MenuOption.shipType && value is List<int>) {
-                    shipType = value;
-                  } else if (type == MenuOption.shipStatus &&
-                      value is ShipStatus) {
-                    shipStatus = value;
-                  } else if (type == MenuOption.shipSort && value is ShipSort) {
-                    shipSort = value;
-                  }
-                });
+                if (value is List<int>) {
+                  onSelectShipType(key);
+                }
               },
               title: key,
-            ),
-          );
+            ));
+          } else {
+            menuItems.add(
+              PullDownMenuItem(
+                onTap: () {
+                  setState(() {
+                    if (option == MenuOption.shipStatus &&
+                        value is ShipStatus) {
+                      shipStatus = value;
+                    } else if (option == MenuOption.shipSort &&
+                        value is ShipSort) {
+                      shipSort = value;
+                    } else if (option == MenuOption.shipSlot &&
+                        value is ShipSlot) {
+                      shipSlot = value;
+                    } else if (option == MenuOption.shipSpeed &&
+                        value is ShipSpeed) {
+                      shipSpeed = value;
+                    }
+                  });
+                },
+                title: key,
+              ),
+            );
+          }
         });
         return menuItems;
       },
@@ -518,7 +548,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
         log('option: $option, value: $value');
         setState(() {
           if (option == MenuOption.shipType && value is List<int>) {
-            shipType = value;
+            // shipType = value;
           } else if (option == MenuOption.shipStatus && value is ShipStatus) {
             shipStatus = value;
           } else if (option == MenuOption.shipSort && value is ShipSort) {
