@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/data/kcwiki/map_data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
@@ -14,20 +18,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
     EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 8.0, 5.0);
 
-class BattleInfo extends ConsumerStatefulWidget {
-  const BattleInfo({super.key});
+class BattleInfoPage extends ConsumerStatefulWidget {
+  const BattleInfoPage({super.key});
 
   @override
-  ConsumerState createState() => _BattleInfoState();
+  ConsumerState createState() => _BattleInfoPageState();
 }
 
-class _BattleInfoState extends ConsumerState<BattleInfo> {
+class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
   @override
   Widget build(BuildContext context) {
     bool combinedFleet = true;
@@ -40,20 +45,19 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
     String routeName = '';
     if (battleInfo.mapRoute != null && battleInfo.mapInfo != null) {
       kcWikiData.when(
-          data: (data) {
-            final kcWikiMapData = data.maps;
-            final map = kcWikiMapData
-                .firstWhere((element) => element.id == battleInfo.mapInfo!.id);
-            final route = map.routes[battleInfo.mapRoute.toString()];
-            if (route != null) {
-              routeName =
-                  ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
-            }
-          },
-          error: (e, s) {},
-          loading: () {});
+        data: (data) {
+          routeName = getRouteName(data, battleInfo, routeName);
+        },
+        error: (e, s) {
+          Fluttertoast.showToast(msg: "Data Load Error");
+          // Handle the error state
+        },
+        loading: () {
+          Fluttertoast.showToast(msg: "Data Loading...");
+          // Handle the loading state
+        },
+      );
     }
-
     // var squads = [...?battleInfo.inBattleSquads, ...?battleInfo.enemySquads];
 
     var items = [];
@@ -82,7 +86,8 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
                               child: ListView(
                                 children: [
                                   CupertinoListSection.insetGrouped(
-                                    header: CupertinoListSectionDescription(S.current.KCDashboardBattleDescription),
+                                    header: CupertinoListSectionDescription(
+                                        S.current.KCDashboardBattleDescription),
                                     footer: SelectableText(
                                         "BattleInfo:\n${battleInfo.toString()}\nData:\n${ref.watch(rawDataProvider).source}\n${jsonDecode(ref.watch(rawDataProvider).data)}"),
                                     children: [
@@ -221,6 +226,33 @@ class _BattleInfoState extends ConsumerState<BattleInfo> {
         ),
       ),
     );
+  }
+
+  String getRouteName(KcWikiData data, BattleInfo battleInfo, String routeName) {
+    try {
+      final kcWikiMapData = data.maps;
+      final map = kcWikiMapData.firstWhere(
+            (element) => element.id == battleInfo.mapInfo!.id,
+        orElse: () => MapData(
+            id: -1,
+            name: "",
+            routes: {},
+            cells: {}), // Provide a fallback value to avoid StateError
+      );
+      if (map.id != -1) {
+        // Check if a map was found
+        final route = map.routes[battleInfo.mapRoute.toString()];
+        if (route != null) {
+          // Safely append '(Boss)' if the target cell is a boss cell
+          routeName =
+          ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+
+    return routeName;
   }
 }
 
