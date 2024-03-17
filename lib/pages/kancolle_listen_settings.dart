@@ -102,7 +102,7 @@ class _KancolleListenSettingsState
               ],
             ),
             CupertinoListSection.insetGrouped(
-              header: const CupertinoListSectionDescription('Data'),
+              header: CupertinoListSectionDescription(S.of(context).WikiDataLabel),
               children: [
                 CupertinoListTile(
                   title: Text(S.of(context).FleetData),

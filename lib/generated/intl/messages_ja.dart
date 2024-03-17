@@ -361,6 +361,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("バージョン更新"),
         "WeaponData": MessageLookupByLibrary.simpleMessage("装備データ"),
         "WebInfo": MessageLookupByLibrary.simpleMessage("Web情報"),
+        "WikiDataLabel": MessageLookupByLibrary.simpleMessage("Wikiデータ"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML例：")
       };
 }

@@ -2320,6 +2320,16 @@ class S {
     );
   }
 
+  /// `Wiki Data`
+  String get WikiDataLabel {
+    return Intl.message(
+      'Wiki Data',
+      name: 'WikiDataLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `YAML Example:`
   String get YamlExample {
     return Intl.message(
