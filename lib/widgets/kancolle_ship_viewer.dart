@@ -497,9 +497,11 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
                   (selectedShipType.contains(key) ||
                       selectedShipType.first == S.current.TextAll),
               onTap: () {
-                if (value is List<int>) {
-                  onSelectShipType(key);
-                }
+                setState(() {
+                  if (value is List<int>) {
+                    onSelectShipType(key);
+                  }
+                });
               },
               title: key,
             ));
