@@ -453,6 +453,8 @@
   "@WeaponData": {},
   "WebInfo": "Web Info",
   "@WebInfo": {},
+  "WikiDataLabel": "Wiki Data",
+  "@WikiDataLabel": {},
   "YamlExample": "YAML Example:",
   "@YamlExample": {}
 }

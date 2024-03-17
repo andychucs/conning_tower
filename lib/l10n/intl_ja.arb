@@ -96,7 +96,7 @@
   "@DashboardSetting": {},
   "DataDownloadGuide": "艦これデータリスナー機能を使用するには、ツール→高度なゲームサポートに進み、データをダウンロードし、スイッチをオンにしてください。異常が発生した場合は、設定でアプリを初期化してください。",
   "@DataDownloadGuide": {},
-  "DataErrorNotice": "データの解析に失敗しました。データに関する機能は正しく動作しません。デバッグを開き、エラーを修正するか、開発者に連絡してください。また、ネットワークエラーが発生した場合は、リロードしてください。",
+  "DataErrorNotice": "データの解析に失敗しました。データに関する機能は正しく動作しません。開発者に連絡してください。また、ネットワークエラーが発生した場合は、リロードしてください。",
   "@DataErrorNotice": {},
   "DesktopMode": "デスクトップモード",
   "@DesktopMode": {},
@@ -452,6 +452,8 @@
   "@WeaponData": {},
   "WebInfo": "Web情報",
   "@WebInfo": {},
+  "WikiDataLabel": "Wikiデータ",
+  "@WikiDataLabel": {},
   "YamlExample": "YAML例：",
   "@YamlExample": {}
 }

@@ -1,5 +1,5 @@
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/pages/dashboard_pages/battle_info.dart';
+import 'package:conning_tower/pages/dashboard_pages/battle_info_page.dart';
 import 'package:conning_tower/pages/dashboard_pages/dashboard_settings.dart';
 import 'package:conning_tower/pages/dashboard_pages/opreation_schedule.dart';
 import 'package:conning_tower/pages/dashboard_pages/photo_gallery.dart';
@@ -42,7 +42,7 @@ class Dashboard extends ConsumerStatefulWidget {
           const PortInfo(),
           const OperationPage(),
           const SquadInfo(),
-          const BattleInfo(),
+          const BattleInfoPage(),
           const QuestInfoPage(),
           const DashboardSettings()
         ];
