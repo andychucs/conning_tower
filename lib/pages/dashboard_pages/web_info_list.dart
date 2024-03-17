@@ -1,4 +1,5 @@
 import 'package:conning_tower/generated/l10n.dart';
+import 'package:conning_tower/providers/generatable/webview_provider.dart';
 import 'package:conning_tower/providers/web_info_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,7 @@ class _WebInfoState extends ConsumerState<WebInfoList> {
   @override
   Widget build(BuildContext context) {
     final webInfo = ref.watch(webInfoProvider);
+    final webController = ref.watch(webControllerProvider);
 
     List<Widget> webInfos = [
       CupertinoListTile(
@@ -33,6 +35,11 @@ class _WebInfoState extends ConsumerState<WebInfoList> {
                     : CupertinoColors.systemYellow
                 : CupertinoColors.destructiveRed),
       ),
+      CupertinoListTile(
+          title: const Text("Modify Cookie"),
+          onTap: () async {
+            await webController.kancolleCookieModify();
+          }),
     ];
 
     List.generate(webInfo.cookies.length, (index) {
