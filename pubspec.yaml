@@ -65,7 +65,7 @@ dependencies:
   flutter_timezone: ^1.0.8
   in_app_review: ^2.0.8
   easy_debounce: ^2.0.3
-  popover: ^0.2.9
+  popover: ^0.3.0
   photo_manager: ^3.0.0
   share_plus: ^7.2.2
   shake: ^2.2.0
