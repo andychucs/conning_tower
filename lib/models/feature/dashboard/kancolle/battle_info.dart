@@ -167,6 +167,8 @@ class BattleInfo with _$BattleInfo {
     enemySquads?.clear();
     dmgMap?.clear();
     dmgTakenMap?.clear();
+    mapInfo = null;
+    mapRoute = null;
   }
 
   void dmgCount(int actShipHash, num damage) {
