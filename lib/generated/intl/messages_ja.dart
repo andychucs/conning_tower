@@ -306,12 +306,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit":
             MessageLookupByLibrary.simpleMessage("タスク数が制限を超えています。"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "TextBattle": MessageLookupByLibrary.simpleMessage("戦闘"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "TextConningTowerFormat":
+            MessageLookupByLibrary.simpleMessage("ConningTower形式"),
+        "TextCopyToClipboard": MessageLookupByLibrary.simpleMessage("コピー"),
+        "TextCopyToClipboardFailed":
+            MessageLookupByLibrary.simpleMessage("コピーに失敗しました"),
+        "TextCopyToClipboardSuccess":
+            MessageLookupByLibrary.simpleMessage("コピーしました"),
+        "TextDeckBuilderFormat":
+            MessageLookupByLibrary.simpleMessage("デッキビルダー形式"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("装備"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("高速+"),
         "TextFastSpeed": MessageLookupByLibrary.simpleMessage("高速"),
         "TextFastestSpeed": MessageLookupByLibrary.simpleMessage("最速"),
         "TextFleetGirl": MessageLookupByLibrary.simpleMessage("艦娘"),
+        "TextFleetMembers": MessageLookupByLibrary.simpleMessage("艦隊編成"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("ヘルプ"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
         "TextItem": MessageLookupByLibrary.simpleMessage("アイテム"),
@@ -321,8 +332,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
+        "TextOpenInJervis":
+            MessageLookupByLibrary.simpleMessage("Jervis作戦室で開く"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
+        "TextShare": MessageLookupByLibrary.simpleMessage("共有"),
         "TextShortRange": MessageLookupByLibrary.simpleMessage("短"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("閉じてよろしいですか？"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("低速"),

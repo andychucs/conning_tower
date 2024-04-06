@@ -40,7 +40,7 @@ class LogViewer extends ConsumerWidget {
                     }),
                 children: [
                   CupertinoListTile(
-                    title: Text("戦闘"),
+                    title: Text(S.of(context).TextBattle),
                     trailing: CupertinoListTileChevron(),
                     onTap: () =>
                         navigatorToCupertino(context, LogDataPage.battle()),

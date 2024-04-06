@@ -58,6 +58,8 @@ class Ship with _$Ship {
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
 
+  int get currentLuck => luck?[0] ?? 0;
+
   bool get haveSlotEx => slotEx != 0 && slotEx != null;
 
   int get totalAttack => (attack?[0] ?? 0) + (attackT?[0] ?? 0);

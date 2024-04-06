@@ -13,6 +13,7 @@ import 'package:conning_tower/pages/log_viewer.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -71,7 +72,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
       backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.systemGroupedBackground,
-        middle: Text("戦闘"),
+        middle: Text(S.of(context).TextBattle),
         previousPageTitle: S.of(context).KanColleLogbook,
         // trailing: GestureDetector(
         //   onTap: () {
@@ -87,23 +88,52 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
         bottom: false,
         child: Builder(
           builder: (context) {
-            if (runtimeData.dataInfo.mapAreaInfo == null) {
-              return kcWikiData.when(data: (kcWikiData) {
-                return kcWikiDataBody(scrollController, data, kcWikiData);
-              }, error: (error, stackTrace) {
-                dev.log(error.toString());
+            return kcWikiData.when(data: (kcWikiData) {
+              return kcWikiDataBody(scrollController, data, kcWikiData);
+            }, error: (error, stackTrace) {
+              dev.log(error.toString());
+              if (runtimeData.dataInfo.mapAreaInfo != null) {
                 return runtimeDataBody(scrollController, data, runtimeData);
-              }, loading: () => const Center(
-                child: CupertinoActivityIndicator(
-                  radius: 30,
-                ),
-              ));
+              }
+              return noDataBody(scrollController, data);
+            }, loading: () => const Center(
+              child: CupertinoActivityIndicator(
+                radius: 30,
+              ),
+            ));
             }
-
-            return runtimeDataBody(scrollController, data, runtimeData);
-          }
         ),
       ),
+    );
+  }
+
+  Widget noDataBody(ScrollController scrollController, List<KancolleBattleLogEntity> data) {
+    return CupertinoScrollbar(
+      controller: scrollController,
+      child: ListView(
+        controller: scrollController,
+        children: [
+          if (data.isEmpty)
+            CupertinoListSection.insetGrouped(
+              children: List.generate(data.length, (index) {
+                var log = data[index];
+                var datetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
+                    tz.local, log.timestamp);
+                String date = DateFormat.yMMMMd().format(datetime);
+                String time = DateFormat('HH:mm:ss').format(datetime);
+                final battleData = KancolleBattleLog.fromJson(jsonDecode(log.logStr));
+                String mapName = "Map ${battleData.mapInfo.id}";
+                String mapCode = "${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}";
+                return LogItem(
+                  log: log,
+                  logType: widget.logType,
+                  title: Text("$mapCode $mapName"),
+                  subtitle: Text('$date $time'),
+                );
+              }),
+            )
+        ]
+      )
     );
   }
 

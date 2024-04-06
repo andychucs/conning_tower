@@ -329,12 +329,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage(
             "request tasks number over limit."),
         "TextAll": MessageLookupByLibrary.simpleMessage("All"),
+        "TextBattle": MessageLookupByLibrary.simpleMessage("Battle"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "TextConningTowerFormat":
+            MessageLookupByLibrary.simpleMessage("ConningTower Format"),
+        "TextCopyToClipboard":
+            MessageLookupByLibrary.simpleMessage("Copy to Clipboard"),
+        "TextCopyToClipboardFailed":
+            MessageLookupByLibrary.simpleMessage("Copy to Clipboard Failed"),
+        "TextCopyToClipboardSuccess":
+            MessageLookupByLibrary.simpleMessage("Copied to Clipboard"),
+        "TextDeckBuilderFormat":
+            MessageLookupByLibrary.simpleMessage("DeckBuilder Format"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("Equipment"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("Fast+"),
         "TextFastSpeed": MessageLookupByLibrary.simpleMessage("Fast"),
         "TextFastestSpeed": MessageLookupByLibrary.simpleMessage("Fastest"),
         "TextFleetGirl": MessageLookupByLibrary.simpleMessage("Fleet Girl"),
+        "TextFleetMembers":
+            MessageLookupByLibrary.simpleMessage("Fleet Members"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("Help"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
         "TextItem": MessageLookupByLibrary.simpleMessage("Item"),
@@ -345,8 +358,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("Medium"),
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
+        "TextOpenInJervis":
+            MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
+        "TextShare": MessageLookupByLibrary.simpleMessage("Share"),
         "TextShortRange": MessageLookupByLibrary.simpleMessage("Short"),
         "TextShouldClose":
             MessageLookupByLibrary.simpleMessage("Should Close?"),
