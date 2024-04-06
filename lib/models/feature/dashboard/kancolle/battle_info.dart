@@ -154,7 +154,7 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void clear() {
+  void clear({bool resetMapInfo = false}) {
     result = null;
     dropName = null;
     mvp = null;
@@ -167,8 +167,10 @@ class BattleInfo with _$BattleInfo {
     enemySquads?.clear();
     dmgMap?.clear();
     dmgTakenMap?.clear();
-    mapInfo = null;
-    mapRoute = null;
+    if (resetMapInfo) {
+      mapInfo = null;
+      mapRoute = null;
+    }
   }
 
   void dmgCount(int actShipHash, num damage) {
@@ -356,7 +358,7 @@ class BattleInfo with _$BattleInfo {
 
   void parsePracticeBattle(ReqPracticeBattleApiDataEntity data, Squad squad) {
 
-    clear();
+    clear(resetMapInfo: true);
     initSingleEnemySquads(data);
 
     inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
