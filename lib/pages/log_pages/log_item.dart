@@ -37,7 +37,7 @@ class LogItem extends StatelessWidget {
       subtitle: subtitle,
       onTap: () => onTap != null ? onTap!() : navigatorToCupertino(
         context,
-        LogDetailBattle(log: log, kcWikiData: kcWikiData),
+        LogDetailBattle(logData: log, kcWikiData: kcWikiData),
       ),
     );
   }

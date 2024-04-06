@@ -1,13 +1,16 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/data/kcwiki/map_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
+import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,47 +22,98 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class LogDetailBattle extends ConsumerWidget {
-  const LogDetailBattle({
+  LogDetailBattle({
     super.key,
-    required this.log,
+    required this.logData,
     this.kcWikiData,
   });
 
-  final KancolleBattleLogEntity log;
-  final KcWikiData? kcWikiData;
+  final KancolleBattleLogEntity logData;
+  late KcWikiData? kcWikiData;
+
+  String getRouteName(MapData? map, int mapRoute) {
+    String routeName = 'Next: $mapRoute';
+
+    try {
+      if (map != null) {
+        if (map.id != -1) {
+          // Check if a map was found
+          final route = map.routes[mapRoute.toString()];
+          if (route != null) {
+            // Safely append '(Boss)' if the target cell is a boss cell
+            routeName =
+            ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+          }
+        }
+      }
+    } catch (e) {
+      routeName = 'Next: $mapRoute';
+    }
+
+    return routeName;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var battleData = KancolleBattleLog.fromJson(jsonDecode(log.logStr));
+    var battleData = KancolleBattleLog.fromJson(jsonDecode(logData.logStr));
     var squads = battleData.squads;
     final runtimeData = ref.watch(kancolleDataProvider);
+    // if (kcWikiData == null) {
+    //   final kcWikiDataFuture = ref.watch(kcWikiDataStateProvider);
+    //   kcWikiDataFuture.when(
+    //       data: (data) {
+    //         kcWikiData = data;
+    //       },
+    //       error: (e, s) {
+    //         Fluttertoast.showToast(msg: "Data Load Error");
+    //         // Handle the error state
+    //       },
+    //       loading: () {
+    //         Fluttertoast.showToast(msg: "Data Loading...");
+    //         // Handle the loading state
+    //       },
+    //     );
+    // }
     // final shipInfo = runtimeData.dataInfo.shipInfo;
     final mapArea =
         runtimeData.dataInfo.mapAreaInfo?[battleData.mapInfo.id ~/ 10];
-    var map = mapArea?.map
-        .firstWhere((element) => element.id == battleData.mapInfo.id);
-    if (map == null) {
-      final kcMapData = kcWikiData?.maps
-          .firstWhere((element) => element.id == battleData.mapInfo.id);
-      if (kcMapData != null) {
-        map = MapInfo(
-            id: kcMapData.id,
-            num: kcMapData.id ~/ 10,
-            areaId: kcMapData.id % 10,
-            name: kcMapData.name,
-            operationName: '');
-      }
+    final defaultMap = MapInfo(
+        id: battleData.mapInfo.id,
+        num: battleData.mapInfo.id ~/ 10,
+        areaId: battleData.mapInfo.id % 10,
+        name: 'Unknown',
+        operationName: 'Unknown');
+
+    MapInfo map = defaultMap;
+
+    // Use KcWikiData if it's available
+    final kcMapData = kcWikiData?.maps
+        .firstWhere((element) => element.id == battleData.mapInfo.id,
+        orElse: () => MapData(id: -1, name: defaultMap.name, routes: {}, cells: {}));
+    if (kcMapData != null && kcMapData.id != -1) {
+      map = MapInfo(
+          id: kcMapData.id,
+          num: kcMapData.id ~/ 10,
+          areaId: kcMapData.id % 10,
+          name: kcMapData.name,
+          operationName: '');
+    }
+
+    if (map == defaultMap && mapArea != null) {
+      map = mapArea.map.firstWhere(
+              (element) => element.id == battleData.mapInfo.id,
+          orElse: () => defaultMap);
     }
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.systemGroupedBackground,
-        middle: Text(map?.name ?? ''),
+        middle: Text(map.name),
         previousPageTitle: "戦闘",
         trailing: GestureDetector(
           onTap: () async {
-            await Clipboard.setData(ClipboardData(text: log.logStr));
+            await Clipboard.setData(ClipboardData(text: logData.logStr));
             Fluttertoast.showToast(msg: "Copy");
           },
           child: Icon(
@@ -77,6 +131,19 @@ class LogDetailBattle extends ConsumerWidget {
                   var log = battleData.data[index];
                   String path = log.source.split("kcsapi").last;
                   dynamic model = DataModelAdapter().parseData(path, log.data);
+
+                  if (model is ReqMapStartEntity || model is ReqMapNextEntity) {
+                    var mapRoute = model.apiData.apiNo;
+                    return CupertinoListSection.insetGrouped(
+                      children: [
+                        CupertinoListTile(
+                          title: Text(
+                            getRouteName(kcMapData, mapRoute),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
 
                   if (model is ReqSortieBattleEntity ||
                       model is ReqBattleMidnightBattleEntity) {
