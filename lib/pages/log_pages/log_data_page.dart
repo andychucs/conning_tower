@@ -71,7 +71,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
       backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.systemGroupedBackground,
-        middle: Text("戦闘"),
+        middle: Text(S.of(context).TextBattle),
         previousPageTitle: S.of(context).KanColleLogbook,
         // trailing: GestureDetector(
         //   onTap: () {

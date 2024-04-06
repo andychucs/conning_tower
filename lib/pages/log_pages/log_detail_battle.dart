@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
@@ -13,6 +14,7 @@ import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
+import 'package:conning_tower/widgets/squads_share_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +44,7 @@ class LogDetailBattle extends ConsumerWidget {
           if (route != null) {
             // Safely append '(Boss)' if the target cell is a boss cell
             routeName =
-            ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+                ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
           }
         }
       }
@@ -87,9 +89,10 @@ class LogDetailBattle extends ConsumerWidget {
     MapInfo map = defaultMap;
 
     // Use KcWikiData if it's available
-    final kcMapData = kcWikiData?.maps
-        .firstWhere((element) => element.id == battleData.mapInfo.id,
-        orElse: () => MapData(id: -1, name: defaultMap.name, routes: {}, cells: {}));
+    final kcMapData = kcWikiData?.maps.firstWhere(
+        (element) => element.id == battleData.mapInfo.id,
+        orElse: () =>
+            MapData(id: -1, name: defaultMap.name, routes: {}, cells: {}));
     if (kcMapData != null && kcMapData.id != -1) {
       map = MapInfo(
           id: kcMapData.id,
@@ -101,7 +104,7 @@ class LogDetailBattle extends ConsumerWidget {
 
     if (map == defaultMap && mapArea != null) {
       map = mapArea.map.firstWhere(
-              (element) => element.id == battleData.mapInfo.id,
+          (element) => element.id == battleData.mapInfo.id,
           orElse: () => defaultMap);
     }
 
@@ -110,11 +113,11 @@ class LogDetailBattle extends ConsumerWidget {
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.systemGroupedBackground,
         middle: Text(map.name),
-        previousPageTitle: "戦闘",
+        previousPageTitle: S.current.TextBattle,
         trailing: GestureDetector(
           onTap: () async {
             await Clipboard.setData(ClipboardData(text: logData.logStr));
-            Fluttertoast.showToast(msg: "Copy");
+            Fluttertoast.showToast(msg: S.current.TextCopyToClipboardSuccess);
           },
           child: Icon(
             CupertinoIcons.square_on_square,
@@ -127,6 +130,12 @@ class LogDetailBattle extends ConsumerWidget {
           child: CustomScrollView(slivers: [
             SliverList(
               delegate: SliverChildListDelegate([
+                CupertinoListSection.insetGrouped(
+                  header: CupertinoListSectionDescription(S.current.TextFleetMembers),
+                  children: [
+                    SquadsShareButton.cupertinoListTile(squads: squads)
+                  ],
+                ),
                 ...List.generate(battleData.data.length, (index) {
                   var log = battleData.data[index];
                   String path = log.source.split("kcsapi").last;
@@ -167,6 +176,10 @@ class LogDetailBattle extends ConsumerWidget {
                         ),
                       ],
                     );
+                  }
+
+                  if (model is GetMemberShipDeckEntity) {
+                    return Container();
                   }
 
                   return CupertinoListSection.insetGrouped(

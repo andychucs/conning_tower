@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/equipment.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
@@ -10,16 +11,15 @@ import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
-import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:conning_tower/widgets/dialog.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
+import 'package:conning_tower/widgets/scroll_view.dart';
+import 'package:conning_tower/widgets/squads_share_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 
 const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 
@@ -263,6 +263,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                               progressColor: ship.sparkColor,
                                             ),
                                           ),
+                                        SquadsShareButton.cupertinoListTile(squads: squads),
                                       ],
                                     )
                                   : SlotItemPage(
@@ -321,7 +322,6 @@ class SlotItemPage extends StatelessWidget {
     final Color dividerColor = CupertinoColors.separator.resolveFrom(context);
     final double dividerHeight = 1.0 / MediaQuery.devicePixelRatioOf(context);
 
-
     return CupertinoGroupedSection(
       padding: _sectionMargin,
       child: Column(
@@ -351,7 +351,9 @@ class SlotItemPage extends StatelessWidget {
                       children: [
                         for (final (index, item) in ship.slot!.indexed)
                           if (item != -1)
-                            Text(slotMap[item]?.text(onSlot: ship.onSlot?[index]) ?? "N/A"),
+                            Text(slotMap[item]
+                                    ?.text(onSlot: ship.onSlot?[index]) ??
+                                "N/A"),
                         if (ship.slotEx != null &&
                             ship.slotEx != -1 &&
                             ship.slotEx != 0)
@@ -458,9 +460,8 @@ class ShipInfo extends StatelessWidget {
               additionalInfo: Text('${ship.attackT?[0]}/${ship.attackT?[1]}'),
             ),
             CupertinoListTile(
-              title: Text(S.current.KCDashboardShipAircraftPower),
-              additionalInfo: Text(ship.aircraftPower().text)
-            ),
+                title: Text(S.current.KCDashboardShipAircraftPower),
+                additionalInfo: Text(ship.aircraftPower().text)),
             CupertinoListTile(
               title: Text(S.current.KCDashboardShipAA),
               additionalInfo:
@@ -508,4 +509,3 @@ class ShipInfo extends StatelessWidget {
     );
   }
 }
-

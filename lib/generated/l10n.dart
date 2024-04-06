@@ -1840,11 +1840,71 @@ class S {
     );
   }
 
+  /// `Battle`
+  String get TextBattle {
+    return Intl.message(
+      'Battle',
+      name: 'TextBattle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancel`
   String get TextCancel {
     return Intl.message(
       'Cancel',
       name: 'TextCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ConningTower Format`
+  String get TextConningTowerFormat {
+    return Intl.message(
+      'ConningTower Format',
+      name: 'TextConningTowerFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy to Clipboard`
+  String get TextCopyToClipboard {
+    return Intl.message(
+      'Copy to Clipboard',
+      name: 'TextCopyToClipboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy to Clipboard Failed`
+  String get TextCopyToClipboardFailed {
+    return Intl.message(
+      'Copy to Clipboard Failed',
+      name: 'TextCopyToClipboardFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copied to Clipboard`
+  String get TextCopyToClipboardSuccess {
+    return Intl.message(
+      'Copied to Clipboard',
+      name: 'TextCopyToClipboardSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DeckBuilder Format`
+  String get TextDeckBuilderFormat {
+    return Intl.message(
+      'DeckBuilder Format',
+      name: 'TextDeckBuilderFormat',
       desc: '',
       args: [],
     );
@@ -1895,6 +1955,16 @@ class S {
     return Intl.message(
       'Fleet Girl',
       name: 'TextFleetGirl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fleet Members`
+  String get TextFleetMembers {
+    return Intl.message(
+      'Fleet Members',
+      name: 'TextFleetMembers',
       desc: '',
       args: [],
     );
@@ -1990,6 +2060,16 @@ class S {
     );
   }
 
+  /// `Open in Jervis FleetHub`
+  String get TextOpenInJervis {
+    return Intl.message(
+      'Open in Jervis FleetHub',
+      name: 'TextOpenInJervis',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Slightly damaged`
   String get TextSDamage {
     return Intl.message(
@@ -2005,6 +2085,16 @@ class S {
     return Intl.message(
       'Save',
       name: 'TextSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get TextShare {
+    return Intl.message(
+      'Share',
+      name: 'TextShare',
       desc: '',
       args: [],
     );

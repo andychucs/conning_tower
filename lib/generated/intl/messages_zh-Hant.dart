@@ -292,12 +292,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "任務提醒功能允許您添加和管理任務提醒。\n\n- 要添加數據源，請點擊右上角的“添加數據源”按鈕，並輸入有效的URL或YAML/JSON內容。\n\n- 要保存更改，請點擊“保存”按鈕。\n\n- 已添加的任務將顯示在列表中。\n\n- 雙擊任務即可添加該任務的提醒推送。\n\n- 點擊進入任務信息頁，您可以查看詳細信息。\n\n- 在任務信息頁中，點擊右上角的向上箭頭按鈕可以將該任務在任務列表中置頂。\n\n- 如果您遇到任何問題，請聯繫我們的支援團隊。\n\n祝您使用愉快!"),
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage("導入任務數量超出限制"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "TextBattle": MessageLookupByLibrary.simpleMessage("戰鬥"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "TextConningTowerFormat":
+            MessageLookupByLibrary.simpleMessage("ConningTower格式"),
+        "TextCopyToClipboard": MessageLookupByLibrary.simpleMessage("複製"),
+        "TextCopyToClipboardFailed":
+            MessageLookupByLibrary.simpleMessage("複製失敗"),
+        "TextCopyToClipboardSuccess":
+            MessageLookupByLibrary.simpleMessage("已複製到剪貼簿"),
+        "TextDeckBuilderFormat":
+            MessageLookupByLibrary.simpleMessage("DeckBuilder格式"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("裝備"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("高速+"),
         "TextFastSpeed": MessageLookupByLibrary.simpleMessage("高速"),
         "TextFastestSpeed": MessageLookupByLibrary.simpleMessage("最速"),
         "TextFleetGirl": MessageLookupByLibrary.simpleMessage("艦娘"),
+        "TextFleetMembers": MessageLookupByLibrary.simpleMessage("艦隊成員"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("幫助"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
         "TextItem": MessageLookupByLibrary.simpleMessage("道具"),
@@ -307,8 +318,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
+        "TextOpenInJervis":
+            MessageLookupByLibrary.simpleMessage("在Jervis作戰室打開"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
+        "TextShare": MessageLookupByLibrary.simpleMessage("分享"),
         "TextShortRange": MessageLookupByLibrary.simpleMessage("短"),
         "TextShouldClose": MessageLookupByLibrary.simpleMessage("要關閉嗎？"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("低速"),
