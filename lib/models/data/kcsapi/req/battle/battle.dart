@@ -15,6 +15,8 @@ export 'req_sortie_airbattle_entity.dart';
 export 'req_combined_battle_ec_midnight_battle_entity.dart';
 export 'req_combined_battle_entity.dart';
 export 'req_combined_battle_each_battle_entity.dart';
+export 'req_combined_battle_water_entity.dart';
+export 'req_combined_battle_each_water_entity.dart';
 
 part 'battle.freezed.dart';
 

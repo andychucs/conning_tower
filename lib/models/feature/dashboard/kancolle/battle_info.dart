@@ -910,6 +910,122 @@ class BattleInfo with _$BattleInfo {
         }
       }
     }
+    updateShipHP();
+
+  }
+
+  void parseReqCombinedBattleWater(ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
+    clear();
+
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [...squads];
+
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+
+    initDMGMap();
+
+    setFormation(data.apiFormation);
+
+    if (data.apiAirBaseAttack != null) {
+      for (final airBaseAttack in data.apiAirBaseAttack!) {
+        airBaseAttackRound(airBaseAttack);
+      }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRound(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+      if (flag == 1) {
+        switch(index) {
+          case 0:
+            gunFireRound(data.apiHougeki1!);
+            break;
+          case 1:
+            gunFireRound(data.apiHougeki2!);
+            break;
+          case 2:
+            gunFireRound(data.apiHougeki3!);
+            break;
+          case 3:
+            torpedoFireRound(data.apiRaigeki!);
+            break;
+          default:
+            log("unhandled hourai flag");
+        }
+      }
+    }
+
+    updateShipHP();
+  }
+
+  void parseReqCombinedBattleEachWater(ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
+    clear();
+    initDoubleEnemySquads(data);
+    inBattleSquads = [...squads];
+    initShipHPDoubleVsDouble(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
+    );
+    initDMGMap();
+    setFormation(data.apiFormation);
+
+    if (data.apiAirBaseAttack != null) {
+      for (final airBaseAttack in data.apiAirBaseAttack!) {
+        airBaseAttackRound(airBaseAttack);
+      }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRound(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+      if (flag == 1) {
+        switch(index) {
+          case 0:
+            gunFireRound(data.apiHougeki1!);
+            break;
+          case 1:
+            gunFireRound(data.apiHougeki2!);
+            break;
+          case 2:
+            gunFireRound(data.apiHougeki3!);
+            break;
+          case 3:
+            torpedoFireRound(data.apiRaigeki!);
+            break;
+          default:
+            log("unhandled hourai flag");
+        }
+      }
+    }
+    updateShipHP();
 
   }
 }

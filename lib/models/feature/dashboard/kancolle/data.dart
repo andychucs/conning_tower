@@ -203,6 +203,16 @@ class KancolleData {
       battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
     }
 
+    if (model is ReqCombinedBattleWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
+    }
+
     if (model is ReqPracticeMidnightBattleEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
