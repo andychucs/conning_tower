@@ -135,8 +135,7 @@ class KancolleData {
     }
 
     if (model is ReqCombinedBattleECMidnightBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squad);
+      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
     }
 
     if (model is ReqBattleMidnightSpMidnightEntity) {

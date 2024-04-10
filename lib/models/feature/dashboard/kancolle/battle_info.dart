@@ -346,6 +346,10 @@ class BattleInfo with _$BattleInfo {
       }
     }
 
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
     //api_opening_taisen
@@ -767,16 +771,22 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleECMidnightBattle(ReqCombinedBattleEcMidnightBattleApiDataEntity data, Squad squad) {
+  void parseReqCombinedBattleECMidnightBattle(ReqCombinedBattleEcMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    if (data.apiFNowhpsCombined == null) {
+      inBattleSquads = [squads[data.apiDeckId - 1]];
+      initShipHPSingleVsDouble(
+          data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!);
+    } else {
+      inBattleSquads = [squads[0], squads[1]];
+      initShipHPDoubleVsDouble(
+          data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
+      );
+    }
 
     initDMGMap();
-
-    initShipHPSingleVsDouble(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!);
 
     setFormation(data.apiFormation);
 

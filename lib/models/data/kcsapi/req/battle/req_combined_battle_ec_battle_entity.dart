@@ -52,7 +52,7 @@ class ReqCombinedBattleECBattleApiDataEntity
     @JsonKey(name: 'api_support_flag') int? apiSupportFlag,
     @JsonKey(name: 'api_support_info') dynamic apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
-    @JsonKey(name: 'api_opening_taisen') dynamic apiOpeningTaisen,
+    @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,
     @JsonKey(name: 'api_opening_flag') int? apiOpeningFlag,
     @JsonKey(name: 'api_opening_atack') OpeningTorpedoRoundEntity? apiOpeningAtack,
     @JsonKey(name: 'api_hourai_flag') List<int>? apiHouraiFlag,
