@@ -14,6 +14,7 @@ export 'req_battle_midnight_sp_midnight_entity.dart';
 export 'req_sortie_airbattle_entity.dart';
 export 'req_combined_battle_ec_midnight_battle_entity.dart';
 export 'req_combined_battle_entity.dart';
+export 'req_combined_battle_each_battle_entity.dart';
 
 part 'battle.freezed.dart';
 
@@ -63,6 +64,11 @@ abstract class SingleVsDoubleBattleData extends SingleVsSingleBaseModel {
 }
 
 abstract class DoubleVsSingleBattleData extends SingleVsSingleBaseModel {
+  late List<int>? apiFNowhpsCombined;
+  late List<int>? apiFMaxhpsCombined;
+}
+
+abstract class DoubleVsDoubleBattleData extends SingleVsDoubleBattleData {
   late List<int>? apiFNowhpsCombined;
   late List<int>? apiFMaxhpsCombined;
 }
