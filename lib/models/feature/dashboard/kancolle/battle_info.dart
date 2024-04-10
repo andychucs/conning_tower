@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';

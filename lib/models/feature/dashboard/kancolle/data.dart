@@ -129,6 +129,30 @@ class KancolleData {
       }
     }
 
+    if (model is ReqHokyuChargeEntity) {
+      var material = model.apiData?.apiMaterial;
+      if (material != null) {
+        seaForceBase.updateResource(material);
+      }
+      if (model.apiData?.apiShip != null) {
+        List<Ship> squadShips = [
+          for (final squad in squads) ...squad.ships
+        ];
+        Map<int, Ship> shipMap = Map.fromIterable(
+          squadShips,
+          key: (item) => item.uid,
+        );
+
+        for (final shipState in model.apiData!.apiShip!) {
+          final shipId =  shipState.apiId;
+          if (shipId != null) {
+            shipMap[shipId]?.fuel = shipState.apiFuel;
+            shipMap[shipId]?.bull = shipState.apiBull;
+          }
+        }
+      }
+    }
+
     if (model is ReqSortieAirbattleEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parseReqSortieAirbattle(model.apiData!, squad);

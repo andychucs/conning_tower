@@ -44,6 +44,14 @@ class SeaForceBase with _$SeaForceBase {
         improvementMaterials: improvementMaterials);
     log(toString());
   }
+
+  void updateResource(List<int> material) {
+    var oil = material[0];
+    var ammo = material[1];
+    var steel = material[2];
+    var bauxite = material[3];
+    resource = resource.copyWith(oil: oil, ammo: ammo, steel: steel, bauxite: bauxite);
+  }
 }
 
 @freezed
