@@ -92,10 +92,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
               return kcWikiDataBody(scrollController, data, kcWikiData);
             }, error: (error, stackTrace) {
               dev.log(error.toString());
-              if (runtimeData.dataInfo.mapAreaInfo != null) {
-                return runtimeDataBody(scrollController, data, runtimeData);
-              }
-              return noDataBody(scrollController, data);
+              return runtimeDataBody(scrollController, data, runtimeData);
             }, loading: () => const Center(
               child: CupertinoActivityIndicator(
                 radius: 30,
@@ -104,36 +101,6 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
             }
         ),
       ),
-    );
-  }
-
-  Widget noDataBody(ScrollController scrollController, List<KancolleBattleLogEntity> data) {
-    return CupertinoScrollbar(
-      controller: scrollController,
-      child: ListView(
-        controller: scrollController,
-        children: [
-          if (data.isEmpty)
-            CupertinoListSection.insetGrouped(
-              children: List.generate(data.length, (index) {
-                var log = data[index];
-                var datetime = tz.TZDateTime.fromMillisecondsSinceEpoch(
-                    tz.local, log.timestamp);
-                String date = DateFormat.yMMMMd().format(datetime);
-                String time = DateFormat('HH:mm:ss').format(datetime);
-                final battleData = KancolleBattleLog.fromJson(jsonDecode(log.logStr));
-                String mapName = "Map ${battleData.mapInfo.id}";
-                String mapCode = "${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}";
-                return LogItem(
-                  log: log,
-                  logType: widget.logType,
-                  title: Text("$mapCode $mapName"),
-                  subtitle: Text('$date $time'),
-                );
-              }),
-            )
-        ]
-      )
     );
   }
 
