@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/data/kcwiki/map_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
@@ -164,7 +163,7 @@ class LogDetailBattle extends ConsumerWidget {
                     return BattleLogFleet(squad: squad);
                   }
 
-                  if (model is ReqSortieBattleResultEntity) {
+                  if (model is ReqSortieBattleResultEntity || model is ReqCombinedBattleResultEntity) {
                     String? dropName = model.apiData.apiGetShip?.apiShipName;
 
                     return CupertinoListSection.insetGrouped(

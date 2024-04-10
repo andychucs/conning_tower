@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class AttributeLabel extends StatelessWidget {
   const AttributeLabel.vertical({
@@ -42,11 +43,13 @@ class AttributeLabel extends StatelessWidget {
                   maxLines: 1,
                 ),
               ),
-        AutoSizeText(
-          value,
-          maxFontSize: 12,
-          minFontSize: 5,
-          maxLines: 1,
+        Expanded(
+          child: AutoSizeText(
+            value,
+            maxFontSize: 12,
+            minFontSize: 5,
+            maxLines: 1,
+          ),
         )
       ],
     );

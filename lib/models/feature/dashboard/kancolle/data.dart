@@ -129,14 +129,37 @@ class KancolleData {
       }
     }
 
+    if (model is ReqHokyuChargeEntity) {
+      var material = model.apiData?.apiMaterial;
+      if (material != null) {
+        seaForceBase.updateResource(material);
+      }
+      if (model.apiData?.apiShip != null) {
+        List<Ship> squadShips = [
+          for (final squad in squads) ...squad.ships
+        ];
+        Map<int, Ship> shipMap = Map.fromIterable(
+          squadShips,
+          key: (item) => item.uid,
+        );
+
+        for (final shipState in model.apiData!.apiShip!) {
+          final shipId =  shipState.apiId;
+          if (shipId != null) {
+            shipMap[shipId]?.fuel = shipState.apiFuel;
+            shipMap[shipId]?.bull = shipState.apiBull;
+          }
+        }
+      }
+    }
+
     if (model is ReqSortieAirbattleEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
     }
 
     if (model is ReqCombinedBattleECMidnightBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squad);
+      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
     }
 
     if (model is ReqBattleMidnightSpMidnightEntity) {
@@ -168,6 +191,26 @@ class KancolleData {
     if (model is ReqCombinedBattleECBattleEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
     }
 
     if (model is ReqPracticeMidnightBattleEntity) {

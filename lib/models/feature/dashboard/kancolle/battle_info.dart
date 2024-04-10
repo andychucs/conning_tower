@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/data/kcsapi/req/battle/battle.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
@@ -277,6 +276,33 @@ class BattleInfo with _$BattleInfo {
       ship.maxHP = max;
     }
   }
+
+  void initShipHPDoubleVsSingle(List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax, List<int> fNow2, List<int> fMax2) {
+    initShipHPSingleVsSingle(fNow, fMax, eNow, eMax);
+    for (final (index, now) in fNow2.indexed) {
+      final max = fMax2[index];
+      final ship = getOShip2(index);
+      ship.nowHP = now;
+      ship.maxHP = max;
+    }
+  }
+
+  void initShipHPDoubleVsDouble(List<int> fNow1, List<int> fMax1, List<int> eNow1, List<int> eMax1, List<int> fNow2, List<int> fMax2, List<int> eNow2, List<int> eMax2) {
+    initShipHPSingleVsSingle(fNow1, fMax1, eNow1, eMax1);
+    for (final (index, now) in eNow2.indexed) {
+      final max = eMax2[index];
+      final ship = getEShip2(index);
+      ship.nowHP = now;
+      ship.maxHP = max;
+    }
+    for (final (index, now) in fNow2.indexed) {
+      final max = fMax2[index];
+      final ship = getOShip2(index);
+      ship.nowHP = now;
+      ship.maxHP = max;
+    }
+  }
+
   void initShipHPSingleVsSingle(
       List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax) {
     for (final (index, now) in fNow.indexed) {
@@ -317,6 +343,10 @@ class BattleInfo with _$BattleInfo {
       for (final airBaseAttack in data.apiAirBaseAttack!) {
         airBaseAttackRound(airBaseAttack);
       }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
     }
 
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
@@ -740,16 +770,22 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleECMidnightBattle(ReqCombinedBattleEcMidnightBattleApiDataEntity data, Squad squad) {
+  void parseReqCombinedBattleECMidnightBattle(ReqCombinedBattleEcMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    if (data.apiFNowhpsCombined == null) {
+      inBattleSquads = [squads[data.apiDeckId - 1]];
+      initShipHPSingleVsDouble(
+          data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!);
+    } else {
+      inBattleSquads = [squads[0], squads[1]];
+      initShipHPDoubleVsDouble(
+          data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
+      );
+    }
 
     initDMGMap();
-
-    initShipHPSingleVsDouble(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!);
 
     setFormation(data.apiFormation);
 
@@ -757,6 +793,240 @@ class BattleInfo with _$BattleInfo {
       gunFireRound(data.apiHougeki!);
     }
     updateShipHP();
+  }
+
+  void parseReqCombinedBattle(ReqCombinedBattleApiDataEntity data, List<Squad> squads) {
+    clear();
+
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [...squads];
+
+    initDMGMap();
+
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+
+    setFormation(data.apiFormation);
+
+    if (data.apiAirBaseAttack != null) {
+      for (final airBaseAttack in data.apiAirBaseAttack!) {
+        airBaseAttackRound(airBaseAttack);
+      }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRound(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+      if (flag == 1) {
+        switch(index) {
+          case 0:
+            gunFireRound(data.apiHougeki1!);
+            break;
+          case 1:
+            torpedoFireRound(data.apiRaigeki!);
+            break;
+          case 2:
+            gunFireRound(data.apiHougeki2!);
+            break;
+          case 3:
+            gunFireRound(data.apiHougeki3!);
+            break;
+          default:
+            log("unhandled hourai flag");
+        }
+      }
+    }
+
+    updateShipHP();
+  }
+
+  void parseReqCombinedBattleEachBattle(ReqCombinedBattleEachBattleApiDataEntity data, List<Squad> squads) {
+    clear();
+
+    initDoubleEnemySquads(data);
+
+    inBattleSquads = [...squads];
+    initShipHPDoubleVsDouble(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
+    );
+
+    initDMGMap();
+
+    setFormation(data.apiFormation);
+
+    if (data.apiAirBaseAttack != null) {
+      for (final airBaseAttack in data.apiAirBaseAttack!) {
+        airBaseAttackRound(airBaseAttack);
+      }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRound(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+      if (flag == 1) {
+        switch(index) {
+          case 0:
+            gunFireRound(data.apiHougeki1!);
+            break;
+          case 1:
+            gunFireRound(data.apiHougeki2!);
+            break;
+          case 2:
+            torpedoFireRound(data.apiRaigeki!);
+            break;
+          case 3:
+            gunFireRound(data.apiHougeki3!);
+            break;
+          default:
+            log("unhandled hourai flag");
+        }
+      }
+    }
+    updateShipHP();
+
+  }
+
+  void parseReqCombinedBattleWater(ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
+    clear();
+
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [...squads];
+
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+
+    initDMGMap();
+
+    setFormation(data.apiFormation);
+
+    if (data.apiAirBaseAttack != null) {
+      for (final airBaseAttack in data.apiAirBaseAttack!) {
+        airBaseAttackRound(airBaseAttack);
+      }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRound(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+      if (flag == 1) {
+        switch(index) {
+          case 0:
+            gunFireRound(data.apiHougeki1!);
+            break;
+          case 1:
+            gunFireRound(data.apiHougeki2!);
+            break;
+          case 2:
+            gunFireRound(data.apiHougeki3!);
+            break;
+          case 3:
+            torpedoFireRound(data.apiRaigeki!);
+            break;
+          default:
+            log("unhandled hourai flag");
+        }
+      }
+    }
+
+    updateShipHP();
+  }
+
+  void parseReqCombinedBattleEachWater(ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
+    clear();
+    initDoubleEnemySquads(data);
+    inBattleSquads = [...squads];
+    initShipHPDoubleVsDouble(
+        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
+    );
+    initDMGMap();
+    setFormation(data.apiFormation);
+
+    if (data.apiAirBaseAttack != null) {
+      for (final airBaseAttack in data.apiAirBaseAttack!) {
+        airBaseAttackRound(airBaseAttack);
+      }
+    }
+
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    //api_opening_taisen
+    if (data.apiOpeningTaisenFlag == 1) {
+      gunFireRound(data.apiOpeningTaisen!);
+    }
+
+    //api_opening_atack
+    if (data.apiOpeningFlag == 1) {
+      torpedoFireRoundWithItem(data.apiOpeningAtack!);
+    }
+
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+      if (flag == 1) {
+        switch(index) {
+          case 0:
+            gunFireRound(data.apiHougeki1!);
+            break;
+          case 1:
+            gunFireRound(data.apiHougeki2!);
+            break;
+          case 2:
+            gunFireRound(data.apiHougeki3!);
+            break;
+          case 3:
+            torpedoFireRound(data.apiRaigeki!);
+            break;
+          default:
+            log("unhandled hourai flag");
+        }
+      }
+    }
+    updateShipHP();
+
   }
 }
 

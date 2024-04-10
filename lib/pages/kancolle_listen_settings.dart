@@ -102,16 +102,16 @@ class _KancolleListenSettingsState
               ],
             ),
             CupertinoListSection.insetGrouped(
-              header: CupertinoListSectionDescription(S.of(context).WikiDataLabel),
+              header: CupertinoListSectionDescription("Data"),
               children: [
                 CupertinoListTile(
-                  title: Text(S.of(context).FleetData),
+                  title: Text(S.of(context).WikiDataLabel),
                   trailing: const CupertinoListTileChevron(),
                   onTap: () {
                     navigatorToCupertino(
                         context,
                         FleetInfoPage(
-                            title: S.of(context).FleetData,
+                            title: S.of(context).WikiDataLabel,
                             previousPageTitle:
                                 widget.showNavigatorBar ? 'KC' : null));
                   },
@@ -272,6 +272,27 @@ class FleetInfoPage extends ConsumerWidget {
                           }
                         },
                       ),
+                      CupertinoListTile(
+                        title: Text("Data Commit ID(Local)"),
+                        subtitle: Text(ref.read(kcWikiDataStateProvider.notifier).getDataRefSha()),
+                      ),
+                      CupertinoListTile(
+                        title: Text("Data Commit ID(Remote)"),
+                        subtitle: FutureBuilder<String?>(
+                          future: ref.read(kcWikiDataStateProvider.notifier).fetchDataRefSha(),
+                          builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data == null) {
+                                return const Text('Connect to GitHub Failed');
+                              }
+                              return Text(snapshot.data!);
+                            }
+                            return const Text('Loading...');
+                          },
+
+                        ),
+                      ),
+
                     ],
                   ),
                 ]),

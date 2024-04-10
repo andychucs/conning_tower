@@ -45,7 +45,7 @@ class KcWikiDataState extends _$KcWikiDataState {
     log("fetching data");
     List<Ship> ships = await _fetchShipData();
     List<MapData> maps = await _fetchMapData();
-    String? refSha = await _fetchDataRefSha();
+    String? refSha = await fetchDataRefSha();
     setDataRefSha(refSha);
     KcWikiData kcWikiData = KcWikiData(ships: ships, maps: maps);
     _saveLocalData(kcWikiData);
@@ -60,7 +60,7 @@ class KcWikiDataState extends _$KcWikiDataState {
     return localStorage.getString("kcWikiDataRefSha") ?? "";
   }
 
-  Future<String?> _fetchDataRefSha() async {
+  Future<String?> fetchDataRefSha() async {
     final res = await http.get(Uri.parse(kcWikiDataGitHub));
     try {
       final json = jsonDecode(res.body);
@@ -106,13 +106,13 @@ class KcWikiDataState extends _$KcWikiDataState {
 
       final kcWikiData = KcWikiData.fromJson(json);
 
-      final refSha = await _fetchDataRefSha();
-      if (refSha == null) {
-        return kcWikiData;
-      }
-      if (refSha != getDataRefSha()) {
-        return _fetchData();
-      }
+      // final refSha = await fetchDataRefSha();
+      // if (refSha == null) {
+      //   return kcWikiData;
+      // }
+      // if (refSha != getDataRefSha()) {
+      //   return _fetchData();
+      // }
 
       return kcWikiData;
     } catch (e) {

@@ -22,45 +22,32 @@ class GetDataApiDataEntity with _$GetDataApiDataEntity {
   factory GetDataApiDataEntity({
     @JsonKey(name: 'api_mst_ship')
     required List<GetDataApiDataApiMstShipEntity> apiMstShip,
-    @JsonKey(name: 'api_mst_slotitem_equiptype')
-    required List<GetDataApiDataApiMstSlotitemEquiptypeEntity>
-        apiMstSlotitemEquiptype,
+    @JsonKey(name: 'api_mst_slotitem_equiptype') dynamic apiMstSlotitemEquiptype,
     @JsonKey(name: 'api_mst_equip_exslot') required List<int> apiMstEquipExslot,
-    @JsonKey(name: 'api_mst_equip_exslot_ship')
-    required dynamic apiMstEquipExslotShip,
+    @JsonKey(name: 'api_mst_equip_exslot_ship') dynamic apiMstEquipExslotShip,
     @JsonKey(name: 'api_mst_stype')
     required List<GetDataApiDataApiMstStypeEntity> apiMstStype,
     @JsonKey(name: 'api_mst_slotitem')
     required List<GetDataApiDataApiMstSlotitemEntity> apiMstSlotitem,
-    @JsonKey(name: 'api_mst_furnituregraph')
-    required List<GetDataApiDataApiMstFurnituregraphEntity>
-        apiMstFurnituregraph,
+    @JsonKey(name: 'api_mst_furnituregraph') dynamic apiMstFurnituregraph,
     @JsonKey(name: 'api_mst_useitem')
     required List<GetDataApiDataApiMstUseitemEntity> apiMstUseitem,
     @JsonKey(name: 'api_mst_payitem')
     required List<GetDataApiDataApiMstPayitemEntity> apiMstPayitem,
-    @JsonKey(name: 'api_mst_item_shop')
-    required GetDataApiDataApiMstItemShopEntity apiMstItemShop,
+    @JsonKey(name: 'api_mst_item_shop') dynamic apiMstItemShop,
     @JsonKey(name: 'api_mst_maparea')
     required List<GetDataApiDataApiMstMapareaEntity> apiMstMaparea,
     @JsonKey(name: 'api_mst_mapinfo')
     required List<GetDataApiDataApiMstMapinfoEntity> apiMstMapinfo,
-    @JsonKey(name: 'api_mst_mapbgm')
-    required List<GetDataApiDataApiMstMapbgmEntity> apiMstMapbgm,
+    @JsonKey(name: 'api_mst_mapbgm') dynamic apiMstMapbgm,
     @JsonKey(name: 'api_mst_mission')
     required List<GetDataApiDataApiMstMissionEntity> apiMstMission,
-    @JsonKey(name: 'api_mst_const')
-    required GetDataApiDataApiMstConstEntity apiMstConst,
-    @JsonKey(name: 'api_mst_shipupgrade')
-    required List<GetDataApiDataApiMstShipupgradeEntity> apiMstShipupgrade,
-    @JsonKey(name: 'api_mst_bgm')
-    required List<GetDataApiDataApiMstBgmEntity> apiMstBgm,
-    @JsonKey(name: 'api_mst_equip_ship')
-    required List<GetDataApiDataApiMstEquipShipEntity> apiMstEquipShip,
-    @JsonKey(name: 'api_mst_furniture')
-    required List<GetDataApiDataApiMstFurnitureEntity> apiMstFurniture,
-    @JsonKey(name: 'api_mst_shipgraph')
-    required List<GetDataApiDataApiMstShipgraphEntity> apiMstShipgraph,
+    @JsonKey(name: 'api_mst_const') dynamic apiMstConst,
+    @JsonKey(name: 'api_mst_shipupgrade') dynamic apiMstShipupgrade,
+    @JsonKey(name: 'api_mst_bgm') dynamic apiMstBgm,
+    @JsonKey(name: 'api_mst_equip_ship') dynamic apiMstEquipShip,
+    @JsonKey(name: 'api_mst_furniture') dynamic apiMstFurniture,
+    @JsonKey(name: 'api_mst_shipgraph') dynamic apiMstShipgraph,
   }) = _GetDataApiDataEntity;
 
   factory GetDataApiDataEntity.fromJson(Map<String, dynamic> json) =>
