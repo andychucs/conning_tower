@@ -815,6 +815,10 @@ class BattleInfo with _$BattleInfo {
       }
     }
 
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
     //api_opening_taisen
