@@ -164,7 +164,7 @@ class LogDetailBattle extends ConsumerWidget {
                     return BattleLogFleet(squad: squad);
                   }
 
-                  if (model is ReqSortieBattleResultEntity) {
+                  if (model is ReqSortieBattleResultEntity || model is ReqCombinedBattleResultEntity) {
                     String? dropName = model.apiData.apiGetShip?.apiShipName;
 
                     return CupertinoListSection.insetGrouped(
