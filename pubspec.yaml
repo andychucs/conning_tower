@@ -43,7 +43,7 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   path_provider: ^2.1.2
   fluttertoast: ^8.2.4
-  shared_preferences: ^2.2.2
+  shared_preferences: ^2.2.3
   url_launcher: ^6.2.6
   package_info_plus: ^5.0.1
   auto_size_text: ^3.0.0
