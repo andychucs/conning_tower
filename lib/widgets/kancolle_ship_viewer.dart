@@ -209,7 +209,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
             buildFiltersWidget(),
             Expanded(
               child: ScrollViewWithCupertinoScrollbar(
-                child: FutureBuilder(
+                children: [FutureBuilder(
                   future: getShips(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<Ship>> snapshot) {
@@ -277,7 +277,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
                     }
                     return Container();
                   },
-                ),
+                )],
               ),
             ),
           ],

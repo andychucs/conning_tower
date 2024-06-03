@@ -960,6 +960,26 @@ class S {
     );
   }
 
+  /// `Cn`
+  String get KCDashboardShipScoutScoreCoefficient {
+    return Intl.message(
+      'Cn',
+      name: 'KCDashboardShipScoutScoreCoefficient',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Formula 33`
+  String get KCDashboardShipScoutScoreFormula33 {
+    return Intl.message(
+      'Formula 33',
+      name: 'KCDashboardShipScoutScoreFormula33',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Speed`
   String get KCDashboardShipSpeed {
     return Intl.message(

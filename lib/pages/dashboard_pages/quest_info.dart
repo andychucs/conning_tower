@@ -1,7 +1,6 @@
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/quest_assistant.dart';
-import 'package:conning_tower/pages/dashboard_pages/squad_info.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +37,7 @@ class _QuestInfoPageState extends ConsumerState<QuestInfoPage> {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 0.0, 10.0),
+        padding: tabContentMargin,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: CupertinoPageScaffold(
@@ -81,27 +80,29 @@ class _QuestInfoPageState extends ConsumerState<QuestInfoPage> {
                     return Container();
                   }
                   return ScrollViewWithCupertinoScrollbar(
-                    child: CupertinoListSection.insetGrouped(
-                      margin: _sectionMargin,
-                      children: List.generate(
-                        questList.length,
-                        (index) => CupertinoListTile(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 4.0),
-                          title: Text(questList[index].title ?? ''),
-                          subtitle: questList[index].detail != null
-                              ? Text(
-                                  questList[index]
-                                      .detail!
-                                      .replaceAll("<br>", ""),
-                                  softWrap: true,
-                                  maxLines: 6,
-                                )
-                              : null,
-                          // trailing: Text('${questList[index].id}'),
+                    children: [
+                      CupertinoListSection.insetGrouped(
+                        margin: tabBottomListMargin,
+                        children: List.generate(
+                          questList.length,
+                          (index) => CupertinoListTile(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 4.0),
+                            title: Text(questList[index].title ?? ''),
+                            subtitle: questList[index].detail != null
+                                ? Text(
+                                    questList[index]
+                                        .detail!
+                                        .replaceAll("<br>", ""),
+                                    softWrap: true,
+                                    maxLines: 6,
+                                  )
+                                : null,
+                            // trailing: Text('${questList[index].id}'),
+                          ),
                         ),
-                      ),
-                    ),
+                      )
+                    ],
                   );
                 }),
               ),

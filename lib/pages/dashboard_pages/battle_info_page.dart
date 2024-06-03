@@ -11,6 +11,7 @@ import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
+import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -148,81 +149,91 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
     }
 
     return SafeArea(
-      child: CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          automaticallyImplyLeading: false,
-          transitionBetweenRoutes: false,
-          backgroundColor: CupertinoColors.systemGroupedBackground,
-          border: null,
-          middle: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              if (battleInfo.result == null)
-                Text(
-                  battleInfo.contactStatus,
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-              if (battleInfo.result == null && battleInfo.airSuperiority != '')
-                Text(
-                  battleInfo.airSuperiority,
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-              if (battleInfo.result != null)
-                Text(
-                  '${battleInfo.result}',
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-              if (battleInfo.dropName != null)
-                Text(
-                  '${battleInfo.dropName} GET!',
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-              if (battleInfo.dropItemId != null)
-                Text(
-                  '${battleInfo.dropItemName ?? useItemData?[battleInfo.dropItemId]?.apiName} GET!',
-                  style: TextStyle(fontWeight: FontWeight.normal),
-                ),
-            ],
-          ),
-        ),
-        child: Column(
-          children: [
-            if (items.isNotEmpty)
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    debugPrint(constraints.maxWidth.toString());
-                    if (constraints.maxWidth >= 600) {
-                      crossAxisCount = 2;
-                    }
-                    return MasonryGridView.count(
-                      crossAxisCount: crossAxisCount,
-                      itemCount: items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return items[index];
+      child: Padding(
+        padding: tabContentMargin,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: CupertinoPageScaffold(
+            navigationBar: CupertinoNavigationBar(
+              automaticallyImplyLeading: false,
+              transitionBetweenRoutes: false,
+              backgroundColor: CupertinoColors.systemGroupedBackground,
+              border: null,
+              middle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  if (battleInfo.result == null)
+                    Text(
+                      battleInfo.contactStatus,
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
+                  if (battleInfo.result == null && battleInfo.airSuperiority != '')
+                    Text(
+                      battleInfo.airSuperiority,
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
+                  if (battleInfo.result != null)
+                    Text(
+                      '${battleInfo.result}',
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
+                  if (battleInfo.dropName != null)
+                    Text(
+                      '${battleInfo.dropName} GET!',
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
+                  if (battleInfo.dropItemId != null)
+                    Text(
+                      '${battleInfo.dropItemName ?? useItemData?[battleInfo.dropItemId]?.apiName} GET!',
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
+                ],
+              ),
+            ),
+            child: Column(
+              children: [
+                if (items.isEmpty)
+                  Center(
+                    child: Text("暁の水平線に勝利を刻みなさい"),
+                  ),
+                if (items.isNotEmpty)
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        debugPrint(constraints.maxWidth.toString());
+                        if (constraints.maxWidth >= 600) {
+                          crossAxisCount = 2;
+                        }
+                        return MasonryGridView.count(
+                          crossAxisCount: crossAxisCount,
+                          itemCount: items.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return items[index];
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
-              ),
-            if (battleInfo.mapInfo != null)
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
-                        ),
-                        Text(
-                          "${battleInfo.mapInfo?.name}",
-                        ),
-                        Text(routeName)
-                      ]),
-                ),
-              ),
-          ],
+                    ),
+                  ),
+                if (battleInfo.mapInfo != null)
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
+                            ),
+                            Text(
+                              "${battleInfo.mapInfo?.name}",
+                            ),
+                            Text(routeName)
+                          ]),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );
