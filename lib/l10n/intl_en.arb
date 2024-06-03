@@ -403,6 +403,8 @@
   "@TextNone": {},
   "TextOpenInJervis": "Open in Jervis FleetHub",
   "@TextOpenInJervis": {},
+  "TextOpenInNoro6": "Open in Aerial Combat Simulator",
+  "@TextOpenInNoro6": {},
   "TextSDamage": "Slightly damaged",
   "@TextSDamage": {},
   "TextSave": "Save",

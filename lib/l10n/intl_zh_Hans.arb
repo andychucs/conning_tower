@@ -404,6 +404,8 @@
   "@TextNone": {},
   "TextOpenInJervis": "在Jervis作战室打开",
   "@TextOpenInJervis": {},
+  "TextOpenInNoro6": "在制空权模拟器打开",
+  "@TextOpenInNoro6": {},
   "TextSDamage": "小破",
   "@TextSDamage": {},
   "TextSave": "保存",

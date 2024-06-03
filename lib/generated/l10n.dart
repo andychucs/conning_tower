@@ -2070,6 +2070,16 @@ class S {
     );
   }
 
+  /// `Open in Aerial Combat Simulator`
+  String get TextOpenInNoro6 {
+    return Intl.message(
+      'Open in Aerial Combat Simulator',
+      name: 'TextOpenInNoro6',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Slightly damaged`
   String get TextSDamage {
     return Intl.message(

@@ -360,6 +360,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
+        "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(
+            "Open in Aerial Combat Simulator"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
         "TextShare": MessageLookupByLibrary.simpleMessage("Share"),

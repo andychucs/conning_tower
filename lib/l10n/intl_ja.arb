@@ -404,6 +404,8 @@
   "@TextNone": {},
   "TextOpenInJervis": "Jervis作戦室で開く",
   "@TextOpenInJervis": {},
+  "TextOpenInNoro6": "制空権シミュレータで開く",
+  "@TextOpenInNoro6": {},
   "TextSDamage": "小破",
   "@TextSDamage": {},
   "TextSave": "保存",

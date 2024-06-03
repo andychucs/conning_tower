@@ -320,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("在Jervis作戰室打開"),
+        "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("在制空權模擬器打開"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
         "TextShare": MessageLookupByLibrary.simpleMessage("分享"),
