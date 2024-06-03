@@ -49,3 +49,32 @@ class DummyIcon extends StatelessWidget {
     );
   }
 }
+
+
+
+class MemberIcon extends StatelessWidget {
+  const MemberIcon({
+    super.key, required this.url,
+  });
+
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5.0),
+      child: FadeInImage(
+          fadeInDuration: const Duration(milliseconds: 500),
+          fadeInCurve: Curves.easeInExpo,
+          fadeOutCurve: Curves.easeOutExpo,
+          placeholder: const AssetImage(
+              "assets/images/defaultAvatarImage.png"),
+          image: NetworkImage(url),
+          imageErrorBuilder: (context, error, stackTrace) {
+            return Image.asset(
+                "assets/images/defaultAvatarImage.png");
+          },
+          fit: BoxFit.cover),
+    );
+  }
+}
