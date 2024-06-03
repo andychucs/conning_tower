@@ -3,6 +3,7 @@ import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
+import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:conning_tower/widgets/kancolle_ship_viewer.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,229 +26,237 @@ class _PortInfoState extends ConsumerState<PortInfo> {
     final fleetInfo = data.fleet;
 
     return SafeArea(
-      child: LocalNavigatorBuilder(
-        builder: (context) {
-          return CupertinoPageScaffold(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                // 1 column width about 120 ~ 240
-                int crossAxisCount = 2;
-                if (constraints.maxWidth < 250)
-                  crossAxisCount = 1;
-                if (constraints.maxWidth > 450) {
-                  crossAxisCount = (constraints.maxWidth/200).ceil();
-                }
-                return CupertinoScrollbar(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 5.0, 10.0),
-                    child: CustomScrollView(
-                      slivers: <Widget>[
-                        SliverPadding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          sliver: SliverGrid.count(
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            crossAxisCount: crossAxisCount,
-                            childAspectRatio: 1.618,
-                            children: <Widget>[
-                              InfoBox(
-                                top: Text(commanderInfo.rankName),
-                                bottom: AutoSizeText(
-                                  commanderInfo.name,
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: Text('Lv.'),
-                                bottom: AutoSizeText(
-                                  '${commanderInfo.level}',
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              GestureDetector(
-                                child: InfoBox(
-                                  top: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(S.of(context).TextFleetGirl),
-                                      const CupertinoListTileChevron(),
+      child: Padding(
+        padding: tabContentMargin,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: LocalNavigatorBuilder(
+              builder: (context) {
+                return CupertinoPageScaffold(
+                  child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        // 1 column width about 120 ~ 240
+                        int crossAxisCount = 2;
+                        if (constraints.maxWidth < 250)
+                          crossAxisCount = 1;
+                        if (constraints.maxWidth > 400) {
+                          crossAxisCount = (constraints.maxWidth/200).ceil();
+                        }
+                        print(constraints.maxWidth);
+
+                        return CupertinoScrollbar(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 5.0, 10.0),
+                            child: CustomScrollView(
+                              slivers: <Widget>[
+                                SliverPadding(
+                                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                  sliver: SliverGrid.count(
+                                    crossAxisSpacing: 12,
+                                    mainAxisSpacing: 12,
+                                    crossAxisCount: crossAxisCount,
+                                    childAspectRatio: 1.618,
+                                    children: <Widget>[
+                                      InfoBox(
+                                        top: Text(commanderInfo.rankName),
+                                        bottom: AutoSizeText(
+                                          commanderInfo.name,
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: Text('Lv.'),
+                                        bottom: AutoSizeText(
+                                          '${commanderInfo.level}',
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        child: InfoBox(
+                                          top: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(S.of(context).TextFleetGirl),
+                                              const CupertinoListTileChevron(),
+                                            ],
+                                          ),
+                                          bottom: AutoSizeText(
+                                            '${fleetInfo.ships.length}/${commanderInfo.maxShip}',
+                                            style: TextStyle(fontSize: 30),
+                                            minFontSize: 16,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          navigatorToCupertino(context, KancolleShipViewer());
+                                        },
+                                      ),
+                                      InfoBox(
+                                        top: Text(S.of(context).TextEquipment),
+                                        bottom: AutoSizeText(
+                                          '${fleetInfo.equipment.length}/${commanderInfo.maxItem}',
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: const Color.fromRGBO(32, 89, 29, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.oil}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: const Color.fromRGBO(126, 102, 54, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.ammo}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: Color.fromRGBO(181, 180, 180, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.steel}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: Color.fromRGBO(219, 150, 102, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.bauxite}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: Color.fromRGBO(255, 176, 7, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.instantCreateShip}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: Color.fromRGBO(195, 212, 75, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.instantRepairs}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: Color.fromRGBO(56, 126, 132, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.developmentMaterials}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      InfoBox(
+                                        top: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Container(
+                                            width: 25,
+                                            height: 25,
+                                            color: Color.fromRGBO(186, 186, 186, 1.0),
+                                          ),
+                                        ),
+                                        bottom: AutoSizeText(
+                                          "${resourceInfo.improvementMaterials}",
+                                          style: TextStyle(fontSize: 30),
+                                          minFontSize: 16,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                  bottom: AutoSizeText(
-                                    '${fleetInfo.ships.length}/${commanderInfo.maxShip}',
-                                    style: TextStyle(fontSize: 30),
-                                    minFontSize: 16,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
                                 ),
-                                onTap: () {
-                                  navigatorToCupertino(context, KancolleShipViewer());
-                                },
-                              ),
-                              InfoBox(
-                                top: Text(S.of(context).TextEquipment),
-                                bottom: AutoSizeText(
-                                  '${fleetInfo.equipment.length}/${commanderInfo.maxItem}',
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: const Color.fromRGBO(32, 89, 29, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.oil}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: const Color.fromRGBO(126, 102, 54, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.ammo}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: Color.fromRGBO(181, 180, 180, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.steel}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: Color.fromRGBO(219, 150, 102, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.bauxite}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: Color.fromRGBO(255, 176, 7, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.instantCreateShip}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: Color.fromRGBO(195, 212, 75, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.instantRepairs}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: Color.fromRGBO(56, 126, 132, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.developmentMaterials}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              InfoBox(
-                                top: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Container(
-                                    width: 25,
-                                    height: 25,
-                                    color: Color.fromRGBO(186, 186, 186, 1.0),
-                                  ),
-                                ),
-                                bottom: AutoSizeText(
-                                  "${resourceInfo.improvementMaterials}",
-                                  style: TextStyle(fontSize: 30),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        );
+                      }
                   ),
                 );
               }
-            ),
-          );
-        }
+          ),
+        ),
       ),
     );
   }

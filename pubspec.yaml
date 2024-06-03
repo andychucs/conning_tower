@@ -77,6 +77,8 @@ dependencies:
   objectbox: ^2.5.1
   objectbox_flutter_libs: ^2.5.1
   pull_down_button: ^0.9.3
+  tab_container: ^3.5.3
+
 
 dev_dependencies:
   flutter_test:

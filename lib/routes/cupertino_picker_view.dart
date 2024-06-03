@@ -55,6 +55,7 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
               Expanded(
                 flex: widget.wideStyle ? 5 : 7,
                 child: CupertinoGroupedSection(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 0.0, 10.0),
                   child: CupertinoPicker(
                     scrollController: scrollController,
                     useMagnifier: true,

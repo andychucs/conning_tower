@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
+import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
+import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -89,44 +91,44 @@ class OperationScheduleState extends ConsumerState<OperationSchedule> {
         kancolleDataProvider.select((data) => data.dataInfo.missionInfo));
 
     return LayoutBuilder(builder: (context, constraints) {
-      return Container(
-        alignment: Alignment.center,
-        color: CupertinoColors.systemGroupedBackground.resolveFrom(context),
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: constraints.maxHeight < 220
-              ? null
-              : const NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            final squad = index + 2;
-            final operation = queueMap[squad]!;
-            var squadName = '-';
-            String? missionName = '--';
-            var missionCode = '-';
-            // print(missionCode);
-            // print(operation);
-            if (squads.length >= squad) {
-              squadName = squads[squad - 1].name;
-            }
+      return SafeArea(
+        child: Padding(
+          padding: tabContentMargin,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: CupertinoPageScaffold(
+              child: ScrollViewWithCupertinoScrollbar(
+                children: List.generate(3, (index) {
+                  final squad = index + 2;
+                  final operation = queueMap[squad]!;
+                  var squadName = '-';
+                  String? missionName = '--';
+                  var missionCode = '-';
+                  // print(missionCode);
+                  // print(operation);
+                  if (squads.length >= squad) {
+                    squadName = squads[squad - 1].name;
+                  }
 
-            if (operation.id < 999) {
-              var mission = missionInfo![operation.id]!;
-              missionCode = mission.apiDispNo;
-              missionName = mission.apiName;
-            }
-            return CupertinoListSection.insetGrouped(
-                margin: const EdgeInsetsDirectional.only(
-                    top: 5.0, bottom: 5.0, end: 10.0, start: 5.0),
-                footer: CupertinoListSectionDescription(squadName),
-                children: [
-                  CupertinoListTile(
-                    leading: Text(missionCode),
-                    title: Text(missionName ?? '--'),
-                    additionalInfo: Text('${remainingTimes[squad]}'),
-                  ),
-                ]);
-          },
+                  if (operation.id < 999) {
+                    var mission = missionInfo![operation.id]!;
+                    missionCode = mission.apiDispNo;
+                    missionName = mission.apiName;
+                  }
+                  return CupertinoListSection.insetGrouped(
+                      margin: tabBottomListMargin,
+                      footer: CupertinoListSectionDescription(squadName),
+                      children: [
+                        CupertinoListTile(
+                          leading: Text(missionCode),
+                          title: Text(missionName ?? '--'),
+                          additionalInfo: Text('${remainingTimes[squad]}'),
+                        ),
+                      ]);
+                }),
+              ),
+            ),
+          ),
         ),
       );
     });

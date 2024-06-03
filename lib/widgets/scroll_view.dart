@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class ScrollViewWithCupertinoScrollbar extends StatelessWidget {
-  const ScrollViewWithCupertinoScrollbar({super.key, required this.child});
+  const ScrollViewWithCupertinoScrollbar({super.key, required this.children});
 
-  final Widget child;
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class ScrollViewWithCupertinoScrollbar extends StatelessWidget {
       controller: controller,
       child: CustomScrollView(controller: controller, slivers: [
         SliverList(
-          delegate: SliverChildListDelegate([child]),
+          delegate: SliverChildListDelegate(children),
         ),
       ]),
     );
