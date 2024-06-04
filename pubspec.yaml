@@ -74,8 +74,8 @@ dependencies:
   carousel_slider: ^4.2.1
   firebase_core: ^2.22.0
   firebase_crashlytics: ^3.4.16
-  objectbox: ^2.5.1
-  objectbox_flutter_libs: ^2.5.1
+  objectbox: ^4.0.1
+  objectbox_flutter_libs: ^4.0.1
   pull_down_button: ^0.9.3
   tab_container: ^3.5.3
 
@@ -96,7 +96,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   freezed: ^2.4.7
   json_serializable: ^6.7.0
-  objectbox_generator: any
+  objectbox_generator: 4.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
