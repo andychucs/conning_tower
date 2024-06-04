@@ -176,6 +176,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("LoS"),
         "KCDashboardShipScoutScore":
             MessageLookupByLibrary.simpleMessage("LoS Score"),
+        "KCDashboardShipScoutScoreCoefficient":
+            MessageLookupByLibrary.simpleMessage("Cn"),
+        "KCDashboardShipScoutScoreFormula33":
+            MessageLookupByLibrary.simpleMessage("Formula 33"),
         "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("Speed"),
         "KCDashboardShipTorpedo":
             MessageLookupByLibrary.simpleMessage("Torpedo"),
@@ -360,6 +364,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
+        "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(
+            "Open in Aerial Combat Simulator"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
         "TextShare": MessageLookupByLibrary.simpleMessage("Share"),

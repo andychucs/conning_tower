@@ -161,6 +161,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardShipScout": MessageLookupByLibrary.simpleMessage("索敵"),
         "KCDashboardShipScoutScore":
             MessageLookupByLibrary.simpleMessage("索敵スコア"),
+        "KCDashboardShipScoutScoreCoefficient":
+            MessageLookupByLibrary.simpleMessage("分岐点係数"),
+        "KCDashboardShipScoutScoreFormula33":
+            MessageLookupByLibrary.simpleMessage("33式"),
         "KCDashboardShipSpeed": MessageLookupByLibrary.simpleMessage("速力"),
         "KCDashboardShipTorpedo": MessageLookupByLibrary.simpleMessage("雷装"),
         "KCDashboardShipTotalAttack":
@@ -334,6 +338,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Jervis作戦室で開く"),
+        "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("制空権シミュレータで開く"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
         "TextShare": MessageLookupByLibrary.simpleMessage("共有"),

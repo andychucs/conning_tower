@@ -51,6 +51,22 @@ class SquadsShareButton extends StatelessWidget {
           },
         ),
         PullDownMenuItem(
+          title: S.current.TextOpenInNoro6,
+          subtitle: 'noro6.github.io/kc-web',
+          icon: CupertinoIcons.square_arrow_up_on_square,
+          onTap: () {
+            Uri uri = Uri(
+                scheme: 'https',
+                host: 'noro6.github.io',
+                path: 'kc-web',
+                queryParameters: {
+                  'predeck': jsonEncode(DeckBuilderEntity.fromSuads(squads))
+                }
+            );
+            launchUrl(uri, mode: LaunchMode.externalApplication);
+          }
+        ),
+        PullDownMenuItem(
           title: S.current.TextCopyToClipboard,
           subtitle: S.current.TextDeckBuilderFormat,
           icon: CupertinoIcons.square_on_square,

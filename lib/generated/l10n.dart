@@ -960,6 +960,26 @@ class S {
     );
   }
 
+  /// `Cn`
+  String get KCDashboardShipScoutScoreCoefficient {
+    return Intl.message(
+      'Cn',
+      name: 'KCDashboardShipScoutScoreCoefficient',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Formula 33`
+  String get KCDashboardShipScoutScoreFormula33 {
+    return Intl.message(
+      'Formula 33',
+      name: 'KCDashboardShipScoutScoreFormula33',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Speed`
   String get KCDashboardShipSpeed {
     return Intl.message(
@@ -2065,6 +2085,16 @@ class S {
     return Intl.message(
       'Open in Jervis FleetHub',
       name: 'TextOpenInJervis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open in Aerial Combat Simulator`
+  String get TextOpenInNoro6 {
+    return Intl.message(
+      'Open in Aerial Combat Simulator',
+      name: 'TextOpenInNoro6',
       desc: '',
       args: [],
     );

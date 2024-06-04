@@ -1,4 +1,3 @@
-
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -47,8 +46,9 @@ class _AboutPageState extends ConsumerState<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = ref.watch(deviceManagerProvider.select((manager) => manager.size));
-    
+    Size size =
+        ref.watch(deviceManagerProvider.select((manager) => manager.size));
+
     return SingleChildFunctionalPage(
       child: CupertinoScrollbar(
         child: CustomScrollView(
@@ -63,8 +63,8 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                 [
                   Center(
                     child: SizedBox(
-                      height: 60,
-                      width: 60,
+                      height: 80,
+                      width: 80,
                       child: Image.asset('assets/images/logo.png'),
                     ),
                   ),
@@ -83,32 +83,15 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                       ),
                       const CupertinoListTile(
                         title: Text("Channel"),
-                        additionalInfo: Text(kReleaseChannel == ReleaseChannel.github ? "GitHub" : "AppStore"),
+                        additionalInfo: Text(
+                            kReleaseChannel == ReleaseChannel.github
+                                ? "GitHub"
+                                : "AppStore"),
                       )
                     ],
                   ),
                   CupertinoListSection.insetGrouped(
                     children: [
-                      CupertinoListTile(
-                        title: Text(S.of(context).AppStoreRating),
-                        leading: const DummyIcon(
-                            color: CupertinoColors.activeBlue,
-                            icon: CupertinoIcons.heart),
-                        trailing: const CupertinoListTileChevron(),
-                        onTap: () async {
-                          if (await _inAppReview.isAvailable()) {
-                            _inAppReview.requestReview();
-                          }
-                        },
-                      ),
-                      CupertinoListTile(
-                        title: const Text("X"),
-                        leading: const DummyIcon(
-                            color: CupertinoColors.black,
-                            icon: FontAwesomeIcons.xTwitter),
-                        trailing: const CupertinoListTileChevron(),
-                        onTap: () => launchUrl(Uri.parse(kXUrl)),
-                      ),
                       if (kReleaseChannel == ReleaseChannel.github)
                         CupertinoListTile(
                           title: const Text("GitHub"),
@@ -130,60 +113,31 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                   ),
                   CupertinoListSection.insetGrouped(
                     header: Text(S.of(context).AboutContributors),
-                    children: [
+                    children: const [
                       CupertinoListTile(
-                        title: const Text('AndyChu'),
-                        leading: kReleaseChannel == ReleaseChannel.github
-                            ? FadeInImage(
-                                fadeInDuration: const Duration(milliseconds: 500),
-                                fadeInCurve: Curves.easeInExpo,
-                                fadeOutCurve: Curves.easeOutExpo,
-                                placeholder: const AssetImage(
-                                    "assets/images/defaultAvatarImage.png"),
-                                image: const NetworkImage(
-                                    'https://avatars.githubusercontent.com/u/24852023?v=4'),
-                                imageErrorBuilder: (context, error, stackTrace) {
-                                  return Image.asset(
-                                      "assets/images/defaultAvatarImage.png");
-                                },
-                                fit: BoxFit.cover)
-                            : null,
+                        title: Text('AndyChu'),
+                        leading: MemberIcon(
+                            url:
+                                'https://avatars.githubusercontent.com/u/24852023?v=4'),
                       ),
                       CupertinoListTile(
-                        title: const Text('Angus'),
-                        leading: kReleaseChannel == ReleaseChannel.github
-                            ? FadeInImage(
-                                fadeInDuration: const Duration(milliseconds: 500),
-                                fadeInCurve: Curves.easeInExpo,
-                                fadeOutCurve: Curves.easeOutExpo,
-                                placeholder: const AssetImage(
-                                    "assets/images/defaultAvatarImage.png"),
-                                image: const NetworkImage(
-                                    'https://avatars.githubusercontent.com/u/91370281?v=4'),
-                                imageErrorBuilder: (context, error, stackTrace) {
-                                  return Image.asset(
-                                      "assets/images/defaultAvatarImage.png");
-                                },
-                                fit: BoxFit.cover)
-                            : null,
+                        title: Text('Angus'),
+                        leading: MemberIcon(
+                            url:
+                                'https://avatars.githubusercontent.com/u/91370281?v=4'),
                       ),
                       CupertinoListTile(
-                        title: const Text('naayu'),
-                        leading: kReleaseChannel == ReleaseChannel.github
-                            ? FadeInImage(
-                                fadeInDuration: const Duration(milliseconds: 500),
-                                fadeInCurve: Curves.easeInExpo,
-                                fadeOutCurve: Curves.easeOutExpo,
-                                placeholder: const AssetImage(
-                                    "assets/images/defaultAvatarImage.png"),
-                                image: const NetworkImage(
-                                    'https://pbs.twimg.com/profile_images/1651315887540928512/tC6-eeXi_400x400.jpg'),
-                                imageErrorBuilder: (context, error, stackTrace) {
-                                  return Image.asset(
-                                      "assets/images/defaultAvatarImage.png");
-                                },
-                                fit: BoxFit.cover)
-                            : null,
+                        title: Text('naayu'),
+                        leading: MemberIcon(
+                            url:
+                                'https://pbs.twimg.com/profile_images/1651315887540928512/tC6-eeXi_400x400.jpg'),
+                      ),
+                      CupertinoListTile(
+                        title: Text('Hatsuzuki'),
+                        subtitle: Text('Artist'),
+                        leading: MemberIcon(
+                            url:
+                                'https://pbs.twimg.com/profile_images/1634965009456562176/FyVARtJC_400x400.jpg'),
                       ),
                     ],
                   ),
@@ -194,7 +148,8 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                       children: [
                         CupertinoListTile(
                           title: const Text("Screen Size"),
-                          additionalInfo: Text("W:${size.width} H:${size.height}"),
+                          additionalInfo:
+                              Text("W:${size.width} H:${size.height}"),
                         ),
                         CupertinoListTile(
                           title: const Text("Device Type"),
@@ -215,7 +170,8 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                               context,
                               CupertinoPageScaffold(
                                   navigationBar: CupertinoNavigationBar(
-                                    backgroundColor: CupertinoColors.systemGroupedBackground,
+                                    backgroundColor:
+                                        CupertinoColors.systemGroupedBackground,
                                     middle: const Text('Libraries'),
                                     previousPageTitle:
                                         S.of(context).AboutButton,
@@ -223,7 +179,6 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                                   child: const LibsInfo())),
                         )
                       ]),
-
                 ],
               ),
             ),
