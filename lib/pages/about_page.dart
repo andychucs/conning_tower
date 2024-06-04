@@ -92,26 +92,6 @@ class _AboutPageState extends ConsumerState<AboutPage> {
                   ),
                   CupertinoListSection.insetGrouped(
                     children: [
-                      CupertinoListTile(
-                        title: Text(S.of(context).AppStoreRating),
-                        leading: const DummyIcon(
-                            color: CupertinoColors.activeBlue,
-                            icon: CupertinoIcons.heart),
-                        trailing: const CupertinoListTileChevron(),
-                        onTap: () async {
-                          if (await _inAppReview.isAvailable()) {
-                            _inAppReview.requestReview();
-                          }
-                        },
-                      ),
-                      CupertinoListTile(
-                        title: const Text("X"),
-                        leading: const DummyIcon(
-                            color: CupertinoColors.black,
-                            icon: FontAwesomeIcons.xTwitter),
-                        trailing: const CupertinoListTileChevron(),
-                        onTap: () => launchUrl(Uri.parse(kXUrl)),
-                      ),
                       if (kReleaseChannel == ReleaseChannel.github)
                         CupertinoListTile(
                           title: const Text("GitHub"),
