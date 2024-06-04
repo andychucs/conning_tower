@@ -76,6 +76,8 @@ This project goal is use same UI and be able to sync player data on all platform
 
 HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.github.io/) by [![Twitter URL](https://img.shields.io/twitter/url?label=naayu1012&style=social&url=https%3A%2F%2Ftwitter.com%2Fnaayu1012)](https://twitter.com/naayu1012)
 
+After v1.13.0, use the icon create by [Hatsuzuki](https://www.pixiv.net/users/15583261) in the app.
+
 ## Sponsors
 
 ### Bronze Sponsors
