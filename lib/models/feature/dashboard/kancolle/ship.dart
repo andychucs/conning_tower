@@ -314,7 +314,7 @@ class Ship with _$Ship {
           count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
           break;
         default:
-          count += equip.los! * 0.6;
+          count += equip.los ?? 0 * 0.6;
           break;
       }
     }
