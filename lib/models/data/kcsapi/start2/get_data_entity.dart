@@ -410,18 +410,18 @@ class GetDataApiDataApiMstEquipShipEntity
 class GetDataApiDataApiMstFurnitureEntity
     with _$GetDataApiDataApiMstFurnitureEntity {
   factory GetDataApiDataApiMstFurnitureEntity({
-    @JsonKey(name: 'api_id') required int apiId,
-    @JsonKey(name: 'api_type') required int apiType,
-    @JsonKey(name: 'api_no') required int apiNo,
-    @JsonKey(name: 'api_title') required String apiTitle,
-    @JsonKey(name: 'api_description') required String apiDescription,
-    @JsonKey(name: 'api_rarity') required int apiRarity,
-    @JsonKey(name: 'api_price') required int apiPrice,
-    @JsonKey(name: 'api_saleflg') required int apiSaleflg,
-    @JsonKey(name: 'api_season') required int apiSeason,
-    @JsonKey(name: 'api_version') required int apiVersion,
-    @JsonKey(name: 'api_outside_id') required int apiOutsideId,
-    @JsonKey(name: 'api_active_flag') required int apiActiveFlag,
+    @JsonKey(name: 'api_id') int? apiId,
+    @JsonKey(name: 'api_type') int? apiType,
+    @JsonKey(name: 'api_no') int? apiNo,
+    @JsonKey(name: 'api_title') String? apiTitle,
+    @JsonKey(name: 'api_description') String? apiDescription,
+    @JsonKey(name: 'api_rarity') int? apiRarity,
+    @JsonKey(name: 'api_price') int? apiPrice,
+    @JsonKey(name: 'api_saleflg') int? apiSaleflg,
+    @JsonKey(name: 'api_season') int? apiSeason,
+    @JsonKey(name: 'api_version') int? apiVersion,
+    @JsonKey(name: 'api_outside_id') int? apiOutsideId,
+    @JsonKey(name: 'api_active_flag') int? apiActiveFlag,
   }) = _GetDataApiDataApiMstFurnitureEntity;
 
   factory GetDataApiDataApiMstFurnitureEntity.fromJson(
