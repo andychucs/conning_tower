@@ -65,7 +65,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
 
     for (final squad in [...?battleInfo.inBattleSquads]) {
       items.add(CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
+        margin: tabContentMargin,
         header: battleInfo.inBattleSquads?.first == squad
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,7 +123,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
     }
     for (final squad in [...?battleInfo.enemySquads]) {
       items.add(CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
+        margin: tabContentMargin,
         header: battleInfo.enemySquads?.first == squad
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
