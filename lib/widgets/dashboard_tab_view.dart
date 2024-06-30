@@ -22,7 +22,6 @@ class MyOverlayColor extends WidgetStateColor {
   }
 }
 
-
 class DashboardTabView extends ConsumerStatefulWidget {
   final int initialIndex;
 
@@ -43,7 +42,8 @@ class DashboardTabView extends ConsumerStatefulWidget {
   ConsumerState<DashboardTabView> createState() => _DashboardTabViewState();
 }
 
-class _DashboardTabViewState extends ConsumerState<DashboardTabView> with TickerProviderStateMixin  {
+class _DashboardTabViewState extends ConsumerState<DashboardTabView>
+    with TickerProviderStateMixin {
   late final TabController _tabController;
   Color? _selectedColor;
 
@@ -55,7 +55,6 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView> with Ticker
     if (widget.colors != null) {
       _selectedColor = widget.colors![_tabController.index];
     }
-
   }
 
   @override
@@ -66,52 +65,54 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView> with Ticker
 
   @override
   Widget build(BuildContext context) {
-
+    _tabController.addListener(() {
+      _selectedColor = widget.colors![_tabController.index];
+      if (!_tabController.indexIsChanging) {
+        ref
+            .watch(settingsProvider.notifier)
+            .setInt("dashboardIndex", _tabController.index);
+      }
+    });
 
     return Padding(
       padding: widget.childPadding,
-      child: DefaultTabController(
-        length: widget.tabs.length,
-        child: Scaffold(
-          bottomNavigationBar: Container(
-            // color:Colors.redAccent,
-            child: TabBar(
-              controller: _tabController,
-              labelStyle: TextStyle(fontSize: 16),
-              unselectedLabelStyle: TextStyle(fontSize: 14),
-              overlayColor: MyOverlayColor(Colors.white10),
-              // physics: const BouncingScrollPhysics(),
-              // padding: EdgeInsets.zero,
-              // labelPadding: EdgeInsets.zero,
-              tabAlignment: TabAlignment.start,
-              isScrollable: true,
-              // dividerColor: Colors.redAccent,
-              labelColor: CupertinoDynamicColor.resolve(CupertinoColors.label, context),
-              // unselectedLabelColor: Colors.redAccent,
-              indicatorColor: _selectedColor,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorWeight: 4.0,
-              // indicator:BoxDecoration(
-              //   color:Colors.white,
-              //   borderRadius:BorderRadius.only(
-              //     bottomLeft:Radius.circular(15),
-              //     bottomRight:Radius.circular(15),
-              //   ),
-              // ),
-              tabs: widget.tabs,
-              onTap: (value) {
-                HapticFeedback.lightImpact();
-                ref
-                    .watch(settingsProvider.notifier)
-                    .setInt("dashboardIndex", value);
-                _selectedColor = widget.colors![value];
-              },
-            ),
-          ),
-          body: TabBarView(
-            controller: _tabController,
-            children: widget.contents,
-          ),
+      child: Scaffold(
+        bottomNavigationBar: TabBar(
+          controller: _tabController,
+          labelStyle: const TextStyle(fontSize: 16),
+          unselectedLabelStyle: const TextStyle(fontSize: 14),
+          overlayColor: const MyOverlayColor(Colors.white10),
+          // physics: const BouncingScrollPhysics(),
+          // padding: EdgeInsets.zero,
+          // labelPadding: EdgeInsets.zero,
+          tabAlignment: TabAlignment.start,
+          isScrollable: true,
+          // dividerColor: Colors.redAccent,
+          labelColor:
+              CupertinoDynamicColor.resolve(CupertinoColors.label, context),
+          // unselectedLabelColor: Colors.redAccent,
+          indicatorColor: _selectedColor,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorWeight: 4.0,
+          // indicator:BoxDecoration(
+          //   color:Colors.white,
+          //   borderRadius:BorderRadius.only(
+          //     bottomLeft:Radius.circular(15),
+          //     bottomRight:Radius.circular(15),
+          //   ),
+          // ),
+          tabs: widget.tabs,
+          onTap: (value) {
+            HapticFeedback.lightImpact();
+            ref
+                .watch(settingsProvider.notifier)
+                .setInt("dashboardIndex", value);
+            _selectedColor = widget.colors![value];
+          },
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: widget.contents,
         ),
       ),
     );
