@@ -12,6 +12,7 @@ import 'package:conning_tower/providers/theme_provider.dart';
 import 'package:conning_tower/routes/cupertino_picker_view.dart';
 import 'package:conning_tower/pages/dashboard_pages/web_info_page.dart';
 import 'package:conning_tower/style/app_color.dart';
+import 'package:conning_tower/widgets/dashboard_tab_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,8 +113,11 @@ class Dashboard extends ConsumerStatefulWidget {
 }
 
 class _DashboardState extends ConsumerState<Dashboard> {
+  int? _selectIndex;
+
   @override
   Widget build(BuildContext context) {
+    _selectIndex = _selectIndex ?? ref.watch(settingsProvider).dashboardIndex;
     final theme = ref.watch(themeProvider);
     late Brightness brightness;
     if (theme == ThemeMode.system) {
@@ -140,40 +144,19 @@ class _DashboardState extends ConsumerState<Dashboard> {
       ];
 
       if (widget.bottomTab) {
-        List<Widget> tabs = <Widget>[for (var i in widget.titles) Text(i)];
+        List<Tab> tabs = <Tab>[for (var i in widget.titles) Tab(child: Text(i))];
         List<Color> colors = <Color>[
           for (var index = 0; index < tabs.length; index++)
             AppColor.getGroupBeta(index)
         ];
 
         return SafeArea(
-          child: Container(
-            color: brightness == Brightness.dark
-                ? CupertinoDynamicColor.resolve(
-                    CupertinoColors.secondarySystemBackground, context)
-                : null,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: TabContainer(
-                tabEdge: TabEdge.bottom,
-                // borderRadius: BorderRadius.circular(15),
-                childPadding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                selectedTextStyle: const TextStyle(
-                  fontSize: 15.0,
-                ),
-                unselectedTextStyle: const TextStyle(
-                  fontSize: 13.0,
-                ),
-                // childPadding: const EdgeInsets.only(bottom: 10.0),
-                tabMinLength: 100,
-                tabExtent: 50,
-                tabs: tabs,
-                colors: brightness == Brightness.light ? colors : null,
-                color:
-                    brightness == Brightness.dark ? CupertinoColors.black : null,
-                children: widget.children,
-              ),
-            ),
+          child: DashboardTabView(
+            initialIndex: _selectIndex ?? 0,
+            tabs: tabs,
+            contents: widget.children,
+            childPadding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            colors: colors,
           ),
         );
       }
