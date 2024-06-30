@@ -332,10 +332,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "797379ea206eaeeb62499775de812761493d0692890fdc7f90b6183a3369176d"
+      sha256: "53316975310c8af75a96e365f9fccb67d1c544ef0acdbf0d88bbe30eedd1c4f9"
       url: "https://pub.dev"
     source: hosted
-    version: "2.25.5"
+    version: "2.27.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
