@@ -105,7 +105,8 @@ class NotificationUtil {
   }
 
   Future<void> setNotificationWithOperation(Operation operation, String? name, {bool feedBack = true}) async {
-    if (operation.endTime.isBefore(tz.TZDateTime.now(tz.local))) return;
+    var endTime = operation.endTime.add(const Duration(minutes: -1)); // notify 1 minute before
+    if (endTime.isBefore(tz.TZDateTime.now(tz.local))) return;
 
     String notificationTitle = S.current.TaskCompleted(name ?? operation.id);
 
@@ -121,7 +122,7 @@ class NotificationUtil {
         operation.id.hashCode,
         notificationTitle,
         '',
-        operation.endTime,
+        endTime,
         notificationDetails);
     if (feedBack) {
       HapticFeedback.lightImpact();
