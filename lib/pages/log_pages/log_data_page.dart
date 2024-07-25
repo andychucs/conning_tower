@@ -14,11 +14,9 @@ import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:pull_down_button/pull_down_button.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class LogDataPage extends ConsumerStatefulWidget {
@@ -76,31 +74,15 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
         backgroundColor: CupertinoColors.systemGroupedBackground,
         middle: Text(S.of(context).TextBattle),
         previousPageTitle: S.of(context).KanColleLogbook,
-        trailing: PullDownButton(
-          itemBuilder: (BuildContext context) => [
-            PullDownMenuItem(
-              onTap: () async {
-                Box<KancolleBattleLogEntity> dataBox = objectbox.battleLog;
-                final allData = dataBox.getAll();
-                await Clipboard.setData(ClipboardData(text: jsonEncode(allData)));
-              },
-              title: "Copy Battle Log",
-            ),
-            PullDownMenuItem(
-              onTap: () async {
-                Box<KancolleQuestLogEntity> dataBox = objectbox.questLog;
-                final allData = dataBox.getAll();
-                await Clipboard.setData(ClipboardData(text: jsonEncode(allData)));
-              },
-              title: "Copy Quest Log",
-            ),
-          ],
-          buttonBuilder: (BuildContext context, Future<void> Function() showMenu) => GestureDetector(
-          onTap: showMenu,
-          child: Icon(CupertinoIcons.hammer),
-        ),
-
-        ),
+        // trailing: GestureDetector(
+        //   onTap: () {
+        //
+        //   },
+        //   child: Icon(
+        //     CupertinoIcons.calendar,
+        //     color: CupertinoTheme.of(context).textTheme.navActionTextStyle.color,
+        //   ),
+        // ),
       ),
       child: SafeArea(
         bottom: false,
