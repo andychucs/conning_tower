@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
@@ -167,7 +168,8 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                       battleInfo.contactStatus,
                       style: TextStyle(fontWeight: FontWeight.normal),
                     ),
-                  if (battleInfo.result == null && battleInfo.airSuperiority != '')
+                  if (battleInfo.result == null &&
+                      battleInfo.airSuperiority != '')
                     Text(
                       battleInfo.airSuperiority,
                       style: TextStyle(fontWeight: FontWeight.normal),
@@ -243,7 +245,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
     try {
       final kcWikiMapData = data.maps;
       final map = kcWikiMapData.firstWhere(
-            (element) => element.id == battleInfo.mapInfo!.id,
+        (element) => element.id == battleInfo.mapInfo!.id,
         orElse: () => MapData(
             id: -1,
             name: "",
@@ -256,7 +258,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
         if (route != null) {
           // Safely append '(Boss)' if the target cell is a boss cell
           routeName =
-          ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
+              ' ${route.from ?? ''} → ${route.to}${map.cells[route.to]?.boss ?? false ? '(Boss)' : ''}';
         }
       }
     } catch (e) {
@@ -285,9 +287,60 @@ class ShipInfoInBattle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const dmgSize = 14.0;
+
     return CupertinoListTile.notched(
-      leading: AttributeLabel.vertical(label: 'DMG', value: '$dmg'),
-      leadingToTitle: 0.0,
+      leading: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Icon(
+                Icons.arrow_drop_up,
+                color: Colors.redAccent,
+                size: dmgSize,
+              ),
+              Expanded(
+                child: AutoSizeText(
+                  '$dmg',
+                  textAlign: TextAlign.end,
+                  softWrap: false,
+                  maxFontSize: dmgSize,
+                  minFontSize: dmgSize - 8,
+                  maxLines: 1,
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                Icons.arrow_drop_down,
+                color: Colors.blueAccent,
+                size: dmgSize,
+              ),
+              Expanded(
+                child: AutoSizeText(
+                  '$dmgTaken',
+                  textAlign: TextAlign.end,
+                  softWrap: false,
+                  maxFontSize: dmgSize,
+                  minFontSize: dmgSize - 8,
+                  maxLines: 1,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+      leadingSize: 48,
+      padding: EdgeInsets.only(right: 14.0, left: 4.0),
+      leadingToTitle: 4.0,
       title: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: Row(
