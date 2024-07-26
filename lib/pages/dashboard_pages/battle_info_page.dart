@@ -399,15 +399,9 @@ class ShipInfoInBattle extends StatelessWidget {
         animationDuration: 500,
         barRadius: const Radius.circular(6),
         animateFromLastPercent: true,
-        lineHeight: 12.0,
+        lineHeight: 8.0,
         percent: (ship.nowHP >= 0 ? ship.nowHP : 0) / ship.maxHP,
         progressColor: ship.damageColor,
-        center: dmgTaken < 0
-            ? Text(
-                "$dmgTaken",
-                style: const TextStyle(fontSize: 10),
-              )
-            : null,
         trailing: SizedBox(
           width: 56,
           child: Text(
