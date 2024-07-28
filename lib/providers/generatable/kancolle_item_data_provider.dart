@@ -34,9 +34,11 @@ class KancolleItemData extends _$KancolleItemData {
     return AkashiSchedule.fromJson(jsonDecode(res.body));
   }
 
-  Future<String> fetchDataVersion() async {
+  Future<String> fetchDataVersion({timeout = 5000}) async {
     try {
-      final res = await http.get(Uri.parse(kOoyodoDataVersion));
+      final res = await http.get(Uri.parse(kOoyodoDataVersion))
+          .timeout(Duration(milliseconds: timeout), onTimeout: () => http.Response('timeout', 408));
+      if (res.statusCode == 408) return '';
       return jsonDecode(res.body)['version'] as String;
     } catch (e) {
       return '';

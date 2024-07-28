@@ -279,7 +279,7 @@ class FleetInfoPage extends ConsumerWidget {
                       CupertinoListTile(
                         title: Text("Data Commit ID(Remote)"),
                         subtitle: FutureBuilder<String?>(
-                          future: ref.read(kcWikiDataStateProvider.notifier).fetchDataRefSha(),
+                          future: ref.read(kcWikiDataStateProvider.notifier).fetchDataRefSha(timeout: 10000),
                           builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
                             if (snapshot.hasData) {
                               if (snapshot.data == null) {
