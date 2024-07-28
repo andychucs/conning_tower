@@ -95,6 +95,11 @@ class KancolleData {
   void parse(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
+    if (data.isEmpty) {
+      log("empty data");
+      Fluttertoast.showToast(msg: "Network Error");
+      return;
+    }
     final json = jsonDecode(data);
     if (json is Map) {
       if (json['api_result'] != 1) {
