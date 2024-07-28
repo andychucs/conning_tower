@@ -35,7 +35,7 @@ main() {
 
     test("item 41 can improve today", () {
       final item = schedule.items?.firstWhere((element) => element.id == 41);
-      if (tz.TZDateTime.now(tz.getLocation('Asia/Tokyo')).weekday != DateTime.tuesday) {
+      if (tz.TZDateTime.now(tz.getLocation('Asia/Tokyo')).weekday != DateTime.monday) {
         expect(item?.isAbleNow(), isTrue);
       }
     });
@@ -43,9 +43,9 @@ main() {
     test("item 41 wednesday req", () {
       final item = schedule.items?.firstWhere((element) => element.id == 41);
 
-      var actImprove = item?.activeImprove(dayIndex: DateTime.wednesday -1);
+      var actImprove = item?.activeImprove(dayIndex: DateTime.tuesday);
 
-      var act = actImprove?.first?.activeReq(dayIndex: DateTime.wednesday -1).first;
+      var act = actImprove?.first?.activeReq(dayIndex: DateTime.tuesday).first;
 
       expect(act?.ship?.length, 1);
       expect(act?.ship?[0], 107);
