@@ -17,6 +17,8 @@ main() {
         .whereType<Ship>()
         .toList();
 
+    print("Ships: ${maps.length}");
+
     expect(maps[0].name, '睦月');
   });
 
@@ -31,6 +33,8 @@ main() {
     })
         .whereType<Ship>()
         .toList();
+
+    print("Ships: ${maps.length}");
 
     expect(maps[0].name, '睦月');
   });

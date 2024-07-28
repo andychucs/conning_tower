@@ -17,6 +17,8 @@ main() {
         .whereType<MapData>()
         .toList();
 
+    print("Maps: ${maps.length}");
+
     expect(maps[0].name, '鎮守府正面海域');
     expect(maps[0].id, 11);
   });
@@ -32,6 +34,8 @@ main() {
     })
         .whereType<MapData>()
         .toList();
+
+    print("Maps: ${maps.length}");
 
     expect(maps[0].name, '鎮守府正面海域');
     expect(maps[0].id, 11);
