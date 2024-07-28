@@ -23,7 +23,7 @@ main() {
     });
 
     test("item 41 can improve day", () {
-      final item = schedule.items?.firstWhere((element) => element?.id == 41);
+      final item = schedule.items?.firstWhere((element) => element.id == 41);
       expect(item?.isAbleOn(0), isTrue);
       expect(item?.isAbleOn(1), isFalse);
       expect(item?.isAbleOn(2), isTrue);
@@ -34,17 +34,20 @@ main() {
     });
 
     test("item 41 can improve today", () {
-      final item = schedule.items?.firstWhere((element) => element?.id == 41);
+      final item = schedule.items?.firstWhere((element) => element.id == 41);
       if (tz.TZDateTime.now(tz.getLocation('Asia/Tokyo')).weekday != DateTime.tuesday) {
         expect(item?.isAbleNow(), isTrue);
       }
     });
 
     test("item 41 wednesday req", () {
-      final item = schedule.items?.firstWhere((element) => element?.id == 41);
+      final item = schedule.items?.firstWhere((element) => element.id == 41);
 
-      var act = item?.activeImprove(dayIndex: DateTime.wednesday -1)[0]?.activeReq()[0];
+      var actImprove = item?.activeImprove(dayIndex: DateTime.wednesday -1);
 
+      var act = actImprove?.first?.activeReq(dayIndex: DateTime.wednesday -1).first;
+
+      expect(act?.ship?.length, 1);
       expect(act?.ship?[0], 107);
     });
   });
