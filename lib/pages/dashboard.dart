@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tab_container/tab_container.dart';
 
+import '../providers/generatable/kancolle_localization_provider.dart';
+
 const tabViewBottomMargin =
     EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 12.0, 10.0);
 
@@ -127,6 +129,9 @@ class _DashboardState extends ConsumerState<Dashboard> {
     } else if (theme == ThemeMode.dark) {
       brightness = Brightness.dark;
     }
+    Locale locale = Localizations.localeOf(context);
+    final kcL10n = ref.watch(kancolleLocalizationProvider(locale));
+
 
     return LayoutBuilder(builder: (context, constraints) {
       // debugPrint(

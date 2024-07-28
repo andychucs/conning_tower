@@ -5,10 +5,15 @@ import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
+import 'package:conning_tower/widgets/kancolle_item_improve_viewer.dart';
 import 'package:conning_tower/widgets/kancolle_ship_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:intl/intl.dart';
+
+import '../../widgets/kancolle_item_viewer.dart';
 
 class PortInfo extends ConsumerStatefulWidget {
   const PortInfo({super.key});
@@ -24,6 +29,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
     final resourceInfo = data.seaForceBase.resource;
     final commanderInfo = data.seaForceBase.commander;
     final fleetInfo = data.fleet;
+    final nowJstTime = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
 
     return SafeArea(
       child: Padding(
@@ -61,8 +67,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         top: Text(commanderInfo.rankName),
                                         bottom: AutoSizeText(
                                           commanderInfo.name,
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -71,8 +77,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         top: Text('Lv.'),
                                         bottom: AutoSizeText(
                                           '${commanderInfo.level}',
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -82,14 +88,14 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                           top: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(S.of(context).TextFleetGirl),
+                                              Expanded(child: Text(S.of(context).TextFleetGirl)),
                                               const CupertinoListTileChevron(),
                                             ],
                                           ),
                                           bottom: AutoSizeText(
                                             '${fleetInfo.ships.length}/${commanderInfo.maxShip}',
-                                            style: TextStyle(fontSize: 30),
-                                            minFontSize: 16,
+                                            maxFontSize: 30,
+                                            minFontSize: 18,
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -98,15 +104,49 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                           navigatorToCupertino(context, KancolleShipViewer());
                                         },
                                       ),
-                                      InfoBox(
-                                        top: Text(S.of(context).TextEquipment),
-                                        bottom: AutoSizeText(
-                                          '${fleetInfo.equipment.length}/${commanderInfo.maxItem}',
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                      GestureDetector(
+                                        child: InfoBox(
+                                          top: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(child: Text(S.of(context).TextEquipment)),
+                                              const CupertinoListTileChevron(),
+                                            ],
+                                          ),
+                                          bottom: AutoSizeText(
+                                            '${fleetInfo.equipment.length}/${commanderInfo.maxItem}',
+                                            maxFontSize: 30,
+                                            minFontSize: 18,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
+                                        onTap: () {
+                                          navigatorToCupertino(context, KancolleItemViewer());
+                                        },
+                                      ),
+                                      GestureDetector(
+                                        child: InfoBox(
+                                          top: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Text(S.of(context).KCAkashiStudio),
+                                              ),
+                                              const CupertinoListTileChevron(),
+                                            ],
+                                          ),
+                                          bottom: AutoSizeText(
+                                            DateFormat.EEEE().format(nowJstTime),
+                                            maxFontSize: 30,
+                                            minFontSize: 18,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          navigatorToCupertino(context, KancolleItemImproveViewer());
+                                        },
                                       ),
                                       InfoBox(
                                         top: ClipRRect(
@@ -119,8 +159,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.oil}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -136,8 +176,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.ammo}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -153,8 +193,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.steel}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -170,8 +210,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.bauxite}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -187,8 +227,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.instantCreateShip}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -204,8 +244,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.instantRepairs}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -221,8 +261,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.developmentMaterials}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -238,8 +278,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                         ),
                                         bottom: AutoSizeText(
                                           "${resourceInfo.improvementMaterials}",
-                                          style: TextStyle(fontSize: 30),
-                                          minFontSize: 16,
+                                          maxFontSize: 30,
+                                          minFontSize: 18,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),

@@ -65,6 +65,7 @@ const String kcWikiShipsUrl = "https://andychucs.github.io/kcwiki-kcdata/ship/sh
 const String kcWikiMapsUrl = "https://andychucs.github.io/kcwiki-kcdata/map/all.json";
 const String kcWikiShipsApi = "https://api.kcwiki.org/ships";
 const String kcWikiDataGitHub = "https://api.github.com/repos/andychucs/kcwiki-kcdata/git/refs/heads/gh-pages";
+const String kOoyodoDataVersion = "https://conntower.github.io/ooyodo/data/version.json";
 
 enum DeviceType {
   iPhone,

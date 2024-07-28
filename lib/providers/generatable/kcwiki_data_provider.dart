@@ -27,6 +27,8 @@ class KcWikiDataState extends _$KcWikiDataState {
     return _loadData();
   }
 
+  KcWikiData get data => state.value ?? const KcWikiData(ships: [], maps: []);
+
   Future<void> deleteLocalFile() async {
     final file = await _localJsonFile;
 

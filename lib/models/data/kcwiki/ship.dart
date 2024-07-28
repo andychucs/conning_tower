@@ -18,16 +18,16 @@ class Ship with _$Ship {
     int? afterShipId,
     String? getMes,
     int? voiceF,
-    required String filename,
-    required List<String> fileVersion,
+    String? filename,
+    List<String>? fileVersion,
     List<int>? bookTableId,
     String? bookSinfo,
-    required ShipStats stats,
-    required ShipGraph graph,
+    ShipStats? stats,
+    ShipGraph? graph,
     String? wikiId,
     String? chineseName,
-    required bool canDrop,
-    required bool canConstruct,
+    bool? canDrop,
+    bool? canConstruct,
   }) = _Ship;
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);

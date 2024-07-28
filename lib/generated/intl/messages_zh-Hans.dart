@@ -118,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidUrlError": MessageLookupByLibrary.simpleMessage("无效的URL。"),
         "InvalidYamlError": MessageLookupByLibrary.simpleMessage("无效的YAML格式。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON示例："),
+        "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("明石工坊"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "目前只有通常舰队对通常舰队的一般战斗数据中的航空战、反潜战、炮击战、雷击战可以解析。"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("战斗报告"),

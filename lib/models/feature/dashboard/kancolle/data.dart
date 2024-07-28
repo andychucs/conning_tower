@@ -18,6 +18,7 @@ import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/dashboard_controller.dart';
+import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter/animation.dart';
@@ -340,11 +341,13 @@ class KancolleData {
 
     if (model is GetMemberRequireInfoEntity) {
       final Iterable<Equipment> equipments = (model.apiData.apiSlotItem ?? []).map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
 
     if (model is GetMemberSlotItemEntity) {
       final Iterable<Equipment> equipments = model.apiData.map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
   }

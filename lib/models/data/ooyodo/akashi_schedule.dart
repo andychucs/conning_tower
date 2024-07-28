@@ -11,7 +11,7 @@ part 'akashi_schedule.g.dart';
 class AkashiSchedule with _$AkashiSchedule {
   factory AkashiSchedule({
     @JsonKey(name: 'data_version') String? dataVersion,
-    List<ImproveableItem?>? items,
+    List<ImproveItem>? items,
   }) = _AkashiSchedule;
 
   factory AkashiSchedule.fromJson(Map<String, dynamic> json) =>
@@ -19,13 +19,13 @@ class AkashiSchedule with _$AkashiSchedule {
 }
 
 @unfreezed
-class ImproveableItem with _$ImproveableItem {
-  const ImproveableItem._();
+class ImproveItem with _$ImproveItem {
+  const ImproveItem._();
 
-  factory ImproveableItem({
+  factory ImproveItem({
     int? id,
     List<ImproveData?>? improvement,
-  }) = _ImproveableItem;
+  }) = _ImproveItem;
 
   List<ImproveData?> activeImprove({int? dayIndex}) {
     if (improvement == null) {
@@ -62,8 +62,8 @@ class ImproveableItem with _$ImproveableItem {
     return false;
   }
 
-  factory ImproveableItem.fromJson(Map<String, dynamic> json) =>
-      _$ImproveableItemFromJson(json);
+  factory ImproveItem.fromJson(Map<String, dynamic> json) =>
+      _$ImproveItemFromJson(json);
 }
 
 @unfreezed

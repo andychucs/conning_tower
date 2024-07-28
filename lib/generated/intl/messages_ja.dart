@@ -129,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("無効なYAML形式です。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON例："),
+        "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("明石アトリエ"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "現在、通常艦隊対通常艦隊の昼戦と夜戦（開幕夜戦不能）の中で、航空戦、対潜戦、砲撃戦、雷撃戦のみが解析可能です。"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),

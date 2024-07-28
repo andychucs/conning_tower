@@ -700,6 +700,16 @@ class S {
     );
   }
 
+  /// `Akashi Studio`
+  String get KCAkashiStudio {
+    return Intl.message(
+      'Akashi Studio',
+      name: 'KCAkashiStudio',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.`
   String get KCDashboardBattleDescription {
     return Intl.message(

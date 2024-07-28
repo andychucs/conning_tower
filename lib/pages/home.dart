@@ -257,8 +257,6 @@ class HomePageState extends ConsumerState<HomePage> {
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
     final settings = ref.watch(settingsProvider);
-    Locale locale = Localizations.localeOf(context);
-    final kcL10n = ref.watch(kancolleLocalizationProvider(locale));
 
     if (setUp) {
       setUp = false;
