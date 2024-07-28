@@ -1310,6 +1310,76 @@ class S {
     );
   }
 
+  /// `Ammo`
+  String get KCResourceAmmo {
+    return Intl.message(
+      'Ammo',
+      name: 'KCResourceAmmo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bauxite`
+  String get KCResourceBauxite {
+    return Intl.message(
+      'Bauxite',
+      name: 'KCResourceBauxite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Development Material`
+  String get KCResourceDevelopmentMaterial {
+    return Intl.message(
+      'Development Material',
+      name: 'KCResourceDevelopmentMaterial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fuel`
+  String get KCResourceFuel {
+    return Intl.message(
+      'Fuel',
+      name: 'KCResourceFuel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Screw`
+  String get KCResourceImprovementMaterial {
+    return Intl.message(
+      'Screw',
+      name: 'KCResourceImprovementMaterial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Steel`
+  String get KCResourceSteel {
+    return Intl.message(
+      'Steel',
+      name: 'KCResourceSteel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resources`
+  String get KCResources {
+    return Intl.message(
+      'Resources',
+      name: 'KCResources',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Already in game window!`
   String get KCViewFuncMsgAlreadyGameRedirect {
     return Intl.message(

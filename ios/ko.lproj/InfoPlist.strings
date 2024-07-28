@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Andy on 2022/11/17.
+  
+*/
+CFBundleDisplayName = "Next Navi";
+
+NSPhotoLibraryAddUsageDescription = "사진 앨범에 사진을 저장합니다. 접근을 허용하시겠습니까?";
+
+NSPhotoLibraryUsageDescription = "앱에서 사진을 표시하려면 접근을 허용해 주세요.";

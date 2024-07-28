@@ -227,6 +227,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("獲得日降順"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("艦娘"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("ボーキサイト"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("開発資材"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("燃料"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("改修資材"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("鋼材"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("資源"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":

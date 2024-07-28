@@ -243,6 +243,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Newest First"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("Fleet Girls"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("Bauxite"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("Development Material"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("Fuel"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("Screw"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("Steel"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("Resources"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":

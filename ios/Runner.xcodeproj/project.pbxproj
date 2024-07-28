@@ -48,6 +48,9 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1BF29702C56684C00DF5616 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		A1BF29712C56684C00DF5616 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A1BF29722C56684C00DF5616 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1F0B7012925415600BC97E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A1F0B7022925415600BC97E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A1F0B7032925415E00BC97E6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -192,6 +195,7 @@
 				"zh-Hans",
 				"zh-Hant",
 				ja,
+				ko,
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
@@ -336,6 +340,7 @@
 				A1F0B7032925415E00BC97E6 /* zh-Hant */,
 				A1F0B7052925416400BC97E6 /* ja */,
 				A1F0B7102925421B00BC97E6 /* en */,
+				A1BF29702C56684C00DF5616 /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				A1F0B7042925415E00BC97E6 /* zh-Hant */,
 				A1F0B7062925416400BC97E6 /* ja */,
 				A1F0B7122925422400BC97E6 /* en */,
+				A1BF29712C56684C00DF5616 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -359,6 +365,7 @@
 				A1F0B70C292541B500BC97E6 /* zh-Hans */,
 				A1F0B70D292541CE00BC97E6 /* zh-Hant */,
 				A1F0B70E292541D500BC97E6 /* ja */,
+				A1BF29722C56684C00DF5616 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

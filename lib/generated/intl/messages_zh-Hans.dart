@@ -216,6 +216,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("从新到旧"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("舰娘"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弹药"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("铝土"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("开发资材"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("燃料"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("改修资材"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("钢材"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("资源"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
         "KCViewFuncMsgAutoGameRedirect":

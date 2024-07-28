@@ -21,5 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ko';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AppHome": MessageLookupByLibrary.simpleMessage("홈페이지"),
+        "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("함대를"),
+        "KCDashboardQuest": MessageLookupByLibrary.simpleMessage("임무"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("탄약"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("보크사이트"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("개발자재"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("연료"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("개수자재"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("강재"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("자원"),
+        "SettingsButton": MessageLookupByLibrary.simpleMessage("설치")
+      };
 }
