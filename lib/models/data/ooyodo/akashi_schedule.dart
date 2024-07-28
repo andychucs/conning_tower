@@ -18,13 +18,13 @@ final saturday = friday.add(const Duration(days: 1));
 final sunday = saturday.add(const Duration(days: 1));
 
 List<tz.TZDateTime> weekdays = [
+  sunday,
   monday,
   tuesday,
   wednesday,
   thursday,
   friday,
   saturday,
-  sunday
 ];
 
 @unfreezed
@@ -65,11 +65,12 @@ class ImproveItem with _$ImproveItem {
   bool isAbleNow() {
     // Get now weekday index use TimeZone locate at Japan. JST(UTC+9)
     final now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
-    final nowDayIndex = now.weekday - 1;
+    final nowDayIndex = now.weekday == 7 ? 0 : now.weekday;
     return isAbleOn(nowDayIndex);
   }
 
   bool isAbleOn(int day) {
+    if (day == 7) day = 0;
     if (improvement == null) {
       return false;
     }
@@ -114,11 +115,12 @@ class ImproveData with _$ImproveData {
   bool isAbleNow() {
     // Get now weekday index use TimeZone locate at Japan. JST(UTC+9)
     final now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
-    final nowDayIndex = now.weekday - 1;
+    final nowDayIndex = now.weekday == 7 ? 0 : now.weekday;
     return isAbleOn(nowDayIndex);
   }
 
   bool isAbleOn(int day) {
+    if (day == 7) day = 0;
     if (req == null) {
       return true;
     }
@@ -175,11 +177,12 @@ class ImproveReq with _$ImproveReq {
   bool isAbleNow() {
     // Get now weekday index use TimeZone locate at Japan. JST(UTC+9)
     final now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
-    final nowDayIndex = now.weekday - 1;
+    final nowDayIndex = now.weekday == 7 ? 0 : now.weekday;
     return isAbleOn(nowDayIndex);
   }
 
   bool isAbleOn(int dayIndex) {
+    if (dayIndex == 7) dayIndex = 0;
     assert(dayIndex >= 0 && dayIndex < 7);
     if (day == "1111111") {
       return true;
