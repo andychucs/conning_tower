@@ -23,7 +23,7 @@ class KcWikiDataState extends _$KcWikiDataState {
   }
 
   @override
-  FutureOr<KcWikiData> build() async {
+  Future<KcWikiData> build() async {
     return _loadData();
   }
 
@@ -108,13 +108,13 @@ class KcWikiDataState extends _$KcWikiDataState {
 
       final kcWikiData = KcWikiData.fromJson(json);
 
-      // final refSha = await fetchDataRefSha();
-      // if (refSha == null) {
-      //   return kcWikiData;
-      // }
-      // if (refSha != getDataRefSha()) {
-      //   return _fetchData();
-      // }
+      final refSha = await fetchDataRefSha();
+      if (refSha == null) {
+        return kcWikiData;
+      }
+      if (refSha != getDataRefSha()) {
+        return _fetchData();
+      }
 
       return kcWikiData;
     } catch (e) {
