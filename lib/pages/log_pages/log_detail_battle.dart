@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
@@ -10,7 +9,6 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
-import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/squads_share_button.dart';
@@ -23,14 +21,14 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class LogDetailBattle extends ConsumerWidget {
-  LogDetailBattle({
+  const LogDetailBattle({
     super.key,
     required this.logData,
     this.kcWikiData,
   });
 
   final KancolleBattleLogEntity logData;
-  late KcWikiData? kcWikiData;
+  final KcWikiData? kcWikiData;
 
   String getRouteName(MapData? map, int mapRoute) {
     String routeName = 'Next: $mapRoute';
@@ -130,7 +128,8 @@ class LogDetailBattle extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate([
                 CupertinoListSection.insetGrouped(
-                  header: CupertinoListSectionDescription(S.current.TextFleetMembers),
+                  header: CupertinoListSectionDescription(
+                      S.current.TextFleetMembers),
                   children: [
                     SquadsShareButton.cupertinoListTile(squads: squads)
                   ],
@@ -163,7 +162,8 @@ class LogDetailBattle extends ConsumerWidget {
                     return BattleLogFleet(squad: squad);
                   }
 
-                  if (model is ReqSortieBattleResultEntity || model is ReqCombinedBattleResultEntity) {
+                  if (model is ReqSortieBattleResultEntity ||
+                      model is ReqCombinedBattleResultEntity) {
                     String? dropName = model.apiData.apiGetShip?.apiShipName;
 
                     return CupertinoListSection.insetGrouped(
@@ -202,6 +202,7 @@ class BattleLogFleet extends StatelessWidget {
   });
 
   final Squad squad;
+
   // final Map<int, GetDataApiDataApiMstShipEntity>? shipInfo;
 
   @override
