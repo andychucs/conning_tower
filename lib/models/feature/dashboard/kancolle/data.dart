@@ -362,7 +362,7 @@ class KancolleData {
     String data = rawData.data;
     String path = source.split("kcsapi").last;
     FirebaseCrashlytics.instance.log('$path data: $data');
-    late KancolleData newData;
+    KancolleData newData = copyWith();
     try {
       if (_operationSource(source)) {
         Map<int, tz.TZDateTime> endTimeMap = {
