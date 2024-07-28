@@ -28,7 +28,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
   Widget build(BuildContext context) {
     var data = ref.watch(kancolleDataProvider);
     final resourceInfo = data.seaForceBase.resource;
-    final commanderInfo = data.seaForceBase.commander;
+    final admiralInfo = data.seaForceBase.admiral;
     final fleetInfo = data.fleet;
     final nowJstTime = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
 
@@ -65,9 +65,9 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                     childAspectRatio: 1.618,
                                     children: <Widget>[
                                       InfoBox(
-                                        top: Text(commanderInfo.rankName),
+                                        top: Text(admiralInfo.rankName),
                                         bottom: AutoSizeText(
-                                          commanderInfo.name,
+                                          admiralInfo.name,
                                           maxFontSize: 30,
                                           minFontSize: 18,
                                           maxLines: 1,
@@ -77,7 +77,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                       InfoBox(
                                         top: Text('Lv.'),
                                         bottom: AutoSizeText(
-                                          '${commanderInfo.level}',
+                                          '${admiralInfo.level}',
                                           maxFontSize: 30,
                                           minFontSize: 18,
                                           maxLines: 1,
@@ -94,7 +94,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                             ],
                                           ),
                                           bottom: AutoSizeText(
-                                            '${fleetInfo.ships.length}/${commanderInfo.maxShip}',
+                                            '${fleetInfo.ships.length}/${admiralInfo.maxShip}',
                                             maxFontSize: 30,
                                             minFontSize: 18,
                                             maxLines: 1,
@@ -115,7 +115,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                             ],
                                           ),
                                           bottom: AutoSizeText(
-                                            '${fleetInfo.equipment.length}/${commanderInfo.maxItem}',
+                                            '${fleetInfo.equipment.length}/${admiralInfo.maxItem}',
                                             maxFontSize: 30,
                                             minFontSize: 18,
                                             maxLines: 1,

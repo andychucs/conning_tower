@@ -11,11 +11,11 @@ class SeaForceBase with _$SeaForceBase {
 
   factory SeaForceBase({
     required SeaForceBaseResource resource,
-    required Commander commander
+    required Admiral admiral
   }) = _SeaForceBase;
 
-  void updateCommanderInfo(PortApiDataApiBasicEntity apiBasic) {
-    commander = commander.copyWith(
+  void updateAdmiralInfo(PortApiDataApiBasicEntity apiBasic) {
+    admiral = admiral.copyWith(
       name: apiBasic.apiNickname,
       level: apiBasic.apiLevel,
       rank: apiBasic.apiRank,
@@ -69,16 +69,16 @@ class SeaForceBaseResource with _$SeaForceBaseResource {
 }
 
 @freezed
-class Commander with _$Commander {
-  const Commander._();
+class Admiral with _$Admiral {
+  const Admiral._();
 
-  const factory Commander({
+  const factory Admiral({
     required String name,
     required int level,
     required int rank,
     required int maxShip,
     required int maxItem,
-  }) = _Commander;
+  }) = _Admiral;
 
   String get rankName {
     try {

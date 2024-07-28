@@ -15,6 +15,7 @@ import 'package:pull_down_button/pull_down_button.dart';
 
 import '../models/feature/log/kancolle_log.dart';
 import '../objectbox.g.dart';
+import '../providers/kancolle_data_provider.dart';
 
 enum LogType { battle }
 
@@ -25,6 +26,9 @@ class LogViewer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var admiral = ref.watch(kancolleDataProvider).seaForceBase.admiral;
+    objectbox.updateAllBattle(admiral.name);
+
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(

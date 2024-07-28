@@ -176,12 +176,12 @@ class KancolleData {
     if (model is GetMemberQuestListEntity) {
       if (questAssistant == null) {
         questAssistant = QuestAssistant.fromApi(model.apiData);
-        questAssistant?.update();
+        questAssistant?.update(seaForceBase.admiral.name);
       } else {
         if (model.apiData.apiList == null) return;
         if (model.apiData.apiList!.isEmpty) return;
         questAssistant = questAssistant?.copyWith(ready: model.apiData.apiList!.map((e) => Quest.fromApi(e)).toList());
-        questAssistant?.update();
+        questAssistant?.update(seaForceBase.admiral.name);
       }
     }
 
@@ -282,7 +282,7 @@ class KancolleData {
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.inBattleSquads?.clear();
-      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
+      battleLog = KancolleBattleLog(id: timestamp, admiral: seaForceBase.admiral.name, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
     }
 
     if (model is GetMemberDeckEntity) {
@@ -332,7 +332,7 @@ class KancolleData {
       battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);
 
-      seaForceBase.updateCommanderInfo(model.apiData.apiBasic);
+      seaForceBase.updateAdmiralInfo(model.apiData.apiBasic);
       seaForceBase.updateMaterial(model.apiData.apiMaterial);
 
       for (var data in model.apiData.apiDeckPort) {

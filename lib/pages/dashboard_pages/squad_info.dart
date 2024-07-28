@@ -139,7 +139,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                           String losScore = squad
                               .los(
                                   admiralLevel:
-                                      data.seaForceBase.commander.level,
+                                      data.seaForceBase.admiral.level,
                                   mapModifier: _mapModifier)
                               .total
                               .toStringAsFixed(2);

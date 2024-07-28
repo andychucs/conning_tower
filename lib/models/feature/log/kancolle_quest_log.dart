@@ -11,6 +11,7 @@ part 'kancolle_quest_log.g.dart';
 class KancolleQuestLog with _$KancolleQuestLog{
   factory KancolleQuestLog({
     required int id, // quest id
+    String? admiral,
     String? title,
     int? state,
     required List<QuestMission> mission,
