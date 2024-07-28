@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../widgets/kancolle_item_viewer.dart';
 
@@ -110,7 +111,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(child: Text(S.of(context).TextEquipment)),
-                                              const CupertinoListTileChevron(),
+                                              // const CupertinoListTileChevron(),
                                             ],
                                           ),
                                           bottom: AutoSizeText(
@@ -122,7 +123,8 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                           ),
                                         ),
                                         onTap: () {
-                                          navigatorToCupertino(context, KancolleItemViewer());
+                                          Fluttertoast.showToast(msg: "Not implemented yet.");
+                                          // navigatorToCupertino(context, KancolleItemViewer());
                                         },
                                       ),
                                       GestureDetector(
