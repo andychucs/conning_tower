@@ -84,6 +84,9 @@ class ObjectBox {
   }
 
   void updateAllQuest(String admiral) async {
+    if (admiral == '') {
+      return;
+    }
     Query<KancolleQuestLogEntity> query = questLog.query().build();
     List<KancolleQuestLogEntity> logs = await query.findAsync();
     for (var log in logs) {
@@ -100,6 +103,9 @@ class ObjectBox {
   }
 
   void updateAllBattle(String admiral) async {
+    if (admiral == '') {
+      return;
+    }
     Query<KancolleBattleLogEntity> query = battleLog.query().build();
     List<KancolleBattleLogEntity> logs = await query.findAsync();
     for (var log in logs) {
