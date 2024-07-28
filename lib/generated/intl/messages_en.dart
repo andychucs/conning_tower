@@ -137,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
+        "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("Akashi Studio"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed."),
         "KCDashboardBattleReport":
@@ -242,6 +243,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Newest First"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("Fleet Girls"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("Bauxite"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("Development Material"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("Fuel"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("Screw"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("Steel"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("Resources"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":

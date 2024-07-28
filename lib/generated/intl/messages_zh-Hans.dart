@@ -118,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidUrlError": MessageLookupByLibrary.simpleMessage("无效的URL。"),
         "InvalidYamlError": MessageLookupByLibrary.simpleMessage("无效的YAML格式。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON示例："),
+        "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("明石工坊"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "目前只有通常舰队对通常舰队的一般战斗数据中的航空战、反潜战、炮击战、雷击战可以解析。"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("战斗报告"),
@@ -215,6 +216,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("从新到旧"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("舰娘"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弹药"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("铝土"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("开发资材"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("燃料"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("改修资材"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("钢材"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("资源"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
         "KCViewFuncMsgAutoGameRedirect":

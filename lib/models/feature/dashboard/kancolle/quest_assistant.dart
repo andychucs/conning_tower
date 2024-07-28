@@ -68,9 +68,10 @@ class QuestAssistant with _$QuestAssistant {
     }
   }
 
-  void update() {
+  void update(String admiral) {
+    objectbox.updateAllQuest(admiral); // TODO: remove this in future
     for (final quest in ready) {
-      objectbox.saveQuest(quest.id, jsonEncode(quest.toLog().toJson()));
+      objectbox.saveQuest(quest.id, jsonEncode(quest.toLog(admiral).toJson()));
     }
     List<Quest> inLogQuests = inLog;
 
@@ -175,8 +176,8 @@ class Quest with _$Quest {
     return Quest(id: questLog.id, mission: questLog.mission, title: questLog.title, state: questLog.state);
   }
 
-  KancolleQuestLog toLog() {
-    return KancolleQuestLog(id: id, mission: mission ?? [], title: title, state: state);
+  KancolleQuestLog toLog(String admiral) {
+    return KancolleQuestLog(id: id, mission: mission ?? [], title: title, state: state, admiral: admiral);
   }
 }
 

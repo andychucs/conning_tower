@@ -33,8 +33,8 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
       instantRepairs: 0,
       developmentMaterials: 0,
       improvementMaterials: 0);
-  const commander = Commander(name: "", level: 1, rank: 10, maxShip: 0, maxItem: 0);
-  final seaForceBase = SeaForceBase(resource: resource, commander: commander);
+  const admiral = Admiral(name: "", level: 1, rank: 10, maxShip: 0, maxItem: 0);
+  final seaForceBase = SeaForceBase(resource: resource, admiral: admiral);
   final fleet = Fleet(ships: [], equipment: {});
   final dataInfo = DataInfo();
 

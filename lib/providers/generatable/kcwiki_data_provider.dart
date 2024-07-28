@@ -6,7 +6,6 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/github_api/git_hub_refs_entity.dart';
-import 'package:conning_tower/models/data/kcwiki/api/kcwiki_api_ship_entity.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/data/kcwiki/map_data.dart';
 import 'package:conning_tower/models/data/kcwiki/ship.dart';
@@ -23,9 +22,11 @@ class KcWikiDataState extends _$KcWikiDataState {
   }
 
   @override
-  FutureOr<KcWikiData> build() async {
+  Future<KcWikiData> build() async {
     return _loadData();
   }
+
+  KcWikiData get data => state.value ?? const KcWikiData(ships: [], maps: []);
 
   Future<void> deleteLocalFile() async {
     final file = await _localJsonFile;
@@ -60,8 +61,11 @@ class KcWikiDataState extends _$KcWikiDataState {
     return localStorage.getString("kcWikiDataRefSha") ?? "";
   }
 
-  Future<String?> fetchDataRefSha() async {
-    final res = await http.get(Uri.parse(kcWikiDataGitHub));
+  Future<String?> fetchDataRefSha({timeout = 5000}) async {
+    final res = await http.get(Uri.parse(kcWikiDataGitHub)).timeout(
+        Duration(milliseconds: timeout),
+        onTimeout: () => http.Response('timeout', 408));
+    if (res.statusCode == 408) return null;
     try {
       final json = jsonDecode(res.body);
       final refs = GitHubRefsEntity.fromJson(json);
@@ -76,8 +80,8 @@ class KcWikiDataState extends _$KcWikiDataState {
     final json = jsonDecode(res.body);
     List<MapData> maps = json
         .map((e) {
-      if (e["name"] != null) return MapData.fromJson(e);
-    })
+          if (e["name"] != null) return MapData.fromJson(e);
+        })
         .whereType<MapData>()
         .toList();
     return maps;
@@ -106,13 +110,13 @@ class KcWikiDataState extends _$KcWikiDataState {
 
       final kcWikiData = KcWikiData.fromJson(json);
 
-      // final refSha = await fetchDataRefSha();
-      // if (refSha == null) {
-      //   return kcWikiData;
-      // }
-      // if (refSha != getDataRefSha()) {
-      //   return _fetchData();
-      // }
+      final refSha = await fetchDataRefSha();
+      if (refSha == null) {
+        return kcWikiData;
+      }
+      if (refSha != getDataRefSha()) {
+        return _fetchData();
+      }
 
       return kcWikiData;
     } catch (e) {

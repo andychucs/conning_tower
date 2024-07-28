@@ -11,6 +11,7 @@ part 'kancolle_battle_log.g.dart';
 class KancolleBattleLog with _$KancolleBattleLog{
   factory KancolleBattleLog({
     required int id, // timestamp
+    String? admiral,
     required MapInfoLog mapInfo,
     required List<Squad> squads,
     required List<DataLogEntity> data,

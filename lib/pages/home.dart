@@ -34,6 +34,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shake/shake.dart';
@@ -257,8 +258,6 @@ class HomePageState extends ConsumerState<HomePage> {
     Size size = MediaQuery.of(context).size;
     bool useStack = size.width <= 1024;
     final settings = ref.watch(settingsProvider);
-    Locale locale = Localizations.localeOf(context);
-    final kcL10n = ref.watch(kancolleLocalizationProvider(locale));
 
     if (setUp) {
       setUp = false;

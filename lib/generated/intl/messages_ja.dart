@@ -129,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("無効なYAML形式です。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON例："),
+        "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("明石アトリエ"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "現在、通常艦隊対通常艦隊の昼戦と夜戦（開幕夜戦不能）の中で、航空戦、対潜戦、砲撃戦、雷撃戦のみが解析可能です。"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),
@@ -226,6 +227,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("獲得日降順"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("艦娘"),
+        "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
+        "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("ボーキサイト"),
+        "KCResourceDevelopmentMaterial":
+            MessageLookupByLibrary.simpleMessage("開発資材"),
+        "KCResourceFuel": MessageLookupByLibrary.simpleMessage("燃料"),
+        "KCResourceImprovementMaterial":
+            MessageLookupByLibrary.simpleMessage("改修資材"),
+        "KCResourceSteel": MessageLookupByLibrary.simpleMessage("鋼材"),
+        "KCResources": MessageLookupByLibrary.simpleMessage("資源"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":

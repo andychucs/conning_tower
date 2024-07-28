@@ -21,6 +21,14 @@ class KancolleBattleLogEntity {
     return KancolleBattleLogEntity(timestamp: log.id, logStr: jsonEncode(log.toJson()));
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "timestamp": timestamp,
+      "logStr": logStr
+    };
+  }
+
 }
 
 @Entity()
@@ -35,6 +43,15 @@ class KancolleQuestLogEntity {
 
   factory KancolleQuestLogEntity.fromLog(KancolleQuestLog log, {int? timestamp}) {
     return KancolleQuestLogEntity(questId: log.id, timestamp: timestamp ?? DateTime.now().millisecondsSinceEpoch, logStr: jsonEncode(log.toJson()));
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'questId': questId,
+      'timestamp': timestamp,
+      'logStr': logStr,
+    };
   }
 
 }

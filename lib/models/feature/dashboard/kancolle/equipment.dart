@@ -3,6 +3,8 @@ import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../data/ooyodo/akashi_schedule.dart';
+
 part 'equipment.freezed.dart';
 part 'equipment.g.dart';
 
@@ -106,5 +108,93 @@ class Equipment with _$Equipment {
   }
 
 }
+
+
+@freezed
+class EquipmentImprove with _$EquipmentImprove {
+  const factory EquipmentImprove({
+    required String name,
+    required List<EquipmentImproveData> data,
+  }) = _EquipmentImprove;
+
+  const EquipmentImprove._();
+
+  String allShipNames(Map<int, String> shipMap) {
+    List<String> names = [];
+    for (final data in this.data) {
+      for (final req in data.req!.nonNulls) {
+        final ships = req.shipNameList(shipMap);
+        if (ships.isNotEmpty) {
+          names.addAll(ships);
+        }
+      }
+    }
+    return names.toSet().join("|");
+  }
+
+  factory EquipmentImprove.fromData(ImproveItem data, Map<int, String> slotItemMap, Map<int, String> useItemMap, Map<int, String> shipMap) {
+    final name = slotItemMap[data.id] ?? "SlotItem ${data.id}";
+    List<EquipmentImproveData> list = [];
+    if (data.improvement != null) {
+      for (final improveData in data.improvement!) {
+        if (improveData != null) {
+          list.add(EquipmentImproveData.fromData(improveData, slotItemMap, useItemMap, shipMap));
+        }
+      }
+    }
+    return EquipmentImprove(name: name, data: list);
+  }
+
+  factory EquipmentImprove.fromJson(Map<String, dynamic> json) =>
+      _$EquipmentImproveFromJson(json);
+}
+
+@freezed
+class EquipmentImproveData with _$EquipmentImproveData {
+  const factory EquipmentImproveData({
+    required String upgradeName,
+    required ImproveResourceEntity resource,
+    required List<ImproveReq>? req,
+  }) = _EquipmentImproveData;
+
+  factory EquipmentImproveData.fromData(ImproveData data, Map<int, String> slotItemMap, Map<int, String> useItemMap, Map<int, String> shipMap) {
+    final resource = ImproveResourceEntity.fromData(data.resource!);
+    if (data.upgrade == null) {
+      return EquipmentImproveData(upgradeName: "", resource: resource, req: data.req!.nonNulls.toList());
+    }
+    final upgradeName = slotItemMap[data.upgrade?.id] ?? "SlotItem ${data.upgrade?.id}";
+    return EquipmentImproveData(upgradeName: upgradeName, resource: resource, req: data.req!.nonNulls.toList());
+  }
+
+
+  factory EquipmentImproveData.fromJson(Map<String, dynamic> json) =>
+      _$EquipmentImproveDataFromJson(json);
+}
+
+@freezed
+class ImproveResourceEntity with _$ImproveResourceEntity {
+  const factory ImproveResourceEntity({
+    required int oil,
+    required int ammo,
+    required int steel,
+    required int bauxite,
+    required List<ImproveResourceExtra> extra,
+  }) = _ImproveResourceEntity;
+
+  const ImproveResourceEntity._();
+  
+  factory ImproveResourceEntity.fromData(ImproveResource data) {
+    final oil = data.base?[0] ?? 0;
+    final ammo = data.base?[1] ?? 0;
+    final steel = data.base?[2] ?? 0;
+    final bauxite = data.base?[3] ?? 0;
+    final extra = data.extra?.nonNulls.toList() ?? [];
+    return ImproveResourceEntity(oil: oil, ammo: ammo, steel: steel, bauxite: bauxite, extra: extra);
+  }
+
+  factory ImproveResourceEntity.fromJson(Map<String, dynamic> json) =>
+      _$ImproveResourceEntityFromJson(json);
+}
+
 
 

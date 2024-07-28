@@ -18,6 +18,7 @@ import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/dashboard_controller.dart';
+import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
 import 'package:flutter/animation.dart';
@@ -94,6 +95,11 @@ class KancolleData {
   void parse(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
+    if (data.isEmpty) {
+      log("empty data");
+      Fluttertoast.showToast(msg: "Network Error");
+      return;
+    }
     final json = jsonDecode(data);
     if (json is Map) {
       if (json['api_result'] != 1) {
@@ -170,12 +176,12 @@ class KancolleData {
     if (model is GetMemberQuestListEntity) {
       if (questAssistant == null) {
         questAssistant = QuestAssistant.fromApi(model.apiData);
-        questAssistant?.update();
+        questAssistant?.update(seaForceBase.admiral.name);
       } else {
         if (model.apiData.apiList == null) return;
         if (model.apiData.apiList!.isEmpty) return;
         questAssistant = questAssistant?.copyWith(ready: model.apiData.apiList!.map((e) => Quest.fromApi(e)).toList());
-        questAssistant?.update();
+        questAssistant?.update(seaForceBase.admiral.name);
       }
     }
 
@@ -276,7 +282,7 @@ class KancolleData {
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.inBattleSquads?.clear();
-      battleLog = KancolleBattleLog(id: timestamp, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
+      battleLog = KancolleBattleLog(id: timestamp, admiral: seaForceBase.admiral.name, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
     }
 
     if (model is GetMemberDeckEntity) {
@@ -326,7 +332,7 @@ class KancolleData {
       battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);
 
-      seaForceBase.updateCommanderInfo(model.apiData.apiBasic);
+      seaForceBase.updateAdmiralInfo(model.apiData.apiBasic);
       seaForceBase.updateMaterial(model.apiData.apiMaterial);
 
       for (var data in model.apiData.apiDeckPort) {
@@ -340,11 +346,13 @@ class KancolleData {
 
     if (model is GetMemberRequireInfoEntity) {
       final Iterable<Equipment> equipments = (model.apiData.apiSlotItem ?? []).map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
 
     if (model is GetMemberSlotItemEntity) {
       final Iterable<Equipment> equipments = model.apiData.map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
   }
