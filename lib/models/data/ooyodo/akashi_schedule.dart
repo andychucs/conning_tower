@@ -3,9 +3,29 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:intl/intl.dart';
 
 part 'akashi_schedule.freezed.dart';
 part 'akashi_schedule.g.dart';
+
+final _locale = tz.getLocation('Asia/Tokyo');
+final monday = tz.TZDateTime(_locale, 2024, 1, 1);
+final tuesday = monday.add(const Duration(days: 1));
+final wednesday = tuesday.add(const Duration(days: 1));
+final thursday = wednesday.add(const Duration(days: 1));
+final friday = thursday.add(const Duration(days: 1));
+final saturday = friday.add(const Duration(days: 1));
+final sunday = saturday.add(const Duration(days: 1));
+
+List<tz.TZDateTime> weekdays = [
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday
+];
 
 @unfreezed
 class AkashiSchedule with _$AkashiSchedule {
@@ -37,10 +57,12 @@ class ImproveItem with _$ImproveItem {
     if (dayIndex == null) {
       return improvement!.where((element) => element!.isAbleNow()).toList();
     }
-    return improvement!.where((element) => element!.isAbleOn(dayIndex)).toList();
+    return improvement!
+        .where((element) => element!.isAbleOn(dayIndex))
+        .toList();
   }
 
-  bool isAbleNow(){
+  bool isAbleNow() {
     // Get now weekday index use TimeZone locate at Japan. JST(UTC+9)
     final now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
     final nowDayIndex = now.weekday - 1;
@@ -89,7 +111,7 @@ class ImproveData with _$ImproveData {
     return req!.where((element) => element!.isAbleOn(dayIndex)).toList();
   }
 
-  bool isAbleNow(){
+  bool isAbleNow() {
     // Get now weekday index use TimeZone locate at Japan. JST(UTC+9)
     final now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
     final nowDayIndex = now.weekday - 1;
@@ -119,13 +141,38 @@ class ImproveData with _$ImproveData {
 class ImproveReq with _$ImproveReq {
   const ImproveReq._();
 
-  @Assert("day?.length == 7 || day == Null")
+  @Assert("day.length == 7")
   const factory ImproveReq({
-    String? day, // "1000001" means able to improve on monday and sunday
+    required String day, // "1000001" means able to improve on monday and sunday
     List<int?>? ship,
   }) = _ImproveReq;
 
-  bool isAbleNow(){
+  List<String> shipNameList(Map<int, String> shipNameMap) {
+    if (ship == null) return [];
+    if (ship!.isEmpty) return [];
+    return ship!.map((key) => shipNameMap[key] ?? 'Ship $key').toList();
+  }
+
+  String get dayNameEEEEE {
+    if (day == "1111111") {
+      return weekdays
+          .map((element) => DateFormat.EEEEE().format(element))
+          .join("/");
+    }
+    if (day == "0000000") {
+      return "";
+    }
+    List<tz.TZDateTime> days = [];
+    for (var (index, element) in day.split("").indexed) {
+      final weekday = weekdays[index];
+      if (element == "1") {
+        days.add(weekday);
+      }
+    }
+    return days.map((element) => DateFormat.EEEEE().format(element)).join("/");
+  }
+
+  bool isAbleNow() {
     // Get now weekday index use TimeZone locate at Japan. JST(UTC+9)
     final now = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
     final nowDayIndex = now.weekday - 1;
@@ -141,7 +188,7 @@ class ImproveReq with _$ImproveReq {
       return false;
     }
     // day[dayIndex] == '1'
-    if (day?.substring(dayIndex, dayIndex + 1) == '1') {
+    if (day.substring(dayIndex, dayIndex + 1) == '1') {
       log("$ship is able to improve on day $dayIndex");
       return true;
     }
@@ -183,6 +230,47 @@ class ImproveResourceExtra with _$ImproveResourceExtra {
     @JsonKey(name: 'use') Map<String, int>? useItem,
   }) = _ImproveResourceExtra;
 
+  const ImproveResourceExtra._();
+
+  ImproveCost get dCost {
+    return ImproveCost(
+        max: developmentMaterial!.last!, min: improvementMaterial!.first);
+  }
+
+  ImproveCost get iCost {
+    return ImproveCost(
+        max: improvementMaterial!.last!, min: improvementMaterial!.first);
+  }
+
+  Map<String, ImproveCost> getSlotCostMap(Map<int, String> slotItemMap) {
+    if (slotItem == null) {
+      return {};
+    }
+    return slotItem!.map((key, value) =>
+        MapEntry(slotItemMap[int.parse(key)]!, ImproveCost(max: value)));
+  }
+
+  Map<String, ImproveCost> getUseCostMap(Map<int, String> useItemMap) {
+    if (useItem == null) {
+      return {};
+    }
+    return useItem!.map((key, value) =>
+        MapEntry(useItemMap[int.parse(key)]!, ImproveCost(max: value)));
+  }
+
   factory ImproveResourceExtra.fromJson(Map<String, dynamic> json) =>
       _$ImproveResourceExtraFromJson(json);
+}
+
+@freezed
+class ImproveCost with _$ImproveCost {
+  const ImproveCost._();
+  factory ImproveCost({required int max, int? min}) = _ImproveCost;
+
+  String get text {
+    return min == null ? "$max" : "$min - $max";
+  }
+
+  factory ImproveCost.fromJson(Map<String, dynamic> json) =>
+      _$ImproveCostFromJson(json);
 }

@@ -16,6 +16,7 @@ part 'kancolle_localization_provider.freezed.dart';
 part 'kancolle_localization_provider.g.dart';
 
 const kSlotItemLocalizationUrl = 'https://conntower.github.io/ooyodo/data/slotitem_l10n.json';
+const kUseItemInImproveLocalizationUrl = 'https://conntower.github.io/ooyodo/data/useitem_in_improve_l10n.json';
 
 @freezed
 class KancolleLocalizationState with _$KancolleLocalizationState {
@@ -55,8 +56,13 @@ class KancolleLocalization extends _$KancolleLocalization {
     try {
       final file = await localFile('slotitem_l10n.json');
       final contents = await file.readAsString();
-      final json = jsonDecode(contents);
-      final data = covertData(locale, json);
+      final slotitemJson = jsonDecode(contents);
+
+      final file2 = await localFile('useitem_in_improve_l10n.json');
+      final contents2 = await file2.readAsString();
+      final useItemInImproveJson = jsonDecode(contents2);
+
+      final data = covertData(locale, slotitemJson, useItemInImproveJson);
       final dataVersion = await fetchDataVersion();
       if (dataVersion != '') {
         if (dataVersion != data.data?.version) {
@@ -69,10 +75,12 @@ class KancolleLocalization extends _$KancolleLocalization {
     }
   }
 
-  KancolleLocalizationState covertData(Locale locale, Map<String, dynamic> slotItemData) {
+  KancolleLocalizationState covertData(Locale locale, Map<String, dynamic> slotItemData, Map<String, dynamic> useItemInImproveData) {
     Map<int, String> equipmentL10n = {};
+    Map<int, String> itemInImproveL10n = {};
     final dataVersion = slotItemData['data_version'] as String;
     final slotItems = slotItemData['data'] as Map<String, dynamic>;
+    final useItemInImprove = useItemInImproveData['data'] as Map<String, dynamic>;
 
     final languageCode = getLanguageCode(locale);
 
@@ -80,9 +88,13 @@ class KancolleLocalization extends _$KancolleLocalization {
       equipmentL10n[int.parse(id)] = translate[languageCode] ?? '';
     });
 
+    useItemInImprove.forEach((id, translate) {
+      itemInImproveL10n[int.parse(id)] = translate[languageCode] ?? '';
+    });
+
     return KancolleLocalizationState(
       locale: locale,
-      data: KancolleLocalizationData(version: dataVersion, equipment: equipmentL10n),
+      data: KancolleLocalizationData(version: dataVersion, equipment: equipmentL10n, itemInImprove: itemInImproveL10n),
     );
 
   }
@@ -90,9 +102,14 @@ class KancolleLocalization extends _$KancolleLocalization {
 
   Future<KancolleLocalizationState> _fetchData(Locale locale) async {
     final response = await http.get(Uri.parse(kSlotItemLocalizationUrl));
-    final json = jsonDecode(response.body);
-    _saveLocalData(await localFile('slotitem_l10n.json'), json);
-    return covertData(locale, json);
+    final slotItemJson = jsonDecode(response.body);
+    _saveLocalData(await localFile('slotitem_l10n.json'), slotItemJson);
+
+    final response2 = await http.get(Uri.parse(kUseItemInImproveLocalizationUrl));
+    final useItemInImproveJson = jsonDecode(response2.body);
+    _saveLocalData(await localFile('useitem_in_improve_l10n.json'), useItemInImproveJson);
+
+    return covertData(locale, slotItemJson, useItemInImproveJson);
   }
 
   String getLanguageCode(Locale locale) {
