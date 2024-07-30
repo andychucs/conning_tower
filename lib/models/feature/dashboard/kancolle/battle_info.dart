@@ -102,12 +102,12 @@ class BattleInfo with _$BattleInfo {
   void airBaseDamageCount(List<num?>? enemyDamageList, List<num?>? enemyCombinedDamageList) {
     if (enemyDamageList != null) {
       for (final (index, damage) in enemyDamageList.indexed) {
-        dmgTake(getEShip1(index).hashCode, damage!);
+        calculateDamageTaken(getEShip1(index).hashCode, damage!);
       }
     }
     if (enemyCombinedDamageList != null) {
       for (final (index, damage) in enemyCombinedDamageList.indexed) {
-        dmgTake(getEShip2(index).hashCode, damage!);
+        calculateDamageTaken(getEShip2(index).hashCode, damage!);
       }
     }
 
@@ -133,23 +133,23 @@ class BattleInfo with _$BattleInfo {
   void aircraftRoundDamageCount(AircraftRound airBattle) {
     if (airBattle.apiStage3?.apiFdam != null) {
       for (final (index, damage) in airBattle.apiStage3!.apiFdam!.indexed) {
-        dmgTake(getOShip1(index).hashCode, damage!);
+        calculateDamageTaken(getOShip1(index).hashCode, damage!);
       }
     }
     if (airBattle.apiStage3?.apiEdam != null) {
       for (final (index, damage) in airBattle.apiStage3!.apiEdam!.indexed) {
-        dmgTake(getEShip1(index).hashCode, damage!);
+        calculateDamageTaken(getEShip1(index).hashCode, damage!);
       }
     }
     if (airBattle is AircraftRoundDoubleEnemy) {
       if (airBattle.apiStage3Combined?.apiFdam != null) {
         for (final (index, damage) in airBattle.apiStage3Combined!.apiFdam!.indexed) {
-          dmgTake(getOShip2(index).hashCode, damage!);
+          calculateDamageTaken(getOShip2(index).hashCode, damage!);
         }
       }
       if (airBattle.apiStage3Combined?.apiEdam != null) {
         for (final (index, damage) in airBattle.apiStage3Combined!.apiEdam!.indexed) {
-          dmgTake(getEShip2(index).hashCode, damage!);
+          calculateDamageTaken(getEShip2(index).hashCode, damage!);
         }
       }
     }
@@ -174,11 +174,13 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void dmgCount(int actShipHash, num damage) {
+  /// Calculates the damage dealt by a ship during combat.
+  void calculateDamageDealt(int actShipHash, num damage) {
     dmgMap![actShipHash] = dmgMap![actShipHash]! + damage.truncate();
   }
 
-  void dmgTake(int defShipHash, num damage) {
+  /// Calculates the damage taken by a ship during combat.
+  void calculateDamageTaken(int defShipHash, num damage) {
     dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
   }
 
@@ -250,8 +252,8 @@ class BattleInfo with _$BattleInfo {
           actShip = actSquads[1].ships[actIndex - actSquads[0].ships.length];
         }
 
-        dmgTake(defShip.hashCode, damage);
-        dmgCount(actShip.hashCode, damage);
+        calculateDamageTaken(defShip.hashCode, damage);
+        calculateDamageDealt(actShip.hashCode, damage);
       }
     }
   }
@@ -662,8 +664,8 @@ class BattleInfo with _$BattleInfo {
             final Ship defShip = getShip(FleetSide.enemy, defIndex);
             final defShipHash = defShip.hashCode;
             final dmg = dmgList![itemIndex];
-            dmgCount(actShipHash, dmg);
-            dmgTake(defShipHash, dmg);
+            calculateDamageDealt(actShipHash, dmg);
+            calculateDamageTaken(defShipHash, dmg);
           }
         }
       }
@@ -679,8 +681,8 @@ class BattleInfo with _$BattleInfo {
             final Ship defShip = getShip(FleetSide.our, defIndex);
             final defShipHash = defShip.hashCode;
             final dmg = dmgList![itemIndex];
-            dmgCount(actShipHash, dmg);
-            dmgTake(defShipHash, dmg);
+            calculateDamageDealt(actShipHash, dmg);
+            calculateDamageTaken(defShipHash, dmg);
           }
         }
       }
@@ -695,8 +697,8 @@ class BattleInfo with _$BattleInfo {
         final Ship defShip = getShip(FleetSide.enemy, defIndex);
         final actShipHash = actShip.hashCode;
         final defShipHash = defShip.hashCode;
-        dmgCount(actShipHash, data.apiFydam[actIndex]);
-        dmgTake(defShipHash, data.apiFydam[actIndex]);
+        calculateDamageDealt(actShipHash, data.apiFydam[actIndex]);
+        calculateDamageTaken(defShipHash, data.apiFydam[actIndex]);
       }
     }
     for (final (actIndex, defIndex) in data.apiErai.indexed) {
@@ -705,8 +707,8 @@ class BattleInfo with _$BattleInfo {
         final Ship defShip = getShip(FleetSide.our, defIndex);
         final actShipHash = actShip.hashCode;
         final defShipHash = defShip.hashCode;
-        dmgCount(actShipHash, data.apiEydam[actIndex]);
-        dmgTake(defShipHash, data.apiEydam[actIndex]);
+        calculateDamageDealt(actShipHash, data.apiEydam[actIndex]);
+        calculateDamageTaken(defShipHash, data.apiEydam[actIndex]);
       }
     }
   }
