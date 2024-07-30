@@ -159,6 +159,10 @@ class KancolleData {
       }
     }
 
+    if (model is ReqCombinedBattleLdAirbattleEntity) {
+      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, squads);
+    }
+
     if (model is ReqSortieAirbattleEntity) {
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
