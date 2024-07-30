@@ -7,6 +7,8 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../data/kcsapi/req/battle/req_combined_battle_ld_airbattle_entity.dart';
+
 part 'battle_info.freezed.dart';
 
 @unfreezed
@@ -618,6 +620,24 @@ class BattleInfo with _$BattleInfo {
     setFormation(data.apiFormation);
 
     //api_kouku
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    updateShipHP();
+  }
+
+  void parseReqCombinedBattleLdAirbattle(ReqCombinedBattleLdAirbattleApiDataEntity data, List<Squad> squads) {
+    clear();
+
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [...squads];
+
+    initDMGMap();
+
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+
+    setFormation(data.apiFormation);
+
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
     updateShipHP();
