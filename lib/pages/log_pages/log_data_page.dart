@@ -4,6 +4,7 @@ import 'dart:developer' as dev;
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
+import 'package:conning_tower/models/data/kcwiki/map_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
@@ -13,7 +14,6 @@ import 'package:conning_tower/pages/log_viewer.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +35,6 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
   Widget build(BuildContext context) {
     final runtimeData = ref.watch(kancolleDataProvider);
     final kcWikiData = ref.watch(kcWikiDataStateProvider);
-
 
     ScrollController scrollController = ScrollController();
 
@@ -86,25 +85,27 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
       ),
       child: SafeArea(
         bottom: false,
-        child: Builder(
-          builder: (context) {
-            return kcWikiData.when(data: (kcWikiData) {
-              return kcWikiDataBody(scrollController, data, kcWikiData);
-            }, error: (error, stackTrace) {
-              dev.log(error.toString());
-              return runtimeDataBody(scrollController, data, runtimeData);
-            }, loading: () => const Center(
-              child: CupertinoActivityIndicator(
-                radius: 30,
-              ),
-            ));
-            }
-        ),
+        child: Builder(builder: (context) {
+          return kcWikiData.when(
+              data: (kcWikiData) {
+                return kcWikiDataBody(scrollController, data, kcWikiData, runtimeData);
+              },
+              error: (error, stackTrace) {
+                dev.log(error.toString());
+                return runtimeDataBody(scrollController, data, runtimeData);
+              },
+              loading: () => const Center(
+                    child: CupertinoActivityIndicator(
+                      radius: 30,
+                    ),
+                  ));
+        }),
       ),
     );
   }
 
-  Widget kcWikiDataBody(ScrollController scrollController, List<KancolleBattleLogEntity> data, KcWikiData kcWikiData) {
+  Widget kcWikiDataBody(ScrollController scrollController,
+      List<KancolleBattleLogEntity> data, KcWikiData kcWikiData, KancolleData runtimeData) {
     dev.log("use kcwiki data");
     return CupertinoScrollbar(
       controller: scrollController,
@@ -119,10 +120,25 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                     tz.local, log.timestamp);
                 String date = DateFormat.yMMMMd().format(datetime);
                 String time = DateFormat('HH:mm:ss').format(datetime);
-                final battleData = KancolleBattleLog.fromJson(jsonDecode(log.logStr));
-                final map = kcWikiData.maps.firstWhere((element) => element.id == battleData.mapInfo.id);
-                String mapName = map.name;
-                String mapCode = "${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}";
+                final battleData =
+                    KancolleBattleLog.fromJson(jsonDecode(log.logStr));
+                final mapId = battleData.mapInfo.id;
+                final map = kcWikiData.maps.firstWhere(
+                    (element) => element.id == mapId,
+                    orElse: () => MapData(
+                        id: mapId, name: "", routes: {}, cells: {}));
+
+                late String mapName;
+                String mapCode = "${mapId ~/ 10}-${mapId % 10}";
+                if (map.name == '') {
+                  final mapArea = runtimeData
+                      .dataInfo.mapAreaInfo?[battleData.mapInfo.id ~/ 10];
+                  final map = mapArea?.map.firstWhere(
+                          (element) => element.id == battleData.mapInfo.id);
+                  mapName = map?.name ?? '';
+                } else {
+                  mapName = map.name;
+                }
                 return LogItem(
                   log: log,
                   logType: widget.logType,
@@ -138,7 +154,8 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
     );
   }
 
-  Widget runtimeDataBody(ScrollController scrollController, List<KancolleBattleLogEntity> data, KancolleData runtimeData) {
+  Widget runtimeDataBody(ScrollController scrollController,
+      List<KancolleBattleLogEntity> data, KancolleData runtimeData) {
     dev.log("use runtime data");
     return CupertinoScrollbar(
       controller: scrollController,
@@ -153,18 +170,21 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                     tz.local, log.timestamp);
                 String date = DateFormat.yMMMMd().format(datetime);
                 String time = DateFormat('HH:mm:ss').format(datetime);
-                final battleData = KancolleBattleLog.fromJson(jsonDecode(log.logStr));
-                final mapArea = runtimeData.dataInfo.mapAreaInfo?[battleData.mapInfo.id ~/ 10];
-                final map = mapArea?.map.firstWhere((element) => element.id == battleData.mapInfo.id);
+                final battleData =
+                    KancolleBattleLog.fromJson(jsonDecode(log.logStr));
+                final mapArea = runtimeData
+                    .dataInfo.mapAreaInfo?[battleData.mapInfo.id ~/ 10];
+                final map = mapArea?.map.firstWhere(
+                    (element) => element.id == battleData.mapInfo.id);
                 String mapName = map?.name ?? '';
                 String mapCode = '${map?.areaId}-${map?.num}';
-
 
                 if (mapName == '') {
                   return LogItem(
                     log: log,
                     logType: widget.logType,
-                    title: Text("${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}"),
+                    title: Text(
+                        "${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}"),
                     subtitle: Text('$date $time'),
                     onTap: () {
                       Fluttertoast.showToast(msg: "Error: Map not found");
