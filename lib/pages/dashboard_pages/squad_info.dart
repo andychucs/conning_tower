@@ -22,6 +22,9 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
+import '../../models/data/l10n/kancolle_localization.dart';
+import '../../providers/generatable/kancolle_localization_provider.dart';
+
 const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 const _normalMargin = EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0);
 
@@ -86,6 +89,12 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
     var data = ref.watch(kancolleDataProvider);
     var squads = data.squads;
     final shipInfo = data.dataInfo.shipInfo;
+    Locale locale = Localizations.localeOf(context);
+    KancolleLocalizationData? l10nData;
+    if (locale.languageCode != 'ja') {
+      final l10n = ref.watch(kancolleLocalizationProvider(locale));
+      l10nData = l10n.whenData((data) => data.data).value;
+    }
 
     segments = {
       for (var element in squads)
@@ -138,8 +147,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                           var squad = squads[index];
                           String losScore = squad
                               .los(
-                                  admiralLevel:
-                                      data.seaForceBase.admiral.level,
+                                  admiralLevel: data.seaForceBase.admiral.level,
                                   mapModifier: _mapModifier)
                               .total
                               .toStringAsFixed(2);
@@ -325,10 +333,12 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
                                     ]
                                   : [
                                       SlotItemPage(
-                                          squad: squad,
-                                          slotMap: data.fleet.equipment,
-                                          slotItemInfo:
-                                              data.dataInfo.slotItemInfo)
+                                        squad: squad,
+                                        slotMap: data.fleet.equipment,
+                                        slotItemInfo:
+                                            data.dataInfo.slotItemInfo,
+                                        l10nData: l10nData,
+                                      )
                                     ],
                             );
                           }
@@ -371,11 +381,13 @@ class SlotItemPage extends StatelessWidget {
     required this.squad,
     required this.slotMap,
     this.slotItemInfo,
+    this.l10nData,
   });
 
   final Squad squad;
   final Map<int, Equipment> slotMap;
   final Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo;
+  final KancolleLocalizationData? l10nData;
 
   @override
   Widget build(BuildContext context) {
@@ -411,13 +423,16 @@ class SlotItemPage extends StatelessWidget {
                       children: [
                         for (final (index, item) in ship.slot!.indexed)
                           if (item != -1)
-                            Text(slotMap[item]
-                                    ?.text(onSlot: ship.onSlot?[index]) ??
+                            Text(slotMap[item]?.text(
+                                    onSlot: ship.onSlot?[index],
+                                    l10nMap: l10nData?.equipment) ??
                                 "N/A"),
                         if (ship.slotEx != null &&
                             ship.slotEx != -1 &&
                             ship.slotEx != 0)
-                          Text(slotMap[ship.slotEx]?.text() ?? "N/A"),
+                          Text(slotMap[ship.slotEx]
+                                  ?.text(l10nMap: l10nData?.equipment) ??
+                              "N/A"),
                       ],
                     ),
                   )
