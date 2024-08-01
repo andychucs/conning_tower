@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/port/port_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -24,8 +25,22 @@ class SeaForceBase with _$SeaForceBase {
     );
   }
 
+  void saveResource() {
+    objectbox.saveResource(admiral.name, "fuel", resource.fuel);
+    objectbox.saveResource(admiral.name, "ammo", resource.ammo);
+    objectbox.saveResource(admiral.name, "steel", resource.steel);
+    objectbox.saveResource(admiral.name, "bauxite", resource.bauxite);
+  }
+
+  void saveMaterials() {
+    objectbox.saveResource(admiral.name, "ic", resource.instantCreateShip);
+    objectbox.saveResource(admiral.name, "ir", resource.instantRepairs);
+    objectbox.saveResource(admiral.name, "dm", resource.developmentMaterials);
+    objectbox.saveResource(admiral.name, "im", resource.improvementMaterials);
+  }
+
   void updateMaterial(List<PortApiDataApiMaterialEntity> updatedMaterial) {
-    var oil = updatedMaterial[0].apiValue;
+    var fuel = updatedMaterial[0].apiValue;
     var ammo = updatedMaterial[1].apiValue;
     var steel = updatedMaterial[2].apiValue;
     var bauxite = updatedMaterial[3].apiValue;
@@ -34,7 +49,7 @@ class SeaForceBase with _$SeaForceBase {
     var developmentMaterials = updatedMaterial[6].apiValue;
     var improvementMaterials = updatedMaterial[7].apiValue;
     resource = resource.copyWith(
-        oil: oil,
+        fuel: fuel,
         ammo: ammo,
         steel: steel,
         bauxite: bauxite,
@@ -42,22 +57,25 @@ class SeaForceBase with _$SeaForceBase {
         instantRepairs: instantRepairs,
         developmentMaterials: developmentMaterials,
         improvementMaterials: improvementMaterials);
+    saveResource();
+    saveMaterials();
     log(toString());
   }
 
   void updateResource(List<int> material) {
-    var oil = material[0];
+    var fuel = material[0];
     var ammo = material[1];
     var steel = material[2];
     var bauxite = material[3];
-    resource = resource.copyWith(oil: oil, ammo: ammo, steel: steel, bauxite: bauxite);
+    resource = resource.copyWith(fuel: fuel, ammo: ammo, steel: steel, bauxite: bauxite);
+    saveResource();
   }
 }
 
 @freezed
 class SeaForceBaseResource with _$SeaForceBaseResource {
   const factory SeaForceBaseResource({
-    required int oil,
+    required int fuel,
     required int ammo,
     required int steel,
     required int bauxite,

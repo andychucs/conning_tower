@@ -53,6 +53,14 @@ class LogViewer extends ConsumerWidget {
               },
               title: "Copy Quest Log",
             ),
+            PullDownMenuItem(
+              onTap: () async {
+                Box<KancolleResourceLogEntity> dataBox = objectbox.resourceLog;
+                final allData = dataBox.getAll();
+                await Clipboard.setData(ClipboardData(text: jsonEncode(allData)));
+              },
+              title: "Copy Resource Log",
+            ),
           ],
           buttonBuilder: (BuildContext context, Future<void> Function() showMenu) => GestureDetector(
             onTap: showMenu,

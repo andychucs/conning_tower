@@ -25,7 +25,7 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   });
   final List<Squad> squads = [];
   const resource = SeaForceBaseResource(
-      oil: 0,
+      fuel: 0,
       ammo: 0,
       steel: 0,
       bauxite: 0,

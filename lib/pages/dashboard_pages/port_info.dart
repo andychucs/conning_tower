@@ -160,7 +160,7 @@ class _PortInfoState extends ConsumerState<PortInfo> {
                                           ),
                                         ),
                                         bottom: AutoSizeText(
-                                          "${resourceInfo.oil}",
+                                          "${resourceInfo.fuel}",
                                           maxFontSize: 30,
                                           minFontSize: 18,
                                           maxLines: 1,
