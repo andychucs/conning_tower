@@ -16,7 +16,6 @@ import 'package:conning_tower/widgets/dashboard_tab_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tab_container/tab_container.dart';
 
 import '../providers/generatable/kancolle_localization_provider.dart';
 
