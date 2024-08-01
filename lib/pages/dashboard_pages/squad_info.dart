@@ -35,7 +35,10 @@ class SquadInfo extends ConsumerStatefulWidget {
   ConsumerState createState() => _SquadInfoState();
 }
 
-class _SquadInfoState extends ConsumerState<SquadInfo> {
+class _SquadInfoState extends ConsumerState<SquadInfo>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   final Map<int, Widget> displayModes = <int, Widget>{
     0: Text(S.current.TextStatus),
     1: Text(S.current.TextEquipment),
@@ -84,6 +87,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final PageController controller =
         PageController(initialPage: _selectedSegment);
     var data = ref.watch(kancolleDataProvider);
