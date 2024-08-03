@@ -124,12 +124,13 @@ class ObjectBox {
     }
   }
 
-  void saveResource(
-      String admiral, String resource, int value) {
+  void saveResource(DateTime time, String admiral, String resource, int value) {
+    if (admiral == '') {
+      return;
+    }
     // search if resource log exists for today update value as high if value above high, low if value below low
     // 2024-08-01 00:00:00.000 ~ 2024-08-01 23:59:59.999 should be one day
-    final now = DateTime.now();
-    final todayStart = DateTime(now.year, now.month, now.day);
+    final todayStart = DateTime(time.year, time.month, time.day);
     final todayEnd = todayStart
         .add(const Duration(days: 1))
         .subtract(const Duration(milliseconds: 1));
@@ -144,12 +145,19 @@ class ObjectBox {
     KancolleResourceLogEntity? log;
     if (logs.isNotEmpty) {
       log = logs.first;
-      log.high = max(log.high, value);
-      log.low = min(log.low, value);
-      log.close = value;
+      final high = max(log.high, value);
+      final low = min(log.low, value);
+      final close = value;
+      if (high == log.high && low == log.low && close == log.close) {
+        return;
+      } else {
+        log.high = high;
+        log.low = low;
+        log.close = close;
+      }
     } else {
       log = KancolleResourceLogEntity(
-          time: now,
+          time: time,
           admiral: admiral,
           resource: resource,
           open: value,

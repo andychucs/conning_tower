@@ -20,26 +20,28 @@ class SeaForceBase with _$SeaForceBase {
 
   void updateAdmiralInfo(PortApiDataApiBasicEntity apiBasic) {
     admiral = admiral.copyWith(
-      name: apiBasic.apiNickname,
-      level: apiBasic.apiLevel,
-      rank: apiBasic.apiRank,
-      maxShip: apiBasic.apiMaxChara,
-      maxItem: apiBasic.apiMaxSlotitem
-    );
+        name: apiBasic.apiNickname,
+        level: apiBasic.apiLevel,
+        rank: apiBasic.apiRank,
+        maxShip: apiBasic.apiMaxChara,
+        maxItem: apiBasic.apiMaxSlotitem);
   }
 
-  void saveResource() {
-    objectbox.saveResource(admiral.name, "fuel", resource.fuel);
-    objectbox.saveResource(admiral.name, "ammo", resource.ammo);
-    objectbox.saveResource(admiral.name, "steel", resource.steel);
-    objectbox.saveResource(admiral.name, "bauxite", resource.bauxite);
+  void saveResource(DateTime time) {
+    objectbox.saveResource(time, admiral.name, "fuel", resource.fuel);
+    objectbox.saveResource(time, admiral.name, "ammo", resource.ammo);
+    objectbox.saveResource(time, admiral.name, "steel", resource.steel);
+    objectbox.saveResource(time, admiral.name, "bauxite", resource.bauxite);
   }
 
-  void saveMaterials() {
-    objectbox.saveResource(admiral.name, "ic", resource.instantCreateShip);
-    objectbox.saveResource(admiral.name, "ir", resource.instantRepairs);
-    objectbox.saveResource(admiral.name, "dm", resource.developmentMaterials);
-    objectbox.saveResource(admiral.name, "im", resource.improvementMaterials);
+  void saveMaterials(DateTime time) {
+    objectbox.saveResource(
+        time, admiral.name, "ic", resource.instantCreateShip);
+    objectbox.saveResource(time, admiral.name, "ir", resource.instantRepairs);
+    objectbox.saveResource(
+        time, admiral.name, "dm", resource.developmentMaterials);
+    objectbox.saveResource(
+        time, admiral.name, "im", resource.improvementMaterials);
   }
 
   void updateMaterial(List<PortApiDataApiMaterialEntity> updatedMaterial) {
@@ -60,8 +62,9 @@ class SeaForceBase with _$SeaForceBase {
         instantRepairs: instantRepairs,
         developmentMaterials: developmentMaterials,
         improvementMaterials: improvementMaterials);
-    saveResource();
-    saveMaterials();
+    final time = DateTime.now();
+    saveResource(time);
+    saveMaterials(time);
     log(toString());
   }
 
@@ -70,8 +73,10 @@ class SeaForceBase with _$SeaForceBase {
     var ammo = material[1];
     var steel = material[2];
     var bauxite = material[3];
-    resource = resource.copyWith(fuel: fuel, ammo: ammo, steel: steel, bauxite: bauxite);
-    saveResource();
+    resource = resource.copyWith(
+        fuel: fuel, ammo: ammo, steel: steel, bauxite: bauxite);
+    final time = DateTime.now();
+    saveResource(time);
   }
 }
 
