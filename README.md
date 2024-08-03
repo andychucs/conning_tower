@@ -28,6 +28,11 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 * Expedition mission notification.
 * Teitoku & port info viewer.
 * Screenshot save to os album.
+* Resource Data Charts.
+
+  <img src=https://github.com/user-attachments/assets/e158cef0-50a9-4de2-8ccb-1a22c8a1025c width=50% />
+
+  
 
 ## 安装 Installation インスタレーション
 
