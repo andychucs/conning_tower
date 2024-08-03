@@ -18,16 +18,19 @@ class LogItem extends StatelessWidget {
     this.subtitle,
     this.onTap,
     this.kcWikiData,
+    this.trailing,
+    this.additionalInfo,
   });
 
-  final KancolleBattleLogEntity log;
+  final dynamic log;
   final LogType logType;
   final Widget? leading;
   final Widget title;
   final Widget? subtitle;
+  final Widget? trailing;
+  final Widget? additionalInfo;
   final VoidCallback? onTap;
   final KcWikiData? kcWikiData;
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +38,20 @@ class LogItem extends StatelessWidget {
       leading: leading,
       title: title,
       subtitle: subtitle,
-      onTap: () => onTap != null ? onTap!() : navigatorToCupertino(
-        context,
-        LogDetailBattle(logData: log, kcWikiData: kcWikiData),
-      ),
+      trailing: trailing,
+      additionalInfo: additionalInfo,
+      onTap: () {
+        if (onTap != null) {
+          onTap!();
+        } else {
+          if (logType == LogType.battle) {
+            navigatorToCupertino(
+              context,
+              LogDetailBattle(logData: log, kcWikiData: kcWikiData),
+            );
+          }
+        }
+      },
     );
   }
 }

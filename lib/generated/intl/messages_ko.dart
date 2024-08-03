@@ -32,6 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCResourceFuel": MessageLookupByLibrary.simpleMessage("연료"),
         "KCResourceImprovementMaterial":
             MessageLookupByLibrary.simpleMessage("개수자재"),
+        "KCResourceInstantCreateShip":
+            MessageLookupByLibrary.simpleMessage("고속건조재"),
+        "KCResourceInstantRepair":
+            MessageLookupByLibrary.simpleMessage("고속수복재"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("강재"),
         "KCResources": MessageLookupByLibrary.simpleMessage("자원"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("설치")

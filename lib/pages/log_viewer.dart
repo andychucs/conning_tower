@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/pages/log_pages/log_data_page.dart';
+import 'package:conning_tower/pages/log_pages/battle_log_data_page.dart';
 import 'package:conning_tower/utils/objectbox.dart';
 import 'package:conning_tower/widgets/icons.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
@@ -16,8 +16,9 @@ import 'package:pull_down_button/pull_down_button.dart';
 import '../models/feature/log/kancolle_log.dart';
 import '../objectbox.g.dart';
 import '../providers/kancolle_data_provider.dart';
+import 'log_pages/resource_log_data_page.dart';
 
-enum LogType { battle }
+enum LogType { battle, resource }
 
 class LogViewer extends ConsumerWidget {
   final String? previousPageTitle;
@@ -85,9 +86,14 @@ class LogViewer extends ConsumerWidget {
                 children: [
                   CupertinoListTile(
                     title: Text(S.of(context).TextBattle),
-                    trailing: CupertinoListTileChevron(),
+                    trailing: const CupertinoListTileChevron(),
                     onTap: () =>
-                        navigatorToCupertino(context, LogDataPage.battle()),
+                        navigatorToCupertino(context, const BattleLogDataPage()),
+                  ),
+                  CupertinoListTile(
+                      title: Text(S.of(context).KCResources),
+                    trailing: const CupertinoListTileChevron(),
+                    onTap: () => navigatorToCupertino(context, const ResourceLogDataPage()),
                   ),
                   // CupertinoListTile(
                   //   title: Text("建造"),

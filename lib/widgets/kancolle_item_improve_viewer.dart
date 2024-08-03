@@ -101,72 +101,66 @@ class ImproveDetailSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(improve.name),
-        ),
-        Expanded(
-          child: ListView(
-            children: List.generate(improve.data.length, (index) {
-              final improveData = improve.data[index];
-
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(improve.name),
+      ),
+      child: ListView(
+        children: List.generate(improve.data.length, (index) {
+          final improveData = improve.data[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                // base resource
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // base resource
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ResourceLabel(
-                          value: improveData.resource.oil,
-                          color: const Color.fromRGBO(32, 89, 29, 1.0),
-                        ),
-                        ResourceLabel(
-                          value: improveData.resource.ammo,
-                          color: const Color.fromRGBO(126, 102, 54, 1.0),
-                        ),
-                        ResourceLabel(
-                          value: improveData.resource.steel,
-                          color: const Color.fromRGBO(181, 180, 180, 1.0),
-                        ),
-                        ResourceLabel(
-                          value: improveData.resource.bauxite,
-                          color: const Color.fromRGBO(219, 150, 102, 1.0),
-                        ),
-                      ],
+                    ResourceLabel(
+                      value: improveData.resource.oil,
+                      color: const Color.fromRGBO(32, 89, 29, 1.0),
                     ),
-                    const Divider(),
-                    // extra resource
-                    ...buildImproveStageList(improveData),
-
-                    // req ship and weekday
-                    if (improveData.req != null && improveData.req!.isNotEmpty)
-                      ...List.generate(improveData.req!.length, (reqIndex) {
-                        return Column(
-                          children: [
-                            Text(
-                                improveData.req![reqIndex]
-                                    .shipNameList(shipMap)
-                                    .join(" | "),
-                                softWrap: true,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis),
-                            Text(improveData.req![reqIndex].dayNameEEEEE),
-                            const Divider(),
-                          ],
-                        );
-                      })
+                    ResourceLabel(
+                      value: improveData.resource.ammo,
+                      color: const Color.fromRGBO(126, 102, 54, 1.0),
+                    ),
+                    ResourceLabel(
+                      value: improveData.resource.steel,
+                      color: const Color.fromRGBO(181, 180, 180, 1.0),
+                    ),
+                    ResourceLabel(
+                      value: improveData.resource.bauxite,
+                      color: const Color.fromRGBO(219, 150, 102, 1.0),
+                    ),
                   ],
                 ),
-              );
-            }),
-          ),
-        ),
-      ],
+                const Divider(),
+                // extra resource
+                ...buildImproveStageList(improveData),
+
+                // req ship and weekday
+                if (improveData.req != null && improveData.req!.isNotEmpty)
+                  ...List.generate(improveData.req!.length, (reqIndex) {
+                    return Column(
+                      children: [
+                        Text(
+                            improveData.req![reqIndex]
+                                .shipNameList(shipMap)
+                                .join(" | "),
+                            softWrap: true,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis),
+                        Text(improveData.req![reqIndex].dayNameEEEEE),
+                        const Divider(),
+                      ],
+                    );
+                  })
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 

@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(taskTitle) => "${taskTitle} 已完成。";
 
+  static String m6(length) => "${length}條資源日誌將導入";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("關於"),
@@ -223,6 +225,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCResourceFuel": MessageLookupByLibrary.simpleMessage("燃料"),
         "KCResourceImprovementMaterial":
             MessageLookupByLibrary.simpleMessage("改修資材"),
+        "KCResourceInstantCreateShip":
+            MessageLookupByLibrary.simpleMessage("高速建造"),
+        "KCResourceInstantRepair": MessageLookupByLibrary.simpleMessage("高速修復"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("鋼材"),
         "KCResources": MessageLookupByLibrary.simpleMessage("資源"),
         "KCViewFuncMsgAlreadyGameRedirect":
@@ -325,11 +330,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextFleetMembers": MessageLookupByLibrary.simpleMessage("艦隊成員"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("幫助"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
+        "TextImport": MessageLookupByLibrary.simpleMessage("導入"),
+        "TextImportResourceFromPoi":
+            MessageLookupByLibrary.simpleMessage("從poi的CSV文件導入資源日誌"),
+        "TextImportResourceNumberCheck": m6,
+        "TextImportResourceWarning":
+            MessageLookupByLibrary.simpleMessage("確認是否要導入?"),
+        "TextImporting": MessageLookupByLibrary.simpleMessage("正在導入"),
+        "TextImportingComplete": MessageLookupByLibrary.simpleMessage("導入完成"),
+        "TextImportingFailed": MessageLookupByLibrary.simpleMessage("導入失敗"),
         "TextItem": MessageLookupByLibrary.simpleMessage("道具"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("大破"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("長"),
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
+        "TextMovingAveragePeriod": MessageLookupByLibrary.simpleMessage("MA時期"),
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
         "TextOpenInJervis":

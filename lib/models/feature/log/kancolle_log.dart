@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../generated/l10n.dart';
 import 'kancolle_battle_log.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -26,6 +27,17 @@ const allResource = [
   "dm",
   "im"
 ];
+
+final resourceNameMap = {
+  "fuel": S.current.KCResourceFuel,
+  "ammo": S.current.KCResourceAmmo,
+  "steel": S.current.KCResourceSteel,
+  "bauxite": S.current.KCResourceBauxite,
+  "ic": S.current.KCResourceInstantCreateShip,
+  "ir": S.current.KCResourceInstantRepair,
+  "dm": S.current.KCResourceDevelopmentMaterial,
+  "im": S.current.KCResourceImprovementMaterial
+};
 
 @Entity(uid: 332593390095459654)
 class KancolleBattleLogEntity {
