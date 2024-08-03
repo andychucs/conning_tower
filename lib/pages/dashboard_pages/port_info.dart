@@ -32,9 +32,6 @@ class _PortInfoState extends ConsumerState<PortInfo>
   Widget build(BuildContext context) {
     super.build(context);
     var data = ref.watch(kancolleDataProvider);
-    final resourceInfo = data.seaForceBase.resource;
-    final admiralInfo = data.seaForceBase.admiral;
-    final fleetInfo = data.fleet;
     final nowJstTime = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
 
     return SafeArea(
@@ -71,9 +68,9 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                 childAspectRatio: 1.618,
                                 children: <Widget>[
                                   InfoBox(
-                                    top: Text(admiralInfo.rankName),
+                                    top: Text(data.seaForceBase.admiral.rankName),
                                     bottom: AutoSizeText(
-                                      admiralInfo.name,
+                                      data.seaForceBase.admiral.name,
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -83,89 +80,81 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                   InfoBox(
                                     top: const Text('Lv.'),
                                     bottom: AutoSizeText(
-                                      '${admiralInfo.level}',
+                                      '${data.seaForceBase.admiral.level}',
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  GestureDetector(
-                                    child: InfoBox(
-                                      top: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                              child: Text(
-                                                  S.of(context).TextFleetGirl)),
-                                          const CupertinoListTileChevron(),
-                                        ],
-                                      ),
-                                      bottom: AutoSizeText(
-                                        '${fleetInfo.ships.length}/${admiralInfo.maxShip}',
-                                        maxFontSize: 30,
-                                        minFontSize: 18,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                  InfoBox(
+                                    onTap: () => navigatorToCupertino(
+                                        context, const KancolleShipViewer()),
+                                    top: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: Text(
+                                                S.of(context).TextFleetGirl)),
+                                        const CupertinoListTileChevron(),
+                                      ],
                                     ),
-                                    onTap: () {
-                                      navigatorToCupertino(
-                                          context, const KancolleShipViewer());
-                                    },
+                                    bottom: AutoSizeText(
+                                      '${data.fleet.ships.length}/${data.seaForceBase.admiral.maxShip}',
+                                      maxFontSize: 30,
+                                      minFontSize: 18,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                  GestureDetector(
-                                    child: InfoBox(
-                                      top: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                              child: Text(
-                                                  S.of(context).TextEquipment)),
-                                          // const CupertinoListTileChevron(),
-                                        ],
-                                      ),
-                                      bottom: AutoSizeText(
-                                        '${fleetInfo.equipment.length}/${admiralInfo.maxItem}',
-                                        maxFontSize: 30,
-                                        minFontSize: 18,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
+                                  InfoBox(
                                     onTap: () {
                                       Fluttertoast.showToast(
                                           msg: "Not implemented yet.");
                                       // navigatorToCupertino(context, KancolleItemViewer());
                                     },
-                                  ),
-                                  GestureDetector(
-                                    child: InfoBox(
-                                      top: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
+                                    top: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
                                             child: Text(
-                                                S.of(context).KCAkashiStudio),
-                                          ),
-                                          const CupertinoListTileChevron(),
-                                        ],
-                                      ),
-                                      bottom: AutoSizeText(
-                                        DateFormat.EEEE().format(nowJstTime),
-                                        maxFontSize: 30,
-                                        minFontSize: 18,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                                S.of(context).TextEquipment)),
+                                        // const CupertinoListTileChevron(),
+                                      ],
                                     ),
+                                    bottom: AutoSizeText(
+                                      '${data.fleet.equipment.length}/${data.seaForceBase.admiral.maxItem}',
+                                      maxFontSize: 30,
+                                      minFontSize: 18,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  InfoBox(
                                     onTap: () {
                                       navigatorToCupertino(context,
                                           const KancolleItemImproveViewer());
                                     },
+                                    top: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                              S.of(context).KCAkashiStudio),
+                                        ),
+                                        const CupertinoListTileChevron(),
+                                      ],
+                                    ),
+                                    bottom: AutoSizeText(
+                                      DateFormat.EEEE().format(nowJstTime),
+                                      maxFontSize: 30,
+                                      minFontSize: 18,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                   InfoBox(
                                     top: ClipRRect(
@@ -178,7 +167,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.fuel}",
+                                      "${data.seaForceBase.resource.fuel}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -196,7 +185,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.ammo}",
+                                      "${data.seaForceBase.resource.ammo}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -214,7 +203,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.steel}",
+                                      "${data.seaForceBase.resource.steel}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -232,7 +221,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.bauxite}",
+                                      "${data.seaForceBase.resource.bauxite}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -250,7 +239,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.instantCreateShip}",
+                                      "${data.seaForceBase.resource.instantCreateShip}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -268,7 +257,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.instantRepairs}",
+                                      "${data.seaForceBase.resource.instantRepairs}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -286,7 +275,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.developmentMaterials}",
+                                      "${data.seaForceBase.resource.developmentMaterials}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -304,7 +293,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ),
                                     ),
                                     bottom: AutoSizeText(
-                                      "${resourceInfo.improvementMaterials}",
+                                      "${data.seaForceBase.resource.improvementMaterials}",
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
@@ -334,31 +323,36 @@ class InfoBox extends StatelessWidget {
     super.key,
     required this.top,
     required this.bottom,
+    this.onTap,
   });
 
   final Widget top;
   final Widget bottom;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoGroupedSection(
       padding: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: top,
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: bottom,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Flex(
+            direction: Axis.vertical,
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: top,
               ),
-            ),
-          ],
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: bottom,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
