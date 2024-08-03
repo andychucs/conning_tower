@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/data_info.dart';
@@ -7,6 +9,8 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.d
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
+
+import '../main.dart';
 
 final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   final OperationQueue queue = OperationQueue(map: {
@@ -34,7 +38,20 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
       developmentMaterials: 0,
       improvementMaterials: 0);
   const admiral = Admiral(name: "", level: 1, rank: 10, maxShip: 0, maxItem: 0);
-  final seaForceBase = SeaForceBase(resource: resource, admiral: admiral);
+  SeaForceBase seaForceBase = SeaForceBase(resource: resource, admiral: admiral);
+
+  try {
+    final localSeaForceBase = localStorage.getString("KC_SEA_FORCE_BASE_CACHE");
+    if (localSeaForceBase != null) {
+      seaForceBase = SeaForceBase.fromJson(jsonDecode(localSeaForceBase));
+      print("load port info: $localSeaForceBase");
+    }
+  }
+  catch (e) {
+    print(e);
+  }
+
+
   final fleet = Fleet(ships: [], equipment: {});
   final dataInfo = DataInfo();
 

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/main.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/sea_force_base.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
@@ -25,13 +29,27 @@ class PortInfo extends ConsumerStatefulWidget {
 
 class _PortInfoState extends ConsumerState<PortInfo>
     with AutomaticKeepAliveClientMixin {
+  SeaForceBase? _seaForceBase;
+
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    print("port info dispose");
+    if (_seaForceBase != null) {
+      print("""port info cache: ${jsonEncode(_seaForceBase)}""");
+      localStorage.setString("KC_SEA_FORCE_BASE_CACHE", jsonEncode(_seaForceBase));
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     var data = ref.watch(kancolleDataProvider);
+    _seaForceBase = data.seaForceBase.admiral.name == "" ? null : data.seaForceBase;
+
     final nowJstTime = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
 
     return SafeArea(
