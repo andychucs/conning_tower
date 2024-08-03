@@ -43,7 +43,8 @@ class LogViewer extends ConsumerWidget {
               onTap: () async {
                 Box<KancolleBattleLogEntity> dataBox = objectbox.battleLog;
                 final allData = dataBox.getAll();
-                await Clipboard.setData(ClipboardData(text: jsonEncode(allData)));
+                await Clipboard.setData(
+                    ClipboardData(text: jsonEncode(allData)));
               },
               title: "Copy Battle Log",
             ),
@@ -51,7 +52,8 @@ class LogViewer extends ConsumerWidget {
               onTap: () async {
                 Box<KancolleQuestLogEntity> dataBox = objectbox.questLog;
                 final allData = dataBox.getAll();
-                await Clipboard.setData(ClipboardData(text: jsonEncode(allData)));
+                await Clipboard.setData(
+                    ClipboardData(text: jsonEncode(allData)));
               },
               title: "Copy Quest Log",
             ),
@@ -59,14 +61,18 @@ class LogViewer extends ConsumerWidget {
               onTap: () async {
                 Box<KancolleResourceLogEntity> dataBox = objectbox.resourceLog;
                 final allData = dataBox.getAll();
-                await Clipboard.setData(ClipboardData(text: jsonEncode(allData)));
+                await Clipboard.setData(
+                    ClipboardData(text: jsonEncode(allData)));
               },
               title: "Copy Resource Log",
             ),
           ],
-          buttonBuilder: (BuildContext context, Future<void> Function() showMenu) => GestureDetector(
-            onTap: showMenu,
-            child: Icon(CupertinoIcons.hammer),
+          buttonBuilder:
+              (BuildContext context, Future<void> Function() showMenu) =>
+                  CupertinoButton(
+            padding: EdgeInsets.zero,
+            onPressed: showMenu,
+            child: const Icon(CupertinoIcons.hammer),
           ),
         ),
       ),
@@ -87,13 +93,14 @@ class LogViewer extends ConsumerWidget {
                   CupertinoListTile(
                     title: Text(S.of(context).TextBattle),
                     trailing: const CupertinoListTileChevron(),
-                    onTap: () =>
-                        navigatorToCupertino(context, const BattleLogDataPage()),
+                    onTap: () => navigatorToCupertino(
+                        context, const BattleLogDataPage()),
                   ),
                   CupertinoListTile(
-                      title: Text(S.of(context).KCResources),
+                    title: Text(S.of(context).KCResources),
                     trailing: const CupertinoListTileChevron(),
-                    onTap: () => navigatorToCupertino(context, const ResourceLogDataPage()),
+                    onTap: () => navigatorToCupertino(
+                        context, const ResourceLogDataPage()),
                   ),
                   // CupertinoListTile(
                   //   title: Text("建造"),
