@@ -36,6 +36,7 @@ class LogViewer extends ConsumerWidget {
         middle: Text(S.of(context).KanColleLogbook),
         previousPageTitle: previousPageTitle,
         trailing: PullDownButton(
+          rootNavigator: true,
           itemBuilder: (BuildContext context) => [
             PullDownMenuItem(
               onTap: () async {

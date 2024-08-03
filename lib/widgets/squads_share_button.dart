@@ -26,10 +26,11 @@ class SquadsShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PullDownButton(
+      rootNavigator: true,
       itemBuilder: (context) => [
         PullDownMenuItem(
           title: S.current.TextCopyToClipboard,
-          subtitle: S.current.TextConningTowerFormat,
+          // subtitle: S.current.TextConningTowerFormat,
           icon: CupertinoIcons.square_on_square,
           onTap: () async {
             await Clipboard.setData(ClipboardData(text: jsonEncode(squads)));
