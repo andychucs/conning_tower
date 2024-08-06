@@ -8,9 +8,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:intl/intl.dart';
 
 import '../generated/l10n.dart';
 import '../models/feature/dashboard/kancolle/equipment.dart';
+
+enum WeekdaySelector {
+  all,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday,
+}
 
 class KancolleItemImproveViewer extends ConsumerStatefulWidget {
   const KancolleItemImproveViewer({super.key});
@@ -21,6 +34,28 @@ class KancolleItemImproveViewer extends ConsumerStatefulWidget {
 
 class _KancolleItemImproveViewerState
     extends ConsumerState<KancolleItemImproveViewer> {
+  late WeekdaySelector _selectedSegment;
+
+  @override
+  void initState() {
+    initWeekday();
+    super.initState();
+  }
+
+  void initWeekday() {
+    final today = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo')); // JST(UTC+9)
+    _selectedSegment = switch(today.weekday) {
+      DateTime.monday => WeekdaySelector.monday,
+      DateTime.tuesday => WeekdaySelector.tuesday,
+      DateTime.wednesday => WeekdaySelector.wednesday,
+      DateTime.thursday => WeekdaySelector.thursday,
+      DateTime.friday => WeekdaySelector.friday,
+      DateTime.saturday => WeekdaySelector.saturday,
+      DateTime.sunday => WeekdaySelector.sunday,
+      _ => WeekdaySelector.all
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final itemData = ref.watch(kancolleItemDataProvider);
@@ -29,15 +64,39 @@ class _KancolleItemImproveViewerState
     final l10nData = l10n.whenData((data) => data.data).value;
     final kcWiki = ref.watch(kcWikiDataStateProvider);
     final kcWikiData = kcWiki.whenData((data) => data).value;
+    final weekdayIndex = _selectedSegment.index;
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text(S.of(context).KCAkashiStudio),
+        middle: CupertinoSlidingSegmentedControl<WeekdaySelector>(
+          children: {
+            WeekdaySelector.all: Text(S.current.TextAll),
+            WeekdaySelector.monday: Text(DateFormat.EEEEE().format(monday)),
+            WeekdaySelector.tuesday: Text(DateFormat.EEEEE().format(tuesday)),
+            WeekdaySelector.wednesday: Text(DateFormat.EEEEE().format(wednesday)),
+            WeekdaySelector.thursday: Text(DateFormat.EEEEE().format(thursday)),
+            WeekdaySelector.friday: Text(DateFormat.EEEEE().format(friday)),
+            WeekdaySelector.saturday: Text(DateFormat.EEEEE().format(saturday)),
+            WeekdaySelector.sunday: Text(DateFormat.EEEEE().format(sunday)),
+          },
+          groupValue: _selectedSegment,
+          onValueChanged: (value) {
+            if (value != null) {
+              setState(() {
+                _selectedSegment = value;
+              });
+            }
+          },
+        ),
       ),
       child: SafeArea(
         child: itemData.when(
             data: (data) {
-              final len = data.improveItems.length;
+              List<ImproveItem> items = data.improveItems;
+              if (weekdayIndex != WeekdaySelector.all.index) {
+                items = items.where((value) => value.isAbleOn(weekdayIndex)).toList();
+              }
+              final len = items.length;
 
               if (l10n.isLoading || kcWiki.isLoading) {
                 return const Center(child: CupertinoActivityIndicator());
@@ -53,13 +112,13 @@ class _KancolleItemImproveViewerState
                     header: CupertinoListSectionDescription(
                         'Ver.${data.dataVersion}'),
                     children: List.generate(len, (index) {
-                      ImproveItem improveItem = data.improveItems[index];
+                      ImproveItem improveItem = items[index];
                       EquipmentImprove improve = EquipmentImprove.fromData(
                           improveItem, slotItemMap, useItemMap, shipMap);
 
                       return CupertinoListTile(
                         title: Text(improve.name),
-                        subtitle: Text(improve.allShipNames(shipMap)),
+                        subtitle: Text(improve.allShipNames(shipMap, weekday: _selectedSegment.index)),
                         trailing: const CupertinoListTileChevron(),
                         onTap: () {
                           showCupertinoModalBottomSheet(
