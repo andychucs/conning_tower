@@ -76,7 +76,10 @@ dependencies:
   firebase_crashlytics: ^3.4.16
   objectbox: ^2.5.1
   objectbox_flutter_libs: ^2.5.1
-  pull_down_button: ^0.10.0
+  pull_down_button:
+    git:
+      url: https://github.com/andychucs/pull_down_button.git
+      ref: dev
   rive: ^0.13.4
   pointer_interceptor: ^0.10.1+1
   introduction_screen: ^3.1.14

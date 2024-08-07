@@ -65,7 +65,7 @@ class ResourceChartState extends State<ResourceChart> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(name),
         trailing: PullDownButton(
-          rootNavigator: true,
+          useRootNavigator: true,
           itemBuilder: (BuildContext context) {
             return [
               PullDownMenuItem.selectable(

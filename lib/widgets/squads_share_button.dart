@@ -26,7 +26,7 @@ class SquadsShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PullDownButton(
-      rootNavigator: true,
+      useRootNavigator: true,
       itemBuilder: (context) => [
         PullDownMenuItem(
           title: S.current.TextCopyToClipboard,

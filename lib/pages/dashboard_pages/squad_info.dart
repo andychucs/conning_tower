@@ -60,7 +60,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
     final List<double> modifierList = [1.0, 2.0, 3.0, 4.0];
     final scrollController = ScrollController();
     return PullDownButton(
-      rootNavigator: true,
+      useRootNavigator: true,
       scrollController: scrollController,
       itemBuilder: (context) => modifierList
           .map((e) => PullDownMenuItem(

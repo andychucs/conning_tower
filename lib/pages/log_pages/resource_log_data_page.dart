@@ -111,7 +111,7 @@ class _ResourceLogDataPageState extends ConsumerState<ResourceLogDataPage> {
         middle: Text(S.of(context).KCResources),
         previousPageTitle: S.of(context).KanColleLogbook,
         trailing: PullDownButton(
-          rootNavigator: true,
+          useRootNavigator: true,
           itemBuilder: (BuildContext context) => [
             PullDownMenuItem(
               title: S.of(context).TextImportResourceFromPoi,
