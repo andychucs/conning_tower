@@ -19,16 +19,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-class LogDataPage extends ConsumerStatefulWidget {
-  final LogType logType;
-
-  LogDataPage.battle({super.key}) : logType = LogType.battle;
+class BattleLogDataPage extends ConsumerStatefulWidget {
+  const BattleLogDataPage({super.key});
 
   @override
-  ConsumerState createState() => _LogDataPageState();
+  ConsumerState createState() => _BattleLogDataPageState();
 }
 
-class _LogDataPageState extends ConsumerState<LogDataPage> {
+class _BattleLogDataPageState extends ConsumerState<BattleLogDataPage> {
   int queryLimit = 20;
 
   @override
@@ -122,6 +120,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                 String time = DateFormat('HH:mm:ss').format(datetime);
                 final battleData =
                     KancolleBattleLog.fromJson(jsonDecode(log.logStr));
+                String admiralName = battleData.admiral ?? '';
                 final mapId = battleData.mapInfo.id;
                 final map = kcWikiData.maps.firstWhere(
                     (element) => element.id == mapId,
@@ -141,9 +140,9 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                 }
                 return LogItem(
                   log: log,
-                  logType: widget.logType,
+                  logType: LogType.battle,
                   title: Text("$mapCode $mapName"),
-                  subtitle: Text('$date $time'),
+                  subtitle: Text('$date $time $admiralName'),
                   // leading: Text(mapCode),
                   kcWikiData: kcWikiData,
                 );
@@ -172,6 +171,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                 String time = DateFormat('HH:mm:ss').format(datetime);
                 final battleData =
                     KancolleBattleLog.fromJson(jsonDecode(log.logStr));
+                String admiralName = battleData.admiral ?? '';
                 final mapArea = runtimeData
                     .dataInfo.mapAreaInfo?[battleData.mapInfo.id ~/ 10];
                 final map = mapArea?.map.firstWhere(
@@ -182,7 +182,7 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                 if (mapName == '') {
                   return LogItem(
                     log: log,
-                    logType: widget.logType,
+                    logType: LogType.battle,
                     title: Text(
                         "${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}"),
                     subtitle: Text('$date $time'),
@@ -193,9 +193,9 @@ class _LogDataPageState extends ConsumerState<LogDataPage> {
                 }
                 return LogItem(
                   log: log,
-                  logType: widget.logType,
+                  logType: LogType.battle,
                   title: Text("$mapCode $mapName"),
-                  subtitle: Text('$date $time'),
+                  subtitle: Text('$date $time $admiralName'),
                   // leading: Text(mapCode),
                 );
               }),

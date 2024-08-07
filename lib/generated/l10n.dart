@@ -1320,6 +1320,16 @@ class S {
     );
   }
 
+  /// `MA Period`
+  String get TextMovingAveragePeriod {
+    return Intl.message(
+      'MA Period',
+      name: 'TextMovingAveragePeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Bauxite`
   String get KCResourceBauxite {
     return Intl.message(
@@ -1355,6 +1365,26 @@ class S {
     return Intl.message(
       'Screw',
       name: 'KCResourceImprovementMaterial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flamethrower`
+  String get KCResourceInstantCreateShip {
+    return Intl.message(
+      'Flamethrower',
+      name: 'KCResourceInstantCreateShip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bucket`
+  String get KCResourceInstantRepair {
+    return Intl.message(
+      'Bucket',
+      name: 'KCResourceInstantRepair',
       desc: '',
       args: [],
     );
@@ -2085,6 +2115,76 @@ class S {
     return Intl.message(
       'ID',
       name: 'TextId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import`
+  String get TextImport {
+    return Intl.message(
+      'Import',
+      name: 'TextImport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import csv file from poi logbook`
+  String get TextImportResourceFromPoi {
+    return Intl.message(
+      'Import csv file from poi logbook',
+      name: 'TextImportResourceFromPoi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{length} items will be imported.`
+  String TextImportResourceNumberCheck(Object length) {
+    return Intl.message(
+      '$length items will be imported.',
+      name: 'TextImportResourceNumberCheck',
+      desc: '',
+      args: [length],
+    );
+  }
+
+  /// `Are you sure to import these data?`
+  String get TextImportResourceWarning {
+    return Intl.message(
+      'Are you sure to import these data?',
+      name: 'TextImportResourceWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Importing`
+  String get TextImporting {
+    return Intl.message(
+      'Importing',
+      name: 'TextImporting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import complete`
+  String get TextImportingComplete {
+    return Intl.message(
+      'Import complete',
+      name: 'TextImportingComplete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import failed`
+  String get TextImportingFailed {
+    return Intl.message(
+      'Import failed',
+      name: 'TextImportingFailed',
       desc: '',
       args: [],
     );

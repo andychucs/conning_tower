@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
@@ -18,11 +19,13 @@ class ObjectBox {
 
   late final Box<KancolleBattleLogEntity> battleLog;
   late final Box<KancolleQuestLogEntity> questLog;
+  late final Box<KancolleResourceLogEntity> resourceLog;
 
   ObjectBox._create(this.store) {
     // Add any additional setup code, e.g. build queries.
     battleLog = Box<KancolleBattleLogEntity>(store);
     questLog = Box<KancolleQuestLogEntity>(store);
+    resourceLog = Box<KancolleResourceLogEntity>(store);
   }
 
   /// Create an instance of ObjectBox to use throughout the app.
@@ -119,5 +122,111 @@ class ObjectBox {
       log.logStr = jsonEncode(newLog.toJson());
       await battleLog.putAsync(log);
     }
+  }
+
+  void saveResource(DateTime time, String admiral, String resource, int value) {
+    if (admiral == '') {
+      return;
+    }
+    // search if resource log exists for today update value as high if value above high, low if value below low
+    // 2024-08-01 00:00:00.000 ~ 2024-08-01 23:59:59.999 should be one day
+    final todayStart = DateTime(time.year, time.month, time.day);
+    final todayEnd = todayStart
+        .add(const Duration(days: 1))
+        .subtract(const Duration(milliseconds: 1));
+    Query<KancolleResourceLogEntity> query = resourceLog
+        .query(KancolleResourceLogEntity_.time
+            .betweenDate(todayStart, todayEnd)
+            .and(KancolleResourceLogEntity_.resource
+                .equals(resource)
+                .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+        .build();
+    List<KancolleResourceLogEntity> logs = query.find();
+    KancolleResourceLogEntity? log;
+    if (logs.isNotEmpty) {
+      log = logs.first;
+      final high = max(log.high, value);
+      final low = min(log.low, value);
+      final close = value;
+      if (high == log.high && low == log.low && close == log.close) {
+        return;
+      } else {
+        log.high = high;
+        log.low = low;
+        log.close = close;
+      }
+    } else {
+      log = KancolleResourceLogEntity(
+          time: time,
+          admiral: admiral,
+          resource: resource,
+          open: value,
+          close: value,
+          high: value,
+          low: value);
+    }
+    resourceLog.put(log);
+    dev.log("put $resource");
+  }
+
+  List<KancolleResourceLogEntity> queryResource(String admiral, String resource,
+      {int? dayRange,
+      int? monthRange,
+      int? yearRange,
+      DateTime? startTime,
+      DateTime? endTime}) {
+    final now = DateTime.now();
+    late Query<KancolleResourceLogEntity> query;
+    if (startTime != null) {
+      if (endTime != null) {
+        query = resourceLog
+            .query(KancolleResourceLogEntity_.time
+                .betweenDate(startTime, endTime)
+                .and(KancolleResourceLogEntity_.resource
+                    .equals(resource)
+                    .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+            .build();
+      } else {
+        query = resourceLog
+          .query(KancolleResourceLogEntity_.time
+              .betweenDate(startTime, now)
+              .and(KancolleResourceLogEntity_.resource
+                  .equals(resource)
+                  .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+          .build();
+      }
+    } else if (dayRange != null) {
+      final start = now.subtract(Duration(days: dayRange));
+      query = resourceLog
+          .query(KancolleResourceLogEntity_.time.betweenDate(start, now).and(
+              KancolleResourceLogEntity_.resource
+                  .equals(resource)
+                  .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+          .build();
+    } else if (monthRange != null) {
+      final start = now.subtract(Duration(days: monthRange * 30));
+      query = resourceLog
+          .query(KancolleResourceLogEntity_.time.betweenDate(start, now).and(
+              KancolleResourceLogEntity_.resource
+                  .equals(resource)
+                  .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+          .build();
+    } else if (yearRange != null) {
+      final start = now.subtract(Duration(days: yearRange * 365));
+      query = resourceLog
+          .query(KancolleResourceLogEntity_.time.betweenDate(start, now).and(
+              KancolleResourceLogEntity_.resource
+                  .equals(resource)
+                  .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+          .build();
+    } else {
+      query = resourceLog
+          .query(KancolleResourceLogEntity_.resource
+              .equals(resource)
+              .and(KancolleResourceLogEntity_.admiral.equals(admiral)))
+          .build();
+    }
+    List<KancolleResourceLogEntity> logs = query.find();
+    return logs;
   }
 }

@@ -23,16 +23,15 @@ class KancolleListenSettings extends ConsumerStatefulWidget {
 }
 
 class _KancolleListenSettingsState
-    extends ConsumerState<KancolleListenSettings> {
+    extends ConsumerState<KancolleListenSettings> with AutomaticKeepAliveClientMixin{
   late bool enableAutoProcessSwitchValue;
 
   @override
-  void initState() {
-    super.initState();
-  }
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final settings = ref.watch(settingsProvider);
     enableAutoProcessSwitchValue = settings.enableAutoProcess;
 

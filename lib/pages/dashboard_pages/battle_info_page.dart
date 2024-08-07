@@ -13,7 +13,6 @@ import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
-import 'package:conning_tower/widgets/components/label.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -241,7 +240,8 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
     );
   }
 
-  String getRouteName(KcWikiData data, BattleInfo battleInfo, String routeName) {
+  String getRouteName(
+      KcWikiData data, BattleInfo battleInfo, String routeName) {
     try {
       final kcWikiMapData = data.maps;
       final map = kcWikiMapData.firstWhere(

@@ -14,11 +14,13 @@ class QuestInfoPage extends ConsumerStatefulWidget {
   ConsumerState createState() => _QuestInfoPageState();
 }
 
-class _QuestInfoPageState extends ConsumerState<QuestInfoPage> {
+class _QuestInfoPageState extends ConsumerState<QuestInfoPage>
+    with AutomaticKeepAliveClientMixin {
   int _selectedSegment = 0;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final PageController controller =
         PageController(initialPage: _selectedSegment);
     final data = ref.watch(kancolleDataProvider);
@@ -112,6 +114,9 @@ class _QuestInfoPageState extends ConsumerState<QuestInfoPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 // CupertinoListTile(

@@ -1,31 +1,51 @@
 import 'dart:developer';
 
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/port/port_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sea_force_base.freezed.dart';
+part 'sea_force_base.g.dart';
 
 @unfreezed
 class SeaForceBase with _$SeaForceBase {
   const SeaForceBase._();
 
-  factory SeaForceBase({
-    required SeaForceBaseResource resource,
-    required Admiral admiral
-  }) = _SeaForceBase;
+  factory SeaForceBase(
+      {required SeaForceBaseResource resource,
+      required Admiral admiral}) = _SeaForceBase;
+
+  factory SeaForceBase.fromJson(Map<String, dynamic> json) =>
+      _$SeaForceBaseFromJson(json);
 
   void updateAdmiralInfo(PortApiDataApiBasicEntity apiBasic) {
     admiral = admiral.copyWith(
-      name: apiBasic.apiNickname,
-      level: apiBasic.apiLevel,
-      rank: apiBasic.apiRank,
-      maxShip: apiBasic.apiMaxChara,
-      maxItem: apiBasic.apiMaxSlotitem
-    );
+        name: apiBasic.apiNickname,
+        level: apiBasic.apiLevel,
+        rank: apiBasic.apiRank,
+        maxShip: apiBasic.apiMaxChara,
+        maxItem: apiBasic.apiMaxSlotitem);
+  }
+
+  void saveResource(DateTime time) {
+    objectbox.saveResource(time, admiral.name, "fuel", resource.fuel);
+    objectbox.saveResource(time, admiral.name, "ammo", resource.ammo);
+    objectbox.saveResource(time, admiral.name, "steel", resource.steel);
+    objectbox.saveResource(time, admiral.name, "bauxite", resource.bauxite);
+  }
+
+  void saveMaterials(DateTime time) {
+    objectbox.saveResource(
+        time, admiral.name, "ic", resource.instantCreateShip);
+    objectbox.saveResource(time, admiral.name, "ir", resource.instantRepairs);
+    objectbox.saveResource(
+        time, admiral.name, "dm", resource.developmentMaterials);
+    objectbox.saveResource(
+        time, admiral.name, "im", resource.improvementMaterials);
   }
 
   void updateMaterial(List<PortApiDataApiMaterialEntity> updatedMaterial) {
-    var oil = updatedMaterial[0].apiValue;
+    var fuel = updatedMaterial[0].apiValue;
     var ammo = updatedMaterial[1].apiValue;
     var steel = updatedMaterial[2].apiValue;
     var bauxite = updatedMaterial[3].apiValue;
@@ -34,7 +54,7 @@ class SeaForceBase with _$SeaForceBase {
     var developmentMaterials = updatedMaterial[6].apiValue;
     var improvementMaterials = updatedMaterial[7].apiValue;
     resource = resource.copyWith(
-        oil: oil,
+        fuel: fuel,
         ammo: ammo,
         steel: steel,
         bauxite: bauxite,
@@ -42,22 +62,28 @@ class SeaForceBase with _$SeaForceBase {
         instantRepairs: instantRepairs,
         developmentMaterials: developmentMaterials,
         improvementMaterials: improvementMaterials);
+    final time = DateTime.now();
+    saveResource(time);
+    saveMaterials(time);
     log(toString());
   }
 
   void updateResource(List<int> material) {
-    var oil = material[0];
+    var fuel = material[0];
     var ammo = material[1];
     var steel = material[2];
     var bauxite = material[3];
-    resource = resource.copyWith(oil: oil, ammo: ammo, steel: steel, bauxite: bauxite);
+    resource = resource.copyWith(
+        fuel: fuel, ammo: ammo, steel: steel, bauxite: bauxite);
+    final time = DateTime.now();
+    saveResource(time);
   }
 }
 
 @freezed
 class SeaForceBaseResource with _$SeaForceBaseResource {
   const factory SeaForceBaseResource({
-    required int oil,
+    required int fuel,
     required int ammo,
     required int steel,
     required int bauxite,
@@ -66,6 +92,9 @@ class SeaForceBaseResource with _$SeaForceBaseResource {
     required int developmentMaterials,
     required int improvementMaterials,
   }) = _SeaForceBaseResource;
+
+  factory SeaForceBaseResource.fromJson(Map<String, dynamic> json) =>
+      _$SeaForceBaseResourceFromJson(json);
 }
 
 @freezed
@@ -79,6 +108,9 @@ class Admiral with _$Admiral {
     required int maxShip,
     required int maxItem,
   }) = _Admiral;
+
+  factory Admiral.fromJson(Map<String, dynamic> json) =>
+      _$AdmiralFromJson(json);
 
   String get rankName {
     try {

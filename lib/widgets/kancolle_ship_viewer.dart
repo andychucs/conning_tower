@@ -486,7 +486,8 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
       required MenuOption option,
       required Map<String, Object?> items}) {
     return PullDownButton(
-      position: PullDownMenuPosition.over,
+      useRootNavigator: true,
+      interceptMouseEvents: true,
       scrollController: ScrollController(),
       itemBuilder: (context) {
         List<PullDownMenuItem> menuItems = [];

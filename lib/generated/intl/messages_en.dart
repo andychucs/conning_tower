@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(taskTitle) => "${taskTitle} has been completed.";
 
+  static String m6(length) => "${length} items will be imported.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("About"),
@@ -250,6 +252,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCResourceFuel": MessageLookupByLibrary.simpleMessage("Fuel"),
         "KCResourceImprovementMaterial":
             MessageLookupByLibrary.simpleMessage("Screw"),
+        "KCResourceInstantCreateShip":
+            MessageLookupByLibrary.simpleMessage("Flamethrower"),
+        "KCResourceInstantRepair":
+            MessageLookupByLibrary.simpleMessage("Bucket"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("Steel"),
         "KCResources": MessageLookupByLibrary.simpleMessage("Resources"),
         "KCViewFuncMsgAlreadyGameRedirect":
@@ -364,12 +370,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fleet Members"),
         "TextHelp": MessageLookupByLibrary.simpleMessage("Help"),
         "TextId": MessageLookupByLibrary.simpleMessage("ID"),
+        "TextImport": MessageLookupByLibrary.simpleMessage("Import"),
+        "TextImportResourceFromPoi": MessageLookupByLibrary.simpleMessage(
+            "Import csv file from poi logbook"),
+        "TextImportResourceNumberCheck": m6,
+        "TextImportResourceWarning": MessageLookupByLibrary.simpleMessage(
+            "Are you sure to import these data?"),
+        "TextImporting": MessageLookupByLibrary.simpleMessage("Importing"),
+        "TextImportingComplete":
+            MessageLookupByLibrary.simpleMessage("Import complete"),
+        "TextImportingFailed":
+            MessageLookupByLibrary.simpleMessage("Import failed"),
         "TextItem": MessageLookupByLibrary.simpleMessage("Item"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("Heavily damaged"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("Long"),
         "TextMDamage":
             MessageLookupByLibrary.simpleMessage("Moderately damaged"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("Medium"),
+        "TextMovingAveragePeriod":
+            MessageLookupByLibrary.simpleMessage("MA Period"),
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
         "TextOpenInJervis":

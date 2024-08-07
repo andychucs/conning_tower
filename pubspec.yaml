@@ -76,8 +76,16 @@ dependencies:
   firebase_crashlytics: ^3.4.16
   objectbox: ^2.5.1
   objectbox_flutter_libs: ^2.5.1
-  pull_down_button: ^0.9.3
-  tab_container: ^3.5.3
+  pull_down_button:
+    git:
+      url: https://github.com/andychucs/pull_down_button.git
+      ref: dev
+  rive: ^0.13.4
+  pointer_interceptor: ^0.10.1+1
+  introduction_screen: ^3.1.14
+  syncfusion_flutter_charts: ^26.2.7
+  csv: ^6.0.0
+  file_picker: ^8.0.0+1
 
 
 dev_dependencies:
