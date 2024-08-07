@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -68,9 +69,15 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
     _tabController.addListener(() {
       _selectedColor = widget.colors![_tabController.index];
       if (!_tabController.indexIsChanging) {
-        ref
-            .watch(settingsProvider.notifier)
-            .setInt("dashboardIndex", _tabController.index);
+        EasyThrottle.throttle(
+            "dashboardIndex",
+            const Duration(seconds: 1),
+            () {
+              print("dashboardIndex: ${_tabController.index}");
+              ref
+                .watch(settingsProvider.notifier)
+                .setInt("dashboardIndex", _tabController.index);
+            });
       }
     });
 
@@ -104,9 +111,16 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
           tabs: widget.tabs,
           onTap: (value) {
             HapticFeedback.lightImpact();
-            ref
-                .watch(settingsProvider.notifier)
-                .setInt("dashboardIndex", value);
+            EasyThrottle.throttle(
+                "dashboardIndex",
+                const Duration(seconds: 1),
+                () {
+                  print("dashboardIndex: $value");
+                  ref
+                      .watch(settingsProvider.notifier)
+                      .setInt("dashboardIndex", value);
+                }
+            );
             _selectedColor = widget.colors![value];
           },
         ),
