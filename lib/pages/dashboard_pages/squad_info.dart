@@ -510,7 +510,7 @@ class ShipInfo extends StatelessWidget {
       child: ScrollViewWithCupertinoScrollbar(
         children: [
           CupertinoListSection.insetGrouped(
-            margin: _sectionMargin,
+            margin: tabBottomListMargin,
             children: [
               CupertinoListTile(
                 title: Text("Lv"),
@@ -519,6 +519,10 @@ class ShipInfo extends StatelessWidget {
               CupertinoListTile(
                 title: Text("Lv. up EXP"),
                 additionalInfo: Text('${ship.exp?[1]}'),
+              ),
+              CupertinoListTile(
+                title: Text(S.current.KCDashboardShipUpgradeLevel),
+                additionalInfo: Text('${ship.upgradeLevel}'),
               ),
               CupertinoListTile(
                 title: Text(S.current.KCDashboardShipCondition),
