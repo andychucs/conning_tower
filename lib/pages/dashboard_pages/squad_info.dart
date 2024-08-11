@@ -27,7 +27,7 @@ import '../../providers/generatable/kancolle_localization_provider.dart';
 
 const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 const _normalMargin = EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0);
-
+const _kListPadding = EdgeInsetsDirectional.only(start: 10.0, end: 8.0);
 class SquadInfo extends ConsumerStatefulWidget {
   const SquadInfo({super.key});
 
@@ -73,12 +73,15 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
               ))
           .toList(),
       buttonBuilder: (context, showMenu) => CupertinoButton(
+        padding: EdgeInsets.zero,
         onPressed: () => showMenu(),
         child: Row(
           children: [
-            Text(S.of(context).KCDashboardShipScoutScoreCoefficient),
-            const Icon(
+            Text(S.of(context).KCDashboardShipScoutScoreCoefficient,
+            style: TextStyle(fontSize: CupertinoTheme.of(context).textTheme.textStyle.fontSize),),
+            Icon(
               Icons.keyboard_arrow_down,
+              size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
             ),
           ],
         ),
@@ -181,10 +184,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                           for (final ship in squad.ships)
                                             CupertinoListTile(
                                               title: Text(ship.name!),
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .only(
-                                                      start: 10.0, end: 8.0),
+                                              padding: _kListPadding,
                                               leading: CarouselSlider(
                                                 items: [
                                                   AttributeLabel.vertical(
