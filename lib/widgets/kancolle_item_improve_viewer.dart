@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/ooyodo/akashi_schedule.dart';
 import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/kancolle_localization_provider.dart';
@@ -7,12 +10,15 @@ import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
 
 import '../generated/l10n.dart';
 import '../models/feature/dashboard/kancolle/equipment.dart';
+
+const String kPinedItems = "KC_ITEM_IMPROVE_VIEWER_PINED_ITEMS";
 
 enum WeekdaySelector {
   all,
@@ -35,6 +41,8 @@ class KancolleItemImproveViewer extends ConsumerStatefulWidget {
 class _KancolleItemImproveViewerState
     extends ConsumerState<KancolleItemImproveViewer> {
   late WeekdaySelector _selectedSegment;
+  String searchText = "";
+  List<int> pinedItems = [];
 
   @override
   void initState() {
@@ -42,9 +50,15 @@ class _KancolleItemImproveViewerState
     super.initState();
   }
 
+  void loadPinedItem() {
+    final pinedItems = localStorage.getStringList(kPinedItems) ?? [];
+    this.pinedItems = pinedItems.map((e) => int.parse(e)).toList();
+    log("PINED: $pinedItems");
+  }
+
   void initWeekday() {
     final today = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo')); // JST(UTC+9)
-    _selectedSegment = switch(today.weekday) {
+    _selectedSegment = switch (today.weekday) {
       DateTime.monday => WeekdaySelector.monday,
       DateTime.tuesday => WeekdaySelector.tuesday,
       DateTime.wednesday => WeekdaySelector.wednesday,
@@ -65,6 +79,7 @@ class _KancolleItemImproveViewerState
     final kcWiki = ref.watch(kcWikiDataStateProvider);
     final kcWikiData = kcWiki.whenData((data) => data).value;
     final weekdayIndex = _selectedSegment.index;
+    loadPinedItem();
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
@@ -73,7 +88,8 @@ class _KancolleItemImproveViewerState
             WeekdaySelector.all: Text(S.current.TextAll),
             WeekdaySelector.monday: Text(DateFormat.EEEEE().format(monday)),
             WeekdaySelector.tuesday: Text(DateFormat.EEEEE().format(tuesday)),
-            WeekdaySelector.wednesday: Text(DateFormat.EEEEE().format(wednesday)),
+            WeekdaySelector.wednesday:
+                Text(DateFormat.EEEEE().format(wednesday)),
             WeekdaySelector.thursday: Text(DateFormat.EEEEE().format(thursday)),
             WeekdaySelector.friday: Text(DateFormat.EEEEE().format(friday)),
             WeekdaySelector.saturday: Text(DateFormat.EEEEE().format(saturday)),
@@ -92,11 +108,12 @@ class _KancolleItemImproveViewerState
       child: SafeArea(
         child: itemData.when(
             data: (data) {
-              List<ImproveItem> items = data.improveItems;
+              List<ImproveItem> items = [...data.improveItems];
               if (weekdayIndex != WeekdaySelector.all.index) {
-                items = items.where((value) => value.isAbleOn(weekdayIndex)).toList();
+                items = items
+                    .where((value) => value.isAbleOn(weekdayIndex))
+                    .toList();
               }
-              final len = items.length;
 
               if (l10n.isLoading || kcWiki.isLoading) {
                 return const Center(child: CupertinoActivityIndicator());
@@ -106,8 +123,34 @@ class _KancolleItemImproveViewerState
                   .map((key, value) => MapEntry(value.id, value.name!));
               Map<int, String> slotItemMap = l10nData!.equipment!;
               Map<int, String> useItemMap = l10nData.itemInImprove!;
+
+              if (searchText.isNotEmpty) {
+                items = items
+                    .where((item) =>
+                        slotItemMap[item.id]?.contains(searchText) ?? true)
+                    .toList();
+              }
+
+              if (pinedItems.isNotEmpty) {
+                final pined =
+                    items.where((e) => pinedItems.contains(e.id)).toList();
+                items.removeWhere((e) => pinedItems.contains(e.id));
+                items.insertAll(0, pined);
+              }
+
+              final len = items.length;
               return ScrollViewWithCupertinoScrollbar(
                 children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(20.0, 8, 20.0, 0.0),
+                    child: CupertinoSearchTextField(
+                      onChanged: (text) {
+                        setState(() {
+                          searchText = text;
+                        });
+                      },
+                    ),
+                  ),
                   CupertinoListSection.insetGrouped(
                     header: CupertinoListSectionDescription(
                         'Ver.${data.dataVersion}'),
@@ -118,12 +161,15 @@ class _KancolleItemImproveViewerState
 
                       return CupertinoListTile(
                         title: Text(improve.name),
-                        subtitle: Text(improve.allShipNames(shipMap, weekday: _selectedSegment.index)),
+                        subtitle: Text(improve.allShipNames(shipMap,
+                            weekday: _selectedSegment.index)),
                         trailing: const CupertinoListTileChevron(),
                         onTap: () {
                           showCupertinoModalBottomSheet(
                             context: context,
                             builder: (context) => ImproveDetailSheet(
+                              id: improveItem.id ?? 0,
+                              notifyParent: () => setState(() {}),
                               improve: improve,
                               slotItemMap: slotItemMap,
                               useItemMap: useItemMap,
@@ -151,18 +197,48 @@ class ImproveDetailSheet extends StatelessWidget {
     required this.slotItemMap,
     required this.useItemMap,
     required this.shipMap,
+    required this.id,
+    required this.notifyParent,
   });
 
   final EquipmentImprove improve;
   final Map<int, String> slotItemMap;
   final Map<int, String> useItemMap;
   final Map<int, String> shipMap;
+  final int id;
+  final VoidCallback notifyParent;
+
+  List<int> loadPinedItem() {
+    final pinedItems = localStorage.getStringList(kPinedItems) ?? [];
+    return pinedItems.map((e) => int.parse(e)).toList();
+  }
+
+  void onPinedItem() {
+    List<int> pinedItems = loadPinedItem();
+    if (pinedItems.contains(id)) {
+      Fluttertoast.showToast(msg: "Unpin");
+      pinedItems.remove(id);
+    } else {
+      Fluttertoast.showToast(msg: "Pin");
+      pinedItems.add(id);
+    }
+    localStorage.setStringList(
+        kPinedItems, pinedItems.map((e) => e.toString()).toList());
+    notifyParent();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(improve.name),
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: onPinedItem,
+          child: const Icon(
+            CupertinoIcons.arrow_up_to_line,
+          ),
+        ),
       ),
       child: ListView(
         children: List.generate(improve.data.length, (index) {
