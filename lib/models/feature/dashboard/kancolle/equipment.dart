@@ -123,10 +123,13 @@ class EquipmentImprove with _$EquipmentImprove {
 
   const EquipmentImprove._();
 
-  String allShipNames(Map<int, String> shipMap) {
+  String allShipNames(Map<int, String> shipMap, {weekday = 0}) {
     List<String> names = [];
     for (final data in this.data) {
       for (final req in data.req!.nonNulls) {
+        if (weekday != 0 && !req.isAbleOn(weekday)) {
+          continue;
+        }
         final ships = req.shipNameList(shipMap);
         if (ships.isNotEmpty) {
           names.addAll(ships);

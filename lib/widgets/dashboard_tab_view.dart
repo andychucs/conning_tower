@@ -84,6 +84,7 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
     return Padding(
       padding: widget.childPadding,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: TabBar(
           controller: _tabController,
           labelStyle: const TextStyle(fontSize: 16),

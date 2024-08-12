@@ -192,7 +192,7 @@ class ImproveReq with _$ImproveReq {
     }
     // day[dayIndex] == '1'
     if (day.substring(dayIndex, dayIndex + 1) == '1') {
-      log("$ship is able to improve on day $dayIndex");
+      // log("$ship is able to improve on day $dayIndex");
       return true;
     }
     return false;
