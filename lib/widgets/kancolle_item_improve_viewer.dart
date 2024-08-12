@@ -42,7 +42,7 @@ class _KancolleItemImproveViewerState
     extends ConsumerState<KancolleItemImproveViewer> {
   late WeekdaySelector _selectedSegment;
   String searchText = "";
-  List<int> pinedItems = [];
+  List<int> pinedItemsId = [];
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _KancolleItemImproveViewerState
 
   void loadPinedItem() {
     final pinedItems = localStorage.getStringList(kPinedItems) ?? [];
-    this.pinedItems = pinedItems.map((e) => int.parse(e)).toList();
+    this.pinedItemsId = pinedItems.map((e) => int.parse(e)).toList();
     log("PINED: $pinedItems");
   }
 
@@ -131,10 +131,10 @@ class _KancolleItemImproveViewerState
                     .toList();
               }
 
-              if (pinedItems.isNotEmpty) {
+              if (pinedItemsId.isNotEmpty) {
                 final pined =
-                    items.where((e) => pinedItems.contains(e.id)).toList();
-                items.removeWhere((e) => pinedItems.contains(e.id));
+                    items.where((e) => pinedItemsId.contains(e.id)).toList();
+                items.removeWhere((e) => pinedItemsId.contains(e.id));
                 items.insertAll(0, pined);
               }
 
@@ -169,6 +169,7 @@ class _KancolleItemImproveViewerState
                             context: context,
                             builder: (context) => ImproveDetailSheet(
                               id: improveItem.id ?? 0,
+                              pinedIds: pinedItemsId,
                               notifyParent: () => setState(() {}),
                               improve: improve,
                               slotItemMap: slotItemMap,
@@ -190,7 +191,7 @@ class _KancolleItemImproveViewerState
   }
 }
 
-class ImproveDetailSheet extends StatelessWidget {
+class ImproveDetailSheet extends StatefulWidget {
   const ImproveDetailSheet({
     super.key,
     required this.improve,
@@ -199,6 +200,7 @@ class ImproveDetailSheet extends StatelessWidget {
     required this.shipMap,
     required this.id,
     required this.notifyParent,
+    required this.pinedIds,
   });
 
   final EquipmentImprove improve;
@@ -207,42 +209,57 @@ class ImproveDetailSheet extends StatelessWidget {
   final Map<int, String> shipMap;
   final int id;
   final VoidCallback notifyParent;
+  final List<int> pinedIds;
 
-  List<int> loadPinedItem() {
-    final pinedItems = localStorage.getStringList(kPinedItems) ?? [];
-    return pinedItems.map((e) => int.parse(e)).toList();
+  @override
+  State<ImproveDetailSheet> createState() => _ImproveDetailSheetState();
+}
+
+class _ImproveDetailSheetState extends State<ImproveDetailSheet> {
+  late bool _pined;
+
+  @override
+  void initState() {
+    if (widget.pinedIds.contains(widget.id)) {
+      _pined = true;
+    } else {
+      _pined = false;
+    }
+    super.initState();
   }
 
   void onPinedItem() {
-    List<int> pinedItems = loadPinedItem();
-    if (pinedItems.contains(id)) {
+
+    List<int> pinedItems = [...widget.pinedIds];
+    if (_pined) {
       Fluttertoast.showToast(msg: "Unpin");
-      pinedItems.remove(id);
+      pinedItems.remove(widget.id);
     } else {
       Fluttertoast.showToast(msg: "Pin");
-      pinedItems.add(id);
+      pinedItems.add(widget.id);
     }
     localStorage.setStringList(
         kPinedItems, pinedItems.map((e) => e.toString()).toList());
-    notifyParent();
+    widget.notifyParent();
+    setState(() {
+      _pined = !_pined;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text(improve.name),
+        middle: Text(widget.improve.name),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: onPinedItem,
-          child: const Icon(
-            CupertinoIcons.arrow_up_to_line,
-          ),
+          child: Icon(_pined ? CupertinoIcons.pin_slash : CupertinoIcons.pin),
         ),
       ),
       child: ListView(
-        children: List.generate(improve.data.length, (index) {
-          final improveData = improve.data[index];
+        children: List.generate(widget.improve.data.length, (index) {
+          final improveData = widget.improve.data[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -281,7 +298,7 @@ class ImproveDetailSheet extends StatelessWidget {
                       children: [
                         Text(
                             improveData.req![reqIndex]
-                                .shipNameList(shipMap)
+                                .shipNameList(widget.shipMap)
                                 .join(" | "),
                             softWrap: true,
                             maxLines: 3,
@@ -308,16 +325,16 @@ class ImproveDetailSheet extends StatelessWidget {
           "${S.current.KCResourceImprovementMaterial}: ${stage.iCost.text}";
       List<Widget> slotItems = [];
       List<Widget> useItems = [];
-      if (stage.getSlotCostMap(slotItemMap).isNotEmpty) {
-        for (var key in stage.getSlotCostMap(slotItemMap).keys) {
+      if (stage.getSlotCostMap(widget.slotItemMap).isNotEmpty) {
+        for (var key in stage.getSlotCostMap(widget.slotItemMap).keys) {
           slotItems.add(
-              Text("$key: ${stage.getSlotCostMap(slotItemMap)[key]!.text}"));
+              Text("$key: ${stage.getSlotCostMap(widget.slotItemMap)[key]!.text}"));
         }
       }
-      if (stage.getUseCostMap(useItemMap).isNotEmpty) {
-        for (var key in stage.getUseCostMap(useItemMap).keys) {
+      if (stage.getUseCostMap(widget.useItemMap).isNotEmpty) {
+        for (var key in stage.getUseCostMap(widget.useItemMap).keys) {
           useItems
-              .add(Text("$key: ${stage.getUseCostMap(useItemMap)[key]!.text}"));
+              .add(Text("$key: ${stage.getUseCostMap(widget.useItemMap)[key]!.text}"));
         }
       }
       Widget stageWidget = Container();
