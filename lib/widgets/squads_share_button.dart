@@ -84,7 +84,11 @@ class SquadsShareButton extends StatelessWidget {
           return CupertinoListTile(
             title: Text(S.current.TextShare),
             onTap: showMenu,
-            trailing: const Icon(CupertinoIcons.share),
+            trailing: Icon(
+              CupertinoIcons.share,
+              size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
+              color: CupertinoColors.systemGrey2.resolveFrom(context),
+            ),
           );
         }
         if (child == 'iconButton') {
