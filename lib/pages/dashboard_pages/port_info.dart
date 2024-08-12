@@ -64,6 +64,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
           child: LocalNavigatorBuilder(
             builder: (context) {
               return CupertinoPageScaffold(
+                resizeToAvoidBottomInset: false,
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     // 1 column width about 120 ~ 240

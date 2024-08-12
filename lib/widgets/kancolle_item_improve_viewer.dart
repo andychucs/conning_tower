@@ -82,6 +82,7 @@ class _KancolleItemImproveViewerState
     loadPinedItem();
 
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false,
       navigationBar: CupertinoNavigationBar(
         middle: CupertinoSlidingSegmentedControl<WeekdaySelector>(
           children: {
