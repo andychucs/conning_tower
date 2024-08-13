@@ -85,7 +85,8 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
       padding: widget.childPadding,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        bottomNavigationBar: TabBar(
+        bottomNavigationBar: TabBar.secondary(
+          dividerHeight: 0.0,
           controller: _tabController,
           labelStyle: const TextStyle(fontSize: 16),
           unselectedLabelStyle: const TextStyle(fontSize: 14),
@@ -101,7 +102,7 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
           // unselectedLabelColor: Colors.redAccent,
           indicatorColor: _selectedColor,
           indicatorSize: TabBarIndicatorSize.label,
-          indicatorWeight: 4.0,
+          // indicatorWeight: 2.0,
           // indicator:BoxDecoration(
           //   color:Colors.white,
           //   borderRadius:BorderRadius.only(
