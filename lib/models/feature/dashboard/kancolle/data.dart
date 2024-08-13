@@ -160,7 +160,8 @@ class KancolleData {
     }
 
     if (model is ReqCombinedBattleLdAirbattleEntity) {
-      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, squads);
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, inBattleSquads);
     }
 
     if (model is ReqSortieAirbattleEntity) {
