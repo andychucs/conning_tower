@@ -393,37 +393,38 @@ class KancolleData {
         rethrow;
       }
       String errorMsg = e.toString();
-      String st = '';
-      if (s.toString().contains('\n')) {
-        st = s.toString().split('\n').first;
-      }
-      errorMsg = '${S.current.DataErrorNotice}\n$errorMsg\n$st\nsource:$source\ndata:$data';
+      final errorData = {
+        "error": errorMsg,
+        "stack": s,
+        "source": source,
+        "data": data
+      };
       log(s.toString());
       ref
           .watch(alertStateProvider.notifier)
-          .update((state) => {"title": "Error", "content": errorMsg});
+          .update((state) => Alert("Error", S.current.DataErrorNotice, data: jsonEncode(errorData)));
     }
     return newData;
   }
 
   void addAlert() {
-    var sb = StringBuffer();
+    List<String> shipsDamaged = [];
     for (var squad in squads) {
       for (var ship in squad.ships) {
         if (ship.damaged()) {
-          sb.write("${squad.name}-${ship.name} 大破\n");
+          shipsDamaged.add("${squad.name}-${ship.name}");
           log("${squad.name}-${ship.name} 大破");
           FirebaseCrashlytics.instance.log("${squad.name}-${ship.name} 大破");
           // break;
         }
       }
     }
-    if (sb.isNotEmpty) {
+    if (shipsDamaged.isNotEmpty) {
       FirebaseCrashlytics.instance.log(squads.toString());
       FirebaseCrashlytics.instance.log(sb.toString());
       ref
           .watch(alertStateProvider.notifier)
-          .update((state) => {"title": "大破", "content": sb.toString()});
+          .update((state) => Alert(S.current.TextLDamage, shipsDamaged.join("\n")));
     }
   }
 
