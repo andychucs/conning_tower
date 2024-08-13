@@ -50,12 +50,18 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
 
   @override
   void initState() {
-    super.initState();
-    _tabController = TabController(length: widget.tabs.length, vsync: this);
-    _tabController.index = widget.initialIndex;
+    late int index;
+    if (widget.initialIndex >= widget.tabs.length) {
+      index = widget.tabs.length - 1;
+    } else {
+      index = widget.initialIndex;
+    }
+    _tabController = TabController(
+        initialIndex: index, length: widget.tabs.length, vsync: this);
     if (widget.colors != null) {
       _selectedColor = widget.colors![_tabController.index];
     }
+    super.initState();
   }
 
   @override
@@ -69,15 +75,19 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
     _tabController.addListener(() {
       _selectedColor = widget.colors![_tabController.index];
       if (!_tabController.indexIsChanging) {
-        EasyThrottle.throttle(
-            "dashboardIndex",
-            const Duration(seconds: 1),
-            () {
-              print("dashboardIndex: ${_tabController.index}");
-              ref
-                .watch(settingsProvider.notifier)
-                .setInt("dashboardIndex", _tabController.index);
-            });
+        EasyThrottle.throttle("dashboardIndex", const Duration(seconds: 1), () {
+          print("dashboardIndex: ${_tabController.index}");
+          ref
+              .watch(settingsProvider.notifier)
+              .setInt("dashboardIndex", _tabController.index);
+        });
+      }
+    });
+
+    ref.listen(settingsProvider, (prev, next) {
+      if (next.dashboardIndex != _tabController.index &&
+          next.dashboardIndex < widget.tabs.length) {
+        _tabController.animateTo(next.dashboardIndex);
       }
     });
 
@@ -113,16 +123,13 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
           tabs: widget.tabs,
           onTap: (value) {
             HapticFeedback.lightImpact();
-            EasyThrottle.throttle(
-                "dashboardIndex",
-                const Duration(seconds: 1),
+            EasyThrottle.throttle("dashboardIndex", const Duration(seconds: 1),
                 () {
-                  print("dashboardIndex: $value");
-                  ref
-                      .watch(settingsProvider.notifier)
-                      .setInt("dashboardIndex", value);
-                }
-            );
+              print("dashboardIndex: $value");
+              ref
+                  .watch(settingsProvider.notifier)
+                  .setInt("dashboardIndex", value);
+            });
             _selectedColor = widget.colors![value];
           },
         ),

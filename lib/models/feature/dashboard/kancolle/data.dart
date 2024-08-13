@@ -234,6 +234,7 @@ class KancolleData {
     }
 
     if (model is ReqPracticeBattleEntity) {
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       var squad = squads[model.apiData!.apiDeckId - 1];
       battleInfo.parsePracticeBattle(model.apiData!, squad);
     }
@@ -283,8 +284,7 @@ class KancolleData {
 
     if (model is ReqMapStartEntity) {
       log("Start");
-      // final index = ref.read(settingsProvider).dashboardIndex;
-      // ref.read(dashboardControllerProvider(index)).animateToItem(5, duration: const Duration(milliseconds: 200), curve: Curves.ease);
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       battleInfo.clear();
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
