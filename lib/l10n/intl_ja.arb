@@ -356,6 +356,8 @@
   "@SettingsScreenOrientation": {},
   "ShipData": "艦船データ",
   "@ShipData": {},
+  "ShortTextAll": "全",
+  "@ShortTextAll": {},
   "StatusCode": "ステータス",
   "@StatusCode": {},
   "SystemTheme": "システムに従う",

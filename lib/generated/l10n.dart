@@ -1320,16 +1320,6 @@ class S {
     );
   }
 
-  /// `MA Period`
-  String get TextMovingAveragePeriod {
-    return Intl.message(
-      'MA Period',
-      name: 'TextMovingAveragePeriod',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Bauxite`
   String get KCResourceBauxite {
     return Intl.message(
@@ -1840,6 +1830,16 @@ class S {
     );
   }
 
+  /// `All`
+  String get ShortTextAll {
+    return Intl.message(
+      'All',
+      name: 'ShortTextAll',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Status Code`
   String get StatusCode {
     return Intl.message(
@@ -2235,6 +2235,16 @@ class S {
     return Intl.message(
       'Medium',
       name: 'TextMediumRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MA Period`
+  String get TextMovingAveragePeriod {
+    return Intl.message(
+      'MA Period',
+      name: 'TextMovingAveragePeriod',
       desc: '',
       args: [],
     );

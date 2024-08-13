@@ -356,6 +356,8 @@
   "@SettingsScreenOrientation": {},
   "ShipData": "艦艇資料",
   "@ShipData": {},
+  "ShortTextAll": "全",
+  "@ShortTextAll": {},
   "StatusCode": "狀態碼",
   "@StatusCode": {},
   "SystemTheme": "跟隨系統",

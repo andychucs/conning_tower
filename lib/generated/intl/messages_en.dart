@@ -332,6 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("Change Screen Orientation"),
         "ShipData": MessageLookupByLibrary.simpleMessage("Ship Data"),
+        "ShortTextAll": MessageLookupByLibrary.simpleMessage("All"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),

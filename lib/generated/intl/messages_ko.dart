@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("고속수복재"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("강재"),
         "KCResources": MessageLookupByLibrary.simpleMessage("자원"),
-        "SettingsButton": MessageLookupByLibrary.simpleMessage("설치")
+        "SettingsButton": MessageLookupByLibrary.simpleMessage("설치"),
+        "ShortTextAll": MessageLookupByLibrary.simpleMessage("전")
       };
 }
