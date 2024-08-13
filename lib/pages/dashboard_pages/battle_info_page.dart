@@ -24,7 +24,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
-    EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 8.0, 5.0);
+    EdgeInsetsDirectional.fromSTEB(8.0, 5.0, 8.0, 5.0);
 
 class BattleInfoPage extends ConsumerStatefulWidget {
   const BattleInfoPage({super.key});
