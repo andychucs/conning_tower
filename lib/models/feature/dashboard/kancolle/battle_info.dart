@@ -271,18 +271,12 @@ class BattleInfo with _$BattleInfo {
     ];
   }
 
-  void initShipHPSingleVsDouble(List<int> fNow, List<int> fMax, List<int> eNow1, List<int> eMax1, List<int> eNow2, List<int> eMax2) {
-    initShipHPSingleVsSingle(fNow, fMax, eNow1, eMax1);
-    for (final (index, now) in eNow2.indexed) {
-      final max = eMax2[index];
-      final ship = getEShip2(index);
-      ship.nowHP = now;
-      ship.maxHP = max;
-    }
+  void initShipHPSingleVsDouble(List<int> fNow, List<int> fMax) {
+    initShipHPSingleVsSingle(fNow, fMax);
   }
 
-  void initShipHPDoubleVsSingle(List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax, List<int> fNow2, List<int> fMax2) {
-    initShipHPSingleVsSingle(fNow, fMax, eNow, eMax);
+  void initShipHPDoubleVsSingle(List<int> fNow, List<int> fMax, List<int> fNow2, List<int> fMax2) {
+    initShipHPSingleVsSingle(fNow, fMax);
     for (final (index, now) in fNow2.indexed) {
       final max = fMax2[index];
       final ship = getOShip2(index);
@@ -291,14 +285,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void initShipHPDoubleVsDouble(List<int> fNow1, List<int> fMax1, List<int> eNow1, List<int> eMax1, List<int> fNow2, List<int> fMax2, List<int> eNow2, List<int> eMax2) {
-    initShipHPSingleVsSingle(fNow1, fMax1, eNow1, eMax1);
-    for (final (index, now) in eNow2.indexed) {
-      final max = eMax2[index];
-      final ship = getEShip2(index);
-      ship.nowHP = now;
-      ship.maxHP = max;
-    }
+  void initShipHPDoubleVsDouble(List<int> fNow1, List<int> fMax1, List<int> fNow2, List<int> fMax2) {
+    initShipHPSingleVsSingle(fNow1, fMax1);
     for (final (index, now) in fNow2.indexed) {
       final max = fMax2[index];
       final ship = getOShip2(index);
@@ -307,17 +295,10 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void initShipHPSingleVsSingle(
-      List<int> fNow, List<int> fMax, List<int> eNow, List<int> eMax) {
+  void initShipHPSingleVsSingle(List<int> fNow, List<int> fMax) {
     for (final (index, now) in fNow.indexed) {
       final max = fMax[index];
       final ship = getOShip1(index);
-      ship.nowHP = now;
-      ship.maxHP = max;
-    }
-    for (final (index, now) in eNow.indexed) {
-      final max = eMax[index];
-      final ship = getEShip1(index);
       ship.nowHP = now;
       ship.maxHP = max;
     }
@@ -338,8 +319,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsDouble(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!);
+    initShipHPSingleVsDouble(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -399,8 +379,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -442,8 +421,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -461,8 +439,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -480,8 +457,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -523,8 +499,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -616,8 +591,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -636,7 +610,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
 
     setFormation(data.apiFormation);
 
@@ -774,8 +748,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps);
+    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -798,13 +771,10 @@ class BattleInfo with _$BattleInfo {
 
     if (data.apiFNowhpsCombined == null) {
       inBattleSquads = [squads[data.apiDeckId - 1]];
-      initShipHPSingleVsDouble(
-          data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!);
+      initShipHPSingleVsDouble(data.apiFNowhps, data.apiFMaxhps);
     } else {
       inBattleSquads = [squads[0], squads[1]];
-      initShipHPDoubleVsDouble(
-          data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
-      );
+      initShipHPDoubleVsDouble(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
     }
 
     initDMGMap();
@@ -826,7 +796,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
 
     setFormation(data.apiFormation);
 
@@ -882,9 +852,7 @@ class BattleInfo with _$BattleInfo {
     initDoubleEnemySquads(data);
 
     inBattleSquads = [...squads];
-    initShipHPDoubleVsDouble(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
-    );
+    initShipHPDoubleVsDouble(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
 
     initDMGMap();
 
@@ -943,7 +911,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = [...squads];
 
-    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
 
     initDMGMap();
 
@@ -999,9 +967,7 @@ class BattleInfo with _$BattleInfo {
     clear();
     initDoubleEnemySquads(data);
     inBattleSquads = [...squads];
-    initShipHPDoubleVsDouble(
-        data.apiFNowhps, data.apiFMaxhps, data.apiENowhps, data.apiEMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!, data.apiENowhpsCombined!, data.apiEMaxhpsCombined!
-    );
+    initShipHPDoubleVsDouble(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
     initDMGMap();
     setFormation(data.apiFormation);
 
