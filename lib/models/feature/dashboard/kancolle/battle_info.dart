@@ -1034,6 +1034,28 @@ class BattleInfo with _$BattleInfo {
     }
     updateShipHP();
   }
+
+  void parseReqCombinedBattleMidnightBattle(ReqCombinedBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
+    clear();
+    initSingleEnemySquads(data);
+
+    inBattleSquads = [...squads];
+
+    initShipHPDoubleSquad(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined!,
+        fMax2: data.apiFMaxhpsCombined!);
+
+    initDMGMap();
+
+    setFormation(data.apiFormation);
+
+    if (data.apiHougeki != null) {
+      gunFireRound(data.apiHougeki!);
+    }
+    updateShipHP();
+  }
 }
 
 enum FleetSide { our, enemy }
