@@ -203,6 +203,11 @@ class KancolleData {
       battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
     }
 
+    if (model is ReqCombinedBattleMidnightBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, inBattleSquads);
+    }
+
     if (model is ReqCombinedBattleEntity) {
       var inBattleSquads = [squads[0], squads[1]];
       battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
