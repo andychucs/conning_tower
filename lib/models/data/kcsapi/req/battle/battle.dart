@@ -49,8 +49,8 @@ abstract class SingleVsSingleBaseModel {
   late List<int> apiFMaxhps;
   late List<int> apiShipKe;
   late List<int> apiShipLv;
-  late List<int> apiENowhps;
-  late List<int> apiEMaxhps;
+  late List<dynamic> apiENowhps;
+  late List<dynamic> apiEMaxhps;
 }
 
 abstract class SingleVsSingleBattleData extends SingleVsSingleBaseModel {
@@ -62,8 +62,8 @@ abstract class SingleVsSingleBattleData extends SingleVsSingleBaseModel {
 abstract class SingleVsDoubleBattleData extends SingleVsSingleBaseModel {
   late List<int>? apiShipKeCombined;
   late List<int>? apiShipLvCombined;
-  late List<int>? apiENowhpsCombined;
-  late List<int>? apiEMaxhpsCombined;
+  late List<dynamic>? apiENowhpsCombined;
+  late List<dynamic>? apiEMaxhpsCombined;
 }
 
 abstract class DoubleVsSingleBattleData extends SingleVsSingleBaseModel {

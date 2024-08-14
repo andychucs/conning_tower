@@ -54,7 +54,7 @@ class Squad with _$Squad {
     );
   }
 
-  factory Squad.fromSingleEnemy(List<int> enemyId, List<int> enemyLv, List<int> enemyMaxHP, List<int> enemyNowHP) {
+  factory Squad.fromSingleEnemy(List<int> enemyId, List<int> enemyLv, List<dynamic> enemyMaxHP, List<dynamic> enemyNowHP) {
     assert(enemyId.length == enemyLv.length && enemyLv.length == enemyMaxHP.length && enemyMaxHP.length == enemyNowHP.length, 'length not equal');
     List<Ship> ships = [];
     for (var i = 0; i < enemyId.length; i++) {
@@ -62,7 +62,7 @@ class Squad with _$Squad {
       var level = enemyLv[i];
       var nowHP = enemyNowHP[i];
       var maxHP = enemyMaxHP[i];
-      ships.add(Ship(uid: -1, shipId: id, level: level, nowHP: nowHP, maxHP: maxHP));
+      ships.add(Ship.enemy(id: id, level: level, nowHP: nowHP, maxHP: maxHP));
     }
     return Squad(id: 1, name: '敵艦隊', ships: ships);
   }

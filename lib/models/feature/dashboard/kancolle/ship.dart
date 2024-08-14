@@ -54,6 +54,7 @@ class Ship with _$Ship {
     int? shipType,
     List<Equipment>? equipment,
     List<Equipment>? exEquipment,
+    String? hpStatus,
   }) = _Ship;
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
@@ -320,6 +321,31 @@ class Ship with _$Ship {
     }
 
     return count;
+  }
+
+  factory Ship.enemy({
+    required int id,
+    required int level,
+    required dynamic nowHP,
+    required dynamic maxHP,
+  }) {
+    if (nowHP is int && maxHP is int) {
+      return Ship(
+        uid: -1,
+        shipId: id,
+        level: level,
+        nowHP: nowHP,
+        maxHP: maxHP,
+      );
+    }
+    return Ship(
+      uid: -1,
+      shipId: id,
+      level: level,
+      nowHP: 0,
+      maxHP: 0,
+      hpStatus: 'N/A',
+    );
   }
 
   factory Ship.fromApi(ShipData data, String shipName,
