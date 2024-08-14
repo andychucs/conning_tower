@@ -344,7 +344,7 @@ class Ship with _$Ship {
       level: level,
       nowHP: 0,
       maxHP: 0,
-      hpStatus: 'N/A',
+      hpStatus: "$nowHP",
     );
   }
 

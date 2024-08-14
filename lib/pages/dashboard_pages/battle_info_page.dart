@@ -65,7 +65,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
 
     for (final squad in [...?battleInfo.inBattleSquads]) {
       items.add(CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
+        // margin: _kBattleInfoGridMargin,
         header: battleInfo.inBattleSquads?.first == squad
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,13 +87,11 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                               child: ListView(
                                 children: [
                                   CupertinoListSection.insetGrouped(
-                                    header: CupertinoListSectionDescription(
-                                        S.current.KCDashboardBattleDescription),
-                                    footer: SelectableText(
-                                        "BattleInfo:\n${battleInfo.toString()}\nData:\n${ref.watch(rawDataProvider).source}\n${jsonDecode(ref.watch(rawDataProvider).data)}"),
+                                    footer: SelectableText("BattleInfo:\n${battleInfo.toString()}"),
                                     children: [
                                       CupertinoListTile(
                                         title: const Text("Copy Data"),
+                                        subtitle: Text(ref.watch(rawDataProvider).source),
                                         onTap: () => Clipboard.setData(
                                             ClipboardData(
                                                 text: ref
@@ -123,7 +121,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
     }
     for (final squad in [...?battleInfo.enemySquads]) {
       items.add(CupertinoListSection.insetGrouped(
-        margin: _kBattleInfoGridMargin,
+        // margin: _kBattleInfoGridMargin,
         header: battleInfo.enemySquads?.first == squad
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -288,6 +286,16 @@ class ShipInfoInBattle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const dmgSize = 14.0;
+    late double damagePercent;
+    late String damageText;
+
+    if (ship.maxHP > 0) {
+      damagePercent = (ship.nowHP >= 0 ? ship.nowHP : 0) / ship.maxHP;
+      damageText = "${(ship.nowHP >= 0 ? ship.nowHP : 0)}/${ship.maxHP}";
+    } else {
+      damagePercent = 0.0;
+      damageText = ship.hpStatus ?? "Unknown";
+    }
 
     return CupertinoListTile.notched(
       leading: Column(
@@ -400,12 +408,12 @@ class ShipInfoInBattle extends StatelessWidget {
         barRadius: const Radius.circular(6),
         animateFromLastPercent: true,
         lineHeight: 8.0,
-        percent: (ship.nowHP >= 0 ? ship.nowHP : 0) / ship.maxHP,
+        percent: damagePercent,
         progressColor: ship.damageColor,
         trailing: SizedBox(
           width: 56,
           child: Text(
-            "${(ship.nowHP >= 0 ? ship.nowHP : 0)}/${ship.maxHP}",
+            damageText,
             textAlign: TextAlign.right,
             maxLines: 1,
             overflow: TextOverflow.clip,
