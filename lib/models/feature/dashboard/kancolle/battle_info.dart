@@ -7,8 +7,6 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/kcsapi/req/battle/req_combined_battle_ld_airbattle_entity.dart';
-
 part 'battle_info.freezed.dart';
 
 @unfreezed
@@ -110,7 +108,6 @@ class BattleInfo with _$BattleInfo {
         calculateDamageTaken(getEShip2(index).hashCode, damage!);
       }
     }
-
   }
 
   void aircraftRound(List<int> airStageFlag, AircraftRound airBattle) {
@@ -143,12 +140,14 @@ class BattleInfo with _$BattleInfo {
     }
     if (airBattle is AircraftRoundDoubleEnemy) {
       if (airBattle.apiStage3Combined?.apiFdam != null) {
-        for (final (index, damage) in airBattle.apiStage3Combined!.apiFdam!.indexed) {
+        for (final (index, damage)
+            in airBattle.apiStage3Combined!.apiFdam!.indexed) {
           calculateDamageTaken(getOShip2(index).hashCode, damage!);
         }
       }
       if (airBattle.apiStage3Combined?.apiEdam != null) {
-        for (final (index, damage) in airBattle.apiStage3Combined!.apiEdam!.indexed) {
+        for (final (index, damage)
+            in airBattle.apiStage3Combined!.apiEdam!.indexed) {
           calculateDamageTaken(getEShip2(index).hashCode, damage!);
         }
       }
@@ -262,43 +261,35 @@ class BattleInfo with _$BattleInfo {
     dmgTakenMap = {for (var ship in allShips) ship.hashCode: 0};
     dmgMap = {for (var ship in allShips) ship.hashCode: 0};
   }
+
   void initDoubleEnemySquads(SingleVsDoubleBattleData data) {
     enemySquads = [
       Squad.fromSingleEnemy(
           data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps),
-      Squad.fromSingleEnemy(
-          data.apiShipKeCombined!, data.apiShipLvCombined!, data.apiEMaxhpsCombined!, data.apiENowhpsCombined!),
+      Squad.fromSingleEnemy(data.apiShipKeCombined!, data.apiShipLvCombined!,
+          data.apiEMaxhpsCombined!, data.apiENowhpsCombined!),
     ];
   }
 
-  void initShipHPSingleVsDouble(List<int> fNow, List<int> fMax) {
-    initShipHPSingleVsSingle(fNow, fMax);
-  }
-
-  void initShipHPDoubleVsSingle(List<int> fNow, List<int> fMax, List<int> fNow2, List<int> fMax2) {
-    initShipHPSingleVsSingle(fNow, fMax);
-    for (final (index, now) in fNow2.indexed) {
-      final max = fMax2[index];
-      final ship = getOShip2(index);
-      ship.nowHP = now;
-      ship.maxHP = max;
-    }
-  }
-
-  void initShipHPDoubleVsDouble(List<int> fNow1, List<int> fMax1, List<int> fNow2, List<int> fMax2) {
-    initShipHPSingleVsSingle(fNow1, fMax1);
-    for (final (index, now) in fNow2.indexed) {
-      final max = fMax2[index];
-      final ship = getOShip2(index);
-      ship.nowHP = now;
-      ship.maxHP = max;
-    }
-  }
-
-  void initShipHPSingleVsSingle(List<int> fNow, List<int> fMax) {
+  void initShipHPSingleSquad(
+      {required List<int> fNow, required List<int> fMax}) {
     for (final (index, now) in fNow.indexed) {
       final max = fMax[index];
       final ship = getOShip1(index);
+      ship.nowHP = now;
+      ship.maxHP = max;
+    }
+  }
+
+  void initShipHPDoubleSquad(
+      {required List<int> fNow,
+      required List<int> fMax,
+      required List<int> fNow2,
+      required List<int> fMax2}) {
+    initShipHPSingleSquad(fNow: fNow, fMax: fMax);
+    for (final (index, now) in fNow2.indexed) {
+      final max = fMax2[index];
+      final ship = getOShip2(index);
       ship.nowHP = now;
       ship.maxHP = max;
     }
@@ -319,7 +310,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsDouble(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -347,7 +338,7 @@ class BattleInfo with _$BattleInfo {
 
     for (final (index, flag) in data.apiHouraiFlag!.indexed) {
       if (flag == 1) {
-        switch(index) {
+        switch (index) {
           case 0:
             gunFireRound(data.apiHougeki1!);
             break;
@@ -367,11 +358,9 @@ class BattleInfo with _$BattleInfo {
     }
 
     updateShipHP();
-
   }
 
   void parsePracticeBattle(ReqPracticeBattleApiDataEntity data, Squad squad) {
-
     clear(resetMapInfo: true);
     initSingleEnemySquads(data);
 
@@ -379,7 +368,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -409,7 +398,6 @@ class BattleInfo with _$BattleInfo {
     }
 
     updateShipHP();
-
   }
 
   void parsePracticeMidnightBattle(
@@ -421,7 +409,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -439,7 +427,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -457,7 +445,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -477,7 +465,9 @@ class BattleInfo with _$BattleInfo {
       }
     }
     mvp = data.apiMvp;
-    if (data.apiGetExmapUseitemId != null && data.apiGetExmapUseitemId != 0 && data.apiGetExmapUseitemId != '') {
+    if (data.apiGetExmapUseitemId != null &&
+        data.apiGetExmapUseitemId != 0 &&
+        data.apiGetExmapUseitemId != '') {
       if (data.apiGetExmapUseitemId is int) {
         dropItemId = data.apiGetExmapUseitemId;
       }
@@ -499,7 +489,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -509,7 +499,7 @@ class BattleInfo with _$BattleInfo {
 
     //api_air_base_injection
     if (data.apiAirBaseInjection != null) {
-      assert (data.apiAirBaseInjection?.apiStage3Combined == null);
+      assert(data.apiAirBaseInjection?.apiStage3Combined == null);
       airBaseDamageCount(data.apiAirBaseInjection?.apiStage3?.apiEdam, null);
     }
 
@@ -568,7 +558,9 @@ class BattleInfo with _$BattleInfo {
       if (item.apiUseitemName != '') {
         dropItemName = item.apiUseitemName;
       }
-    } else if (data.apiGetExmapUseitemId != null && data.apiGetExmapUseitemId != 0 && data.apiGetExmapUseitemId != '') {
+    } else if (data.apiGetExmapUseitemId != null &&
+        data.apiGetExmapUseitemId != 0 &&
+        data.apiGetExmapUseitemId != '') {
       // only record one of apiGetExmapUseitemId and apiGetExmapUseitemName now
       if (data.apiGetExmapUseitemId is int) {
         dropItemId = data.apiGetExmapUseitemId;
@@ -591,7 +583,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -610,7 +602,11 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleSquad(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined!,
+        fMax2: data.apiFMaxhpsCombined!);
 
     setFormation(data.apiFormation);
 
@@ -632,7 +628,8 @@ class BattleInfo with _$BattleInfo {
         final Ship actShip = getShip(FleetSide.our, actIndex);
         final actShipHash = actShip.hashCode;
         final dmgList = data.apiFydamListItems[actIndex];
-        assert (dmgList?.length == defIndexList.length, "Opening torpedo calc error, data not match: $dmgList & $defIndexList");
+        assert(dmgList?.length == defIndexList.length,
+            "Opening torpedo calc error, data not match: $dmgList & $defIndexList");
         for (final (itemIndex, defIndex) in defIndexList.indexed) {
           if (defIndex > -1) {
             final Ship defShip = getShip(FleetSide.enemy, defIndex);
@@ -649,7 +646,8 @@ class BattleInfo with _$BattleInfo {
         final Ship actShip = getShip(FleetSide.enemy, actIndex);
         final actShipHash = actShip.hashCode;
         final dmgList = data.apiEydamListItems[actIndex];
-        assert (dmgList?.length == defIndexList.length, "Opening torpedo calc error, data not match: $dmgList & $defIndexList");
+        assert(dmgList?.length == defIndexList.length,
+            "Opening torpedo calc error, data not match: $dmgList & $defIndexList");
         for (final (itemIndex, defIndex) in defIndexList.indexed) {
           if (defIndex > -1) {
             final Ship defShip = getShip(FleetSide.our, defIndex);
@@ -748,7 +746,7 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPSingleVsSingle(data.apiFNowhps, data.apiFMaxhps);
+    initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
 
     setFormation(data.apiFormation);
 
@@ -771,10 +769,14 @@ class BattleInfo with _$BattleInfo {
 
     if (data.apiFNowhpsCombined == null) {
       inBattleSquads = [squads[data.apiDeckId - 1]];
-      initShipHPSingleVsDouble(data.apiFNowhps, data.apiFMaxhps);
+      initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
     } else {
       inBattleSquads = [squads[0], squads[1]];
-      initShipHPDoubleVsDouble(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+      initShipHPDoubleSquad(
+          fNow: data.apiFNowhps,
+          fMax: data.apiFMaxhps,
+          fNow2: data.apiFNowhpsCombined!,
+          fMax2: data.apiFMaxhpsCombined!);
     }
 
     initDMGMap();
@@ -796,7 +798,11 @@ class BattleInfo with _$BattleInfo {
 
     initDMGMap();
 
-    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleSquad(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined!,
+        fMax2: data.apiFMaxhpsCombined!);
 
     setFormation(data.apiFormation);
 
@@ -824,7 +830,7 @@ class BattleInfo with _$BattleInfo {
 
     for (final (index, flag) in data.apiHouraiFlag!.indexed) {
       if (flag == 1) {
-        switch(index) {
+        switch (index) {
           case 0:
             gunFireRound(data.apiHougeki1!);
             break;
@@ -852,7 +858,11 @@ class BattleInfo with _$BattleInfo {
     initDoubleEnemySquads(data);
 
     inBattleSquads = [...squads];
-    initShipHPDoubleVsDouble(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleSquad(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined!,
+        fMax2: data.apiFMaxhpsCombined!);
 
     initDMGMap();
 
@@ -882,7 +892,7 @@ class BattleInfo with _$BattleInfo {
 
     for (final (index, flag) in data.apiHouraiFlag!.indexed) {
       if (flag == 1) {
-        switch(index) {
+        switch (index) {
           case 0:
             gunFireRound(data.apiHougeki1!);
             break;
@@ -901,7 +911,6 @@ class BattleInfo with _$BattleInfo {
       }
     }
     updateShipHP();
-
   }
 
   void parseReqCombinedBattleWater(ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
@@ -911,7 +920,11 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = [...squads];
 
-    initShipHPDoubleVsSingle(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleSquad(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined!,
+        fMax2: data.apiFMaxhpsCombined!);
 
     initDMGMap();
 
@@ -941,7 +954,7 @@ class BattleInfo with _$BattleInfo {
 
     for (final (index, flag) in data.apiHouraiFlag!.indexed) {
       if (flag == 1) {
-        switch(index) {
+        switch (index) {
           case 0:
             gunFireRound(data.apiHougeki1!);
             break;
@@ -967,7 +980,11 @@ class BattleInfo with _$BattleInfo {
     clear();
     initDoubleEnemySquads(data);
     inBattleSquads = [...squads];
-    initShipHPDoubleVsDouble(data.apiFNowhps, data.apiFMaxhps, data.apiFNowhpsCombined!, data.apiFMaxhpsCombined!);
+    initShipHPDoubleSquad(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined!,
+        fMax2: data.apiFMaxhpsCombined!);
     initDMGMap();
     setFormation(data.apiFormation);
 
@@ -995,7 +1012,7 @@ class BattleInfo with _$BattleInfo {
 
     for (final (index, flag) in data.apiHouraiFlag!.indexed) {
       if (flag == 1) {
-        switch(index) {
+        switch (index) {
           case 0:
             gunFireRound(data.apiHougeki1!);
             break;
@@ -1014,7 +1031,6 @@ class BattleInfo with _$BattleInfo {
       }
     }
     updateShipHP();
-
   }
 }
 
