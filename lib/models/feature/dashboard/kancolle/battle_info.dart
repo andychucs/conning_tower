@@ -9,6 +9,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'battle_info.freezed.dart';
 
+const kSecondSquadIndexStart = 6;
+
 @unfreezed
 class BattleInfo with _$BattleInfo {
   factory BattleInfo({
@@ -208,13 +210,13 @@ class BattleInfo with _$BattleInfo {
     // 游擊部隊 squad len is 7, index need less than first squad len
     // combine and normal squad len max is 6
     if (side == FleetSide.our) {
-      final len = inBattleSquads![0].ships.length;
-      if (len > index) return getOShip1(index);
-      return getOShip2(index - len); // len may be always 6
+      final firstLength = inBattleSquads![0].ships.length;
+      if (firstLength > index) return getOShip1(index);
+      return getOShip2(index - kSecondSquadIndexStart); // len may be always 6
     } else {
-      final len = enemySquads![0].ships.length;
-      if (len > index) return getEShip1(index);
-      return getEShip2(index - len);
+      final firstLength = enemySquads![0].ships.length;
+      if (firstLength > index) return getEShip1(index);
+      return getEShip2(index - kSecondSquadIndexStart);
     }
   }
 
@@ -242,13 +244,13 @@ class BattleInfo with _$BattleInfo {
         if (defIndex < defSquads[0].ships.length) {
           defShip = defSquads[0].ships[defIndex];
         } else {
-          defShip = defSquads[1].ships[defIndex - defSquads[0].ships.length];
+          defShip = defSquads[1].ships[defIndex - kSecondSquadIndexStart]; // second squad index start from 6
         }
 
         if (actIndex < actSquads[0].ships.length) {
           actShip = actSquads[0].ships[actIndex];
         } else {
-          actShip = actSquads[1].ships[actIndex - actSquads[0].ships.length];
+          actShip = actSquads[1].ships[actIndex - kSecondSquadIndexStart];
         }
 
         calculateDamageTaken(defShip.hashCode, damage);
