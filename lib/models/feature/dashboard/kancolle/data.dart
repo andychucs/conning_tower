@@ -93,6 +93,7 @@ class KancolleData {
   void parse(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
+    final params = rawData.params;
     if (data.isEmpty) {
       log("empty data");
       Fluttertoast.showToast(msg: "Network Error");
@@ -130,6 +131,15 @@ class KancolleData {
         } catch (e) {
           FirebaseCrashlytics.instance.log(e.toString());
         }
+      }
+    }
+
+    if (model is ReqHenseiCombinedEntity) {
+      if (model.apiData!.apiCombined! == 1) {
+        final combinedType = int.parse(params!["api_combined_type"]);
+        fleet.combined = combinedType;
+      } else {
+        fleet.combined = 0;
       }
     }
 
@@ -266,6 +276,7 @@ class KancolleData {
       }
       battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);
+      fleet.combined = model.apiData.apiCombinedFlag;
 
       seaForceBase.updateAdmiralInfo(model.apiData.apiBasic);
       seaForceBase.updateMaterial(model.apiData.apiMaterial);

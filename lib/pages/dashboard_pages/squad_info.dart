@@ -103,6 +103,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
       final l10n = ref.watch(kancolleLocalizationProvider(locale));
       l10nData = l10n.whenData((data) => data.data).value;
     }
+    debugPrint("data.fleet.combined: ${data.fleet.combined}");
 
     segments = {
       for (var element in squads)
@@ -141,234 +142,239 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                     : null,
               ),
               child: SafeArea(
-                child: Column(
+                child: Stack(
                   children: [
-                    Expanded(
-                      child: PageView(
-                        controller: controller,
-                        onPageChanged: (value) {
-                          setState(() {
-                            _selectedSegment = value;
-                          });
-                        },
-                        children: List.generate(squads.length, (index) {
-                          var squad = squads[index];
-                          String losScore = squad
-                              .los(
-                                  admiralLevel: data.seaForceBase.admiral.level,
-                                  mapModifier: _mapModifier)
-                              .total
-                              .toStringAsFixed(2);
-                          if (squad.ships.isNotEmpty) {
-                            List<int> speedList = [];
-                            List<int> attackList = [];
-                            List<int> antiAircraftList = [];
-                            List<int> levelList = [];
-                            List<int> antiSubmarineList = [];
-                            List<int> scoutList = [];
-                            for (var ship in squad.ships) {
-                              speedList.add(ship.speed!);
-                              attackList.add(ship.attack![0]);
-                              antiAircraftList.add(ship.antiAircraft![0]);
-                              levelList.add(ship.level);
-                              antiSubmarineList.add(ship.antiSubmarine![0]);
-                              scoutList.add(ship.scout![0]);
-                            }
+                    Column(
+                      children: [
+                        Expanded(
+                          child: PageView(
+                            controller: controller,
+                            onPageChanged: (value) {
+                              setState(() {
+                                _selectedSegment = value;
+                              });
+                            },
+                            children: List.generate(squads.length, (index) {
+                              var squad = squads[index];
+                              String losScore = squad
+                                  .los(
+                                      admiralLevel: data.seaForceBase.admiral.level,
+                                      mapModifier: _mapModifier)
+                                  .total
+                                  .toStringAsFixed(2);
+                              if (squad.ships.isNotEmpty) {
+                                List<int> speedList = [];
+                                List<int> attackList = [];
+                                List<int> antiAircraftList = [];
+                                List<int> levelList = [];
+                                List<int> antiSubmarineList = [];
+                                List<int> scoutList = [];
+                                for (var ship in squad.ships) {
+                                  speedList.add(ship.speed!);
+                                  attackList.add(ship.attack![0]);
+                                  antiAircraftList.add(ship.antiAircraft![0]);
+                                  levelList.add(ship.level);
+                                  antiSubmarineList.add(ship.antiSubmarine![0]);
+                                  scoutList.add(ship.scout![0]);
+                                }
 
-                            return ScrollViewWithCupertinoScrollbar(
-                              children: _displayedSegment == 0
-                                  ? [
-                                      CupertinoListSection.insetGrouped(
-                                        margin: tabBottomListMargin,
-                                        children: [
-                                          for (final ship in squad.ships)
-                                            CupertinoListTile(
-                                              title: Text(ship.name!),
-                                              padding: _kListPadding,
-                                              leading: CarouselSlider(
-                                                items: [
-                                                  AttributeLabel.vertical(
-                                                      label: 'Lv',
-                                                      value: '${ship.level}'),
-                                                  AttributeLabel.vertical(
-                                                      label: 'Lv Up',
-                                                      value: '${ship.exp?[1]}'),
-                                                ],
-                                                options: CarouselOptions(
-                                                  height: 30,
-                                                  viewportFraction: 1,
-                                                  initialPage: 0,
-                                                  enableInfiniteScroll: true,
-                                                  reverse: false,
-                                                  autoPlay: true,
-                                                  autoPlayInterval:
-                                                      Duration(seconds: 5),
-                                                  autoPlayAnimationDuration:
-                                                      Duration(
-                                                          milliseconds: 800),
-                                                  autoPlayCurve: Curves.ease,
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                ),
-                                              ),
-                                              leadingToTitle: 4,
-                                              onTap: () async {
-                                                await navigatorToCupertino(
-                                                    context,
-                                                    ShipInfo(
-                                                      ship: ship,
-                                                      squadName:
-                                                          squads[index].name,
-                                                    ));
-                                              },
-                                              additionalInfo: SizedBox(
-                                                  width: 70,
-                                                  child: Text(
-                                                    "${ship.nowHP}/${ship.maxHP}",
-                                                    textAlign: TextAlign.end,
-                                                  )),
-                                              subtitle: LinearPercentIndicator(
-                                                backgroundColor:
-                                                    CupertinoDynamicColor.resolve(
-                                                        CupertinoColors
-                                                            .systemGroupedBackground,
-                                                        context),
-                                                animation: true,
-                                                animationDuration: 500,
-                                                barRadius:
-                                                    const Radius.circular(2.5),
-                                                animateFromLastPercent: true,
-                                                lineHeight: 5.0,
-                                                percent:
-                                                    ship.nowHP / ship.maxHP,
-                                                progressColor: ship.damageColor,
-                                              ),
-                                              trailing:
-                                                  CircularPercentIndicator(
-                                                backgroundColor:
-                                                    CupertinoDynamicColor.resolve(
-                                                        CupertinoColors
-                                                            .systemGroupedBackground,
-                                                        context),
-                                                reverse: true,
-                                                radius: 12.0,
-                                                lineWidth: 5.0,
-                                                animation: true,
-                                                animationDuration: 500,
-                                                animateFromLastPercent: true,
-                                                circularStrokeCap:
-                                                    CircularStrokeCap.round,
-                                                percent: ship.condition! / 100,
-                                                center: Container(
-                                                  height: 6,
-                                                  width: 6,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: ship.fuelBullColor(
-                                                        shipInfo?[ship.shipId]!
-                                                            .apiFuelMax,
-                                                        shipInfo?[ship.shipId]!
-                                                            .apiBullMax),
+                                return ScrollViewWithCupertinoScrollbar(
+                                  children: _displayedSegment == 0
+                                      ? [
+                                          CupertinoListSection.insetGrouped(
+                                            margin: tabBottomListMargin,
+                                            children: [
+                                              for (final ship in squad.ships)
+                                                CupertinoListTile(
+                                                  title: Text(ship.name!),
+                                                  padding: _kListPadding,
+                                                  leading: CarouselSlider(
+                                                    items: [
+                                                      AttributeLabel.vertical(
+                                                          label: 'Lv',
+                                                          value: '${ship.level}'),
+                                                      AttributeLabel.vertical(
+                                                          label: 'Lv Up',
+                                                          value: '${ship.exp?[1]}'),
+                                                    ],
+                                                    options: CarouselOptions(
+                                                      height: 30,
+                                                      viewportFraction: 1,
+                                                      initialPage: 0,
+                                                      enableInfiniteScroll: true,
+                                                      reverse: false,
+                                                      autoPlay: true,
+                                                      autoPlayInterval:
+                                                          Duration(seconds: 5),
+                                                      autoPlayAnimationDuration:
+                                                          Duration(
+                                                              milliseconds: 800),
+                                                      autoPlayCurve: Curves.ease,
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                    ),
+                                                  ),
+                                                  leadingToTitle: 4,
+                                                  onTap: () async {
+                                                    await navigatorToCupertino(
+                                                        context,
+                                                        ShipInfo(
+                                                          ship: ship,
+                                                          squadName:
+                                                              squads[index].name,
+                                                        ));
+                                                  },
+                                                  additionalInfo: SizedBox(
+                                                      width: 70,
+                                                      child: Text(
+                                                        "${ship.nowHP}/${ship.maxHP}",
+                                                        textAlign: TextAlign.end,
+                                                      )),
+                                                  subtitle: LinearPercentIndicator(
+                                                    backgroundColor:
+                                                        CupertinoDynamicColor.resolve(
+                                                            CupertinoColors
+                                                                .systemGroupedBackground,
+                                                            context),
+                                                    animation: true,
+                                                    animationDuration: 500,
+                                                    barRadius:
+                                                        const Radius.circular(2.5),
+                                                    animateFromLastPercent: true,
+                                                    lineHeight: 5.0,
+                                                    percent:
+                                                        ship.nowHP / ship.maxHP,
+                                                    progressColor: ship.damageColor,
+                                                  ),
+                                                  trailing:
+                                                      CircularPercentIndicator(
+                                                    backgroundColor:
+                                                        CupertinoDynamicColor.resolve(
+                                                            CupertinoColors
+                                                                .systemGroupedBackground,
+                                                            context),
+                                                    reverse: true,
+                                                    radius: 12.0,
+                                                    lineWidth: 5.0,
+                                                    animation: true,
+                                                    animationDuration: 500,
+                                                    animateFromLastPercent: true,
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap.round,
+                                                    percent: ship.condition! / 100,
+                                                    center: Container(
+                                                      height: 6,
+                                                      width: 6,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: ship.fuelBullColor(
+                                                            shipInfo?[ship.shipId]!
+                                                                .apiFuelMax,
+                                                            shipInfo?[ship.shipId]!
+                                                                .apiBullMax),
+                                                      ),
+                                                    ),
+                                                    progressColor: ship.sparkColor,
                                                   ),
                                                 ),
-                                                progressColor: ship.sparkColor,
+                                              SquadsShareButton.cupertinoListTile(
+                                                  squads: squads),
+                                            ],
+                                          ),
+                                          CupertinoListSection.insetGrouped(
+                                            margin: tabBottomListMargin,
+                                            footer: CupertinoListSectionDescription(
+                                                S
+                                                    .of(context)
+                                                    .KCDashboardFleetDescription),
+                                            children: [
+                                              CupertinoListTile(
+                                                subtitle: Text("Lv"),
+                                                title: Text(
+                                                    '${levelList.reduce((value, element) => value + element)}'),
                                               ),
-                                            ),
-                                          SquadsShareButton.cupertinoListTile(
-                                              squads: squads),
+                                              CupertinoListTile(
+                                                subtitle: Text(
+                                                    "${S.current.KCDashboardShipScoutScore} ${S.current.KCDashboardShipScoutScoreFormula33}"),
+                                                title: Text(losScore),
+                                                additionalInfo:
+                                                    Text('$_mapModifier'),
+                                                trailing: mapModifierMenu(),
+                                              ),
+                                              CupertinoListTile(
+                                                subtitle: Text(
+                                                    S.current.KCDashboardShipSpeed),
+                                                title: Text(speedLevel(
+                                                    speedList.reduce(min))),
+                                              ),
+                                              CupertinoListTile(
+                                                subtitle: Text(S.current
+                                                    .KCDashboardShipFirepower),
+                                                title: Text(
+                                                    '${attackList.reduce((value, element) => value + element)}'),
+                                              ),
+                                              CupertinoListTile(
+                                                subtitle: Text(
+                                                    S.current.KCDashboardShipAA),
+                                                title: Text(
+                                                    '${antiAircraftList.reduce((value, element) => value + element)}'),
+                                              ),
+                                              CupertinoListTile(
+                                                subtitle: Text(
+                                                    S.current.KCDashboardShipASW),
+                                                title: Text(
+                                                    '${antiSubmarineList.reduce((value, element) => value + element)}'),
+                                              ),
+                                              CupertinoListTile(
+                                                subtitle: Text(
+                                                    S.current.KCDashboardShipScout),
+                                                title: Text(
+                                                    '${scoutList.reduce((value, element) => value + element)}'),
+                                              ),
+                                              CupertinoListTile(
+                                                subtitle: Text(S.current
+                                                    .KCDashboardShipAircraftPower),
+                                                title: Text(squad.aircraftPower),
+                                              ),
+                                            ],
+                                          )
+                                        ]
+                                      : [
+                                          SlotItemPage(
+                                            squad: squad,
+                                            slotMap: data.fleet.equipment,
+                                            slotItemInfo:
+                                                data.dataInfo.slotItemInfo,
+                                            l10nData: l10nData,
+                                          )
                                         ],
-                                      ),
-                                      CupertinoListSection.insetGrouped(
-                                        margin: tabBottomListMargin,
-                                        footer: CupertinoListSectionDescription(
-                                            S
-                                                .of(context)
-                                                .KCDashboardFleetDescription),
-                                        children: [
-                                          CupertinoListTile(
-                                            subtitle: Text("Lv"),
-                                            title: Text(
-                                                '${levelList.reduce((value, element) => value + element)}'),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(
-                                                "${S.current.KCDashboardShipScoutScore} ${S.current.KCDashboardShipScoutScoreFormula33}"),
-                                            title: Text(losScore),
-                                            additionalInfo:
-                                                Text('$_mapModifier'),
-                                            trailing: mapModifierMenu(),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(
-                                                S.current.KCDashboardShipSpeed),
-                                            title: Text(speedLevel(
-                                                speedList.reduce(min))),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(S.current
-                                                .KCDashboardShipFirepower),
-                                            title: Text(
-                                                '${attackList.reduce((value, element) => value + element)}'),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(
-                                                S.current.KCDashboardShipAA),
-                                            title: Text(
-                                                '${antiAircraftList.reduce((value, element) => value + element)}'),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(
-                                                S.current.KCDashboardShipASW),
-                                            title: Text(
-                                                '${antiSubmarineList.reduce((value, element) => value + element)}'),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(
-                                                S.current.KCDashboardShipScout),
-                                            title: Text(
-                                                '${scoutList.reduce((value, element) => value + element)}'),
-                                          ),
-                                          CupertinoListTile(
-                                            subtitle: Text(S.current
-                                                .KCDashboardShipAircraftPower),
-                                            title: Text(squad.aircraftPower),
-                                          ),
-                                        ],
-                                      )
-                                    ]
-                                  : [
-                                      SlotItemPage(
-                                        squad: squad,
-                                        slotMap: data.fleet.equipment,
-                                        slotItemInfo:
-                                            data.dataInfo.slotItemInfo,
-                                        l10nData: l10nData,
-                                      )
-                                    ],
-                            );
-                          }
-                          return CupertinoListSection.insetGrouped(
-                            children: const [
-                              CupertinoListTile.notched(
-                                title: Text("N/A"),
-                              ),
-                            ],
-                          );
-                        }),
-                      ),
-                    ),
-                    if (squads.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                        child: CupertinoSlidingSegmentedControl(
-                            children: displayModes,
-                            groupValue: _displayedSegment,
-                            onValueChanged: (value) {
-                              setState(() {
-                                _displayedSegment = value ?? 0;
-                              });
+                                );
+                              }
+                              return CupertinoListSection.insetGrouped(
+                                children: const [
+                                  CupertinoListTile.notched(
+                                    title: Text("N/A"),
+                                  ),
+                                ],
+                              );
                             }),
-                      ),
+                          ),
+                        ),
+                        if (squads.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                            child: CupertinoSlidingSegmentedControl(
+                                children: displayModes,
+                                groupValue: _displayedSegment,
+                                onValueChanged: (value) {
+                                  setState(() {
+                                    _displayedSegment = value ?? 0;
+                                  });
+                                }),
+                          ),
+                      ],
+                    ),
+                    Positioned(right:4, bottom:4, child: Text(data.fleet.combinedText))
                   ],
                 ),
               ),
