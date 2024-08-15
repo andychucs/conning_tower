@@ -17,11 +17,9 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
-import 'package:conning_tower/providers/dashboard_controller.dart';
 import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
-import 'package:flutter/animation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -159,24 +157,7 @@ class KancolleData {
       }
     }
 
-    if (model is ReqCombinedBattleLdAirbattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqSortieAirbattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
-    }
-
-    if (model is ReqCombinedBattleECMidnightBattleEntity) {
-      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
-    }
-
-    if (model is ReqBattleMidnightSpMidnightEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
-    }
+    parseBattle(model);
 
     if (model is GetMemberQuestListEntity) {
       if (questAssistant == null) {
@@ -192,62 +173,6 @@ class KancolleData {
 
     if (model is ReqCombinedBattleResultEntity) {
       battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
-    }
-
-    if (model is ReqSortieLdAirbattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
-    }
-
-    if (model is ReqCombinedBattleECBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
-    }
-
-    if (model is ReqCombinedBattleMidnightBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleEachBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleWaterEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleEachWaterEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqPracticeMidnightBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
-    }
-
-    if (model is ReqPracticeBattleEntity) {
-      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parsePracticeBattle(model.apiData!, squad);
-    }
-
-    if (model is ReqBattleMidnightBattleEntity) {
-      var squad = squads[model.apiData.apiDeckId - 1];
-      battleInfo.parseReqBattleMidnightBattle(model.apiData, squad);
-    }
-
-    if (model is ReqSortieBattleEntity) {
-      var squad = squads[model.apiData.apiDeckId - 1];
-      battleInfo.parseReqSortieBattle(model.apiData, squad);
     }
 
     if (model is ReqSortieBattleResultEntity) {
@@ -365,6 +290,84 @@ class KancolleData {
       ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
+  }
+
+  void parseBattle(model) {
+    if (model is ReqCombinedBattleLdAirbattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqSortieAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECMidnightBattleEntity) {
+      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
+    }
+
+    if (model is ReqBattleMidnightSpMidnightEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
+    }
+
+    if (model is ReqSortieLdAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleMidnightBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqPracticeMidnightBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqPracticeBattleEntity) {
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqBattleMidnightBattleEntity) {
+      var squad = squads[model.apiData.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightBattle(model.apiData, squad);
+    }
+
+    if (model is ReqSortieBattleEntity) {
+      var squad = squads[model.apiData.apiDeckId - 1];
+      battleInfo.parseReqSortieBattle(model.apiData, squad);
+    }
+
   }
 
   KancolleData parseWith(RawData rawData) {
