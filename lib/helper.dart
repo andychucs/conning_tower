@@ -117,3 +117,17 @@ Future<String> getFileSize(String filepath, int decimals) async {
   debugPrint('${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}');
   return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
 }
+
+Map<String, dynamic> parseRequestBody(String body) {
+  Map<String, dynamic> params = {};
+  body.split("&").forEach((element) {
+    // remove some secret or useless params
+    if (element.contains("token") || element.contains("api_verno")) {
+      return;
+    }
+    var key = element.split("=")[0];
+    var value = element.split("=")[1];
+    params[key] = value;
+  });
+  return params;
+}
