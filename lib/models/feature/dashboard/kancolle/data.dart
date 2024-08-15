@@ -48,6 +48,7 @@ class KancolleData {
   final BattleInfo battleInfo;
   KancolleBattleLog? battleLog;
   QuestAssistant? questAssistant;
+  List<Squad>? battleSquads;
 
   KancolleData({
     required this.queue,
@@ -59,6 +60,7 @@ class KancolleData {
     required this.battleInfo,
     this.battleLog,
     this.questAssistant,
+    this.battleSquads,
   });
 
   KancolleData copyWith({
@@ -80,6 +82,7 @@ class KancolleData {
       ref: ref ?? this.ref,
       battleLog: battleLog,
       questAssistant: questAssistant,
+      battleSquads: battleSquads,
     );
   }
 
@@ -214,12 +217,20 @@ class KancolleData {
 
     if (model is ReqMapNextEntity) {
       log("Next");
+      addAlert();
       battleInfo.clear();
       battleInfo.mapRoute = model.apiData.apiNo;
     }
 
     if (model is ReqMapStartEntity) {
       log("Start");
+      final battleSquadIndex = int.parse(params?["api_deck_id"]);
+      if (battleSquadIndex == 1 && fleet.combined! > 0) {
+        battleSquads = [squads[0], squads[1]];
+      } else {
+        battleSquads = [squads[battleSquadIndex - 1]];
+      }
+      addAlert();
       ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       battleInfo.clear();
       battleInfo.mapInfo = dataInfo
@@ -399,8 +410,6 @@ class KancolleData {
         parse(rawData);
         newData = copyWith();
       }
-
-      if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
       FirebaseCrashlytics.instance.log('Kancolle Data Parse Error at $source');
       FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error", fatal: true);
@@ -424,7 +433,7 @@ class KancolleData {
 
   void addAlert() {
     List<String> shipsDamaged = [];
-    for (var squad in squads) {
+    for (var squad in battleSquads!) {
       for (var ship in squad.ships) {
         if (ship.damaged()) {
           shipsDamaged.add("${squad.name}-${ship.name}");
@@ -529,11 +538,6 @@ class KancolleData {
       PortEntity.source,
       ReqMissionReturnInstructionEntity.source
     ].contains(source.split("kcsapi").last);
-  }
-
-  bool _shouldAlertSource(String source) {
-    return [ReqMapNextEntity.source, ReqMapStartEntity.source]
-        .contains(source.split("kcsapi").last);
   }
 
   void _setNotification(
