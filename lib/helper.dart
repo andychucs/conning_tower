@@ -120,7 +120,8 @@ Future<String> getFileSize(String filepath, int decimals) async {
 
 Map<String, dynamic> parseRequestBody(String body) {
   Map<String, dynamic> params = {};
-  body.split("&").forEach((element) {
+  final bodyDecode = Uri.decodeFull(body);
+  bodyDecode.split("&").forEach((element) {
     // remove some secret or useless params
     if (element.contains("token") || element.contains("api_verno")) {
       return;
