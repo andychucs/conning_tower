@@ -23,11 +23,13 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../../models/data/l10n/kancolle_localization.dart';
+import '../../providers/generatable/kancolle_event_ship_tags_provider.dart';
 import '../../providers/generatable/kancolle_localization_provider.dart';
 
 const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 const _normalMargin = EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0);
 const _kListPadding = EdgeInsetsDirectional.only(start: 10.0, end: 8.0);
+
 class SquadInfo extends ConsumerStatefulWidget {
   const SquadInfo({super.key});
 
@@ -37,6 +39,8 @@ class SquadInfo extends ConsumerStatefulWidget {
 
 class _SquadInfoState extends ConsumerState<SquadInfo>
     with AutomaticKeepAliveClientMixin {
+  late Map<String, EventShipTag>? shipTagsData;
+
   @override
   bool get wantKeepAlive => true;
   final Map<int, Widget> displayModes = <int, Widget>{
@@ -77,8 +81,12 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
         onPressed: () => showMenu(),
         child: Row(
           children: [
-            Text(S.of(context).KCDashboardShipScoutScoreCoefficient,
-            style: TextStyle(fontSize: CupertinoTheme.of(context).textTheme.textStyle.fontSize),),
+            Text(
+              S.of(context).KCDashboardShipScoutScoreCoefficient,
+              style: TextStyle(
+                  fontSize:
+                      CupertinoTheme.of(context).textTheme.textStyle.fontSize),
+            ),
             Icon(
               Icons.keyboard_arrow_down,
               size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
@@ -94,6 +102,10 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
     super.build(context);
     final PageController controller =
         PageController(initialPage: _selectedSegment);
+    final eventShipTags = ref.watch(eventShipTagsProvider);
+    eventShipTags.whenData((data) => setState(() {
+          shipTagsData = data.data;
+        }));
     var data = ref.watch(kancolleDataProvider);
     var squads = data.squads;
     final shipInfo = data.dataInfo.shipInfo;
@@ -158,7 +170,8 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                               var squad = squads[index];
                               String losScore = squad
                                   .los(
-                                      admiralLevel: data.seaForceBase.admiral.level,
+                                      admiralLevel:
+                                          data.seaForceBase.admiral.level,
                                       mapModifier: _mapModifier)
                                   .total
                                   .toStringAsFixed(2);
@@ -186,30 +199,35 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                             children: [
                                               for (final ship in squad.ships)
                                                 CupertinoListTile(
-                                                  title: Text(ship.name!),
+                                                  title: buildShipTitle(ship),
                                                   padding: _kListPadding,
                                                   leading: CarouselSlider(
                                                     items: [
                                                       AttributeLabel.vertical(
                                                           label: 'Lv',
-                                                          value: '${ship.level}'),
+                                                          value:
+                                                              '${ship.level}'),
                                                       AttributeLabel.vertical(
                                                           label: 'Lv Up',
-                                                          value: '${ship.exp?[1]}'),
+                                                          value:
+                                                              '${ship.exp?[1]}'),
                                                     ],
                                                     options: CarouselOptions(
                                                       height: 30,
                                                       viewportFraction: 1,
                                                       initialPage: 0,
-                                                      enableInfiniteScroll: true,
+                                                      enableInfiniteScroll:
+                                                          true,
                                                       reverse: false,
                                                       autoPlay: true,
                                                       autoPlayInterval:
                                                           Duration(seconds: 5),
                                                       autoPlayAnimationDuration:
                                                           Duration(
-                                                              milliseconds: 800),
-                                                      autoPlayCurve: Curves.ease,
+                                                              milliseconds:
+                                                                  800),
+                                                      autoPlayCurve:
+                                                          Curves.ease,
                                                       scrollDirection:
                                                           Axis.horizontal,
                                                     ),
@@ -221,70 +239,84 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                                         ShipInfo(
                                                           ship: ship,
                                                           squadName:
-                                                              squads[index].name,
+                                                              squads[index]
+                                                                  .name,
                                                         ));
                                                   },
                                                   additionalInfo: SizedBox(
                                                       width: 70,
                                                       child: Text(
                                                         "${ship.nowHP}/${ship.maxHP}",
-                                                        textAlign: TextAlign.end,
+                                                        textAlign:
+                                                            TextAlign.end,
                                                       )),
-                                                  subtitle: LinearPercentIndicator(
+                                                  subtitle:
+                                                      LinearPercentIndicator(
                                                     backgroundColor:
-                                                        CupertinoDynamicColor.resolve(
-                                                            CupertinoColors
-                                                                .systemGroupedBackground,
-                                                            context),
+                                                        CupertinoDynamicColor
+                                                            .resolve(
+                                                                CupertinoColors
+                                                                    .systemGroupedBackground,
+                                                                context),
                                                     animation: true,
                                                     animationDuration: 500,
                                                     barRadius:
-                                                        const Radius.circular(2.5),
-                                                    animateFromLastPercent: true,
+                                                        const Radius.circular(
+                                                            2.5),
+                                                    animateFromLastPercent:
+                                                        true,
                                                     lineHeight: 5.0,
                                                     percent:
                                                         ship.nowHP / ship.maxHP,
-                                                    progressColor: ship.damageColor,
+                                                    progressColor:
+                                                        ship.damageColor,
                                                   ),
                                                   trailing:
                                                       CircularPercentIndicator(
                                                     backgroundColor:
-                                                        CupertinoDynamicColor.resolve(
-                                                            CupertinoColors
-                                                                .systemGroupedBackground,
-                                                            context),
+                                                        CupertinoDynamicColor
+                                                            .resolve(
+                                                                CupertinoColors
+                                                                    .systemGroupedBackground,
+                                                                context),
                                                     reverse: true,
                                                     radius: 12.0,
                                                     lineWidth: 5.0,
                                                     animation: true,
                                                     animationDuration: 500,
-                                                    animateFromLastPercent: true,
+                                                    animateFromLastPercent:
+                                                        true,
                                                     circularStrokeCap:
                                                         CircularStrokeCap.round,
-                                                    percent: ship.condition! / 100,
+                                                    percent:
+                                                        ship.condition! / 100,
                                                     center: Container(
                                                       height: 6,
                                                       width: 6,
                                                       decoration: BoxDecoration(
                                                         shape: BoxShape.circle,
                                                         color: ship.fuelBullColor(
-                                                            shipInfo?[ship.shipId]!
+                                                            shipInfo?[ship
+                                                                    .shipId]!
                                                                 .apiFuelMax,
-                                                            shipInfo?[ship.shipId]!
+                                                            shipInfo?[ship
+                                                                    .shipId]!
                                                                 .apiBullMax),
                                                       ),
                                                     ),
-                                                    progressColor: ship.sparkColor,
+                                                    progressColor:
+                                                        ship.sparkColor,
                                                   ),
                                                 ),
-                                              SquadsShareButton.cupertinoListTile(
-                                                  squads: squads),
+                                              SquadsShareButton
+                                                  .cupertinoListTile(
+                                                      squads: squads),
                                             ],
                                           ),
                                           CupertinoListSection.insetGrouped(
                                             margin: tabBottomListMargin,
-                                            footer: CupertinoListSectionDescription(
-                                                S
+                                            footer:
+                                                CupertinoListSectionDescription(S
                                                     .of(context)
                                                     .KCDashboardFleetDescription),
                                             children: [
@@ -302,8 +334,8 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                                 trailing: mapModifierMenu(),
                                               ),
                                               CupertinoListTile(
-                                                subtitle: Text(
-                                                    S.current.KCDashboardShipSpeed),
+                                                subtitle: Text(S.current
+                                                    .KCDashboardShipSpeed),
                                                 title: Text(speedLevel(
                                                     speedList.reduce(min))),
                                               ),
@@ -314,27 +346,28 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                                     '${attackList.reduce((value, element) => value + element)}'),
                                               ),
                                               CupertinoListTile(
-                                                subtitle: Text(
-                                                    S.current.KCDashboardShipAA),
+                                                subtitle: Text(S
+                                                    .current.KCDashboardShipAA),
                                                 title: Text(
                                                     '${antiAircraftList.reduce((value, element) => value + element)}'),
                                               ),
                                               CupertinoListTile(
-                                                subtitle: Text(
-                                                    S.current.KCDashboardShipASW),
+                                                subtitle: Text(S.current
+                                                    .KCDashboardShipASW),
                                                 title: Text(
                                                     '${antiSubmarineList.reduce((value, element) => value + element)}'),
                                               ),
                                               CupertinoListTile(
-                                                subtitle: Text(
-                                                    S.current.KCDashboardShipScout),
+                                                subtitle: Text(S.current
+                                                    .KCDashboardShipScout),
                                                 title: Text(
                                                     '${scoutList.reduce((value, element) => value + element)}'),
                                               ),
                                               CupertinoListTile(
                                                 subtitle: Text(S.current
                                                     .KCDashboardShipAircraftPower),
-                                                title: Text(squad.aircraftPower),
+                                                title:
+                                                    Text(squad.aircraftPower),
                                               ),
                                             ],
                                           )
@@ -362,7 +395,8 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                         ),
                         if (squads.isNotEmpty)
                           Padding(
-                            padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                            padding:
+                                const EdgeInsets.only(top: 4.0, bottom: 4.0),
                             child: CupertinoSlidingSegmentedControl(
                                 children: displayModes,
                                 groupValue: _displayedSegment,
@@ -374,7 +408,10 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                           ),
                       ],
                     ),
-                    Positioned(right:4, bottom:4, child: Text(data.fleet.combinedText))
+                    Positioned(
+                        right: 4,
+                        bottom: 4,
+                        child: Text(data.fleet.combinedText))
                   ],
                 ),
               ),
@@ -383,6 +420,23 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
         ),
       ),
     );
+  }
+
+  Widget buildShipTitle(Ship ship) {
+    if (ship.sallyArea != null && shipTagsData != null) {
+      return Row(
+        children: [
+          Icon(
+            CupertinoIcons.tag_fill,
+            color: shipTagsData?["${ship.sallyArea}"]?.color ?? Colors.transparent,
+            size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
+          ),
+          const SizedBox(width: 4),
+          Text(ship.name!),
+        ],
+      );
+    }
+    return Text(ship.name!);
   }
 }
 

@@ -55,6 +55,7 @@ class Ship with _$Ship {
     List<Equipment>? equipment,
     List<Equipment>? exEquipment,
     String? hpStatus,
+    int? sallyArea,
   }) = _Ship;
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
@@ -398,6 +399,7 @@ class Ship with _$Ship {
       shipType: shipType,
       equipment: equips,
       exEquipment: equipsEx,
+      sallyArea: data.apiSallyArea,
     );
   }
 }
