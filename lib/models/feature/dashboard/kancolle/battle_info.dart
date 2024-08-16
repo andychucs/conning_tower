@@ -304,11 +304,11 @@ class BattleInfo with _$BattleInfo {
     ];
   }
 
-  void parseCombinedBattleECBattle(ReqCombinedBattleECBattleApiDataEntity data, Squad squad) {
+  void parseCombinedBattleECBattle(ReqCombinedBattleECBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -421,11 +421,11 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parseReqBattleMidnightBattle(
-      ReqBattleMidnightBattleApiDataEntity data, Squad squad) {
+      ReqBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -439,11 +439,11 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parseReqBattleMidnightSpMidnight(
-      ReqBattleMidnightSpMidnightDataApiDataEntity data, Squad squad) {
+      ReqBattleMidnightSpMidnightDataApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -483,11 +483,11 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseReqSortieBattle(ReqSortieBattleApiDataEntity data, Squad squad) {
+  void parseReqSortieBattle(ReqSortieBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -577,11 +577,11 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseSortieLdAirbattle(ReqSortieLdAirbattleApiDataEntity data, Squad squad) {
+  void parseSortieLdAirbattle(ReqSortieLdAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -600,7 +600,7 @@ class BattleInfo with _$BattleInfo {
 
     initSingleEnemySquads(data);
 
-    inBattleSquads = [...squads];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -740,11 +740,11 @@ class BattleInfo with _$BattleInfo {
     return formation;
   }
 
-  void parseReqSortieAirbattle(ReqSortieAirbattleApiDataEntity data, Squad squad) {
+  void parseReqSortieAirbattle(ReqSortieAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [squad];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -769,11 +769,11 @@ class BattleInfo with _$BattleInfo {
     clear();
     initDoubleEnemySquads(data);
 
+    inBattleSquads = squads;
+
     if (data.apiFNowhpsCombined == null) {
-      inBattleSquads = [squads[data.apiDeckId - 1]];
       initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
     } else {
-      inBattleSquads = [squads[0], squads[1]];
       initShipHPDoubleSquad(
           fNow: data.apiFNowhps,
           fMax: data.apiFMaxhps,
@@ -796,7 +796,7 @@ class BattleInfo with _$BattleInfo {
 
     initSingleEnemySquads(data);
 
-    inBattleSquads = [...squads];
+    inBattleSquads = squads;
 
     initDMGMap();
 
@@ -859,7 +859,7 @@ class BattleInfo with _$BattleInfo {
 
     initDoubleEnemySquads(data);
 
-    inBattleSquads = [...squads];
+    inBattleSquads = squads;
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
         fMax: data.apiFMaxhps,
@@ -920,7 +920,7 @@ class BattleInfo with _$BattleInfo {
 
     initSingleEnemySquads(data);
 
-    inBattleSquads = [...squads];
+    inBattleSquads = squads;
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -981,7 +981,7 @@ class BattleInfo with _$BattleInfo {
   void parseReqCombinedBattleEachWater(ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
-    inBattleSquads = [...squads];
+    inBattleSquads = squads;
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
         fMax: data.apiFMaxhps,
@@ -1039,7 +1039,7 @@ class BattleInfo with _$BattleInfo {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [...squads];
+    inBattleSquads = squads;
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
