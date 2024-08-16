@@ -76,8 +76,10 @@ class KancolleLocalization extends _$KancolleLocalization {
   }
 
   KancolleLocalizationState covertData(Locale locale, Map<String, dynamic> slotItemData, Map<String, dynamic> useItemInImproveData) {
-    Map<int, String> equipmentL10n = {};
-    Map<int, String> itemInImproveL10n = {};
+    Map<int, String> equipmentMap = {};
+    Map<String, String> equipmentL10nMap = {};
+    Map<int, String> itemInImproveMap = {};
+    Map<String, String> itemInImproveL10nMap = {};
     final dataVersion = slotItemData['data_version'] as String;
     final slotItems = slotItemData['data'] as Map<String, dynamic>;
     final useItemInImprove = useItemInImproveData['data'] as Map<String, dynamic>;
@@ -85,16 +87,24 @@ class KancolleLocalization extends _$KancolleLocalization {
     final languageCode = getLanguageCode(locale);
 
     slotItems.forEach((id, translate) {
-      equipmentL10n[int.parse(id)] = translate[languageCode] ?? '';
+      equipmentMap[int.parse(id)] = translate[languageCode] ?? '';
+      equipmentL10nMap[translate['ja']] = translate[languageCode] ?? '';
     });
 
     useItemInImprove.forEach((id, translate) {
-      itemInImproveL10n[int.parse(id)] = translate[languageCode] ?? '';
+      itemInImproveMap[int.parse(id)] = translate[languageCode] ?? '';
+      itemInImproveL10nMap[translate['ja']] = translate[languageCode] ?? '';
     });
 
     return KancolleLocalizationState(
       locale: locale,
-      data: KancolleLocalizationData(version: dataVersion, equipment: equipmentL10n, itemInImprove: itemInImproveL10n),
+      data: KancolleLocalizationData(
+          version: dataVersion,
+          equipment: equipmentMap,
+          equipmentLocal: equipmentL10nMap,
+          itemInImprove: itemInImproveMap,
+          itemInImproveLocal: itemInImproveL10nMap,
+      ),
     );
 
   }

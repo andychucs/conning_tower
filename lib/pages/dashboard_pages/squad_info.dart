@@ -436,13 +436,13 @@ class SlotItemPage extends StatelessWidget {
                           if (item != -1)
                             Text(slotMap[item]?.text(
                                     onSlot: ship.onSlot?[index],
-                                    l10nMap: l10nData?.equipment) ??
+                                    l10nMap: l10nData?.equipmentLocal) ??
                                 "N/A"),
                         if (ship.slotEx != null &&
                             ship.slotEx != -1 &&
                             ship.slotEx != 0)
                           Text(slotMap[ship.slotEx]
-                                  ?.text(l10nMap: l10nData?.equipment) ??
+                                  ?.text(l10nMap: l10nData?.equipmentLocal) ??
                               "N/A"),
                       ],
                     ),
