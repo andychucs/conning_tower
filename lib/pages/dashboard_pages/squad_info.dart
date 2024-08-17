@@ -436,6 +436,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                     TextStyle(color: CupertinoColors.secondaryLabel.resolveFrom(context))),
                 overflow: TextOverflow.ellipsis,
               ),
+              const SizedBox(width: 4.0),
               Icon(
                 CupertinoIcons.tag_fill,
                 color: shipTagsData?["${ship.sallyArea}"]?.color ?? Colors.transparent,
