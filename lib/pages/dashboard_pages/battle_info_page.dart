@@ -22,6 +22,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
+
+import '../../widgets/dialog.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
     EdgeInsetsDirectional.fromSTEB(8.0, 5.0, 8.0, 5.0);
@@ -87,11 +90,13 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                               child: ListView(
                                 children: [
                                   CupertinoListSection.insetGrouped(
-                                    footer: SelectableText("BattleInfo:\n${battleInfo.toString()}"),
+                                    footer: SelectableText(
+                                        "BattleInfo:\n${battleInfo.toString()}"),
                                     children: [
                                       CupertinoListTile(
                                         title: const Text("Copy Data"),
-                                        subtitle: Text(ref.watch(rawDataProvider).source),
+                                        subtitle: Text(
+                                            ref.watch(rawDataProvider).source),
                                         onTap: () => Clipboard.setData(
                                             ClipboardData(
                                                 text: ref
@@ -218,16 +223,86 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "${battleInfo.mapInfo?.areaId}-${battleInfo.mapInfo?.num}",
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CupertinoButton(
+                            color: CupertinoDynamicColor.resolve(
+                                CupertinoColors
+                                    .secondarySystemGroupedBackground,
+                                context),
+                            minSize: CupertinoTheme.of(context)
+                                .textTheme
+                                .tabLabelTextStyle
+                                .fontSize,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 20),
+                            onPressed: () {
+                              final mapState = data.mapStateMap?[battleInfo.mapInfo!.id];
+                              showAdaptiveDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (context) => PointerInterceptor(
+                                  child: AlertDialog.adaptive(
+                                    title: Text('${battleInfo.mapInfo?.name}'),
+                                    content: mapState == null ? null : SizedBox(
+                                      height: 80,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          if (mapState.rank != null) Text(mapState.rankName),
+                                          Text("${mapState.now}/${mapState.max}"),
+                                          LinearPercentIndicator(
+                                            lineHeight: 16,
+                                            percent: mapState.rate,
+                                            backgroundColor: CupertinoDynamicColor.resolve(
+                                                CupertinoColors.systemGroupedBackground, context),
+                                            animation: true,
+                                            animationDuration: 500,
+                                            barRadius: const Radius.circular(8),
+                                            animateFromLastPercent: true,
+                                            progressColor: mapState.color,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: [
+                                      adaptiveAction(
+                                          context: context,
+                                          child: Text(S.of(context).TextYes),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          })
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "${battleInfo.mapInfo?.areaId} - ${battleInfo.mapInfo?.num}",
+                                  style: CupertinoTheme.of(context)
+                                      .textTheme
+                                      .textStyle
+                                      .merge(TextStyle(
+                                          color: CupertinoColors.label
+                                              .resolveFrom(context))),
+                                ),
+                              ],
                             ),
+                          ),
+                          if (routeName != '')
                             Text(
-                              "${battleInfo.mapInfo?.name}",
+                              routeName,
+                              style: CupertinoTheme.of(context)
+                                  .textTheme
+                                  .textStyle
+                                  .merge(TextStyle(
+                                      color: CupertinoColors.secondaryLabel
+                                          .resolveFrom(context))),
                             ),
-                            Text(routeName)
-                          ]),
+                        ],
+                      ),
                     ),
                   ),
               ],

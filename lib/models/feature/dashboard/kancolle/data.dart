@@ -27,6 +27,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'equipment.dart';
+import 'map_state.dart';
 import 'operation_queue.dart';
 import 'quest_assistant.dart';
 
@@ -49,6 +50,7 @@ class KancolleData {
   KancolleBattleLog? battleLog;
   QuestAssistant? questAssistant;
   List<Squad>? battleSquads;
+  Map<int, MapState>? mapStateMap;
 
   KancolleData({
     required this.queue,
@@ -61,6 +63,7 @@ class KancolleData {
     this.battleLog,
     this.questAssistant,
     this.battleSquads,
+    this.mapStateMap,
   });
 
   KancolleData copyWith({
@@ -83,6 +86,7 @@ class KancolleData {
       battleLog: battleLog,
       questAssistant: questAssistant,
       battleSquads: battleSquads,
+      mapStateMap: mapStateMap,
     );
   }
 
@@ -135,6 +139,10 @@ class KancolleData {
           FirebaseCrashlytics.instance.log(e.toString());
         }
       }
+    }
+
+    if (model is GetMemberMapinfoEntity) {
+      mapStateMap = parseMapState(model);
     }
 
     if (model is ReqHenseiCombinedEntity) {
@@ -312,6 +320,38 @@ class KancolleData {
       ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
+  }
+
+  static Map<int, MapState> parseMapState(GetMemberMapinfoEntity model) {
+    Map<int, MapState> mapStateMap = {};
+    for (final mapInfo in model.apiData!.apiMapInfo!) {
+      MapState? mapState;
+      if (mapInfo?.apiEventmap != null) {
+        mapState = MapState(
+          id: mapInfo!.apiId,
+          now: mapInfo.apiEventmap!.apiNowMapHP,
+          max: mapInfo.apiEventmap!.apiMaxMapHP,
+          cleared: mapInfo.apiCleared == 1,
+          type: mapInfo.apiGaugeType!,
+          rank: mapInfo.apiEventmap!.apiSelectedRank
+        );
+      } else if (mapInfo?.apiDefeatCount != null && mapInfo?.apiRequiredDefeatCount != null) {
+        mapState = MapState(
+          id: mapInfo!.apiId,
+          now: mapInfo.apiRequiredDefeatCount! - mapInfo.apiDefeatCount!,
+          max: mapInfo.apiRequiredDefeatCount,
+          cleared: mapInfo.apiCleared == 1,
+          type: mapInfo.apiGaugeType!
+        );
+      }
+
+      if (mapState == null) {
+        continue;
+      }
+
+      mapStateMap[mapState.id] = mapState;
+    }
+    return mapStateMap;
   }
 
   void parseBattle(model) {
