@@ -8,7 +8,7 @@ part 'req_combined_battle_each_water_entity.g.dart';
 
 @unfreezed
 class ReqCombinedBattleEachWaterEntity with _$ReqCombinedBattleEachWaterEntity {
-  static get source => "/api_req_combined_battle/each_battle_water";
+  static const source = "/api_req_combined_battle/each_battle_water";
 
   factory ReqCombinedBattleEachWaterEntity({
     @JsonKey(name: 'api_result') int? apiResult,

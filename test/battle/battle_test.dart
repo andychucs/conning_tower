@@ -23,7 +23,7 @@ main() {
       """;
       final json = jsonDecode(rawData);
       const path = "/api_req_combined_battle/battle";
-      dynamic model = DataModelAdapter().parseData(path, json);
+      dynamic model = DataModelAdapter.toEntity(path, json);
 
       final battleInfo = BattleInfo();
       battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);

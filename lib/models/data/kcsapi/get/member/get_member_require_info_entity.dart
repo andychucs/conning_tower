@@ -7,7 +7,7 @@ part 'get_member_require_info_entity.g.dart';
 
 @unfreezed
 class GetMemberRequireInfoEntity with _$GetMemberRequireInfoEntity {
-  static get source => '/api_get_member/require_info';
+  static const source = '/api_get_member/require_info';
 
   factory GetMemberRequireInfoEntity({
     @JsonKey(name: 'api_result') required int apiResult,

@@ -6,7 +6,7 @@ part 'req_mission_start_entity.g.dart';
 
 @unfreezed
 class ReqMissionStartEntity with _$ReqMissionStartEntity {
-  static get source => '/api_req_mission/start';
+  static const source = '/api_req_mission/start';
 
 
   factory ReqMissionStartEntity({

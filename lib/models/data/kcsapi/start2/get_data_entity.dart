@@ -11,7 +11,7 @@ class GetDataEntity with _$GetDataEntity {
     @JsonKey(name: 'api_data') required GetDataApiDataEntity apiData,
   }) = _GetDataEntity;
 
-  static get source => "/api_start2/getData";
+  static const source = "/api_start2/getData";
 
   factory GetDataEntity.fromJson(Map<String, dynamic> json) =>
       _$GetDataEntityFromJson(json);

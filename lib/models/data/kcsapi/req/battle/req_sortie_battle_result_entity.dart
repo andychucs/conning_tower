@@ -6,7 +6,7 @@ part 'req_sortie_battle_result_entity.g.dart';
 
 @unfreezed
 class ReqSortieBattleResultEntity with _$ReqSortieBattleResultEntity {
-  static get source => "/api_req_sortie/battleresult";
+  static const source = "/api_req_sortie/battleresult";
 
   factory ReqSortieBattleResultEntity({
     @JsonKey(name: 'api_result') required int apiResult,

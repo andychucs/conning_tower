@@ -124,7 +124,7 @@ class KancolleData {
       battleLog?.data.add(rawData.decoded);
     }
 
-    dynamic model = DataModelAdapter().parseData(path, json);
+    dynamic model = DataModelAdapter.toEntity(path, json);
 
     if (model == null) {
       if (isBattleAPI(path) && !path.contains("/goback_port")) {
