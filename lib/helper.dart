@@ -132,3 +132,19 @@ Map<String, dynamic> parseRequestBody(String body) {
   });
   return params;
 }
+
+String getLanguageCode(Locale locale) {
+  String languageCode = 'ja';
+  if (locale.languageCode == 'en') {
+    languageCode = 'en';
+  } else if (locale.languageCode == 'zh') {
+    if (locale.scriptCode == 'Hans') {
+      languageCode = 'sc';
+    } else if (locale.scriptCode == 'Hant') {
+      languageCode = 'tc';
+    }
+  } else if (locale.languageCode == 'ko') {
+    languageCode = 'ko';
+  }
+  return languageCode;
+}

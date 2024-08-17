@@ -11,6 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../constants.dart';
+import '../../helper.dart';
 
 part 'kancolle_localization_provider.freezed.dart';
 part 'kancolle_localization_provider.g.dart';
@@ -120,23 +121,6 @@ class KancolleLocalization extends _$KancolleLocalization {
     _saveLocalData(await localFile('useitem_in_improve_l10n.json'), useItemInImproveJson);
 
     return covertData(locale, slotItemJson, useItemInImproveJson);
-  }
-
-  String getLanguageCode(Locale locale) {
-    String languageCode = 'ja';
-    if (locale.languageCode == 'en') {
-      languageCode = 'en';
-    } else if (locale.languageCode == 'zh') {
-      if (locale.scriptCode == 'Hans') {
-        languageCode = 'sc';
-      } else if (locale.scriptCode == 'Hant') {
-        languageCode = 'tc';
-      }
-    } else if (locale.languageCode == 'ko') {
-      languageCode = 'ko';
-    }
-    log("languageCode: $languageCode");
-    return languageCode;
   }
 
   Future<KancolleLocalizationData> fetchTranslate(String url) async {

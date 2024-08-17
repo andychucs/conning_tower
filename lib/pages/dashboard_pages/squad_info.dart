@@ -39,7 +39,7 @@ class SquadInfo extends ConsumerStatefulWidget {
 
 class _SquadInfoState extends ConsumerState<SquadInfo>
     with AutomaticKeepAliveClientMixin {
-  late Map<String, EventShipTag>? shipTagsData;
+  Map<String, EventShipTag>? shipTagsData;
 
   @override
   bool get wantKeepAlive => true;
@@ -199,7 +199,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                             children: [
                                               for (final ship in squad.ships)
                                                 CupertinoListTile(
-                                                  title: buildShipTitle(ship),
+                                                  title: buildShipTitle(ship, locale),
                                                   padding: _kListPadding,
                                                   leading: CarouselSlider(
                                                     items: [
@@ -422,17 +422,27 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
     );
   }
 
-  Widget buildShipTitle(Ship ship) {
+  Widget buildShipTitle(Ship ship, Locale locale) {
     if (ship.sallyArea != null && shipTagsData != null) {
-      return Row(
+      return Stack(
         children: [
-          Icon(
-            CupertinoIcons.tag_fill,
-            color: shipTagsData?["${ship.sallyArea}"]?.color ?? Colors.transparent,
-            size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
-          ),
-          const SizedBox(width: 4),
           Text(ship.name!),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                shipTagsData?["${ship.sallyArea}"]?.nameLocal(locale) ?? '',
+                style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle.merge(
+                    TextStyle(color: CupertinoColors.secondaryLabel.resolveFrom(context))),
+                overflow: TextOverflow.ellipsis,
+              ),
+              Icon(
+                CupertinoIcons.tag_fill,
+                color: shipTagsData?["${ship.sallyArea}"]?.color ?? Colors.transparent,
+                size: CupertinoTheme.of(context).textTheme.tabLabelTextStyle.fontSize,
+              ),
+            ],
+          ),
         ],
       );
     }
