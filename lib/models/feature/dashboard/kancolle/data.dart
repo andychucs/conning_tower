@@ -125,7 +125,7 @@ class KancolleData {
     dynamic model = DataModelAdapter().parseData(path, json);
 
     if (model == null) {
-      if (isBattleAPI(path)) {
+      if (isBattleAPI(path) && !path.contains("/goback_port")) {
         FirebaseCrashlytics.instance.log('no handler data $path : $data');
         try {
           FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null, fatal: true);
@@ -420,8 +420,6 @@ class KancolleData {
       }
     }
     if (shipsDamaged.isNotEmpty) {
-      FirebaseCrashlytics.instance.log(squads.toString());
-      FirebaseCrashlytics.instance.log(sb.toString());
       ref
           .watch(alertStateProvider.notifier)
           .update((state) => Alert(S.current.TextLDamage, shipsDamaged.join("\n")));
