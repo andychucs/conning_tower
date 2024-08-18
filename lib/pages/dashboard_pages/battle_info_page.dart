@@ -452,7 +452,7 @@ class BattleInfoAllMapView extends StatelessWidget {
                           const Radius.circular(8),
                           animateFromLastPercent: true,
                           progressColor: mapState.color,
-                          trailing: mapState.cleared ? Text(S.of(context).KCDashboardBattleMapStateCleared) : Text("${mapState.now}/${mapState.max}",
+                          trailing: mapState.now == null ? Text(S.of(context).KCDashboardBattleMapStateCleared) : Text("${mapState.now}/${mapState.max}",
                           ),
                         ),
                       );
