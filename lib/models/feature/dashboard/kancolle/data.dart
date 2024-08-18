@@ -27,6 +27,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'equipment.dart';
+import 'map_state.dart';
 import 'operation_queue.dart';
 import 'quest_assistant.dart';
 
@@ -49,6 +50,7 @@ class KancolleData {
   KancolleBattleLog? battleLog;
   QuestAssistant? questAssistant;
   List<Squad>? battleSquads;
+  Map<int, MapState>? mapStateMap;
 
   KancolleData({
     required this.queue,
@@ -61,6 +63,7 @@ class KancolleData {
     this.battleLog,
     this.questAssistant,
     this.battleSquads,
+    this.mapStateMap,
   });
 
   KancolleData copyWith({
@@ -83,6 +86,7 @@ class KancolleData {
       battleLog: battleLog,
       questAssistant: questAssistant,
       battleSquads: battleSquads,
+      mapStateMap: mapStateMap,
     );
   }
 
@@ -124,7 +128,7 @@ class KancolleData {
       battleLog?.data.add(rawData.decoded);
     }
 
-    dynamic model = DataModelAdapter().parseData(path, json);
+    dynamic model = DataModelAdapter.toEntity(path, json);
 
     if (model == null) {
       if (isBattleAPI(path) && !path.contains("/goback_port")) {
@@ -135,6 +139,10 @@ class KancolleData {
           FirebaseCrashlytics.instance.log(e.toString());
         }
       }
+    }
+
+    if (model is GetMemberMapinfoEntity) {
+      mapStateMap = parseMapState(model);
     }
 
     if (model is ReqHenseiCombinedEntity) {
@@ -237,7 +245,7 @@ class KancolleData {
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.mapRoute = model.apiData.apiNo;
-      battleInfo.inBattleSquads?.clear();
+      battleInfo.inBattleSquads = battleSquads;
       battleLog = KancolleBattleLog(id: timestamp, admiral: seaForceBase.admiral.name, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
     }
 
@@ -314,59 +322,81 @@ class KancolleData {
     }
   }
 
+  static Map<int, MapState> parseMapState(GetMemberMapinfoEntity model) {
+    Map<int, MapState> mapStateMap = {};
+    for (final mapInfo in model.apiData!.apiMapInfo!) {
+      MapState? mapState;
+      if (mapInfo?.apiEventmap != null) {
+        mapState = MapState(
+          id: mapInfo!.apiId,
+          now: mapInfo.apiEventmap!.apiNowMapHP,
+          max: mapInfo.apiEventmap!.apiMaxMapHP,
+          cleared: mapInfo.apiCleared == 1,
+          type: mapInfo.apiGaugeType!,
+          rank: mapInfo.apiEventmap!.apiSelectedRank
+        );
+      } else if (mapInfo?.apiDefeatCount != null && mapInfo?.apiRequiredDefeatCount != null) {
+        mapState = MapState(
+          id: mapInfo!.apiId,
+          now: mapInfo.apiRequiredDefeatCount! - mapInfo.apiDefeatCount!,
+          max: mapInfo.apiRequiredDefeatCount,
+          cleared: mapInfo.apiCleared == 1,
+          type: mapInfo.apiGaugeType!
+        );
+      }
+
+      if (mapState == null) {
+        continue;
+      }
+
+      mapStateMap[mapState.id] = mapState;
+    }
+    return mapStateMap;
+  }
+
   void parseBattle(model) {
     if (model is ReqCombinedBattleLdAirbattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, inBattleSquads);
+      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqSortieAirbattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
+      battleInfo.parseReqSortieAirbattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleECMidnightBattleEntity) {
-      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
+      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqBattleMidnightSpMidnightEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
+      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, battleSquads!);
     }
 
     if (model is ReqSortieLdAirbattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
+      battleInfo.parseSortieLdAirbattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleECBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
+      battleInfo.parseCombinedBattleECBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleMidnightBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, inBattleSquads);
+      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
+      battleInfo.parseReqCombinedBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleEachBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
+      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleWaterEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
+      battleInfo.parseReqCombinedBattleWater(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleEachWaterEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
+      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, battleSquads!);
     }
 
     if (model is ReqPracticeMidnightBattleEntity) {
@@ -381,13 +411,11 @@ class KancolleData {
     }
 
     if (model is ReqBattleMidnightBattleEntity) {
-      var squad = squads[model.apiData.apiDeckId - 1];
-      battleInfo.parseReqBattleMidnightBattle(model.apiData, squad);
+      battleInfo.parseReqBattleMidnightBattle(model.apiData, battleSquads!);
     }
 
     if (model is ReqSortieBattleEntity) {
-      var squad = squads[model.apiData.apiDeckId - 1];
-      battleInfo.parseReqSortieBattle(model.apiData, squad);
+      battleInfo.parseReqSortieBattle(model.apiData, battleSquads!);
     }
 
   }

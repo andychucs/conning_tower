@@ -7,7 +7,7 @@ part 'get_member_slot_item_entity.g.dart';
 
 @unfreezed
 class GetMemberSlotItemEntity with _$GetMemberSlotItemEntity {
-  static get source => '/api_get_member/slot_item';
+  static const source = '/api_get_member/slot_item';
 
   factory GetMemberSlotItemEntity({
     @JsonKey(name: 'api_result') required int apiResult,

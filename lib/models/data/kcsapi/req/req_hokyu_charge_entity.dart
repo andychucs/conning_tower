@@ -6,7 +6,7 @@ part 'req_hokyu_charge_entity.g.dart';
 
 @unfreezed
 class ReqHokyuChargeEntity with _$ReqHokyuChargeEntity {
-  static get source => '/api_req_hokyu/charge';
+  static const source = '/api_req_hokyu/charge';
 
   factory ReqHokyuChargeEntity({
     @JsonKey(name: 'api_result') int? apiResult,

@@ -6,7 +6,7 @@ part 'req_map_start_entity.g.dart';
 
 @unfreezed
 class ReqMapStartEntity with _$ReqMapStartEntity {
-  static get source => "/api_req_map/start";
+  static const source = "/api_req_map/start";
 
   factory ReqMapStartEntity({
     @JsonKey(name: 'api_result') required int apiResult,

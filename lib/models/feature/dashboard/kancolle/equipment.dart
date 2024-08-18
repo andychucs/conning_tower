@@ -82,10 +82,10 @@ class Equipment with _$Equipment {
 
   bool get isAirCraft => (type?[4] ?? 0) > 0;
 
-  String text({int? onSlot, Map<int, String>? l10nMap}) {
+  String text({int? onSlot, Map<String, String>? l10nMap}) {
     String name = this.name ?? "N/A";
-    if (l10nMap != null && l10nMap.containsKey(itemId)) {
-      name = l10nMap[itemId]!;
+    if (l10nMap != null && l10nMap.containsKey(name)) {
+      name = l10nMap[name]!;
     }
 
     late String info;

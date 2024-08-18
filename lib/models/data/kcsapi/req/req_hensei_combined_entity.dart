@@ -6,7 +6,7 @@ part 'req_hensei_combined_entity.g.dart';
 
 @unfreezed
 class ReqHenseiCombinedEntity with _$ReqHenseiCombinedEntity {
-  static get source => "/api_req_hensei/combined";
+  static const source = "/api_req_hensei/combined";
   factory ReqHenseiCombinedEntity({
     @JsonKey(name: 'api_result') int? apiResult,
     @JsonKey(name: 'api_result_msg') String? apiResultMsg,

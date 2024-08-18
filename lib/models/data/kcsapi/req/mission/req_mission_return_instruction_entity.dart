@@ -7,7 +7,7 @@ part 'req_mission_return_instruction_entity.g.dart';
 @unfreezed
 class ReqMissionReturnInstructionEntity
     with _$ReqMissionReturnInstructionEntity {
-  static get source => "/api_req_mission/return_instruction";
+  static const source = "/api_req_mission/return_instruction";
 
   factory ReqMissionReturnInstructionEntity({
     @JsonKey(name: 'api_result') required int apiResult,

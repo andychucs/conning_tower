@@ -137,7 +137,7 @@ class LogDetailBattle extends ConsumerWidget {
                 ...List.generate(battleData.data.length, (index) {
                   var log = battleData.data[index];
                   String path = log.source.split("kcsapi").last;
-                  dynamic model = DataModelAdapter().parseData(path, log.data);
+                  dynamic model = DataModelAdapter.toEntity(path, log.data);
 
                   if (model is ReqMapStartEntity || model is ReqMapNextEntity) {
                     var mapRoute = model.apiData.apiNo;

@@ -7,7 +7,7 @@ part 'get_member_deck_entity.g.dart';
 
 @unfreezed
 class GetMemberDeckEntity with _$GetMemberDeckEntity {
-  static get source => '/api_get_member/deck';
+  static const source = '/api_get_member/deck';
 
   factory GetMemberDeckEntity({
     @JsonKey(name: 'api_result') required int apiResult,

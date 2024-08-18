@@ -8,7 +8,7 @@ part 'req_battle_midnight_battle_entity.g.dart';
 
 @unfreezed
 class ReqBattleMidnightBattleEntity with _$ReqBattleMidnightBattleEntity {
-  static get source => "/api_req_battle_midnight/battle";
+  static const source = "/api_req_battle_midnight/battle";
 
   factory ReqBattleMidnightBattleEntity({
     @JsonKey(name: 'api_result') required int apiResult,

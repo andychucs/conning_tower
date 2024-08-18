@@ -14,7 +14,7 @@ class PortEntity with _$PortEntity {
     @JsonKey(name: 'api_data') required PortApiDataEntity apiData,
   }) = _PortEntity;
 
-  static get source => "/api_port/port";
+  static const source = "/api_port/port";
 
   factory PortEntity.fromJson(Map<String, dynamic> json) =>
       _$PortEntityFromJson(json);

@@ -11,6 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../constants.dart';
+import '../../helper.dart';
 
 part 'kancolle_localization_provider.freezed.dart';
 part 'kancolle_localization_provider.g.dart';
@@ -76,8 +77,10 @@ class KancolleLocalization extends _$KancolleLocalization {
   }
 
   KancolleLocalizationState covertData(Locale locale, Map<String, dynamic> slotItemData, Map<String, dynamic> useItemInImproveData) {
-    Map<int, String> equipmentL10n = {};
-    Map<int, String> itemInImproveL10n = {};
+    Map<int, String> equipmentMap = {};
+    Map<String, String> equipmentL10nMap = {};
+    Map<int, String> itemInImproveMap = {};
+    Map<String, String> itemInImproveL10nMap = {};
     final dataVersion = slotItemData['data_version'] as String;
     final slotItems = slotItemData['data'] as Map<String, dynamic>;
     final useItemInImprove = useItemInImproveData['data'] as Map<String, dynamic>;
@@ -85,16 +88,24 @@ class KancolleLocalization extends _$KancolleLocalization {
     final languageCode = getLanguageCode(locale);
 
     slotItems.forEach((id, translate) {
-      equipmentL10n[int.parse(id)] = translate[languageCode] ?? '';
+      equipmentMap[int.parse(id)] = translate[languageCode] ?? '';
+      equipmentL10nMap[translate['ja']] = translate[languageCode] ?? '';
     });
 
     useItemInImprove.forEach((id, translate) {
-      itemInImproveL10n[int.parse(id)] = translate[languageCode] ?? '';
+      itemInImproveMap[int.parse(id)] = translate[languageCode] ?? '';
+      itemInImproveL10nMap[translate['ja']] = translate[languageCode] ?? '';
     });
 
     return KancolleLocalizationState(
       locale: locale,
-      data: KancolleLocalizationData(version: dataVersion, equipment: equipmentL10n, itemInImprove: itemInImproveL10n),
+      data: KancolleLocalizationData(
+          version: dataVersion,
+          equipment: equipmentMap,
+          equipmentLocal: equipmentL10nMap,
+          itemInImprove: itemInImproveMap,
+          itemInImproveLocal: itemInImproveL10nMap,
+      ),
     );
 
   }
@@ -110,23 +121,6 @@ class KancolleLocalization extends _$KancolleLocalization {
     _saveLocalData(await localFile('useitem_in_improve_l10n.json'), useItemInImproveJson);
 
     return covertData(locale, slotItemJson, useItemInImproveJson);
-  }
-
-  String getLanguageCode(Locale locale) {
-    String languageCode = 'ja';
-    if (locale.languageCode == 'en') {
-      languageCode = 'en';
-    } else if (locale.languageCode == 'zh') {
-      if (locale.scriptCode == 'Hans') {
-        languageCode = 'sc';
-      } else if (locale.scriptCode == 'Hant') {
-        languageCode = 'tc';
-      }
-    } else if (locale.languageCode == 'ko') {
-      languageCode = 'ko';
-    }
-    log("languageCode: $languageCode");
-    return languageCode;
   }
 
   Future<KancolleLocalizationData> fetchTranslate(String url) async {

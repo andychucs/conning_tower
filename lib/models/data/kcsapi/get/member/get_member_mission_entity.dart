@@ -6,7 +6,7 @@ part 'get_member_mission_entity.g.dart';
 
 @unfreezed
 class GetMemberMissionEntity with _$GetMemberMissionEntity {
-  static get source => '/api_get_member/mission';
+  static const source = '/api_get_member/mission';
 
   factory GetMemberMissionEntity({
     @JsonKey(name: 'api_result') required int apiResult,

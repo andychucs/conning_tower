@@ -6,7 +6,7 @@ part 'req_misssion_result_entity.g.dart';
 
 @unfreezed
 class ReqMisssionResultEntity with _$ReqMisssionResultEntity {
-  static get source => "/api_req_mission/result";
+  static const source = "/api_req_mission/result";
 
   factory ReqMisssionResultEntity({
     @JsonKey(name: 'api_result') required int apiResult,
@@ -21,20 +21,19 @@ class ReqMisssionResultEntity with _$ReqMisssionResultEntity {
 @unfreezed
 class ReqMisssionResultApiDataEntity with _$ReqMisssionResultApiDataEntity {
   factory ReqMisssionResultApiDataEntity({
-    @JsonKey(name: 'api_ship_id') required List<int> apiShipId,
-    @JsonKey(name: 'api_clear_result') required int apiClearResult,
-    @JsonKey(name: 'api_get_exp') required int apiGetExp,
-    @JsonKey(name: 'api_member_lv') required int apiMemberLv,
-    @JsonKey(name: 'api_member_exp') required int apiMemberExp,
-    @JsonKey(name: 'api_get_ship_exp') required List<int> apiGetShipExp,
-    @JsonKey(name: 'api_get_exp_lvup')
-    required List<dynamic> apiGetExpLvup,
-    @JsonKey(name: 'api_maparea_name') required String apiMapareaName,
-    @JsonKey(name: 'api_detail') required String apiDetail,
-    @JsonKey(name: 'api_quest_name') required String apiQuestName,
-    @JsonKey(name: 'api_quest_level') required int apiQuestLevel,
-    @JsonKey(name: 'api_get_material') required int apiGetMaterial,
-    @JsonKey(name: 'api_useitem_flag') required List<int> apiUseitemFlag,
+    @JsonKey(name: 'api_ship_id') List<int>? apiShipId,
+    @JsonKey(name: 'api_clear_result') int? apiClearResult,
+    @JsonKey(name: 'api_get_exp') int? apiGetExp,
+    @JsonKey(name: 'api_member_lv') int? apiMemberLv,
+    @JsonKey(name: 'api_member_exp') int? apiMemberExp,
+    @JsonKey(name: 'api_get_ship_exp') List<int>? apiGetShipExp,
+    @JsonKey(name: 'api_get_exp_lvup') List<dynamic>? apiGetExpLvup,
+    @JsonKey(name: 'api_maparea_name') String? apiMapareaName,
+    @JsonKey(name: 'api_detail') String? apiDetail,
+    @JsonKey(name: 'api_quest_name') String? apiQuestName,
+    @JsonKey(name: 'api_quest_level') int? apiQuestLevel,
+    @JsonKey(name: 'api_get_material') dynamic apiGetMaterial,
+    @JsonKey(name: 'api_useitem_flag') dynamic apiUseitemFlag,
   }) = _ReqMisssionResultApiDataEntity;
 
   factory ReqMisssionResultApiDataEntity.fromJson(Map<String, dynamic> json) =>

@@ -8,7 +8,7 @@ part 'req_combined_battle_ec_battle_entity.g.dart';
 
 @unfreezed
 class ReqCombinedBattleECBattleEntity with _$ReqCombinedBattleECBattleEntity {
-  static get source => "/api_req_combined_battle/ec_battle";
+  static const source = "/api_req_combined_battle/ec_battle";
 
   factory ReqCombinedBattleECBattleEntity({
     @JsonKey(name: 'api_result') int? apiResult,
