@@ -7,12 +7,15 @@ part 'web_message_data.g.dart';
 @freezed
 class WebMessageData with _$WebMessageData {
   const factory WebMessageData({
+    required String type,
     required String responseUrl,
-    required String responseText,
-    required int readyState
+    String? response,
+    String? responseType,
+    String? request,
+    String? method,
+    required String requestUrl,
+    int? status,
   }) = _WebMessageData;
-  
-  
 
   factory WebMessageData.fromJson(Map<String, dynamic> json) =>
       _$WebMessageDataFromJson(json);

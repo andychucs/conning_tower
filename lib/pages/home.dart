@@ -171,6 +171,7 @@ class HomePageState extends ConsumerState<HomePage> {
     ref.listen(rawDataProvider, (previous, RawData next) {
       debugPrint('listen.rawDataProvider');
       log(next.source);
+      log(next.params.toString());
       log(next.data);
       ref
           .watch(kancolleDataProvider.notifier)

@@ -312,13 +312,29 @@ class WebController extends _$WebController {
   void _kancolleMessageHandle(WebMessage message) {
     var json = jsonDecode(message.data);
     var messageData = WebMessageData.fromJson(json);
-    String result = messageData.responseText.replaceAll('svdata=', '');
 
-    log("responseURL:${messageData.responseUrl}");
-    log("readyState:${messageData.readyState}");
-    int time = DateTime.now().millisecondsSinceEpoch;
+    // log("type: ${messageData.type}");
+    // log("request: ${messageData.requestUrl}");
+    // log("body: ${messageData.request}");
+    // log("response: ${messageData.responseUrl}");
+    // log("response_type: ${messageData.responseType}");
+    // log("data: ${messageData.response}");
+
+    if (messageData.responseUrl.contains("/kcsapi/") && messageData.type == "load") {
+      final result = messageData.response?.replaceAll('svdata=', '');
+      Map<String, dynamic> params = {};
+      // make sure request body is a valid HTTP parameter string foo=bar&lorem=ipsum
+      if (messageData.request != null && messageData.request!.contains('=')) {
+        // load parameters as parameters
+        params = parseRequestBody(messageData.request!);
+      }
     ref.watch(rawDataProvider.notifier).update(
-        (state) => RawData(source: messageData.responseUrl, data: result, timestamp: time));
+        (state) => RawData.response(source: messageData.responseUrl, data: result?? "", params: params));
+    }
+
+    if (messageData.type == "error") {
+      log("XHR Error: $messageData");
+    }
   }
 
   Future<void> onWebviewCreate() async {
