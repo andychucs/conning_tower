@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
@@ -621,6 +622,9 @@ class BattleInfo with _$BattleInfo {
     formation = apiFormation[0];
     eFormation = apiFormation[1];
     contact = apiFormation[2];
+    if (mapInfo != null && mapRoute != null) {
+      objectbox.saveRouteLog(mapId: mapInfo!.id, routeId: mapRoute, formation: formation!);
+    }
   }
 
   void torpedoFireRoundWithItem(
