@@ -7,6 +7,8 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/data/kcwiki/map_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
+import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
@@ -14,20 +16,25 @@ import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
+import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
+import '../../models/feature/dashboard/kancolle/map_state.dart';
 import '../../widgets/dialog.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
     EdgeInsetsDirectional.fromSTEB(8.0, 5.0, 8.0, 5.0);
+
+const kDefaultMap = MapInfo(id: 0, num: 0, areaId: 0, name: '', operationName: '');
 
 class BattleInfoPage extends ConsumerStatefulWidget {
   const BattleInfoPage({super.key});
@@ -162,6 +169,15 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
               transitionBetweenRoutes: false,
               backgroundColor: CupertinoColors.systemGroupedBackground,
               border: null,
+              trailing: CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: Text(S.of(context).KCDashboardBattleAllMap),
+                onPressed: () => showCupertinoModalBottomSheet(
+                  useRootNavigator: true,
+                  context: context,
+                  builder: (context) => BattleInfoAllMapView(data: data),
+                ),
+              ),
               middle: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -225,72 +241,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CupertinoButton(
-                            color: CupertinoDynamicColor.resolve(
-                                CupertinoColors
-                                    .secondarySystemGroupedBackground,
-                                context),
-                            minSize: CupertinoTheme.of(context)
-                                .textTheme
-                                .tabLabelTextStyle
-                                .fontSize,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 20),
-                            onPressed: () {
-                              final mapState = data.mapStateMap?[battleInfo.mapInfo!.id];
-                              showAdaptiveDialog(
-                                context: context,
-                                barrierDismissible: true,
-                                builder: (context) => PointerInterceptor(
-                                  child: AlertDialog.adaptive(
-                                    title: Text('${battleInfo.mapInfo?.name}'),
-                                    content: mapState == null ? null : SizedBox(
-                                      height: 80,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          if (mapState.rank != null) Text(mapState.rankName),
-                                          Text("${mapState.now}/${mapState.max}"),
-                                          LinearPercentIndicator(
-                                            lineHeight: 16,
-                                            percent: mapState.rate,
-                                            backgroundColor: CupertinoDynamicColor.resolve(
-                                                CupertinoColors.systemGroupedBackground, context),
-                                            animation: true,
-                                            animationDuration: 500,
-                                            barRadius: const Radius.circular(8),
-                                            animateFromLastPercent: true,
-                                            progressColor: mapState.color,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: [
-                                      adaptiveAction(
-                                          context: context,
-                                          child: Text(S.of(context).TextYes),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          })
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                Text(
-                                  "${battleInfo.mapInfo?.areaId} - ${battleInfo.mapInfo?.num}",
-                                  style: CupertinoTheme.of(context)
-                                      .textTheme
-                                      .textStyle
-                                      .merge(TextStyle(
-                                          color: CupertinoColors.label
-                                              .resolveFrom(context))),
-                                ),
-                              ],
-                            ),
-                          ),
+                          MapInfoButton(data: data, battleInfo: battleInfo),
                           if (routeName != '')
                             Text(
                               routeName,
@@ -339,6 +290,174 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
     }
 
     return routeName;
+  }
+}
+
+class MapInfoButton extends StatelessWidget {
+  const MapInfoButton({
+    super.key,
+    required this.data,
+    required this.battleInfo,
+  });
+
+  final KancolleData data;
+  final BattleInfo battleInfo;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+      color: CupertinoDynamicColor.resolve(
+          CupertinoColors
+              .secondarySystemGroupedBackground,
+          context),
+      minSize: CupertinoTheme.of(context)
+          .textTheme
+          .tabLabelTextStyle
+          .fontSize,
+      padding: const EdgeInsets.symmetric(
+          vertical: 4, horizontal: 20),
+      onPressed: () {
+        final mapState =
+            data.mapStateMap?[battleInfo.mapInfo!.id];
+        showAdaptiveDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) => PointerInterceptor(
+            child: AlertDialog.adaptive(
+              title: Text('${battleInfo.mapInfo?.name}'),
+              content: mapState == null
+                  ? null
+                  : SizedBox(
+                      height: 80,
+                      child: Column(
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                        children: [
+                          if (mapState.rank != null)
+                            Text(mapState.rankName),
+                          Text(
+                              "${mapState.now}/${mapState.max}"),
+                          LinearPercentIndicator(
+                            lineHeight: 16,
+                            percent: mapState.rate,
+                            backgroundColor:
+                                CupertinoDynamicColor.resolve(
+                                    CupertinoColors
+                                        .systemGroupedBackground,
+                                    context),
+                            animation: true,
+                            animationDuration: 500,
+                            barRadius:
+                                const Radius.circular(8),
+                            animateFromLastPercent: true,
+                            progressColor: mapState.color,
+                          ),
+                        ],
+                      ),
+                    ),
+              actions: [
+                adaptiveAction(
+                    context: context,
+                    child: Text(S.of(context).TextYes),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    })
+              ],
+            ),
+          ),
+        );
+      },
+      child: Row(
+        children: [
+          Text(
+            "${battleInfo.mapInfo?.areaCode} - ${battleInfo.mapInfo?.num}",
+            style: CupertinoTheme.of(context)
+                .textTheme
+                .textStyle
+                .merge(TextStyle(
+                    color: CupertinoColors.label
+                        .resolveFrom(context))),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BattleInfoAllMapView extends StatelessWidget {
+  const BattleInfoAllMapView({
+    super.key,
+    required this.data,
+  });
+
+  final KancolleData data;
+
+  String mapName(MapState mapState) {
+    final area = data.dataInfo.mapAreaInfo?[mapState.areaId];
+    if (area != null) {
+      final map = area.map.singleWhere((element) => element.id == mapState.id, orElse: () => kDefaultMap);
+      if (mapState.rank != null) {
+        return "${map.name} - ${mapState.rankName}";
+      }
+      return map.name;
+    }
+    return "";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mapStates = data.mapStateMap;
+    
+    return PointerInterceptor(
+      child: Scaffold(
+        body: CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text(S.of(context).KCDashboardBattleAllMap),
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: Builder(
+              builder: (context) {
+                if (mapStates == null) {
+                  return const Center(child: CupertinoActivityIndicator(radius: 20));
+                }
+                return ScrollViewWithCupertinoScrollbar(
+                  children: [
+                    CupertinoListSection.insetGrouped(
+                      children: mapStates.values.map((mapState) {
+                        return CupertinoListTile(
+                          leading: Text(mapState.mapCode),
+                          leadingSize: 32,
+                          title: Text(mapName(mapState)),
+                          subtitle: LinearPercentIndicator(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            lineHeight: 12,
+                            percent: mapState.rate,
+                            backgroundColor:
+                            CupertinoDynamicColor.resolve(
+                                CupertinoColors
+                                    .systemGroupedBackground,
+                                context),
+                            animation: true,
+                            animationDuration: 500,
+                            barRadius:
+                            const Radius.circular(8),
+                            animateFromLastPercent: true,
+                            progressColor: mapState.color,
+                            trailing: Text("${mapState.now}/${mapState.max}",
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    )
+                  ],
+                );
+              }
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

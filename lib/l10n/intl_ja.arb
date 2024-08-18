@@ -132,6 +132,8 @@
   "@JsonExample": {},
   "KCAkashiStudio": "明石アトリエ",
   "@KCAkashiStudio": {},
+  "KCDashboardBattleAllMap": "全海域",
+  "@KCDashboardBattleAllMap": {},
   "KCDashboardBattleDescription": "現在、通常艦隊対通常艦隊の昼戦と夜戦（開幕夜戦不能）の中で、航空戦、対潜戦、砲撃戦、雷撃戦のみが解析可能です。",
   "@KCDashboardBattleDescription": {},
   "KCDashboardBattleReport": "戦闘情報",

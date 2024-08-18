@@ -27,11 +27,19 @@ class MapState with _$MapState {
   double get rate => (now ?? 0) / (max ?? 1);
 
   Color get color => switch (type) {
-    1 => AppColor.verdigris,
-    2 => AppColor.indianRed,
-    3 => Colors.lightGreen,
-    _ => Colors.grey,
-  };
+        1 => AppColor.verdigris,
+        2 => AppColor.indianRed,
+        3 => Colors.lightGreen,
+        _ => Colors.grey,
+      };
+
+  String get mapCode => id.toString().length > 2
+      ? 'E-${id.toString().substring(2)}'
+      : id.toString().length == 2
+          ? '${id.toString()[0]}-${id.toString()[1]}'
+          : '';
+
+  int get areaId => id ~/ 10;
 
   factory MapState.fromJson(Map<String, dynamic> json) =>
       _$MapStateFromJson(json);

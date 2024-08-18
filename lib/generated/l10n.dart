@@ -710,6 +710,16 @@ class S {
     );
   }
 
+  /// `Maps`
+  String get KCDashboardBattleAllMap {
+    return Intl.message(
+      'Maps',
+      name: 'KCDashboardBattleAllMap',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.`
   String get KCDashboardBattleDescription {
     return Intl.message(
