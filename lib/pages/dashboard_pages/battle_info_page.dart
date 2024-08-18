@@ -409,51 +409,58 @@ class BattleInfoAllMapView extends StatelessWidget {
     final mapStates = data.mapStateMap;
     
     return PointerInterceptor(
-      child: Scaffold(
-        body: CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: Text(S.of(context).KCDashboardBattleAllMap),
-          ),
-          child: SafeArea(
-            bottom: false,
-            child: Builder(
-              builder: (context) {
-                if (mapStates == null) {
-                  return const Center(child: CupertinoActivityIndicator(radius: 20));
-                }
-                return ScrollViewWithCupertinoScrollbar(
-                  children: [
-                    CupertinoListSection.insetGrouped(
-                      children: mapStates.values.map((mapState) {
-                        return CupertinoListTile(
-                          leading: Text(mapState.mapCode),
-                          leadingSize: 32,
-                          title: Text(mapName(mapState)),
-                          subtitle: LinearPercentIndicator(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            lineHeight: 12,
-                            percent: mapState.rate,
-                            backgroundColor:
-                            CupertinoDynamicColor.resolve(
-                                CupertinoColors
-                                    .systemGroupedBackground,
-                                context),
-                            animation: true,
-                            animationDuration: 500,
-                            barRadius:
-                            const Radius.circular(8),
-                            animateFromLastPercent: true,
-                            progressColor: mapState.color,
-                            trailing: Text("${mapState.now}/${mapState.max}",
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    )
-                  ],
-                );
+      child: CupertinoPageScaffold(
+        backgroundColor: CupertinoDynamicColor.resolve(
+            CupertinoColors.systemGroupedBackground,
+            context),
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(S.of(context).KCDashboardBattleAllMap),
+        ),
+        child: SafeArea(
+          bottom: false,
+          child: Builder(
+            builder: (context) {
+              if (mapStates == null) {
+                return const Center(child: CupertinoActivityIndicator(radius: 20));
               }
-            ),
+              return ScrollViewWithCupertinoScrollbar(
+                children: [
+                  CupertinoListSection.insetGrouped(
+                    // backgroundColor: CupertinoDynamicColor.resolve(
+                    //     CupertinoTheme.of(context).scaffoldBackgroundColor,
+                    //     context),
+                    children: mapStates.values.map((mapState) {
+                      return CupertinoListTile(
+                        // backgroundColor: CupertinoDynamicColor.resolve(
+                        //     CupertinoColors.secondarySystemGroupedBackground,
+                        //     context),
+                        leading: Text(mapState.mapCode, style: CupertinoTheme.of(context).textTheme.textStyle,),
+                        leadingSize: 32,
+                        title: Text(mapName(mapState)),
+                        subtitle: LinearPercentIndicator(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          lineHeight: 12,
+                          percent: mapState.rate,
+                          backgroundColor:
+                          CupertinoDynamicColor.resolve(
+                              CupertinoColors
+                                  .systemGroupedBackground,
+                              context),
+                          animation: true,
+                          animationDuration: 500,
+                          barRadius:
+                          const Radius.circular(8),
+                          animateFromLastPercent: true,
+                          progressColor: mapState.color,
+                          trailing: mapState.cleared ? Text(S.of(context).KCDashboardBattleMapStateCleared) : Text("${mapState.now}/${mapState.max}",
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  )
+                ],
+              );
+            }
           ),
         ),
       ),

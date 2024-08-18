@@ -14,6 +14,8 @@
   "@ActiveMainWebPage": {},
   "AddDataSource": "添加數據源",
   "@AddDataSource": {},
+  "KCDashboardBattleMapStateCleared": "已攻略",
+  "@KCDashboardBattleMapStateCleared": {},
   "AdvancedGameSupport": "高級遊戲支援",
   "@AdvancedGameSupport": {},
   "AdvancedGameSupportDescription": "本團隊未運營任何遊戲，該功能基於公開數據和第三方庫、web運行環境實現，不能保證準確性。如果你有想要我們支援的遊戲及功能，歡迎聯繫技術支援。",

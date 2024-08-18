@@ -136,6 +136,8 @@
   "@KCDashboardBattleAllMap": {},
   "KCDashboardBattleDescription": "目前只有通常舰队对通常舰队的一般战斗数据中的航空战、反潜战、炮击战、雷击战可以解析。",
   "@KCDashboardBattleDescription": {},
+  "KCDashboardBattleMapStateCleared": "已攻略",
+  "@KCDashboardBattleMapStateCleared": {},
   "KCDashboardBattleReport": "战斗报告",
   "@KCDashboardBattleReport": {},
   "KCDashboardCommand": "司令部",

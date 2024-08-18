@@ -134,6 +134,8 @@
   "@KCAkashiStudio": {},
   "KCDashboardBattleAllMap": "Maps",
   "@KCDashboardBattleAllMap": {},
+  "KCDashboardBattleMapStateCleared": "Cleared",
+  "@KCDashboardBattleMapStateCleared": {},
   "KCDashboardBattleDescription": "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.",
   "@KCDashboardBattleDescription": {},
   "KCDashboardBattleReport": "Report",

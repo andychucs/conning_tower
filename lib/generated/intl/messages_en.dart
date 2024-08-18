@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("Maps"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed."),
+        "KCDashboardBattleMapStateCleared":
+            MessageLookupByLibrary.simpleMessage("Cleared"),
         "KCDashboardBattleReport":
             MessageLookupByLibrary.simpleMessage("Report"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("Command"),

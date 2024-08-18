@@ -124,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("全海域"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "目前只有通常舰队对通常舰队的一般战斗数据中的航空战、反潜战、炮击战、雷击战可以解析。"),
+        "KCDashboardBattleMapStateCleared":
+            MessageLookupByLibrary.simpleMessage("已攻略"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("战斗报告"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("舰队"),
