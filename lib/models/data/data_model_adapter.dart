@@ -46,4 +46,10 @@ class DataModelAdapter {
         GetMemberMapinfoEntity.source => GetMemberMapinfoEntity.fromJson(json),
         _ => null,
       };
+
+  static Object? requestToEntity(String source, Map<String, dynamic>? json) =>
+      switch (source) {
+        ReqHenseiChangeBodyEntity.source => ReqHenseiChangeBodyEntity.fromJson(json!),
+        _ => null,
+      };
 }

@@ -128,7 +128,30 @@ class KancolleData {
       battleLog?.data.add(rawData.decoded);
     }
 
-    dynamic model = DataModelAdapter.toEntity(path, json);
+    final model = DataModelAdapter.toEntity(path, json);
+    final requestBody = DataModelAdapter.requestToEntity(path, params);
+
+    if (requestBody is ReqHenseiChangeBodyEntity) {
+      final squadIdx = requestBody.apiId! - 1;
+      if (requestBody.apiShipId! == -1) {
+        squads[squadIdx].ships.removeAt(requestBody.apiShipIdx!);
+      } else if (requestBody.apiShipId! == -2) {
+        squads[squadIdx].ships.removeRange(1, squads[squadIdx].ships.length);
+      } else {
+        final ship = fleet.ships.firstWhere((element) => element.uid == requestBody.apiShipId);
+        if (squads[squadIdx].ships.contains(ship)) {
+          final originShip = squads[squadIdx].ships[requestBody.apiShipIdx!];
+          final fromIdx = squads[squadIdx].ships.indexOf(ship);
+          squads[squadIdx].ships[fromIdx] = originShip;
+        }
+
+        if (requestBody.apiShipIdx! >= squads[squadIdx].ships.length) {
+          squads[squadIdx].ships.add(ship);
+        } else {
+          squads[squadIdx].ships[requestBody.apiShipIdx!] = ship;
+        }
+      }
+    }
 
     if (model == null) {
       if (isBattleAPI(path) && !path.contains("/goback_port")) {
