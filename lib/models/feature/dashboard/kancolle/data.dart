@@ -438,7 +438,6 @@ class KancolleData {
         if (ship.damaged()) {
           shipsDamaged.add("${squad.name}-${ship.name}");
           log("${squad.name}-${ship.name} 大破");
-          FirebaseCrashlytics.instance.log("${squad.name}-${ship.name} 大破");
           // break;
         }
       }

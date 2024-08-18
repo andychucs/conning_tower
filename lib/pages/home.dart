@@ -187,10 +187,6 @@ class HomePageState extends ConsumerState<HomePage> {
     ref.listen(alertStateProvider, (previous, Alert next) {
       log(next.toString());
       if (next.title != "") {
-        if (next['title'] == null) {
-          FirebaseCrashlytics.instance.log(next.toString());
-          FirebaseCrashlytics.instance.recordError("alert no title", null);
-        }
         HapticFeedback.heavyImpact();
         List<Widget> actions = [
           adaptiveAction(
@@ -225,10 +221,11 @@ class HomePageState extends ConsumerState<HomePage> {
             adaptiveAction(
               context: context,
               child: Text(
-                              S.of(context).AppControlsReload,
-                              style: const TextStyle(color: CupertinoColors.activeBlue),
-                            ),
-                            onPressed: (){
+                S.of(context).AppControlsReload,
+                style: const TextStyle(
+                    color: CupertinoColors.activeBlue),
+              ),
+              onPressed: () {
                 ref.read(webControllerProvider.notifier).reload();
                 Navigator.of(context).pop();
               },
