@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/data/kcwiki/map_data.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
@@ -34,7 +35,8 @@ import '../../widgets/dialog.dart';
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
     EdgeInsetsDirectional.fromSTEB(8.0, 5.0, 8.0, 5.0);
 
-const kDefaultMap = MapInfo(id: 0, num: 0, areaId: 0, name: '', operationName: '');
+const kDefaultMap =
+    MapInfo(id: 0, num: 0, areaId: 0, name: '', operationName: '');
 
 class BattleInfoPage extends ConsumerStatefulWidget {
   const BattleInfoPage({super.key});
@@ -207,6 +209,16 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                       '${battleInfo.dropItemName ?? useItemData?[battleInfo.dropItemId]?.apiName} GET!',
                       style: TextStyle(fontWeight: FontWeight.normal),
                     ),
+                  if (battleInfo.mapRoute != null &&
+                      battleInfo.formation == null)
+                    Text(
+                      S.of(context).KCDashboardBattleLastChosen(
+                          BattleInfo.getFormationText(
+                              objectbox.getRouteFormation(
+                                  battleInfo.mapInfo?.id,
+                                  battleInfo.mapRoute))),
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    ),
                 ],
               ),
             ),
@@ -307,18 +319,11 @@ class MapInfoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       color: CupertinoDynamicColor.resolve(
-          CupertinoColors
-              .secondarySystemGroupedBackground,
-          context),
-      minSize: CupertinoTheme.of(context)
-          .textTheme
-          .tabLabelTextStyle
-          .fontSize,
-      padding: const EdgeInsets.symmetric(
-          vertical: 4, horizontal: 20),
+          CupertinoColors.secondarySystemGroupedBackground, context),
+      minSize: CupertinoTheme.of(context).textTheme.tabLabelTextStyle.fontSize,
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
       onPressed: () {
-        final mapState =
-            data.mapStateMap?[battleInfo.mapInfo!.id];
+        final mapState = data.mapStateMap?[battleInfo.mapInfo!.id];
         showAdaptiveDialog(
           context: context,
           barrierDismissible: true,
@@ -330,25 +335,19 @@ class MapInfoButton extends StatelessWidget {
                   : SizedBox(
                       height: 80,
                       child: Column(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          if (mapState.rank != null)
-                            Text(mapState.rankName),
-                          Text(
-                              "${mapState.now}/${mapState.max}"),
+                          if (mapState.rank != null) Text(mapState.rankName),
+                          Text("${mapState.now}/${mapState.max}"),
                           LinearPercentIndicator(
                             lineHeight: 16,
                             percent: mapState.rate,
-                            backgroundColor:
-                                CupertinoDynamicColor.resolve(
-                                    CupertinoColors
-                                        .systemGroupedBackground,
-                                    context),
+                            backgroundColor: CupertinoDynamicColor.resolve(
+                                CupertinoColors.systemGroupedBackground,
+                                context),
                             animation: true,
                             animationDuration: 500,
-                            barRadius:
-                                const Radius.circular(8),
+                            barRadius: const Radius.circular(8),
                             animateFromLastPercent: true,
                             progressColor: mapState.color,
                           ),
@@ -371,12 +370,8 @@ class MapInfoButton extends StatelessWidget {
         children: [
           Text(
             "${battleInfo.mapInfo?.areaCode} - ${battleInfo.mapInfo?.num}",
-            style: CupertinoTheme.of(context)
-                .textTheme
-                .textStyle
-                .merge(TextStyle(
-                    color: CupertinoColors.label
-                        .resolveFrom(context))),
+            style: CupertinoTheme.of(context).textTheme.textStyle.merge(
+                TextStyle(color: CupertinoColors.label.resolveFrom(context))),
           ),
         ],
       ),
@@ -395,7 +390,8 @@ class BattleInfoAllMapView extends StatelessWidget {
   String mapName(MapState mapState) {
     final area = data.dataInfo.mapAreaInfo?[mapState.areaId];
     if (area != null) {
-      final map = area.map.singleWhere((element) => element.id == mapState.id, orElse: () => kDefaultMap);
+      final map = area.map.singleWhere((element) => element.id == mapState.id,
+          orElse: () => kDefaultMap);
       if (mapState.rank != null) {
         return "${map.name} - ${mapState.rankName}";
       }
@@ -407,61 +403,62 @@ class BattleInfoAllMapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mapStates = data.mapStateMap;
-    
+
     return PointerInterceptor(
       child: CupertinoPageScaffold(
         backgroundColor: CupertinoDynamicColor.resolve(
-            CupertinoColors.systemGroupedBackground,
-            context),
+            CupertinoColors.systemGroupedBackground, context),
         navigationBar: CupertinoNavigationBar(
           middle: Text(S.of(context).KCDashboardBattleAllMap),
         ),
         child: SafeArea(
           bottom: false,
-          child: Builder(
-            builder: (context) {
-              if (mapStates == null) {
-                return const Center(child: CupertinoActivityIndicator(radius: 20));
-              }
-              return ScrollViewWithCupertinoScrollbar(
-                children: [
-                  CupertinoListSection.insetGrouped(
-                    // backgroundColor: CupertinoDynamicColor.resolve(
-                    //     CupertinoTheme.of(context).scaffoldBackgroundColor,
-                    //     context),
-                    children: mapStates.values.map((mapState) {
-                      return CupertinoListTile(
-                        // backgroundColor: CupertinoDynamicColor.resolve(
-                        //     CupertinoColors.secondarySystemGroupedBackground,
-                        //     context),
-                        leading: Text(mapState.mapCode, style: CupertinoTheme.of(context).textTheme.textStyle,),
-                        leadingSize: 32,
-                        title: Text(mapName(mapState)),
-                        subtitle: LinearPercentIndicator(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          lineHeight: 12,
-                          percent: mapState.rate,
-                          backgroundColor:
-                          CupertinoDynamicColor.resolve(
-                              CupertinoColors
-                                  .systemGroupedBackground,
-                              context),
-                          animation: true,
-                          animationDuration: 500,
-                          barRadius:
-                          const Radius.circular(8),
-                          animateFromLastPercent: true,
-                          progressColor: mapState.color,
-                          trailing: mapState.now == null ? Text(S.of(context).KCDashboardBattleMapStateCleared) : Text("${mapState.now}/${mapState.max}",
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  )
-                ],
-              );
+          child: Builder(builder: (context) {
+            if (mapStates == null) {
+              return const Center(
+                  child: CupertinoActivityIndicator(radius: 20));
             }
-          ),
+            return ScrollViewWithCupertinoScrollbar(
+              children: [
+                CupertinoListSection.insetGrouped(
+                  // backgroundColor: CupertinoDynamicColor.resolve(
+                  //     CupertinoTheme.of(context).scaffoldBackgroundColor,
+                  //     context),
+                  children: mapStates.values.map((mapState) {
+                    return CupertinoListTile(
+                      // backgroundColor: CupertinoDynamicColor.resolve(
+                      //     CupertinoColors.secondarySystemGroupedBackground,
+                      //     context),
+                      leading: Text(
+                        mapState.mapCode,
+                        style: CupertinoTheme.of(context).textTheme.textStyle,
+                      ),
+                      leadingSize: 32,
+                      title: Text(mapName(mapState)),
+                      subtitle: LinearPercentIndicator(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        lineHeight: 12,
+                        percent: mapState.rate,
+                        backgroundColor: CupertinoDynamicColor.resolve(
+                            CupertinoColors.systemGroupedBackground, context),
+                        animation: true,
+                        animationDuration: 500,
+                        barRadius: const Radius.circular(8),
+                        animateFromLastPercent: true,
+                        progressColor: mapState.color,
+                        trailing: mapState.now == null
+                            ? Text(
+                                S.of(context).KCDashboardBattleMapStateCleared)
+                            : Text(
+                                "${mapState.now}/${mapState.max}",
+                              ),
+                      ),
+                    );
+                  }).toList(),
+                )
+              ],
+            );
+          }),
         ),
       ),
     );

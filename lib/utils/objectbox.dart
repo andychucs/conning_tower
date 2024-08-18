@@ -57,6 +57,22 @@ class ObjectBox {
         routeId: routeId, mapId: mapId, formation: formation));
   }
 
+  int getRouteFormation(int? mapId, int? routeId) {
+    if (mapId == null || routeId == null) {
+      return -1;
+    }
+    Query<KancolleRouteLogEntity> query = routeLog
+        .query(KancolleRouteLogEntity_.mapId
+            .equals(mapId)
+            .and(KancolleRouteLogEntity_.routeId.equals(routeId)))
+        .build();
+    List<KancolleRouteLogEntity>? logs = query.find();
+    if (logs.isNotEmpty) {
+      return logs.first.formation;
+    }
+    return -1;
+  }
+
   void close() {
     store.close();
   }

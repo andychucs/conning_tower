@@ -22,17 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "載入網址: ${url}";
 
-  static String m1(count) => "艦娘數: ${count}";
+  static String m1(data) => "上次選擇: ${data}";
 
-  static String m2(url) => "正在加載 ${url}";
+  static String m2(count) => "艦娘數: ${count}";
 
-  static String m3(url) => "頁面加載完畢: ${url}";
+  static String m3(url) => "正在加載 ${url}";
 
-  static String m4(url) => "頁面開始載入 ${url}";
+  static String m4(url) => "頁面加載完畢: ${url}";
 
-  static String m5(taskTitle) => "${taskTitle} 已完成。";
+  static String m5(url) => "頁面開始載入 ${url}";
 
-  static String m6(length) => "${length}條資源日誌將導入";
+  static String m6(taskTitle) => "${taskTitle} 已完成。";
+
+  static String m7(length) => "${length}條資源日誌將導入";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -124,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("全海域"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "目前只有通常艦隊對通常艦隊的一般戰鬥數據中的航空戰、反潛戰、砲擊戰、雷擊戰可以解析。"),
+        "KCDashboardBattleLastChosen": m1,
         "KCDashboardBattleMapStateCleared":
             MessageLookupByLibrary.simpleMessage("已攻略"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戰鬥報告"),
@@ -166,7 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("火雷值"),
         "KCDashboardShipUpgradeLevel":
             MessageLookupByLibrary.simpleMessage("改造等級"),
-        "KCDashboardShipViewerCount": m1,
+        "KCDashboardShipViewerCount": m2,
         "KCDashboardShipViewerFilterShipClass":
             MessageLookupByLibrary.simpleMessage("艦級"),
         "KCDashboardShipViewerFilterShipSlot":
@@ -241,17 +244,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("遊戲視窗載入中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("遊戲視窗的重載已被攔截"),
-        "KCViewFuncMsgNavi": m2,
+        "KCViewFuncMsgNavi": m3,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("遊戲加載完成"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("遊戲加載失敗"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("遊戲未加載完畢"),
-        "KCViewFuncMsgPageFinished": m3,
+        "KCViewFuncMsgPageFinished": m4,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("當前頁面為遊戲url"),
-        "KCViewFuncMsgPageStart": m4,
+        "KCViewFuncMsgPageStart": m5,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("資料監聽"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日誌"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("淺色主題"),
@@ -302,7 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("狀態碼"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),
-        "TaskCompleted": m5,
+        "TaskCompleted": m6,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任務提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任務"),
         "TaskNotificationAdded":
@@ -337,7 +340,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("導入"),
         "TextImportResourceFromPoi":
             MessageLookupByLibrary.simpleMessage("從poi的CSV文件導入資源日誌"),
-        "TextImportResourceNumberCheck": m6,
+        "TextImportResourceNumberCheck": m7,
         "TextImportResourceWarning":
             MessageLookupByLibrary.simpleMessage("確認是否要導入?"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("正在導入"),

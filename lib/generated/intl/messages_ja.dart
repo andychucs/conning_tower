@@ -22,17 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "URLをロード: ${url}";
 
-  static String m1(count) => "艦娘数: ${count}";
+  static String m1(data) => "前の選択: ${data}";
 
-  static String m2(url) => "Now navigation to ${url}";
+  static String m2(count) => "艦娘数: ${count}";
 
-  static String m3(url) => "ページの読み込みが完了しました: ${url}";
+  static String m3(url) => "Now navigation to ${url}";
 
-  static String m4(url) => "ページの読み込み開始:${url}";
+  static String m4(url) => "ページの読み込みが完了しました: ${url}";
 
-  static String m5(taskTitle) => "${taskTitle} が完了しました。";
+  static String m5(url) => "ページの読み込み開始:${url}";
 
-  static String m6(length) => "${length}個のデーターをインポートします。";
+  static String m6(taskTitle) => "${taskTitle} が完了しました。";
+
+  static String m7(length) => "${length}個のデーターをインポートします。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -135,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("全海域"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "現在、通常艦隊対通常艦隊の昼戦と夜戦（開幕夜戦不能）の中で、航空戦、対潜戦、砲撃戦、雷撃戦のみが解析可能です。"),
+        "KCDashboardBattleLastChosen": m1,
         "KCDashboardBattleMapStateCleared":
             MessageLookupByLibrary.simpleMessage("攻略済み"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),
@@ -177,7 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("火力雷装合計"),
         "KCDashboardShipUpgradeLevel":
             MessageLookupByLibrary.simpleMessage("改造レベル"),
-        "KCDashboardShipViewerCount": m1,
+        "KCDashboardShipViewerCount": m2,
         "KCDashboardShipViewerFilterShipClass":
             MessageLookupByLibrary.simpleMessage("艦級"),
         "KCDashboardShipViewerFilterShipSlot":
@@ -253,17 +256,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームのロード中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("ゲームのリフレッシュは中断されました"),
-        "KCViewFuncMsgNavi": m2,
+        "KCViewFuncMsgNavi": m3,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("ゲームの読み込みに失敗しました"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードはまだ完了しません"),
-        "KCViewFuncMsgPageFinished": m3,
+        "KCViewFuncMsgPageFinished": m4,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
-        "KCViewFuncMsgPageStart": m4,
+        "KCViewFuncMsgPageStart": m5,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("データリスナー"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日誌"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
@@ -316,7 +319,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
-        "TaskCompleted": m5,
+        "TaskCompleted": m6,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("タスク"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("タスクが追加されていません"),
         "TaskNotificationAdded":
@@ -352,7 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("インポート"),
         "TextImportResourceFromPoi":
             MessageLookupByLibrary.simpleMessage("POIからのCSVファイルでリソースをインポート"),
-        "TextImportResourceNumberCheck": m6,
+        "TextImportResourceNumberCheck": m7,
         "TextImportResourceWarning":
             MessageLookupByLibrary.simpleMessage("インポートを実行しますか？"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("インポート中"),
