@@ -57,6 +57,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
     final nowJstTime = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
 
     return SafeArea(
+      bottom: false,
       child: Padding(
         padding: tabContentMargin,
         child: ClipRRect(
@@ -70,15 +71,15 @@ class _PortInfoState extends ConsumerState<PortInfo>
                     // 1 column width about 120 ~ 240
                     int crossAxisCount = 2;
                     if (constraints.maxWidth < 250) crossAxisCount = 1;
-                    if (constraints.maxWidth > 400) {
-                      crossAxisCount = (constraints.maxWidth / 200).ceil();
+                    if (constraints.maxWidth > 390) {
+                      crossAxisCount = (constraints.maxWidth / 190).ceil();
                     }
                     print(constraints.maxWidth);
 
                     return CupertinoScrollbar(
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 10.0, 5.0, 10.0),
+                            0.0, 10.0, 0.0, 10.0),
                         child: CustomScrollView(
                           slivers: <Widget>[
                             SliverPadding(
@@ -166,8 +167,13 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
-                                          child: Text(
-                                              S.of(context).KCAkashiStudio),
+                                          child: AutoSizeText(
+                                            S.of(context).KCAkashiStudio,
+                                            maxFontSize: 30,
+                                            minFontSize: 12,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
                                         const CupertinoListTileChevron(),
                                       ],

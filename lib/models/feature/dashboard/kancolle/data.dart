@@ -17,11 +17,9 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
-import 'package:conning_tower/providers/dashboard_controller.dart';
 import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/utils/notification_util.dart';
-import 'package:flutter/animation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,6 +48,7 @@ class KancolleData {
   final BattleInfo battleInfo;
   KancolleBattleLog? battleLog;
   QuestAssistant? questAssistant;
+  List<Squad>? battleSquads;
 
   KancolleData({
     required this.queue,
@@ -61,6 +60,7 @@ class KancolleData {
     required this.battleInfo,
     this.battleLog,
     this.questAssistant,
+    this.battleSquads,
   });
 
   KancolleData copyWith({
@@ -82,6 +82,7 @@ class KancolleData {
       ref: ref ?? this.ref,
       battleLog: battleLog,
       questAssistant: questAssistant,
+      battleSquads: battleSquads,
     );
   }
 
@@ -95,6 +96,7 @@ class KancolleData {
   void parse(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
+    final params = rawData.params;
     if (data.isEmpty) {
       log("empty data");
       Fluttertoast.showToast(msg: "Network Error");
@@ -125,13 +127,22 @@ class KancolleData {
     dynamic model = DataModelAdapter().parseData(path, json);
 
     if (model == null) {
-      if (isBattleAPI(path)) {
+      if (isBattleAPI(path) && !path.contains("/goback_port")) {
         FirebaseCrashlytics.instance.log('no handler data $path : $data');
         try {
           FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null, fatal: true);
         } catch (e) {
           FirebaseCrashlytics.instance.log(e.toString());
         }
+      }
+    }
+
+    if (model is ReqHenseiCombinedEntity) {
+      if (model.apiData!.apiCombined! == 1) {
+        final combinedType = int.parse(params!["api_combined_type"]);
+        fleet.combined = combinedType;
+      } else {
+        fleet.combined = 0;
       }
     }
 
@@ -159,23 +170,7 @@ class KancolleData {
       }
     }
 
-    if (model is ReqCombinedBattleLdAirbattleEntity) {
-      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, squads);
-    }
-
-    if (model is ReqSortieAirbattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
-    }
-
-    if (model is ReqCombinedBattleECMidnightBattleEntity) {
-      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
-    }
-
-    if (model is ReqBattleMidnightSpMidnightEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
-    }
+    parseBattle(model);
 
     if (model is GetMemberQuestListEntity) {
       if (questAssistant == null) {
@@ -191,61 +186,6 @@ class KancolleData {
 
     if (model is ReqCombinedBattleResultEntity) {
       battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
-    }
-
-    if (model is ReqSortieLdAirbattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
-    }
-
-    if (model is ReqCombinedBattleECBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
-    }
-
-    if (model is ReqCombinedBattleMidnightBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleEachBattleEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleWaterEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqCombinedBattleEachWaterEntity) {
-      var inBattleSquads = [squads[0], squads[1]];
-      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
-    }
-
-    if (model is ReqPracticeMidnightBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
-    }
-
-    if (model is ReqPracticeBattleEntity) {
-      var squad = squads[model.apiData!.apiDeckId - 1];
-      battleInfo.parsePracticeBattle(model.apiData!, squad);
-    }
-
-    if (model is ReqBattleMidnightBattleEntity) {
-      var squad = squads[model.apiData.apiDeckId - 1];
-      battleInfo.parseReqBattleMidnightBattle(model.apiData, squad);
-    }
-
-    if (model is ReqSortieBattleEntity) {
-      var squad = squads[model.apiData.apiDeckId - 1];
-      battleInfo.parseReqSortieBattle(model.apiData, squad);
     }
 
     if (model is ReqSortieBattleResultEntity) {
@@ -277,14 +217,21 @@ class KancolleData {
 
     if (model is ReqMapNextEntity) {
       log("Next");
+      addAlert();
       battleInfo.clear();
       battleInfo.mapRoute = model.apiData.apiNo;
     }
 
     if (model is ReqMapStartEntity) {
       log("Start");
-      // final index = ref.read(settingsProvider).dashboardIndex;
-      // ref.read(dashboardControllerProvider(index)).animateToItem(5, duration: const Duration(milliseconds: 200), curve: Curves.ease);
+      final battleSquadIndex = int.parse(params?["api_deck_id"]);
+      if (battleSquadIndex == 1 && fleet.combined! > 0) {
+        battleSquads = [squads[0], squads[1]];
+      } else {
+        battleSquads = [squads[battleSquadIndex - 1]];
+      }
+      addAlert();
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       battleInfo.clear();
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
@@ -340,6 +287,7 @@ class KancolleData {
       }
       battleLog = null; // reset battle log
       updateFleetShips(model.apiData.apiShip);
+      fleet.combined = model.apiData.apiCombinedFlag;
 
       seaForceBase.updateAdmiralInfo(model.apiData.apiBasic);
       seaForceBase.updateMaterial(model.apiData.apiMaterial);
@@ -366,6 +314,84 @@ class KancolleData {
     }
   }
 
+  void parseBattle(model) {
+    if (model is ReqCombinedBattleLdAirbattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqSortieAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqSortieAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECMidnightBattleEntity) {
+      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, squads);
+    }
+
+    if (model is ReqBattleMidnightSpMidnightEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, squad);
+    }
+
+    if (model is ReqSortieLdAirbattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseSortieLdAirbattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleECBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parseCombinedBattleECBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqCombinedBattleMidnightBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachBattleEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleWater(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqCombinedBattleEachWaterEntity) {
+      var inBattleSquads = [squads[0], squads[1]];
+      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, inBattleSquads);
+    }
+
+    if (model is ReqPracticeMidnightBattleEntity) {
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeMidnightBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqPracticeBattleEntity) {
+      ref.read(settingsProvider.notifier).changeDashboardIndex(5);
+      var squad = squads[model.apiData!.apiDeckId - 1];
+      battleInfo.parsePracticeBattle(model.apiData!, squad);
+    }
+
+    if (model is ReqBattleMidnightBattleEntity) {
+      var squad = squads[model.apiData.apiDeckId - 1];
+      battleInfo.parseReqBattleMidnightBattle(model.apiData, squad);
+    }
+
+    if (model is ReqSortieBattleEntity) {
+      var squad = squads[model.apiData.apiDeckId - 1];
+      battleInfo.parseReqSortieBattle(model.apiData, squad);
+    }
+
+  }
+
   KancolleData parseWith(RawData rawData) {
     String source = rawData.source;
     String data = rawData.data;
@@ -384,8 +410,6 @@ class KancolleData {
         parse(rawData);
         newData = copyWith();
       }
-
-      if (_shouldAlertSource(source)) addAlert();
     } catch (e, s) {
       FirebaseCrashlytics.instance.log('Kancolle Data Parse Error at $source');
       FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error", fatal: true);
@@ -393,37 +417,35 @@ class KancolleData {
         rethrow;
       }
       String errorMsg = e.toString();
-      String st = '';
-      if (s.toString().contains('\n')) {
-        st = s.toString().split('\n').first;
-      }
-      errorMsg = '${S.current.DataErrorNotice}\n$errorMsg\n$st\nsource:$source\ndata:$data';
+      final errorData = {
+        "error": errorMsg,
+        "stack": s,
+        "source": source,
+        "data": data
+      };
       log(s.toString());
       ref
           .watch(alertStateProvider.notifier)
-          .update((state) => {"title": "Error", "content": errorMsg});
+          .update((state) => Alert("Error", S.current.DataErrorNotice, data: jsonEncode(errorData)));
     }
     return newData;
   }
 
   void addAlert() {
-    var sb = StringBuffer();
-    for (var squad in squads) {
+    List<String> shipsDamaged = [];
+    for (var squad in battleSquads!) {
       for (var ship in squad.ships) {
         if (ship.damaged()) {
-          sb.write("${squad.name}-${ship.name} 大破\n");
+          shipsDamaged.add("${squad.name}-${ship.name}");
           log("${squad.name}-${ship.name} 大破");
-          FirebaseCrashlytics.instance.log("${squad.name}-${ship.name} 大破");
           // break;
         }
       }
     }
-    if (sb.isNotEmpty) {
-      FirebaseCrashlytics.instance.log(squads.toString());
-      FirebaseCrashlytics.instance.log(sb.toString());
+    if (shipsDamaged.isNotEmpty) {
       ref
           .watch(alertStateProvider.notifier)
-          .update((state) => {"title": "大破", "content": sb.toString()});
+          .update((state) => Alert(S.current.TextLDamage, shipsDamaged.join("\n")));
     }
   }
 
@@ -515,11 +537,6 @@ class KancolleData {
       PortEntity.source,
       ReqMissionReturnInstructionEntity.source
     ].contains(source.split("kcsapi").last);
-  }
-
-  bool _shouldAlertSource(String source) {
-    return [ReqMapNextEntity.source, ReqMapStartEntity.source]
-        .contains(source.split("kcsapi").last);
   }
 
   void _setNotification(

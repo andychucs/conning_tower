@@ -148,7 +148,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
       ];
 
       if (widget.bottomTab) {
-        List<Tab> tabs = <Tab>[for (var i in widget.titles) Tab(child: Text(i))];
+        List<Tab> tabs = <Tab>[for (var i in widget.titles) Tab(height: 36,child: Text(i),)];
         List<Color> colors = <Color>[
           for (var index = 0; index < tabs.length; index++)
             AppColor.getGroupBeta(index)

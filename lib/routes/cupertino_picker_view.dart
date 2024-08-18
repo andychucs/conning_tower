@@ -26,26 +26,36 @@ class CupertinoPickerView extends ConsumerStatefulWidget {
 }
 
 class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
-  int _selectIndex = -1;
+  late int _selectIndex;
+  late FixedExtentScrollController _scrollController;
 
   @override
-  void dispose() {
-    _selectIndex = -1;
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_selectIndex == -1) {
-      _selectIndex = ref.watch(settingsProvider).dashboardIndex;
-    }
+  void initState() {
+    _selectIndex = localStorage.getInt("dashboardIndex") ?? 0;
     if (_selectIndex >= widget.items.length) {
       _selectIndex = widget.items.length - 1;
     }
     if (_selectIndex < 0) {
       _selectIndex = 0;
     }
-    final scrollController = ref.watch(dashboardControllerProvider(_selectIndex));
+    _scrollController = FixedExtentScrollController(initialItem: _selectIndex);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    ref.listen(settingsProvider, (prev, next) {
+      if (next.dashboardIndex != _selectIndex && next.dashboardIndex < widget.items.length) {
+        _scrollController.animateToItem(next.dashboardIndex, duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      }
+    });
+
     return OrientationBuilder(
       builder: (context, orientation) {
         return SafeArea(
@@ -57,16 +67,14 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
                 child: CupertinoGroupedSection(
                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 0.0, 10.0),
                   child: CupertinoPicker(
-                    scrollController: scrollController,
+                    scrollController: _scrollController,
                     useMagnifier: true,
                     itemExtent: widget.wideStyle ? 45 : 40,
                     onSelectedItemChanged: (int value) {
                       setState(() {
                         _selectIndex = value;
                         HapticFeedback.lightImpact();
-                        ref
-                            .watch(settingsProvider.notifier)
-                            .setInt("dashboardIndex", value);
+                        localStorage.setInt("dashboardIndex", _selectIndex);
                       });
                     },
                     children: widget.items,

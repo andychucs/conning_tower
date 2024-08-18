@@ -295,6 +295,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("屏幕方向設置"),
         "ShipData": MessageLookupByLibrary.simpleMessage("艦艇資料"),
+        "ShortTextAll": MessageLookupByLibrary.simpleMessage("全"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("狀態碼"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟隨系統"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截屏"),

@@ -86,7 +86,7 @@ class _KancolleItemImproveViewerState
       navigationBar: CupertinoNavigationBar(
         middle: CupertinoSlidingSegmentedControl<WeekdaySelector>(
           children: {
-            WeekdaySelector.all: Text(S.current.TextAll),
+            WeekdaySelector.all: Text(S.current.ShortTextAll),
             WeekdaySelector.monday: Text(DateFormat.EEEEE().format(monday)),
             WeekdaySelector.tuesday: Text(DateFormat.EEEEE().format(tuesday)),
             WeekdaySelector.wednesday:

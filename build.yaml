@@ -19,4 +19,4 @@ targets:
           field_rename: snake  # apiResult -> api_result
           generic_argument_factories: false
           ignore_unannotated: false
-          include_if_null: true
+          include_if_null: false

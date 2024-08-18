@@ -25,5 +25,7 @@
   "KCResources": "자원",
   "@KCResources": {},
   "SettingsButton": "설치",
-  "@SettingsButton": {}
+  "@SettingsButton": {},
+  "ShortTextAll": "전",
+  "@ShortTextAll": {}
 }

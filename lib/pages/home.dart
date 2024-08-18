@@ -37,6 +37,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:shake/shake.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -183,71 +184,69 @@ class HomePageState extends ConsumerState<HomePage> {
       log("listen kancolleDataProvider");
     });
 
-    ref.listen(alertStateProvider, (previous, Map<String, String> next) {
+    ref.listen(alertStateProvider, (previous, Alert next) {
       log(next.toString());
-      if (next.isNotEmpty) {
-        if (next['title'] == null) {
-          FirebaseCrashlytics.instance.log(next.toString());
-          FirebaseCrashlytics.instance.recordError("alert no title", null);
-        }
+      if (next.title != "") {
         HapticFeedback.heavyImpact();
-        if (Platform.isAndroid) {
-          showAdaptiveDialog(
+        List<Widget> actions = [
+          adaptiveAction(
+            context: context,
+            child: Text(
+              S.of(context).TextYes,
+              style: const TextStyle(
+                  color: CupertinoColors.destructiveRed),
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ];
+        if (next.title == "Error") {
+          actions.add(
+            adaptiveAction(
               context: context,
-              barrierDismissible: false,
-              builder: (builder) {
-                return AlertDialog.adaptive(
-                  title: Text(next["title"] ?? "empty error title"),
-                  content: SelectableText(next["content"] ?? "empty error content"),
-                  actions: [
-                    adaptiveAction(
-                      context: context,
-                      child: Text(
-                        S.of(context).TextYes,
-                        style: const TextStyle(
-                            color: CupertinoColors.destructiveRed),
-                      ),
-                      onPressed: () => Navigator.of(context).pop(),
-                    )
-                  ],
-                );
-              });
-        } else {
-          navigatorToCupertino(
-            context,
-            Scaffold(
-              body: CupertinoPageScaffold(
-                navigationBar: CupertinoNavigationBar(
-                  middle: Text(next["title"]!),
-                  backgroundColor: CupertinoColors.systemGroupedBackground,
-                ),
-                child: SafeArea(
-                  bottom: false,
-                  child: ListView(
-                    children: [
-                      CupertinoListSection.insetGrouped(
-                        footer: SelectableText(next["content"]!),
-                        children: [
-                          CupertinoListTile(
-                            title: Text(
-                              S.of(context).AppControlsReload,
-                              style: const TextStyle(color: CupertinoColors.activeBlue),
-                            ),
-                            trailing: const Icon(CupertinoIcons.refresh, color: CupertinoColors.activeBlue,),
-                            onTap: () =>
-                                ref.read(webControllerProvider.notifier).reload(),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+              child: Text(
+                S.of(context).TextCopyToClipboard,
+                style: const TextStyle(
+                    color: CupertinoColors.activeBlue),
               ),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await Clipboard.setData(ClipboardData(text: next.data ?? ""));
+                Fluttertoast.showToast(msg: S.current.TextCopyToClipboardSuccess);
+              },
             ),
           );
         }
+        if (next.title == S.current.TextLDamage) {
+          actions.add(
+            adaptiveAction(
+              context: context,
+              child: Text(
+                S.of(context).AppControlsReload,
+                style: const TextStyle(
+                    color: CupertinoColors.activeBlue),
+              ),
+              onPressed: () {
+                ref.read(webControllerProvider.notifier).reload();
+                Navigator.of(context).pop();
+              },
+            ),
+          );
+        }
+
+        showAdaptiveDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (builder) {
+              return PointerInterceptor(
+                child: AlertDialog.adaptive(
+                  title: Text(next.title),
+                  content:
+                  SelectableText(next.content),
+                  actions: actions,
+                ),
+              );
+            });
       }
-      next.clear();
     });
   }
 

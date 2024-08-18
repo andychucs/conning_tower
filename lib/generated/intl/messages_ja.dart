@@ -309,6 +309,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("画面の向きを設定する"),
         "ShipData": MessageLookupByLibrary.simpleMessage("艦船データ"),
+        "ShortTextAll": MessageLookupByLibrary.simpleMessage("全"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),

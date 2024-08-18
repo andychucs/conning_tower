@@ -31,7 +31,7 @@ class RawData with _$RawData {
       source: entity.source, data: jsonEncode(entity.data), timestamp: entity.timestamp);
 
   DataLogEntity get decoded => DataLogEntity(
-      timestamp: timestamp, source: source, data: jsonDecode(data));
+      timestamp: timestamp, source: source, data: jsonDecode(data), params: params);
 }
 
 @freezed
@@ -40,6 +40,7 @@ class DataLogEntity with _$DataLogEntity {
     required int timestamp,
     required String source,
     required Map<String, dynamic> data,
+    Map<String, dynamic>? params,
   }) = _DataLogEntity;
 
   factory DataLogEntity.fromJson(Map<String, dynamic> json) =>
