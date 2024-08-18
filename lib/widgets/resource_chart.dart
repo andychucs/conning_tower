@@ -63,6 +63,8 @@ class ResourceChartState extends State<ResourceChart> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        backgroundColor: CupertinoColors.systemGroupedBackground,
+        border: null,
         middle: Text(name),
         trailing: PullDownButton(
           useRootNavigator: true,
