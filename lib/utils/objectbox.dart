@@ -20,12 +20,14 @@ class ObjectBox {
   late final Box<KancolleBattleLogEntity> battleLog;
   late final Box<KancolleQuestLogEntity> questLog;
   late final Box<KancolleResourceLogEntity> resourceLog;
+  late final Box<KancolleRouteLogEntity> routeLog;
 
   ObjectBox._create(this.store) {
     // Add any additional setup code, e.g. build queries.
     battleLog = Box<KancolleBattleLogEntity>(store);
     questLog = Box<KancolleQuestLogEntity>(store);
     resourceLog = Box<KancolleResourceLogEntity>(store);
+    routeLog = Box<KancolleRouteLogEntity>(store);
   }
 
   /// Create an instance of ObjectBox to use throughout the app.
@@ -35,6 +37,40 @@ class ObjectBox {
     debugPrint(docsDir.toString());
     final store = await openStore(directory: p.join(docsDir.path, "obx"));
     return ObjectBox._create(store);
+  }
+
+  void saveRouteLog({
+    required int mapId,
+    required routeId,
+    required int formation,
+  }) {
+    Query<KancolleRouteLogEntity> query = routeLog
+        .query(KancolleRouteLogEntity_.mapId
+            .equals(mapId)
+            .and(KancolleRouteLogEntity_.routeId.equals(routeId)))
+        .build();
+    List<KancolleRouteLogEntity>? logs = query.find();
+    if (logs.isNotEmpty) {
+      routeLog.removeMany(logs.map((e) => e.id).toList());
+    }
+    routeLog.put(KancolleRouteLogEntity(
+        routeId: routeId, mapId: mapId, formation: formation));
+  }
+
+  int getRouteFormation(int? mapId, int? routeId) {
+    if (mapId == null || routeId == null) {
+      return -1;
+    }
+    Query<KancolleRouteLogEntity> query = routeLog
+        .query(KancolleRouteLogEntity_.mapId
+            .equals(mapId)
+            .and(KancolleRouteLogEntity_.routeId.equals(routeId)))
+        .build();
+    List<KancolleRouteLogEntity>? logs = query.find();
+    if (logs.isNotEmpty) {
+      return logs.first.formation;
+    }
+    return -1;
   }
 
   void close() {
@@ -188,12 +224,12 @@ class ObjectBox {
             .build();
       } else {
         query = resourceLog
-          .query(KancolleResourceLogEntity_.time
-              .betweenDate(startTime, now)
-              .and(KancolleResourceLogEntity_.resource
-                  .equals(resource)
-                  .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
-          .build();
+            .query(KancolleResourceLogEntity_.time
+                .betweenDate(startTime, now)
+                .and(KancolleResourceLogEntity_.resource
+                    .equals(resource)
+                    .and(KancolleResourceLogEntity_.admiral.equals(admiral))))
+            .build();
       }
     } else if (dayRange != null) {
       final start = now.subtract(Duration(days: dayRange));

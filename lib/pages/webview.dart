@@ -88,7 +88,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
                   debugPrint("onZoomScaleChanged $oldScale, $newScale");
                 },
                 onConsoleMessage: (controller, consoleMessage) {
-                  log(consoleMessage.message);
+                  //log(consoleMessage.message);
                 },
                 onNavigationResponse: (controller, response) async {
                   await webController.onNavigationResponse(response);

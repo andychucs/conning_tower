@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
@@ -71,11 +72,11 @@ class BattleInfo with _$BattleInfo {
   }
 
   String get enemyFormation {
-    return _getFormation(eFormation ?? 0);
+    return getFormationText(eFormation ?? 0);
   }
 
   String get ourFormation {
-    return _getFormation(formation ?? 0);
+    return getFormationText(formation ?? 0);
   }
 
   void airBaseAttackRound(AirBaseAttackRound? data) {
@@ -621,6 +622,9 @@ class BattleInfo with _$BattleInfo {
     formation = apiFormation[0];
     eFormation = apiFormation[1];
     contact = apiFormation[2];
+    if (mapInfo != null && mapRoute != null) {
+      objectbox.saveRouteLog(mapId: mapInfo!.id, routeId: mapRoute, formation: formation!);
+    }
   }
 
   void torpedoFireRoundWithItem(
@@ -699,43 +703,23 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  String _getFormation(int flag) {
+  static String getFormationText(int flag) {
     String formation;
 
-    switch (flag) {
-      case 1:
-        formation = "単縦陣";
-        break;
-      case 2:
-        formation = "複縦陣";
-        break;
-      case 3:
-        formation = "輪形陣";
-        break;
-      case 4:
-        formation = "梯形陣";
-        break;
-      case 5:
-        formation = "単横陣";
-        break;
-      case 6:
-        formation = "警戒陣";
-        break;
-      case 11:
-        formation = "第1警戒航行序列";
-        break;
-      case 12:
-        formation = "第2警戒航行序列";
-        break;
-      case 13:
-        formation = "第3警戒航行序列";
-        break;
-      case 14:
-        formation = "第4警戒航行序列";
-        break;
-      default:
-        formation = "";
-    }
+    formation = switch (flag) {
+      -1 => "N/A",
+      1 => "単縦陣",
+      2 => "複縦陣",
+      3 => "輪形陣",
+      4 => "梯形陣",
+      5 => "単横陣",
+      6 => "警戒陣",
+      11 => "第1警戒航行序列",
+      12 => "第2警戒航行序列",
+      13 => "第3警戒航行序列",
+      14 => "第4警戒航行序列",
+      _ => ""
+    };
 
     return formation;
   }

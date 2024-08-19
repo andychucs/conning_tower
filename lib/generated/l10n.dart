@@ -720,21 +720,31 @@ class S {
     );
   }
 
-  /// `Cleared`
-  String get KCDashboardBattleMapStateCleared {
-    return Intl.message(
-      'Cleared',
-      name: 'KCDashboardBattleMapStateCleared',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.`
   String get KCDashboardBattleDescription {
     return Intl.message(
       'Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed.',
       name: 'KCDashboardBattleDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Chosen: {data}`
+  String KCDashboardBattleLastChosen(Object data) {
+    return Intl.message(
+      'Last Chosen: $data',
+      name: 'KCDashboardBattleLastChosen',
+      desc: '',
+      args: [data],
+    );
+  }
+
+  /// `Cleared`
+  String get KCDashboardBattleMapStateCleared {
+    return Intl.message(
+      'Cleared',
+      name: 'KCDashboardBattleMapStateCleared',
       desc: '',
       args: [],
     );

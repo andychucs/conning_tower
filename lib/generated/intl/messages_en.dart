@@ -22,17 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(url) => "Load URL: ${url}";
 
-  static String m1(count) => "Fleet Girls: ${count}";
+  static String m1(data) => "Last Chosen: ${data}";
 
-  static String m2(url) => "Now navigation to ${url}";
+  static String m2(count) => "Fleet Girls: ${count}";
 
-  static String m3(url) => "Page finished loading: ${url}";
+  static String m3(url) => "Now navigation to ${url}";
 
-  static String m4(url) => "Page started loading: ${url}";
+  static String m4(url) => "Page finished loading: ${url}";
 
-  static String m5(taskTitle) => "${taskTitle} has been completed.";
+  static String m5(url) => "Page started loading: ${url}";
 
-  static String m6(length) => "${length} items will be imported.";
+  static String m6(taskTitle) => "${taskTitle} has been completed.";
+
+  static String m7(length) => "${length} items will be imported.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -143,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("Maps"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed."),
+        "KCDashboardBattleLastChosen": m1,
         "KCDashboardBattleMapStateCleared":
             MessageLookupByLibrary.simpleMessage("Cleared"),
         "KCDashboardBattleReport":
@@ -193,7 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Firepower and Torpedo"),
         "KCDashboardShipUpgradeLevel":
             MessageLookupByLibrary.simpleMessage("Remodel Level"),
-        "KCDashboardShipViewerCount": m1,
+        "KCDashboardShipViewerCount": m2,
         "KCDashboardShipViewerFilterShipClass":
             MessageLookupByLibrary.simpleMessage("Ship Class"),
         "KCDashboardShipViewerFilterShipSlot":
@@ -269,17 +272,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Game homepage is loading"),
         "KCViewFuncMsgGameNaviBlock": MessageLookupByLibrary.simpleMessage(
             "refresh on game homepage is block"),
-        "KCViewFuncMsgNavi": m2,
+        "KCViewFuncMsgNavi": m3,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("Game load completed"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("Game load failed"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("Game not load complete yet"),
-        "KCViewFuncMsgPageFinished": m3,
+        "KCViewFuncMsgPageFinished": m4,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),
-        "KCViewFuncMsgPageStart": m4,
+        "KCViewFuncMsgPageStart": m5,
         "KanColleDataListener":
             MessageLookupByLibrary.simpleMessage("Data Listener"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("Logbook"),
@@ -339,7 +342,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
-        "TaskCompleted": m5,
+        "TaskCompleted": m6,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("Tasks"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("Task Not Added"),
         "TaskNotificationAdded": MessageLookupByLibrary.simpleMessage(
@@ -377,7 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("Import"),
         "TextImportResourceFromPoi": MessageLookupByLibrary.simpleMessage(
             "Import csv file from poi logbook"),
-        "TextImportResourceNumberCheck": m6,
+        "TextImportResourceNumberCheck": m7,
         "TextImportResourceWarning": MessageLookupByLibrary.simpleMessage(
             "Are you sure to import these data?"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("Importing"),
