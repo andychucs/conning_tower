@@ -115,7 +115,6 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
       final l10n = ref.watch(kancolleLocalizationProvider(locale));
       l10nData = l10n.whenData((data) => data.data).value;
     }
-    debugPrint("data.fleet.combined: ${data.fleet.combined}");
 
     segments = {
       for (var element in squads)
