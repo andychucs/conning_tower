@@ -56,7 +56,7 @@ dependencies:
   flutter_riverpod: ^2.3.6
   riverpod_annotation: ^2.3.5
   image_gallery_saver: ^2.0.3
-  freezed_annotation: ^2.4.1
+  freezed_annotation: ^2.4.4
   json_annotation: ^4.8.1
   http: ^1.2.0
   device_info_plus: ^9.1.2
