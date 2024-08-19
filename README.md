@@ -1,4 +1,4 @@
-![‎banner](https://github.com/andychucs/conning_tower/assets/24852023/eaf1b185-be29-474f-865b-00d8be7414ad)
+![banner](https://github.com/andychucs/conning_tower/assets/24852023/eaf1b185-be29-474f-865b-00d8be7414ad)
 
 # Conning Tower	
 
@@ -14,7 +14,8 @@
 ![Localizely language progress](https://img.shields.io/badge/한국어-5%25-red)
 [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?label=Follow&style=social&url=https%3A%2F%2Fx.com%2Fcontwr)](https://x.com/contwr)
 
-Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser. Support iPhone and iPad, Mac(Apple Silicon) now.
+Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
+Support iPhone and iPad, Mac (Apple Silicon) now.
 
 舰桥是一款跨平台舰队Collection「艦隊これくしょん-艦これ-」专用浏览器。现已支持iPhone、iPad。
 
@@ -24,10 +25,10 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 
 * KanColle logbook.
 * Battle result preview.
-* Fleet grils info viewer.
+* Fleet girls info viewer.
 * Expedition mission notification.
 * Teitoku & port info viewer.
-* Screenshot save to os album.
+* Screenshot save it to os album.
 * Resource Data Charts.
 
   <img src=https://github.com/user-attachments/assets/e158cef0-50a9-4de2-8ccb-1a22c8a1025c width=50% />
@@ -36,17 +37,17 @@ Conning towerやBridgeはクロスプラットフォームプレイに対応し�
 
 ## 安装 Installation インスタレーション
 
-Donwload :[Home Page](https://conntower.github.io/#/)
+Download: [Home Page](https://conntower.github.io/#/)
 
-APK for Android, IPA for for iOS/iPadOS/macOS(as iPad) need sideloading.
+APK for Android, IPA for iOS/iPadOS/macOS (as iPad) need sideloading.
 
-|  Device   | Require  |
-|  ----  | ----  |
-| iPhone  | Requires iOS 12.0 or later. |
-| iPad  | Requires iPadOS 12.0 or later. |
-| iPod touch | Requires iOS 12.0 or later.|
-| Mac | Requires macOS 12.0 or later and a Mac with Apple M1 chip or later. |
-| Android | Requires Android 5.0 (API level 21) or later. |
+| Device     | Require                                                             |
+|------------|:--------------------------------------------------------------------|
+| iPhone     | Requires iOS 12.0 or later.                                         |
+| iPad       | Requires iPadOS 12.0 or later.                                      |
+| iPod touch | Requires iOS 12.0 or later.                                         |
+| Mac        | Requires macOS 12.0 or later and a Mac with Apple M1 chip or later. |
+| Android    | Requires Android 5.0 (API level 21) or later.                       |
 
 ## 本地化 地域化 Localization 
 
@@ -54,35 +55,36 @@ APK for Android, IPA for for iOS/iPadOS/macOS(as iPad) need sideloading.
 
 Localization is still not complete, hope to receive pull requests.　English👉`lib/l10n/intl_en.arb`
 
-Also welcome other language. Add new file as `lib/l10n/intl_<language code>.arb`
+Also welcome another language. Add a new file as `lib/l10n/intl_<language code>.arb`
 
 ## About
 
-Conning Tower is design to play KanColle on single app include assistant utilities.
+Conning Tower is designed to play KanColle on single app include assistant utilities.
 Now available on iOS and Android.
 The minimum OS versions are iOS 12.0 and Android 5.0.
-Best platform suggest is iPad.
+The Best platform suggest is iPad.
 Will support macOS, Windows and Linux in the future.
 
 ## Previews
-| ![CC7B1141-A925-4C8D-BC7E-B562CB4BFC23_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/9241c616-588f-4479-bdff-186e9ebefe13) | ![5C479DA8-B96E-4ED7-9258-9D2E93D0AC85_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/c3cb6c79-777b-40bc-88b5-66dcd0a2678e) | ![28833525-0862-471D-AC13-ECE53280068D_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/1a96640d-e070-4d34-9985-83112a2a6580) | ![E176BCED-6F47-4FE4-A5FF-9DDA1D62C26A_4_5005_c](https://github.com/andychucs/conning_tower/assets/24852023/510b1046-2d0c-4938-982f-f74f7c2344c6) |
-| --- | --- | --- | --- |
+| Port                                                                                                 | Fleet                                                                                                | Battle                                                                                               | Operation                                                                                            |
+|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| ![](https://github.com/andychucs/conning_tower/assets/24852023/9241c616-588f-4479-bdff-186e9ebefe13) | ![](https://github.com/andychucs/conning_tower/assets/24852023/c3cb6c79-777b-40bc-88b5-66dcd0a2678e) | ![](https://github.com/andychucs/conning_tower/assets/24852023/1a96640d-e070-4d34-9985-83112a2a6580) | ![](https://github.com/andychucs/conning_tower/assets/24852023/510b1046-2d0c-4938-982f-f74f7c2344c6) |
 
 
 
 ## Why start this project
 
 Playing KanColle on iOS is not easy.
-KanColle player data on the Android 3rd party browsers cannot sync with desktop platform browsers.
+KanColle player data on the Android third party browsers cannot sync with desktop platform browsers.
 And there is no one software to play KanColle on mobile platform and desktop platform.
 
-This project goal is use same UI and be able to sync player data on all platforms.
+This project goal is to use the same UI and be able to sync player data on all platforms.
 
 ## Thanks
 
 HTTP redirect solution for iOS15+ is from [GitHub Pages](https://ios15-kancolle.github.io/) by [![Twitter URL](https://img.shields.io/twitter/url?label=naayu1012&style=social&url=https%3A%2F%2Ftwitter.com%2Fnaayu1012)](https://twitter.com/naayu1012)
 
-After v1.13.0, use the icon create by [Hatsuzuki](https://www.pixiv.net/users/15583261) in the app.
+After v1.13.0, use the icon created by [Hatsuzuki](https://www.pixiv.net/users/15583261) in the app.
 
 ## Sponsors
 
@@ -99,4 +101,3 @@ After v1.13.0, use the icon create by [Hatsuzuki](https://www.pixiv.net/users/15
 - None
   
 <a href="https://www.buymeacoffee.com/vk8pdcwxyjy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-<!--- Support Project by [afdian](https://afdian.net/a/conntower) --> 
