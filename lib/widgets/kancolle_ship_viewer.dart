@@ -162,6 +162,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        border: null,
         backgroundColor: CupertinoColors.systemGroupedBackground,
         middle: FutureBuilder(
             future: getShips(),
