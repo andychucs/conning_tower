@@ -34,42 +34,27 @@ class BattleInfo with _$BattleInfo {
 
   const BattleInfo._();
 
-  String get airSuperiority {
-    switch (airSuperiorityFlag) {
-      case 0:
-        return '制空均衡';
-      case 1:
-        return '制空権確保';
-      case 2:
-        return '航空優勢';
-      case 3:
-        return '航空劣勢';
-      case 4:
-        return '制空権喪失';
-      default:
-        return '';
-    }
-  }
+  String get airSuperiority => switch (airSuperiorityFlag) {
+      0 => '制空均衡',
+      1 => '制空権確保',
+      2 => '航空優勢',
+      3 => '航空劣勢',
+      4 => '制空権喪失',
+      _ => ''
+    };
 
   List<Ship> get allShips => inBattleSquads!
       .expand((squad) => squad.ships)
       .followedBy(enemySquads!.expand((squad) => squad.ships))
       .toList();
 
-  String get contactStatus {
-    switch (contact) {
-      case 1:
-        return "同航戦";
-      case 2:
-        return "反航戦";
-      case 3:
-        return "T字有利";
-      case 4:
-        return "T字不利";
-      default:
-        return "";
-    }
-  }
+  String get contactStatus => switch (contact) {
+      1 => "同航戦",
+      2 => "反航戦",
+      3 => "T字有利",
+      4 => "T字不利",
+      _ => ""
+    };
 
   String get enemyFormation {
     return getFormationText(eFormation ?? 0);
