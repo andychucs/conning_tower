@@ -132,23 +132,23 @@ class Ship with _$Ship {
     return 'N/A';
   }
 
-  String get speedLevel {
-    if (speed == 5) return S.current.TextSlowSpeed;
-    if (speed == 10) return S.current.TextFastSpeed;
-    if (speed == 15) return S.current.TextFastPlusSpeed;
-    if (speed == 20) return S.current.TextFastestSpeed;
-    return 'N/A';
-  }
+  String get speedLevel => switch (speed) {
+      5 => S.current.TextSlowSpeed,
+      10 => S.current.TextFastSpeed,
+      15 => S.current.TextFastPlusSpeed,
+      20 => S.current.TextFastestSpeed,
+      _ => 'N/A'
+    };
 
-  String get attackRangeLevel {
-    if (attackRange == 5) return S.current.TextSuperLongRangePlus;
-    if (attackRange == 4) return S.current.TextSuperLongRange;
-    if (attackRange == 3) return S.current.TextLongRange;
-    if (attackRange == 2) return S.current.TextMediumRange;
-    if (attackRange == 1) return S.current.TextShortRange;
-    if (attackRange == 0) return S.current.TextNone;
-    return 'N/A';
-  }
+  String get attackRangeLevel => switch (attackRange) {
+      5 => S.current.TextSuperLongRangePlus,
+      4 => S.current.TextSuperLongRange,
+      3 => S.current.TextLongRange,
+      2 => S.current.TextMediumRange,
+      1 => S.current.TextShortRange,
+      0 => S.current.TextNone,
+      _ => 'N/A'
+    };
 
   List<AircraftCarry> get aircraftCarry {
     List<AircraftCarry> aircraftCarry = [];
@@ -296,29 +296,15 @@ class Ship with _$Ship {
     num count = 0;
     final allEquipment = [...equipment ?? [], ...exEquipment ?? []];
     for (final equip in allEquipment) {
-      switch (equip.type?[2]) {
-        case 8:
-          count += equip.los! * 0.8;
-          break;
-        case 9:
-          count += equip.los! * 1.0;
-          break;
-        case 10:
-          count += (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2;
-          break;
-        case 11:
-          count += (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1;
-          break;
-        case 12:
-          count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
-          break;
-        case 13:
-          count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
-          break;
-        default:
-          count += equip.los ?? 0 * 0.6;
-          break;
-      }
+      count += switch (equip.type?[2]) {
+        8 => equip.los! * 0.8,
+        9 => equip.los! * 1.0,
+        10 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2,
+        11 => (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1,
+        12 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6,
+        13 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6,
+        _ => equip.los ?? 0 * 0.6
+      };
     }
 
     return count;
