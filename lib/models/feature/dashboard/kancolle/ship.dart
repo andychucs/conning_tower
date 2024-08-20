@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
-import 'package:conning_tower/style/app_color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -122,7 +122,7 @@ class Ship with _$Ship {
 
   Color? get damageColor {
     if (escape != null && escape!) {
-      return AppColor.timberWolf;
+      return CupertinoColors.inactiveGray;
     }
     if (nowHP <= maxHP * 0.25) return const Color(0xFFDE3C14);
     if (nowHP <= maxHP * 0.50) return const Color(0xFFFFB616);

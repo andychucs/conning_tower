@@ -577,7 +577,11 @@ class ShipInfoInBattle extends StatelessWidget {
     const dmgSize = 14.0;
 
     if (ship.escape ?? false) {
-      return const Text("退避");
+      return const Icon(
+        CupertinoIcons.escape,
+        color: CupertinoColors.inactiveGray,
+        size: 20,
+      );
     }
 
     return Column(
