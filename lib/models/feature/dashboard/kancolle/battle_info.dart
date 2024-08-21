@@ -300,7 +300,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -419,7 +419,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
 
     initDMGMap();
 
@@ -439,7 +439,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
 
     initDMGMap();
 
@@ -488,7 +488,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
 
     initDMGMap();
 
@@ -587,7 +587,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
 
     initDMGMap();
 
@@ -608,7 +608,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -737,7 +737,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
 
 
     initDMGMap();
@@ -765,7 +765,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     if (data.apiFNowhpsCombined == null) {
       initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -794,7 +794,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -859,7 +859,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -923,7 +923,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -986,7 +986,7 @@ class BattleInfo with _$BattleInfo {
     initDoubleEnemySquads(data);
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -1047,7 +1047,7 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
-    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -1074,16 +1074,21 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void updateEscapedShip({List<int>? indexes, List<int>? combinedIndexes}) {
+  void updateEscapeFlagInBattle({List<int>? indexes, List<int>? combinedIndexes}) {
     if (indexes != null) {
-      for (final index in indexes) {
-        getOShip1(index - 1).escape = true;
-      }
+      _updateEscapeFlag(0, indexes);
     }
-
     if (combinedIndexes != null) {
-      for (final index in combinedIndexes) {
-        getOShip2(index - 1).escape = true;
+      _updateEscapeFlag(1, combinedIndexes);
+    }
+  }
+
+  void _updateEscapeFlag(int squadIndex, List<int> numList) {
+    for (final (index, ship) in inBattleSquads![squadIndex].ships.indexed){
+      if (numList.contains(index + 1)) {
+        ship.escape = true;
+      } else {
+        ship.escape = false;
       }
     }
   }
