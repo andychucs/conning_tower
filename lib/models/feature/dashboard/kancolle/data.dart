@@ -154,7 +154,7 @@ class KancolleData {
     }
 
     if (model == null) {
-      if (isBattleAPI(path) && !path.contains("/goback_port")) {
+      if (isBattleAPI(path)) {
         FirebaseCrashlytics.instance.log('no handler data $path : $data');
         try {
           FirebaseCrashlytics.instance.recordError(Exception('no handler for $path'), null, fatal: true);
