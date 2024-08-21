@@ -261,6 +261,7 @@ class KancolleData {
       } else {
         battleSquads = [squads[battleSquadIndex - 1]];
       }
+      resetShipEscapeState();
       addAlert();
       ref.read(settingsProvider.notifier).changeDashboardIndex(5);
       battleInfo.clear();
@@ -378,6 +379,11 @@ class KancolleData {
   }
 
   void parseBattle(model) {
+    if (model is ReqSortieGobackPortEntity || model is ReqCombinedBattleGobackPortEntity) {
+      battleInfo.confirmEscapeShip();
+      return;
+    }
+
     if (model is ReqCombinedBattleLdAirbattleEntity) {
       battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, battleSquads!);
     }
@@ -486,7 +492,11 @@ class KancolleData {
     List<String> shipsDamaged = [];
     for (var squad in battleSquads!) {
       for (var ship in squad.ships) {
-        if (ship.damaged()) {
+        if (ship.damaged) {
+          if (ship.escape != null && ship.escape!) {
+            log("${squad.name}-${ship.name} 退避");
+            continue;
+          }
           shipsDamaged.add("${squad.name}-${ship.name}");
           log("${squad.name}-${ship.name} 大破");
           // break;
@@ -562,8 +572,8 @@ class KancolleData {
 
   void updateSquadShips(int index, List<ShipData> apiShipData) {
     Squad squad = squads[index].copyWith();
-    squad.ships.clear();
-    for (var data in apiShipData) {
+    // squad.ships.clear();
+    for (final (shipIndex, data) in apiShipData.indexed) {
       final shipData = dataInfo.shipInfo?[data.apiShipId];
 
       final afterId = int.parse(shipData?.apiAftershipid ?? '0');
@@ -573,10 +583,10 @@ class KancolleData {
       String shipName = shipData?.apiName ??
           "Ship No.${data.apiShipId}";
 
-      Ship ship = Ship.fromApi(data, shipName, afterIds: afterIds, upgradeLevel: shipData?.apiAfterlv, shipType: shipData?.apiStype, equipment: fleet.equipment);
+      squad.ships[shipIndex] = squad.ships[shipIndex].copyWithApi(data, shipName, afterIds: afterIds, upgradeLevel: shipData?.apiAfterlv, shipType: shipData?.apiStype, equipment: fleet.equipment);
+      final ship = squad.ships[shipIndex];
       log(ship.toString());
-      log(ship.damaged().toString());
-      squad.ships.add(ship);
+      log(ship.damaged.toString());
     }
     squads[index] = squad;
   }
@@ -604,5 +614,13 @@ class KancolleData {
         notification.setNotificationWithOperation(operation, name);
       }
     });
+  }
+
+  void resetShipEscapeState() {
+    for (var squad in battleSquads!) {
+      for (var ship in squad.ships) {
+        ship.escape = false;
+      }
+    }
   }
 }

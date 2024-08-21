@@ -52,6 +52,8 @@ class ReqCombinedBattleEcMidnightBattleApiDataEntity
     @JsonKey(name: 'api_touch_plane') List<dynamic>? apiTouchPlane,
     @JsonKey(name: 'api_flare_pos') List<dynamic>? apiFlarePos,
     @JsonKey(name: 'api_hougeki') NightBattleGunFireRoundEntity? apiHougeki,
+    List<int>? apiEscapeIdx,
+    List<int>? apiEscapeIdxCombined,
   }) = _ReqCombinedBattleEcMidnightBattleApiDataEntity;
 
   factory ReqCombinedBattleEcMidnightBattleApiDataEntity.fromJson(

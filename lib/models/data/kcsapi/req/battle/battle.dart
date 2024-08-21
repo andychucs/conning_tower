@@ -2,26 +2,30 @@ library battle;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'req_combined_battle_goback_port_entity.dart';
+import 'req_sortie_goback_port_entity.dart';
+
 export 'req_battle_midnight_battle_entity.dart';
-export 'req_combined_battle_ec_battle_entity.dart';
-export 'req_practice_battle_entity.dart';
-export 'req_sortie_battle_entity.dart';
-export 'req_sortie_battle_result_entity.dart';
-export 'req_practice_midnight_battle_entity.dart';
-export 'req_sortie_ld_airbattle_entity.dart';
-export 'req_combined_battle_result_entity.dart';
 export 'req_battle_midnight_sp_midnight_entity.dart';
-export 'req_sortie_airbattle_entity.dart';
+export 'req_combined_battle_each_battle_entity.dart';
+export 'req_combined_battle_each_water_entity.dart';
+export 'req_combined_battle_ec_battle_entity.dart';
 export 'req_combined_battle_ec_midnight_battle_entity.dart';
 export 'req_combined_battle_entity.dart';
-export 'req_combined_battle_each_battle_entity.dart';
-export 'req_combined_battle_water_entity.dart';
-export 'req_combined_battle_each_water_entity.dart';
 export 'req_combined_battle_ld_airbattle_entity.dart';
 export 'req_combined_battle_midnight_battle_entity.dart';
+export 'req_combined_battle_water_entity.dart';
+export 'req_practice_battle_entity.dart';
+export 'req_practice_midnight_battle_entity.dart';
+export 'req_sortie_airbattle_entity.dart';
+export 'req_sortie_battle_entity.dart';
+export 'req_sortie_ld_airbattle_entity.dart';
+export 'req_combined_battle_goback_port_entity.dart';
+export 'req_sortie_goback_port_entity.dart';
+export 'result/req_combined_battle_result_entity.dart';
+export 'result/req_sortie_battle_result_entity.dart';
 
 part 'battle.freezed.dart';
-
 part 'battle.g.dart';
 
 abstract class GunFireRound {
@@ -52,6 +56,7 @@ abstract class SingleVsSingleBaseModel {
   late List<int> apiShipLv;
   late List<dynamic> apiENowhps;
   late List<dynamic> apiEMaxhps;
+  late List<int>? apiEscapeIdx;
 }
 
 abstract class SingleVsSingleBattleData extends SingleVsSingleBaseModel {
@@ -65,6 +70,7 @@ abstract class SingleVsDoubleBattleData extends SingleVsSingleBaseModel {
   late List<int>? apiShipLvCombined;
   late List<dynamic>? apiENowhpsCombined;
   late List<dynamic>? apiEMaxhpsCombined;
+  late List<int>? apiEscapeIdxCombined;
 }
 
 abstract class DoubleVsSingleBattleData extends SingleVsSingleBaseModel {

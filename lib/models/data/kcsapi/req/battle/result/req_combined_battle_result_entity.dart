@@ -32,24 +32,21 @@ class ReqCombinedBattleResultApiDataEntity
     @JsonKey(name: 'api_get_base_exp') int? apiGetBaseExp,
     @JsonKey(name: 'api_get_ship_exp') List<int?>? apiGetShipExp,
     @JsonKey(name: 'api_get_ship_exp_combined') dynamic apiGetShipExpCombined,
-    @JsonKey(name: 'api_get_exp_lvup')
-    List<dynamic>? apiGetExpLvup,
+    @JsonKey(name: 'api_get_exp_lvup') List<dynamic>? apiGetExpLvup,
     @JsonKey(name: 'api_get_exp_lvup_combined') dynamic apiGetExpLvupCombined,
     @JsonKey(name: 'api_dests') int? apiDests,
     @JsonKey(name: 'api_destsf') int? apiDestsf,
     @JsonKey(name: 'api_quest_name') String? apiQuestName,
     @JsonKey(name: 'api_quest_level') int? apiQuestLevel,
-    @JsonKey(name: 'api_enemy_info')
-    ReqCombinedBattleResultApiDataApiEnemyInfoEntity? apiEnemyInfo,
+    @JsonKey(name: 'api_enemy_info') BattleResultEnemyInfoEntity? apiEnemyInfo,
     @JsonKey(name: 'api_first_clear') int? apiFirstClear,
     @JsonKey(name: 'api_get_flag') List<int?>? apiGetFlag,
-    @JsonKey(name: 'api_get_ship')
-    ReqCombinedBattleResultApiDataApiGetShipEntity? apiGetShip,
+    @JsonKey(name: 'api_get_ship') BattleResultGetShipEntity? apiGetShip,
     @JsonKey(name: 'api_get_eventflag') int? apiGetEventflag,
     @JsonKey(name: 'api_get_exmap_rate') dynamic apiGetExmapRate,
     @JsonKey(name: 'api_get_exmap_useitem_id') dynamic apiGetExmapUseitemId,
     @JsonKey(name: 'api_escape_flag') int? apiEscapeFlag,
-    @JsonKey(name: 'api_escape') dynamic apiEscape,
+    @JsonKey(name: 'api_escape') BattleResultEscapeEntity? apiEscape,
   }) = _ReqCombinedBattleResultApiDataEntity;
 
   factory ReqCombinedBattleResultApiDataEntity.fromJson(
@@ -58,30 +55,38 @@ class ReqCombinedBattleResultApiDataEntity
 }
 
 @unfreezed
-class ReqCombinedBattleResultApiDataApiEnemyInfoEntity
-    with _$ReqCombinedBattleResultApiDataApiEnemyInfoEntity {
-  factory ReqCombinedBattleResultApiDataApiEnemyInfoEntity({
+class BattleResultEnemyInfoEntity with _$BattleResultEnemyInfoEntity {
+  factory BattleResultEnemyInfoEntity({
     @JsonKey(name: 'api_level') String? apiLevel,
     @JsonKey(name: 'api_rank') String? apiRank,
     @JsonKey(name: 'api_deck_name') String? apiDeckName,
-  }) = _ReqCombinedBattleResultApiDataApiEnemyInfoEntity;
+  }) = _BattleResultEnemyInfoEntity;
 
-  factory ReqCombinedBattleResultApiDataApiEnemyInfoEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqCombinedBattleResultApiDataApiEnemyInfoEntityFromJson(json);
+  factory BattleResultEnemyInfoEntity.fromJson(Map<String, dynamic> json) =>
+      _$BattleResultEnemyInfoEntityFromJson(json);
 }
 
 @unfreezed
-class ReqCombinedBattleResultApiDataApiGetShipEntity
-    with _$ReqCombinedBattleResultApiDataApiGetShipEntity {
-  factory ReqCombinedBattleResultApiDataApiGetShipEntity({
+class BattleResultGetShipEntity with _$BattleResultGetShipEntity {
+  factory BattleResultGetShipEntity({
     @JsonKey(name: 'api_ship_id') int? apiShipId,
     @JsonKey(name: 'api_ship_type') String? apiShipType,
     @JsonKey(name: 'api_ship_name') String? apiShipName,
     @JsonKey(name: 'api_ship_getmes') String? apiShipGetmes,
-  }) = _ReqCombinedBattleResultApiDataApiGetShipEntity;
+  }) = _BattleResultGetShipEntity;
 
-  factory ReqCombinedBattleResultApiDataApiGetShipEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqCombinedBattleResultApiDataApiGetShipEntityFromJson(json);
+  factory BattleResultGetShipEntity.fromJson(Map<String, dynamic> json) =>
+      _$BattleResultGetShipEntityFromJson(json);
+}
+
+@freezed
+class BattleResultEscapeEntity with _$BattleResultEscapeEntity {
+  // data structure also see: https://www.cat-ears.net/?p=38652
+  const factory BattleResultEscapeEntity({
+    @JsonKey(name: 'api_escape_idx') required List<int> apiEscapeIdx,
+    @JsonKey(name: 'api_tow_idx') List<int>? apiTowIdx,
+  }) = _BattleResultEscapeEntity;
+
+  factory BattleResultEscapeEntity.fromJson(Map<String, dynamic> json) =>
+      _$BattleResultEscapeEntityFromJson(json);
 }

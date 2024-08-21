@@ -69,6 +69,8 @@ class ReqCombinedBattleEachWaterApiDataEntity
     @JsonKey(name: 'api_hougeki2') GunFireRoundEntity? apiHougeki2,
     @JsonKey(name: 'api_hougeki3') GunFireRoundEntity? apiHougeki3,
     @JsonKey(name: 'api_raigeki') TorpedoRoundEntity? apiRaigeki,
+    List<int>? apiEscapeIdx,
+    List<int>? apiEscapeIdxCombined,
   }) = _ReqCombinedBattleEachWaterApiDataEntity;
 
   factory ReqCombinedBattleEachWaterApiDataEntity.fromJson(

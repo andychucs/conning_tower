@@ -30,6 +30,7 @@ class BattleInfo with _$BattleInfo {
     int? contact,
     MapInfo? mapInfo,
     int? mapRoute,
+    List<Ship>? readyEscapeShips,
   }) = _BattleInfo;
 
   const BattleInfo._();
@@ -206,6 +207,9 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
+  // index start from 1
+  Ship getShipByNumero(FleetSide side, int num) => getShip(side, num - 1);
+
   void gunFireRound(GunFireRound data) {
     if (data.apiAtEflag == null) return;
     for (final (index, flag) in data.apiAtEflag!.indexed) {
@@ -295,6 +299,8 @@ class BattleInfo with _$BattleInfo {
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -413,6 +419,8 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
+    updateEscapedShip(indexes: data.apiEscapeIdx);
+
     initDMGMap();
 
     initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -431,6 +439,8 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
+    updateEscapedShip(indexes: data.apiEscapeIdx);
+
     initDMGMap();
 
     initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -443,6 +453,9 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parseReqCombinedBattleResultEntity(ReqCombinedBattleResultApiDataEntity data) {
+    if (data.apiEscape != null) {
+      setReadyEscapeShip(data.apiEscape!);
+    }
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
     if (enemySquads != null) {
@@ -474,6 +487,8 @@ class BattleInfo with _$BattleInfo {
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx);
 
     initDMGMap();
 
@@ -532,11 +547,14 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parseReqSortieBattleResult(ReqSortieBattleResultApiDataEntity data) {
+    if (data.apiEscape != null) {
+      setReadyEscapeShip(data.apiEscape!);
+    }
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
-        squad.name = data.apiEnemyInfo.apiDeckName;
+        squad.name = data.apiEnemyInfo.apiDeckName ?? '敵艦隊';
       }
     }
     mvp = data.apiMvp;
@@ -569,6 +587,8 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
+    updateEscapedShip(indexes: data.apiEscapeIdx);
+
     initDMGMap();
 
     initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -587,6 +607,8 @@ class BattleInfo with _$BattleInfo {
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -715,6 +737,9 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
+    updateEscapedShip(indexes: data.apiEscapeIdx);
+
+
     initDMGMap();
 
     initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -739,6 +764,8 @@ class BattleInfo with _$BattleInfo {
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     if (data.apiFNowhpsCombined == null) {
       initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -766,6 +793,8 @@ class BattleInfo with _$BattleInfo {
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -829,6 +858,9 @@ class BattleInfo with _$BattleInfo {
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
         fMax: data.apiFMaxhps,
@@ -891,6 +923,8 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
         fMax: data.apiFMaxhps,
@@ -951,6 +985,9 @@ class BattleInfo with _$BattleInfo {
     clear();
     initDoubleEnemySquads(data);
     inBattleSquads = squads;
+
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
         fMax: data.apiFMaxhps,
@@ -1010,6 +1047,8 @@ class BattleInfo with _$BattleInfo {
 
     inBattleSquads = squads;
 
+    updateEscapedShip(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
         fMax: data.apiFMaxhps,
@@ -1025,6 +1064,40 @@ class BattleInfo with _$BattleInfo {
     }
     updateShipHP();
   }
+
+  void confirmEscapeShip() {
+    if (readyEscapeShips != null) {
+      for (final ship in readyEscapeShips!) {
+        ship.escape = true;
+      }
+      readyEscapeShips = [];
+    }
+  }
+
+  void updateEscapedShip({List<int>? indexes, List<int>? combinedIndexes}) {
+    if (indexes != null) {
+      for (final index in indexes) {
+        getOShip1(index - 1).escape = true;
+      }
+    }
+
+    if (combinedIndexes != null) {
+      for (final index in combinedIndexes) {
+        getOShip2(index - 1).escape = true;
+      }
+    }
+  }
+
+  void setReadyEscapeShip(BattleResultEscapeEntity data) {
+    readyEscapeShips ??= [];
+    if (data.apiEscapeIdx.isNotEmpty) {
+      readyEscapeShips?.add(getShipByNumero(FleetSide.our, data.apiEscapeIdx.first));
+    }
+    if (data.apiTowIdx != null && data.apiTowIdx!.isNotEmpty) {
+      readyEscapeShips?.add(getShipByNumero(FleetSide.our, data.apiTowIdx!.first));
+    }
+  }
+
 }
 
 enum FleetSide { our, enemy }

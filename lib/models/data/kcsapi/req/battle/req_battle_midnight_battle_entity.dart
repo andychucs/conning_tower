@@ -42,6 +42,7 @@ class ReqBattleMidnightBattleApiDataEntity
     @JsonKey(name: 'api_touch_plane') required List<int> apiTouchPlane,
     @JsonKey(name: 'api_flare_pos') required List<int> apiFlarePos,
     @JsonKey(name: 'api_hougeki') NightBattleGunFireRoundEntity? apiHougeki,
+    List<int>? apiEscapeIdx,
   }) = _ReqBattleMidnightBattleApiDataEntity;
 
   factory ReqBattleMidnightBattleApiDataEntity.fromJson(

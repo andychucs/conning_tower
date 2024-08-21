@@ -62,6 +62,8 @@ class ReqCombinedBattleECBattleApiDataEntity
     @JsonKey(name: 'api_hougeki3') GunFireRoundEntity? apiHougeki3,
     AirBaseJetAircraftRound? apiAirBaseInjection,
     CombineAircraftRound? apiInjectionKouku,
+    List<int>? apiEscapeIdx,
+    List<int>? apiEscapeIdxCombined,
   }) = _ReqCombinedBattleECBattleApiDataEntity;
 
   factory ReqCombinedBattleECBattleApiDataEntity.fromJson(

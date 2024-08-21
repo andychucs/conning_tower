@@ -483,7 +483,6 @@ class ShipInfoInBattle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const dmgSize = 14.0;
     late double damagePercent;
     late String damageText;
 
@@ -496,54 +495,7 @@ class ShipInfoInBattle extends StatelessWidget {
     }
 
     return CupertinoListTile.notched(
-      leading: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Icon(
-                Icons.arrow_drop_up,
-                color: Colors.redAccent,
-                size: dmgSize,
-              ),
-              Expanded(
-                child: AutoSizeText(
-                  '$dmg',
-                  textAlign: TextAlign.end,
-                  softWrap: false,
-                  maxFontSize: dmgSize,
-                  minFontSize: dmgSize - 8,
-                  maxLines: 1,
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Icon(
-                Icons.arrow_drop_down,
-                color: Colors.blueAccent,
-                size: dmgSize,
-              ),
-              Expanded(
-                child: AutoSizeText(
-                  '$dmgTaken',
-                  textAlign: TextAlign.end,
-                  softWrap: false,
-                  maxFontSize: dmgSize,
-                  minFontSize: dmgSize - 8,
-                  maxLines: 1,
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+      leading: buildLeading(),
       leadingSize: 48,
       padding: EdgeInsets.only(right: 14.0, left: 4.0),
       leadingToTitle: 4.0,
@@ -618,6 +570,63 @@ class ShipInfoInBattle extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildLeading() {
+    const dmgSize = 14.0;
+
+    if (ship.escape ?? false) {
+      return const Text("退避");
+    }
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            const Icon(
+              Icons.arrow_drop_up,
+              color: Colors.redAccent,
+              size: dmgSize,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                '$dmg',
+                textAlign: TextAlign.end,
+                softWrap: false,
+                maxFontSize: dmgSize,
+                minFontSize: dmgSize - 8,
+                maxLines: 1,
+              ),
+            )
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.arrow_drop_down,
+              color: Colors.blueAccent,
+              size: dmgSize,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                '$dmgTaken',
+                textAlign: TextAlign.end,
+                softWrap: false,
+                maxFontSize: dmgSize,
+                minFontSize: dmgSize - 8,
+                maxLines: 1,
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
