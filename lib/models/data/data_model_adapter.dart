@@ -42,7 +42,7 @@ class DataModelAdapter {
         ReqCombinedBattleLdAirbattleEntity.source => ReqCombinedBattleLdAirbattleEntity.fromJson(json),
         ReqCombinedBattleMidnightBattleEntity.source => ReqCombinedBattleMidnightBattleEntity.fromJson(json),
         ReqHenseiCombinedEntity.source => ReqHenseiCombinedEntity.fromJson(json),
-        ReqMisssionResultEntity.source => ReqMisssionResultEntity.fromJson(json),
+        ReqMissionResultEntity.source => ReqMissionResultEntity.fromJson(json),
         GetMemberMapinfoEntity.source => GetMemberMapinfoEntity.fromJson(json),
         ReqCombinedBattleGobackPortEntity.source => ReqCombinedBattleGobackPortEntity.fromJson(json),
         ReqSortieGobackPortEntity.source => ReqSortieGobackPortEntity.fromJson(json),

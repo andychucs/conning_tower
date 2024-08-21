@@ -1,30 +1,30 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'req_misssion_result_entity.freezed.dart';
+part 'req_mission_result_entity.freezed.dart';
 
-part 'req_misssion_result_entity.g.dart';
+part 'req_mission_result_entity.g.dart';
 
 @unfreezed
-class ReqMisssionResultEntity with _$ReqMisssionResultEntity {
+class ReqMissionResultEntity with _$ReqMissionResultEntity {
   static const source = "/api_req_mission/result";
 
-  factory ReqMisssionResultEntity({
+  factory ReqMissionResultEntity({
     @JsonKey(name: 'api_result') required int apiResult,
     @JsonKey(name: 'api_result_msg') required String apiResultMsg,
-    @JsonKey(name: 'api_data') required ReqMisssionResultApiDataEntity apiData,
-  }) = _ReqMisssionResultEntity;
+    @JsonKey(name: 'api_data') dynamic apiData,
+  }) = _ReqMissionResultEntity;
 
-  factory ReqMisssionResultEntity.fromJson(Map<String, dynamic> json) =>
-      _$ReqMisssionResultEntityFromJson(json);
+  factory ReqMissionResultEntity.fromJson(Map<String, dynamic> json) =>
+      _$ReqMissionResultEntityFromJson(json);
 }
 
 @unfreezed
-class ReqMisssionResultApiDataEntity with _$ReqMisssionResultApiDataEntity {
-  factory ReqMisssionResultApiDataEntity({
+class ReqMissionResultApiDataEntity with _$ReqMissionResultApiDataEntity {
+  factory ReqMissionResultApiDataEntity({
     @JsonKey(name: 'api_ship_id') List<int>? apiShipId,
     @JsonKey(name: 'api_clear_result') int? apiClearResult,
     @JsonKey(name: 'api_get_exp') int? apiGetExp,
-    @JsonKey(name: 'api_member_lv') int? apiMemberLv,
+    @JsonKey(name: 'api_member_lv') dynamic apiMemberLv,
     @JsonKey(name: 'api_member_exp') int? apiMemberExp,
     @JsonKey(name: 'api_get_ship_exp') List<int>? apiGetShipExp,
     @JsonKey(name: 'api_get_exp_lvup') List<dynamic>? apiGetExpLvup,
@@ -34,8 +34,8 @@ class ReqMisssionResultApiDataEntity with _$ReqMisssionResultApiDataEntity {
     @JsonKey(name: 'api_quest_level') int? apiQuestLevel,
     @JsonKey(name: 'api_get_material') dynamic apiGetMaterial,
     @JsonKey(name: 'api_useitem_flag') dynamic apiUseitemFlag,
-  }) = _ReqMisssionResultApiDataEntity;
+  }) = _ReqMissionResultApiDataEntity;
 
-  factory ReqMisssionResultApiDataEntity.fromJson(Map<String, dynamic> json) =>
-      _$ReqMisssionResultApiDataEntityFromJson(json);
+  factory ReqMissionResultApiDataEntity.fromJson(Map<String, dynamic> json) =>
+      _$ReqMissionResultApiDataEntityFromJson(json);
 }
