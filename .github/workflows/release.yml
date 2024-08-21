@@ -42,8 +42,11 @@ jobs:
           echo $KEY_PROPERTIES | base64 -d > android/key.properties
           echo $FIREBASE_OPTIONS | base64 -d > lib/firebase_options.dart
           echo $GOOGLE_SERVICES_JSON | base64 -d > android/app/google-services.json
-      - run: flutter build apk
-      - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ConningTower-${{ steps.version.outputs.version }}-release.apk
+      - run: flutter build apk --split-per-abi
+      - run: mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk build/app/outputs/flutter-apk/ConningTower-${{ steps.version.outputs.version }}-arm64-v8a-release.apk
+      - run: mv build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk build/app/outputs/flutter-apk/ConningTower-${{ steps.version.outputs.version }}-armeabi-v7a-release.apk
+      - run: mv build/app/outputs/flutter-apk/app-x86_64-release.apk build/app/outputs/flutter-apk/ConningTower-${{ steps.version.outputs.version }}-x86_64-release.apk
+      - run: mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk build/app/outputs/flutter-apk/ConningTower-${{ steps.version.outputs.version }}-release.apk
       - name: Create Release
         uses: ncipollo/release-action@v1.14.0
         with:
