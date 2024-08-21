@@ -251,6 +251,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Newest First"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("Fleet Girls"),
+        "KCNeedLoginNoticeDesc": MessageLookupByLibrary.simpleMessage(
+            "You need to log in to the game before using this feature."),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
         "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("Bauxite"),
         "KCResourceDevelopmentMaterial":
@@ -307,8 +309,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "If photos are not displayed, please open the access permission in system settings."),
         "PhotoAlbumPermissionRequest":
             MessageLookupByLibrary.simpleMessage("Open System Settings"),
-        "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
-            "Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings."),
+        "ScreenshotFailDialogDesc": MessageLookupByLibrary.simpleMessage(
+            "Please allow app to access Photos in the System Settings."),
+        "ScreenshotFailDialogTitle":
+            MessageLookupByLibrary.simpleMessage("Screenshot save failed."),
         "ScreenshotSuccessDialog":
             MessageLookupByLibrary.simpleMessage("Screenshot saved."),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -390,12 +394,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Import failed"),
         "TextItem": MessageLookupByLibrary.simpleMessage("Item"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("Heavily damaged"),
+        "TextLoginRequired":
+            MessageLookupByLibrary.simpleMessage("Login Required"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("Long"),
         "TextMDamage":
             MessageLookupByLibrary.simpleMessage("Moderately damaged"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("Medium"),
         "TextMovingAveragePeriod":
             MessageLookupByLibrary.simpleMessage("MA Period"),
+        "TextNetworkError":
+            MessageLookupByLibrary.simpleMessage("Network Error"),
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
         "TextOpenInJervis":

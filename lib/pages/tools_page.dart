@@ -17,10 +17,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:validators/validators.dart';
+
+import '../utils/toast.dart';
 
 class ToolsPage extends ConsumerStatefulWidget {
   ToolsPage(CookieManager? cookieManager,
@@ -68,7 +69,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
         });
     if (value ?? false) {
       await controller.clearCache();
-      Fluttertoast.showToast(msg: S.current.AppControlsClearCache);
+      Toast.showSuccess(title: S.current.AppControlsClearCache);
     }
   }
 
@@ -81,7 +82,7 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
     if (value ?? false) {
       await widget.cookieManager.deleteAllCookies();
       String message = S.current.AppControlsLogoutSuccess;
-      Fluttertoast.showToast(msg: message);
+      Toast.showSuccess(title: message);
     }
   }
 
@@ -92,16 +93,16 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
         if (currentUrl.toString() == customHomeUrl) {
           customHomeUrl = '';
           ref.watch(settingsProvider.notifier).setString('customHomeUrl', '');
-          Fluttertoast.showToast(msg: S.current.ToolSaveHomeCancel);
+          Toast.show(title: S.current.ToolSaveHomeCancel);
         } else {
           customHomeUrl = currentUrl.toString();
           ref.watch(settingsProvider.notifier).setString('customHomeUrl', currentUrl.toString());
-          Fluttertoast.showToast(msg: S.current.ToolSaveHomeSuccess);
+          Toast.showSuccess(title: S.current.ToolSaveHomeSuccess);
         }
       });
       _resetTextController();
     } else {
-      Fluttertoast.showToast(msg: S.current.ToolSaveHomeFail);
+      Toast.showError(title: S.current.ToolSaveHomeFail);
     }
   }
 

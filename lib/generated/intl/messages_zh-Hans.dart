@@ -224,6 +224,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("从新到旧"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("舰娘"),
+        "KCNeedLoginNoticeDesc":
+            MessageLookupByLibrary.simpleMessage("登录游戏后才能使用此功能"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弹药"),
         "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("铝土"),
         "KCResourceDevelopmentMaterial":
@@ -274,8 +276,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("如果照片无法显示，请在系统设置中打开读取权限。"),
         "PhotoAlbumPermissionRequest":
             MessageLookupByLibrary.simpleMessage("点此打开系统设置"),
-        "ScreenshotFailDialog":
-            MessageLookupByLibrary.simpleMessage("截图保存失败，请在系统设置中允许舰桥访问照片"),
+        "ScreenshotFailDialogDesc":
+            MessageLookupByLibrary.simpleMessage("请在系统设置中允许访问照片"),
+        "ScreenshotFailDialogTitle":
+            MessageLookupByLibrary.simpleMessage("截图保存失败"),
         "ScreenshotSuccessDialog":
             MessageLookupByLibrary.simpleMessage("截图已保存"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("设置"),
@@ -347,10 +351,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImportingFailed": MessageLookupByLibrary.simpleMessage("导入失败"),
         "TextItem": MessageLookupByLibrary.simpleMessage("道具"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("大破"),
+        "TextLoginRequired": MessageLookupByLibrary.simpleMessage("需要登录"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("长"),
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextMovingAveragePeriod": MessageLookupByLibrary.simpleMessage("MA周期"),
+        "TextNetworkError": MessageLookupByLibrary.simpleMessage("网络错误"),
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextNone": MessageLookupByLibrary.simpleMessage("无"),
         "TextOpenInJervis":

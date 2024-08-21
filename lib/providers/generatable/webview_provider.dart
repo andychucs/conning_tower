@@ -12,12 +12,13 @@ import 'package:conning_tower/models/feature/web_message_data.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/web_info_provider.dart';
+import 'package:conning_tower/utils/toast.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -161,7 +162,7 @@ class WebController extends _$WebController {
         (uri.host.startsWith(kDMMOSAPIDomain) && Platform.isIOS)) {
       inKancolleWindow = true;
       gameLoadCompleted = true;
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgNaviGameLoadCompleted);
+      Toast.showSuccess(title: S.current.KCViewFuncMsgNaviGameLoadCompleted);
       HapticFeedback.mediumImpact();
       await screenResize();
     }
@@ -192,11 +193,10 @@ class WebController extends _$WebController {
           state.controller.loadUrl(
               urlRequest:
                   URLRequest(url: WebUri.uri(url.replace(scheme: 'http'))));
-          Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
         } else {
           state.controller.loadUrl(urlRequest: URLRequest(url: url));
-          Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
         }
+        Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
       }
     }
   }
@@ -223,12 +223,12 @@ class WebController extends _$WebController {
       autoAdjusted = true;
       log("Auto adjust success");
       if (needToaste)
-        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+        Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
       return true;
     }
     log("autoAdjustWindow fail");
     if (needToaste)
-      Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+      Toast.showError(title: S.current.FutureAutoAdjustWindowFail);
     return false;
   }
 
@@ -251,9 +251,9 @@ class WebController extends _$WebController {
       final result =
           await ImageGallerySaver.saveImage(imageBytes, quality: 100);
       if (result['isSuccess']) {
-        Fluttertoast.showToast(msg: S.current.ScreenshotSuccessDialog);
+        Toast.showSuccess(title: S.current.ScreenshotSuccessDialog);
       } else {
-        Fluttertoast.showToast(msg: S.current.ScreenshotFailDialog);
+        Toast.showError(title: S.current.ScreenshotFailDialogTitle, description: S.current.ScreenshotFailDialogDesc);
       }
       debugPrint('Image saved to gallery: $result');
     }
@@ -274,10 +274,10 @@ class WebController extends _$WebController {
         }
         inKancolleWindow = true;
       }
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAutoGameRedirect);
+      Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
       log("HTTP Redirect success");
     } else {
-      Fluttertoast.showToast(msg: S.current.KCViewFuncMsgAlreadyGameRedirect);
+      Toast.show(title: S.current.KCViewFuncMsgAlreadyGameRedirect);
       log("HTTP Redirect fail");
     }
     log("inKancolleWindow: $inKancolleWindow");
@@ -287,26 +287,25 @@ class WebController extends _$WebController {
     if (gameLoadCompleted) {
       bool flag = await autoAdjustWindowV2(controller, force: true);
       if (flag) {
-        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowSuccess);
+        Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
       } else {
-        Fluttertoast.showToast(msg: S.current.FutureAutoAdjustWindowFail);
+        Toast.showError(title: S.current.FutureAutoAdjustWindowFail);
       }
     } else {
-      Fluttertoast.showToast(
-          msg: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
+      Toast.showWarning(title: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
     }
   }
 
   Future<void> muteGame() async {
     await controller.injectJavascriptFileFromAsset(
         assetFilePath: muteKancolleJS);
-    Fluttertoast.showToast(msg: S.current.MsgMuteGame);
+    Toast.show(title: S.current.MsgMuteGame);
   }
 
   Future<void> unmuteGame() async {
     await controller.injectJavascriptFileFromAsset(
         assetFilePath: unMuteKancolleJS);
-    Fluttertoast.showToast(msg: S.current.MsgUnmuteGame);
+    Toast.show(title: S.current.MsgUnmuteGame);
   }
 
   void _kancolleMessageHandle(WebMessage message) {

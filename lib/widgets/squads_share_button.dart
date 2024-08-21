@@ -5,9 +5,10 @@ import 'package:conning_tower/models/data/kancolle_calc_net/deck_builder_entity.
 import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/toast.dart';
 
 class SquadsShareButton extends StatelessWidget {
   const SquadsShareButton.cupertinoListTile({
@@ -34,7 +35,7 @@ class SquadsShareButton extends StatelessWidget {
           icon: CupertinoIcons.square_on_square,
           onTap: () async {
             await Clipboard.setData(ClipboardData(text: jsonEncode(squads)));
-            Fluttertoast.showToast(msg: S.current.TextCopyToClipboardSuccess);
+            Toast.showSuccess(title: S.current.TextCopyToClipboardSuccess);
           },
         ),
         PullDownMenuItem(
@@ -75,7 +76,7 @@ class SquadsShareButton extends StatelessWidget {
             var deckBuilderFormat =
                 jsonEncode(DeckBuilderEntity.fromSuads(squads));
             await Clipboard.setData(ClipboardData(text: deckBuilderFormat));
-            Fluttertoast.showToast(msg: S.current.TextCopyToClipboardSuccess);
+            Toast.showSuccess(title: S.current.TextCopyToClipboardSuccess);
           },
         )
       ],

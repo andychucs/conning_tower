@@ -4,11 +4,11 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/task.dart';
+import 'package:conning_tower/utils/toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/timezone.dart';
@@ -126,7 +126,7 @@ class NotificationUtil {
         notificationDetails);
     if (feedBack) {
       HapticFeedback.lightImpact();
-      Fluttertoast.showToast(msg: S.current.TaskNotificationAdded);
+      Toast.showSuccess(title: S.current.TaskNotificationAdded);
     }
   }
 
@@ -153,7 +153,7 @@ class NotificationUtil {
         notificationDetails);
     if (feedBack) {
       HapticFeedback.lightImpact();
-      Fluttertoast.showToast(msg: S.current.TaskNotificationAdded);
+      Toast.showSuccess(title: S.current.TaskNotificationAdded);
     }
   }
 
@@ -195,7 +195,7 @@ class NotificationUtil {
         notificationDetails);
     if (feedBack) {
       HapticFeedback.lightImpact();
-      Fluttertoast.showToast(msg: S.current.TaskNotificationAdded);
+      Toast.showSuccess(title: S.current.TaskNotificationAdded);
     }
   }
 

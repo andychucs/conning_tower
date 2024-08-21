@@ -23,9 +23,9 @@ import 'package:conning_tower/utils/notification_util.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../../utils/toast.dart';
 import 'equipment.dart';
 import 'map_state.dart';
 import 'operation_queue.dart';
@@ -103,14 +103,14 @@ class KancolleData {
     final params = rawData.params;
     if (data.isEmpty) {
       log("empty data");
-      Fluttertoast.showToast(msg: "Network Error");
+      Toast.showError(title: S.current.TextNetworkError);
       return;
     }
     final json = jsonDecode(data);
     if (json is Map) {
       if (json['api_result'] != 1) {
         final msg = json['api_result_msg'];
-        Fluttertoast.showToast(msg: "$msg");
+        Toast.showError(title: S.current.TextNetworkError, description: "$msg");
         return;
       }
     }

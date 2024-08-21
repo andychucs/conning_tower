@@ -23,13 +23,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 import '../../models/feature/dashboard/kancolle/map_state.dart';
+import '../../utils/toast.dart';
 import '../../widgets/dialog.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
@@ -62,11 +62,11 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
           routeName = getRouteName(data, battleInfo, routeName);
         },
         error: (e, s) {
-          Fluttertoast.showToast(msg: "Data Load Error");
+          Toast.showError(title: "Wiki Data Load Error");
           // Handle the error state
         },
         loading: () {
-          Fluttertoast.showToast(msg: "Data Loading...");
+          Toast.show(title: "Wiki Data Loading...");
           // Handle the loading state
         },
       );

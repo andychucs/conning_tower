@@ -34,11 +34,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:shake/shake.dart';
+
+import '../utils/toast.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key, this.cookieManager}) : super(key: key);
@@ -211,7 +212,7 @@ class HomePageState extends ConsumerState<HomePage> {
               onPressed: () async {
                 Navigator.of(context).pop();
                 await Clipboard.setData(ClipboardData(text: next.data ?? ""));
-                Fluttertoast.showToast(msg: S.current.TextCopyToClipboardSuccess);
+                Toast.showSuccess(title: S.current.TextCopyToClipboardSuccess);
               },
             ),
           );

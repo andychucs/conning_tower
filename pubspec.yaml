@@ -42,7 +42,6 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_inappwebview: ^6.0.0
   path_provider: ^2.1.2
-  fluttertoast: ^8.2.4
   shared_preferences: ^2.2.3
   url_launcher: ^6.2.6
   package_info_plus: ^5.0.1
@@ -86,6 +85,7 @@ dependencies:
   syncfusion_flutter_charts: ^26.2.7
   csv: ^6.0.0
   file_picker: ^8.0.0+1
+  toastification: ^2.1.0
 
 
 dev_dependencies:

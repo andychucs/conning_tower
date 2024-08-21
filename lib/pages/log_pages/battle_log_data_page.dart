@@ -15,9 +15,10 @@ import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
+
+import '../../utils/toast.dart';
 
 class BattleLogDataPage extends ConsumerStatefulWidget {
   const BattleLogDataPage({super.key});
@@ -187,7 +188,7 @@ class _BattleLogDataPageState extends ConsumerState<BattleLogDataPage> {
                         "${battleData.mapInfo.id ~/ 10}-${battleData.mapInfo.id % 10}"),
                     subtitle: Text('$date $time'),
                     onTap: () {
-                      Fluttertoast.showToast(msg: "Error: Map not found");
+                      Toast.showError(title: "Map not found");
                     },
                   );
                 }

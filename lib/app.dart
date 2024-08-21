@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:toastification/toastification.dart';
 
 class ConnTowerApp extends ConsumerWidget {
   const ConnTowerApp({super.key});
@@ -19,8 +20,9 @@ class ConnTowerApp extends ConsumerWidget {
       ref.watch(deviceManagerProvider.notifier).setSize(size);
     });
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return ToastificationWrapper(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -80,7 +82,7 @@ class ConnTowerApp extends ConsumerWidget {
       ),
       themeMode: themeMode,
       onGenerateRoute: (_) => MaterialWithModalsPageRoute(
-        builder: (_) => const HomePage(),),
+        builder: (_) => const HomePage(),),),
     );
   }
 }
