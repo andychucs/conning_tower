@@ -21,6 +21,7 @@ Support iPhone and iPad, Mac (Apple Silicon) now.
 
 Conning towerやBridgeはクロスプラットフォームプレイに対応した艦隊これくしょんの専用ブラウザです。
 
+
 ## MAJOR FEATURE
 
 * KanColle logbook.
