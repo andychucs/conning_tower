@@ -14,7 +14,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
+import '../utils/toast.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
@@ -153,7 +154,7 @@ class SettingsPageState extends ConsumerState<SettingsPage> {
                           select = index;
                           if (kReleaseChannel == ReleaseChannel.github) {
                             if (layouts[select].name.toLowerCase().contains("joystick")) {
-                              Fluttertoast.showToast(msg: "Not available");
+                              Toast.showWarning(title: "Not available");
                               return;
                             }
                           }

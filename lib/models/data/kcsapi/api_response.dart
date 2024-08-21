@@ -1,17 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'api_response.freezed.dart';
 part 'api_response.g.dart';
 
+sealed class ApiResponse {}
+
 @freezed
-class ApiResponse with _$ApiResponse {
-  factory ApiResponse({
+sealed class AnyApiResponse with _$AnyApiResponse{
+  @Implements<ApiResponse>()
+  factory AnyApiResponse({
     required int apiResult,
     required String apiResultMsg,
-    required dynamic apiData,
-  }) = _ApiResponse;
+    dynamic apiData,
+  }) = _AnyApiResponse;
 
-  factory ApiResponse.fromJson(Map<String, dynamic> json) =>
-      _$ApiResponseFromJson(json);
+  factory AnyApiResponse.fromJson(Map<String, dynamic> json) =>
+      _$AnyApiResponseFromJson(json);
 }
 
 

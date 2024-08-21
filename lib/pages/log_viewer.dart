@@ -10,12 +10,12 @@ import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../models/feature/log/kancolle_log.dart';
 import '../objectbox.g.dart';
 import '../providers/kancolle_data_provider.dart';
+import '../utils/toast.dart';
 import 'log_pages/resource_log_data_page.dart';
 
 enum LogType { battle, resource }
@@ -126,7 +126,7 @@ class LogViewer extends ConsumerWidget {
                     onTap: () async {
                       await objectbox.clear();
                       objectbox = await ObjectBox.create();
-                      Fluttertoast.showToast(msg: "All log cleared");
+                      Toast.showSuccess(title: "All log cleared");
                     },
                   )
                 ],

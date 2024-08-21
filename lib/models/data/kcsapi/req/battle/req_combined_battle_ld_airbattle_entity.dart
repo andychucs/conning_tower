@@ -48,6 +48,8 @@ class ReqCombinedBattleLdAirbattleApiDataEntity
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
     @JsonKey(name: 'api_kouku') CombineAircraftRound? apiKouku,
+    List<int>? apiEscapeIdx,
+    List<int>? apiEscapeIdxCombined,
   }) = _ReqCombinedBattleLdAirbattleApiDataEntity;
 
   factory ReqCombinedBattleLdAirbattleApiDataEntity.fromJson(

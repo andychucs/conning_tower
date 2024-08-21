@@ -48,6 +48,7 @@ class ReqSortieAirbattleApiDataEntity
     @JsonKey(name: 'api_stage_flag2') List<int>? apiStageFlag2,
     @JsonKey(name: 'api_kouku2')
     ReqSortieAirbattleApiDataApiKoukuEntity? apiKouku2,
+    List<int>? apiEscapeIdx,
   }) = _ReqSortieAirbattleApiDataEntity;
 
   factory ReqSortieAirbattleApiDataEntity.fromJson(Map<String, dynamic> json) =>

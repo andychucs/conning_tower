@@ -5,12 +5,12 @@ import 'package:conning_tower/models/data/ooyodo/akashi_schedule.dart';
 import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/kancolle_localization_provider.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
+import 'package:conning_tower/utils/toast.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
@@ -235,10 +235,10 @@ class _ImproveDetailSheetState extends State<ImproveDetailSheet> {
 
     List<int> pinedItems = [...widget.pinedIds];
     if (_pined) {
-      Fluttertoast.showToast(msg: "Unpin");
+      Toast.show(title: "Unpin");
       pinedItems.remove(widget.id);
     } else {
-      Fluttertoast.showToast(msg: "Pin");
+      Toast.show(title: "Pin");
       pinedItems.add(widget.id);
     }
     localStorage.setStringList(

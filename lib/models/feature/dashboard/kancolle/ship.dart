@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -56,6 +57,7 @@ class Ship with _$Ship {
     List<Equipment>? exEquipment,
     String? hpStatus,
     int? sallyArea,
+    bool? escape,
   }) = _Ship;
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
@@ -84,7 +86,7 @@ class Ship with _$Ship {
     }
   }
 
-  bool damaged() {
+  bool get damaged {
     if (nowHP <= maxHP * 0.25) {
       return true;
     } else {
@@ -119,6 +121,9 @@ class Ship with _$Ship {
   }
 
   Color? get damageColor {
+    if (escape != null && escape!) {
+      return CupertinoColors.inactiveGray;
+    }
     if (nowHP <= maxHP * 0.25) return const Color(0xFFDE3C14);
     if (nowHP <= maxHP * 0.50) return const Color(0xFFFFB616);
     if (nowHP <= maxHP * 0.75) return const Color(0xFFD0FD3D);
@@ -132,23 +137,23 @@ class Ship with _$Ship {
     return 'N/A';
   }
 
-  String get speedLevel {
-    if (speed == 5) return S.current.TextSlowSpeed;
-    if (speed == 10) return S.current.TextFastSpeed;
-    if (speed == 15) return S.current.TextFastPlusSpeed;
-    if (speed == 20) return S.current.TextFastestSpeed;
-    return 'N/A';
-  }
+  String get speedLevel => switch (speed) {
+      5 => S.current.TextSlowSpeed,
+      10 => S.current.TextFastSpeed,
+      15 => S.current.TextFastPlusSpeed,
+      20 => S.current.TextFastestSpeed,
+      _ => 'N/A'
+    };
 
-  String get attackRangeLevel {
-    if (attackRange == 5) return S.current.TextSuperLongRangePlus;
-    if (attackRange == 4) return S.current.TextSuperLongRange;
-    if (attackRange == 3) return S.current.TextLongRange;
-    if (attackRange == 2) return S.current.TextMediumRange;
-    if (attackRange == 1) return S.current.TextShortRange;
-    if (attackRange == 0) return S.current.TextNone;
-    return 'N/A';
-  }
+  String get attackRangeLevel => switch (attackRange) {
+      5 => S.current.TextSuperLongRangePlus,
+      4 => S.current.TextSuperLongRange,
+      3 => S.current.TextLongRange,
+      2 => S.current.TextMediumRange,
+      1 => S.current.TextShortRange,
+      0 => S.current.TextNone,
+      _ => 'N/A'
+    };
 
   List<AircraftCarry> get aircraftCarry {
     List<AircraftCarry> aircraftCarry = [];
@@ -296,29 +301,15 @@ class Ship with _$Ship {
     num count = 0;
     final allEquipment = [...equipment ?? [], ...exEquipment ?? []];
     for (final equip in allEquipment) {
-      switch (equip.type?[2]) {
-        case 8:
-          count += equip.los! * 0.8;
-          break;
-        case 9:
-          count += equip.los! * 1.0;
-          break;
-        case 10:
-          count += (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2;
-          break;
-        case 11:
-          count += (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1;
-          break;
-        case 12:
-          count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
-          break;
-        case 13:
-          count += (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6;
-          break;
-        default:
-          count += equip.los ?? 0 * 0.6;
-          break;
-      }
+      count += switch (equip.type?[2]) {
+        8 => equip.los! * 0.8,
+        9 => equip.los! * 1.0,
+        10 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2,
+        11 => (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1,
+        12 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6,
+        13 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6,
+        _ => equip.los ?? 0 * 0.6
+      };
     }
 
     return count;
@@ -346,6 +337,60 @@ class Ship with _$Ship {
       nowHP: 0,
       maxHP: 0,
       hpStatus: "$nowHP",
+    );
+  }
+
+  Ship copyWithApi(ShipData data, String shipName,
+      {List<int>? afterIds,
+        int? upgradeLevel,
+        int? shipType,
+        Map<int, Equipment>? equipment}) {
+    List<Equipment> equips = [];
+    List<Equipment> equipsEx = [];
+    if (equipment != null) {
+      for (final eid in data.apiSlot) {
+        if (eid == -1) continue;
+        if (equipment[eid] != null) {
+          equips.add(equipment[eid]!);
+        }
+      }
+      if (data.apiSlotEx != -1 && data.apiSlotEx != 0) {
+        if (equipment[data.apiSlotEx] != null) {
+          equipsEx.add(equipment[data.apiSlotEx]!);
+        }
+      }
+    }
+    return copyWith(
+      uid: data.apiId,
+      shipId: data.apiShipId,
+      name: shipName,
+      level: data.apiLv,
+      exp: data.apiExp,
+      nowHP: data.apiNowhp,
+      maxHP: data.apiMaxhp,
+      // sortNo: data.apiSortno,
+      speed: data.apiSoku,
+      condition: data.apiCond,
+      attack: data.apiKaryoku,
+      attackT: data.apiRaisou,
+      antiAircraft: data.apiTaiku,
+      armor: data.apiSoukou,
+      evasion: data.apiKaihi,
+      antiSubmarine: data.apiTaisen,
+      scout: data.apiSakuteki,
+      luck: data.apiLucky,
+      attackRange: data.apiLeng,
+      fuel: data.apiFuel,
+      bull: data.apiBull,
+      slot: data.apiSlot,
+      slotEx: data.apiSlotEx,
+      onSlot: data.apiOnslot,
+      afterIds: afterIds,
+      upgradeLevel: upgradeLevel,
+      shipType: shipType,
+      equipment: equips,
+      exEquipment: equipsEx,
+      sallyArea: data.apiSallyArea,
     );
   }
 

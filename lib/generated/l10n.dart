@@ -1340,6 +1340,16 @@ class S {
     );
   }
 
+  /// `You need to log in to the game before using this feature.`
+  String get KCNeedLoginNoticeDesc {
+    return Intl.message(
+      'You need to log in to the game before using this feature.',
+      name: 'KCNeedLoginNoticeDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ammo`
   String get KCResourceAmmo {
     return Intl.message(
@@ -1680,11 +1690,21 @@ class S {
     );
   }
 
-  /// `Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings.`
-  String get ScreenshotFailDialog {
+  /// `Please allow app to access Photos in the System Settings.`
+  String get ScreenshotFailDialogDesc {
     return Intl.message(
-      'Screenshot save failed. Please allow Conning Tower to access Photos in the System Settings.',
-      name: 'ScreenshotFailDialog',
+      'Please allow app to access Photos in the System Settings.',
+      name: 'ScreenshotFailDialogDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Screenshot save failed.`
+  String get ScreenshotFailDialogTitle {
+    return Intl.message(
+      'Screenshot save failed.',
+      name: 'ScreenshotFailDialogTitle',
       desc: '',
       args: [],
     );
@@ -2240,6 +2260,16 @@ class S {
     );
   }
 
+  /// `Login Required`
+  String get TextLoginRequired {
+    return Intl.message(
+      'Login Required',
+      name: 'TextLoginRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Long`
   String get TextLongRange {
     return Intl.message(
@@ -2275,6 +2305,16 @@ class S {
     return Intl.message(
       'MA Period',
       name: 'TextMovingAveragePeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network Error`
+  String get TextNetworkError {
+    return Intl.message(
+      'Network Error',
+      name: 'TextNetworkError',
       desc: '',
       args: [],
     );

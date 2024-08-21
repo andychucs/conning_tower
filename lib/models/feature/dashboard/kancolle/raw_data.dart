@@ -31,7 +31,7 @@ class RawData with _$RawData {
       source: entity.source, data: jsonEncode(entity.data), timestamp: entity.timestamp);
 
   DataLogEntity get decoded => DataLogEntity(
-      timestamp: timestamp, source: source, data: jsonDecode(data), params: params);
+      timestamp: timestamp, source: source, data: jsonDecode(data));
 }
 
 @freezed

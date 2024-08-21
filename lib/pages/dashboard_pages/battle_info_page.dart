@@ -23,13 +23,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 import '../../models/feature/dashboard/kancolle/map_state.dart';
+import '../../utils/toast.dart';
 import '../../widgets/dialog.dart';
 
 const EdgeInsetsDirectional _kBattleInfoGridMargin =
@@ -62,11 +62,11 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
           routeName = getRouteName(data, battleInfo, routeName);
         },
         error: (e, s) {
-          Fluttertoast.showToast(msg: "Data Load Error");
+          Toast.showError(title: "Wiki Data Load Error");
           // Handle the error state
         },
         loading: () {
-          Fluttertoast.showToast(msg: "Data Loading...");
+          Toast.show(title: "Wiki Data Loading...");
           // Handle the loading state
         },
       );
@@ -483,7 +483,6 @@ class ShipInfoInBattle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const dmgSize = 14.0;
     late double damagePercent;
     late String damageText;
 
@@ -496,54 +495,7 @@ class ShipInfoInBattle extends StatelessWidget {
     }
 
     return CupertinoListTile.notched(
-      leading: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Icon(
-                Icons.arrow_drop_up,
-                color: Colors.redAccent,
-                size: dmgSize,
-              ),
-              Expanded(
-                child: AutoSizeText(
-                  '$dmg',
-                  textAlign: TextAlign.end,
-                  softWrap: false,
-                  maxFontSize: dmgSize,
-                  minFontSize: dmgSize - 8,
-                  maxLines: 1,
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Icon(
-                Icons.arrow_drop_down,
-                color: Colors.blueAccent,
-                size: dmgSize,
-              ),
-              Expanded(
-                child: AutoSizeText(
-                  '$dmgTaken',
-                  textAlign: TextAlign.end,
-                  softWrap: false,
-                  maxFontSize: dmgSize,
-                  minFontSize: dmgSize - 8,
-                  maxLines: 1,
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+      leading: buildLeading(),
       leadingSize: 48,
       padding: EdgeInsets.only(right: 14.0, left: 4.0),
       leadingToTitle: 4.0,
@@ -618,6 +570,67 @@ class ShipInfoInBattle extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildLeading() {
+    const dmgSize = 14.0;
+
+    if (ship.escape ?? false) {
+      return const Icon(
+        CupertinoIcons.escape,
+        color: CupertinoColors.inactiveGray,
+        size: 20,
+      );
+    }
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            const Icon(
+              Icons.arrow_drop_up,
+              color: Colors.redAccent,
+              size: dmgSize,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                '$dmg',
+                textAlign: TextAlign.end,
+                softWrap: false,
+                maxFontSize: dmgSize,
+                minFontSize: dmgSize - 8,
+                maxLines: 1,
+              ),
+            )
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.arrow_drop_down,
+              color: Colors.blueAccent,
+              size: dmgSize,
+            ),
+            Expanded(
+              child: AutoSizeText(
+                '$dmgTaken',
+                textAlign: TextAlign.end,
+                softWrap: false,
+                maxFontSize: dmgSize,
+                minFontSize: dmgSize - 8,
+                maxLines: 1,
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }

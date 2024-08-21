@@ -7,8 +7,8 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/providers/tasks_provider.dart';
+import 'package:conning_tower/utils/toast.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -161,7 +161,7 @@ class TaskUtil extends _$TaskUtil {
             if (tasks.items.length <= kMaxTaskNum) {
               ref.read(tasksStateProvider.notifier).update((state) => tasks);
             } else {
-              Fluttertoast.showToast(msg: S.current.TasksNumOverLimit);
+              Toast.showError(title: S.current.TasksNumOverLimit);
             }
           }
         } catch (e, s) {
@@ -183,7 +183,7 @@ class TaskUtil extends _$TaskUtil {
       });
       debugPrint(state.toString());
     } else {
-      Fluttertoast.showToast(msg: S.current.InvalidUrlError);
+      Toast.showError(title: S.current.InvalidUrlError);
     }
   }
 
@@ -203,7 +203,7 @@ class TaskUtil extends _$TaskUtil {
         debugPrint(state.toString());
         // await _saveLocalTasks();
       } catch (e) {
-        Fluttertoast.showToast(msg: S.current.InvalidJsonError);
+        Toast.showError(title: S.current.InvalidJsonError);
       }
     } else if (isYaml(content)) {
       try {
@@ -218,7 +218,7 @@ class TaskUtil extends _$TaskUtil {
         debugPrint(state.toString());
         // await _saveLocalTasks();
       } catch (e) {
-        Fluttertoast.showToast(msg: S.current.InvalidYamlError);
+        Toast.showError(title: S.current.InvalidYamlError);
       }
     }
   }
@@ -270,7 +270,7 @@ class TaskUtil extends _$TaskUtil {
     } else if (text.isNotEmpty) {
       setTasksString(text);
     } else {
-      Fluttertoast.showToast(msg: S.current.EmptyFieldError);
+      Toast.showError(title: S.current.EmptyFieldError);
     }
   }
 

@@ -57,6 +57,7 @@ class ReqSortieBattleApiDataEntity
     @JsonKey(name: 'api_raigeki') TorpedoRoundEntity? apiRaigeki,
     AirBaseJetAircraftRound? apiAirBaseInjection,
     NormalAircraftRound? apiInjectionKouku,
+    List<int>? apiEscapeIdx,
   }) = _ReqSortieBattleApiDataEntity;
 
   factory ReqSortieBattleApiDataEntity.fromJson(Map<String, dynamic> json) =>

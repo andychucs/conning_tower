@@ -16,9 +16,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+
+import '../../utils/toast.dart';
 
 class LogDetailBattle extends ConsumerWidget {
   const LogDetailBattle({
@@ -114,7 +115,7 @@ class LogDetailBattle extends ConsumerWidget {
         trailing: GestureDetector(
           onTap: () async {
             await Clipboard.setData(ClipboardData(text: logData.logStr));
-            Fluttertoast.showToast(msg: S.current.TextCopyToClipboardSuccess);
+            Toast.showSuccess(title: S.current.TextCopyToClipboardSuccess);
           },
           child: Icon(
             CupertinoIcons.square_on_square,

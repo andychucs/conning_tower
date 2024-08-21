@@ -235,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("獲得日降順"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("艦娘"),
+        "KCNeedLoginNoticeDesc":
+            MessageLookupByLibrary.simpleMessage("ゲームにログインする必要があります。"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
         "KCResourceBauxite": MessageLookupByLibrary.simpleMessage("ボーキサイト"),
         "KCResourceDevelopmentMaterial":
@@ -288,8 +290,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "写真が表示されない場合、システム設定でアクセス権限を開いてください。"),
         "PhotoAlbumPermissionRequest":
             MessageLookupByLibrary.simpleMessage("システム設定へ"),
-        "ScreenshotFailDialog": MessageLookupByLibrary.simpleMessage(
-            "スクリーンショットの保存に失敗しました。写真へのアクセスを許可していただけますか？"),
+        "ScreenshotFailDialogDesc":
+            MessageLookupByLibrary.simpleMessage("写真へのアクセスを許可していただけますか？"),
+        "ScreenshotFailDialogTitle":
+            MessageLookupByLibrary.simpleMessage("スクリーンショットの保存に失敗しました。"),
         "ScreenshotSuccessDialog":
             MessageLookupByLibrary.simpleMessage("スクリーンショットが保存されました"),
         "SettingsButton": MessageLookupByLibrary.simpleMessage("設定"),
@@ -365,10 +369,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("インポートに失敗しました"),
         "TextItem": MessageLookupByLibrary.simpleMessage("アイテム"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("大破"),
+        "TextLoginRequired": MessageLookupByLibrary.simpleMessage("ログインが必要です"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("長"),
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextMovingAveragePeriod": MessageLookupByLibrary.simpleMessage("MA期間"),
+        "TextNetworkError": MessageLookupByLibrary.simpleMessage("ネットワークエラー発生"),
         "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
         "TextOpenInJervis":

@@ -18,8 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../utils/toast.dart';
 import '../../widgets/kancolle_item_viewer.dart';
 
 class PortInfo extends ConsumerStatefulWidget {
@@ -135,8 +135,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                   ),
                                   InfoBox(
                                     onTap: () {
-                                      Fluttertoast.showToast(
-                                          msg: "Not implemented yet.");
+                                      Toast.showWarning(title: "Not implemented yet.");
                                       // navigatorToCupertino(context, KancolleItemViewer());
                                     },
                                     top: Row(
@@ -276,7 +275,7 @@ class ResourceInfoBox extends StatelessWidget {
       onTap: () {
         final resourceList = objectbox.queryResource(admiralName, resource);
         if (resourceList.isEmpty) {
-          Fluttertoast.showToast(msg: "Need Login first.");
+          Toast.showWarning(title: S.of(context).TextLoginRequired, description: S.of(context).KCNeedLoginNoticeDesc);
           return;
         }
         navigatorToCupertino(
