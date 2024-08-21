@@ -14,7 +14,6 @@ class Toast {
         description: description != null ? Text(description) : null,
         alignment: Alignment.topCenter,
         autoCloseDuration: autoCloseDuration ?? const Duration(seconds: 4),
-        applyBlurEffect: true,
       );
 
   static showWarning({
