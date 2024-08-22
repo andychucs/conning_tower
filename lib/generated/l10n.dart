@@ -710,6 +710,16 @@ class S {
     );
   }
 
+  /// `Battle Finish`
+  String get KCBattleFinish {
+    return Intl.message(
+      'Battle Finish',
+      name: 'KCBattleFinish',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Maps`
   String get KCDashboardBattleAllMap {
     return Intl.message(

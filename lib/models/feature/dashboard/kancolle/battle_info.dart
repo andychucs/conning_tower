@@ -1152,6 +1152,18 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
+  List<String> get damagedShipNames {
+    final names = <String>[];
+    for (final squad in inBattleSquads!) {
+      for (final ship in squad.ships) {
+        if (ship.damaged && ship.escape != true) {
+          names.add(ship.name ?? "Ship ${ship.shipId}");
+        }
+      }
+    }
+    return names;
+  }
+
 }
 
 enum FleetSide { our, enemy }

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:toastification/toastification.dart';
+
+import '../generated/l10n.dart';
 
 class Toast {
   static show(
@@ -51,4 +54,18 @@ class Toast {
         description: description,
         autoCloseDuration: autoCloseDuration,
       );
+
+  static battleResultNotify(List<String> damageShips) async {
+    HapticFeedback.mediumImpact();
+    show(title: S.current.KCBattleFinish);
+    if (damageShips.isEmpty) {
+      return;
+    }
+    await Future.delayed(const Duration(milliseconds: 500));
+    showWarning(
+      title: S.current.TextLDamage,
+      description: damageShips.join('\n'),
+      autoCloseDuration: const Duration(seconds: 10),
+    );
+  }
 }
