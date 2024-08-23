@@ -57,6 +57,7 @@ class Toast {
 
   static battleResultNotify(List<String> damageShips) async {
     HapticFeedback.mediumImpact();
+    SystemSound.play(SystemSoundType.click);
     show(title: S.current.KCBattleFinish);
     if (damageShips.isEmpty) {
       return;

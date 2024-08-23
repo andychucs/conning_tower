@@ -8,6 +8,8 @@ import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../utils/toast.dart';
+
 part 'battle_info.freezed.dart';
 
 const kSecondSquadIndexStart = 6;
@@ -484,6 +486,7 @@ class BattleInfo with _$BattleInfo {
     if (data.apiEscape != null) {
       setReadyEscapeShip(data.apiEscape!);
     }
+    Toast.battleResultNotify(damagedShipNames);
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
     if (enemySquads != null) {
@@ -585,6 +588,7 @@ class BattleInfo with _$BattleInfo {
     if (data.apiEscape != null) {
       setReadyEscapeShip(data.apiEscape!);
     }
+    Toast.battleResultNotify(damagedShipNames);
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
     if (enemySquads != null) {

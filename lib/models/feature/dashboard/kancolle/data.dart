@@ -217,12 +217,10 @@ class KancolleData {
 
     if (model is ReqCombinedBattleResultEntity) {
       battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
-      Toast.battleResultNotify(battleInfo.damagedShipNames);
     }
 
     if (model is ReqSortieBattleResultEntity) {
       battleInfo.parseReqSortieBattleResult(model.apiData);
-      Toast.battleResultNotify(battleInfo.damagedShipNames);
     }
 
     if (model is GetDataEntity) {
