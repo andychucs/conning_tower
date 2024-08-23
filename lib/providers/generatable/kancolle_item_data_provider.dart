@@ -26,6 +26,10 @@ class KancolleItemData extends _$KancolleItemData {
 
   Future<void> _saveLocalData(AkashiSchedule akashiSchedule) async {
     final file = await _localJsonFile;
+    final directory = file.parent;
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
     await file.writeAsString(jsonEncode(akashiSchedule.toJson()));
   }
 
