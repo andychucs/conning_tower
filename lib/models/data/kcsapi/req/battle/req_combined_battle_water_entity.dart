@@ -51,7 +51,7 @@ class ReqCombinedBattleWaterApiDataEntity
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
     @JsonKey(name: 'api_kouku') CombineAircraftRound? apiKouku,
     @JsonKey(name: 'api_support_flag') int? apiSupportFlag,
-    @JsonKey(name: 'api_support_info') dynamic apiSupportInfo,
+    @JsonKey(name: 'api_support_info') BattleSupportInfo? apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,
     @JsonKey(name: 'api_opening_flag') int? apiOpeningFlag,

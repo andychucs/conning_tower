@@ -150,12 +150,12 @@ class TorpedoRoundEntity with _$TorpedoRoundEntity {
 @unfreezed
 class BattleDataAircraftRoundStage1 with _$BattleDataAircraftRoundStage1 {
   factory BattleDataAircraftRoundStage1({
-    required int? apiFCount,
-    required int? apiFLostcount,
-    required int? apiECount,
-    required int? apiELostcount,
-    required int? apiDispSeiku,
-    required List<int>? apiTouchPlane,
+    int? apiFCount,
+    int? apiFLostcount,
+    int? apiECount,
+    int? apiELostcount,
+    int? apiDispSeiku,
+    List<int>? apiTouchPlane,
   }) = _BattleDataAircraftRoundStage1;
 
   factory BattleDataAircraftRoundStage1.fromJson(Map<String, dynamic> json) =>
@@ -165,10 +165,10 @@ class BattleDataAircraftRoundStage1 with _$BattleDataAircraftRoundStage1 {
 @unfreezed
 class BattleDataAircraftRoundStage2 with _$BattleDataAircraftRoundStage2 {
   factory BattleDataAircraftRoundStage2({
-    required int? apiFCount,
-    required int? apiFLostcount,
-    required int? apiECount,
-    required int? apiELostcount,
+    int? apiFCount,
+    int? apiFLostcount,
+    int? apiECount,
+    int? apiELostcount,
   }) = _BattleDataAircraftRoundStage2;
 
   factory BattleDataAircraftRoundStage2.fromJson(Map<String, dynamic> json) =>
@@ -178,14 +178,14 @@ class BattleDataAircraftRoundStage2 with _$BattleDataAircraftRoundStage2 {
 @unfreezed
 class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
   factory BattleDataAircraftRoundStage3({
-    required List<int?>? apiFraiFlag,
-    required List<int?>? apiEraiFlag,
-    required List<int?>? apiFbakFlag,
-    required List<int?>? apiEbakFlag,
-    required List<int?>? apiFclFlag,
-    required List<int?>? apiEclFlag,
-    required List<num?>? apiFdam,
-    required List<num?>? apiEdam,
+    List<int?>? apiFraiFlag,
+    List<int?>? apiEraiFlag,
+    List<int?>? apiFbakFlag,
+    List<int?>? apiEbakFlag,
+    List<int?>? apiFclFlag,
+    List<int?>? apiEclFlag,
+    List<num?>? apiFdam,
+    List<num?>? apiEdam,
     List<dynamic>? apiFSpList,
     List<dynamic>? apiESpList,
   }) = _BattleDataAircraftRoundStage3;
@@ -292,4 +292,40 @@ class CombineAircraftRound
   factory CombineAircraftRound.fromJson(
       Map<String, dynamic> json) =>
       _$CombineAircraftRoundFromJson(json);
+}
+
+@freezed
+class BattleSupportInfo with _$BattleSupportInfo {
+  const factory BattleSupportInfo({
+    CombineAircraftRound? apiSupportAiratack,
+    BattleGunfireSupport? apiSupportHourai,
+  }) = _BattleSupportInfo;
+
+  factory BattleSupportInfo.fromJson(Map<String, dynamic> json) =>
+      _$BattleSupportInfoFromJson(json);
+}
+
+@freezed
+class BattleGunfireSupport with _$BattleGunfireSupport {
+  const factory BattleGunfireSupport({
+    int? apiDeckId,
+    List<int>? apiShipId,
+    List<int>? apiUndressingFlag,
+    List<int>? apiClList,
+    List<num>? apiDamage,
+  }) = _BattleGunfireSupport;
+
+  factory BattleGunfireSupport.fromJson(Map<String, dynamic> json) =>
+      _$BattleGunfireSupportFromJson(json);
+}
+
+@freezed
+class FriendlyFleetBattle with _$FriendlyFleetBattle {
+  const factory FriendlyFleetBattle({
+    dynamic apiFlarePos,
+    GunFireRoundEntity? apiHougeki,
+  }) = _FriendlyFleetBattle;
+
+  factory FriendlyFleetBattle.fromJson(Map<String, dynamic> json) =>
+      _$FriendlyFleetBattleFromJson(json);
 }

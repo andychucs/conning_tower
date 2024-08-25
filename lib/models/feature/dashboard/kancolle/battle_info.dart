@@ -49,6 +49,8 @@ class BattleInfo with _$BattleInfo {
       .followedBy(enemySquads!.expand((squad) => squad.ships))
       .toList();
 
+  List<Ship> get allEnemyShips => enemySquads!.expand((squad) => squad.ships).toList();
+
   String get contactStatus => switch (contact) {
       1 => "同航戦",
       2 => "反航戦",
@@ -164,11 +166,13 @@ class BattleInfo with _$BattleInfo {
 
   /// Calculates the damage dealt by a ship during combat.
   void calculateDamageDealt(int actShipHash, num damage) {
+    assert(damage >= 0);
     dmgMap![actShipHash] = dmgMap![actShipHash]! + damage.truncate();
   }
 
   /// Calculates the damage taken by a ship during combat.
   void calculateDamageTaken(int defShipHash, num damage) {
+    assert(damage >= 0);
     dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
   }
 
@@ -210,7 +214,27 @@ class BattleInfo with _$BattleInfo {
   // index start from 1
   Ship getShipByNumero(FleetSide side, int num) => getShip(side, num - 1);
 
-  void gunFireRound(GunFireRound data) {
+  void supportBattleRound(BattleSupportInfo? data) {
+    if (data == null) return;
+    supportBattleGunFireRound(data.apiSupportHourai);
+    supportBattleAircraftRound(data.apiSupportAiratack);
+  }
+
+  void supportBattleAircraftRound(AircraftRound? data) {
+    if (data == null) return;
+    for (final (index, ship) in allEnemyShips.indexed) {
+      calculateDamageTaken(ship.hashCode, data.apiStage3!.apiEdam![index]!);
+    }
+  }
+
+  void supportBattleGunFireRound(BattleGunfireSupport? data) {
+    if (data == null) return;
+    for (final (index, ship) in allEnemyShips.indexed) {
+      calculateDamageTaken(ship.hashCode, data.apiDamage![index]);
+    }
+  }
+
+  void gunFireRound(GunFireRound data, {bool isFriendlyFleet = false}) {
     if (data.apiAtEflag == null) return;
     for (final (index, flag) in data.apiAtEflag!.indexed) {
       if (flag != 1 && flag != 0) {
@@ -230,20 +254,22 @@ class BattleInfo with _$BattleInfo {
         // "防御艦のインデックス　[][攻撃対象数]　0基点　単発カットイン攻撃では [防御艦, -1, -1] になる" Not Understand this case yet
         if (defIndex == -1) continue;
         late final Ship defShip;
-        late final Ship actShip;
         if (defIndex < defSquads[0].ships.length) {
           defShip = defSquads[0].ships[defIndex];
         } else {
           defShip = defSquads[1].ships[defIndex - kSecondSquadIndexStart]; // second squad index start from 6
         }
-
+        calculateDamageTaken(defShip.hashCode, damage);
+        
+        if (isFriendlyFleet) continue; // friendly battle no need to calculate damage dealt
+        
+        late final Ship actShip;
         if (actIndex < actSquads[0].ships.length) {
           actShip = actSquads[0].ships[actIndex];
         } else {
           actShip = actSquads[1].ships[actIndex - kSecondSquadIndexStart];
         }
 
-        calculateDamageTaken(defShip.hashCode, damage);
         calculateDamageDealt(actShip.hashCode, damage);
       }
     }
@@ -319,6 +345,8 @@ class BattleInfo with _$BattleInfo {
     }
 
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    supportBattleRound(data.apiSupportInfo);
 
     //api_opening_taisen
     if (data.apiOpeningTaisenFlag == 1) {
@@ -496,10 +524,6 @@ class BattleInfo with _$BattleInfo {
 
     setFormation(data.apiFormation);
 
-    /*
-    TODO: api_friendly_battle, api_friendly_kouku, api_support_info
-    */
-
     //api_air_base_injection
     if (data.apiAirBaseInjection != null) {
       assert(data.apiAirBaseInjection?.apiStage3Combined == null);
@@ -518,8 +542,19 @@ class BattleInfo with _$BattleInfo {
       }
     }
 
+    if (data.apiFriendlyBattle != null) {
+      gunFireRound(data.apiFriendlyBattle!.apiHougeki!, isFriendlyFleet: true);
+    }
+    
+    if (data.apiFriendlyKouku != null) {
+      aircraftRoundDamageCount(data.apiFriendlyKouku!);
+    }
+
     //api_kouku
     aircraftRound(data.apiStageFlag, data.apiKouku);
+
+    //api_support_info
+    supportBattleRound(data.apiSupportInfo);
 
     //api_opening_taisen
     if (data.apiOpeningTaisenFlag == 1) {
@@ -751,6 +786,8 @@ class BattleInfo with _$BattleInfo {
       aircraftRound(data.apiStageFlag!, data.apiKouku!);
     }
 
+    supportBattleRound(data.apiSupportInfo);
+
     //api_kouku2
     if (data.apiStageFlag2 != null) {
       aircraftRound(data.apiStageFlag2!, data.apiKouku2!);
@@ -780,6 +817,10 @@ class BattleInfo with _$BattleInfo {
     initDMGMap();
 
     setFormation(data.apiFormation);
+
+    if (data.apiFriendlyBattle != null) {
+      gunFireRound(data.apiFriendlyBattle!.apiHougeki!, isFriendlyFleet: true);
+    }
 
     if (data.apiHougeki != null) {
       gunFireRound(data.apiHougeki!);
@@ -817,6 +858,8 @@ class BattleInfo with _$BattleInfo {
     }
 
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    supportBattleRound(data.apiSupportInfo);
 
     //api_opening_taisen
     if (data.apiOpeningTaisenFlag == 1) {
@@ -883,6 +926,8 @@ class BattleInfo with _$BattleInfo {
 
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
+    supportBattleRound(data.apiSupportInfo);
+
     //api_opening_taisen
     if (data.apiOpeningTaisenFlag == 1) {
       gunFireRound(data.apiOpeningTaisen!);
@@ -947,6 +992,8 @@ class BattleInfo with _$BattleInfo {
 
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
+    supportBattleRound(data.apiSupportInfo);
+
     //api_opening_taisen
     if (data.apiOpeningTaisenFlag == 1) {
       gunFireRound(data.apiOpeningTaisen!);
@@ -1007,6 +1054,8 @@ class BattleInfo with _$BattleInfo {
     }
 
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
+
+    supportBattleRound(data.apiSupportInfo);
 
     //api_opening_taisen
     if (data.apiOpeningTaisenFlag == 1) {
