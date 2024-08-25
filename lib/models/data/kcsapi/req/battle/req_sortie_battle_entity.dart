@@ -43,7 +43,7 @@ class ReqSortieBattleApiDataEntity
     @JsonKey(name: 'api_stage_flag') required List<int> apiStageFlag,
     @JsonKey(name: 'api_kouku') required NormalAircraftRound apiKouku,
     @JsonKey(name: 'api_support_flag') required int apiSupportFlag,
-    @JsonKey(name: 'api_support_info') required dynamic apiSupportInfo,
+    @JsonKey(name: 'api_support_info') required BattleSupportInfo? apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') required int apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen')
     GunFireRoundEntity?
@@ -58,6 +58,8 @@ class ReqSortieBattleApiDataEntity
     AirBaseJetAircraftRound? apiAirBaseInjection,
     NormalAircraftRound? apiInjectionKouku,
     List<int>? apiEscapeIdx,
+    FriendlyFleetBattle? apiFriendlyBattle,
+    CombineAircraftRound? apiFriendlyKouku,
   }) = _ReqSortieBattleApiDataEntity;
 
   factory ReqSortieBattleApiDataEntity.fromJson(Map<String, dynamic> json) =>

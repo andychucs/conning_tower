@@ -44,7 +44,7 @@ class ReqSortieAirbattleApiDataEntity
     @JsonKey(name: 'api_kouku')
     ReqSortieAirbattleApiDataApiKoukuEntity? apiKouku,
     @JsonKey(name: 'api_support_flag') int? apiSupportFlag,
-    @JsonKey(name: 'api_support_info') dynamic apiSupportInfo,
+    @JsonKey(name: 'api_support_info') BattleSupportInfo? apiSupportInfo,
     @JsonKey(name: 'api_stage_flag2') List<int>? apiStageFlag2,
     @JsonKey(name: 'api_kouku2')
     ReqSortieAirbattleApiDataApiKoukuEntity? apiKouku2,
