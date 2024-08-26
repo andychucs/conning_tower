@@ -54,6 +54,7 @@ class ReqCombinedBattleEcMidnightBattleApiDataEntity
     @JsonKey(name: 'api_hougeki') NightBattleGunFireRoundEntity? apiHougeki,
     List<int>? apiEscapeIdx,
     List<int>? apiEscapeIdxCombined,
+    BattleFriendlyInfo? apiFriendlyInfo,
     FriendlyFleetBattle? apiFriendlyBattle,
   }) = _ReqCombinedBattleEcMidnightBattleApiDataEntity;
 

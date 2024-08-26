@@ -24,6 +24,7 @@ class BattleInfo with _$BattleInfo {
     String? dropItemName,
     List<Squad>? enemySquads,
     List<Squad>? inBattleSquads,
+    Squad? friendSquad,
     Map<int, int>? dmgTakenMap,
     Map<int, int>? dmgMap,
     int? airSuperiorityFlag,
@@ -38,28 +39,29 @@ class BattleInfo with _$BattleInfo {
   const BattleInfo._();
 
   String get airSuperiority => switch (airSuperiorityFlag) {
-      0 => '制空均衡',
-      1 => '制空権確保',
-      2 => '航空優勢',
-      3 => '航空劣勢',
-      4 => '制空権喪失',
-      _ => ''
-    };
+        0 => '制空均衡',
+        1 => '制空権確保',
+        2 => '航空優勢',
+        3 => '航空劣勢',
+        4 => '制空権喪失',
+        _ => '',
+      };
 
   List<Ship> get allShips => inBattleSquads!
       .expand((squad) => squad.ships)
       .followedBy(enemySquads!.expand((squad) => squad.ships))
       .toList();
 
-  List<Ship> get allEnemyShips => enemySquads!.expand((squad) => squad.ships).toList();
+  List<Ship> get allEnemyShips =>
+      enemySquads!.expand((squad) => squad.ships).toList();
 
   String get contactStatus => switch (contact) {
-      1 => "同航戦",
-      2 => "反航戦",
-      3 => "T字有利",
-      4 => "T字不利",
-      _ => ""
-    };
+        1 => "同航戦",
+        2 => "反航戦",
+        3 => "T字有利",
+        4 => "T字不利",
+        _ => "",
+      };
 
   String get enemyFormation {
     return getFormationText(eFormation ?? 0);
@@ -81,7 +83,8 @@ class BattleInfo with _$BattleInfo {
             break;
           case 2:
             if (data.apiStage3Combined != null) {
-              airBaseDamageCount(data.apiStage3?.apiEdam, data.apiStage3Combined?.apiEdam);
+              airBaseDamageCount(
+                  data.apiStage3?.apiEdam, data.apiStage3Combined?.apiEdam);
             } else {
               airBaseDamageCount(data.apiStage3?.apiEdam, null);
             }
@@ -90,7 +93,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void airBaseDamageCount(List<num?>? enemyDamageList, List<num?>? enemyCombinedDamageList) {
+  void airBaseDamageCount(
+      List<num?>? enemyDamageList, List<num?>? enemyCombinedDamageList) {
     if (enemyDamageList != null) {
       for (final (index, damage) in enemyDamageList.indexed) {
         calculateDamageTaken(getEShip1(index).hashCode, damage!);
@@ -120,8 +124,9 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void aircraftRoundDamageCount(AircraftRound airBattle) {
-    if (airBattle.apiStage3?.apiFdam != null) {
+  void aircraftRoundDamageCount(AircraftRound airBattle,
+      {bool isFriendlyBattle = false}) {
+    if (airBattle.apiStage3?.apiFdam != null && !isFriendlyBattle) {
       for (final (index, damage) in airBattle.apiStage3!.apiFdam!.indexed) {
         calculateDamageTaken(getOShip1(index).hashCode, damage!);
       }
@@ -132,7 +137,7 @@ class BattleInfo with _$BattleInfo {
       }
     }
     if (airBattle is AircraftRoundDoubleEnemy) {
-      if (airBattle.apiStage3Combined?.apiFdam != null) {
+      if (airBattle.apiStage3Combined?.apiFdam != null && !isFriendlyBattle) {
         for (final (index, damage)
             in airBattle.apiStage3Combined!.apiFdam!.indexed) {
           calculateDamageTaken(getOShip2(index).hashCode, damage!);
@@ -160,6 +165,7 @@ class BattleInfo with _$BattleInfo {
     enemySquads?.clear();
     dmgMap?.clear();
     dmgTakenMap?.clear();
+    friendSquad = null;
     if (resetMapInfo) {
       mapInfo = null;
       mapRoute = null;
@@ -168,12 +174,18 @@ class BattleInfo with _$BattleInfo {
 
   /// Calculates the damage dealt by a ship during combat.
   void calculateDamageDealt(int actShipHash, num damage) {
+    if (!dmgMap!.containsKey(actShipHash)) {
+      return;
+    }
     assert(damage >= 0);
     dmgMap![actShipHash] = dmgMap![actShipHash]! + damage.truncate();
   }
 
   /// Calculates the damage taken by a ship during combat.
   void calculateDamageTaken(int defShipHash, num damage) {
+    if (!dmgTakenMap!.containsKey(defShipHash)) {
+      return;
+    }
     assert(damage >= 0);
     dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
   }
@@ -236,7 +248,7 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void gunFireRound(GunFireRound data, {bool isFriendlyFleet = false}) {
+  void gunFireRound(GunFireRound data, {bool isFriendlyBattle = false}) {
     if (data.apiAtEflag == null) return;
     for (final (index, flag) in data.apiAtEflag!.indexed) {
       if (flag != 1 && flag != 0) {
@@ -245,8 +257,10 @@ class BattleInfo with _$BattleInfo {
       }
       final actIndex = data.apiAtList![index];
 
-      final actSquads = flag == 0 ? inBattleSquads! : enemySquads!;
-      final defSquads = flag == 1 ? inBattleSquads! : enemySquads!;
+      final ourSquads = isFriendlyBattle ? [friendSquad!] : inBattleSquads!;
+
+      final actSquads = flag == 0 ? ourSquads : enemySquads!;
+      final defSquads = flag == 1 ? ourSquads : enemySquads!;
 
       final damages = data.apiDamage![index];
       final defList = data.apiDfList![index];
@@ -259,12 +273,15 @@ class BattleInfo with _$BattleInfo {
         if (defIndex < defSquads[0].ships.length) {
           defShip = defSquads[0].ships[defIndex];
         } else {
-          defShip = defSquads[1].ships[defIndex - kSecondSquadIndexStart]; // second squad index start from 6
+          defShip = defSquads[1].ships[defIndex -
+              kSecondSquadIndexStart]; // second squad index start from 6
         }
         calculateDamageTaken(defShip.hashCode, damage);
-        
-        if (isFriendlyFleet) continue; // friendly battle no need to calculate damage dealt
-        
+
+        if (isFriendlyBattle) {
+          continue; // friendly battle no need to calculate damage dealt
+        }
+
         late final Ship actShip;
         if (actIndex < actSquads[0].ships.length) {
           actShip = actSquads[0].ships[actIndex];
@@ -275,6 +292,28 @@ class BattleInfo with _$BattleInfo {
         calculateDamageDealt(actShip.hashCode, damage);
       }
     }
+  }
+
+  void friendlyBattleCalculate({
+    BattleFriendlyInfo? info,
+    FriendlyFleetBattle? battle,
+    CombineAircraftRound? airBattle,
+  }) {
+    if (info == null) return;
+
+    initFriendSquads(info);
+
+    if (battle != null) {
+      gunFireRound(battle.apiHougeki!, isFriendlyBattle: true);
+    }
+    if (airBattle != null) {
+      aircraftRoundDamageCount(airBattle, isFriendlyBattle: true);
+    }
+  }
+
+  void initFriendSquads(BattleFriendlyInfo info) {
+    friendSquad = Squad.fromSingleFriend(
+        info.apiShipId, info.apiShipLv, info.apiMaxhps, info.apiNowhps);
   }
 
   void initDMGMap() {
@@ -322,13 +361,15 @@ class BattleInfo with _$BattleInfo {
     ];
   }
 
-  void parseCombinedBattleECBattle(ReqCombinedBattleECBattleApiDataEntity data, List<Squad> squads) {
+  void parseCombinedBattleECBattle(
+      ReqCombinedBattleECBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -482,7 +523,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleResultEntity(ReqCombinedBattleResultApiDataEntity data) {
+  void parseReqCombinedBattleResultEntity(
+      ReqCombinedBattleResultApiDataEntity data) {
     if (data.apiEscape != null) {
       setReadyEscapeShip(data.apiEscape!);
     }
@@ -513,7 +555,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseReqSortieBattle(ReqSortieBattleApiDataEntity data, List<Squad> squads) {
+  void parseReqSortieBattle(
+      ReqSortieBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -545,13 +588,10 @@ class BattleInfo with _$BattleInfo {
       }
     }
 
-    if (data.apiFriendlyBattle != null) {
-      gunFireRound(data.apiFriendlyBattle!.apiHougeki!, isFriendlyFleet: true);
-    }
-    
-    if (data.apiFriendlyKouku != null) {
-      aircraftRoundDamageCount(data.apiFriendlyKouku!);
-    }
+    friendlyBattleCalculate(
+        info: data.apiFriendlyInfo,
+        battle: data.apiFriendlyBattle,
+        airBattle: data.apiFriendlyKouku);
 
     //api_kouku
     aircraftRound(data.apiStageFlag, data.apiKouku);
@@ -620,7 +660,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseSortieLdAirbattle(ReqSortieLdAirbattleApiDataEntity data, List<Squad> squads) {
+  void parseSortieLdAirbattle(
+      ReqSortieLdAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -640,14 +681,16 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleLdAirbattle(ReqCombinedBattleLdAirbattleApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattleLdAirbattle(
+      ReqCombinedBattleLdAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
 
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -669,12 +712,12 @@ class BattleInfo with _$BattleInfo {
     eFormation = apiFormation[1];
     contact = apiFormation[2];
     if (mapInfo != null && mapRoute != null) {
-      objectbox.saveRouteLog(mapId: mapInfo!.id, routeId: mapRoute, formation: formation!);
+      objectbox.saveRouteLog(
+          mapId: mapInfo!.id, routeId: mapRoute, formation: formation!);
     }
   }
 
-  void torpedoFireRoundWithItem(
-      OpeningTorpedoRoundEntity data) {
+  void torpedoFireRoundWithItem(OpeningTorpedoRoundEntity data) {
     for (final (actIndex, defIndexList) in data.apiFraiListItems.indexed) {
       if (defIndexList != null) {
         final Ship actShip = getShip(FleetSide.our, actIndex);
@@ -713,8 +756,7 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void torpedoFireRound(
-      TorpedoRoundEntity data) {
+  void torpedoFireRound(TorpedoRoundEntity data) {
     for (final (actIndex, defIndex) in data.apiFrai.indexed) {
       if (defIndex != -1) {
         final Ship actShip = getShip(FleetSide.our, actIndex);
@@ -770,14 +812,14 @@ class BattleInfo with _$BattleInfo {
     return formation;
   }
 
-  void parseReqSortieAirbattle(ReqSortieAirbattleApiDataEntity data, List<Squad> squads) {
+  void parseReqSortieAirbattle(
+      ReqSortieAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
 
     updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
-
 
     initDMGMap();
 
@@ -800,13 +842,15 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleECMidnightBattle(ReqCombinedBattleEcMidnightBattleApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattleECMidnightBattle(
+      ReqCombinedBattleEcMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     if (data.apiFNowhpsCombined == null) {
       initShipHPSingleSquad(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
@@ -822,9 +866,8 @@ class BattleInfo with _$BattleInfo {
 
     setFormation(data.apiFormation);
 
-    if (data.apiFriendlyBattle != null) {
-      gunFireRound(data.apiFriendlyBattle!.apiHougeki!, isFriendlyFleet: true);
-    }
+    friendlyBattleCalculate(
+        info: data.apiFriendlyInfo, battle: data.apiFriendlyBattle);
 
     if (data.apiHougeki != null) {
       gunFireRound(data.apiHougeki!);
@@ -832,14 +875,16 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattle(ReqCombinedBattleApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattle(
+      ReqCombinedBattleApiDataEntity data, List<Squad> squads) {
     clear();
 
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initDMGMap();
 
@@ -899,14 +944,16 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleEachBattle(ReqCombinedBattleEachBattleApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattleEachBattle(
+      ReqCombinedBattleEachBattleApiDataEntity data, List<Squad> squads) {
     clear();
 
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -965,14 +1012,16 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleWater(ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattleWater(
+      ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
     clear();
 
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -1032,12 +1081,14 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleEachWater(ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattleEachWater(
+      ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -1094,13 +1145,15 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleMidnightBattle(ReqCombinedBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
+  void parseReqCombinedBattleMidnightBattle(
+      ReqCombinedBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
 
     initShipHPDoubleSquad(
         fNow: data.apiFNowhps,
@@ -1127,7 +1180,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void updateEscapeFlagInBattle({List<int>? indexes, List<int>? combinedIndexes}) {
+  void updateEscapeFlagInBattle(
+      {List<int>? indexes, List<int>? combinedIndexes}) {
     if (indexes != null) {
       _updateEscapeFlag(0, indexes);
     }
@@ -1137,7 +1191,7 @@ class BattleInfo with _$BattleInfo {
   }
 
   void _updateEscapeFlag(int squadIndex, List<int> numList) {
-    for (final (index, ship) in inBattleSquads![squadIndex].ships.indexed){
+    for (final (index, ship) in inBattleSquads![squadIndex].ships.indexed) {
       if (numList.contains(index + 1)) {
         ship.escape = true;
       } else {
@@ -1149,10 +1203,12 @@ class BattleInfo with _$BattleInfo {
   void setReadyEscapeShip(BattleResultEscapeEntity data) {
     readyEscapeShips ??= [];
     if (data.apiEscapeIdx.isNotEmpty) {
-      readyEscapeShips?.add(getShipByNumero(FleetSide.our, data.apiEscapeIdx.first));
+      readyEscapeShips
+          ?.add(getShipByNumero(FleetSide.our, data.apiEscapeIdx.first));
     }
     if (data.apiTowIdx != null && data.apiTowIdx!.isNotEmpty) {
-      readyEscapeShips?.add(getShipByNumero(FleetSide.our, data.apiTowIdx!.first));
+      readyEscapeShips
+          ?.add(getShipByNumero(FleetSide.our, data.apiTowIdx!.first));
     }
   }
 
@@ -1167,7 +1223,6 @@ class BattleInfo with _$BattleInfo {
     }
     return names;
   }
-
 }
 
 enum FleetSide { our, enemy }

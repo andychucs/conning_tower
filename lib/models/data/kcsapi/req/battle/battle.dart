@@ -329,3 +329,22 @@ class FriendlyFleetBattle with _$FriendlyFleetBattle {
   factory FriendlyFleetBattle.fromJson(Map<String, dynamic> json) =>
       _$FriendlyFleetBattleFromJson(json);
 }
+
+@freezed
+class BattleFriendlyInfo with _$BattleFriendlyInfo {
+  const factory BattleFriendlyInfo({
+    int? apiProductionType,
+    required List<int> apiShipId,
+    required List<int> apiShipLv,
+    required List<int> apiNowhps,
+    required List<int> apiMaxhps,
+    List<List<int>>? apiSlot,
+    List<int>? apiSlotEx,
+    dynamic apiParam,
+    List<int?>? apiVoiceId,
+    List<int?>? apiVoicePNo,
+  }) = _BattleFriendlyInfo;
+
+  factory BattleFriendlyInfo.fromJson(Map<String, dynamic> json) =>
+      _$BattleFriendlyInfoFromJson(json);
+}
