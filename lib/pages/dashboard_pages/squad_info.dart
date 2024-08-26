@@ -21,6 +21,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pull_down_button/pull_down_button.dart';
+import 'package:rank_icons/rank_icons.dart';
 
 import '../../models/data/l10n/kancolle_localization.dart';
 import '../../providers/generatable/kancolle_event_ship_tags_provider.dart';
@@ -198,7 +199,8 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                             children: [
                                               for (final ship in squad.ships)
                                                 CupertinoListTile(
-                                                  title: buildShipTitle(ship, locale),
+                                                  title: buildShipTitle(
+                                                      ship, locale),
                                                   padding: _kListPadding,
                                                   leading: CarouselSlider(
                                                     items: [
@@ -431,15 +433,23 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
             children: [
               Text(
                 shipTagsData?["${ship.sallyArea}"]?.nameLocal(locale) ?? '',
-                style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle.merge(
-                    TextStyle(color: CupertinoColors.secondaryLabel.resolveFrom(context))),
+                style: CupertinoTheme.of(context)
+                    .textTheme
+                    .tabLabelTextStyle
+                    .merge(TextStyle(
+                        color: CupertinoColors.secondaryLabel
+                            .resolveFrom(context))),
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(width: 4.0),
               Icon(
                 CupertinoIcons.tag_fill,
-                color: shipTagsData?["${ship.sallyArea}"]?.color ?? Colors.transparent,
-                size: CupertinoTheme.of(context).textTheme.tabLabelTextStyle.fontSize,
+                color: shipTagsData?["${ship.sallyArea}"]?.color ??
+                    Colors.transparent,
+                size: CupertinoTheme.of(context)
+                    .textTheme
+                    .tabLabelTextStyle
+                    .fontSize,
               ),
             ],
           ),
@@ -498,10 +508,7 @@ class SlotItemPage extends StatelessWidget {
                       children: [
                         for (final (index, item) in ship.slot!.indexed)
                           if (item != -1)
-                            Text(slotMap[item]?.text(
-                                    onSlot: ship.onSlot?[index],
-                                    l10nMap: l10nData?.equipmentLocal) ??
-                                "N/A"),
+                            equipmentItem(context, item, ship, index),
                         if (ship.slotEx != null &&
                             ship.slotEx != -1 &&
                             ship.slotEx != 0)
@@ -524,6 +531,24 @@ class SlotItemPage extends StatelessWidget {
           ];
         }).toList(),
       ),
+    );
+  }
+
+  Widget equipmentItem(BuildContext context, int item, Ship ship, int index) {
+    final text = Text(slotMap[item]?.text(
+            onSlot: ship.onSlot?[index], l10nMap: l10nData?.equipmentLocal) ??
+        "N/A");
+    final iconData = slotMap[item]?.proficiencyIcon;
+    final iconColor = slotMap[item]?.proficiencyColor;
+    return Row(
+      children: [
+        text,
+        Icon(
+          iconData,
+          size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
+          color: iconColor,
+        ),
+      ],
     );
   }
 }

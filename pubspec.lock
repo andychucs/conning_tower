@@ -1077,6 +1077,14 @@ packages:
       url: "https://github.com/andychucs/pull_down_button.git"
     source: git
     version: "0.10.1"
+  rank_icons:
+    dependency: "direct main"
+    description:
+      name: rank_icons
+      sha256: "1b5e4bd0e12f4f81415f2559558127da6c7279267d5f7de7083d81fd9f5c755a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   rive:
     dependency: "direct main"
     description:
@@ -1563,5 +1571,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.4.0 <4.0.0"
+  dart: ">=3.4.4 <4.0.0"
   flutter: ">=3.22.0"

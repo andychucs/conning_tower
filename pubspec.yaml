@@ -86,6 +86,7 @@ dependencies:
   csv: ^6.0.0
   file_picker: ^8.0.0+1
   toastification: ^2.1.0
+  rank_icons: ^0.1.2
 
 
 dev_dependencies:
