@@ -6,7 +6,7 @@ part 'api_response.g.dart';
 sealed class ApiResponse {}
 
 @freezed
-sealed class AnyApiResponse with _$AnyApiResponse{
+sealed class AnyApiResponse with _$AnyApiResponse {
   @Implements<ApiResponse>()
   factory AnyApiResponse({
     required int apiResult,
@@ -17,5 +17,3 @@ sealed class AnyApiResponse with _$AnyApiResponse{
   factory AnyApiResponse.fromJson(Map<String, dynamic> json) =>
       _$AnyApiResponseFromJson(json);
 }
-
-

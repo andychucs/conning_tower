@@ -24,7 +24,8 @@ class ReqBattleMidnightSpMidnightEntity
 
 @unfreezed
 class ReqBattleMidnightSpMidnightDataApiDataEntity
-    with _$ReqBattleMidnightSpMidnightDataApiDataEntity implements NightBattleData {
+    with _$ReqBattleMidnightSpMidnightDataApiDataEntity
+    implements NightBattleData {
   factory ReqBattleMidnightSpMidnightDataApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -52,4 +53,3 @@ class ReqBattleMidnightSpMidnightDataApiDataEntity
           Map<String, dynamic> json) =>
       _$ReqBattleMidnightSpMidnightDataApiDataEntityFromJson(json);
 }
-

@@ -77,7 +77,9 @@ class QuestAssistant with _$QuestAssistant {
 
     List<int> readyQuestId = ready.map((e) => e.id).toList();
 
-    List<Quest> doneQuests = inLogQuests.where((quest) => !readyQuestId.contains(quest.id) && quest.isCompleted).toList();
+    List<Quest> doneQuests = inLogQuests
+        .where((quest) => !readyQuestId.contains(quest.id) && quest.isCompleted)
+        .toList();
 
     done = doneQuests;
 
@@ -158,26 +160,35 @@ class Quest with _$Quest {
 
   factory Quest.fromApi(GetMemberQuestListEntityApiDataApiListEntity data) {
     return Quest(
-        id: data.apiNo!,
-        category: data.apiCategory,
-        type: data.apiType,
-        label: data.apiLabelType,
-        state: data.apiState,
-        title: data.apiTitle,
-        detail: data.apiDetail,
-        progressFlag: data.apiProgressFlag,
-        invalidFlag: data.apiInvalidFlag,
+      id: data.apiNo!,
+      category: data.apiCategory,
+      type: data.apiType,
+      label: data.apiLabelType,
+      state: data.apiState,
+      title: data.apiTitle,
+      detail: data.apiDetail,
+      progressFlag: data.apiProgressFlag,
+      invalidFlag: data.apiInvalidFlag,
     );
   }
 
   factory Quest.fromLog(KancolleQuestLogEntity log) {
     KancolleQuestLog questLog =
         KancolleQuestLog.fromJson(jsonDecode(log.logStr));
-    return Quest(id: questLog.id, mission: questLog.mission, title: questLog.title, state: questLog.state);
+    return Quest(
+        id: questLog.id,
+        mission: questLog.mission,
+        title: questLog.title,
+        state: questLog.state);
   }
 
   KancolleQuestLog toLog(String admiral) {
-    return KancolleQuestLog(id: id, mission: mission ?? [], title: title, state: state, admiral: admiral);
+    return KancolleQuestLog(
+        id: id,
+        mission: mission ?? [],
+        title: title,
+        state: state,
+        admiral: admiral);
   }
 }
 

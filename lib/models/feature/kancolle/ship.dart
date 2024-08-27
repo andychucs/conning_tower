@@ -138,22 +138,22 @@ class Ship with _$Ship {
   }
 
   String get speedLevel => switch (speed) {
-      5 => S.current.TextSlowSpeed,
-      10 => S.current.TextFastSpeed,
-      15 => S.current.TextFastPlusSpeed,
-      20 => S.current.TextFastestSpeed,
-      _ => 'N/A'
-    };
+        5 => S.current.TextSlowSpeed,
+        10 => S.current.TextFastSpeed,
+        15 => S.current.TextFastPlusSpeed,
+        20 => S.current.TextFastestSpeed,
+        _ => 'N/A'
+      };
 
   String get attackRangeLevel => switch (attackRange) {
-      5 => S.current.TextSuperLongRangePlus,
-      4 => S.current.TextSuperLongRange,
-      3 => S.current.TextLongRange,
-      2 => S.current.TextMediumRange,
-      1 => S.current.TextShortRange,
-      0 => S.current.TextNone,
-      _ => 'N/A'
-    };
+        5 => S.current.TextSuperLongRangePlus,
+        4 => S.current.TextSuperLongRange,
+        3 => S.current.TextLongRange,
+        2 => S.current.TextMediumRange,
+        1 => S.current.TextShortRange,
+        0 => S.current.TextNone,
+        _ => 'N/A'
+      };
 
   List<AircraftCarry> get aircraftCarry {
     List<AircraftCarry> aircraftCarry = [];
@@ -357,9 +357,9 @@ class Ship with _$Ship {
 
   Ship copyWithApi(ShipData data, String shipName,
       {List<int>? afterIds,
-        int? upgradeLevel,
-        int? shipType,
-        Map<int, Equipment>? equipment}) {
+      int? upgradeLevel,
+      int? shipType,
+      Map<int, Equipment>? equipment}) {
     List<Equipment> equips = [];
     List<Equipment> equipsEx = [];
     if (equipment != null) {

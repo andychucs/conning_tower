@@ -8,7 +8,6 @@ part 'req_mission_start_entity.g.dart';
 class ReqMissionStartEntity with _$ReqMissionStartEntity {
   static const source = '/api_req_mission/start';
 
-
   factory ReqMissionStartEntity({
     @JsonKey(name: 'api_result') required int apiResult,
     @JsonKey(name: 'api_result_msg') required String apiResultMsg,

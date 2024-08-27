@@ -69,14 +69,12 @@ abstract class DoubleOurBattleData extends BattleBasicModel {
   late List<int>? apiEscapeIdxCombined;
 }
 
-abstract class SingleVsDoubleBattleData implements DoubleEnemyBattleData {
-}
+abstract class SingleVsDoubleBattleData implements DoubleEnemyBattleData {}
 
-abstract class DoubleVsSingleBattleData implements DoubleOurBattleData {
-}
+abstract class DoubleVsSingleBattleData implements DoubleOurBattleData {}
 
-abstract class DoubleVsDoubleBattleData implements DoubleOurBattleData, DoubleEnemyBattleData {
-}
+abstract class DoubleVsDoubleBattleData
+    implements DoubleOurBattleData, DoubleEnemyBattleData {}
 
 abstract class FullGunFireRoundBattle implements BattleBasicModel {
   late GunFireRoundEntity? apiHougeki1;
@@ -141,14 +139,20 @@ class GunFireRoundEntity with _$GunFireRoundEntity implements GunFireRound {
 @unfreezed
 class OpeningTorpedoRoundEntity with _$OpeningTorpedoRoundEntity {
   factory OpeningTorpedoRoundEntity({
-    @JsonKey(name: 'api_frai_list_items') required List<List<int>?> apiFraiListItems,
-    @JsonKey(name: 'api_fcl_list_items') required List<List<num>?> apiFclListItems,
+    @JsonKey(name: 'api_frai_list_items')
+    required List<List<int>?> apiFraiListItems,
+    @JsonKey(name: 'api_fcl_list_items')
+    required List<List<num>?> apiFclListItems,
     @JsonKey(name: 'api_fdam') required List<num> apiFdam,
-    @JsonKey(name: 'api_fydam_list_items') required List<List<num>?> apiFydamListItems,
-    @JsonKey(name: 'api_erai_list_items') required List<List<int>?> apiEraiListItems,
-    @JsonKey(name: 'api_ecl_list_items') required List<List<num>?> apiEclListItems,
+    @JsonKey(name: 'api_fydam_list_items')
+    required List<List<num>?> apiFydamListItems,
+    @JsonKey(name: 'api_erai_list_items')
+    required List<List<int>?> apiEraiListItems,
+    @JsonKey(name: 'api_ecl_list_items')
+    required List<List<num>?> apiEclListItems,
     @JsonKey(name: 'api_edam') required List<num> apiEdam,
-    @JsonKey(name: 'api_eydam_list_items') required List<List<num>?> apiEydamListItems,
+    @JsonKey(name: 'api_eydam_list_items')
+    required List<List<num>?> apiEydamListItems,
   }) = _OpeningTorpedoRoundEntity;
 
   factory OpeningTorpedoRoundEntity.fromJson(Map<String, dynamic> json) =>
@@ -174,14 +178,25 @@ class TorpedoRoundEntity with _$TorpedoRoundEntity {
   @Deprecated('Use torpedoFireRoundWithItem instead covert to torpedoFireRound')
   factory TorpedoRoundEntity.fromOpening(OpeningTorpedoRoundEntity opening) {
     return TorpedoRoundEntity(
-      apiFrai: opening.apiFraiListItems.map((e) => e != null ? e.first : -1).toList(),
-      apiFcl: opening.apiFclListItems.map((e) => e != null ? e.first : 0).toList(),
+      apiFrai: opening.apiFraiListItems
+          .map((e) => e != null ? e.first : -1)
+          .toList(),
+      apiFcl:
+          opening.apiFclListItems.map((e) => e != null ? e.first : 0).toList(),
       apiFdam: opening.apiFdam,
-      apiFydam: opening.apiFydamListItems.map((e) => e != null ? e.reduce((value, element) => value + element) : 0).toList(),
-      apiErai: opening.apiEraiListItems.map((e) => e != null ? e.first : -1).toList(),
-      apiEcl: opening.apiEclListItems.map((e) => e != null ? e.first : 0).toList(),
+      apiFydam: opening.apiFydamListItems
+          .map((e) =>
+              e != null ? e.reduce((value, element) => value + element) : 0)
+          .toList(),
+      apiErai: opening.apiEraiListItems
+          .map((e) => e != null ? e.first : -1)
+          .toList(),
+      apiEcl:
+          opening.apiEclListItems.map((e) => e != null ? e.first : 0).toList(),
       apiEdam: opening.apiEdam,
-      apiEydam: opening.apiEydamListItems.map((e) => e != null ? e.first : 0).toList(),
+      apiEydam: opening.apiEydamListItems
+          .map((e) => e != null ? e.first : 0)
+          .toList(),
     );
   }
 }
@@ -234,8 +249,7 @@ class BattleDataAircraftRoundStage3 with _$BattleDataAircraftRoundStage3 {
 }
 
 @unfreezed
-class AirBaseAttackRound
-    with _$AirBaseAttackRound {
+class AirBaseAttackRound with _$AirBaseAttackRound {
   factory AirBaseAttackRound({
     @JsonKey(name: 'api_base_id') int? apiBaseId,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
@@ -248,8 +262,7 @@ class AirBaseAttackRound
     BattleDataAircraftRoundStage3? apiStage3Combined,
   }) = _AirBaseAttackRound;
 
-  factory AirBaseAttackRound.fromJson(
-      Map<String, dynamic> json) =>
+  factory AirBaseAttackRound.fromJson(Map<String, dynamic> json) =>
       _$AirBaseAttackRoundFromJson(json);
 }
 
@@ -279,11 +292,9 @@ class NightBattleGunFireRoundEntity
     @JsonKey(name: 'api_damage') List<List<num>>? apiDamage,
   }) = _NightBattleGunFireRoundEntity;
 
-  factory NightBattleGunFireRoundEntity.fromJson(
-      Map<String, dynamic> json) =>
+  factory NightBattleGunFireRoundEntity.fromJson(Map<String, dynamic> json) =>
       _$NightBattleGunFireRoundEntityFromJson(json);
 }
-
 
 @unfreezed
 class AirBaseJetAircraftRound with _$AirBaseJetAircraftRound {
@@ -301,8 +312,7 @@ class AirBaseJetAircraftRound with _$AirBaseJetAircraftRound {
 }
 
 @unfreezed
-class AircraftRoundData
-    with _$AircraftRoundData implements AircraftRound{
+class AircraftRoundData with _$AircraftRoundData implements AircraftRound {
   factory AircraftRoundData({
     @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
     @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
@@ -312,8 +322,7 @@ class AircraftRoundData
     BattleDataAircraftRoundStage3? apiStage3Combined,
   }) = _AircraftRoundData;
 
-  factory AircraftRoundData.fromJson(
-      Map<String, dynamic> json) =>
+  factory AircraftRoundData.fromJson(Map<String, dynamic> json) =>
       _$AircraftRoundDataFromJson(json);
 }
 

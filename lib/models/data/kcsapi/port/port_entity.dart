@@ -71,7 +71,9 @@ class PortApiDataApiMaterialEntity with _$PortApiDataApiMaterialEntity {
 }
 
 @unfreezed
-class PortApiDataApiDeckPortEntity with _$PortApiDataApiDeckPortEntity implements DeckData{
+class PortApiDataApiDeckPortEntity
+    with _$PortApiDataApiDeckPortEntity
+    implements DeckData {
   factory PortApiDataApiDeckPortEntity({
     @JsonKey(name: 'api_member_id') required int apiMemberId,
     @JsonKey(name: 'api_id') required int apiId,
@@ -106,7 +108,9 @@ class PortApiDataApiNdockEntity with _$PortApiDataApiNdockEntity {
 }
 
 @unfreezed
-class PortApiDataApiShipEntity with _$PortApiDataApiShipEntity implements ShipData{
+class PortApiDataApiShipEntity
+    with _$PortApiDataApiShipEntity
+    implements ShipData {
   factory PortApiDataApiShipEntity({
     @JsonKey(name: 'api_id') required int apiId,
     @JsonKey(name: 'api_sortno') required int apiSortno,

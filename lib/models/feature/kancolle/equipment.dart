@@ -1,7 +1,6 @@
 import 'package:conning_tower/models/data/kcsapi/item_data.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rank_icons/rank_icons.dart';

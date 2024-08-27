@@ -114,7 +114,18 @@ class Admiral with _$Admiral {
 
   String get rankName {
     try {
-      return ['元帥', '大将', '中将', '少将', '大佐', '中佐', '新米中佐', '少佐', '中堅少佐', '新米少佐'][rank - 1];
+      return [
+        '元帥',
+        '大将',
+        '中将',
+        '少将',
+        '大佐',
+        '中佐',
+        '新米中佐',
+        '少佐',
+        '中堅少佐',
+        '新米少佐'
+      ][rank - 1];
     } catch (e) {
       return 'N/A';
     }

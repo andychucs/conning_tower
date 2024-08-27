@@ -21,14 +21,20 @@ class RawData with _$RawData {
     required String source,
     required String data,
     required Map<String, dynamic> params,
-  }) => RawData(
-      source: source, data: data, timestamp: DateTime.now().millisecondsSinceEpoch, params: params);
+  }) =>
+      RawData(
+          source: source,
+          data: data,
+          timestamp: DateTime.now().millisecondsSinceEpoch,
+          params: params);
 
   factory RawData.fromJson(Map<String, dynamic> json) =>
       _$RawDataFromJson(json);
 
   factory RawData.fromDataLogEntity(DataLogEntity entity) => RawData(
-      source: entity.source, data: jsonEncode(entity.data), timestamp: entity.timestamp);
+      source: entity.source,
+      data: jsonEncode(entity.data),
+      timestamp: entity.timestamp);
 
   DataLogEntity get decoded => DataLogEntity(
       timestamp: timestamp, source: source, data: jsonDecode(data));

@@ -35,7 +35,8 @@ class GetMemberShipDeckApiDataEntity with _$GetMemberShipDeckApiDataEntity {
 
 @unfreezed
 class GetMemberShipDeckApiDataApiShipDataEntity
-    with _$GetMemberShipDeckApiDataApiShipDataEntity implements ShipData{
+    with _$GetMemberShipDeckApiDataApiShipDataEntity
+    implements ShipData {
   factory GetMemberShipDeckApiDataApiShipDataEntity({
     @JsonKey(name: 'api_id') required int apiId,
     @JsonKey(name: 'api_sortno') required int apiSortno,
@@ -80,7 +81,8 @@ class GetMemberShipDeckApiDataApiShipDataEntity
 
 @unfreezed
 class GetMemberShipDeckApiDataApiDeckDataEntity
-    with _$GetMemberShipDeckApiDataApiDeckDataEntity implements DeckData{
+    with _$GetMemberShipDeckApiDataApiDeckDataEntity
+    implements DeckData {
   factory GetMemberShipDeckApiDataApiDeckDataEntity({
     @JsonKey(name: 'api_member_id') required int apiMemberId,
     @JsonKey(name: 'api_id') required int apiId,

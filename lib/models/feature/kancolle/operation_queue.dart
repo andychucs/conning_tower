@@ -5,13 +5,11 @@ import 'package:timezone/timezone.dart';
 
 part 'operation_queue.freezed.dart';
 
-
 @unfreezed
 class OperationQueue with _$OperationQueue {
   const OperationQueue._();
 
-  factory OperationQueue({required Map<int, Operation> map}) =
-      _OperationQueue;
+  factory OperationQueue({required Map<int, Operation> map}) = _OperationQueue;
 
   void executeOperation(int squad, Operation operation) {
     map[squad] = operation;
@@ -27,15 +25,13 @@ class OperationQueue with _$OperationQueue {
       minutes: int.parse(parts[1]),
       seconds: int.parse(parts[2]),
     );
-    map[squad] = Operation(
-        id: 100,
-        endTime: TZDateTime.now(local).add(duration));
+    map[squad] =
+        Operation(id: 100, endTime: TZDateTime.now(local).add(duration));
   }
 }
 
 @freezed
 class Operation with _$Operation {
-  factory Operation(
-      {required int id,
-      required TZDateTime endTime}) = _Operation;
+  factory Operation({required int id, required TZDateTime endTime}) =
+      _Operation;
 }

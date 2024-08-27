@@ -1,14 +1,15 @@
-import 'package:conning_tower/models/data/kcsapi/item_data.dart';
-import 'equipment.dart';
-import 'ship.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'equipment.dart';
+import 'ship.dart';
 
 part 'fleet.freezed.dart';
 
 @unfreezed
 class Fleet with _$Fleet {
   const Fleet._();
+
   factory Fleet({
     required List<Ship> ships,
     required Map<int, Equipment> equipment,

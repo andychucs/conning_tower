@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,6 +10,7 @@ part 'map_state.g.dart';
 @freezed
 class MapState with _$MapState {
   const MapState._();
+
   const factory MapState({
     required int id,
     num? now,
