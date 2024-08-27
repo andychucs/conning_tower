@@ -142,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
         "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("Akashi Studio"),
+        "KCBattleFinish": MessageLookupByLibrary.simpleMessage("Battle Finish"),
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("Maps"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed."),

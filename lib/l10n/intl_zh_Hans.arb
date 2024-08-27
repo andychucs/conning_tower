@@ -132,6 +132,8 @@
   "@JsonExample": {},
   "KCAkashiStudio": "明石工坊",
   "@KCAkashiStudio": {},
+  "KCBattleFinish": "战斗结束",
+  "@KCBattleFinish": {},
   "KCDashboardBattleAllMap": "全海域",
   "@KCDashboardBattleAllMap": {},
   "KCDashboardBattleDescription": "目前只有通常舰队对通常舰队的一般战斗数据中的航空战、反潜战、炮击战、雷击战可以解析。",
