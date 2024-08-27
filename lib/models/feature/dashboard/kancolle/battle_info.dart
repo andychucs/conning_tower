@@ -14,6 +14,13 @@ part 'battle_info.freezed.dart';
 
 const kSecondSquadIndexStart = 6;
 
+enum CombinedFleetType {
+  sortieFleet,
+  carrierTaskForce, // 空母機動部隊
+  surfaceTaskForce, // 水上打撃部隊
+  transportEscort, // 輸送護衛部隊
+}
+
 @unfreezed
 class BattleInfo with _$BattleInfo {
   factory BattleInfo({
@@ -136,7 +143,7 @@ class BattleInfo with _$BattleInfo {
         calculateDamageTaken(getEShip1(index).hashCode, damage!);
       }
     }
-    if (airBattle is AircraftRoundDoubleEnemy) {
+    if (airBattle.apiStage3Combined != null) {
       if (airBattle.apiStage3Combined?.apiFdam != null && !isFriendlyBattle) {
         for (final (index, damage)
             in airBattle.apiStage3Combined!.apiFdam!.indexed) {
@@ -194,7 +201,7 @@ class BattleInfo with _$BattleInfo {
 
   Ship getEShip2(int index) => enemySquads![1].ships[index];
 
-  GunFireRound getGunFireData(SingleVsSingleBattleData data, int index) {
+  GunFireRound getGunFireData(FullGunFireRoundBattle data, int index) {
     switch (index) {
       case 0:
         return data.apiHougeki1!;
@@ -297,7 +304,7 @@ class BattleInfo with _$BattleInfo {
   void friendlyBattleCalculate({
     BattleFriendlyInfo? info,
     FriendlyFleetBattle? battle,
-    CombineAircraftRound? airBattle,
+    AircraftRoundData? airBattle,
   }) {
     if (info == null) return;
 
@@ -321,7 +328,7 @@ class BattleInfo with _$BattleInfo {
     dmgMap = {for (var ship in allShips) ship.hashCode: 0};
   }
 
-  void initDoubleEnemySquads(SingleVsDoubleBattleData data) {
+  void initDoubleEnemySquads(DoubleEnemyBattleData data) {
     enemySquads = [
       Squad.fromSingleEnemy(
           data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps),
@@ -354,22 +361,222 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void initSingleEnemySquads(SingleVsSingleBaseModel data) {
+  void initShipHP(
+      {required List<int> fNow,
+      required List<int> fMax,
+      List<int>? fNow2,
+      List<int>? fMax2}) {
+    if (fNow2 == null || fMax2 == null) {
+      initShipHPSingleSquad(fNow: fNow, fMax: fMax);
+    } else {
+      initShipHPDoubleSquad(fNow: fNow, fMax: fMax, fNow2: fNow2, fMax2: fMax2);
+    }
+  }
+
+  void initSingleEnemySquads(BattleBasicModel data) {
     enemySquads = [
       Squad.fromSingleEnemy(
           data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps)
     ];
   }
 
-  void parseCombinedBattleECBattle(
-      ReqCombinedBattleECBattleApiDataEntity data, List<Squad> squads) {
+  void parseBattle(BattleBasicModel data, List<Squad> squads) {
+    clear();
+    inBattleSquads = squads;
+
+    if (data is DoubleVsDoubleBattleData) {
+      doubleOurSideBattlePrepare(data);
+      initDoubleEnemySquads(data);
+    } else if (data is SingleVsDoubleBattleData) {
+      singleOurSideBattlePrepare(data);
+      initDoubleEnemySquads(data);
+    } else if (data is DoubleVsSingleBattleData) {
+      doubleOurSideBattlePrepare(data);
+      initSingleEnemySquads(data);
+    } else {
+      singleOurSideBattlePrepare(data);
+      initSingleEnemySquads(data);
+    }
+
+    initDMGMap();
+
+    setFormation(data.apiFormation);
+
+    _parseBasicBattleApi(data);
+
+    _parseRoundBattleApi(data);
+
+    updateShipHP();
+  }
+
+  void doubleOurSideBattlePrepare(DoubleOurBattleData data) {
+    updateEscapeFlagInBattle(
+        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    initShipHP(
+        fNow: data.apiFNowhps,
+        fMax: data.apiFMaxhps,
+        fNow2: data.apiFNowhpsCombined,
+        fMax2: data.apiFMaxhpsCombined,
+    );
+  }
+
+  void singleOurSideBattlePrepare(BattleBasicModel data) {
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
+    initShipHP(fNow: data.apiFNowhps, fMax: data.apiFMaxhps);
+  }
+
+  void _parseBasicBattleApi(BattleBasicModel data) {
+    if (data is NormalBattleData) {
+      //api_air_base_injection
+      if (data.apiAirBaseInjection != null) {
+        if (data.apiAirBaseInjection?.apiStage3Combined != null) {
+          airBaseDamageCount(data.apiAirBaseInjection?.apiStage3?.apiEdam,
+              data.apiAirBaseInjection?.apiStage3Combined?.apiEdam);
+        } else {
+          airBaseDamageCount(
+              data.apiAirBaseInjection?.apiStage3?.apiEdam, null);
+        }
+      }
+      // api_air_base_attack
+      if (data.apiAirBaseAttack != null) {
+        for (final airBaseAttack in data.apiAirBaseAttack!) {
+          airBaseAttackRound(airBaseAttack);
+        }
+      }
+      // api_injection_kouku
+      if (data.apiInjectionKouku != null) {
+        aircraftRoundDamageCount(data.apiInjectionKouku!);
+      }
+      // api_kouku
+      aircraftRound(data.apiStageFlag!, data.apiKouku!);
+      // api_support_info
+      supportBattleRound(data.apiSupportInfo);
+      //api_opening_taisen
+      if (data.apiOpeningTaisenFlag == 1) {
+        gunFireRound(data.apiOpeningTaisen!);
+      }
+      //api_opening_atack
+      if (data.apiOpeningFlag == 1) {
+        torpedoFireRoundWithItem(data.apiOpeningAtack!);
+      }
+
+      if (data is ReqSortieBattleApiDataEntity) {
+        friendlyBattleCalculate(
+            info: data.apiFriendlyInfo,
+            battle: data.apiFriendlyBattle,
+            airBattle: data.apiFriendlyKouku);
+      } else {
+        friendlyBattleCalculate(
+            info: data.apiFriendlyInfo, airBattle: data.apiFriendlyKouku);
+      }
+    } else if (data is NightBattleData) {
+      friendlyBattleCalculate(
+          info: data.apiFriendlyInfo, battle: data.apiFriendlyBattle);
+      if (data.apiHougeki != null) {
+        gunFireRound(data.apiHougeki!);
+      }
+    } else if (data is ReqSortieLdAirbattleApiDataEntity) {
+      aircraftRound(data.apiStageFlag!, data.apiKouku!);
+    } else if (data is ReqCombinedBattleLdAirbattleApiDataEntity) {
+      aircraftRound(data.apiStageFlag!, data.apiKouku!);
+    } else if (data is ReqSortieAirbattleApiDataEntity) {
+      if (data.apiStageFlag != null) {
+        aircraftRound(data.apiStageFlag!, data.apiKouku!);
+      }
+      supportBattleRound(data.apiSupportInfo);
+      if (data.apiStageFlag2 != null) {
+        aircraftRound(data.apiStageFlag2!, data.apiKouku2!);
+      }
+    }
+  }
+
+  void _parseRoundBattleApi(BattleBasicModel data) {
+    if (data is ReqSortieBattleApiDataEntity) {
+      for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+        if (flag == 1) {
+          if (index >= 0 && index <= 2) {
+            gunFireRound(getGunFireData(data, index));
+          } else if (index == 3) {
+            torpedoFireRound(data.apiRaigeki!);
+          } else {
+            log("unhandled hourai flag");
+          }
+        }
+      }
+    } else if (data is CarrierOrEscortBattleData) {
+      for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+        if (flag == 1) {
+          switch (index) {
+            case 0:
+              gunFireRound(data.apiHougeki1!);
+              break;
+            case 1:
+              torpedoFireRound(data.apiRaigeki!);
+              break;
+            case 2:
+              gunFireRound(data.apiHougeki2!);
+              break;
+            case 3:
+              gunFireRound(data.apiHougeki3!);
+              break;
+            default:
+              log("unhandled hourai flag");
+          }
+        }
+      }
+    } else if (data is ReqCombinedBattleEachBattleApiDataEntity) {
+      for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+        if (flag == 1) {
+          switch (index) {
+            case 0:
+              gunFireRound(data.apiHougeki1!);
+              break;
+            case 1:
+              gunFireRound(data.apiHougeki2!);
+              break;
+            case 2:
+              torpedoFireRound(data.apiRaigeki!);
+              break;
+            case 3:
+              gunFireRound(data.apiHougeki3!);
+              break;
+            default:
+              log("unhandled hourai flag");
+          }
+        }
+      }
+    } else if (data is SurfaceForceBattleData) {
+      for (final (index, flag) in data.apiHouraiFlag!.indexed) {
+        if (flag == 1) {
+          switch (index) {
+            case 0:
+              gunFireRound(data.apiHougeki1!);
+              break;
+            case 1:
+              gunFireRound(data.apiHougeki2!);
+              break;
+            case 2:
+              gunFireRound(data.apiHougeki3!);
+              break;
+            case 3:
+              torpedoFireRound(data.apiRaigeki!);
+              break;
+            default:
+              log("unhandled hourai flag");
+          }
+        }
+      }
+    }
+  }
+
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseCombinedBattleECBattle(ReqCombinedBattleECBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
     inBattleSquads = squads;
 
-    updateEscapeFlagInBattle(
-        indexes: data.apiEscapeIdx, combinedIndexes: data.apiEscapeIdxCombined);
+    updateEscapeFlagInBattle(indexes: data.apiEscapeIdx);
 
     initDMGMap();
 
@@ -483,8 +690,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqBattleMidnightBattle(
-      ReqBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqBattleMidnightBattle(ReqBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -503,8 +710,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqBattleMidnightSpMidnight(
-      ReqBattleMidnightSpMidnightDataApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqBattleMidnightSpMidnight(ReqBattleMidnightSpMidnightDataApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -555,8 +762,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseReqSortieBattle(
-      ReqSortieBattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqSortieBattle(ReqSortieBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -594,7 +801,7 @@ class BattleInfo with _$BattleInfo {
         airBattle: data.apiFriendlyKouku);
 
     //api_kouku
-    aircraftRound(data.apiStageFlag, data.apiKouku);
+    aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
     //api_support_info
     supportBattleRound(data.apiSupportInfo);
@@ -609,7 +816,7 @@ class BattleInfo with _$BattleInfo {
       torpedoFireRoundWithItem(data.apiOpeningAtack!);
     }
 
-    for (final (index, flag) in data.apiHouraiFlag.indexed) {
+    for (final (index, flag) in data.apiHouraiFlag!.indexed) {
       if (flag == 1) {
         if (index >= 0 && index <= 2) {
           gunFireRound(getGunFireData(data, index));
@@ -660,8 +867,8 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseSortieLdAirbattle(
-      ReqSortieLdAirbattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseSortieLdAirbattle(ReqSortieLdAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -681,8 +888,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleLdAirbattle(
-      ReqCombinedBattleLdAirbattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattleLdAirbattle(ReqCombinedBattleLdAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
 
     initSingleEnemySquads(data);
@@ -812,8 +1019,8 @@ class BattleInfo with _$BattleInfo {
     return formation;
   }
 
-  void parseReqSortieAirbattle(
-      ReqSortieAirbattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqSortieAirbattle(ReqSortieAirbattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 
@@ -842,8 +1049,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleECMidnightBattle(
-      ReqCombinedBattleEcMidnightBattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattleECMidnightBattle(ReqCombinedBattleEcMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
 
@@ -875,8 +1082,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattle(
-      ReqCombinedBattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattle(ReqCombinedBattleApiDataEntity data, List<Squad> squads) {
     clear();
 
     initSingleEnemySquads(data);
@@ -944,8 +1151,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleEachBattle(
-      ReqCombinedBattleEachBattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattleEachBattle(ReqCombinedBattleEachBattleApiDataEntity data, List<Squad> squads) {
     clear();
 
     initDoubleEnemySquads(data);
@@ -1012,8 +1219,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleWater(
-      ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattleWater(ReqCombinedBattleWaterApiDataEntity data, List<Squad> squads) {
     clear();
 
     initSingleEnemySquads(data);
@@ -1081,8 +1288,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleEachWater(
-      ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattleEachWater(ReqCombinedBattleEachWaterApiDataEntity data, List<Squad> squads) {
     clear();
     initDoubleEnemySquads(data);
     inBattleSquads = squads;
@@ -1145,8 +1352,8 @@ class BattleInfo with _$BattleInfo {
     updateShipHP();
   }
 
-  void parseReqCombinedBattleMidnightBattle(
-      ReqCombinedBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
+  @Deprecated("old solution, use [parseBattle] instead")
+  void parseReqCombinedBattleMidnightBattle(ReqCombinedBattleMidnightBattleApiDataEntity data, List<Squad> squads) {
     clear();
     initSingleEnemySquads(data);
 

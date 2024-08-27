@@ -47,7 +47,7 @@ class ReqCombinedBattleLdAirbattleApiDataEntity
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku') CombineAircraftRound? apiKouku,
+    @JsonKey(name: 'api_kouku') AircraftRoundData? apiKouku,
     List<int>? apiEscapeIdx,
     List<int>? apiEscapeIdxCombined,
   }) = _ReqCombinedBattleLdAirbattleApiDataEntity;

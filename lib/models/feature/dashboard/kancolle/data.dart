@@ -385,47 +385,47 @@ class KancolleData {
     }
 
     if (model is ReqCombinedBattleLdAirbattleEntity) {
-      battleInfo.parseReqCombinedBattleLdAirbattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqSortieAirbattleEntity) {
-      battleInfo.parseReqSortieAirbattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleECMidnightBattleEntity) {
-      battleInfo.parseReqCombinedBattleECMidnightBattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqBattleMidnightSpMidnightEntity) {
-      battleInfo.parseReqBattleMidnightSpMidnight(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqSortieLdAirbattleEntity) {
-      battleInfo.parseSortieLdAirbattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleECBattleEntity) {
-      battleInfo.parseCombinedBattleECBattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleMidnightBattleEntity) {
-      battleInfo.parseReqCombinedBattleMidnightBattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleEntity) {
-      battleInfo.parseReqCombinedBattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleEachBattleEntity) {
-      battleInfo.parseReqCombinedBattleEachBattle(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleWaterEntity) {
-      battleInfo.parseReqCombinedBattleWater(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqCombinedBattleEachWaterEntity) {
-      battleInfo.parseReqCombinedBattleEachWater(model.apiData!, battleSquads!);
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
     }
 
     if (model is ReqPracticeMidnightBattleEntity) {
@@ -440,11 +440,11 @@ class KancolleData {
     }
 
     if (model is ReqBattleMidnightBattleEntity) {
-      battleInfo.parseReqBattleMidnightBattle(model.apiData, battleSquads!);
+      battleInfo.parseBattle(model.apiData, battleSquads!);
     }
 
     if (model is ReqSortieBattleEntity) {
-      battleInfo.parseReqSortieBattle(model.apiData, battleSquads!);
+      battleInfo.parseBattle(model.apiData, battleSquads!);
     }
 
   }

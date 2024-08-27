@@ -41,13 +41,10 @@ abstract class AircraftRound {
   late BattleDataAircraftRoundStage1? apiStage1;
   late BattleDataAircraftRoundStage2? apiStage2;
   late BattleDataAircraftRoundStage3? apiStage3;
-}
-
-abstract class AircraftRoundDoubleEnemy extends AircraftRound {
   late BattleDataAircraftRoundStage3? apiStage3Combined;
 }
 
-abstract class SingleVsSingleBaseModel {
+abstract class BattleBasicModel {
   late int apiDeckId;
   late List<int> apiFormation;
   late List<int> apiFNowhps;
@@ -59,28 +56,70 @@ abstract class SingleVsSingleBaseModel {
   late List<int>? apiEscapeIdx;
 }
 
-abstract class SingleVsSingleBattleData extends SingleVsSingleBaseModel {
+abstract class DoubleEnemyBattleData extends BattleBasicModel {
+  late List<int>? apiShipKeCombined;
+  late List<int>? apiShipLvCombined;
+  late List<dynamic>? apiENowhpsCombined;
+  late List<dynamic>? apiEMaxhpsCombined;
+}
+
+abstract class DoubleOurBattleData extends BattleBasicModel {
+  late List<int>? apiFNowhpsCombined;
+  late List<int>? apiFMaxhpsCombined;
+  late List<int>? apiEscapeIdxCombined;
+}
+
+abstract class SingleVsDoubleBattleData implements DoubleEnemyBattleData {
+}
+
+abstract class DoubleVsSingleBattleData implements DoubleOurBattleData {
+}
+
+abstract class DoubleVsDoubleBattleData implements DoubleOurBattleData, DoubleEnemyBattleData {
+}
+
+abstract class FullGunFireRoundBattle implements BattleBasicModel {
   late GunFireRoundEntity? apiHougeki1;
   late GunFireRoundEntity? apiHougeki2;
   late GunFireRoundEntity? apiHougeki3;
 }
 
-abstract class SingleVsDoubleBattleData extends SingleVsSingleBaseModel {
-  late List<int>? apiShipKeCombined;
-  late List<int>? apiShipLvCombined;
-  late List<dynamic>? apiENowhpsCombined;
-  late List<dynamic>? apiEMaxhpsCombined;
-  late List<int>? apiEscapeIdxCombined;
+abstract class NightBattleData implements BattleBasicModel {
+  late NightBattleGunFireRoundEntity? apiHougeki;
+  late BattleFriendlyInfo? apiFriendlyInfo;
+  late FriendlyFleetBattle? apiFriendlyBattle;
 }
 
-abstract class DoubleVsSingleBattleData extends SingleVsSingleBaseModel {
-  late List<int>? apiFNowhpsCombined;
-  late List<int>? apiFMaxhpsCombined;
+abstract class NormalBattleData implements BattleBasicModel {
+  late List<AirBaseAttackRound?>? apiAirBaseAttack;
+  late List<int>? apiStageFlag;
+  late AircraftRoundData? apiKouku;
+  late int? apiSupportFlag;
+  late BattleSupportInfo? apiSupportInfo;
+  late int? apiOpeningTaisenFlag;
+  late GunFireRoundEntity? apiOpeningTaisen;
+  late int? apiOpeningFlag;
+  late OpeningTorpedoRoundEntity? apiOpeningAtack;
+  late AirBaseJetAircraftRound? apiAirBaseInjection;
+  late AircraftRoundData? apiInjectionKouku;
+  late BattleFriendlyInfo? apiFriendlyInfo;
+  late AircraftRoundData? apiFriendlyKouku;
 }
 
-abstract class DoubleVsDoubleBattleData extends SingleVsDoubleBattleData {
-  late List<int>? apiFNowhpsCombined;
-  late List<int>? apiFMaxhpsCombined;
+abstract class SurfaceForceBattleData implements BattleBasicModel {
+  late List<int>? apiHouraiFlag;
+  late GunFireRoundEntity? apiHougeki1;
+  late GunFireRoundEntity? apiHougeki2;
+  late GunFireRoundEntity? apiHougeki3;
+  late TorpedoRoundEntity? apiRaigeki;
+}
+
+abstract class CarrierOrEscortBattleData implements BattleBasicModel {
+  late List<int>? apiHouraiFlag;
+  late GunFireRoundEntity? apiHougeki1;
+  late TorpedoRoundEntity? apiRaigeki;
+  late GunFireRoundEntity? apiHougeki2;
+  late GunFireRoundEntity? apiHougeki3;
 }
 
 @unfreezed
@@ -262,42 +301,26 @@ class AirBaseJetAircraftRound with _$AirBaseJetAircraftRound {
 }
 
 @unfreezed
-class NormalAircraftRound
-    with _$NormalAircraftRound implements AircraftRound{
-  factory NormalAircraftRound({
-    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
-    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
-    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
-    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
-  }) = _NormalAircraftRound;
-
-  factory NormalAircraftRound.fromJson(
-      Map<String, dynamic> json) =>
-      _$NormalAircraftRoundFromJson(json);
-}
-
-@unfreezed
-class CombineAircraftRound
-    with _$CombineAircraftRound
-    implements AircraftRoundDoubleEnemy {
-  factory CombineAircraftRound({
+class AircraftRoundData
+    with _$AircraftRoundData implements AircraftRound{
+  factory AircraftRoundData({
     @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
     @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
     @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
     @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
     @JsonKey(name: 'api_stage3_combined')
     BattleDataAircraftRoundStage3? apiStage3Combined,
-  }) = _CombineAircraftRound;
+  }) = _AircraftRoundData;
 
-  factory CombineAircraftRound.fromJson(
+  factory AircraftRoundData.fromJson(
       Map<String, dynamic> json) =>
-      _$CombineAircraftRoundFromJson(json);
+      _$AircraftRoundDataFromJson(json);
 }
 
 @freezed
 class BattleSupportInfo with _$BattleSupportInfo {
   const factory BattleSupportInfo({
-    CombineAircraftRound? apiSupportAiratack,
+    AircraftRoundData? apiSupportAiratack,
     BattleGunfireSupport? apiSupportHourai,
   }) = _BattleSupportInfo;
 

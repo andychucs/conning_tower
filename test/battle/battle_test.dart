@@ -26,7 +26,7 @@ main() {
       dynamic model = DataModelAdapter.toEntity(path, json);
 
       final battleInfo = BattleInfo();
-      battleInfo.parseReqCombinedBattle(model.apiData!, inBattleSquads);
+      battleInfo.parseBattle(model.apiData!, inBattleSquads);
       expect(battleInfo.formation, 11);
 
     });
@@ -43,7 +43,7 @@ main() {
       dynamic model = DataModelAdapter.toEntity(path, json);
 
       final battleInfo = BattleInfo();
-      battleInfo.parseCombinedBattleECBattle(model.apiData!, inBattleSquads);
+      battleInfo.parseBattle(model.apiData!, inBattleSquads);
     });
 
     test("supportBattleRound", () {
@@ -58,7 +58,7 @@ main() {
       dynamic model = DataModelAdapter.toEntity(path, jsonDecode(rawData));
 
       final battleInfo = BattleInfo();
-      battleInfo.parseReqSortieBattle(model.apiData!, inBattleSquads);
+      battleInfo.parseBattle(model.apiData!, inBattleSquads);
 
       expect(battleInfo.inBattleSquads, inBattleSquads);
     });
