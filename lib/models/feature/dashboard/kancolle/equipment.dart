@@ -1,7 +1,10 @@
 import 'package:conning_tower/models/data/kcsapi/item_data.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rank_icons/rank_icons.dart';
 
 import '../../../data/ooyodo/akashi_schedule.dart';
 
@@ -41,10 +44,15 @@ class Equipment with _$Equipment {
     int? cost, // api_cost 航空機のコスト
     int? distance, // api_distance 航空機の航続距離
   }) = _Equipment;
-  
 
-  factory Equipment.fromApi(SlotItem item, Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfoMap) {
-    Equipment equipment = Equipment(id: item.apiId, itemId: item.apiSlotitemId, locked: item.apiLocked, level: item.apiLevel, proficiency: item.apiAlv);
+  factory Equipment.fromApi(SlotItem item,
+      Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfoMap) {
+    Equipment equipment = Equipment(
+        id: item.apiId,
+        itemId: item.apiSlotitemId,
+        locked: item.apiLocked,
+        level: item.apiLevel,
+        proficiency: item.apiAlv);
     if (slotItemInfoMap != null) {
       final slotItemInfo = slotItemInfoMap[item.apiSlotitemId];
       if (slotItemInfo != null) {
@@ -70,8 +78,7 @@ class Equipment with _$Equipment {
             luck: slotItemInfo.apiLuck,
             range: slotItemInfo.apiLeng,
             cost: slotItemInfo.apiCost,
-            distance: slotItemInfo.apiDistance
-        );
+            distance: slotItemInfo.apiDistance);
       }
     }
     return equipment;
@@ -111,8 +118,23 @@ class Equipment with _$Equipment {
     return info;
   }
 
-}
+  IconData? get proficiencyIcon => switch (proficiency ?? 0) {
+        1 => RankIcons.w1,
+        2 => RankIcons.w2,
+        3 => RankIcons.w3,
+        4 => RankIcons.o1,
+        5 => RankIcons.o2,
+        6 => RankIcons.o3,
+        >= 7 => RankIcons.o5,
+        _ => null,
+      };
 
+  Color? get proficiencyColor => switch (proficiency ?? 0) {
+        1 || 2 || 3 => const Color(0xFF95B1CE),
+        >= 4 => const Color(0xFFE6C470),
+        _ => null,
+      };
+}
 
 @freezed
 class EquipmentImprove with _$EquipmentImprove {
@@ -139,13 +161,18 @@ class EquipmentImprove with _$EquipmentImprove {
     return names.toSet().join("|");
   }
 
-  factory EquipmentImprove.fromData(ImproveItem data, Map<int, String> slotItemMap, Map<int, String> useItemMap, Map<int, String> shipMap) {
+  factory EquipmentImprove.fromData(
+      ImproveItem data,
+      Map<int, String> slotItemMap,
+      Map<int, String> useItemMap,
+      Map<int, String> shipMap) {
     final name = slotItemMap[data.id] ?? "SlotItem ${data.id}";
     List<EquipmentImproveData> list = [];
     if (data.improvement != null) {
       for (final improveData in data.improvement!) {
         if (improveData != null) {
-          list.add(EquipmentImproveData.fromData(improveData, slotItemMap, useItemMap, shipMap));
+          list.add(EquipmentImproveData.fromData(
+              improveData, slotItemMap, useItemMap, shipMap));
         }
       }
     }
@@ -164,15 +191,25 @@ class EquipmentImproveData with _$EquipmentImproveData {
     required List<ImproveReq>? req,
   }) = _EquipmentImproveData;
 
-  factory EquipmentImproveData.fromData(ImproveData data, Map<int, String> slotItemMap, Map<int, String> useItemMap, Map<int, String> shipMap) {
+  factory EquipmentImproveData.fromData(
+      ImproveData data,
+      Map<int, String> slotItemMap,
+      Map<int, String> useItemMap,
+      Map<int, String> shipMap) {
     final resource = ImproveResourceEntity.fromData(data.resource!);
     if (data.upgrade == null) {
-      return EquipmentImproveData(upgradeName: "", resource: resource, req: data.req!.nonNulls.toList());
+      return EquipmentImproveData(
+          upgradeName: "",
+          resource: resource,
+          req: data.req!.nonNulls.toList());
     }
-    final upgradeName = slotItemMap[data.upgrade?.id] ?? "SlotItem ${data.upgrade?.id}";
-    return EquipmentImproveData(upgradeName: upgradeName, resource: resource, req: data.req!.nonNulls.toList());
+    final upgradeName =
+        slotItemMap[data.upgrade?.id] ?? "SlotItem ${data.upgrade?.id}";
+    return EquipmentImproveData(
+        upgradeName: upgradeName,
+        resource: resource,
+        req: data.req!.nonNulls.toList());
   }
-
 
   factory EquipmentImproveData.fromJson(Map<String, dynamic> json) =>
       _$EquipmentImproveDataFromJson(json);
@@ -189,19 +226,17 @@ class ImproveResourceEntity with _$ImproveResourceEntity {
   }) = _ImproveResourceEntity;
 
   const ImproveResourceEntity._();
-  
+
   factory ImproveResourceEntity.fromData(ImproveResource data) {
     final oil = data.base?[0] ?? 0;
     final ammo = data.base?[1] ?? 0;
     final steel = data.base?[2] ?? 0;
     final bauxite = data.base?[3] ?? 0;
     final extra = data.extra?.nonNulls.toList() ?? [];
-    return ImproveResourceEntity(oil: oil, ammo: ammo, steel: steel, bauxite: bauxite, extra: extra);
+    return ImproveResourceEntity(
+        oil: oil, ammo: ammo, steel: steel, bauxite: bauxite, extra: extra);
   }
 
   factory ImproveResourceEntity.fromJson(Map<String, dynamic> json) =>
       _$ImproveResourceEntityFromJson(json);
 }
-
-
-
