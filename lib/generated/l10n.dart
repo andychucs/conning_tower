@@ -710,6 +710,56 @@ class S {
     );
   }
 
+  /// `Resources sustained losses`
+  String get KCBattleAirbaseResourceLostLevel1 {
+    return Intl.message(
+      'Resources sustained losses',
+      name: 'KCBattleAirbaseResourceLostLevel1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resources and land-based air squadrons sustained losses`
+  String get KCBattleAirbaseResourceLostLevel2 {
+    return Intl.message(
+      'Resources and land-based air squadrons sustained losses',
+      name: 'KCBattleAirbaseResourceLostLevel2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Land-based air squadrons sustained losses`
+  String get KCBattleAirbaseResourceLostLevel3 {
+    return Intl.message(
+      'Land-based air squadrons sustained losses',
+      name: 'KCBattleAirbaseResourceLostLevel3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No damage was inflicted`
+  String get KCBattleAirbaseResourceLostLevel4 {
+    return Intl.message(
+      'No damage was inflicted',
+      name: 'KCBattleAirbaseResourceLostLevel4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Debuff mechanism has taken effect!`
+  String get KCBattleDebuffUnlock {
+    return Intl.message(
+      'Debuff mechanism has taken effect!',
+      name: 'KCBattleDebuffUnlock',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Battle Finish`
   String get KCBattleFinish {
     return Intl.message(
@@ -2020,6 +2070,16 @@ class S {
     );
   }
 
+  /// `Airbase`
+  String get TextAirbase {
+    return Intl.message(
+      'Airbase',
+      name: 'TextAirbase',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `All`
   String get TextAll {
     return Intl.message(
@@ -2365,6 +2425,16 @@ class S {
     return Intl.message(
       'Open in Aerial Combat Simulator',
       name: 'TextOpenInNoro6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return Port`
+  String get TextReturnPort {
+    return Intl.message(
+      'Return Port',
+      name: 'TextReturnPort',
       desc: '',
       args: [],
     );

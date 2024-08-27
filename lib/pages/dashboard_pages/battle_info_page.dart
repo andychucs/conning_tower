@@ -133,6 +133,24 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
                 )),
       ));
     }
+    for (final squad in [...?battleInfo.friendSquads]) {
+      items.add(CupertinoListSection.insetGrouped(
+        // margin: _kBattleInfoGridMargin,
+        header: CupertinoListSectionDescription(squad.name),
+        children: List.generate(
+            squad.ships.length,
+                (index) => ShipInfoInBattle(
+              ship: squad.ships[index],
+              name: squad.ships[index].name ??
+                  shipInfo?[squad.ships[index].shipId]?.apiName ??
+                  'N/A',
+              dmg: battleInfo.dmgMap?[squad.ships[index].hashCode] ?? 0,
+              dmgTaken:
+              battleInfo.dmgTakenMap?[squad.ships[index].hashCode] ?? 0,
+              useEmoji: ref.read(settingsProvider).kcSparkEmoji,
+            )),
+      ));
+    }
     for (final squad in [...?battleInfo.enemySquads]) {
       items.add(CupertinoListSection.insetGrouped(
         // margin: _kBattleInfoGridMargin,
@@ -225,8 +243,13 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage> {
             child: Column(
               children: [
                 if (items.isEmpty)
-                  Center(
+                  const Center(
                     child: Text("暁の水平線に勝利を刻みなさい"),
+                  ),
+                if (battleInfo.note != null)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(battleInfo.note!, style: CupertinoTheme.of(context).textTheme.textStyle),
                   ),
                 if (items.isNotEmpty)
                   Expanded(

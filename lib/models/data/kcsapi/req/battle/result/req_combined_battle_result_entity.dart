@@ -47,6 +47,7 @@ class ReqCombinedBattleResultApiDataEntity
     @JsonKey(name: 'api_get_exmap_useitem_id') dynamic apiGetExmapUseitemId,
     @JsonKey(name: 'api_escape_flag') int? apiEscapeFlag,
     @JsonKey(name: 'api_escape') BattleResultEscapeEntity? apiEscape,
+    @JsonKey(name: 'api_m2') int? apiM2,
   }) = _ReqCombinedBattleResultApiDataEntity;
 
   factory ReqCombinedBattleResultApiDataEntity.fromJson(

@@ -51,6 +51,7 @@ class PortApiDataApiEventObjectEntity with _$PortApiDataApiEventObjectEntity {
   factory PortApiDataApiEventObjectEntity({
     @JsonKey(name: 'api_c_num') int? apiCNum,
     @JsonKey(name: 'api_m_flag') int? apiMFlag,
+    @JsonKey(name: 'api_m_flag2') int? apiMFlag2,
   }) = _PortApiDataApiEventObjectEntity;
 
   factory PortApiDataApiEventObjectEntity.fromJson(Map<String, dynamic> json) =>

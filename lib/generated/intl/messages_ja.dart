@@ -134,6 +134,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("無効なYAML形式です。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON例："),
         "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("明石アトリエ"),
+        "KCBattleAirbaseResourceLostLevel1":
+            MessageLookupByLibrary.simpleMessage("空襲により備蓄資源に損害を受けました"),
+        "KCBattleAirbaseResourceLostLevel2":
+            MessageLookupByLibrary.simpleMessage(
+                "空襲により備蓄資源に損害を受け、基地航空隊にも地上撃破の損害が発生しました！"),
+        "KCBattleAirbaseResourceLostLevel3":
+            MessageLookupByLibrary.simpleMessage("空襲により基地航空隊に地上撃破の損害が発生しました！"),
+        "KCBattleAirbaseResourceLostLevel4":
+            MessageLookupByLibrary.simpleMessage("空襲による基地の損害はありません。"),
+        "KCBattleDebuffUnlock":
+            MessageLookupByLibrary.simpleMessage("ギミック解除成功しました！"),
         "KCBattleFinish": MessageLookupByLibrary.simpleMessage("戦闘終了"),
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("全海域"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
@@ -337,6 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "タスクリマインダー機能により、タスクのリマインダーを追加および管理できます。\n\n- データソースを追加するには、右上隅の[データソースの追加]ボタンをクリックし、有効なURLまたはYAML/JSONの内容を入力します。\n\n- 変更を保存するには、「保存」ボタンをクリックしてください。\n\n- 追加されたタスクはリストに表示されます。\n\n- タスクをダブルクリックすると、そのタスクのリマインダー通知が追加されます。\n\n- タスク情報ページに入るには、タスクをクリックして詳細情報を表示します。\n\n- タスク情報ページで、右上隅の上向き矢印ボタンをクリックすると、タスクをタスクリストのトップに固定できます。\n\n- 何か問題がある場合は、サポートチームにお問い合わせください。\n\nお楽しみください！"),
         "TasksNumOverLimit":
             MessageLookupByLibrary.simpleMessage("タスク数が制限を超えています。"),
+        "TextAirbase": MessageLookupByLibrary.simpleMessage("基地航空隊"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("戦闘"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
@@ -381,6 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Jervis作戦室で開く"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("制空権シミュレータで開く"),
+        "TextReturnPort": MessageLookupByLibrary.simpleMessage("帰港"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
         "TextShare": MessageLookupByLibrary.simpleMessage("共有"),

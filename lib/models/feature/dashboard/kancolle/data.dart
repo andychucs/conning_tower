@@ -39,6 +39,13 @@ List<String> _battleAPI = [
   ReqMapStartEntity.source,
 ];
 
+enum EventDebuffType {
+  port,
+  battleResult,
+  airbaseDefense,
+  none,
+}
+
 class KancolleData {
   final OperationQueue queue;
   final List<Squad> squads;
@@ -131,6 +138,8 @@ class KancolleData {
     final model = DataModelAdapter.toEntity(path, json);
     final requestBody = DataModelAdapter.requestToEntity(path, params);
 
+    checkDebuffNotify(model);
+
     if (requestBody is ReqHenseiChangeBodyEntity) {
       final squadIdx = requestBody.apiId! - 1;
       if (requestBody.apiShipId! == -1) {
@@ -138,7 +147,8 @@ class KancolleData {
       } else if (requestBody.apiShipId! == -2) {
         squads[squadIdx].ships.removeRange(1, squads[squadIdx].ships.length);
       } else {
-        final ship = fleet.ships.firstWhere((element) => element.uid == requestBody.apiShipId);
+        final ship = fleet.ships
+            .firstWhere((element) => element.uid == requestBody.apiShipId);
         if (squads[squadIdx].ships.contains(ship)) {
           final originShip = squads[squadIdx].ships[requestBody.apiShipIdx!];
           final fromIdx = squads[squadIdx].ships.indexOf(ship);
@@ -183,16 +193,14 @@ class KancolleData {
         seaForceBase.updateResource(material);
       }
       if (model.apiData?.apiShip != null) {
-        List<Ship> squadShips = [
-          for (final squad in squads) ...squad.ships
-        ];
+        List<Ship> squadShips = [for (final squad in squads) ...squad.ships];
         Map<int, Ship> shipMap = Map.fromIterable(
           squadShips,
           key: (item) => item.uid,
         );
 
         for (final shipState in model.apiData!.apiShip!) {
-          final shipId =  shipState.apiId;
+          final shipId = shipState.apiId;
           if (shipId != null) {
             shipMap[shipId]?.fuel = shipState.apiFuel;
             shipMap[shipId]?.bull = shipState.apiBull;
@@ -210,7 +218,9 @@ class KancolleData {
       } else {
         if (model.apiData.apiList == null) return;
         if (model.apiData.apiList!.isEmpty) return;
-        questAssistant = questAssistant?.copyWith(ready: model.apiData.apiList!.map((e) => Quest.fromApi(e)).toList());
+        questAssistant = questAssistant?.copyWith(
+            ready:
+                model.apiData.apiList!.map((e) => Quest.fromApi(e)).toList());
         questAssistant?.update(seaForceBase.admiral.name);
       }
     }
@@ -236,8 +246,7 @@ class KancolleData {
           item.apiId: MapArea.fromApi(item, model.apiData.apiMstMapinfo)
       };
       dataInfo.slotItemInfo = {
-        for (var item in model.apiData.apiMstSlotitem)
-          item.apiId: item
+        for (var item in model.apiData.apiMstSlotitem) item.apiId: item
       };
       dataInfo.shipTypeList = model.apiData.apiMstStype;
     }
@@ -251,6 +260,14 @@ class KancolleData {
       addAlert();
       battleInfo.clear();
       battleInfo.mapRoute = model.apiData.apiNo;
+      battleInfo.note =
+          switch (model.apiData.apiDestructionBattle?.apiLostKind) {
+        1 => S.current.KCBattleAirbaseResourceLostLevel1,
+        2 => S.current.KCBattleAirbaseResourceLostLevel2,
+        3 => S.current.KCBattleAirbaseResourceLostLevel3,
+        4 => S.current.KCBattleAirbaseResourceLostLevel4,
+        _ => null,
+      };
     }
 
     if (model is ReqMapStartEntity) {
@@ -270,7 +287,12 @@ class KancolleData {
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
       battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.inBattleSquads = battleSquads;
-      battleLog = KancolleBattleLog(id: timestamp, admiral: seaForceBase.admiral.name, mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!), squads: [for (var squad in squads) Squad.fromJson(squad.toJson())], data: [rawData.decoded]);
+      battleLog = KancolleBattleLog(
+          id: timestamp,
+          admiral: seaForceBase.admiral.name,
+          mapInfo: MapInfoLog.fromEntity(battleInfo.mapInfo!),
+          squads: [for (var squad in squads) Squad.fromJson(squad.toJson())],
+          data: [rawData.decoded]);
     }
 
     if (model is GetMemberDeckEntity) {
@@ -334,14 +356,20 @@ class KancolleData {
     }
 
     if (model is GetMemberRequireInfoEntity) {
-      final Iterable<Equipment> equipments = (model.apiData.apiSlotItem ?? []).map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
-      ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
+      final Iterable<Equipment> equipments = (model.apiData.apiSlotItem ?? [])
+          .map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      ref
+          .read(kancolleItemDataProvider.notifier)
+          .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
 
     if (model is GetMemberSlotItemEntity) {
-      final Iterable<Equipment> equipments = model.apiData.map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
-      ref.read(kancolleItemDataProvider.notifier).setEquipments(equipments.toList());
+      final Iterable<Equipment> equipments =
+          model.apiData.map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
+      ref
+          .read(kancolleItemDataProvider.notifier)
+          .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
   }
@@ -352,21 +380,20 @@ class KancolleData {
       MapState? mapState;
       if (mapInfo?.apiEventmap != null) {
         mapState = MapState(
-          id: mapInfo!.apiId,
-          now: mapInfo.apiEventmap!.apiNowMapHP,
-          max: mapInfo.apiEventmap!.apiMaxMapHP,
-          cleared: mapInfo.apiCleared == 1,
-          type: mapInfo.apiGaugeType!,
-          rank: mapInfo.apiEventmap!.apiSelectedRank
-        );
-      } else if (mapInfo?.apiDefeatCount != null && mapInfo?.apiRequiredDefeatCount != null) {
+            id: mapInfo!.apiId,
+            now: mapInfo.apiEventmap!.apiNowMapHP,
+            max: mapInfo.apiEventmap!.apiMaxMapHP,
+            cleared: mapInfo.apiCleared == 1,
+            type: mapInfo.apiGaugeType!,
+            rank: mapInfo.apiEventmap!.apiSelectedRank);
+      } else if (mapInfo?.apiDefeatCount != null &&
+          mapInfo?.apiRequiredDefeatCount != null) {
         mapState = MapState(
-          id: mapInfo!.apiId,
-          now: mapInfo.apiRequiredDefeatCount! - mapInfo.apiDefeatCount!,
-          max: mapInfo.apiRequiredDefeatCount,
-          cleared: mapInfo.apiCleared == 1,
-          type: mapInfo.apiGaugeType!
-        );
+            id: mapInfo!.apiId,
+            now: mapInfo.apiRequiredDefeatCount! - mapInfo.apiDefeatCount!,
+            max: mapInfo.apiRequiredDefeatCount,
+            cleared: mapInfo.apiCleared == 1,
+            type: mapInfo.apiGaugeType!);
       }
 
       if (mapState == null) {
@@ -379,7 +406,8 @@ class KancolleData {
   }
 
   void parseBattle(model) {
-    if (model is ReqSortieGobackPortEntity || model is ReqCombinedBattleGobackPortEntity) {
+    if (model is ReqSortieGobackPortEntity ||
+        model is ReqCombinedBattleGobackPortEntity) {
       battleInfo.confirmEscapeShip();
       return;
     }
@@ -446,7 +474,6 @@ class KancolleData {
     if (model is ReqSortieBattleEntity) {
       battleInfo.parseBattle(model.apiData, battleSquads!);
     }
-
   }
 
   KancolleData parseWith(RawData rawData) {
@@ -481,9 +508,10 @@ class KancolleData {
         "data": data
       };
       log(s.toString());
-      ref
-          .watch(alertStateProvider.notifier)
-          .update((state) => Alert("Error", S.current.DataErrorNotice, data: jsonEncode(errorData)));
+      Toast.showError(title: "Error", description: S.current.DataErrorNotice);
+      ref.watch(alertStateProvider.notifier).update((state) => Alert(
+          "Error", S.current.DataErrorNotice,
+          data: jsonEncode(errorData)));
     }
     return newData;
   }
@@ -504,9 +532,8 @@ class KancolleData {
       }
     }
     if (shipsDamaged.isNotEmpty) {
-      ref
-          .watch(alertStateProvider.notifier)
-          .update((state) => Alert(S.current.TextLDamage, shipsDamaged.join("\n")));
+      ref.watch(alertStateProvider.notifier).update(
+          (state) => Alert(S.current.TextLDamage, shipsDamaged.join("\n")));
     }
   }
 
@@ -519,22 +546,18 @@ class KancolleData {
       List<int> afterIds = getAfterIds([data.apiShipId], afterId);
       afterIds.remove(data.apiShipId);
 
-      String shipName = shipData?.apiName ??
-          "Ship No.${data.apiShipId}";
+      String shipName = shipData?.apiName ?? "Ship No.${data.apiShipId}";
 
-      allShips.add(Ship.fromApi(
-        data,
-        shipName,
-        afterIds: afterIds,
-        upgradeLevel: shipData?.apiAfterlv,
-        shipType: shipData?.apiStype,
-        equipment: fleet.equipment
-      ));
+      allShips.add(Ship.fromApi(data, shipName,
+          afterIds: afterIds,
+          upgradeLevel: shipData?.apiAfterlv,
+          shipType: shipData?.apiStype,
+          equipment: fleet.equipment));
     }
     fleet.ships = allShips;
   }
 
-  List<int> getAfterIds(List<int> ids, int nextId){
+  List<int> getAfterIds(List<int> ids, int nextId) {
     if (ids.contains(nextId) || nextId == 0) return ids;
     ids.add(nextId);
     return getAfterIds(ids, nextId);
@@ -580,10 +603,14 @@ class KancolleData {
       List<int> afterIds = getAfterIds([data.apiShipId], afterId);
       afterIds.remove(data.apiShipId);
 
-      String shipName = shipData?.apiName ??
-          "Ship No.${data.apiShipId}";
+      String shipName = shipData?.apiName ?? "Ship No.${data.apiShipId}";
 
-      squad.ships[shipIndex] = squad.ships[shipIndex].copyWithApi(data, shipName, afterIds: afterIds, upgradeLevel: shipData?.apiAfterlv, shipType: shipData?.apiStype, equipment: fleet.equipment);
+      squad.ships[shipIndex] = squad.ships[shipIndex].copyWithApi(
+          data, shipName,
+          afterIds: afterIds,
+          upgradeLevel: shipData?.apiAfterlv,
+          shipType: shipData?.apiStype,
+          equipment: fleet.equipment);
       final ship = squad.ships[shipIndex];
       log(ship.toString());
       log(ship.damaged.toString());
@@ -622,5 +649,49 @@ class KancolleData {
         ship.escape = false;
       }
     }
+  }
+
+  void checkDebuffNotify(model) {
+    final debuffType = checkDebuffFlag(model);
+    if (debuffType == EventDebuffType.none) return;
+    if (debuffType == EventDebuffType.airbaseDefense) {
+      Toast.kancolleUnlockNotify(
+          S.current.TextAirbase, S.current.KCBattleDebuffUnlock);
+    } else if (debuffType == EventDebuffType.battleResult) {
+      Toast.kancolleUnlockNotify(
+          S.current.TextBattle, S.current.KCBattleDebuffUnlock);
+    } else if (debuffType == EventDebuffType.port) {
+      Toast.kancolleUnlockNotify(
+          S.current.TextReturnPort, S.current.KCBattleDebuffUnlock);
+    }
+  }
+
+  EventDebuffType checkDebuffFlag(model) {
+    if (model is ReqMapNextEntity) {
+      if (model.apiData.apiDestructionBattle?.apiM2 == 1) {
+        return EventDebuffType.airbaseDefense;
+      }
+    }
+    if (model is ReqMapStartEntity) {
+      if (model.apiData.apiDestructionBattle?.apiM2 == 1) {
+        return EventDebuffType.airbaseDefense;
+      }
+    }
+    if (model is ReqSortieBattleResultEntity) {
+      if (model.apiData.apiM2 == 1) {
+        return EventDebuffType.battleResult;
+      }
+    }
+    if (model is ReqCombinedBattleResultEntity) {
+      if (model.apiData?.apiM2 == 1) {
+        return EventDebuffType.battleResult;
+      }
+    }
+    if (model is PortEntity) {
+      if (model.apiData.apiEventObject?.apiMFlag2 == 1) {
+        return EventDebuffType.port;
+      }
+    }
+    return EventDebuffType.none;
   }
 }

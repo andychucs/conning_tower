@@ -69,4 +69,10 @@ class Toast {
       autoCloseDuration: const Duration(seconds: 10),
     );
   }
+
+  static kancolleUnlockNotify(String title, String description) {
+    HapticFeedback.mediumImpact();
+    SystemSound.play(SystemSoundType.click);
+    showSuccess(title: title, description: description, autoCloseDuration: const Duration(seconds: 15));
+  }
 }
