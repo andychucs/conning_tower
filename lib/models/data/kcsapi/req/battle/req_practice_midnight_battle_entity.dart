@@ -23,7 +23,7 @@ class ReqPracticeMidnightBattleEntity with _$ReqPracticeMidnightBattleEntity {
 
 @unfreezed
 class ReqPracticeMidnightBattleApiDataEntity
-    with _$ReqPracticeMidnightBattleApiDataEntity implements SingleVsSingleBaseModel{
+    with _$ReqPracticeMidnightBattleApiDataEntity implements BattleBasicModel {
   factory ReqPracticeMidnightBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,

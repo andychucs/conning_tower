@@ -22,7 +22,7 @@ class ReqSortieLdAirbattleEntity with _$ReqSortieLdAirbattleEntity {
 @unfreezed
 class ReqSortieLdAirbattleApiDataEntity
     with _$ReqSortieLdAirbattleApiDataEntity
-    implements SingleVsSingleBaseModel {
+    implements BattleBasicModel {
   factory ReqSortieLdAirbattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -40,26 +40,11 @@ class ReqSortieLdAirbattleApiDataEntity
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku') ReqSortieLdAirbattleApiDataApiKoukuEntity? apiKouku,
+    @JsonKey(name: 'api_kouku') AircraftRoundData? apiKouku,
     List<int>? apiEscapeIdx,
   }) = _ReqSortieLdAirbattleApiDataEntity;
 
   factory ReqSortieLdAirbattleApiDataEntity.fromJson(
           Map<String, dynamic> json) =>
       _$ReqSortieLdAirbattleApiDataEntityFromJson(json);
-}
-
-@unfreezed
-class ReqSortieLdAirbattleApiDataApiKoukuEntity
-    with _$ReqSortieLdAirbattleApiDataApiKoukuEntity implements AircraftRound{
-  factory ReqSortieLdAirbattleApiDataApiKoukuEntity({
-    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
-    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
-    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
-    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
-  }) = _ReqSortieLdAirbattleApiDataApiKoukuEntity;
-
-  factory ReqSortieLdAirbattleApiDataApiKoukuEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqSortieLdAirbattleApiDataApiKoukuEntityFromJson(json);
 }

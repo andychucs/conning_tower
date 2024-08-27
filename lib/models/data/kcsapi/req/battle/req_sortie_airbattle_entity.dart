@@ -23,7 +23,7 @@ class ReqSortieAirbattleEntity with _$ReqSortieAirbattleEntity {
 @unfreezed
 class ReqSortieAirbattleApiDataEntity
     with _$ReqSortieAirbattleApiDataEntity
-    implements SingleVsSingleBaseModel {
+    implements BattleBasicModel {
   factory ReqSortieAirbattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -41,32 +41,14 @@ class ReqSortieAirbattleApiDataEntity
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku')
-    ReqSortieAirbattleApiDataApiKoukuEntity? apiKouku,
+    @JsonKey(name: 'api_kouku') AircraftRoundData? apiKouku,
     @JsonKey(name: 'api_support_flag') int? apiSupportFlag,
     @JsonKey(name: 'api_support_info') BattleSupportInfo? apiSupportInfo,
     @JsonKey(name: 'api_stage_flag2') List<int>? apiStageFlag2,
-    @JsonKey(name: 'api_kouku2')
-    ReqSortieAirbattleApiDataApiKoukuEntity? apiKouku2,
+    @JsonKey(name: 'api_kouku2') AircraftRoundData? apiKouku2,
     List<int>? apiEscapeIdx,
   }) = _ReqSortieAirbattleApiDataEntity;
 
   factory ReqSortieAirbattleApiDataEntity.fromJson(Map<String, dynamic> json) =>
       _$ReqSortieAirbattleApiDataEntityFromJson(json);
-}
-
-@unfreezed
-class ReqSortieAirbattleApiDataApiKoukuEntity
-    with _$ReqSortieAirbattleApiDataApiKoukuEntity
-    implements AircraftRound {
-  factory ReqSortieAirbattleApiDataApiKoukuEntity({
-    @JsonKey(name: 'api_plane_from') dynamic apiPlaneFrom,
-    @JsonKey(name: 'api_stage1') BattleDataAircraftRoundStage1? apiStage1,
-    @JsonKey(name: 'api_stage2') BattleDataAircraftRoundStage2? apiStage2,
-    @JsonKey(name: 'api_stage3') BattleDataAircraftRoundStage3? apiStage3,
-  }) = _ReqSortieAirbattleApiDataApiKoukuEntity;
-
-  factory ReqSortieAirbattleApiDataApiKoukuEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$ReqSortieAirbattleApiDataApiKoukuEntityFromJson(json);
 }

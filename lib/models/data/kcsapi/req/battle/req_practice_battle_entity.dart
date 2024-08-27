@@ -23,7 +23,7 @@ class ReqPracticeBattleEntity with _$ReqPracticeBattleEntity {
 @unfreezed
 class ReqPracticeBattleApiDataEntity
     with _$ReqPracticeBattleApiDataEntity
-    implements SingleVsSingleBattleData {
+    implements FullGunFireRoundBattle {
   factory ReqPracticeBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -42,7 +42,7 @@ class ReqPracticeBattleApiDataEntity
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku') NormalAircraftRound? apiKouku,
+    @JsonKey(name: 'api_kouku') AircraftRoundData? apiKouku,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,
     @JsonKey(name: 'api_opening_flag') int? apiOpeningFlag,

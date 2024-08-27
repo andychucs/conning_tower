@@ -26,7 +26,7 @@ class ReqCombinedBattleEachBattleEntity
 @unfreezed
 class ReqCombinedBattleEachBattleApiDataEntity
     with _$ReqCombinedBattleEachBattleApiDataEntity
-    implements DoubleVsDoubleBattleData {
+    implements DoubleVsDoubleBattleData, NormalBattleData {
   factory ReqCombinedBattleEachBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -56,11 +56,11 @@ class ReqCombinedBattleEachBattleApiDataEntity
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     AirBaseJetAircraftRound? apiAirBaseInjection,
     @JsonKey(name: 'api_injection_kouku')
-    CombineAircraftRound? apiInjectionKouku,
+    AircraftRoundData? apiInjectionKouku,
     @JsonKey(name: 'api_air_base_attack')
     List<AirBaseAttackRound?>? apiAirBaseAttack,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
-    @JsonKey(name: 'api_kouku') CombineAircraftRound? apiKouku,
+    @JsonKey(name: 'api_kouku') AircraftRoundData? apiKouku,
     @JsonKey(name: 'api_support_flag') int? apiSupportFlag,
     @JsonKey(name: 'api_support_info') BattleSupportInfo? apiSupportInfo,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
@@ -75,6 +75,8 @@ class ReqCombinedBattleEachBattleApiDataEntity
     @JsonKey(name: 'api_hougeki3') GunFireRoundEntity? apiHougeki3,
     List<int>? apiEscapeIdx,
     List<int>? apiEscapeIdxCombined,
+    BattleFriendlyInfo? apiFriendlyInfo,
+    AircraftRoundData? apiFriendlyKouku,
   }) = _ReqCombinedBattleEachBattleApiDataEntity;
 
   factory ReqCombinedBattleEachBattleApiDataEntity.fromJson(

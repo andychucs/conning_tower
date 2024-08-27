@@ -10,7 +10,7 @@ main() {
 
     var data = ReqSortieBattleEntity.fromJson(json);
 
-    expect(data.apiData.apiKouku.apiStage3?.apiFbakFlag?.last, null);
+    expect(data.apiData.apiKouku?.apiStage3?.apiFbakFlag?.last, null);
     expect(data.apiData.apiOpeningAtack?.apiFraiListItems[4], [0, 3]);
   });
 }
