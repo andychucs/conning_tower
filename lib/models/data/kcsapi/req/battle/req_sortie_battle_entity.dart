@@ -58,6 +58,7 @@ class ReqSortieBattleApiDataEntity
     AirBaseJetAircraftRound? apiAirBaseInjection,
     NormalAircraftRound? apiInjectionKouku,
     List<int>? apiEscapeIdx,
+    BattleFriendlyInfo? apiFriendlyInfo,
     FriendlyFleetBattle? apiFriendlyBattle,
     CombineAircraftRound? apiFriendlyKouku,
   }) = _ReqSortieBattleApiDataEntity;

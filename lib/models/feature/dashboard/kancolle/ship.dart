@@ -340,6 +340,21 @@ class Ship with _$Ship {
     );
   }
 
+  factory Ship.friend({
+    required int id,
+    required int level,
+    required int nowHP,
+    required int maxHP,
+  }) {
+    return Ship(
+      uid: -1,
+      shipId: id,
+      level: level,
+      nowHP: nowHP,
+      maxHP: maxHP,
+    );
+  }
+
   Ship copyWithApi(ShipData data, String shipName,
       {List<int>? afterIds,
         int? upgradeLevel,

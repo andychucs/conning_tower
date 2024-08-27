@@ -67,6 +67,19 @@ class Squad with _$Squad {
     return Squad(id: 1, name: '敵艦隊', ships: ships);
   }
 
+  factory Squad.fromSingleFriend(List<int> friendId, List<int> friendLv, List<int> friendMaxHP, List<int> friendNowHP) {
+    assert(friendId.length == friendLv.length && friendLv.length == friendMaxHP.length && friendMaxHP.length == friendNowHP.length, 'length not equal');
+    List<Ship> ships = [];
+    for (var i = 0; i < friendId.length; i++) {
+      var id = friendId[i];
+      var level = friendLv[i];
+      var nowHP = friendNowHP[i];
+      var maxHP = friendMaxHP[i];
+      ships.add(Ship.friend(id: id, level: level, nowHP: nowHP, maxHP: maxHP));
+    }
+    return Squad(id: 1, name: '友軍艦隊', ships: ships);
+  }
+
   factory Squad.fromJson(Map<String, dynamic> json) => _$SquadFromJson(json);
 }
 
