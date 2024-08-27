@@ -1,5 +1,5 @@
 import 'package:conning_tower/models/data/kcsapi/start2/get_data_entity.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
+import 'map_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

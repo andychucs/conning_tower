@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/models/feature/kancolle/data.dart';
+import 'package:conning_tower/models/feature/kancolle/ship.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';

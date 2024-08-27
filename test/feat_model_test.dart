@@ -1,4 +1,4 @@
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/models/feature/kancolle/ship.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {

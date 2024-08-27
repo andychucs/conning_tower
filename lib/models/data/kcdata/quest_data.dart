@@ -1,4 +1,4 @@
-import 'package:conning_tower/models/feature/dashboard/kancolle/quest_assistant.dart';
+import 'package:conning_tower/models/feature/kancolle/quest_assistant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

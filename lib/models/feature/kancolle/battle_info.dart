@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'map_info.dart';
+import 'ship.dart';
+import 'squad.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

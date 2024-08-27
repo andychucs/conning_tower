@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rank_icons/rank_icons.dart';
 
-import '../../../data/ooyodo/akashi_schedule.dart';
+import '../../data/ooyodo/akashi_schedule.dart';
 
 part 'equipment.freezed.dart';
 part 'equipment.g.dart';

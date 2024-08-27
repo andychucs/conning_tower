@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/models/feature/kancolle/map_info.dart';
+import 'package:conning_tower/models/feature/kancolle/raw_data.dart';
+import 'package:conning_tower/models/feature/kancolle/squad.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:objectbox/objectbox.dart';
 

@@ -1,6 +1,6 @@
-import 'package:conning_tower/models/feature/dashboard/kancolle/equipment.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/models/feature/kancolle/equipment.dart';
+import 'package:conning_tower/models/feature/kancolle/ship.dart';
+import 'package:conning_tower/models/feature/kancolle/squad.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'deck_builder_entity.freezed.dart';

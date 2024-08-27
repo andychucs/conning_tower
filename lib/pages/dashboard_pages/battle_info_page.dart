@@ -7,10 +7,10 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
 import 'package:conning_tower/models/data/kcwiki/map_data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/map_info.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'package:conning_tower/models/feature/kancolle/battle_info.dart';
+import 'package:conning_tower/models/feature/kancolle/data.dart';
+import 'package:conning_tower/models/feature/kancolle/map_info.dart';
+import 'package:conning_tower/models/feature/kancolle/ship.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
@@ -28,7 +28,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
-import '../../models/feature/dashboard/kancolle/map_state.dart';
+import '../../models/feature/kancolle/map_state.dart';
 import '../../utils/toast.dart';
 import '../../widgets/dialog.dart';
 

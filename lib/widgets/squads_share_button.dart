@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/kancolle_calc_net/deck_builder_entity.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/models/feature/kancolle/squad.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:pull_down_button/pull_down_button.dart';
