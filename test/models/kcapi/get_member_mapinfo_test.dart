@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/data.dart';
+import 'package:conning_tower/models/feature/kancolle/data.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/operation_queue.dart';
+import 'package:conning_tower/models/feature/kancolle/operation_queue.dart';
 import 'package:conning_tower/models/feature/task.dart';
 import 'package:conning_tower/utils/toast.dart';
 import 'package:flutter/foundation.dart';

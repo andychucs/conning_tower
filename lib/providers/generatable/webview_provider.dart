@@ -7,7 +7,7 @@ import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/raw_data.dart';
+import 'package:conning_tower/models/feature/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/web_message_data.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';

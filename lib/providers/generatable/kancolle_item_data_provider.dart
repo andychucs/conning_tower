@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 import '../../helper.dart';
 import '../../models/data/ooyodo/akashi_schedule.dart';
-import '../../models/feature/dashboard/kancolle/equipment.dart';
+import '../../models/feature/kancolle/equipment.dart';
 
 part 'kancolle_item_data_provider.freezed.dart';
 part 'kancolle_item_data_provider.g.dart';

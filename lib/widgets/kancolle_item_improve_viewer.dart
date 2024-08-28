@@ -16,7 +16,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
 
 import '../generated/l10n.dart';
-import '../models/feature/dashboard/kancolle/equipment.dart';
+import '../models/feature/kancolle/equipment.dart';
 
 const String kPinedItems = "KC_ITEM_IMPROVE_VIEWER_PINED_ITEMS";
 

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'ship.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'squad.freezed.dart';

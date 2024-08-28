@@ -1,6 +1,6 @@
 import 'package:conning_tower/models/data/kcsapi/item_data.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/equipment.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
+import 'equipment.dart';
+import 'ship.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

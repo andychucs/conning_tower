@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:conning_tower/models/data/data_model_adapter.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/battle_info.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/ship.dart';
-import 'package:conning_tower/models/feature/dashboard/kancolle/squad.dart';
+import 'package:conning_tower/models/feature/kancolle/battle_info.dart';
+import 'package:conning_tower/models/feature/kancolle/ship.dart';
+import 'package:conning_tower/models/feature/kancolle/squad.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
