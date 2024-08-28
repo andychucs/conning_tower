@@ -46,6 +46,7 @@ class DataModelAdapter {
         GetMemberMapinfoEntity.source => GetMemberMapinfoEntity.fromJson(json),
         ReqCombinedBattleGobackPortEntity.source => ReqCombinedBattleGobackPortEntity.fromJson(json),
         ReqSortieGobackPortEntity.source => ReqSortieGobackPortEntity.fromJson(json),
+        ReqCombinedBattleSpMidnightEntity.source => ReqCombinedBattleSpMidnightEntity.fromJson(json),
         _ => null,
       };
 
