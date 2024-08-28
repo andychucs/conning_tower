@@ -500,10 +500,6 @@ class KancolleData {
       }
     } catch (e, s) {
       FirebaseCrashlytics.instance.log('Kancolle Data Parse Error at $source');
-      FirebaseCrashlytics.instance.recordError(e, s, reason: "Kancolle Data Parse Error", fatal: true);
-      if (kDebugMode) {
-        rethrow;
-      }
       String errorMsg = e.toString();
       final errorData = {
         "error": errorMsg,
@@ -516,6 +512,7 @@ class KancolleData {
       ref.watch(alertStateProvider.notifier).update((state) => Alert(
           "Error", S.current.DataErrorNotice,
           data: jsonEncode(errorData)));
+      rethrow;
     }
     return newData;
   }
