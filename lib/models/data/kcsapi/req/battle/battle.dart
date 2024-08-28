@@ -2,9 +2,6 @@ library battle;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'req_combined_battle_goback_port_entity.dart';
-import 'req_sortie_goback_port_entity.dart';
-
 export 'req_battle_midnight_battle_entity.dart';
 export 'req_battle_midnight_sp_midnight_entity.dart';
 export 'req_combined_battle_each_battle_entity.dart';
@@ -12,16 +9,17 @@ export 'req_combined_battle_each_water_entity.dart';
 export 'req_combined_battle_ec_battle_entity.dart';
 export 'req_combined_battle_ec_midnight_battle_entity.dart';
 export 'req_combined_battle_entity.dart';
+export 'req_combined_battle_goback_port_entity.dart';
 export 'req_combined_battle_ld_airbattle_entity.dart';
 export 'req_combined_battle_midnight_battle_entity.dart';
+export 'req_combined_battle_sp_midnight_entity.dart';
 export 'req_combined_battle_water_entity.dart';
 export 'req_practice_battle_entity.dart';
 export 'req_practice_midnight_battle_entity.dart';
 export 'req_sortie_airbattle_entity.dart';
 export 'req_sortie_battle_entity.dart';
-export 'req_sortie_ld_airbattle_entity.dart';
-export 'req_combined_battle_goback_port_entity.dart';
 export 'req_sortie_goback_port_entity.dart';
+export 'req_sortie_ld_airbattle_entity.dart';
 export 'result/req_combined_battle_result_entity.dart';
 export 'result/req_sortie_battle_result_entity.dart';
 
@@ -86,6 +84,11 @@ abstract class NightBattleData implements BattleBasicModel {
   late NightBattleGunFireRoundEntity? apiHougeki;
   late BattleFriendlyInfo? apiFriendlyInfo;
   late FriendlyFleetBattle? apiFriendlyBattle;
+}
+
+abstract class NightBattleWithSupportData implements NightBattleData {
+  late int? apiNSupportFlag;
+  late BattleSupportInfo? apiNSupportInfo;
 }
 
 abstract class NormalBattleData implements BattleBasicModel {

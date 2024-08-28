@@ -412,6 +412,10 @@ class KancolleData {
       return;
     }
 
+    if (model is ReqCombinedBattleSpMidnightEntity) {
+      battleInfo.parseBattle(model.apiData!, battleSquads!);
+    }
+
     if (model is ReqCombinedBattleLdAirbattleEntity) {
       battleInfo.parseBattle(model.apiData!, battleSquads!);
     }

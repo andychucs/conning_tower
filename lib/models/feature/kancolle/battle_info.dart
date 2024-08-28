@@ -391,6 +391,7 @@ class BattleInfo with _$BattleInfo {
     inBattleSquads = squads;
 
     if (data is DoubleVsDoubleBattleData) {
+      // FIXME: need check `api_deck_id`, if not 1, then it's not combined battle?
       doubleOurSideBattlePrepare(data);
       initDoubleEnemySquads(data);
     } else if (data is SingleVsDoubleBattleData) {
@@ -730,6 +731,9 @@ class BattleInfo with _$BattleInfo {
           info: data.apiFriendlyInfo, battle: data.apiFriendlyBattle);
       if (data.apiHougeki != null) {
         gunFireRound(data.apiHougeki!);
+      }
+      if (data is NightBattleWithSupportData) {
+        supportBattleRound(data.apiNSupportInfo);
       }
     } else if (data is ReqSortieLdAirbattleApiDataEntity) {
       aircraftRound(data.apiStageFlag!, data.apiKouku!);
