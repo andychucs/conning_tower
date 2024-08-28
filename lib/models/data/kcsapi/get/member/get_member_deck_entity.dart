@@ -21,7 +21,9 @@ class GetMemberDeckEntity with _$GetMemberDeckEntity {
 }
 
 @unfreezed
-class GetMemberDeckApiDataEntity with _$GetMemberDeckApiDataEntity implements DeckData{
+class GetMemberDeckApiDataEntity
+    with _$GetMemberDeckApiDataEntity
+    implements DeckData {
   factory GetMemberDeckApiDataEntity({
     @JsonKey(name: 'api_member_id') required int apiMemberId,
     @JsonKey(name: 'api_id') required int apiId, // Squad id
@@ -30,7 +32,8 @@ class GetMemberDeckApiDataEntity with _$GetMemberDeckApiDataEntity implements De
     @JsonKey(name: 'api_mission') required List<int> apiMission,
     // apiMission[1] is GetMission.api_mission_id, apiMission[2] is ReqMission.api_complatetime
     @JsonKey(name: 'api_flagship') required String apiFlagship,
-    @JsonKey(name: 'api_ship') required List<int> apiShip, // List of ship girl's uid
+    @JsonKey(name: 'api_ship')
+    required List<int> apiShip, // List of ship girl's uid
   }) = _GetMemberDeckApiDataEntity;
 
   factory GetMemberDeckApiDataEntity.fromJson(Map<String, dynamic> json) =>

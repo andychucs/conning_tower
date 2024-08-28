@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'ship.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'ship.dart';
 
 part 'squad.freezed.dart';
 part 'squad.g.dart';
@@ -54,8 +55,13 @@ class Squad with _$Squad {
     );
   }
 
-  factory Squad.fromSingleEnemy(List<int> enemyId, List<int> enemyLv, List<dynamic> enemyMaxHP, List<dynamic> enemyNowHP) {
-    assert(enemyId.length == enemyLv.length && enemyLv.length == enemyMaxHP.length && enemyMaxHP.length == enemyNowHP.length, 'length not equal');
+  factory Squad.fromSingleEnemy(List<int> enemyId, List<int> enemyLv,
+      List<dynamic> enemyMaxHP, List<dynamic> enemyNowHP) {
+    assert(
+        enemyId.length == enemyLv.length &&
+            enemyLv.length == enemyMaxHP.length &&
+            enemyMaxHP.length == enemyNowHP.length,
+        'length not equal');
     List<Ship> ships = [];
     for (var i = 0; i < enemyId.length; i++) {
       var id = enemyId[i];
@@ -67,8 +73,13 @@ class Squad with _$Squad {
     return Squad(id: 1, name: '敵艦隊', ships: ships);
   }
 
-  factory Squad.fromSingleFriend(List<int> friendId, List<int> friendLv, List<int> friendMaxHP, List<int> friendNowHP) {
-    assert(friendId.length == friendLv.length && friendLv.length == friendMaxHP.length && friendMaxHP.length == friendNowHP.length, 'length not equal');
+  factory Squad.fromSingleFriend(List<int> friendId, List<int> friendLv,
+      List<int> friendMaxHP, List<int> friendNowHP) {
+    assert(
+        friendId.length == friendLv.length &&
+            friendLv.length == friendMaxHP.length &&
+            friendMaxHP.length == friendNowHP.length,
+        'length not equal');
     List<Ship> ships = [];
     for (var i = 0; i < friendId.length; i++) {
       var id = friendId[i];
@@ -88,6 +99,7 @@ class LoS {
   late final num equip;
   late final num admiral;
   late final num total;
+
   LoS({
     required this.ship,
     required this.equip,

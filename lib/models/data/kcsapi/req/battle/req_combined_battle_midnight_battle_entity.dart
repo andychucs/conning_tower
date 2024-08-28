@@ -25,7 +25,8 @@ class ReqCombinedBattleMidnightBattleEntity
 
 @unfreezed
 class ReqCombinedBattleMidnightBattleApiDataEntity
-    with _$ReqCombinedBattleMidnightBattleApiDataEntity implements DoubleVsSingleBattleData, NightBattleData {
+    with _$ReqCombinedBattleMidnightBattleApiDataEntity
+    implements DoubleVsSingleBattleData, NightBattleData {
   factory ReqCombinedBattleMidnightBattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,

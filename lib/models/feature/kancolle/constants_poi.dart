@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 // views/utils/game-utils.es
 const aircraftExpTable = [0, 10, 25, 40, 55, 70, 85, 100, 121];
 const aircraftLevelBonus = {

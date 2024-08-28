@@ -36,11 +36,14 @@ class ReqMapNextApiDataEntity with _$ReqMapNextApiDataEntity {
     @JsonKey(name: 'api_bosscomp') int? apiBosscomp,
     @JsonKey(name: 'api_comment_kind') int? apiCommentKind,
     @JsonKey(name: 'api_production_kind') int? apiProductionKind,
-    @JsonKey(name: 'api_airsearch') ReqMapNextApiDataApiAirsearchEntity? apiAirsearch,
-    @JsonKey(name: 'api_e_deck_info') List<ReqMapNextApiDataApiEDeckInfoEntity?>? apiEDeckInfo,
+    @JsonKey(name: 'api_airsearch')
+    ReqMapNextApiDataApiAirsearchEntity? apiAirsearch,
+    @JsonKey(name: 'api_e_deck_info')
+    List<ReqMapNextApiDataApiEDeckInfoEntity?>? apiEDeckInfo,
     @JsonKey(name: 'api_limit_state') int? apiLimitState,
-    @JsonKey(name: 'api_ration_flag') int? apiRationFlag,  // may not in response
-    @JsonKey(name: 'api_destruction_battle') AirbaseDefenseInfo? apiDestructionBattle,
+    @JsonKey(name: 'api_ration_flag') int? apiRationFlag, // may not in response
+    @JsonKey(name: 'api_destruction_battle')
+    AirbaseDefenseInfo? apiDestructionBattle,
   }) = _ReqMapNextApiDataEntity;
 
   factory ReqMapNextApiDataEntity.fromJson(Map<String, dynamic> json) =>

@@ -23,7 +23,10 @@ class ReqCombinedBattleWaterEntity with _$ReqCombinedBattleWaterEntity {
 @unfreezed
 class ReqCombinedBattleWaterApiDataEntity
     with _$ReqCombinedBattleWaterApiDataEntity
-    implements DoubleVsSingleBattleData, NormalBattleData, SurfaceForceBattleData {
+    implements
+        DoubleVsSingleBattleData,
+        NormalBattleData,
+        SurfaceForceBattleData {
   factory ReqCombinedBattleWaterApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,
@@ -44,7 +47,8 @@ class ReqCombinedBattleWaterApiDataEntity
     @JsonKey(name: 'api_atoll_cell') int? apiAtollCell,
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
-    @JsonKey(name: 'api_air_base_attack') List<AirBaseAttackRound?>? apiAirBaseAttack,
+    @JsonKey(name: 'api_air_base_attack')
+    List<AirBaseAttackRound?>? apiAirBaseAttack,
     AircraftRoundData? apiInjectionKouku,
     AirBaseJetAircraftRound? apiAirBaseInjection,
     @JsonKey(name: 'api_air_base_rescue_type') int? apiAirBaseRescueType,
@@ -55,7 +59,8 @@ class ReqCombinedBattleWaterApiDataEntity
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,
     @JsonKey(name: 'api_opening_flag') int? apiOpeningFlag,
-    @JsonKey(name: 'api_opening_atack') OpeningTorpedoRoundEntity? apiOpeningAtack,
+    @JsonKey(name: 'api_opening_atack')
+    OpeningTorpedoRoundEntity? apiOpeningAtack,
     @JsonKey(name: 'api_hourai_flag') List<int>? apiHouraiFlag,
     @JsonKey(name: 'api_hougeki1') GunFireRoundEntity? apiHougeki1,
     @JsonKey(name: 'api_hougeki2') GunFireRoundEntity? apiHougeki2,

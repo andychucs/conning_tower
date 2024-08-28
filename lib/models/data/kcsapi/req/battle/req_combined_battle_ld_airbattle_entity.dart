@@ -25,7 +25,8 @@ class ReqCombinedBattleLdAirbattleEntity
 
 @unfreezed
 class ReqCombinedBattleLdAirbattleApiDataEntity
-    with _$ReqCombinedBattleLdAirbattleApiDataEntity implements DoubleVsSingleBattleData {
+    with _$ReqCombinedBattleLdAirbattleApiDataEntity
+    implements DoubleVsSingleBattleData {
   factory ReqCombinedBattleLdAirbattleApiDataEntity({
     @JsonKey(name: 'api_deck_id') required int apiDeckId,
     @JsonKey(name: 'api_formation') required List<int> apiFormation,

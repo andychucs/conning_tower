@@ -7,11 +7,12 @@ part 'get_member_quest_list_entity.g.dart';
 @unfreezed
 class GetMemberQuestListEntity with _$GetMemberQuestListEntity {
   static const source = '/api_get_member/questlist';
-  
+
   factory GetMemberQuestListEntity({
     @JsonKey(name: 'api_result') required int apiResult,
     @JsonKey(name: 'api_result_msg') required String apiResultMsg,
-    @JsonKey(name: 'api_data') required GetMemberQuestListEntityApiDataEntity apiData,
+    @JsonKey(name: 'api_data')
+    required GetMemberQuestListEntityApiDataEntity apiData,
   }) = _GetMemberQuestListEntity;
 
   factory GetMemberQuestListEntity.fromJson(Map<String, dynamic> json) =>
@@ -19,12 +20,14 @@ class GetMemberQuestListEntity with _$GetMemberQuestListEntity {
 }
 
 @unfreezed
-class GetMemberQuestListEntityApiDataEntity with _$GetMemberQuestListEntityApiDataEntity {
+class GetMemberQuestListEntityApiDataEntity
+    with _$GetMemberQuestListEntityApiDataEntity {
   factory GetMemberQuestListEntityApiDataEntity({
     List<GetMemberQuestListEntityApiDataApiListEntity>? apiList,
   }) = _GetMemberQuestListEntityApiDataEntity;
 
-  factory GetMemberQuestListEntityApiDataEntity.fromJson(Map<String, dynamic> json) =>
+  factory GetMemberQuestListEntityApiDataEntity.fromJson(
+          Map<String, dynamic> json) =>
       _$GetMemberQuestListEntityApiDataEntityFromJson(json);
 }
 
@@ -51,7 +54,8 @@ class GetMemberQuestListEntityApiDataEntity with _$GetMemberQuestListEntityApiDa
 */
 
 @unfreezed
-class GetMemberQuestListEntityApiDataApiListEntity with _$GetMemberQuestListEntityApiDataApiListEntity {
+class GetMemberQuestListEntityApiDataApiListEntity
+    with _$GetMemberQuestListEntityApiDataApiListEntity {
   factory GetMemberQuestListEntityApiDataApiListEntity({
     int? apiNo,
     int? apiCategory,
@@ -67,7 +71,7 @@ class GetMemberQuestListEntityApiDataApiListEntity with _$GetMemberQuestListEnti
     int? apiInvalidFlag,
   }) = _GetMemberQuestListEntityApiDataApiListEntity;
 
-
-  factory GetMemberQuestListEntityApiDataApiListEntity.fromJson(Map<String, dynamic> json) =>
+  factory GetMemberQuestListEntityApiDataApiListEntity.fromJson(
+          Map<String, dynamic> json) =>
       _$GetMemberQuestListEntityApiDataApiListEntityFromJson(json);
 }

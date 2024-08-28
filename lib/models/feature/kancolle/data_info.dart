@@ -1,7 +1,8 @@
 import 'package:conning_tower/models/data/kcsapi/start2/get_data_entity.dart';
-import 'map_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'map_info.dart';
 
 part 'data_info.freezed.dart';
 

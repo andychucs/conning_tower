@@ -51,5 +51,3 @@ class ReqBattleMidnightBattleApiDataEntity
           Map<String, dynamic> json) =>
       _$ReqBattleMidnightBattleApiDataEntityFromJson(json);
 }
-
-

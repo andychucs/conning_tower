@@ -46,7 +46,8 @@ class ReqPracticeBattleApiDataEntity
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,
     @JsonKey(name: 'api_opening_flag') int? apiOpeningFlag,
-    @JsonKey(name: 'api_opening_atack') OpeningTorpedoRoundEntity? apiOpeningAtack,
+    @JsonKey(name: 'api_opening_atack')
+    OpeningTorpedoRoundEntity? apiOpeningAtack,
     @JsonKey(name: 'api_hourai_flag') required List<int> apiHouraiFlag,
     @JsonKey(name: 'api_hougeki1') GunFireRoundEntity? apiHougeki1,
     @JsonKey(name: 'api_hougeki2') GunFireRoundEntity? apiHougeki2,

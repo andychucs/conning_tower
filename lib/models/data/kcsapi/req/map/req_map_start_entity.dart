@@ -23,7 +23,8 @@ class ReqMapStartEntity with _$ReqMapStartEntity {
 @unfreezed
 class ReqMapStartApiDataEntity with _$ReqMapStartApiDataEntity {
   factory ReqMapStartApiDataEntity({
-    @JsonKey(name: 'api_cell_data') List<ReqMapStartApiDataApiCellDataEntity?>? apiCellData,
+    @JsonKey(name: 'api_cell_data')
+    List<ReqMapStartApiDataApiCellDataEntity?>? apiCellData,
     @JsonKey(name: 'api_rashin_flg') int? apiRashinFlg,
     @JsonKey(name: 'api_rashin_id') int? apiRashinId,
     @JsonKey(name: 'api_maparea_id') required int apiMapareaId,
@@ -35,13 +36,18 @@ class ReqMapStartApiDataEntity with _$ReqMapStartApiDataEntity {
     @JsonKey(name: 'api_next') int? apiNext,
     @JsonKey(name: 'api_bosscell_no') int? apiBosscellNo,
     @JsonKey(name: 'api_bosscomp') int? apiBosscomp,
-    @JsonKey(name: 'api_airsearch') ReqMapStartApiDataApiAirsearchEntity? apiAirsearch,
-    @JsonKey(name: 'api_e_deck_info') List<ReqMapStartApiDataApiEDeckInfoEntity?>? apiEDeckInfo,
-    @JsonKey(name: 'api_eventmap') ReqMapStartApiDataApiEventmapEntity? apiEventmap,
-    @JsonKey(name: 'api_select_route') ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute,
+    @JsonKey(name: 'api_airsearch')
+    ReqMapStartApiDataApiAirsearchEntity? apiAirsearch,
+    @JsonKey(name: 'api_e_deck_info')
+    List<ReqMapStartApiDataApiEDeckInfoEntity?>? apiEDeckInfo,
+    @JsonKey(name: 'api_eventmap')
+    ReqMapStartApiDataApiEventmapEntity? apiEventmap,
+    @JsonKey(name: 'api_select_route')
+    ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute,
     @JsonKey(name: 'api_limit_state') int? apiLimitState,
     @JsonKey(name: 'api_from_no') int? apiFromNo,
-    @JsonKey(name: 'api_destruction_battle') AirbaseDefenseInfo? apiDestructionBattle,
+    @JsonKey(name: 'api_destruction_battle')
+    AirbaseDefenseInfo? apiDestructionBattle,
   }) = _ReqMapStartApiDataEntity;
 
   factory ReqMapStartApiDataEntity.fromJson(Map<String, dynamic> json) =>
@@ -99,7 +105,7 @@ class ReqMapStartApiDataApiEventmapEntity
   }) = _ReqMapStartApiDataApiEventmapEntity;
 
   factory ReqMapStartApiDataApiEventmapEntity.fromJson(
-      Map<String, dynamic> json) =>
+          Map<String, dynamic> json) =>
       _$ReqMapStartApiDataApiEventmapEntityFromJson(json);
 }
 
@@ -111,7 +117,6 @@ class ReqMapStartApiDataApiSelectRouteEntity
   }) = _ReqMapStartApiDataApiSelectRouteEntity;
 
   factory ReqMapStartApiDataApiSelectRouteEntity.fromJson(
-      Map<String, dynamic> json) =>
+          Map<String, dynamic> json) =>
       _$ReqMapStartApiDataApiSelectRouteEntityFromJson(json);
 }
-

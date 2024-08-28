@@ -34,6 +34,7 @@ class MapArea with _$MapArea {
 @freezed
 class MapInfo with _$MapInfo {
   const MapInfo._();
+
   const factory MapInfo({
     required int id,
     required int num,

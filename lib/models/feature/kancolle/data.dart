@@ -6,14 +6,6 @@ import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
 import 'package:conning_tower/models/data/kcsapi/ship_data.dart';
-import 'battle_info.dart';
-import 'data_info.dart';
-import 'fleet.dart';
-import 'map_info.dart';
-import 'raw_data.dart';
-import 'sea_force_base.dart';
-import 'ship.dart';
-import 'squad.dart';
 import 'package:conning_tower/models/feature/log/kancolle_battle_log.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
@@ -26,10 +18,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../../utils/toast.dart';
+import 'battle_info.dart';
+import 'data_info.dart';
 import 'equipment.dart';
+import 'fleet.dart';
+import 'map_info.dart';
 import 'map_state.dart';
 import 'operation_queue.dart';
 import 'quest_assistant.dart';
+import 'raw_data.dart';
+import 'sea_force_base.dart';
+import 'ship.dart';
+import 'squad.dart';
 
 List<String> _battleAPI = [
   ReqSortieBattleEntity.source,
