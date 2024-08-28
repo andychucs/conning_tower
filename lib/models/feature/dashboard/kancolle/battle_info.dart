@@ -31,7 +31,7 @@ class BattleInfo with _$BattleInfo {
     String? dropItemName,
     List<Squad>? enemySquads,
     List<Squad>? inBattleSquads,
-    Squad? friendSquad,
+    List<Squad>? friendSquads,
     Map<int, int>? dmgTakenMap,
     Map<int, int>? dmgMap,
     int? airSuperiorityFlag,
@@ -41,6 +41,7 @@ class BattleInfo with _$BattleInfo {
     MapInfo? mapInfo,
     int? mapRoute,
     List<Ship>? readyEscapeShips,
+    String? note,
   }) = _BattleInfo;
 
   const BattleInfo._();
@@ -172,7 +173,8 @@ class BattleInfo with _$BattleInfo {
     enemySquads?.clear();
     dmgMap?.clear();
     dmgTakenMap?.clear();
-    friendSquad = null;
+    friendSquads?.clear();
+    note = null;
     if (resetMapInfo) {
       mapInfo = null;
       mapRoute = null;
@@ -264,7 +266,7 @@ class BattleInfo with _$BattleInfo {
       }
       final actIndex = data.apiAtList![index];
 
-      final ourSquads = isFriendlyBattle ? [friendSquad!] : inBattleSquads!;
+      final ourSquads = isFriendlyBattle ? friendSquads! : inBattleSquads!;
 
       final actSquads = flag == 0 ? ourSquads : enemySquads!;
       final defSquads = flag == 1 ? ourSquads : enemySquads!;
@@ -284,10 +286,6 @@ class BattleInfo with _$BattleInfo {
               kSecondSquadIndexStart]; // second squad index start from 6
         }
         calculateDamageTaken(defShip.hashCode, damage);
-
-        if (isFriendlyBattle) {
-          continue; // friendly battle no need to calculate damage dealt
-        }
 
         late final Ship actShip;
         if (actIndex < actSquads[0].ships.length) {
@@ -319,8 +317,18 @@ class BattleInfo with _$BattleInfo {
   }
 
   void initFriendSquads(BattleFriendlyInfo info) {
-    friendSquad = Squad.fromSingleFriend(
-        info.apiShipId, info.apiShipLv, info.apiMaxhps, info.apiNowhps);
+    friendSquads = [Squad.fromSingleFriend(
+        info.apiShipId, info.apiShipLv, info.apiMaxhps, info.apiNowhps)];
+    updateDMGMap();
+  }
+
+  void updateDMGMap() {
+    if (friendSquads != null) {
+      for (final ship in friendSquads!.first.ships) {
+        dmgMap?[ship.hashCode] = 0;
+        dmgTakenMap?[ship.hashCode] = 0;
+      }
+    }
   }
 
   void initDMGMap() {

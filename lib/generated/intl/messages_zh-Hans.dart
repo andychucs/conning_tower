@@ -123,6 +123,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError": MessageLookupByLibrary.simpleMessage("无效的YAML格式。"),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON示例："),
         "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("明石工坊"),
+        "KCBattleAirbaseResourceLostLevel1":
+            MessageLookupByLibrary.simpleMessage("储备资源受到了损害"),
+        "KCBattleAirbaseResourceLostLevel2":
+            MessageLookupByLibrary.simpleMessage("储备资源以及基地航空队受到了损害"),
+        "KCBattleAirbaseResourceLostLevel3":
+            MessageLookupByLibrary.simpleMessage("基地航空队受到了损害"),
+        "KCBattleAirbaseResourceLostLevel4":
+            MessageLookupByLibrary.simpleMessage("空袭没有给基地带来损害"),
+        "KCBattleDebuffUnlock": MessageLookupByLibrary.simpleMessage("解谜已完成"),
         "KCBattleFinish": MessageLookupByLibrary.simpleMessage("战斗结束"),
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("全海域"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
@@ -321,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TaskRemindersHelpContent": MessageLookupByLibrary.simpleMessage(
             "任务提醒功能允许您添加和管理任务提醒。\n\n- 要添加数据源，请点击右上角的“添加数据源”按钮，并输入有效的 URL 或 YAML/JSON 内容。\n\n- 若要保存更改，请点击“保存”按钮。\n\n- 已添加的任务将显示在列表中。\n\n- 双击任务即可添加该任务的提醒推送。\n\n- 点击进入任务信息页，您可以查看详细信息。\n\n- 在任务信息页中，点击右上角的向上箭头按钮可以将该任务在任务列表中置顶。\n\n- 如果您遇到任何问题，请联系我们的支持团队。\n\n祝您使用愉快！"),
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage("导入任务数量超出限制"),
+        "TextAirbase": MessageLookupByLibrary.simpleMessage("基地航空队"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("战斗"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
@@ -363,6 +373,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("在Jervis作战室打开"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("在制空权模拟器打开"),
+        "TextReturnPort": MessageLookupByLibrary.simpleMessage("归港"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
         "TextShare": MessageLookupByLibrary.simpleMessage("分享"),

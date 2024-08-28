@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'map.dart';
+
 part 'req_map_next_entity.freezed.dart';
 
 part 'req_map_next_entity.g.dart';
@@ -38,6 +40,7 @@ class ReqMapNextApiDataEntity with _$ReqMapNextApiDataEntity {
     @JsonKey(name: 'api_e_deck_info') List<ReqMapNextApiDataApiEDeckInfoEntity?>? apiEDeckInfo,
     @JsonKey(name: 'api_limit_state') int? apiLimitState,
     @JsonKey(name: 'api_ration_flag') int? apiRationFlag,  // may not in response
+    @JsonKey(name: 'api_destruction_battle') AirbaseDefenseInfo? apiDestructionBattle,
   }) = _ReqMapNextApiDataEntity;
 
   factory ReqMapNextApiDataEntity.fromJson(Map<String, dynamic> json) =>

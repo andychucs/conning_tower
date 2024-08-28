@@ -142,6 +142,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
         "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("Akashi Studio"),
+        "KCBattleAirbaseResourceLostLevel1":
+            MessageLookupByLibrary.simpleMessage("Resources sustained losses"),
+        "KCBattleAirbaseResourceLostLevel2":
+            MessageLookupByLibrary.simpleMessage(
+                "Resources and land-based air squadrons sustained losses"),
+        "KCBattleAirbaseResourceLostLevel3":
+            MessageLookupByLibrary.simpleMessage(
+                "Land-based air squadrons sustained losses"),
+        "KCBattleAirbaseResourceLostLevel4":
+            MessageLookupByLibrary.simpleMessage("No damage was inflicted"),
+        "KCBattleDebuffUnlock": MessageLookupByLibrary.simpleMessage(
+            "Debuff mechanism has taken effect!"),
         "KCBattleFinish": MessageLookupByLibrary.simpleMessage("Battle Finish"),
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("Maps"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
@@ -360,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The Task Reminders feature allows you to add and manage task reminders.\n\n- To add a data source, click the Add data source button in the top right corner and enter a valid URL or YAML/JSON content.\n\n- To save changes, click the Save button.\n\n- Added tasks will be displayed in the list.\n\n- Double clicking on a task will add a reminder notification for that task.\n\n- Clicking on a task to enter the task information page where you can view detailed information.\n\n- In the task information page, click the Up-Arrow button in the top right corner to pin the task at the top of the task list.\n\n- If you encounter any issues, please contact our support team.\n\nEnjoy using it!"),
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage(
             "request tasks number over limit."),
+        "TextAirbase": MessageLookupByLibrary.simpleMessage("Airbase"),
         "TextAll": MessageLookupByLibrary.simpleMessage("All"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("Battle"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -411,6 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(
             "Open in Aerial Combat Simulator"),
+        "TextReturnPort": MessageLookupByLibrary.simpleMessage("Return Port"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
         "TextShare": MessageLookupByLibrary.simpleMessage("Share"),

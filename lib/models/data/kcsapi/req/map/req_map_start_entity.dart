@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'map.dart';
+
 part 'req_map_start_entity.freezed.dart';
 
 part 'req_map_start_entity.g.dart';
@@ -39,6 +41,7 @@ class ReqMapStartApiDataEntity with _$ReqMapStartApiDataEntity {
     @JsonKey(name: 'api_select_route') ReqMapStartApiDataApiSelectRouteEntity? apiSelectRoute,
     @JsonKey(name: 'api_limit_state') int? apiLimitState,
     @JsonKey(name: 'api_from_no') int? apiFromNo,
+    @JsonKey(name: 'api_destruction_battle') AirbaseDefenseInfo? apiDestructionBattle,
   }) = _ReqMapStartApiDataEntity;
 
   factory ReqMapStartApiDataEntity.fromJson(Map<String, dynamic> json) =>
