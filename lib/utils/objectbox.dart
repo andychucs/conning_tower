@@ -11,7 +11,8 @@ import 'package:conning_tower/objectbox.g.dart';
 import 'dart:developer' as dev;
 
 import '../models/feature/log/kancolle_battle_log.dart';
-import '../models/feature/log/kancolle_quest_log.dart'; // created by `flutter pub run build_runner build`
+import '../models/feature/log/kancolle_quest_log.dart';
+import '../models/feature/log/kancolle_ship_log.dart'; // created by `flutter pub run build_runner build`
 
 class ObjectBox {
   /// The Store of this app.
@@ -21,6 +22,7 @@ class ObjectBox {
   late final Box<KancolleQuestLogEntity> questLog;
   late final Box<KancolleResourceLogEntity> resourceLog;
   late final Box<KancolleRouteLogEntity> routeLog;
+  late final Box<KancolleShipLogEntity> shipLog;
 
   ObjectBox._create(this.store) {
     // Add any additional setup code, e.g. build queries.
@@ -28,6 +30,7 @@ class ObjectBox {
     questLog = Box<KancolleQuestLogEntity>(store);
     resourceLog = Box<KancolleResourceLogEntity>(store);
     routeLog = Box<KancolleRouteLogEntity>(store);
+    shipLog = Box<KancolleShipLogEntity>(store);
   }
 
   /// Create an instance of ObjectBox to use throughout the app.
@@ -37,6 +40,45 @@ class ObjectBox {
     debugPrint(docsDir.toString());
     final store = await openStore(directory: p.join(docsDir.path, "obx"));
     return ObjectBox._create(store);
+  }
+
+  List<KancolleShipLogEntity>? queryShipLog({ShipLogType? type}) {
+    late Query<KancolleShipLogEntity> query;
+    if (type != null) {
+      query = shipLog
+          .query(KancolleShipLogEntity_.type.equals(kShipLogTypeMap[type]!))
+          .build();
+    } else {
+      query = shipLog.query().build();
+    }
+    List<KancolleShipLogEntity> logs = query.find();
+    query.close();
+
+    if (logs.isEmpty) {
+      return null;
+    }
+
+    return logs;
+  }
+
+  void saveShipLog({
+    required String admiral,
+    required ShipLogType type,
+    required String? shipName,
+  }) {
+    if (shipName == null) {
+      return;
+    }
+    DateTime dateTime = DateTime.now();
+    dev.log("save ship log");
+    dev.log(shipName);
+    dev.log(type.name);
+    shipLog.put(KancolleShipLogEntity(
+      dateTime: dateTime,
+      admiral: admiral,
+      type: kShipLogTypeMap[type]!,
+      shipName: shipName,
+    ));
   }
 
   void saveRouteLog({
@@ -202,7 +244,6 @@ class ObjectBox {
           low: value);
     }
     resourceLog.put(log);
-    dev.log("put $resource");
   }
 
   List<KancolleResourceLogEntity> queryResource(String admiral, String resource,

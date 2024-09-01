@@ -21,7 +21,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pull_down_button/pull_down_button.dart';
-import 'package:rank_icons/rank_icons.dart';
 
 import '../../models/data/l10n/kancolle_localization.dart';
 import '../../providers/generatable/kancolle_event_ship_tags_provider.dart';

@@ -26,15 +26,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "Fleet Girls: ${count}";
 
-  static String m3(url) => "Now navigation to ${url}";
+  static String m3(name) => "${name} arrived!";
 
-  static String m4(url) => "Page finished loading: ${url}";
+  static String m4(url) => "Now navigation to ${url}";
 
-  static String m5(url) => "Page started loading: ${url}";
+  static String m5(url) => "Page finished loading: ${url}";
 
-  static String m6(taskTitle) => "${taskTitle} has been completed.";
+  static String m6(url) => "Page started loading: ${url}";
 
-  static String m7(length) => "${length} items will be imported.";
+  static String m7(taskTitle) => "${taskTitle} has been completed.";
+
+  static String m8(length) => "${length} items will be imported.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -264,6 +266,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Newest First"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("Fleet Girls"),
+        "KCGetNewShipNotify": m3,
+        "KCGetNewShipNotifyTitle":
+            MessageLookupByLibrary.simpleMessage("New fleet girl"),
         "KCNeedLoginNoticeDesc": MessageLookupByLibrary.simpleMessage(
             "You need to log in to the game before using this feature."),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
@@ -279,6 +284,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bucket"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("Steel"),
         "KCResources": MessageLookupByLibrary.simpleMessage("Resources"),
+        "KCShipDeregisterLabel":
+            MessageLookupByLibrary.simpleMessage("Deregister"),
+        "KCShipGetLabel": MessageLookupByLibrary.simpleMessage("Get"),
+        "KCShipNotRegisteredLabel":
+            MessageLookupByLibrary.simpleMessage("Not Registered"),
+        "KCShipRegisterList":
+            MessageLookupByLibrary.simpleMessage("Register List"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("Already in game window!"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -287,17 +299,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Game homepage is loading"),
         "KCViewFuncMsgGameNaviBlock": MessageLookupByLibrary.simpleMessage(
             "refresh on game homepage is block"),
-        "KCViewFuncMsgNavi": m3,
+        "KCViewFuncMsgNavi": m4,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("Game load completed"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("Game load failed"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("Game not load complete yet"),
-        "KCViewFuncMsgPageFinished": m4,
+        "KCViewFuncMsgPageFinished": m5,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),
-        "KCViewFuncMsgPageStart": m5,
+        "KCViewFuncMsgPageStart": m6,
         "KanColleDataListener":
             MessageLookupByLibrary.simpleMessage("Data Listener"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("Logbook"),
@@ -359,7 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
-        "TaskCompleted": m6,
+        "TaskCompleted": m7,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("Tasks"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("Task Not Added"),
         "TaskNotificationAdded": MessageLookupByLibrary.simpleMessage(
@@ -376,6 +388,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextAll": MessageLookupByLibrary.simpleMessage("All"),
         "TextBackToTop": MessageLookupByLibrary.simpleMessage("Back to Top"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("Battle"),
+        "TextBonus": MessageLookupByLibrary.simpleMessage("Bonus"),
+        "TextBuild": MessageLookupByLibrary.simpleMessage("Build"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower Format"),
@@ -387,6 +401,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Copied to Clipboard"),
         "TextDeckBuilderFormat":
             MessageLookupByLibrary.simpleMessage("DeckBuilder Format"),
+        "TextDestroy": MessageLookupByLibrary.simpleMessage("Destroy"),
+        "TextDone": MessageLookupByLibrary.simpleMessage("Done"),
+        "TextDrop": MessageLookupByLibrary.simpleMessage("Drop"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("Equipment"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("Fast+"),
         "TextFastSpeed": MessageLookupByLibrary.simpleMessage("Fast"),
@@ -399,7 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("Import"),
         "TextImportResourceFromPoi": MessageLookupByLibrary.simpleMessage(
             "Import csv file from poi logbook"),
-        "TextImportResourceNumberCheck": m7,
+        "TextImportResourceNumberCheck": m8,
         "TextImportResourceWarning": MessageLookupByLibrary.simpleMessage(
             "Are you sure to import these data?"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("Importing"),
@@ -425,6 +442,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(
             "Open in Aerial Combat Simulator"),
+        "TextRefit": MessageLookupByLibrary.simpleMessage("Refit"),
         "TextResetZoom": MessageLookupByLibrary.simpleMessage("Reset Zoom"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("Return Port"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
@@ -443,6 +461,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextTag": MessageLookupByLibrary.simpleMessage("Tag"),
         "TextTime": MessageLookupByLibrary.simpleMessage("Time"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("Title"),
+        "TextTotal": MessageLookupByLibrary.simpleMessage("Total"),
         "TextYes": MessageLookupByLibrary.simpleMessage("Yes"),
         "TextZoomIn": MessageLookupByLibrary.simpleMessage("Zoom In"),
         "TextZoomOut": MessageLookupByLibrary.simpleMessage("Zoom Out"),

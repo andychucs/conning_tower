@@ -3,3 +3,6 @@ export 'map/map.dart';
 export 'battle/battle.dart';
 export 'req_hokyu_charge_entity.dart';
 export 'req_hensei_combined_entity.dart';
+export 'req_kaisou_powerup_entity.dart';
+export 'req_kousyou_destroyship_entity.dart';
+export 'req_kousyou_getship_entity.dart';

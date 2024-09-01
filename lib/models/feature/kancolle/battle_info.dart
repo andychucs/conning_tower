@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/feature/log/kancolle_ship_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -479,13 +480,16 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parseReqCombinedBattleResultEntity(
-      ReqCombinedBattleResultApiDataEntity data) {
+      ReqCombinedBattleResultApiDataEntity data, {required String admiral}) {
     if (data.apiEscape != null) {
       setReadyEscapeShip(data.apiEscape!);
     }
     Toast.battleResultNotify(damagedShipNames);
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
+    if (dropName != null) {
+      objectbox.saveShipLog(admiral: admiral, type: ShipLogType.drop, shipName: dropName!);
+    }
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
         if (data.apiEnemyInfo != null) {
@@ -510,13 +514,16 @@ class BattleInfo with _$BattleInfo {
     }
   }
 
-  void parseReqSortieBattleResult(ReqSortieBattleResultApiDataEntity data) {
+  void parseReqSortieBattleResult(ReqSortieBattleResultApiDataEntity data, {required String admiral}) {
     if (data.apiEscape != null) {
       setReadyEscapeShip(data.apiEscape!);
     }
     Toast.battleResultNotify(damagedShipNames);
     result = data.apiWinRank;
     dropName = data.apiGetShip?.apiShipName;
+    if (dropName != null) {
+      objectbox.saveShipLog(admiral: admiral, type: ShipLogType.drop, shipName: dropName!);
+    }
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
         squad.name = data.apiEnemyInfo.apiDeckName ?? '敵艦隊';

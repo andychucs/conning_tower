@@ -1400,6 +1400,26 @@ class S {
     );
   }
 
+  /// `{name} arrived!`
+  String KCGetNewShipNotify(Object name) {
+    return Intl.message(
+      '$name arrived!',
+      name: 'KCGetNewShipNotify',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `New fleet girl`
+  String get KCGetNewShipNotifyTitle {
+    return Intl.message(
+      'New fleet girl',
+      name: 'KCGetNewShipNotifyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `You need to log in to the game before using this feature.`
   String get KCNeedLoginNoticeDesc {
     return Intl.message(
@@ -1495,6 +1515,46 @@ class S {
     return Intl.message(
       'Resources',
       name: 'KCResources',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deregister`
+  String get KCShipDeregisterLabel {
+    return Intl.message(
+      'Deregister',
+      name: 'KCShipDeregisterLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get`
+  String get KCShipGetLabel {
+    return Intl.message(
+      'Get',
+      name: 'KCShipGetLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Registered`
+  String get KCShipNotRegisteredLabel {
+    return Intl.message(
+      'Not Registered',
+      name: 'KCShipNotRegisteredLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register List`
+  String get KCShipRegisterList {
+    return Intl.message(
+      'Register List',
+      name: 'KCShipRegisterList',
       desc: '',
       args: [],
     );
@@ -2110,6 +2170,26 @@ class S {
     );
   }
 
+  /// `Bonus`
+  String get TextBonus {
+    return Intl.message(
+      'Bonus',
+      name: 'TextBonus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Build`
+  String get TextBuild {
+    return Intl.message(
+      'Build',
+      name: 'TextBuild',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Cancel`
   String get TextCancel {
     return Intl.message(
@@ -2165,6 +2245,36 @@ class S {
     return Intl.message(
       'DeckBuilder Format',
       name: 'TextDeckBuilderFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Destroy`
+  String get TextDestroy {
+    return Intl.message(
+      'Destroy',
+      name: 'TextDestroy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get TextDone {
+    return Intl.message(
+      'Done',
+      name: 'TextDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drop`
+  String get TextDrop {
+    return Intl.message(
+      'Drop',
+      name: 'TextDrop',
       desc: '',
       args: [],
     );
@@ -2440,6 +2550,16 @@ class S {
     );
   }
 
+  /// `Refit`
+  String get TextRefit {
+    return Intl.message(
+      'Refit',
+      name: 'TextRefit',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Reset Zoom`
   String get TextResetZoom {
     return Intl.message(
@@ -2585,6 +2705,16 @@ class S {
     return Intl.message(
       'Title',
       name: 'TextTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get TextTotal {
+    return Intl.message(
+      'Total',
+      name: 'TextTotal',
       desc: '',
       args: [],
     );

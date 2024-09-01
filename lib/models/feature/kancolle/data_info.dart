@@ -8,6 +8,8 @@ part 'data_info.freezed.dart';
 
 @unfreezed
 class DataInfo with _$DataInfo {
+  const DataInfo._();
+  
   factory DataInfo({
     Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
     Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo,
@@ -15,5 +17,31 @@ class DataInfo with _$DataInfo {
     Map<int, MapArea>? mapAreaInfo,
     Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo,
     List<GetDataApiDataApiMstStypeEntity>? shipTypeList,
+    Map<int, List<int>>? shipUpgradeMap,
   }) = _DataInfo;
+  
+  List<int>? get allOurShipIds => shipInfo?.values.where((e) => e.apiSortno != null).map((e) => e.apiId).toList();
+
+  void initShipUpgradeMap() {
+    shipUpgradeMap ??= {};
+    Set<int> allAfterIds = {};
+    for (final ship in shipInfo!.values.where((e) => e.apiSortno != null)) {
+      final afterId = int.parse(ship.apiAftershipid ?? "0");
+      if (shipUpgradeMap!.keys.contains(afterId)) {
+        shipUpgradeMap?.remove(afterId);
+      }
+      if (allAfterIds.contains(ship.apiId)) continue;
+      final afterIds = getAfterIds([], afterId);
+      allAfterIds.addAll(afterIds);
+      shipUpgradeMap?[ship.apiId] = afterIds;
+    }
+  }
+
+  List<int> getAfterIds(List<int> ids, int? nextId) {
+    if (nextId == null) return ids;
+    if (ids.contains(nextId) || nextId == 0) return ids;
+    ids.add(nextId);
+    final newNext = shipInfo?[nextId];
+    return getAfterIds(ids, int.parse(newNext?.apiAftershipid ?? "0"));
+  }
 }

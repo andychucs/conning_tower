@@ -26,15 +26,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "艦娘数: ${count}";
 
-  static String m3(url) => "Now navigation to ${url}";
+  static String m3(name) => "${name}、到着しました！";
 
-  static String m4(url) => "ページの読み込みが完了しました: ${url}";
+  static String m4(url) => "Now navigation to ${url}";
 
-  static String m5(url) => "ページの読み込み開始:${url}";
+  static String m5(url) => "ページの読み込みが完了しました: ${url}";
 
-  static String m6(taskTitle) => "${taskTitle} が完了しました。";
+  static String m6(url) => "ページの読み込み開始:${url}";
 
-  static String m7(length) => "${length}個のデーターをインポートします。";
+  static String m7(taskTitle) => "${taskTitle} が完了しました。";
+
+  static String m8(length) => "${length}個のデーターをインポートします。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -247,6 +249,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("獲得日降順"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("艦娘"),
+        "KCGetNewShipNotify": m3,
+        "KCGetNewShipNotifyTitle": MessageLookupByLibrary.simpleMessage("新艦娘"),
         "KCNeedLoginNoticeDesc":
             MessageLookupByLibrary.simpleMessage("ゲームにログインする必要があります。"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
@@ -262,6 +266,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("高速修復材"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("鋼材"),
         "KCResources": MessageLookupByLibrary.simpleMessage("資源"),
+        "KCShipDeregisterLabel": MessageLookupByLibrary.simpleMessage("除籍"),
+        "KCShipGetLabel": MessageLookupByLibrary.simpleMessage("获得"),
+        "KCShipNotRegisteredLabel": MessageLookupByLibrary.simpleMessage("未登録"),
+        "KCShipRegisterList": MessageLookupByLibrary.simpleMessage("登録名簿"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("すでにゲームウィンドウが読み込まれています！"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -270,17 +278,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ゲームのロード中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("ゲームのリフレッシュは中断されました"),
-        "KCViewFuncMsgNavi": m3,
+        "KCViewFuncMsgNavi": m4,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードが完了しました"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("ゲームの読み込みに失敗しました"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("ゲームのロードはまだ完了しません"),
-        "KCViewFuncMsgPageFinished": m4,
+        "KCViewFuncMsgPageFinished": m5,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("ゲームオリジンURLです"),
-        "KCViewFuncMsgPageStart": m5,
+        "KCViewFuncMsgPageStart": m6,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("データリスナー"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日誌"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
@@ -335,7 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("システムに従う"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("スクリーンショット"),
-        "TaskCompleted": m6,
+        "TaskCompleted": m7,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("タスク"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("タスクが追加されていません"),
         "TaskNotificationAdded":
@@ -352,6 +360,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
         "TextBackToTop": MessageLookupByLibrary.simpleMessage("トップに戻る"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("戦闘"),
+        "TextBonus": MessageLookupByLibrary.simpleMessage("ボーナス"),
+        "TextBuild": MessageLookupByLibrary.simpleMessage("建造"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower形式"),
@@ -362,6 +372,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("コピーしました"),
         "TextDeckBuilderFormat":
             MessageLookupByLibrary.simpleMessage("デッキビルダー形式"),
+        "TextDestroy": MessageLookupByLibrary.simpleMessage("解体"),
+        "TextDone": MessageLookupByLibrary.simpleMessage("完了"),
+        "TextDrop": MessageLookupByLibrary.simpleMessage("ドロップ"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("装備"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("高速+"),
         "TextFastSpeed": MessageLookupByLibrary.simpleMessage("高速"),
@@ -373,7 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("インポート"),
         "TextImportResourceFromPoi":
             MessageLookupByLibrary.simpleMessage("POIからのCSVファイルでリソースをインポート"),
-        "TextImportResourceNumberCheck": m7,
+        "TextImportResourceNumberCheck": m8,
         "TextImportResourceWarning":
             MessageLookupByLibrary.simpleMessage("インポートを実行しますか？"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("インポート中"),
@@ -394,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Jervis作戦室で開く"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("制空権シミュレータで開く"),
+        "TextRefit": MessageLookupByLibrary.simpleMessage("改修"),
         "TextResetZoom": MessageLookupByLibrary.simpleMessage("拡大/縮小をリセット"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("帰港"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
@@ -409,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextTag": MessageLookupByLibrary.simpleMessage("タグ"),
         "TextTime": MessageLookupByLibrary.simpleMessage("時間"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("タイトル"),
+        "TextTotal": MessageLookupByLibrary.simpleMessage("合計"),
         "TextYes": MessageLookupByLibrary.simpleMessage("はい"),
         "TextZoomIn": MessageLookupByLibrary.simpleMessage("拡大"),
         "TextZoomOut": MessageLookupByLibrary.simpleMessage("縮小"),
