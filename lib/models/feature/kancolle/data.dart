@@ -503,7 +503,7 @@ class KancolleData {
       String errorMsg = e.toString();
       final errorData = {
         "error": errorMsg,
-        "stack": s,
+        "stack": s.toString(),
         "source": source,
         "data": data
       };
