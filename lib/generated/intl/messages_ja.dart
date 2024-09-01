@@ -267,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("鋼材"),
         "KCResources": MessageLookupByLibrary.simpleMessage("資源"),
         "KCShipDeregisterLabel": MessageLookupByLibrary.simpleMessage("除籍"),
-        "KCShipGetLabel": MessageLookupByLibrary.simpleMessage("获得"),
+        "KCShipGetLabel": MessageLookupByLibrary.simpleMessage("獲得"),
         "KCShipNotRegisteredLabel": MessageLookupByLibrary.simpleMessage("未登録"),
         "KCShipRegisterList": MessageLookupByLibrary.simpleMessage("登録名簿"),
         "KCViewFuncMsgAlreadyGameRedirect":
