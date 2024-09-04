@@ -42,14 +42,21 @@ class ObjectBox {
     return ObjectBox._create(store);
   }
 
-  List<KancolleShipLogEntity>? queryShipLog({ShipLogType? type}) {
+  List<KancolleShipLogEntity>? queryShipLog(
+      {required String admiral, ShipLogType? type}) {
     late Query<KancolleShipLogEntity> query;
     if (type != null) {
       query = shipLog
-          .query(KancolleShipLogEntity_.type.equals(kShipLogTypeMap[type]!))
+          .query(KancolleShipLogEntity_.admiral
+              .equals(admiral)
+              .and(KancolleShipLogEntity_.type.equals(kShipLogTypeMap[type]!)))
+          .order(KancolleShipLogEntity_.dateTime, flags: Order.descending)
           .build();
     } else {
-      query = shipLog.query().build();
+      query = shipLog
+          .query(KancolleShipLogEntity_.admiral.equals(admiral))
+          .order(KancolleShipLogEntity_.dateTime, flags: Order.descending)
+          .build();
     }
     List<KancolleShipLogEntity> logs = query.find();
     query.close();

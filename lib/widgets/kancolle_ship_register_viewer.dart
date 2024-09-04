@@ -11,7 +11,8 @@ import '../generated/l10n.dart';
 import '../models/feature/log/kancolle_ship_log.dart';
 
 class KancolleShipRegisterViewer extends ConsumerStatefulWidget {
-  const KancolleShipRegisterViewer({super.key});
+  const KancolleShipRegisterViewer({required this.admiralName, super.key});
+  final String admiralName;
 
   @override
   ConsumerState createState() => _KancolleShipRegisterViewerState();
@@ -53,7 +54,7 @@ class _KancolleShipRegisterViewerState
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    shipLogs = objectbox.queryShipLog();
+    shipLogs = objectbox.queryShipLog(admiral: widget.admiralName);
     final data = ref.watch(kancolleDataProvider).dataInfo.shipInfo;
     notRegShipIds = ref.watch(kancolleDataProvider).fleet.notInFleetIds;
 

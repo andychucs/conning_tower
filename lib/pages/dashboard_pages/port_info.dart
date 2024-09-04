@@ -135,7 +135,12 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                   ),
                                   InfoBox(
                                     onTap: () => navigatorToCupertino(
-                                        context, const KancolleShipRegisterViewer()),
+                                      context,
+                                      KancolleShipRegisterViewer(
+                                        admiralName:
+                                            data.seaForceBase.admiral.name,
+                                      ),
+                                    ),
                                     top: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
