@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
-const _sectionMargin = EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 10.0, 10.0);
+// const _sectionMargin = EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 10.0, 10.0);
 
 // sort by level upper first, level lower first, uid upper first, uid lower first
 enum ShipSort {
@@ -72,44 +72,31 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
     return selectedShipType.join(", ");
   }
 
-  String get _shipStatusTitle {
-    switch (shipStatus) {
-      case ShipStatus.all:
-        return S.current.KCDashboardShipViewerFilterShipStatus;
-      case ShipStatus.canUpgrade:
-        return S.current.KCDashboardShipViewerFilterShipStatusCanUpgrade;
-      case ShipStatus.waitUpgrade:
-        return S.current.KCDashboardShipViewerFilterShipStatusWaitUpgrade;
-      case ShipStatus.upgraded:
-        return S.current.KCDashboardShipViewerFilterShipStatusUpgraded;
-    }
-  }
+  String get _shipStatusTitle => switch (shipStatus) {
+        ShipStatus.all => S.current.KCDashboardShipViewerFilterShipStatus,
+        ShipStatus.canUpgrade =>
+          S.current.KCDashboardShipViewerFilterShipStatusCanUpgrade,
+        ShipStatus.waitUpgrade =>
+          S.current.KCDashboardShipViewerFilterShipStatusWaitUpgrade,
+        ShipStatus.upgraded =>
+          S.current.KCDashboardShipViewerFilterShipStatusUpgraded
+      };
 
-  String get _shipSlotTitle {
-    switch (shipSlot) {
-      case ShipSlot.all:
-        return S.current.KCDashboardShipViewerFilterShipSlot;
-      case ShipSlot.slotEx:
-        return S.current.KCDashboardShipViewerFilterShipSlotHaveExSlot;
-      case ShipSlot.noSlotEx:
-        return S.current.KCDashboardShipViewerFilterShipSlotNoExSlot;
-    }
-  }
+  String get _shipSlotTitle => switch (shipSlot) {
+        ShipSlot.all => S.current.KCDashboardShipViewerFilterShipSlot,
+        ShipSlot.slotEx =>
+          S.current.KCDashboardShipViewerFilterShipSlotHaveExSlot,
+        ShipSlot.noSlotEx =>
+          S.current.KCDashboardShipViewerFilterShipSlotNoExSlot
+      };
 
-  String get _shipSpeedTitle {
-    switch (shipSpeed) {
-      case ShipSpeed.all:
-        return S.current.KCDashboardShipViewerFilterSpeed;
-      case ShipSpeed.slow:
-        return S.current.TextSlowSpeed;
-      case ShipSpeed.fast:
-        return S.current.TextFastSpeed;
-      case ShipSpeed.fastPlus:
-        return S.current.TextFastPlusSpeed;
-      case ShipSpeed.fastest:
-        return S.current.TextFastestSpeed;
-    }
-  }
+  String get _shipSpeedTitle => switch (shipSpeed) {
+        ShipSpeed.all => S.current.KCDashboardShipViewerFilterSpeed,
+        ShipSpeed.slow => S.current.TextSlowSpeed,
+        ShipSpeed.fast => S.current.TextFastSpeed,
+        ShipSpeed.fastPlus => S.current.TextFastPlusSpeed,
+        ShipSpeed.fastest => S.current.TextFastestSpeed
+      };
 
   void onSelectShipType(String value) {
     final allStr = S.current.TextAll;
@@ -210,75 +197,75 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
             buildFiltersWidget(),
             Expanded(
               child: ScrollViewWithCupertinoScrollbar(
-                children: [FutureBuilder(
-                  future: getShips(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Ship>> snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data == null) return Container();
-                      if (snapshot.data!.isEmpty) {
+                children: [
+                  FutureBuilder(
+                    future: getShips(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Ship>> snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data == null) return Container();
+                        if (snapshot.data!.isEmpty) {
+                          return CupertinoListSection.insetGrouped(
+                            children: const [
+                              CupertinoListTile(title: Text('N/A'))
+                            ],
+                          );
+                        }
                         return CupertinoListSection.insetGrouped(
-                          margin: _sectionMargin,
-                          children: const [
-                            CupertinoListTile(title: Text('N/A'))
-                          ],
+                          children:
+                              List.generate(snapshot.data!.length, (index) {
+                            final ship = snapshot.data?[index];
+                            if (ship != null) {
+                              return CupertinoListTile(
+                                title: Text(ship.name ?? ""),
+                                additionalInfo: SizedBox(
+                                  width: 56,
+                                  child: Text(
+                                    'Lv.${ship.level}',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('ID:${ship.uid}'),
+                                      if (shipSort.name.startsWith('level'))
+                                        Text(
+                                            '${S.current.KCDashboardShipUpgradeLevel}:${ship.upgradeLevel}'),
+                                      if (shipSort.name.startsWith('attack'))
+                                        Text(
+                                            '${S.current.KCDashboardShipTotalAttack}:${ship.totalAttack}'),
+                                      if (shipSort.name.startsWith('aa'))
+                                        Text(
+                                            '${S.current.KCDashboardShipAA}:${ship.antiAircraft?[0]}'),
+                                      if (shipSort.name.startsWith('asw'))
+                                        Text(
+                                            '${S.current.KCDashboardShipASW}:${ship.antiSubmarine?[0]}'),
+                                      if (shipSort.name.startsWith('armor'))
+                                        Text(
+                                            '${S.current.KCDashboardShipArmor}:${ship.armor?[0]}'),
+                                      if (shipSort.name.startsWith('luck'))
+                                        Text(
+                                            '${S.current.KCDashboardShipLuck}:${ship.luck?[0]}'),
+                                      if (shipSort.name.startsWith('condition'))
+                                        Text(
+                                            '${S.current.KCDashboardShipCondition}:${ship.condition}'),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                            return const CupertinoListTile(title: Text('N/A'));
+                          }),
                         );
                       }
-                      final count = snapshot.data!.length;
-                      return CupertinoListSection.insetGrouped(
-                        margin: _sectionMargin,
-                        children: List.generate(snapshot.data!.length, (index) {
-                          final ship = snapshot.data?[index];
-                          if (ship != null) {
-                            return CupertinoListTile(
-                              title: Text(ship.name ?? ""),
-                              additionalInfo: SizedBox(
-                                width: 56,
-                                child: Text(
-                                  'Lv.${ship.level}',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              subtitle: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('ID:${ship.uid}'),
-                                    if (shipSort.name.startsWith('level'))
-                                      Text(
-                                          '${S.current.KCDashboardShipUpgradeLevel}:${ship.upgradeLevel}'),
-                                    if (shipSort.name.startsWith('attack'))
-                                      Text(
-                                          '${S.current.KCDashboardShipTotalAttack}:${ship.totalAttack}'),
-                                    if (shipSort.name.startsWith('aa'))
-                                      Text(
-                                          '${S.current.KCDashboardShipAA}:${ship.antiAircraft?[0]}'),
-                                    if (shipSort.name.startsWith('asw'))
-                                      Text(
-                                          '${S.current.KCDashboardShipASW}:${ship.antiSubmarine?[0]}'),
-                                    if (shipSort.name.startsWith('armor'))
-                                      Text(
-                                          '${S.current.KCDashboardShipArmor}:${ship.armor?[0]}'),
-                                    if (shipSort.name.startsWith('luck'))
-                                      Text(
-                                          '${S.current.KCDashboardShipLuck}:${ship.luck?[0]}'),
-                                    if (shipSort.name.startsWith('condition'))
-                                      Text(
-                                          '${S.current.KCDashboardShipCondition}:${ship.condition}'),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }
-                          return const CupertinoListTile(title: Text('N/A'));
-                        }),
-                      );
-                    }
-                    return Container();
-                  },
-                )],
+                      return Container();
+                    },
+                  ),
+                ],
               ),
             ),
           ],
@@ -288,63 +275,27 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
   }
 
   void sortShips() {
-    int Function(Ship, Ship) compareFunction;
-
-    switch (shipSort) {
-      case ShipSort.level:
-        compareFunction = (a, b) => a.level.compareTo(b.level);
-        break;
-      case ShipSort.levelDesc:
-        compareFunction = (a, b) => b.level.compareTo(a.level);
-        break;
-      case ShipSort.uid:
-        compareFunction = (a, b) => a.uid.compareTo(b.uid);
-        break;
-      case ShipSort.uidDesc:
-        compareFunction = (a, b) => b.uid.compareTo(a.uid);
-        break;
-      case ShipSort.attack:
-        compareFunction = (a, b) => a.totalAttack.compareTo(b.totalAttack);
-        break;
-      case ShipSort.attackDesc:
-        compareFunction = (a, b) => b.totalAttack.compareTo(a.totalAttack);
-        break;
-      case ShipSort.aa:
-        compareFunction =
-            (a, b) => a.antiAircraft![0].compareTo(b.antiAircraft![0]);
-        break;
-      case ShipSort.aaDesc:
-        compareFunction =
-            (a, b) => b.antiAircraft![0].compareTo(a.antiAircraft![0]);
-        break;
-      case ShipSort.asw:
-        compareFunction =
-            (a, b) => a.antiSubmarine![0].compareTo(b.antiSubmarine![0]);
-        break;
-      case ShipSort.aswDesc:
-        compareFunction =
-            (a, b) => b.antiSubmarine![0].compareTo(a.antiSubmarine![0]);
-        break;
-      case ShipSort.armor:
-        compareFunction = (a, b) => a.armor![0].compareTo(b.armor![0]);
-        break;
-      case ShipSort.armorDesc:
-        compareFunction = (a, b) => b.armor![0].compareTo(a.armor![0]);
-        break;
-      case ShipSort.luck:
-        compareFunction = (a, b) => a.luck![0].compareTo(b.luck![0]);
-        break;
-      case ShipSort.luckDesc:
-        compareFunction = (a, b) => b.luck![0].compareTo(a.luck![0]);
-        break;
-      case ShipSort.condition:
-        compareFunction = (a, b) => a.condition!.compareTo(b.condition!);
-        break;
-      case ShipSort.conditionDesc:
-        compareFunction = (a, b) => b.condition!.compareTo(a.condition!);
-      default:
-        return; // No sorting if shipSort does not match any case.
-    }
+    int Function(Ship, Ship) compareFunction = switch (shipSort) {
+      ShipSort.level => (a, b) => a.level.compareTo(b.level),
+      ShipSort.levelDesc => (a, b) => b.level.compareTo(a.level),
+      ShipSort.uid => (a, b) => a.uid.compareTo(b.uid),
+      ShipSort.uidDesc => (a, b) => b.uid.compareTo(a.uid),
+      ShipSort.attack => (a, b) => a.totalAttack.compareTo(b.totalAttack),
+      ShipSort.attackDesc => (a, b) => b.totalAttack.compareTo(a.totalAttack),
+      ShipSort.aa => (a, b) => a.antiAircraft![0].compareTo(b.antiAircraft![0]),
+      ShipSort.aaDesc => (a, b) =>
+          b.antiAircraft![0].compareTo(a.antiAircraft![0]),
+      ShipSort.asw => (a, b) =>
+          a.antiSubmarine![0].compareTo(b.antiSubmarine![0]),
+      ShipSort.aswDesc => (a, b) =>
+          b.antiSubmarine![0].compareTo(a.antiSubmarine![0]),
+      ShipSort.armor => (a, b) => a.armor![0].compareTo(b.armor![0]),
+      ShipSort.armorDesc => (a, b) => b.armor![0].compareTo(a.armor![0]),
+      ShipSort.luck => (a, b) => a.luck![0].compareTo(b.luck![0]),
+      ShipSort.luckDesc => (a, b) => b.luck![0].compareTo(a.luck![0]),
+      ShipSort.condition => (a, b) => a.condition!.compareTo(b.condition!),
+      ShipSort.conditionDesc => (a, b) => b.condition!.compareTo(a.condition!),
+    };
 
     ships?.sort(compareFunction);
   }
@@ -452,32 +403,23 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
       }
     }
     if (shipSpeed != ShipSpeed.all) {
-      switch (shipSpeed) {
-        case ShipSpeed.slow:
-          filterShips = filterShips
-              .where((element) => element.speedLevel == S.current.TextSlowSpeed)
-              .toList();
-          break;
-        case ShipSpeed.fast:
-          filterShips = filterShips
-              .where((element) => element.speedLevel == S.current.TextFastSpeed)
-              .toList();
-          break;
-        case ShipSpeed.fastPlus:
-          filterShips = filterShips
-              .where((element) =>
-                  element.speedLevel == S.current.TextFastPlusSpeed)
-              .toList();
-          break;
-        case ShipSpeed.fastest:
-          filterShips = filterShips
-              .where(
-                  (element) => element.speedLevel == S.current.TextFastestSpeed)
-              .toList();
-          break;
-        default:
-          break;
-      }
+      filterShips = switch (shipSpeed) {
+        ShipSpeed.slow => filterShips
+            .where((element) => element.speedLevel == S.current.TextSlowSpeed)
+            .toList(),
+        ShipSpeed.fast => filterShips
+            .where((element) => element.speedLevel == S.current.TextFastSpeed)
+            .toList(),
+        ShipSpeed.fastPlus => filterShips
+            .where(
+                (element) => element.speedLevel == S.current.TextFastPlusSpeed)
+            .toList(),
+        ShipSpeed.fastest => filterShips
+            .where(
+                (element) => element.speedLevel == S.current.TextFastestSpeed)
+            .toList(),
+        ShipSpeed.all => filterShips,
+      };
     }
     return filterShips;
   }
