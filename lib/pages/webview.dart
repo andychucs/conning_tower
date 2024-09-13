@@ -48,7 +48,8 @@ class AppWebViewState extends ConsumerState<AppWebView> {
         //Android intercept kancolle API
         useShouldInterceptRequest: false,
         isElementFullscreenEnabled: false,
-        mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW
+        mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
+        upgradeKnownHostsToHTTPS: false,
     );
 
     String homeUrl = getHomeUrl(settings.customHomeUrl, settings.enableAutoLoadHomeUrl);
