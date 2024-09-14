@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'constants_poi.dart';
 import 'equipment.dart';
 import 'ship.dart';
 
@@ -22,7 +23,8 @@ class Fleet with _$Fleet {
 
   Set<int> get shipIds => ships.map((e) => e.shipId).toSet();
 
-  Set<int> get afterShipIds => <int>{for (final ship in ships) ...?ship.afterIds};
+  Set<int> get afterShipIds =>
+      <int>{for (final ship in ships) ...?ship.afterIds};
 
   void initNotInFleetIds(Map<int, List<int>>? shipUpgradeMap) {
     notInFleetIds ??= {};
@@ -42,4 +44,7 @@ class Fleet with _$Fleet {
       notInFleetIds?.add(e.key);
     }
   }
+
+  Iterable<Equipment> get uncountedEquipments =>
+      equipment.values.where((e) => kUncountedSlotitemId.contains(e.itemId));
 }
