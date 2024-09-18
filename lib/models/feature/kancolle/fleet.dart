@@ -26,8 +26,8 @@ class Fleet with _$Fleet {
   Set<int> get afterShipIds =>
       <int>{for (final ship in ships) ...?ship.afterIds};
 
-  void initNotInFleetIds(Map<int, List<int>>? shipUpgradeMap) {
-    notInFleetIds ??= {};
+  void updateNotInFleetIds(Map<int, List<int>>? shipUpgradeMap) {
+    notInFleetIds = {};
     if (shipUpgradeMap == null) return;
     for (final e in shipUpgradeMap.entries) {
       if (shipIds.contains(e.key)) {
