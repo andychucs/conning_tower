@@ -623,7 +623,7 @@ class KancolleData {
       allShips.add(ship);
     }
     fleet.ships = allShips;
-    fleet.initNotInFleetIds(dataInfo.shipUpgradeMap);
+    fleet.updateNotInFleetIds(dataInfo.shipUpgradeMap);
   }
 
   void updateOperationQueue(DeckData data, int id) {
