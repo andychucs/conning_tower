@@ -42,6 +42,7 @@ class ReqPracticeBattleApiDataEntity
     @JsonKey(name: 'api_midnight_flag') int? apiMidnightFlag,
     @JsonKey(name: 'api_search') List<int?>? apiSearch,
     @JsonKey(name: 'api_stage_flag') List<int>? apiStageFlag,
+    @JsonKey(name: 'api_injection_kouku') AircraftRoundData? apiInjectionKouku,
     @JsonKey(name: 'api_kouku') AircraftRoundData? apiKouku,
     @JsonKey(name: 'api_opening_taisen_flag') int? apiOpeningTaisenFlag,
     @JsonKey(name: 'api_opening_taisen') GunFireRoundEntity? apiOpeningTaisen,

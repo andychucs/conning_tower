@@ -428,6 +428,10 @@ class BattleInfo with _$BattleInfo {
 
     setFormation(data.apiFormation);
 
+    if (data.apiInjectionKouku != null) {
+      aircraftRoundDamageCount(data.apiInjectionKouku!);
+    }
+
     //api_kouku
     aircraftRound(data.apiStageFlag!, data.apiKouku!);
 
