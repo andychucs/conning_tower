@@ -484,6 +484,7 @@ class KancolleData {
     String source = rawData.source;
     String data = rawData.data;
     String path = source.split("kcsapi").last;
+    FirebaseCrashlytics.instance.log('$path request: ${jsonEncode(rawData.params)}');
     FirebaseCrashlytics.instance.log('$path data: $data');
     KancolleData newData = copyWith();
     try {
