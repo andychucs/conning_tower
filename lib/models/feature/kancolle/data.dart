@@ -183,7 +183,7 @@ class KancolleData {
         final combinedType = int.parse(params!["api_combined_type"]);
         fleet.combined = combinedType;
       } else {
-        fleet.combined = 0;
+        fleet.combined = null;
       }
     }
 
@@ -273,7 +273,7 @@ class KancolleData {
     if (model is ReqMapStartEntity) {
       log("Start");
       final battleSquadIndex = int.parse(params?["api_deck_id"]);
-      if (battleSquadIndex == 1 && fleet.combined! > 0) {
+      if (battleSquadIndex == 1 && fleet.combined != null) {
         battleSquads = [squads[0], squads[1]];
       } else {
         battleSquads = [squads[battleSquadIndex - 1]];
