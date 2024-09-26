@@ -502,9 +502,12 @@ class KancolleData {
     } catch (e, s) {
       FirebaseCrashlytics.instance.log('Kancolle Data Parse Error at $source');
       String errorMsg = e.toString();
+      String stackMsg = s.toString();
+      FirebaseCrashlytics.instance.log(errorMsg);
+      FirebaseCrashlytics.instance.log(stackMsg);
       final errorData = {
         "error": errorMsg,
-        "stack": s.toString(),
+        "stack": stackMsg,
         "source": source,
         "data": data
       };
