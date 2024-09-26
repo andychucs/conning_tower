@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
+import 'package:conning_tower/utils/toast.dart';
 import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
@@ -32,6 +33,14 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
   }
 
   Future<void> _fetchImages() async {
+    final PermissionState ps = await PhotoManager.requestPermissionExtend();
+    if (!mounted) {
+      return;
+    }
+    if (!ps.hasAccess) {
+      Toast.showError(title: 'Permission is not accessible.');
+      return;
+    }
     images.clear();
     bytes.clear();
     List<AssetPathEntity> albums =
