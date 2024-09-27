@@ -534,14 +534,20 @@ class SlotItemPage extends StatelessWidget {
   }
 
   Widget equipmentItem(BuildContext context, int item, Ship ship, int index) {
-    final text = Text(slotMap[item]?.text(
-            onSlot: ship.onSlot?[index], l10nMap: l10nData?.equipmentLocal) ??
-        "N/A");
+    final text = Text(
+      slotMap[item]?.text(
+              onSlot: ship.onSlot?[index], l10nMap: l10nData?.equipmentLocal) ??
+          "N/A",
+      softWrap: true,
+    );
+    if (ship.onSlot?[index] == null) {
+      return text;
+    }
     final iconData = slotMap[item]?.proficiencyIcon;
     final iconColor = slotMap[item]?.proficiencyColor;
     return Row(
       children: [
-        text,
+        Expanded(child: text),
         Icon(
           iconData,
           size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
@@ -550,35 +556,6 @@ class SlotItemPage extends StatelessWidget {
       ],
     );
   }
-}
-
-@Deprecated("Use Equipment.text instead")
-String _slotItemInfoText(Equipment? slotItem, {int? onSlot}) {
-  if (slotItem == null) {
-    return "";
-  }
-  final name = slotItem.name ?? "N/A";
-  late String info;
-
-  if (slotItem.level! > 0) {
-    info = "$name - ★${slotItem.level}";
-  } else {
-    info = name;
-  }
-
-  if (onSlot == null) {
-    return info;
-  } else {
-    if (onSlot > 0 && slotItem.isAirCraft) {
-      // aircraft
-      info = "$name : $onSlot";
-      if (slotItem.level! > 0) {
-        info = "$name - ★${slotItem.level} : $onSlot";
-      }
-    }
-  }
-
-  return info;
 }
 
 class ShipInfo extends StatelessWidget {
