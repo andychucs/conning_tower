@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(length) => "${length}個のデーターをインポートします。";
 
+  static String m9(statusCode) => "ネットワークエラー発生：${statusCode}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("情報"),
@@ -401,7 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextMovingAveragePeriod": MessageLookupByLibrary.simpleMessage("MA期間"),
-        "TextNetworkError": MessageLookupByLibrary.simpleMessage("ネットワークエラー発生"),
+        "TextNetworkError": m9,
         "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
         "TextOpenInJervis":

@@ -111,14 +111,14 @@ class KancolleData {
     final params = rawData.params;
     if (data.isEmpty) {
       log("empty data");
-      Toast.showError(title: S.current.TextNetworkError);
+      Toast.showError(title: S.current.TextNetworkError('${rawData.status}'));
       return;
     }
     final json = jsonDecode(data);
     if (json is Map) {
       if (json['api_result'] != 1) {
         final msg = json['api_result_msg'];
-        Toast.showError(title: S.current.TextNetworkError, description: "$msg");
+        Toast.showError(title: S.current.TextNetworkError('${rawData.status}'), description: "$msg");
         return;
       }
     }

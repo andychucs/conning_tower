@@ -315,7 +315,7 @@ class WebController extends _$WebController {
         params = parseRequestBody(messageData.request!);
       }
     ref.watch(rawDataProvider.notifier).update(
-        (state) => RawData.response(source: messageData.responseUrl, data: result?? "", params: params));
+        (state) => RawData.response(source: messageData.responseUrl, data: result?? "", params: params, status: messageData.status ?? 200));
     }
 
     if (messageData.type == "error") {
