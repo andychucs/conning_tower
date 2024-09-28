@@ -83,7 +83,6 @@ dependencies:
       ref: dev
   objectbox: ^4.0.2
   objectbox_flutter_libs: ^4.0.2
-  rive: ^0.13.4
   pointer_interceptor: ^0.10.1+1
   introduction_screen: ^3.1.14
   syncfusion_flutter_charts: ^27.1.50
