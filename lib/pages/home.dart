@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:circular_menu/circular_menu.dart';
 import 'package:conning_tower/constants.dart';
@@ -15,7 +14,6 @@ import 'package:conning_tower/pages/tasks_sheet.dart';
 import 'package:conning_tower/pages/webview.dart';
 import 'package:conning_tower/providers/alert_provider.dart';
 import 'package:conning_tower/providers/generatable/device_provider.dart';
-import 'package:conning_tower/providers/generatable/kancolle_localization_provider.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/generatable/webview_provider.dart';
@@ -28,7 +26,6 @@ import 'package:conning_tower/widgets/indexed_stack.dart';
 import 'package:conning_tower/widgets/modal_sheets.dart';
 import 'package:conning_tower/widgets/sidebar.dart';
 import 'package:conning_tower/widgets/texts.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +48,7 @@ class HomePage extends ConsumerStatefulWidget {
 
 class HomePageState extends ConsumerState<HomePage> {
   late Alignment fabAlignment;
+  late bool showControls;
   bool showNewVersion = false;
   bool setUp = true;
   PackageInfo _packageInfo = PackageInfo(
@@ -65,7 +63,8 @@ class HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
-
+    
+    showControls = true;
 
     _initPackageInfo();
 
@@ -76,6 +75,9 @@ class HomePageState extends ConsumerState<HomePage> {
 
     ShakeDetector detector = ShakeDetector.autoStart(
       onPhoneShake: () {
+        if (!showControls) {
+          return;
+        }
         setState(() {
           showControls = true;
         });

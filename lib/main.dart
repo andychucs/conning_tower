@@ -20,7 +20,6 @@ final InAppLocalhostServer localhostServer = InAppLocalhostServer(port: 8686,
     documentRoot: 'assets/www', directoryIndex: 'home.html');
 late bool safeNavi;
 late int selectedIndex;
-late bool showControls;
 late DeviceType deviceType;
 late ObjectBox objectbox;
 
@@ -79,5 +78,4 @@ Future<void> init() async {
 
   safeNavi = false;
   selectedIndex = 0;
-  showControls = true;
 }

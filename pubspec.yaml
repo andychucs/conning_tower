@@ -68,7 +68,10 @@ dependencies:
   popover: ^0.3.0+1
   photo_manager: ^3.2.3
   share_plus: ^10.0.2
-  shake: ^2.2.0
+  shake:
+    git:
+      url: https://github.com/andychucs/shake.git
+      ref: dev
   flutter_staggered_grid_view: ^0.7.0
   percent_indicator: ^4.2.3
   carousel_slider: ^5.0.0
