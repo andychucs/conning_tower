@@ -78,5 +78,4 @@ Future<void> init() async {
 
   safeNavi = false;
   selectedIndex = 0;
-  showControls = true;
 }
