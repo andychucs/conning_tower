@@ -12,6 +12,11 @@ jobs:
     name: Release
     runs-on: macos-latest
     steps:
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.6.0
+        with:
+          xcode-version: latest-stable
+
       - uses: actions/checkout@v4
 
       - name: Setup Java JDK
@@ -26,6 +31,18 @@ jobs:
 
       - name: dart run build_runner
         run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build IPA
+        uses: cedvdb/action-flutter-build-ios@v1
+        with:
+          build-cmd: flutter build ipa --release --export-options-plist=ios/GithubActionsExportOptions.plist
+          certificate-base64: ${{ secrets.IOS_BUILD_CERTIFICATE_BASE64 }}
+          certificate-password: ${{ secrets.IOS_BUILD_CERTIFICATE_PASSWORD }}
+          provisioning-profile-base64: ${{ secrets.IOS_MOBILE_PROVISIONING_PROFILE_BASE64 }}
+          keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
+
+      - name: Rename IPA
+        run: mv build/ios/ipa/conning_tower.ipa build/ios/ipa/ConningTower-${{ inputs.tag }}.ipa
 
       - name: Create the Keystore
         env:
@@ -43,18 +60,6 @@ jobs:
         run: flutter build apk
       - name: Rename APK
         run: cp build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk
-
-      - name: Build IPA
-        uses: cedvdb/action-flutter-build-ios@v1
-        with:
-          build-cmd: flutter build ipa --release --export-options-plist=ios/GithubActionsExportOptions.plist
-          certificate-base64: ${{ secrets.IOS_BUILD_CERTIFICATE_BASE64 }}
-          certificate-password: ${{ secrets.IOS_BUILD_CERTIFICATE_PASSWORD }}
-          provisioning-profile-base64: ${{ secrets.IOS_MOBILE_PROVISIONING_PROFILE_BASE64 }}
-          keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
-
-      - name: Rename IPA
-        run: mv build/ios/ipa/conning_tower.ipa build/ios/ipa/ConningTower-${{ inputs.tag }}.ipa
 
 
       - name: Create Release
