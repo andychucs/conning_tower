@@ -74,6 +74,7 @@ jobs:
           tag: ${{ inputs.tag }}
           artifacts: "build/app/outputs/flutter-apk/*release.apk,build/ios/ipa/*.ipa"
           token: ${{ secrets.ACTIONS_TOKEN }}
+          generateReleaseNotes: true
       - name: Telegram Message Notify
         uses: appleboy/telegram-action@v1.0.0
         with:
