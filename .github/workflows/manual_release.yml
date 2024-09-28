@@ -32,6 +32,23 @@ jobs:
       - name: dart run build_runner
         run: dart run build_runner build --delete-conflicting-outputs
 
+      - name: Create the Keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY_PROPERTIES: ${{ secrets.KEY_PROPERTIES }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLESERVICE_INFO_PLIST: ${{ secrets.GOOGLESERVICE_INFO_PLIST }}
+          FIREBASE_APP_ID_FILE_JSON: ${{ secrets.FIREBASE_APP_ID_FILE_JSON }}
+        run: |
+          # import keystore from secrets
+          echo $KEYSTORE_BASE64 | base64 -d > android/app/upload-keystore.jks
+          echo $KEY_PROPERTIES | base64 -d > android/key.properties
+          echo $FIREBASE_OPTIONS | base64 -d > lib/firebase_options.dart
+          echo $GOOGLE_SERVICES_JSON | base64 -d > android/app/google-services.json
+          echo $GOOGLESERVICE_INFO_PLIST | base64 -d > ios/Runner/GoogleService-Info.plist
+          echo $FIREBASE_APP_ID_FILE_JSON | base64 -d > ios/firebase_app_id_file.json
+
       - name: Build IPA
         uses: cedvdb/action-flutter-build-ios@v1
         with:
@@ -44,18 +61,6 @@ jobs:
       - name: Rename IPA
         run: mv build/ios/ipa/conning_tower.ipa build/ios/ipa/ConningTower-${{ inputs.tag }}.ipa
 
-      - name: Create the Keystore
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-          KEY_PROPERTIES: ${{ secrets.KEY_PROPERTIES }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: |
-          # import keystore from secrets
-          echo $KEYSTORE_BASE64 | base64 -d > android/app/upload-keystore.jks
-          echo $KEY_PROPERTIES | base64 -d > android/key.properties
-          echo $FIREBASE_OPTIONS | base64 -d > lib/firebase_options.dart
-          echo $GOOGLE_SERVICES_JSON | base64 -d > android/app/google-services.json
       - name: Build APK
         run: flutter build apk
       - name: Rename APK
