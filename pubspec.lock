@@ -1150,24 +1150,24 @@ packages:
     dependency: transitive
     description:
       name: sensors_plus
-      sha256: a1e461f28a8e8d3f81feb07d5c4e87e948379ea91f0b5131266bb79f72b38acb
+      sha256: "90f2d38471ca75625f6569d1044d783e0add43548692fbe6e53b008a38a8313a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "6.0.1"
   sensors_plus_platform_interface:
     dependency: transitive
     description:
       name: sensors_plus_platform_interface
-      sha256: bc472d6cfd622acb4f020e726433ee31788b038056691ba433fec80e448a094f
+      sha256: b6cacfe243cbeb16403ba688cb0d7054ad4dccb946dcd1254bebdf345fe4b187
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "2.0.0"
   shake:
     dependency: "direct main"
     description:
       path: "."
       ref: dev
-      resolved-ref: d51dcc52e9288536e234e62b6b658752fb0a2266
+      resolved-ref: "1a6c04a074d4ed8a0fce64955b5eaca2d160fd7e"
       url: "https://github.com/andychucs/shake.git"
     source: git
     version: "2.2.0"
