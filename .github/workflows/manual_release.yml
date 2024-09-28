@@ -64,7 +64,7 @@ jobs:
       - name: Build APK
         run: flutter build apk
       - name: Rename APK
-        run: cp build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ConningTower-${{ inputs.tag }}-release.apk
 
 
       - name: Create Release
