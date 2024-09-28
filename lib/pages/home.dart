@@ -34,7 +34,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:shake/shake.dart';
 
 import '../utils/toast.dart';
 
@@ -72,22 +71,6 @@ class HomePageState extends ConsumerState<HomePage> {
       await Future.delayed(const Duration(seconds: 1));
       await showNewVersionInfo();
     });
-
-    ShakeDetector detector = ShakeDetector.autoStart(
-      onPhoneShake: () {
-        if (!showControls) {
-          return;
-        }
-        setState(() {
-          showControls = true;
-        });
-      },
-      minimumShakeCount: 2,
-      shakeSlopTimeMS: 500,
-      shakeCountResetTime: 3000,
-      shakeThresholdGravity: 2.7,
-    );
-    detector.startListening();
   }
 
   @override
