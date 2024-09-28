@@ -264,27 +264,10 @@ class WebController extends _$WebController {
   }
 
   Future<void> httpRedirect() async {
-    if (!inKancolleWindow) {
-      WebUri? currentUrl = await controller.getUrl();
-      if (currentUrl == null) {
-        Toast.showError(title: "Get Url Fail");
-        return;
-      }
-      if (currentUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
-        // May be HTTPS or HTTP
-        if (Platform.isIOS) {
-          await controller.injectJavascriptFileFromAsset(
-              assetFilePath: httpRedirectJS);
-        }
-        inKancolleWindow = true;
-      }
-      Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
-      log("HTTP Redirect success");
-    } else {
-      Toast.show(title: S.current.KCViewFuncMsgAlreadyGameRedirect);
-      log("HTTP Redirect fail");
-    }
-    log("inKancolleWindow: $inKancolleWindow");
+    await controller.injectJavascriptFileFromAsset(assetFilePath: httpRedirectJS);
+    inKancolleWindow = true;
+    Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
+    log("HTTP Redirect success");
   }
 
   Future<void> adjustWindow() async {
