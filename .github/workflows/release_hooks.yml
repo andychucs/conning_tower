@@ -1,7 +1,8 @@
-name: release_hooks.yml
+name: Release Hooks
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   github-releases-to-discord:
