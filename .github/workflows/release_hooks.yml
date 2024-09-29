@@ -20,7 +20,8 @@ jobs:
           title: "舰桥${{ github.event.release.name }}发布"
           description: |
             版本 `${{ github.event.release.tag_name }}`
-            更新内容: ${{ github.event.release.body }}
+            更新内容: 
+            ${{ github.event.release.body }}
           url: ${{ github.event.release.html_url }}
           color: 0xB56576
 
@@ -33,7 +34,8 @@ jobs:
           title: "ConningTower ${{ github.event.release.name }} Release"
           description: |
             Version `${{ github.event.release.tag_name }}`
-            Update Content: ${{ github.event.release.body }}
+            Update Content: 
+            ${{ github.event.release.body }}
           url: ${{ github.event.release.html_url }}
           color: 0x5BC0EB
 
@@ -46,6 +48,7 @@ jobs:
           title: "ConningTower${{ github.event.release.name }}リリース"
           description: |
             デバージョン `${{ github.event.release.tag_name }}`
-            アプデート内容: ${{ github.event.release.body }}
+            アプデート内容: 
+            ${{ github.event.release.body }}
           url: ${{ github.event.release.html_url }}
           color: 0xC3423F
