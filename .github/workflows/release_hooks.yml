@@ -1,0 +1,50 @@
+name: release_hooks.yml
+on:
+  release:
+    types: [published]
+
+jobs:
+  github-releases-to-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Discord Message Notify Chinese
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOKS_CHINESE_SERVER_URL }}
+          nodetail: true
+          title: "舰桥${{ github.event.release.name }}发布"
+          description: |
+            版本 `${{ github.event.release.tag_name }}`
+            更新内容: ${{ github.event.release.body }}
+          url: ${{ github.event.release.html_url }}
+          color: 0xB56576
+
+      - name: Discord Message Notify English
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOKS_ENGLISH_SERVER_URL }}
+          nodetail: true
+          title: "ConningTower ${{ github.event.release.name }} Release"
+          description: |
+            Version `${{ github.event.release.tag_name }}`
+            Update Content: ${{ github.event.release.body }}
+          url: ${{ github.event.release.html_url }}
+          color: 0x5BC0EB
+
+      - name: Discord Message Notify Japanese
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOKS_JAPANESE_SERVER_URL }}
+          nodetail: true
+          title: "ConningTower${{ github.event.release.name }}リリース"
+          description: |
+            デバージョン `${{ github.event.release.tag_name }}`
+            アプデート内容: ${{ github.event.release.body }}
+          url: ${{ github.event.release.html_url }}
+          color: 0xC3423F
