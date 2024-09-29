@@ -13,6 +13,10 @@
 ![Localizely language progress](https://img.shields.io/badge/日本語-100%25-brightgreen)
 ![Localizely language progress](https://img.shields.io/badge/한국어-5%25-red)
 [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?label=Follow&style=social&url=https%3A%2F%2Fx.com%2Fcontwr)](https://x.com/contwr)
+![Discord](https://img.shields.io/discord/1289780951030693911?logo=Discord&label=%E4%B8%AD%E6%96%87)
+![Discord](https://img.shields.io/discord/1289781434848116767?logo=Discord&label=English)
+![Discord](https://img.shields.io/discord/1289777057043316776?logo=Discord&label=%E6%97%A5%E6%9C%AC%E8%AA%9E)
+
 
 Conning tower or Bridge is a cross-platform KanColle(艦隊これくしょん-艦これ-) browser.
 Support iPhone and iPad, Mac (Apple Silicon) now.
