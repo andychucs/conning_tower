@@ -1,6 +1,8 @@
 import 'package:conning_tower/models/data/kcsapi/item_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'get_member_useitem_entity.dart';
+
 part 'get_member_require_info_entity.freezed.dart';
 
 part 'get_member_require_info_entity.g.dart';
@@ -32,7 +34,7 @@ class GetMemberRequireInfoApiDataEntity
     @JsonKey(name: 'api_kdock')
     List<GetMemberRequireInfoApiDataApiKdockEntity>? apiKdock,
     @JsonKey(name: 'api_useitem')
-    List<GetMemberRequireInfoApiDataApiUseitemEntity>? apiUseitem,
+    List<GetMemberUseitemApiDataEntity>? apiUseitem,
     @JsonKey(name: 'api_furniture')
     List<GetMemberRequireInfoApiDataApiFurnitureEntity>? apiFurniture,
     @JsonKey(name: 'api_extra_supply') List<int>? apiExtraSupply,
@@ -96,19 +98,6 @@ class GetMemberRequireInfoApiDataApiKdockEntity
   factory GetMemberRequireInfoApiDataApiKdockEntity.fromJson(
           Map<String, dynamic> json) =>
       _$GetMemberRequireInfoApiDataApiKdockEntityFromJson(json);
-}
-
-@unfreezed
-class GetMemberRequireInfoApiDataApiUseitemEntity
-    with _$GetMemberRequireInfoApiDataApiUseitemEntity {
-  factory GetMemberRequireInfoApiDataApiUseitemEntity({
-    @JsonKey(name: 'api_id') required int apiId,
-    @JsonKey(name: 'api_count') required int apiCount,
-  }) = _GetMemberRequireInfoApiDataApiUseitemEntity;
-
-  factory GetMemberRequireInfoApiDataApiUseitemEntity.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetMemberRequireInfoApiDataApiUseitemEntityFromJson(json);
 }
 
 @unfreezed

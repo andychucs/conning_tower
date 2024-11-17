@@ -11,6 +11,7 @@ import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:conning_tower/widgets/kancolle_item_improve_viewer.dart';
 import 'package:conning_tower/widgets/kancolle_ship_viewer.dart';
+import 'package:conning_tower/widgets/kancolle_use_item_viewer.dart';
 import 'package:conning_tower/widgets/resource_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -143,7 +144,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                     ),
                                     top: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                             child: Text(
@@ -161,7 +162,8 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                   ),
                                   InfoBox(
                                     onTap: () {
-                                      Toast.showWarning(title: "Not implemented yet.");
+                                      Toast.showWarning(
+                                          title: "Not implemented yet.");
                                       // navigatorToCupertino(context, KancolleItemViewer());
                                     },
                                     top: Row(
@@ -181,6 +183,36 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
+                                  ),
+                                  InfoBox(
+                                    onTap: () {
+                                      if (data.seaForceBase.useItem == null ||
+                                          data.dataInfo.itemInfo == null
+                                      ) {
+                                        Toast.showWarning(
+                                            title:
+                                                S.of(context).TextLoginRequired,
+                                            description: S
+                                                .of(context)
+                                                .KCNeedLoginNoticeDesc);
+                                        return;
+                                      }
+                                      navigatorToCupertino(
+                                          context, KancolleUseItemViewer());
+                                    },
+                                    top: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child:
+                                                Text(S.of(context).TextItem)),
+                                        const CupertinoListTileChevron(),
+                                      ],
+                                    ),
+                                    bottom: KancolleUseItemQuickLook(
+                                        useItem: data.seaForceBase.useItem,
+                                        itemInfo: data.dataInfo.itemInfo),
                                   ),
                                   InfoBox(
                                     onTap: () {
@@ -213,52 +245,60 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                   ),
                                   ResourceInfoBox(
                                     resource: 'fuel',
-                                    color: const Color.fromRGBO(32, 89, 29, 1.0),
+                                    color:
+                                        const Color.fromRGBO(32, 89, 29, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource.fuel,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'ammo',
-                                    color: const Color.fromRGBO(126, 102, 54, 1.0),
+                                    color:
+                                        const Color.fromRGBO(126, 102, 54, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource.ammo,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'steel',
-                                    color: const Color.fromRGBO(181, 180, 180, 1.0),
+                                    color: const Color.fromRGBO(
+                                        181, 180, 180, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource.steel,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'bauxite',
-                                    color: const Color.fromRGBO(219, 150, 102, 1.0),
+                                    color: const Color.fromRGBO(
+                                        219, 150, 102, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource.bauxite,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'ic',
-                                    color: const Color.fromRGBO(255, 176, 7, 1.0),
+                                    color:
+                                        const Color.fromRGBO(255, 176, 7, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource
                                         .instantCreateShip,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'ir',
-                                    color: const Color.fromRGBO(195, 212, 75, 1.0),
+                                    color:
+                                        const Color.fromRGBO(195, 212, 75, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data
                                         .seaForceBase.resource.instantRepairs,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'dm',
-                                    color: const Color.fromRGBO(56, 126, 132, 1.0),
+                                    color:
+                                        const Color.fromRGBO(56, 126, 132, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource
                                         .developmentMaterials,
                                   ),
                                   ResourceInfoBox(
                                     resource: 'im',
-                                    color: const Color.fromRGBO(186, 186, 186, 1.0),
+                                    color: const Color.fromRGBO(
+                                        186, 186, 186, 1.0),
                                     admiralName: data.seaForceBase.admiral.name,
                                     value: data.seaForceBase.resource
                                         .improvementMaterials,
@@ -301,7 +341,9 @@ class ResourceInfoBox extends StatelessWidget {
       onTap: () {
         final resourceList = objectbox.queryResource(admiralName, resource);
         if (resourceList.isEmpty) {
-          Toast.showWarning(title: S.of(context).TextLoginRequired, description: S.of(context).KCNeedLoginNoticeDesc);
+          Toast.showWarning(
+              title: S.of(context).TextLoginRequired,
+              description: S.of(context).KCNeedLoginNoticeDesc);
           return;
         }
         navigatorToCupertino(

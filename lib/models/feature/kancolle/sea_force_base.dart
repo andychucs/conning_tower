@@ -1,22 +1,32 @@
 import 'dart:developer';
 
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/models/data/kcsapi/port/port_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'sea_force_base.freezed.dart';
-part 'sea_force_base.g.dart';
+import '../../data/kcsapi/kcsapi.dart';
+
+part 'sea_force_base.freezed.dart';part 'sea_force_base.g.dart';
 
 @unfreezed
 class SeaForceBase with _$SeaForceBase {
   const SeaForceBase._();
 
-  factory SeaForceBase(
-      {required SeaForceBaseResource resource,
-      required Admiral admiral}) = _SeaForceBase;
+  factory SeaForceBase({
+    required SeaForceBaseResource resource,
+    required Admiral admiral,
+    Map<int, int>? useItem,
+  }) = _SeaForceBase;
 
   factory SeaForceBase.fromJson(Map<String, dynamic> json) =>
       _$SeaForceBaseFromJson(json);
+
+  void updateUseItem(List<GetMemberUseitemApiDataEntity>? useItemList) {
+    if (useItemList != null) {
+      useItem = {
+        for (var item in useItemList) item.apiId ?? 0: item.apiCount ?? 0
+      };
+    }
+  }
 
   void updateAdmiralInfo(PortApiDataApiBasicEntity apiBasic) {
     admiral = admiral.copyWith(
