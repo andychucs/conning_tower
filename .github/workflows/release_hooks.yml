@@ -46,7 +46,7 @@ jobs:
           nodetail: true
           title: "ConningTower${{ github.event.release.name }}リリース"
           description: |
-            デバージョン `${{ github.event.release.tag_name }}`
+            バージョン `${{ github.event.release.tag_name }}`
             アプデート内容: 
             ${{ github.event.release.body }}
           url: ${{ github.event.release.html_url }}
