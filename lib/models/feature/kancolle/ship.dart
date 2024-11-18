@@ -298,16 +298,18 @@ class Ship with _$Ship {
   }
 
   num get losEquip {
+    // https://wikiwiki.jp/kancolle/ルート分岐#coefficient_equipment
     num count = 0;
     final allEquipment = [...equipment ?? [], ...exEquipment ?? []];
     for (final equip in allEquipment) {
       count += switch (equip.type?[2]) {
-        8 => equip.los! * 0.8,
-        9 => equip.los! * 1.0,
-        10 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2,
-        11 => (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1,
-        12 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6,
-        13 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6,
+        8 => equip.los! * 0.8, // 艦上攻撃機
+        9 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.0, // 艦上偵察機
+        10 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2, // 水上偵察機
+        11 => (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1, // 水上爆撃機
+        12 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6, // 小型電探
+        13 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6, // 大型電探
+        41 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 0.6, // 大型飛行艇
         _ => equip.los ?? 0 * 0.6
       };
     }
