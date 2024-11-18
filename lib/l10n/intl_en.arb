@@ -489,7 +489,7 @@
   "@TextMediumRange": {},
   "TextMovingAveragePeriod": "MA Period",
   "@TextMovingAveragePeriod": {},
-  "TextNetworkError": "Network Error",
+  "TextNetworkError": "Network Error: {statusCode}",
   "@TextNetworkError": {},
   "TextNo": "No",
   "@TextNo": {},

@@ -15,18 +15,22 @@ class RawData with _$RawData {
     required String data,
     required int timestamp,
     Map<String, dynamic>? params,
+    int? status,
   }) = _RawData;
 
   factory RawData.response({
     required String source,
     required String data,
     required Map<String, dynamic> params,
+    required int status,
   }) =>
       RawData(
           source: source,
           data: data,
           timestamp: DateTime.now().millisecondsSinceEpoch,
-          params: params);
+          params: params,
+          status: status,
+      );
 
   factory RawData.fromJson(Map<String, dynamic> json) =>
       _$RawDataFromJson(json);

@@ -2500,13 +2500,13 @@ class S {
     );
   }
 
-  /// `Network Error`
-  String get TextNetworkError {
+  /// `Network Error: {statusCode}`
+  String TextNetworkError(Object statusCode) {
     return Intl.message(
-      'Network Error',
+      'Network Error: $statusCode',
       name: 'TextNetworkError',
       desc: '',
-      args: [],
+      args: [statusCode],
     );
   }
 

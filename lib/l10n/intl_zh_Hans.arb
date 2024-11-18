@@ -490,7 +490,7 @@
   "@TextMediumRange": {},
   "TextMovingAveragePeriod": "MA周期",
   "@TextMovingAveragePeriod": {},
-  "TextNetworkError": "网络错误",
+  "TextNetworkError": "网络错误，状态码：{statusCode}",
   "@TextNetworkError": {},
   "TextNo": "否",
   "@TextNo": {},

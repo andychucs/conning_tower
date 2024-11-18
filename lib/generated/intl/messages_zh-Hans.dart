@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(length) => "${length}个资源日志将被导入";
 
+  static String m9(statusCode) => "网络错误，状态码：${statusCode}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("关于"),
@@ -381,7 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextMovingAveragePeriod": MessageLookupByLibrary.simpleMessage("MA周期"),
-        "TextNetworkError": MessageLookupByLibrary.simpleMessage("网络错误"),
+        "TextNetworkError": m9,
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextNone": MessageLookupByLibrary.simpleMessage("无"),
         "TextOpenInJervis":

@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(length) => "${length} items will be imported.";
 
+  static String m9(statusCode) => "Network Error: ${statusCode}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AboutButton": MessageLookupByLibrary.simpleMessage("About"),
@@ -434,8 +436,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("Medium"),
         "TextMovingAveragePeriod":
             MessageLookupByLibrary.simpleMessage("MA Period"),
-        "TextNetworkError":
-            MessageLookupByLibrary.simpleMessage("Network Error"),
+        "TextNetworkError": m9,
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
         "TextOpenInJervis":

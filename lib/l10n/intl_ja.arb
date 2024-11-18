@@ -490,7 +490,7 @@
   "@TextMediumRange": {},
   "TextMovingAveragePeriod": "MA期間",
   "@TextMovingAveragePeriod": {},
-  "TextNetworkError": "ネットワークエラー発生",
+  "TextNetworkError": "ネットワークエラー発生：{statusCode}",
   "@TextNetworkError": {},
   "TextNo": "いいえ",
   "@TextNo": {},
