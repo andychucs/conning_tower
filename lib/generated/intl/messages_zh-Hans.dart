@@ -26,15 +26,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "舰娘数: ${count}";
 
-  static String m3(url) => "正在访问${url}";
+  static String m3(name) => "${name}加入了舰队";
 
-  static String m4(url) => "页面加载完毕：${url}";
+  static String m4(url) => "正在访问${url}";
 
-  static String m5(url) => "页面开始加载：${url}";
+  static String m5(url) => "页面加载完毕：${url}";
 
-  static String m6(taskTitle) => "${taskTitle} 已完成。";
+  static String m6(url) => "页面开始加载：${url}";
 
-  static String m7(length) => "${length}个资源日志将被导入";
+  static String m7(taskTitle) => "${taskTitle} 已完成。";
+
+  static String m8(length) => "${length}个资源日志将被导入";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -234,6 +236,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("从新到旧"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("舰娘"),
+        "KCGetNewShipNotify": m3,
+        "KCGetNewShipNotifyTitle": MessageLookupByLibrary.simpleMessage("新舰娘"),
         "KCNeedLoginNoticeDesc":
             MessageLookupByLibrary.simpleMessage("登录游戏后才能使用此功能"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弹药"),
@@ -248,6 +252,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCResourceInstantRepair": MessageLookupByLibrary.simpleMessage("高速修复"),
         "KCResourceSteel": MessageLookupByLibrary.simpleMessage("钢材"),
         "KCResources": MessageLookupByLibrary.simpleMessage("资源"),
+        "KCShipDeregisterLabel": MessageLookupByLibrary.simpleMessage("除籍"),
+        "KCShipGetLabel": MessageLookupByLibrary.simpleMessage("获得"),
+        "KCShipNotRegisteredLabel": MessageLookupByLibrary.simpleMessage("未登记"),
+        "KCShipRegisterList": MessageLookupByLibrary.simpleMessage("登记表"),
         "KCViewFuncMsgAlreadyGameRedirect":
             MessageLookupByLibrary.simpleMessage("已进入游戏页面，无需执行"),
         "KCViewFuncMsgAutoGameRedirect":
@@ -256,17 +264,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("游戏主页加载中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("游戏主页的重载已被拦截"),
-        "KCViewFuncMsgNavi": m3,
+        "KCViewFuncMsgNavi": m4,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("游戏加载完毕"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("游戏加载失败"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("游戏尚未加载完毕"),
-        "KCViewFuncMsgPageFinished": m4,
+        "KCViewFuncMsgPageFinished": m5,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
-        "KCViewFuncMsgPageStart": m5,
+        "KCViewFuncMsgPageStart": m6,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("数据监听"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日志"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
@@ -318,7 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("状态码"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截图"),
-        "TaskCompleted": m6,
+        "TaskCompleted": m7,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任务提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任务"),
         "TaskNotificationAdded":
@@ -332,7 +340,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage("导入任务数量超出限制"),
         "TextAirbase": MessageLookupByLibrary.simpleMessage("基地航空队"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "TextBackToTop": MessageLookupByLibrary.simpleMessage("返回顶部"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("战斗"),
+        "TextBonus": MessageLookupByLibrary.simpleMessage("奖励"),
+        "TextBuild": MessageLookupByLibrary.simpleMessage("建造"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower格式"),
@@ -343,6 +354,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("已复制到剪贴板"),
         "TextDeckBuilderFormat":
             MessageLookupByLibrary.simpleMessage("DeckBuilder格式"),
+        "TextDestroy": MessageLookupByLibrary.simpleMessage("解体"),
+        "TextDone": MessageLookupByLibrary.simpleMessage("完"),
+        "TextDrop": MessageLookupByLibrary.simpleMessage("掉落"),
         "TextEquipment": MessageLookupByLibrary.simpleMessage("装备"),
         "TextFastPlusSpeed": MessageLookupByLibrary.simpleMessage("高速+"),
         "TextFastSpeed": MessageLookupByLibrary.simpleMessage("高速"),
@@ -354,7 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("导入"),
         "TextImportResourceFromPoi":
             MessageLookupByLibrary.simpleMessage("从poi的CSV文件导入资源日志"),
-        "TextImportResourceNumberCheck": m7,
+        "TextImportResourceNumberCheck": m8,
         "TextImportResourceWarning":
             MessageLookupByLibrary.simpleMessage("确定导入吗?"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("导入中"),
@@ -373,6 +387,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("在Jervis作战室打开"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("在制空权模拟器打开"),
+        "TextRefit": MessageLookupByLibrary.simpleMessage("改修"),
+        "TextResetZoom": MessageLookupByLibrary.simpleMessage("重置缩放"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("归港"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
@@ -387,7 +403,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextTag": MessageLookupByLibrary.simpleMessage("标签"),
         "TextTime": MessageLookupByLibrary.simpleMessage("时间"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("标题"),
+        "TextTotal": MessageLookupByLibrary.simpleMessage("总计"),
         "TextYes": MessageLookupByLibrary.simpleMessage("是"),
+        "TextZoomIn": MessageLookupByLibrary.simpleMessage("放大"),
+        "TextZoomOut": MessageLookupByLibrary.simpleMessage("缩小"),
         "Theme": MessageLookupByLibrary.simpleMessage("主题"),
         "ToolSaveHomeCancel": MessageLookupByLibrary.simpleMessage("主页URL已删除"),
         "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("无效的URL"),
@@ -410,7 +429,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("点击此处查看"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("版本更新"),
         "WeaponData": MessageLookupByLibrary.simpleMessage("装备数据"),
-        "WebInfo": MessageLookupByLibrary.simpleMessage("网页信息"),
         "WikiDataLabel": MessageLookupByLibrary.simpleMessage("Wiki数据"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML示例：")
       };

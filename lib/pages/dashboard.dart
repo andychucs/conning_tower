@@ -26,7 +26,7 @@ class Dashboard extends ConsumerStatefulWidget {
   Dashboard.general({super.key, required this.notifyParent})
       : titles = [
           S.current.PhotoAlbum,
-          S.current.WebInfo,
+          S.current.ToolTitleWeb,
           S.current.TaskDashboardTitle,
           S.current.SettingsButton,
         ],
@@ -42,7 +42,7 @@ class Dashboard extends ConsumerStatefulWidget {
   Dashboard.generalWithBottomTab({super.key, required this.notifyParent})
       : titles = [
           S.current.PhotoAlbum,
-          S.current.WebInfo,
+          S.current.ToolTitleWeb,
           S.current.TaskDashboardTitle,
           S.current.SettingsButton,
         ],
@@ -58,7 +58,7 @@ class Dashboard extends ConsumerStatefulWidget {
   Dashboard.kancolle({super.key, required this.notifyParent})
       : titles = [
           S.current.PhotoAlbum,
-          S.current.WebInfo,
+          S.current.ToolTitleWeb,
           S.current.KCDashboardCommand,
           S.current.KCDashboardOperation,
           S.current.KCDashboardFleet,
@@ -82,7 +82,7 @@ class Dashboard extends ConsumerStatefulWidget {
   Dashboard.kancolleWithBottomTab({super.key, required this.notifyParent})
       : titles = [
           S.current.PhotoAlbum,
-          S.current.WebInfo,
+          S.current.ToolTitleWeb,
           S.current.KCDashboardCommand,
           S.current.KCDashboardOperation,
           S.current.KCDashboardFleet,

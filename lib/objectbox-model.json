@@ -135,9 +135,43 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "9:7792766552501196420",
+      "lastPropertyId": "5:3057652566560391113",
+      "name": "KancolleShipLogEntity",
+      "properties": [
+        {
+          "id": "1:7471191810277840944",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:40817348843234814",
+          "name": "dateTime",
+          "type": 10
+        },
+        {
+          "id": "3:3046172293587705074",
+          "name": "type",
+          "type": 6
+        },
+        {
+          "id": "4:5311033972126146351",
+          "name": "shipName",
+          "type": 9
+        },
+        {
+          "id": "5:3057652566560391113",
+          "name": "admiral",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "8:6521250304125153865",
+  "lastEntityId": "9:7792766552501196420",
   "lastIndexId": "4:4508818424622429566",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

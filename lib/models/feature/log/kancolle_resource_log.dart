@@ -59,7 +59,7 @@ class KancolleResourceLogEntity {
       : assert(allResource.contains(resource));
   factory KancolleResourceLogEntity.fromJson(Map<String, dynamic> json) {
     return KancolleResourceLogEntity(
-      time: json['timestamp'],
+      time: json['time'],
       admiral: json['admiral'],
       resource: json['resource'],
       open: json['open'],

@@ -14,8 +14,32 @@ class Fleet with _$Fleet {
     required List<Ship> ships,
     required Map<int, Equipment> equipment,
     int? combined,
+    Set<int>? notInFleetIds,
   }) = _Fleet;
 
   String get combinedText =>
       switch (combined) { 1 => "機動部隊", 2 => "水上部隊", 3 => "輸送部隊", 0 || _ => "" };
+
+  Set<int> get shipIds => ships.map((e) => e.shipId).toSet();
+
+  Set<int> get afterShipIds => <int>{for (final ship in ships) ...?ship.afterIds};
+
+  void initNotInFleetIds(Map<int, List<int>>? shipUpgradeMap) {
+    notInFleetIds ??= {};
+    if (shipUpgradeMap == null) return;
+    for (final e in shipUpgradeMap.entries) {
+      if (shipIds.contains(e.key)) {
+        continue;
+      }
+      bool haveUpgraded = false;
+      for (final id in e.value) {
+        if (shipIds.contains(id)) {
+          haveUpgraded = true;
+          break;
+        }
+      }
+      if (haveUpgraded) continue;
+      notInFleetIds?.add(e.key);
+    }
+  }
 }

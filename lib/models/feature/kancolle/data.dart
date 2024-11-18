@@ -18,6 +18,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../../utils/toast.dart';
+import '../log/kancolle_ship_log.dart';
 import 'battle_info.dart';
 import 'data_info.dart';
 import 'equipment.dart';
@@ -140,6 +141,55 @@ class KancolleData {
 
     checkDebuffNotify(model);
 
+    if (model is ReqKousyouGetshipEntity) {
+      log("get ship");
+      if (model.apiData?.apiShipId != null) {
+        objectbox.saveShipLog(
+          admiral: seaForceBase.admiral.name,
+          type: ShipLogType.build,
+          shipName: dataInfo.shipInfo?[model.apiData?.apiShipId]?.apiName,
+        );
+        final ship = createShip(model.apiData!.apiShip!);
+        fleet.ships.add(ship);
+      }
+    }
+
+    if (requestBody is ReqKousyouDestroyshipBodyEntity) {
+      log("destroy");
+      final shipIds = requestBody.apiShipId?.split(",");
+      if (shipIds != null && shipIds.isNotEmpty) {
+        for (var shipId in shipIds) {
+          final id = int.tryParse(shipId);
+          if (id != null) {
+            objectbox.saveShipLog(
+                admiral: seaForceBase.admiral.name,
+                type: ShipLogType.destroy,
+                shipName: fleet.ships
+                    .firstWhere((element) => element.uid == id)
+                    .name);
+          }
+        }
+      }
+    }
+
+    if (requestBody is ReqKaisouPowerupBodyEntity) {
+      log("改装");
+      final shipIds = requestBody.apiIdItems?.split(",");
+      if (shipIds != null && shipIds.isNotEmpty) {
+        for (var shipId in shipIds) {
+          final id = int.tryParse(shipId);
+          if (id != null) {
+            objectbox.saveShipLog(
+                admiral: seaForceBase.admiral.name,
+                type: ShipLogType.refit,
+                shipName: fleet.ships
+                    .firstWhere((element) => element.uid == id)
+                    .name);
+          }
+        }
+      }
+    }
+
     if (requestBody is ReqHenseiChangeBodyEntity) {
       final squadIdx = requestBody.apiId! - 1;
       if (requestBody.apiShipId! == -1) {
@@ -226,11 +276,13 @@ class KancolleData {
     }
 
     if (model is ReqCombinedBattleResultEntity) {
-      battleInfo.parseReqCombinedBattleResultEntity(model.apiData!);
+      battleInfo.parseReqCombinedBattleResultEntity(model.apiData!,
+          admiral: seaForceBase.admiral.name);
     }
 
     if (model is ReqSortieBattleResultEntity) {
-      battleInfo.parseReqSortieBattleResult(model.apiData);
+      battleInfo.parseReqSortieBattleResult(model.apiData,
+          admiral: seaForceBase.admiral.name);
     }
 
     if (model is GetDataEntity) {
@@ -249,6 +301,7 @@ class KancolleData {
         for (var item in model.apiData.apiMstSlotitem) item.apiId: item
       };
       dataInfo.shipTypeList = model.apiData.apiMstStype;
+      dataInfo.initShipUpgradeMap();
     }
 
     if (model is ReqMissionStartEntity) {
@@ -542,30 +595,35 @@ class KancolleData {
     }
   }
 
-  void updateFleetShips(List<PortApiDataApiShipEntity> apiShip) {
-    List<Ship> allShips = [];
-    for (var data in apiShip) {
-      final shipData = dataInfo.shipInfo?[data.apiShipId];
+  Ship createShip(ShipDataEntity data) {
+    final shipData = dataInfo.shipInfo?[data.apiShipId];
 
-      final afterId = int.parse(shipData?.apiAftershipid ?? '0');
-      List<int> afterIds = getAfterIds([data.apiShipId], afterId);
-      afterIds.remove(data.apiShipId);
+    final afterId = int.parse(shipData?.apiAftershipid ?? '0');
+    List<int> afterIds = dataInfo.getAfterIds([data.apiShipId], afterId);
+    afterIds.remove(data.apiShipId);
 
-      String shipName = shipData?.apiName ?? "Ship No.${data.apiShipId}";
+    String shipName = shipData?.apiName ?? "Ship No.${data.apiShipId}";
 
-      allShips.add(Ship.fromApi(data, shipName,
-          afterIds: afterIds,
-          upgradeLevel: shipData?.apiAfterlv,
-          shipType: shipData?.apiStype,
-          equipment: fleet.equipment));
+    if (fleet.notInFleetIds != null &&
+        fleet.notInFleetIds!.contains(data.apiShipId)) {
+      Toast.kancolleUnlockNotify(S.current.KCGetNewShipNotifyTitle,
+          S.current.KCGetNewShipNotify(shipName));
     }
-    fleet.ships = allShips;
+    return Ship.fromApi(data, shipName,
+        afterIds: afterIds,
+        upgradeLevel: shipData?.apiAfterlv,
+        shipType: shipData?.apiStype,
+        equipment: fleet.equipment);
   }
 
-  List<int> getAfterIds(List<int> ids, int nextId) {
-    if (ids.contains(nextId) || nextId == 0) return ids;
-    ids.add(nextId);
-    return getAfterIds(ids, nextId);
+  void updateFleetShips(List<ShipDataEntity> apiShip) {
+    List<Ship> allShips = [];
+    for (var data in apiShip) {
+      final ship = createShip(data);
+      allShips.add(ship);
+    }
+    fleet.ships = allShips;
+    fleet.initNotInFleetIds(dataInfo.shipUpgradeMap);
   }
 
   void updateOperationQueue(DeckData data, int id) {
@@ -590,7 +648,7 @@ class KancolleData {
       operation: data.apiMission[1],
       ships: ships,
     );
-    log(squad.toString());
+    // log(squad.toString());
     if (id > squads.length) {
       squads.add(squad);
     } else {
@@ -605,7 +663,7 @@ class KancolleData {
       final shipData = dataInfo.shipInfo?[data.apiShipId];
 
       final afterId = int.parse(shipData?.apiAftershipid ?? '0');
-      List<int> afterIds = getAfterIds([data.apiShipId], afterId);
+      List<int> afterIds = dataInfo.getAfterIds([data.apiShipId], afterId);
       afterIds.remove(data.apiShipId);
 
       String shipName = shipData?.apiName ?? "Ship No.${data.apiShipId}";

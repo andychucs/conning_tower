@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'battle.dart';
-import 'req_battle_midnight_battle_entity.dart';
 
 part 'req_practice_midnight_battle_entity.freezed.dart';
 

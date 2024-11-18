@@ -4,7 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
-import 'package:conning_tower/models/feature/kancolle/data.dart';
 import 'package:conning_tower/models/feature/kancolle/sea_force_base.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
@@ -21,6 +20,7 @@ import 'package:intl/intl.dart';
 
 import '../../utils/toast.dart';
 import '../../widgets/kancolle_item_viewer.dart';
+import '../../widgets/kancolle_ship_register_viewer.dart';
 
 class PortInfo extends ConsumerStatefulWidget {
   const PortInfo({super.key});
@@ -127,6 +127,32 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                     ),
                                     bottom: AutoSizeText(
                                       '${data.fleet.ships.length}/${data.seaForceBase.admiral.maxShip}',
+                                      maxFontSize: 30,
+                                      minFontSize: 18,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  InfoBox(
+                                    onTap: () => navigatorToCupertino(
+                                      context,
+                                      KancolleShipRegisterViewer(
+                                        admiralName:
+                                            data.seaForceBase.admiral.name,
+                                      ),
+                                    ),
+                                    top: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: Text(
+                                                S.of(context).TextFleetGirl)),
+                                        const CupertinoListTileChevron(),
+                                      ],
+                                    ),
+                                    bottom: AutoSizeText(
+                                      S.of(context).KCShipRegisterList,
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,
