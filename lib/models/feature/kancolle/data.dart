@@ -415,6 +415,11 @@ class KancolleData {
           .read(kancolleItemDataProvider.notifier)
           .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
+      seaForceBase.updateUseItem(model.apiData.apiUseitem);
+    }
+
+    if (model is GetMemberUseitemEntity) {
+      seaForceBase.updateUseItem(model.apiData);
     }
 
     if (model is GetMemberSlotItemEntity) {

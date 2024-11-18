@@ -78,6 +78,7 @@ class DataModelAdapter {
         GetMemberKdockEntity.source => GetMemberKdockEntity.fromJson(json),
         ReqKousyouGetshipEntity.source =>
           ReqKousyouGetshipEntity.fromJson(json),
+        GetMemberUseitemEntity.source => GetMemberUseitemEntity.fromJson(json),
         _ => null,
       };
 
