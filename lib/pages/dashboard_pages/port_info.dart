@@ -175,7 +175,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                                       ],
                                     ),
                                     bottom: AutoSizeText(
-                                      '${data.fleet.equipment.length}/${data.seaForceBase.admiral.maxItem}',
+                                      '${data.fleet.equipment.length - data.fleet.uncountedEquipments.length}/${data.seaForceBase.admiral.maxItem}',
                                       maxFontSize: 30,
                                       minFontSize: 18,
                                       maxLines: 1,

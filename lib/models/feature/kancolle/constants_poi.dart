@@ -37,4 +37,4 @@ const aircraftLevelBonus = {
   57: [0, 0, 0, 0, 0, 0, 0, 0, 0], // 噴式戦闘爆撃機
   58: [0, 0, 0, 0, 0, 0, 0, 0, 0], // 噴式攻撃機
 };
-const uncountedSlotitemId = [42, 43, 145, 146, 150, 241];
+const kUncountedSlotitemId = [42, 43, 145, 146, 150, 241];
