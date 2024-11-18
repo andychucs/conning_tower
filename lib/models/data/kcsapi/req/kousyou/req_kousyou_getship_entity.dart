@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../ship_data.dart';
+import '../../ship_data.dart';
 
 part 'req_kousyou_getship_entity.freezed.dart';
 

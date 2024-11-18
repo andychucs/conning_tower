@@ -237,6 +237,20 @@ class KancolleData {
       }
     }
 
+    if (model is ReqHenseiPresetSelectEntity) {
+      int index = model.apiData!.apiId - 1;
+      List<Ship> ships = [];
+      for (var shipsId in model.apiData!.apiShip) {
+        if (shipsId != -1) {
+          final ship = fleet.ships
+              .firstWhere((element) => element.uid == shipsId);
+          ships.add(ship);
+        }
+      }
+
+      squads[index].ships = ships;
+    }
+
     if (model is ReqHokyuChargeEntity) {
       var material = model.apiData?.apiMaterial;
       if (material != null) {
