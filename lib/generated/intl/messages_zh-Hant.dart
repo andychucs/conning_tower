@@ -333,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TasksNumOverLimit": MessageLookupByLibrary.simpleMessage("導入任務數量超出限制"),
         "TextAirbase": MessageLookupByLibrary.simpleMessage("基地航空隊"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "TextBackToTop": MessageLookupByLibrary.simpleMessage("返回頂部"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("戰鬥"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
         "TextConningTowerFormat":
@@ -374,6 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("在Jervis作戰室打開"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("在制空權模擬器打開"),
+        "TextResetZoom": MessageLookupByLibrary.simpleMessage("重置縮放"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("歸港"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
@@ -389,6 +391,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextTime": MessageLookupByLibrary.simpleMessage("時間"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("標題"),
         "TextYes": MessageLookupByLibrary.simpleMessage("是"),
+        "TextZoomIn": MessageLookupByLibrary.simpleMessage("放大"),
+        "TextZoomOut": MessageLookupByLibrary.simpleMessage("縮小"),
         "Theme": MessageLookupByLibrary.simpleMessage("主題"),
         "ToolSaveHomeCancel": MessageLookupByLibrary.simpleMessage("主頁URL已刪除"),
         "ToolSaveHomeFail": MessageLookupByLibrary.simpleMessage("無效的URL"),
@@ -409,7 +413,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "VersionUpdateLinkText": MessageLookupByLibrary.simpleMessage("點擊此處查看"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("版本更新"),
         "WeaponData": MessageLookupByLibrary.simpleMessage("裝備資料"),
-        "WebInfo": MessageLookupByLibrary.simpleMessage("網頁資訊"),
         "WikiDataLabel": MessageLookupByLibrary.simpleMessage("Wiki資料"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML範例：")
       };

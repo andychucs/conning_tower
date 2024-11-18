@@ -2090,6 +2090,16 @@ class S {
     );
   }
 
+  /// `Back to Top`
+  String get TextBackToTop {
+    return Intl.message(
+      'Back to Top',
+      name: 'TextBackToTop',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Battle`
   String get TextBattle {
     return Intl.message(
@@ -2430,6 +2440,16 @@ class S {
     );
   }
 
+  /// `Reset Zoom`
+  String get TextResetZoom {
+    return Intl.message(
+      'Reset Zoom',
+      name: 'TextResetZoom',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Return Port`
   String get TextReturnPort {
     return Intl.message(
@@ -2575,6 +2595,26 @@ class S {
     return Intl.message(
       'Yes',
       name: 'TextYes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zoom In`
+  String get TextZoomIn {
+    return Intl.message(
+      'Zoom In',
+      name: 'TextZoomIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zoom Out`
+  String get TextZoomOut {
+    return Intl.message(
+      'Zoom Out',
+      name: 'TextZoomOut',
       desc: '',
       args: [],
     );
@@ -2765,16 +2805,6 @@ class S {
     return Intl.message(
       'Weapon Data',
       name: 'WeaponData',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Web Info`
-  String get WebInfo {
-    return Intl.message(
-      'Web Info',
-      name: 'WebInfo',
       desc: '',
       args: [],
     );

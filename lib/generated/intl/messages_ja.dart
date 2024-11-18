@@ -350,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("タスク数が制限を超えています。"),
         "TextAirbase": MessageLookupByLibrary.simpleMessage("基地航空隊"),
         "TextAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "TextBackToTop": MessageLookupByLibrary.simpleMessage("トップに戻る"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("戦闘"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "TextConningTowerFormat":
@@ -393,6 +394,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Jervis作戦室で開く"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("制空権シミュレータで開く"),
+        "TextResetZoom": MessageLookupByLibrary.simpleMessage("拡大/縮小をリセット"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("帰港"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("小破"),
         "TextSave": MessageLookupByLibrary.simpleMessage("保存"),
@@ -408,6 +410,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextTime": MessageLookupByLibrary.simpleMessage("時間"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("タイトル"),
         "TextYes": MessageLookupByLibrary.simpleMessage("はい"),
+        "TextZoomIn": MessageLookupByLibrary.simpleMessage("拡大"),
+        "TextZoomOut": MessageLookupByLibrary.simpleMessage("縮小"),
         "Theme": MessageLookupByLibrary.simpleMessage("テーマ"),
         "ToolSaveHomeCancel":
             MessageLookupByLibrary.simpleMessage("ホームページのURLが削除されました"),
@@ -434,7 +438,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ここをクリックして表示"),
         "VersionUpdateTitle": MessageLookupByLibrary.simpleMessage("バージョン更新"),
         "WeaponData": MessageLookupByLibrary.simpleMessage("装備データ"),
-        "WebInfo": MessageLookupByLibrary.simpleMessage("Web情報"),
         "WikiDataLabel": MessageLookupByLibrary.simpleMessage("Wikiデータ"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML例：")
       };

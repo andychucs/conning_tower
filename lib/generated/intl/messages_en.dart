@@ -374,6 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "request tasks number over limit."),
         "TextAirbase": MessageLookupByLibrary.simpleMessage("Airbase"),
         "TextAll": MessageLookupByLibrary.simpleMessage("All"),
+        "TextBackToTop": MessageLookupByLibrary.simpleMessage("Back to Top"),
         "TextBattle": MessageLookupByLibrary.simpleMessage("Battle"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "TextConningTowerFormat":
@@ -424,6 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(
             "Open in Aerial Combat Simulator"),
+        "TextResetZoom": MessageLookupByLibrary.simpleMessage("Reset Zoom"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("Return Port"),
         "TextSDamage": MessageLookupByLibrary.simpleMessage("Slightly damaged"),
         "TextSave": MessageLookupByLibrary.simpleMessage("Save"),
@@ -442,6 +444,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextTime": MessageLookupByLibrary.simpleMessage("Time"),
         "TextTitle": MessageLookupByLibrary.simpleMessage("Title"),
         "TextYes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "TextZoomIn": MessageLookupByLibrary.simpleMessage("Zoom In"),
+        "TextZoomOut": MessageLookupByLibrary.simpleMessage("Zoom Out"),
         "Theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "ToolSaveHomeCancel":
             MessageLookupByLibrary.simpleMessage("Homepage URL removed"),
@@ -472,7 +476,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "VersionUpdateTitle":
             MessageLookupByLibrary.simpleMessage("Version Update"),
         "WeaponData": MessageLookupByLibrary.simpleMessage("Weapon Data"),
-        "WebInfo": MessageLookupByLibrary.simpleMessage("Web Info"),
         "WikiDataLabel": MessageLookupByLibrary.simpleMessage("Wiki Data"),
         "YamlExample": MessageLookupByLibrary.simpleMessage("YAML Example:")
       };
