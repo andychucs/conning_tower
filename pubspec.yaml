@@ -103,7 +103,7 @@ dev_dependencies:
   build_runner: ^2.4.12
   riverpod_generator: ^2.2.5
   freezed: ^2.5.2
-  json_serializable: ^6.7.0
+  json_serializable: ^6.9.0
   objectbox_generator: ^4.0.2
   analyzer: ^6.4.1
 
