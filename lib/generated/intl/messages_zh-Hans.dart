@@ -240,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("舰娘"),
         "KCGetNewShipNotify": m3,
         "KCGetNewShipNotifyTitle": MessageLookupByLibrary.simpleMessage("新舰娘"),
+        "KCLowestCond": MessageLookupByLibrary.simpleMessage("疲劳度最差"),
         "KCNeedLoginNoticeDesc":
             MessageLookupByLibrary.simpleMessage("登录游戏后才能使用此功能"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弹药"),

@@ -253,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("艦娘"),
         "KCGetNewShipNotify": m3,
         "KCGetNewShipNotifyTitle": MessageLookupByLibrary.simpleMessage("新艦娘"),
+        "KCLowestCond": MessageLookupByLibrary.simpleMessage("cond値・最小値"),
         "KCNeedLoginNoticeDesc":
             MessageLookupByLibrary.simpleMessage("ゲームにログインする必要があります。"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),

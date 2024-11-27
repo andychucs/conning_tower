@@ -274,6 +274,8 @@
   "@KCGetNewShipNotify": {},
   "KCGetNewShipNotifyTitle": "New fleet girl",
   "@KCGetNewShipNotifyTitle": {},
+  "KCLowestCond": "Lowest Morale",
+  "@KCLowestCond": {},
   "KCNeedLoginNoticeDesc": "You need to log in to the game before using this feature.",
   "@KCNeedLoginNoticeDesc": {},
   "KCResourceAmmo": "Ammo",

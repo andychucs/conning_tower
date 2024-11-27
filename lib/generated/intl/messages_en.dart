@@ -271,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCGetNewShipNotify": m3,
         "KCGetNewShipNotifyTitle":
             MessageLookupByLibrary.simpleMessage("New fleet girl"),
+        "KCLowestCond": MessageLookupByLibrary.simpleMessage("Lowest Morale"),
         "KCNeedLoginNoticeDesc": MessageLookupByLibrary.simpleMessage(
             "You need to log in to the game before using this feature."),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),

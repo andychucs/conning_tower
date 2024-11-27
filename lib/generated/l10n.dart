@@ -1420,6 +1420,16 @@ class S {
     );
   }
 
+  /// `Lowest Morale`
+  String get KCLowestCond {
+    return Intl.message(
+      'Lowest Morale',
+      name: 'KCLowestCond',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `You need to log in to the game before using this feature.`
   String get KCNeedLoginNoticeDesc {
     return Intl.message(

@@ -274,6 +274,8 @@
   "@KCGetNewShipNotify": {},
   "KCGetNewShipNotifyTitle": "新艦娘",
   "@KCGetNewShipNotifyTitle": {},
+  "KCLowestCond": "cond値・最小値",
+  "@KCLowestCond": {},
   "KCNeedLoginNoticeDesc": "ゲームにログインする必要があります。",
   "@KCNeedLoginNoticeDesc": {},
   "KCResourceAmmo": "弾薬",

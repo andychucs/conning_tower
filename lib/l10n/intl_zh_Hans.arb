@@ -274,6 +274,8 @@
   "@KCGetNewShipNotify": {},
   "KCGetNewShipNotifyTitle": "新舰娘",
   "@KCGetNewShipNotifyTitle": {},
+  "KCLowestCond": "疲劳度最差",
+  "@KCLowestCond": {},
   "KCNeedLoginNoticeDesc": "登录游戏后才能使用此功能",
   "@KCNeedLoginNoticeDesc": {},
   "KCResourceAmmo": "弹药",

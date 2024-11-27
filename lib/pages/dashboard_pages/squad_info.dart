@@ -181,6 +181,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                 List<int> levelList = [];
                                 List<int> antiSubmarineList = [];
                                 List<int> scoutList = [];
+                                Ship lowestConditionShip = squad.ships[0];
                                 for (var ship in squad.ships) {
                                   speedList.add(ship.speed!);
                                   attackList.add(ship.attack![0]);
@@ -188,6 +189,9 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                   levelList.add(ship.level);
                                   antiSubmarineList.add(ship.antiSubmarine![0]);
                                   scoutList.add(ship.scout![0]);
+                                  if (lowestConditionShip.condition! > ship.condition!) {
+                                    lowestConditionShip = ship;
+                                  }
                                 }
 
                                 return ScrollViewWithCupertinoScrollbar(
@@ -320,6 +324,11 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                                     .of(context)
                                                     .KCDashboardFleetDescription),
                                             children: [
+                                              CupertinoListTile(
+                                                title: Text("${lowestConditionShip.condition}"),
+                                                subtitle: Text(S.current.KCLowestCond),
+                                                additionalInfo: Text('${lowestConditionShip.name}'),
+                                              ),
                                               CupertinoListTile(
                                                 subtitle: Text("Lv"),
                                                 title: Text(
