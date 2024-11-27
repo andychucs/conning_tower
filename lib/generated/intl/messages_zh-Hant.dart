@@ -349,6 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextBonus": MessageLookupByLibrary.simpleMessage("獎勵"),
         "TextBuild": MessageLookupByLibrary.simpleMessage("建造"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "TextCompact": MessageLookupByLibrary.simpleMessage("緊湊"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower格式"),
         "TextCopyToClipboard": MessageLookupByLibrary.simpleMessage("複製"),
@@ -380,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImportingFailed": MessageLookupByLibrary.simpleMessage("導入失敗"),
         "TextItem": MessageLookupByLibrary.simpleMessage("道具"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("大破"),
+        "TextLayout": MessageLookupByLibrary.simpleMessage("佈局"),
         "TextLoginRequired": MessageLookupByLibrary.simpleMessage("請先登入"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("長"),
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
@@ -388,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNetworkError": m9,
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
+        "TextNormal": MessageLookupByLibrary.simpleMessage("通常"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("在Jervis作戰室打開"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("在制空權模擬器打開"),

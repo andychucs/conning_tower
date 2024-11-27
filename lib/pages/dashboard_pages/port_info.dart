@@ -21,6 +21,7 @@ import 'package:intl/intl.dart';
 
 import '../../utils/toast.dart';
 import '../../widgets/kancolle_item_viewer.dart';
+import '../../widgets/kancolle_port_settings_page.dart';
 import '../../widgets/kancolle_ship_register_viewer.dart';
 
 class PortInfo extends ConsumerStatefulWidget {
@@ -33,6 +34,28 @@ class PortInfo extends ConsumerStatefulWidget {
 class _PortInfoState extends ConsumerState<PortInfo>
     with AutomaticKeepAliveClientMixin {
   SeaForceBase? _seaForceBase;
+  double maxCrossAxisExtent = 200.0;
+  double crossAxisSpacing = 12.0;
+  double mainAxisSpacing = 12.0;
+
+  @override
+  void initState() {
+    loadConfig();
+    super.initState();
+  }
+
+  void loadConfig() {
+    final layout = localStorage.getInt("KC_PORT_LAYOUT") ?? 0;
+    if (layout case 0) {
+      maxCrossAxisExtent = 200.0;
+      crossAxisSpacing = 12.0;
+      mainAxisSpacing = 12.0;
+    } else if (layout case 1) {
+      maxCrossAxisExtent = 170.0;
+      crossAxisSpacing = 8.0;
+      mainAxisSpacing = 8.0;
+    }
+  }
 
   @override
   bool get wantKeepAlive => true;
@@ -68,233 +91,229 @@ class _PortInfoState extends ConsumerState<PortInfo>
               return CupertinoPageScaffold(
                 resizeToAvoidBottomInset: false,
                 child: CupertinoScrollbar(
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 8.0, 0.0, 8.0),
-                        child: GridView(
-                          padding: EdgeInsets.all(8),
-                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 170,
-                            childAspectRatio: 1.618,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 10.0, 0.0, 10.0),
+                    child: GridView(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: maxCrossAxisExtent,
+                        childAspectRatio: 1.618,
+                        crossAxisSpacing: crossAxisSpacing,
+                        mainAxisSpacing: mainAxisSpacing,
+                      ),
+                      children: <Widget>[
+                        InfoBox(
+                          top: Text(data.seaForceBase.admiral.rankName),
+                          bottom: AutoSizeText(
+                            data.seaForceBase.admiral.name,
+                            maxFontSize: 30,
+                            minFontSize: 18,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          children: <Widget>[
-                            InfoBox(
-                              top: Text(
-                                  data.seaForceBase.admiral.rankName),
-                              bottom: AutoSizeText(
-                                data.seaForceBase.admiral.name,
-                                maxFontSize: 30,
-                                minFontSize: 18,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                        ),
+                        InfoBox(
+                          top: const Text('Lv.'),
+                          bottom: AutoSizeText(
+                            '${data.seaForceBase.admiral.level}',
+                            maxFontSize: 30,
+                            minFontSize: 18,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        InfoBox(
+                          onTap: () => navigatorToCupertino(
+                              context, const KancolleShipViewer()),
+                          top: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Text(S.of(context).TextFleetGirl)),
+                              const CupertinoListTileChevron(),
+                            ],
+                          ),
+                          bottom: AutoSizeText(
+                            '${data.fleet.ships.length}/${data.seaForceBase.admiral.maxShip}',
+                            maxFontSize: 30,
+                            minFontSize: 18,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        InfoBox(
+                          onTap: () => navigatorToCupertino(
+                            context,
+                            KancolleShipRegisterViewer(
+                              admiralName: data.seaForceBase.admiral.name,
                             ),
-                            InfoBox(
-                              top: const Text('Lv.'),
-                              bottom: AutoSizeText(
-                                '${data.seaForceBase.admiral.level}',
-                                maxFontSize: 30,
-                                minFontSize: 18,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            InfoBox(
-                              onTap: () => navigatorToCupertino(
-                                  context, const KancolleShipViewer()),
-                              top: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                          S.of(context).TextFleetGirl)),
-                                  const CupertinoListTileChevron(),
-                                ],
-                              ),
-                              bottom: AutoSizeText(
-                                '${data.fleet.ships.length}/${data.seaForceBase.admiral.maxShip}',
-                                maxFontSize: 30,
-                                minFontSize: 18,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            InfoBox(
-                              onTap: () => navigatorToCupertino(
-                                context,
-                                KancolleShipRegisterViewer(
-                                  admiralName:
-                                  data.seaForceBase.admiral.name,
+                          ),
+                          top: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Text(S.of(context).TextFleetGirl)),
+                              const CupertinoListTileChevron(),
+                            ],
+                          ),
+                          bottom: AutoSizeText(
+                            S.of(context).KCShipRegisterList,
+                            maxFontSize: 30,
+                            minFontSize: 18,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        InfoBox(
+                          onTap: () {
+                            Toast.showWarning(title: "Not implemented yet.");
+                            // navigatorToCupertino(context, KancolleItemViewer());
+                          },
+                          top: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Text(S.of(context).TextEquipment)),
+                              // const CupertinoListTileChevron(),
+                            ],
+                          ),
+                          bottom: AutoSizeText(
+                            '${data.fleet.equipment.length - data.fleet.uncountedEquipments.length}/${data.seaForceBase.admiral.maxItem}',
+                            maxFontSize: 30,
+                            minFontSize: 18,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        InfoBox(
+                          onTap: () {
+                            if (data.seaForceBase.useItem == null ||
+                                data.dataInfo.itemInfo == null) {
+                              Toast.showWarning(
+                                  title: S.of(context).TextLoginRequired,
+                                  description:
+                                      S.of(context).KCNeedLoginNoticeDesc);
+                              return;
+                            }
+                            navigatorToCupertino(
+                                context, KancolleUseItemViewer());
+                          },
+                          top: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(child: Text(S.of(context).TextItem)),
+                              const CupertinoListTileChevron(),
+                            ],
+                          ),
+                          bottom: KancolleUseItemQuickLook(
+                              useItem: data.seaForceBase.useItem,
+                              itemInfo: data.dataInfo.itemInfo),
+                        ),
+                        InfoBox(
+                          onTap: () {
+                            navigatorToCupertino(
+                                context, const KancolleItemImproveViewer());
+                          },
+                          top: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: AutoSizeText(
+                                  S.of(context).KCAkashiStudio,
+                                  maxFontSize: 30,
+                                  minFontSize: 12,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              top: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                          S.of(context).TextFleetGirl)),
-                                  const CupertinoListTileChevron(),
-                                ],
-                              ),
-                              bottom: AutoSizeText(
-                                S.of(context).KCShipRegisterList,
-                                maxFontSize: 30,
-                                minFontSize: 18,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            InfoBox(
-                              onTap: () {
-                                Toast.showWarning(
-                                    title: "Not implemented yet.");
-                                // navigatorToCupertino(context, KancolleItemViewer());
-                              },
-                              top: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      child: Text(
-                                          S.of(context).TextEquipment)),
-                                  // const CupertinoListTileChevron(),
-                                ],
-                              ),
-                              bottom: AutoSizeText(
-                                '${data.fleet.equipment.length - data.fleet.uncountedEquipments.length}/${data.seaForceBase.admiral.maxItem}',
-                                maxFontSize: 30,
-                                minFontSize: 18,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            InfoBox(
-                              onTap: () {
-                                if (data.seaForceBase.useItem == null ||
-                                    data.dataInfo.itemInfo == null
-                                ) {
-                                  Toast.showWarning(
-                                      title:
-                                      S.of(context).TextLoginRequired,
-                                      description: S
-                                          .of(context)
-                                          .KCNeedLoginNoticeDesc);
-                                  return;
-                                }
-                                navigatorToCupertino(
-                                    context, KancolleUseItemViewer());
-                              },
-                              top: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      child:
-                                      Text(S.of(context).TextItem)),
-                                  const CupertinoListTileChevron(),
-                                ],
-                              ),
-                              bottom: KancolleUseItemQuickLook(
-                                  useItem: data.seaForceBase.useItem,
-                                  itemInfo: data.dataInfo.itemInfo),
-                            ),
-                            InfoBox(
-                              onTap: () {
-                                navigatorToCupertino(context,
-                                    const KancolleItemImproveViewer());
-                              },
-                              top: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: AutoSizeText(
-                                      S.of(context).KCAkashiStudio,
-                                      maxFontSize: 30,
-                                      minFontSize: 12,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  const CupertinoListTileChevron(),
-                                ],
-                              ),
-                              bottom: AutoSizeText(
-                                DateFormat.EEEE().format(nowJstTime),
-                                maxFontSize: 30,
-                                minFontSize: 18,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            ResourceInfoBox(
-                              resource: 'fuel',
-                              color:
-                              const Color.fromRGBO(32, 89, 29, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource.fuel,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'ammo',
-                              color:
-                              const Color.fromRGBO(126, 102, 54, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource.ammo,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'steel',
-                              color: const Color.fromRGBO(
-                                  181, 180, 180, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource.steel,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'bauxite',
-                              color: const Color.fromRGBO(
-                                  219, 150, 102, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource.bauxite,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'ic',
-                              color:
-                              const Color.fromRGBO(255, 176, 7, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource
-                                  .instantCreateShip,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'ir',
-                              color:
-                              const Color.fromRGBO(195, 212, 75, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data
-                                  .seaForceBase.resource.instantRepairs,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'dm',
-                              color:
-                              const Color.fromRGBO(56, 126, 132, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource
-                                  .developmentMaterials,
-                            ),
-                            ResourceInfoBox(
-                              resource: 'im',
-                              color: const Color.fromRGBO(
-                                  186, 186, 186, 1.0),
-                              admiralName: data.seaForceBase.admiral.name,
-                              value: data.seaForceBase.resource
-                                  .improvementMaterials,
-                            ),
-                          ],
+                              const CupertinoListTileChevron(),
+                            ],
+                          ),
+                          bottom: AutoSizeText(
+                            DateFormat.EEEE().format(nowJstTime),
+                            maxFontSize: 30,
+                            minFontSize: 18,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
+                        ResourceInfoBox(
+                          resource: 'fuel',
+                          color: const Color.fromRGBO(32, 89, 29, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value: data.seaForceBase.resource.fuel,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'ammo',
+                          color: const Color.fromRGBO(126, 102, 54, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value: data.seaForceBase.resource.ammo,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'steel',
+                          color: const Color.fromRGBO(181, 180, 180, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value: data.seaForceBase.resource.steel,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'bauxite',
+                          color: const Color.fromRGBO(219, 150, 102, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value: data.seaForceBase.resource.bauxite,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'ic',
+                          color: const Color.fromRGBO(255, 176, 7, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value: data.seaForceBase.resource.instantCreateShip,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'ir',
+                          color: const Color.fromRGBO(195, 212, 75, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value: data.seaForceBase.resource.instantRepairs,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'dm',
+                          color: const Color.fromRGBO(56, 126, 132, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value:
+                              data.seaForceBase.resource.developmentMaterials,
+                        ),
+                        ResourceInfoBox(
+                          resource: 'im',
+                          color: const Color.fromRGBO(186, 186, 186, 1.0),
+                          admiralName: data.seaForceBase.admiral.name,
+                          value:
+                              data.seaForceBase.resource.improvementMaterials,
+                        ),
+                        InfoBox(
+                          onTap: () => navigatorToCupertino(
+                                  context, const KancollePortSettingsPage())
+                              .then(
+                            (value) => setState(() {
+                              loadConfig();
+                            }),
+                          ),
+                          top: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: Text(S.of(context).SettingsButton)),
+                              const CupertinoListTileChevron(),
+                            ],
+                          ),
+                          bottom: Icon(
+                            CupertinoIcons.settings_solid,
+                            color: CupertinoColors.systemGrey2
+                                .resolveFrom(context),
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                ),
               );
             },
           ),
