@@ -271,15 +271,11 @@ class WebController extends _$WebController {
   }
 
   Future<void> adjustWindow() async {
-    if (gameLoadCompleted) {
-      bool flag = await autoAdjustWindowV2(controller, force: true);
-      if (flag) {
-        Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
-      } else {
-        Toast.showError(title: S.current.FutureAutoAdjustWindowFail);
-      }
+    bool flag = await autoAdjustWindowV2(controller, force: true);
+    if (flag) {
+      Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
     } else {
-      Toast.showWarning(title: S.current.KCViewFuncMsgNaviGameLoadNotCompleted);
+      Toast.showError(title: S.current.FutureAutoAdjustWindowFail);
     }
   }
 
