@@ -74,7 +74,7 @@ class _PortInfoState extends ConsumerState<PortInfo>
                         child: GridView(
                           padding: EdgeInsets.all(8),
                           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 180,
+                            maxCrossAxisExtent: 170,
                             childAspectRatio: 1.618,
                             crossAxisSpacing: 12,
                             mainAxisSpacing: 12,
