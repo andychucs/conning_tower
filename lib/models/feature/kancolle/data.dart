@@ -776,4 +776,18 @@ class KancolleData {
     }
     return EventDebuffType.none;
   }
+
+  // void setShipStatusTimer() {
+  //   for (var squad in squads) {
+  //     // find lowest condition ship
+  //     var ship = squad.ships
+  //         .where((element) => element.condition != null)
+  //         .reduce((value, element) => value.condition! < element.condition!
+  //             ? value
+  //             : element);
+  //     if (ship.condition != null) {
+  //
+  //     }
+  //   }
+  // }
 }

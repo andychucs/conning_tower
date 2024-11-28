@@ -1420,6 +1420,16 @@ class S {
     );
   }
 
+  /// `Lowest Morale`
+  String get KCLowestCond {
+    return Intl.message(
+      'Lowest Morale',
+      name: 'KCLowestCond',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `You need to log in to the game before using this feature.`
   String get KCNeedLoginNoticeDesc {
     return Intl.message(
@@ -2200,6 +2210,16 @@ class S {
     );
   }
 
+  /// `Compact`
+  String get TextCompact {
+    return Intl.message(
+      'Compact',
+      name: 'TextCompact',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `ConningTower Format`
   String get TextConningTowerFormat {
     return Intl.message(
@@ -2450,6 +2470,16 @@ class S {
     );
   }
 
+  /// `Layout`
+  String get TextLayout {
+    return Intl.message(
+      'Layout',
+      name: 'TextLayout',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login Required`
   String get TextLoginRequired {
     return Intl.message(
@@ -2525,6 +2555,16 @@ class S {
     return Intl.message(
       'None',
       name: 'TextNone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get TextNormal {
+    return Intl.message(
+      'Normal',
+      name: 'TextNormal',
       desc: '',
       args: [],
     );

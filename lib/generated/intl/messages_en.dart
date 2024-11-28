@@ -271,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCGetNewShipNotify": m3,
         "KCGetNewShipNotifyTitle":
             MessageLookupByLibrary.simpleMessage("New fleet girl"),
+        "KCLowestCond": MessageLookupByLibrary.simpleMessage("Lowest Morale"),
         "KCNeedLoginNoticeDesc": MessageLookupByLibrary.simpleMessage(
             "You need to log in to the game before using this feature."),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("Ammo"),
@@ -393,6 +394,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextBonus": MessageLookupByLibrary.simpleMessage("Bonus"),
         "TextBuild": MessageLookupByLibrary.simpleMessage("Build"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "TextCompact": MessageLookupByLibrary.simpleMessage("Compact"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower Format"),
         "TextCopyToClipboard":
@@ -428,6 +430,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Import failed"),
         "TextItem": MessageLookupByLibrary.simpleMessage("Item"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("Heavily damaged"),
+        "TextLayout": MessageLookupByLibrary.simpleMessage("Layout"),
         "TextLoginRequired":
             MessageLookupByLibrary.simpleMessage("Login Required"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("Long"),
@@ -439,6 +442,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNetworkError": m9,
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
+        "TextNormal": MessageLookupByLibrary.simpleMessage("Normal"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(

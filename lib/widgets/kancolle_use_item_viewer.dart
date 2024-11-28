@@ -82,6 +82,8 @@ class _KancolleUseItemViewerState extends ConsumerState<KancolleUseItemViewer> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        border: null,
+        backgroundColor: CupertinoColors.systemGroupedBackground,
         middle: Text(S.of(context).TextItem),
       ),
       child: SafeArea(

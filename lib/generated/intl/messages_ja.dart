@@ -253,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("艦娘"),
         "KCGetNewShipNotify": m3,
         "KCGetNewShipNotifyTitle": MessageLookupByLibrary.simpleMessage("新艦娘"),
+        "KCLowestCond": MessageLookupByLibrary.simpleMessage("cond値・最小値"),
         "KCNeedLoginNoticeDesc":
             MessageLookupByLibrary.simpleMessage("ゲームにログインする必要があります。"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("弾薬"),
@@ -365,6 +366,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextBonus": MessageLookupByLibrary.simpleMessage("ボーナス"),
         "TextBuild": MessageLookupByLibrary.simpleMessage("建造"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "TextCompact": MessageLookupByLibrary.simpleMessage("コンパクト"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower形式"),
         "TextCopyToClipboard": MessageLookupByLibrary.simpleMessage("コピー"),
@@ -398,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("インポートに失敗しました"),
         "TextItem": MessageLookupByLibrary.simpleMessage("アイテム"),
         "TextLDamage": MessageLookupByLibrary.simpleMessage("大破"),
+        "TextLayout": MessageLookupByLibrary.simpleMessage("レイアウト"),
         "TextLoginRequired": MessageLookupByLibrary.simpleMessage("ログインが必要です"),
         "TextLongRange": MessageLookupByLibrary.simpleMessage("長"),
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
@@ -406,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextNetworkError": m9,
         "TextNo": MessageLookupByLibrary.simpleMessage("いいえ"),
         "TextNone": MessageLookupByLibrary.simpleMessage("無"),
+        "TextNormal": MessageLookupByLibrary.simpleMessage("通常"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("Jervis作戦室で開く"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("制空権シミュレータで開く"),
