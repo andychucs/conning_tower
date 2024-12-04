@@ -165,9 +165,6 @@ class WebController extends _$WebController {
       await closeLocalServer();
     }
 
-    if (uri.host.endsWith(kDMMDomain)){
-      await manageUserScriptOnDMM(true);
-    }
     inKancolleWindow = false;
     autoAdjusted = false;
     if (uri.path.startsWith(gameUrlPath)) {
@@ -365,6 +362,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> onWebviewCreate() async {
+    if (useDMMCookieModify) await manageKCUserScript(true);
     if (useKancolleListener) {
       await addKCUserScript();
       //Listen Kancolle API
