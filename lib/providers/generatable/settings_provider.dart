@@ -22,6 +22,7 @@ class SettingsState with _$SettingsState {
     required AppLayout appLayout,
     required bool showDashboardInHome,
     required bool useKancolleListener,
+    required bool useDMMCookieModify,
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
@@ -47,6 +48,7 @@ class Settings extends _$Settings {
         localStorage.getBool('showDashboardInHome') ?? true;
     bool useKancolleListener =
         localStorage.getBool("useKancolleListener") ?? true;
+    bool useDMMCookieModify = localStorage.getBool("useDMMCookieModify") ?? false;
     return SettingsState(
       dashboardIndex: dashboardIndex,
       kcSparkEmoji: kcSparkEmoji,
@@ -60,6 +62,7 @@ class Settings extends _$Settings {
       appLayout: appLayout,
       showDashboardInHome: showDashboardInHome,
       useKancolleListener: useKancolleListener,
+      useDMMCookieModify: useDMMCookieModify,
     );
   }
 
