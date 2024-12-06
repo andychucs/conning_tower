@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ui';
 
+import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/models/data/data_model_adapter.dart';
 import 'package:conning_tower/models/feature/kancolle/battle_info.dart';
 import 'package:conning_tower/models/feature/kancolle/ship.dart';
@@ -7,8 +9,11 @@ import 'package:conning_tower/models/feature/kancolle/squad.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
-  group("Battle", () {
+  setUp(() {
+    S.load(Locale.fromSubtags(languageCode: 'en'));
+  });
 
+  group("Battle", () {
     // demo data.
     // make 12 ships
     List<Ship> ships = List.generate(12, (index) => Ship(uid: index, shipId: index, level: 1, nowHP: 100, maxHP: 100));
@@ -28,7 +33,6 @@ main() {
       final battleInfo = BattleInfo();
       battleInfo.parseBattle(model.apiData!, inBattleSquads);
       expect(battleInfo.formation, 11);
-
     });
 
     test("Battle EC", () {

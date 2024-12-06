@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../utils/toast.dart';
+import '../../../generated/l10n.dart';
 import 'map_info.dart';
 import 'ship.dart';
 import 'squad.dart';
@@ -330,9 +331,9 @@ class BattleInfo with _$BattleInfo {
   void initDoubleEnemySquads(DoubleEnemyBattleData data) {
     enemySquads = [
       Squad.fromSingleEnemy(
-          data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps),
+          data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps, data.apiESlot),
       Squad.fromSingleEnemy(data.apiShipKeCombined!, data.apiShipLvCombined!,
-          data.apiEMaxhpsCombined!, data.apiENowhpsCombined!),
+          data.apiEMaxhpsCombined!, data.apiENowhpsCombined!, data.apiESlotCombined!),
     ];
   }
 
@@ -383,7 +384,7 @@ class BattleInfo with _$BattleInfo {
   void initSingleEnemySquads(BattleBasicModel data) {
     enemySquads = [
       Squad.fromSingleEnemy(
-          data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps)
+          data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps, data.apiESlot)
     ];
   }
 
@@ -493,7 +494,7 @@ class BattleInfo with _$BattleInfo {
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
         if (data.apiEnemyInfo != null) {
-          squad.name = data.apiEnemyInfo?.apiDeckName ?? '敵艦隊';
+          squad.name = data.apiEnemyInfo?.apiDeckName ?? S.current.KCDashboardBattleEnemy;
         }
       }
     }
@@ -526,7 +527,7 @@ class BattleInfo with _$BattleInfo {
     }
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
-        squad.name = data.apiEnemyInfo.apiDeckName ?? '敵艦隊';
+        squad.name = data.apiEnemyInfo.apiDeckName ?? S.current.KCDashboardBattleEnemy;
       }
     }
     mvp = data.apiMvp;

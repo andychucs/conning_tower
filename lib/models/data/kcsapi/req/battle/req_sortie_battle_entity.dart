@@ -34,7 +34,7 @@ class ReqSortieBattleApiDataEntity
     @JsonKey(name: 'api_ship_lv') required List<int> apiShipLv,
     @JsonKey(name: 'api_e_nowhps') required List<dynamic> apiENowhps,
     @JsonKey(name: 'api_e_maxhps') required List<dynamic> apiEMaxhps,
-    @JsonKey(name: 'api_eSlot') required List<dynamic> apiESlot,
+    @JsonKey(name: 'api_eSlot') required List<List<int>> apiESlot,
     @JsonKey(name: 'api_eParam') required List<dynamic> apiEParam,
     @JsonKey(name: 'api_smoke_type') required int apiSmokeType,
     @JsonKey(name: 'api_midnight_flag') required int apiMidnightFlag,
