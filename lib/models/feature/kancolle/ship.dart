@@ -322,6 +322,7 @@ class Ship with _$Ship {
     required int level,
     required dynamic nowHP,
     required dynamic maxHP,
+    required List<int> slot,
   }) {
     if (nowHP is int && maxHP is int) {
       return Ship(
@@ -330,6 +331,7 @@ class Ship with _$Ship {
         level: level,
         nowHP: nowHP,
         maxHP: maxHP,
+        slot: slot,
       );
     }
     return Ship(

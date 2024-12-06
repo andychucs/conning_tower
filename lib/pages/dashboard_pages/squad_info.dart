@@ -3,15 +3,11 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
-import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
-import 'package:conning_tower/models/feature/kancolle/equipment.dart';
 import 'package:conning_tower/models/feature/kancolle/ship.dart';
-import 'package:conning_tower/models/feature/kancolle/squad.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/local_navigator.dart';
 import 'package:conning_tower/widgets/components/edge_insets_constants.dart';
 import 'package:conning_tower/widgets/components/label.dart';
-import 'package:conning_tower/widgets/cupertino_grouped_section.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:conning_tower/widgets/squads_share_button.dart';
@@ -25,6 +21,7 @@ import 'package:pull_down_button/pull_down_button.dart';
 import '../../models/data/l10n/kancolle_localization.dart';
 import '../../providers/generatable/kancolle_event_ship_tags_provider.dart';
 import '../../providers/generatable/kancolle_localization_provider.dart';
+import '../../widgets/kancolle_squad_slot_info.dart';
 
 const _sectionMargin = EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 10.0);
 const _normalMargin = EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0);
@@ -382,7 +379,7 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                           )
                                         ]
                                       : [
-                                          SlotItemPage(
+                                          KancolleSquadSlotInfo(
                                             squad: squad,
                                             slotMap: data.fleet.equipment,
                                             slotItemInfo:
@@ -465,105 +462,6 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
       );
     }
     return Text(ship.name!);
-  }
-}
-
-class SlotItemPage extends StatelessWidget {
-  const SlotItemPage({
-    super.key,
-    required this.squad,
-    required this.slotMap,
-    this.slotItemInfo,
-    this.l10nData,
-  });
-
-  final Squad squad;
-  final Map<int, Equipment> slotMap;
-  final Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo;
-  final KancolleLocalizationData? l10nData;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color dividerColor = CupertinoColors.separator.resolveFrom(context);
-    final double dividerHeight = 1.0 / MediaQuery.devicePixelRatioOf(context);
-
-    return CupertinoGroupedSection(
-      padding: tabBottomListMargin,
-      child: Column(
-        children: squad.ships.expand((ship) {
-          final index = squad.ships.indexOf(ship);
-          return [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Center(
-                      child: Text(
-                        ship.name!,
-                        softWrap: true,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Expanded(
-                    flex: 7,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (final (index, item) in ship.slot!.indexed)
-                          if (item != -1)
-                            equipmentItem(context, item, ship, index),
-                        if (ship.slotEx != null &&
-                            ship.slotEx != -1 &&
-                            ship.slotEx != 0)
-                          Text(slotMap[ship.slotEx]
-                                  ?.text(l10nMap: l10nData?.equipmentLocal) ??
-                              "N/A"),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            if (index < squad.ships.length - 1)
-              Divider(
-                height: 1,
-                thickness: dividerHeight,
-                indent: 16,
-                color: dividerColor,
-              ),
-          ];
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget equipmentItem(BuildContext context, int item, Ship ship, int index) {
-    final text = Text(
-      slotMap[item]?.text(
-              onSlot: ship.onSlot?[index], l10nMap: l10nData?.equipmentLocal) ??
-          "N/A",
-      softWrap: true,
-    );
-    if (ship.onSlot?[index] == null) {
-      return text;
-    }
-    final iconData = slotMap[item]?.proficiencyIcon;
-    final iconColor = slotMap[item]?.proficiencyColor;
-    return Row(
-      children: [
-        Expanded(child: text),
-        Icon(
-          iconData,
-          size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
-          color: iconColor,
-        ),
-      ],
-    );
   }
 }
 

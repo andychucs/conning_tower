@@ -52,6 +52,7 @@ abstract class BattleBasicModel {
   late List<dynamic> apiENowhps;
   late List<dynamic> apiEMaxhps;
   late List<int>? apiEscapeIdx;
+  late List<List<int>> apiESlot;
 }
 
 abstract class DoubleEnemyBattleData extends BattleBasicModel {
@@ -59,6 +60,7 @@ abstract class DoubleEnemyBattleData extends BattleBasicModel {
   late List<int>? apiShipLvCombined;
   late List<dynamic>? apiENowhpsCombined;
   late List<dynamic>? apiEMaxhpsCombined;
+  late List<List<int>>? apiESlotCombined;
 }
 
 abstract class DoubleOurBattleData extends BattleBasicModel {

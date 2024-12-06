@@ -790,6 +790,16 @@ class S {
     );
   }
 
+  /// `Enemy Fleet`
+  String get KCDashboardBattleEnemy {
+    return Intl.message(
+      'Enemy Fleet',
+      name: 'KCDashboardBattleEnemy',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Last Chosen: {data}`
   String KCDashboardBattleLastChosen(Object data) {
     return Intl.message(
@@ -805,6 +815,26 @@ class S {
     return Intl.message(
       'Cleared',
       name: 'KCDashboardBattleMapStateCleared',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get KCDashboardBattleMoreInfo {
+    return Intl.message(
+      'More',
+      name: 'KCDashboardBattleMoreInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our Fleet`
+  String get KCDashboardBattleOur {
+    return Intl.message(
+      'Our Fleet',
+      name: 'KCDashboardBattleOur',
       desc: '',
       args: [],
     );

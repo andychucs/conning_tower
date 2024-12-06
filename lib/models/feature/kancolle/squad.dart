@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../generated/l10n.dart';
 import 'ship.dart';
 
 part 'squad.freezed.dart';
@@ -56,7 +57,7 @@ class Squad with _$Squad {
   }
 
   factory Squad.fromSingleEnemy(List<int> enemyId, List<int> enemyLv,
-      List<dynamic> enemyMaxHP, List<dynamic> enemyNowHP) {
+      List<dynamic> enemyMaxHP, List<dynamic> enemyNowHP, List<List<int>> slotData) {
     assert(
         enemyId.length == enemyLv.length &&
             enemyLv.length == enemyMaxHP.length &&
@@ -68,9 +69,10 @@ class Squad with _$Squad {
       var level = enemyLv[i];
       var nowHP = enemyNowHP[i];
       var maxHP = enemyMaxHP[i];
-      ships.add(Ship.enemy(id: id, level: level, nowHP: nowHP, maxHP: maxHP));
+      var slot = slotData[i];
+      ships.add(Ship.enemy(id: id, level: level, nowHP: nowHP, maxHP: maxHP, slot: slot));
     }
-    return Squad(id: 1, name: '敵艦隊', ships: ships);
+    return Squad(id: 1, name: S.current.KCDashboardBattleEnemy, ships: ships);
   }
 
   factory Squad.fromSingleFriend(List<int> friendId, List<int> friendLv,
