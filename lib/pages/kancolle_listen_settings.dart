@@ -198,7 +198,7 @@ class _KancolleListenSettingsState
             CupertinoListSection.insetGrouped(
               children: [
                 CupertinoListTile(
-                  title: Text("Automatic Modify DMM Cookie"),
+                  title: Text("Automatic Bypass Foreign Block"),
                   subtitle: Text("For oversea user"),
                   leading: const DummyIcon(
                       color: CupertinoColors.activeBlue,
@@ -207,9 +207,9 @@ class _KancolleListenSettingsState
                     value: ref.watch(settingsProvider).useDMMCookieModify,
                     onChanged: (value) async {
                       HapticFeedback.mediumImpact();
-                      ref
-                          .watch(webControllerProvider)
-                          .manageUserScriptOnDMM(value);
+                      // ref
+                      //     .watch(webControllerProvider)
+                      //     .manageUserScriptOnDMM(value);
                       ref.watch(settingsProvider.notifier).setBool('useDMMCookieModify', value);
                     },
                   ),

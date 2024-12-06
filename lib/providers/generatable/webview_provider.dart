@@ -46,22 +46,21 @@ String getDMMCookieString() {
   var now = DateTime.now();
   var nextYearDate = now.add(Duration(days: 365));
   // Convert to JavaScript Date.toUTCString()
-  String expires = "${DateFormat('E, d MMM yyyy HH:mm:ss').format(nextYearDate)} GMT";
+  String expires = "${DateFormat('E, dd MMM yyyy HH:mm:ss').format(nextYearDate)} GMT";
   String script = '''
-    document.cookie = `cklg=welcome;expires=$expires;domain=.dmm.com;path=/`
-    document.cookie = `cklg=welcome;expires=$expires;domain=.dmm.com;path=/netgame/`
-    document.cookie = `cklg=welcome;expires=$expires;domain=.dmm.com;path=/netgame_s/`
-    document.cookie = `ckcy=1;expires=$expires;domain=osapi.dmm.com;path=/`
-    document.cookie = `ckcy=1;expires=$expires;domain=203.104.209.7;path=/`
-    document.cookie = `ckcy=1;expires=$expires;domain=www.dmm.com;path=/netgame/`
-    document.cookie = `ckcy=1;expires=$expires;domain=log-netgame.dmm.com;path=/`
-    document.cookie = `ckcy=1;expires=$expires;domain=.dmm.com;path=/`
-    document.cookie = `ckcy=1;expires=$expires;domain=.dmm.com;path=/netgame/`
-    document.cookie = `ckcy=1;expires=$expires;domain=.dmm.com;path=/netgame_s/`
-    ''';
+document.cookie='cklg=welcome;expires=$expires;domain=.dmm.com;path=/;'
+document.cookie='cklg=welcome;expires=$expires;domain=.dmm.com;path=/netgame/;'
+document.cookie='cklg=welcome;expires=$expires;domain=.dmm.com;path=/netgame_s/;'
+document.cookie='ckcy=1;expires=$expires;domain=osapi.dmm.com;path=/;'
+document.cookie='ckcy=1;expires=$expires;domain=203.104.209.7;path=/;'
+document.cookie='ckcy=1;expires=$expires;domain=www.dmm.com;path=/netgame/;'
+document.cookie='ckcy=1;expires=$expires;domain=log-netgame.dmm.com;path=/;'
+document.cookie='ckcy=1;expires=$expires;domain=.dmm.com;path=/;'
+document.cookie='ckcy=1;expires=$expires;domain=.dmm.com;path=/netgame/;'
+document.cookie='ckcy=1;expires=$expires;domain=.dmm.com;path=/netgame_s/;'
+''';
   return script;
 }
-
 @freezed
 class WebControllerState with _$WebControllerState {
   factory WebControllerState(
@@ -163,6 +162,9 @@ class WebController extends _$WebController {
       await startLocalServer();
     } else {
       await closeLocalServer();
+    }
+    if (useDMMCookieModify && uri.path.contains("/foreign/") && uri.host.endsWith(kDMMDomain)) {
+      state.controller.loadUrl(urlRequest: URLRequest(url: WebUri(kGameUrlApp)));
     }
 
     inKancolleWindow = false;
