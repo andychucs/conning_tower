@@ -22,6 +22,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'webview_provider.g.dart';
@@ -35,6 +36,31 @@ UserScript get kancolleUserScript => UserScript(
     forMainFrameOnly: false,
     groupName: "KC");
 
+UserScript get dmmCookieScript => UserScript(
+    source: getDMMCookieString(),
+    injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+    forMainFrameOnly: false,
+    groupName: "DMM");
+
+String getDMMCookieString() {
+  var now = DateTime.now();
+  var nextYearDate = now.add(Duration(days: 365));
+  // Convert to JavaScript Date.toUTCString()
+  String expires = "${DateFormat('E, dd MMM yyyy HH:mm:ss').format(nextYearDate)} GMT";
+  String script = '''
+document.cookie='cklg=welcome;expires=$expires;domain=.dmm.com;path=/'
+document.cookie='cklg=welcome;expires=$expires;domain=.dmm.com;path=/netgame/'
+document.cookie='cklg=welcome;expires=$expires;domain=.dmm.com;path=/netgame_s/'
+document.cookie='ckcy=1;expires=$expires;domain=osapi.dmm.com;path=/'
+document.cookie='ckcy=1;expires=$expires;domain=203.104.209.7;path=/'
+document.cookie='ckcy=1;expires=$expires;domain=www.dmm.com;path=/netgame/'
+document.cookie='ckcy=1;expires=$expires;domain=log-netgame.dmm.com;path=/'
+document.cookie='ckcy=1;expires=$expires;domain=.dmm.com;path=/'
+document.cookie='ckcy=1;expires=$expires;domain=.dmm.com;path=/netgame/'
+document.cookie='ckcy=1;expires=$expires;domain=.dmm.com;path=/netgame_s/'
+''';
+  return script;
+}
 @freezed
 class WebControllerState with _$WebControllerState {
   factory WebControllerState(
@@ -61,11 +87,15 @@ class WebController extends _$WebController {
 
   bool gameLoadCompleted = false;
 
+  bool dmmCookieModified = false;
+
   get customHomeUrl => ref.watch(settingsProvider).customHomeUrl;
 
   get enableAutoProcess => ref.watch(settingsProvider).enableAutoProcess;
 
   bool get useKancolleListener => ref.watch(settingsProvider).useKancolleListener;
+
+  bool get useDMMCookieModify => ref.watch(settingsProvider).useDMMCookieModify;
 
   @override
   WebController build() {
@@ -133,6 +163,9 @@ class WebController extends _$WebController {
     } else {
       await closeLocalServer();
     }
+    if (useDMMCookieModify && uri.path.contains("/foreign/") && uri.host.endsWith(kDMMDomain)) {
+      state.controller.loadUrl(urlRequest: URLRequest(url: WebUri(kGameUrlApp)));
+    }
 
     inKancolleWindow = false;
     autoAdjusted = false;
@@ -140,6 +173,17 @@ class WebController extends _$WebController {
       log("game load start");
     } else if (uri.host == kDMMOSAPIDomain) {
       inKancolleWindow = true;
+    }
+  }
+
+  Future<void> manageUserScriptOnDMM(bool enable) async {
+    if (useDMMCookieModify && enable && !dmmCookieModified) {
+      await controller.addUserScript(userScript: dmmCookieScript);
+      dmmCookieModified = true;
+    }
+    if (!enable) {
+      await controller.removeUserScriptsByGroupName(groupName: "DMM");
+      dmmCookieModified = false;
     }
   }
 
@@ -320,6 +364,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> onWebviewCreate() async {
+    if (useDMMCookieModify) await manageKCUserScript(true);
     if (useKancolleListener) {
       await addKCUserScript();
       //Listen Kancolle API
@@ -351,13 +396,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> kancolleCookieModify() async {
-    var nextYear = DateTime.now().year + 1;
-    String script = '''
-    document.cookie='ckcy=1;expires=Sun, 04 Feb $nextYear 09:00:09 GMT;domain=osapi.dmm.com;path=/';
-    document.cookie='ckcy=1;expires=Sun, 04 Feb $nextYear 09:00:09 GMT;domain=203.104.209.7;path=/';
-    document.cookie='ckcy=1;expires=Sun, 04 Feb $nextYear 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';
-    document.cookie='ckcy=1;expires=Sun, 04 Feb $nextYear 09:00:09 GMT;domain=log-netgame.dmm.com;path=/';
-    ''';
+    String script = getDMMCookieString();
     await controller.evaluateJavascript(source: script);
   }
 

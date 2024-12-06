@@ -196,6 +196,38 @@ class _KancolleListenSettingsState
                   ),
                 ]),
             CupertinoListSection.insetGrouped(
+              children: [
+                CupertinoListTile(
+                  title: Text("Automatic Bypass Foreign Block"),
+                  subtitle: Text("For oversea user"),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeBlue,
+                      icon: CupertinoIcons.globe),
+                  trailing: CupertinoSwitch(
+                    value: ref.watch(settingsProvider).useDMMCookieModify,
+                    onChanged: (value) async {
+                      HapticFeedback.mediumImpact();
+                      // ref
+                      //     .watch(webControllerProvider)
+                      //     .manageUserScriptOnDMM(value);
+                      ref.watch(settingsProvider.notifier).setBool('useDMMCookieModify', value);
+                    },
+                  ),
+                ),
+                CupertinoListTile(
+                  title: Text("Modify DMM Cookie"),
+                  subtitle: Text("For oversea user"),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeGreen,
+                      icon: CupertinoIcons.airplane),
+                  onTap: () async {
+                    HapticFeedback.mediumImpact();
+                    await ref.read(webControllerProvider).kancolleCookieModify();
+                  },
+                ),
+              ],
+            ),
+            CupertinoListSection.insetGrouped(
                 children: [
                   CupertinoListTile(
                     title: const Text("Libraries"),

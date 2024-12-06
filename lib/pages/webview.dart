@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 import 'dart:io';
 
@@ -68,7 +69,10 @@ class AppWebViewState extends ConsumerState<AppWebView> {
               InAppWebView(
                 key: webViewKey,
                 initialSettings: webViewSetting,
-                initialUrlRequest: URLRequest(url: WebUri(homeUrl)),
+                initialUrlRequest: URLRequest(url: WebUri(homeUrl), httpShouldHandleCookies: true),
+              initialUserScripts: UnmodifiableListView([
+                dmmCookieScript,
+              ]),
                 onWebViewCreated: (InAppWebViewController controller) {
                   webController.setController(controller);
                   // ref.read(webViewControllerProvider.notifier).setController(controller);
