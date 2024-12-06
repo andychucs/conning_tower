@@ -140,7 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("全海域"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "目前只有通常艦隊對通常艦隊的一般戰鬥數據中的航空戰、反潛戰、砲擊戰、雷擊戰可以解析。"),
-        "KCDashboardBattleEnemy": MessageLookupByLibrary.simpleMessage("敌方舰队"),
+        "KCDashboardBattleEnemy": MessageLookupByLibrary.simpleMessage("敵方艦隊"),
         "KCDashboardBattleLastChosen": m1,
         "KCDashboardBattleMapStateCleared":
             MessageLookupByLibrary.simpleMessage("已攻略"),

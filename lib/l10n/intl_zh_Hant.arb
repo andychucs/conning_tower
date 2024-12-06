@@ -148,7 +148,7 @@
   "@KCDashboardBattleAllMap": {},
   "KCDashboardBattleDescription": "目前只有通常艦隊對通常艦隊的一般戰鬥數據中的航空戰、反潛戰、砲擊戰、雷擊戰可以解析。",
   "@KCDashboardBattleDescription": {},
-  "KCDashboardBattleEnemy": "敌方舰队",
+  "KCDashboardBattleEnemy": "敵方艦隊",
   "@KCDashboardBattleEnemy": {},
   "KCDashboardBattleLastChosen": "上次選擇: {data}",
   "@KCDashboardBattleLastChosen": {},
