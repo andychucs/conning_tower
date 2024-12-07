@@ -207,9 +207,9 @@ class _KancolleListenSettingsState
                     value: ref.watch(settingsProvider).useDMMCookieModify,
                     onChanged: (value) async {
                       HapticFeedback.mediumImpact();
-                      // ref
-                      //     .watch(webControllerProvider)
-                      //     .manageUserScriptOnDMM(value);
+                      ref
+                          .watch(webControllerProvider)
+                          .manageUserScriptOnDMM(value);
                       ref.watch(settingsProvider.notifier).setBool('useDMMCookieModify', value);
                     },
                   ),

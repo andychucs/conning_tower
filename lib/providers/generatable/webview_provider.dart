@@ -364,9 +364,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> onWebviewCreate() async {
-    if (useDMMCookieModify) await manageKCUserScript(true);
     if (useKancolleListener) {
-      await addKCUserScript();
       //Listen Kancolle API
       WebMessageListener kcListener = WebMessageListener(
         jsObjectName: "kcMessage",
