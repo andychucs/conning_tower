@@ -73,7 +73,6 @@ class AppWebViewState extends ConsumerState<AppWebView> {
               initialUserScripts: UnmodifiableListView([
                 if (settings.useDMMCookieModify) dmmCookieScript,
                 if (settings.useKancolleListener) kancolleUserScript,
-                if (settings.useKancolleListener) alignUserScript,
               ]),
                 onWebViewCreated: (InAppWebViewController controller) {
                   webController.setController(controller);
