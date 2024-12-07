@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/helper.dart';
@@ -67,6 +69,21 @@ class _KancolleListenSettingsState
                     },
                   ),
                 ),
+                if (Platform.isAndroid)
+                  CupertinoListTile(
+                    title: Text("${S.of(context).KanColleDataListener} (Android Intercept)"),
+                    subtitle: Text(S.of(context).ToolUATip),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeGreen,
+                        icon: CupertinoIcons.search),
+                    trailing: CupertinoSwitch(
+                      value: settings.kancolleListenerType == 1,
+                      onChanged: (value) async {
+                        HapticFeedback.mediumImpact();
+                        ref.watch(settingsProvider.notifier).setInt('kancolleListenerType', value ? 1 : 0);
+                      },
+                    ),
+                  ),
                 CupertinoListTile(
                   title: Text(S.of(context).KanColleLogbook),
                   trailing: const CupertinoListTileChevron(),

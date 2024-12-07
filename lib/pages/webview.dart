@@ -47,7 +47,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
         //Allow window.open JS
         javaScriptCanOpenWindowsAutomatically: true,
         //Android intercept kancolle API
-        useShouldInterceptRequest: false,
+        useShouldInterceptRequest: true,
         isElementFullscreenEnabled: false,
         mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
         upgradeKnownHostsToHTTPS: false,
@@ -72,7 +72,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
                 initialUrlRequest: URLRequest(url: WebUri(homeUrl), httpShouldHandleCookies: true),
               initialUserScripts: UnmodifiableListView([
                 if (settings.useDMMCookieModify) dmmCookieScript,
-                if (settings.useKancolleListener) kancolleUserScript,
+                if (settings.useKancolleListener && settings.kancolleListenerType == 0) kancolleUserScript,
               ]),
                 onWebViewCreated: (InAppWebViewController controller) {
                   webController.setController(controller);
@@ -104,12 +104,15 @@ class AppWebViewState extends ConsumerState<AppWebView> {
                   debugPrint("onContentSizeChanged $oldContentSize, $newContentSize");
                   webController.onContentSizeChanged();
                 },
-                //shouldInterceptRequest: (
-                //  controller,
-                //  WebResourceRequest request,
-                //) async {
-                //  return webController.onShouldInterceptRequest(request);
-                //},
+                shouldInterceptRequest: (
+                  controller,
+                  WebResourceRequest request,
+                ) async {
+                if (settings.kancolleListenerType == 1) {
+                  return webController.onShouldInterceptRequest(request);
+                }
+                return null;
+                },
                 onProgressChanged: (controller, progress) {
                   setState(() {
                     this.progress = progress / 100;
