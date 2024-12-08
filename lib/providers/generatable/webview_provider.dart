@@ -255,8 +255,7 @@ class WebController extends _$WebController {
   Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
       {bool force = false, bool needToaste = false}) async {
     //Adjust Kancolle window
-    if ((inKancolleWindow && !autoAdjusted) ||
-        (force && inKancolleWindow)) {
+    if ((inKancolleWindow && !autoAdjusted) || force) {
       if (Platform.isIOS) {
         await controller.injectJavascriptFileFromAsset(
             assetFilePath: autoScaleIOSJS);
