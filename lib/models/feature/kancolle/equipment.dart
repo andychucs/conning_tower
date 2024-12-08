@@ -44,6 +44,11 @@ class Equipment with _$Equipment {
     int? distance, // api_distance 航空機の航続距離
   }) = _Equipment;
 
+  Map<String, int> toNoro6Data() => {
+    "api_slotitem_id": id,
+    "api_level": level ?? 0,
+  };
+
   factory Equipment.fromApi(SlotItem item,
       Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfoMap) {
     Equipment equipment = Equipment(

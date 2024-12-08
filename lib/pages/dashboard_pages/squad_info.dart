@@ -311,7 +311,12 @@ class _SquadInfoState extends ConsumerState<SquadInfo>
                                                 ),
                                               SquadsShareButton
                                                   .cupertinoListTile(
-                                                      squads: squads),
+                                                squads: squads,
+                                                ships: data.fleet.ships,
+                                                equipments: data
+                                                    .fleet.equipment.values
+                                                    .toList(),
+                                              ),
                                             ],
                                           ),
                                           CupertinoListSection.insetGrouped(

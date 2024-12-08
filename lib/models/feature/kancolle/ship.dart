@@ -30,7 +30,7 @@ class Ship with _$Ship {
     List<int>? slot,
     List<int>? onSlot,
     int? slotEx,
-    // required List<int> apiKyouka,
+    List<int>? enhancement, // api_kyouka 強化
     // required int apiBacks,
     int? fuel,
     int? bull,
@@ -59,6 +59,15 @@ class Ship with _$Ship {
     int? sallyArea,
     bool? escape,
   }) = _Ship;
+
+  Map<String, dynamic> toNoro6Data() => {
+        "api_ship_id": shipId,
+        "api_lv": level,
+        "api_kyouka": enhancement,
+        "api_exp": this.exp,
+        "api_slot_ex": slotEx,
+        "api_sally_area": sallyArea,
+      };
 
   factory Ship.fromJson(Map<String, dynamic> json) => _$ShipFromJson(json);
 
@@ -410,6 +419,7 @@ class Ship with _$Ship {
       equipment: equips,
       exEquipment: equipsEx,
       sallyArea: data.apiSallyArea,
+      enhancement: data.apiKyouka,
     );
   }
 
@@ -464,6 +474,7 @@ class Ship with _$Ship {
       equipment: equips,
       exEquipment: equipsEx,
       sallyArea: data.apiSallyArea,
+      enhancement: data.apiKyouka,
     );
   }
 }
