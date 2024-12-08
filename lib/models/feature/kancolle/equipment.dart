@@ -45,7 +45,7 @@ class Equipment with _$Equipment {
   }) = _Equipment;
 
   Map<String, int> toNoro6Data() => {
-    "api_slotitem_id": id,
+    "api_slotitem_id": itemId ?? 0,
     "api_level": level ?? 0,
   };
 
