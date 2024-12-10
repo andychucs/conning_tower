@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
+import 'package:conning_tower/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../helper.dart';
 import '../../models/data/ooyodo/akashi_schedule.dart';
 import '../../models/feature/kancolle/equipment.dart';
 
@@ -20,8 +20,7 @@ const kAkashiScheduleUrl = "https://conntower.github.io/ooyodo/data/akashi_sched
 @riverpod
 class KancolleItemData extends _$KancolleItemData {
   Future<File> get _localJsonFile async {
-    final path = await localPath;
-    return File('$path/providers/akashi_schedule.json');
+    return File(pathUtil.localAkashiSchedulePath);
   }
 
   Future<void> _saveLocalData(AkashiSchedule akashiSchedule) async {

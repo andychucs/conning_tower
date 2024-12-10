@@ -64,12 +64,6 @@ Uint8List convertStringToUint8List(String str) {
   return unit8List;
 }
 
-Future<String> get localPath async {
-  final directory = await getApplicationDocumentsDirectory();
-
-  return directory.path;
-}
-
 List<int> getAllIndices<T>(List<T> list, T element) {
   List<int> indices = [];
   int index = -1;

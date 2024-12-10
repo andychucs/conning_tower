@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:conning_tower/constants.dart';
-import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/github_api/git_hub_refs_entity.dart';
 import 'package:conning_tower/models/data/kcwiki/kcwiki_data.dart';
@@ -17,8 +16,7 @@ part 'kcwiki_data_provider.g.dart';
 @riverpod
 class KcWikiDataState extends _$KcWikiDataState {
   Future<File> get _localJsonFile async {
-    final path = await localPath;
-    return File('$path/providers/kcwiki_data.json');
+    return File(pathUtil.localKcWikiDataPath);
   }
 
   @override
