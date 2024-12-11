@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
@@ -316,6 +317,8 @@ class KancolleData {
       };
       dataInfo.shipTypeList = model.apiData.apiMstStype;
       dataInfo.initShipUpgradeMap();
+
+      cacheData(source, path, data);
     }
 
     if (model is ReqMissionStartEntity) {
@@ -443,6 +446,34 @@ class KancolleData {
           .read(kancolleItemDataProvider.notifier)
           .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
+    }
+  }
+
+  void cacheData(String source, String path, String data) {
+    if (source.startsWith("local")) {
+      return;
+    }
+    // save data to local file
+    final file = File(pathUtil.getKcCacheDataPath(path));
+    file.writeAsStringSync(data);
+  }
+
+
+  void loadCachedData() {
+    _loadCachedData(GetDataEntity.source);
+  }
+
+  void _loadCachedData(String source) {
+    final localFile =
+    File(pathUtil.getKcCacheDataPath(source));
+    if (localFile.existsSync()) {
+      final cacheString = localFile.readAsStringSync();
+      final rawData = RawData(
+        source: "local/kcsapi/$source",
+        data: cacheString,
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      );
+      parse(rawData);
     }
   }
 

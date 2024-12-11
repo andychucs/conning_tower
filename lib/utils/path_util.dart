@@ -2,10 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart' as p;
 
 class PathUtil {
-  bool isInit = false;
+  late Directory appDocumentsDirectory;
 
   late String objectBoxPath;
   late String objectBoxDataDBPath;
@@ -26,19 +26,32 @@ class PathUtil {
   }
 
   PathUtil._create(Directory docsDir) {
-    objectBoxPath = path.join(docsDir.path, "obx");
-    objectBoxDataDBPath = path.join(objectBoxPath, 'data.mdb');
+    appDocumentsDirectory = docsDir;
 
-    final providersDir = path.join(docsDir.path, "providers");
-    localAkashiSchedulePath = path.join(providersDir, "akashi_schedule.json");
-    localKcWikiDataPath = path.join(providersDir, "kcwiki_data.json");
+    objectBoxPath = p.join(docsDir.path, "obx");
+    objectBoxDataDBPath = p.join(objectBoxPath, 'data.mdb');
 
-    final tasksDir = path.join(providersDir, "task");
-    customTaskDataJsonPath = path.join(tasksDir, "tasks.json");
-    customTaskDataYamlPath = path.join(tasksDir, "tasks.yaml");
+    final providersDir = p.join(docsDir.path, "providers");
+    localAkashiSchedulePath = p.join(providersDir, "akashi_schedule.json");
+    localKcWikiDataPath = p.join(providersDir, "kcwiki_data.json");
 
-    final localizationDir = path.join(docsDir.path, "l10n");
-    localL10nSlotItemPath = path.join(localizationDir, "slotitem_l10n.json");
-    localL10nUseItemInImprovePath = path.join(localizationDir, "useitem_in_improve_l10n.json");
+    final tasksDir = p.join(providersDir, "task");
+    customTaskDataJsonPath = p.join(tasksDir, "tasks.json");
+    customTaskDataYamlPath = p.join(tasksDir, "tasks.yaml");
+
+    final localizationDir = p.join(docsDir.path, "l10n");
+    localL10nSlotItemPath = p.join(localizationDir, "slotitem_l10n.json");
+    localL10nUseItemInImprovePath =
+        p.join(localizationDir, "useitem_in_improve_l10n.json");
+  }
+
+  String getKcCacheDataPath(String path) {
+    final gameDataDir =
+        p.join(appDocumentsDirectory.path, "kancolle", "kcsapi");
+    final split = path.split("/");
+    split.remove("");
+    final fileName = "${split.last}.json";
+    final dirName = split.sublist(0, split.length - 1).join("/");
+    return p.join(gameDataDir, dirName, fileName);
   }
 }

@@ -55,11 +55,15 @@ final kancolleDataProvider = StateProvider<KancolleData>((ref) {
   final fleet = Fleet(ships: [], equipment: {});
   final dataInfo = DataInfo();
 
-  return KancolleData(
+  final data = KancolleData(
     queue: queue,
     squads: squads,
     ref: ref,
     seaForceBase: seaForceBase,
     fleet: fleet, dataInfo: dataInfo, battleInfo: BattleInfo(),
   );
+
+  data.loadCachedData();
+
+  return data;
 });
