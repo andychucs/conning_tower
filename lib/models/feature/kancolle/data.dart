@@ -473,7 +473,7 @@ class KancolleData {
     if (localFile.existsSync()) {
       final cacheString = localFile.readAsStringSync();
       final rawData = RawData(
-        source: "local/kcsapi/$source",
+        source: "local/kcsapi$source",
         data: cacheString,
         timestamp: DateTime.now().millisecondsSinceEpoch,
       );
