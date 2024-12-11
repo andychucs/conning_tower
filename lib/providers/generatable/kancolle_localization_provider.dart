@@ -31,8 +31,8 @@ class KancolleLocalizationState with _$KancolleLocalizationState {
 
 @riverpod
 class KancolleLocalization extends _$KancolleLocalization {
-  static File slotItemLocalFile = File(pathUtil.localL10nSlotItemPath);
-  static File useItemInImproveLocalFile =
+  File get slotItemLocalFile => File(pathUtil.localL10nSlotItemPath);
+  File get useItemInImproveLocalFile =>
       File(pathUtil.localL10nUseItemInImprovePath);
 
   @override
