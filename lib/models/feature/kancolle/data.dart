@@ -455,7 +455,11 @@ class KancolleData {
     }
     // save data to local file
     final file = File(pathUtil.getKcCacheDataPath(path));
-    file.writeAsStringSync(data);
+    final directory = file.parent;
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
+    file.writeAsString(data);
   }
 
 
