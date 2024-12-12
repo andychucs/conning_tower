@@ -328,8 +328,8 @@ class BattleInfo with _$BattleInfo {
   }
 
   void initDMGMap() {
-    dmgTakenMap = {for (var ship in allShips) ship.hashCode: 0};
-    dmgMap = {for (var ship in allShips) ship.hashCode: 0};
+    dmgTakenMap ??= {for (var ship in allShips) ship.hashCode: 0};
+    dmgMap ??= {for (var ship in allShips) ship.hashCode: 0};
   }
 
   void initDoubleEnemySquads(DoubleEnemyBattleData data) {
