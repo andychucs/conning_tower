@@ -37,6 +37,7 @@ main() {
       final enemySquads = [sixShipSquad2];
 
       final battleInfo = BattleInfo();
+      battleInfo.clear();
       battleInfo.inBattleSquads = ourSquads;
       battleInfo.enemySquads = enemySquads;
 
@@ -47,7 +48,7 @@ main() {
       battleInfo.updateShipHP();
 
       // Expected result: SS
-      final result = battleInfo.resultGuess;
+      final result = battleInfo.battleResult?.expected;
       expect(result, equals("SS"));
     });
 
@@ -56,6 +57,7 @@ main() {
       final enemySquads = [sixShipSquad4];
 
       final battleInfo = BattleInfo();
+      battleInfo.clear();
       battleInfo.inBattleSquads = ourSquads;
       battleInfo.enemySquads = enemySquads;
 
@@ -66,7 +68,7 @@ main() {
       battleInfo.updateShipHP();
 
       // Expected result: S
-      final result = battleInfo.resultGuess;
+      final result = battleInfo.battleResult?.expected;
       expect(result, equals("S"));
     });
 
@@ -75,6 +77,7 @@ main() {
       final enemySquads = [sixShipSquad2];
 
       final battleInfo = BattleInfo();
+      battleInfo.clear();
       battleInfo.inBattleSquads = ourSquads;
       battleInfo.enemySquads = enemySquads;
 
@@ -91,7 +94,7 @@ main() {
       battleInfo.updateShipHP();
 
       // Expected result: A
-      final result = battleInfo.resultGuess;
+      final result = battleInfo.battleResult?.expected;
       expect(result, equals("A"));
     });
 
@@ -100,6 +103,7 @@ main() {
       final enemySquads = [sixShipSquad2];
 
       final battleInfo = BattleInfo();
+      battleInfo.clear();
       battleInfo.inBattleSquads = ourSquads;
       battleInfo.enemySquads = enemySquads;
 
@@ -118,7 +122,7 @@ main() {
       battleInfo.updateShipHP();
 
       // Expected result: B
-      final result = battleInfo.resultGuess;
+      final result = battleInfo.battleResult?.expected;
       expect(result, equals("B"));
     });
 
@@ -127,6 +131,7 @@ main() {
       final enemySquads = [sixShipSquad2];
 
       final battleInfo = BattleInfo();
+      battleInfo.clear();
       battleInfo.inBattleSquads = ourSquads;
       battleInfo.enemySquads = enemySquads;
 
@@ -144,7 +149,7 @@ main() {
       battleInfo.updateShipHP();
 
       // Expected result: D
-      final result = battleInfo.resultGuess;
+      final result = battleInfo.battleResult?.expected;
       expect(result, equals("D"));
     });
   });

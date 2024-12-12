@@ -94,27 +94,6 @@ class Squad with _$Squad {
   }
 
   factory Squad.fromJson(Map<String, dynamic> json) => _$SquadFromJson(json);
-
-  void updateEnemySquads(
-      List<int> enemyId, List<int> enemyLv,
-      List<dynamic> enemyMaxHP, List<dynamic> enemyNowHP, List<List<int>> slotData) {
-    assert(
-        enemyId.length == enemyLv.length &&
-            enemyLv.length == enemyMaxHP.length &&
-            enemyMaxHP.length == enemyNowHP.length,
-        'length not equal');
-    for (var i = 0; i < enemyId.length; i++) {
-      var id = enemyId[i];
-      var nowHP = enemyNowHP[i];
-      var maxHP = enemyMaxHP[i];
-      var slot = slotData[i];
-      final ship = ships[i];
-      assert(ship.shipId == id, 'ship id not equal');
-      ship.nowHP = nowHP;
-      ship.maxHP = maxHP;
-      ship.slot = slot;
-    }
-  }
 }
 
 class LoS {
