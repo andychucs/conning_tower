@@ -160,6 +160,8 @@
   "@KCDashboardBattleOur": {},
   "KCDashboardBattleReport": "Report",
   "@KCDashboardBattleReport": {},
+  "KCDashboardBattleResult": "Result",
+  "@KCDashboardBattleResult": {},
   "KCDashboardCommand": "Command",
   "@KCDashboardCommand": {},
   "KCDashboardFleet": "Fleet",

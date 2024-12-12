@@ -850,6 +850,16 @@ class S {
     );
   }
 
+  /// `Result`
+  String get KCDashboardBattleResult {
+    return Intl.message(
+      'Result',
+      name: 'KCDashboardBattleResult',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Command`
   String get KCDashboardCommand {
     return Intl.message(

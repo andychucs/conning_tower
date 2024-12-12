@@ -130,6 +130,14 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                           style:
                               CupertinoTheme.of(context).textTheme.textStyle),
                     ),
+                  if (battleInfo.resultGuess != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                          "${S.of(context).KCDashboardBattleResult}: ${battleInfo.resultGuess}?",
+                          style:
+                              CupertinoTheme.of(context).textTheme.textStyle),
+                    ),
                   if ((battleInfo.inBattleSquads ?? []).isNotEmpty)
                     Expanded(
                       child: LayoutBuilder(

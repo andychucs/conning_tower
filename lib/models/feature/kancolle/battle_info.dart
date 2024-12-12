@@ -37,6 +37,7 @@ class BattleInfo with _$BattleInfo {
     int? mapRoute,
     List<Ship>? readyEscapeShips,
     String? note,
+    String? resultGuess,
   }) = _BattleInfo;
 
   const BattleInfo._();
@@ -53,10 +54,10 @@ class BattleInfo with _$BattleInfo {
   List<Ship> get allEnemyShips =>
       enemySquads!.expand((squad) => squad.ships).toList();
 
-  List<Ship> get allShips => inBattleSquads!
-      .expand((squad) => squad.ships)
-      .followedBy(enemySquads!.expand((squad) => squad.ships))
-      .toList();
+  List<Ship> get allOurShips =>
+      inBattleSquads!.expand((squad) => squad.ships).toList();
+
+  List<Ship> get allShips => allEnemyShips + allOurShips;
 
   String get contactStatus => switch (contact) {
         1 => "同航戦",
@@ -185,7 +186,7 @@ class BattleInfo with _$BattleInfo {
     dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
   }
 
-  void clear({bool resetMapInfo = false}) {
+  void clear({bool resetMapInfo = false, bool resetDmgMap = false}) {
     result = null;
     dropName = null;
     mvp = null;
@@ -196,10 +197,13 @@ class BattleInfo with _$BattleInfo {
     eFormation = null;
     contact = null;
     enemySquads?.clear();
-    dmgMap?.clear();
-    dmgTakenMap?.clear();
+    if (resetDmgMap) {
+      dmgMap?.clear();
+      dmgTakenMap?.clear();
+    }
     friendSquads?.clear();
     note = null;
+    resultGuess = null;
     if (resetMapInfo) {
       mapInfo = null;
       mapRoute = null;
@@ -683,15 +687,131 @@ class BattleInfo with _$BattleInfo {
   }
 
   void updateShipHP() {
+    Map<int, int> hpChangeMap = {};
+    final enemyHPTotal = allEnemyShips.fold(0, (t, e) => t + e.nowHP);
+    final ourHPTotal = allOurShips.fold(0, (t, e) => t + e.nowHP);
+
     if (dmgTakenMap != null) {
       final shipsMap = {for (Ship ship in allShips) ship.hashCode: ship};
 
       dmgTakenMap?.forEach((shipHash, damage) {
         if (damage != 0) {
-          shipsMap[shipHash]?.onHPChange(damage);
+          final hpChange = shipsMap[shipHash]?.onHPChange(damage);
+          if (hpChange != null) {
+            hpChangeMap[shipHash] = hpChange;
+          }
         }
       });
     }
+    try {
+      resultGuess = _resultGuess(hpChangeMap, enemyHPTotal, ourHPTotal);
+    } catch (e) {
+      resultGuess = null;
+    }
+  }
+
+  String? _resultGuess(
+      Map<int, int> hpChangeMap, int enemyHPTotal, int ourHPTotal) {
+    int ourDamageTaken = 0;
+    int ourBattleResult = 0;
+    int enemyBattleResult = 0;
+    bool ourSunken = allOurShips.any((ship) => ship.sunken);
+    for (final squad in inBattleSquads!) {
+      for (final ship in squad.ships) {
+        if (ship.escape != true) {
+          ourDamageTaken += dmgTakenMap![ship.hashCode]!;
+          enemyBattleResult += hpChangeMap[ship.hashCode] ?? 0;
+        }
+      }
+    }
+    // enemy all sunken
+    if (allEnemyShips.every((ship) => ship.sunken)) {
+      if (ourDamageTaken == 0 && !ourSunken) {
+        // our damage taken is 0, return SS
+        return "SS";
+      } else if (ourSunken) {
+        // our ship sunken
+        return "B";
+      } else {
+        // our ship not sunken
+        return "S";
+      }
+    }
+
+    for (final squad in enemySquads!) {
+      for (final ship in squad.ships) {
+        if (ship.escape != true) {
+          ourBattleResult += hpChangeMap[ship.hashCode] ?? 0;
+        }
+      }
+    }
+
+    if (ourBattleResult == 0 && enemyBattleResult == 0) {
+      return "D";
+    }
+
+    final enemyNumber = allEnemyShips.length;
+    final enemySunkenNumber = allEnemyShips.where((ship) => ship.sunken).length;
+    final ourSunkenNumber = allOurShips.where((ship) => ship.sunken).length;
+    bool enemyFlagShipSunken = enemySquads!.first.ships.first.sunken;
+    if (!ourSunken) {
+      if (ourBattleResult == 0 && enemyBattleResult > ourHPTotal * 0.75) {
+        return "E";
+      }
+
+      if (ourBattleResult < enemyHPTotal * 0.05) {
+        return "D";
+      }
+
+      // enemy sunken more than 2/3. return A
+      if (enemySunkenNumber >= (enemyNumber * 2 / 3).truncate() &&
+          enemySunkenNumber > 0) {
+        return "A";
+      }
+
+      // enemy flag ship sunken
+      if (enemyFlagShipSunken) {
+        return "B";
+      } else if (ourSunkenNumber >= allOurShips.length / 2) {
+        return "E";
+      }
+
+      if (ourBattleResult > enemyBattleResult * 2.5) {
+        return "B";
+      }
+      if (enemyBattleResult > ourBattleResult &&
+          enemyBattleResult < ourBattleResult * 2.5) {
+        return "C";
+      }
+
+      if (enemyBattleResult < ourBattleResult) {
+        return "D";
+      }
+    } else {
+      if (!enemyFlagShipSunken) {
+        if (ourBattleResult > enemyBattleResult * 2.5) {
+          if (enemySunkenNumber >= (enemyNumber * 2 / 3).truncate() &&
+              enemySunkenNumber > 0) {
+            if (enemyBattleResult > ourBattleResult &&
+                enemyBattleResult < ourBattleResult * 2.5) {
+              return "C";
+            }
+            return "B";
+          } else if (ourBattleResult > enemyBattleResult * 3) {
+            return "B";
+          } else {
+            return "C";
+          }
+        }
+      } else {
+        if (ourSunkenNumber < enemySunkenNumber) {
+          return "B";
+        }
+        return "C";
+      }
+    }
+
+    return null;
   }
 
   void _parseBasicBattleApi(BattleBasicModel data) {

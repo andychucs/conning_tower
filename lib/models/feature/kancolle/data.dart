@@ -328,7 +328,7 @@ class KancolleData {
     if (model is ReqMapNextEntity) {
       log("Next");
       addAlert();
-      battleInfo.clear();
+      battleInfo.clear(resetDmgMap: true);
       battleInfo.mapRoute = model.apiData.apiNo;
       battleInfo.note =
           switch (model.apiData.apiDestructionBattle?.apiLostKind) {
@@ -351,7 +351,7 @@ class KancolleData {
       resetShipEscapeState();
       addAlert();
       ref.read(settingsProvider.notifier).changeDashboardIndex(5);
-      battleInfo.clear();
+      battleInfo.clear(resetDmgMap: true);
       battleInfo.mapInfo = dataInfo
           .mapAreaInfo?[model.apiData.apiMapareaId]?.map
           .firstWhere((element) => element.num == model.apiData.apiMapinfoNo);
