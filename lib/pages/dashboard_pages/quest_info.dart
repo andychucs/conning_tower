@@ -37,77 +37,76 @@ class _QuestInfoPageState extends ConsumerState<QuestInfoPage>
       questAssistant?.done ?? []
     ];
 
-    return SafeArea(
-      child: Padding(
-        padding: tabContentMargin,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: CupertinoPageScaffold(
-            navigationBar: CupertinoNavigationBar(
-              automaticallyImplyLeading: false,
-              transitionBetweenRoutes: false,
-              backgroundColor:
-                  CupertinoColors.systemGroupedBackground.resolveFrom(context),
-              border: null,
-              middle: CupertinoSlidingSegmentedControl(
-                groupValue: _selectedSegment,
-                onValueChanged: (int? value) {
-                  if (value != null) {
-                    setState(() {
-                      _selectedSegment = value;
-                      controller.animateToPage(value,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.ease);
-                    });
-                  }
-                },
-                children: {
-                  0: Text(S.current.KCDashboardQuestInProgress),
-                  1: Text(S.current.KCDashboardQuestToDo),
-                  2: Text(S.current.KCDashboardQuestDone)
-                },
-              ),
-            ),
-            child: SafeArea(
-              child: PageView(
-                controller: controller,
-                onPageChanged: (value) {
+    return Padding(
+      padding: tabContentMargin,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            automaticallyImplyLeading: false,
+            transitionBetweenRoutes: false,
+            backgroundColor:
+                CupertinoColors.systemGroupedBackground.resolveFrom(context),
+            border: null,
+            middle: CupertinoSlidingSegmentedControl(
+              groupValue: _selectedSegment,
+              onValueChanged: (int? value) {
+                if (value != null) {
                   setState(() {
                     _selectedSegment = value;
+                    controller.animateToPage(value,
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.ease);
                   });
-                },
-                children: List.generate(3, (index) {
-                  final questList = questLists[index];
-                  if (questList.isEmpty) {
-                    return Container();
-                  }
-                  return ScrollViewWithCupertinoScrollbar(
-                    children: [
-                      CupertinoListSection.insetGrouped(
-                        margin: tabBottomListMargin,
-                        children: List.generate(
-                          questList.length,
-                          (index) => CupertinoListTile(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4.0),
-                            title: Text(questList[index].title ?? ''),
-                            subtitle: questList[index].detail != null
-                                ? Text(
-                                    questList[index]
-                                        .detail!
-                                        .replaceAll("<br>", ""),
-                                    softWrap: true,
-                                    maxLines: 6,
-                                  )
-                                : null,
-                            // trailing: Text('${questList[index].id}'),
-                          ),
+                }
+              },
+              children: {
+                0: Text(S.current.KCDashboardQuestInProgress),
+                1: Text(S.current.KCDashboardQuestToDo),
+                2: Text(S.current.KCDashboardQuestDone)
+              },
+            ),
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: PageView(
+              controller: controller,
+              onPageChanged: (value) {
+                setState(() {
+                  _selectedSegment = value;
+                });
+              },
+              children: List.generate(3, (index) {
+                final questList = questLists[index];
+                if (questList.isEmpty) {
+                  return Container();
+                }
+                return ScrollViewWithCupertinoScrollbar(
+                  children: [
+                    CupertinoListSection.insetGrouped(
+                      margin: tabBottomListMargin,
+                      children: List.generate(
+                        questList.length,
+                        (index) => CupertinoListTile(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4.0),
+                          title: Text(questList[index].title ?? ''),
+                          subtitle: questList[index].detail != null
+                              ? Text(
+                                  questList[index]
+                                      .detail!
+                                      .replaceAll("<br>", ""),
+                                  softWrap: true,
+                                  maxLines: 6,
+                                )
+                              : null,
+                          // trailing: Text('${questList[index].id}'),
                         ),
-                      )
-                    ],
-                  );
-                }),
-              ),
+                      ),
+                    )
+                  ],
+                );
+              }),
             ),
           ),
         ),

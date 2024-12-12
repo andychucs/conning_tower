@@ -80,16 +80,16 @@ class _PortInfoState extends ConsumerState<PortInfo>
 
     final nowJstTime = tz.TZDateTime.now(tz.getLocation('Asia/Tokyo'));
 
-    return SafeArea(
-      bottom: false,
-      child: Padding(
-        padding: tabContentMargin,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: LocalNavigatorBuilder(
-            builder: (context) {
-              return CupertinoPageScaffold(
-                resizeToAvoidBottomInset: false,
+    return Padding(
+      padding: tabContentMargin,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: LocalNavigatorBuilder(
+          builder: (context) {
+            return CupertinoPageScaffold(
+              resizeToAvoidBottomInset: false,
+              child: SafeArea(
+                bottom: false,
                 child: CupertinoScrollbar(
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(
@@ -314,9 +314,9 @@ class _PortInfoState extends ConsumerState<PortInfo>
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

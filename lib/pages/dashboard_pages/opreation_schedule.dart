@@ -91,12 +91,13 @@ class OperationScheduleState extends ConsumerState<OperationSchedule> {
         kancolleDataProvider.select((data) => data.dataInfo.missionInfo));
 
     return LayoutBuilder(builder: (context, constraints) {
-      return SafeArea(
-        child: Padding(
-          padding: tabContentMargin,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: CupertinoPageScaffold(
+      return Padding(
+        padding: tabContentMargin,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: CupertinoPageScaffold(
+            child: SafeArea(
+              bottom: false,
               child: ScrollViewWithCupertinoScrollbar(
                 children: List.generate(3, (index) {
                   final squad = index + 2;
