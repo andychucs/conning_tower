@@ -776,16 +776,19 @@ class BattleInfo with _$BattleInfo {
         return "E";
       }
 
-      if (ourBattleResult > enemyBattleResult * 2.5) {
+      if (ourBattleResult >= enemyBattleResult * 2.5) {
         return "B";
-      }
-      if (enemyBattleResult > ourBattleResult &&
-          enemyBattleResult < ourBattleResult * 2.5) {
-        return "C";
+      } else {
+        if (ourBattleResult >= enemyBattleResult ||
+            ourBattleResult >= enemyHPTotal * 0.5) {
+          return "C";
+        }
       }
 
-      if (enemyBattleResult < ourBattleResult) {
+      if (enemyBattleResult > ourBattleResult) {
         return "D";
+      } else {
+        return "C";
       }
     } else {
       if (!enemyFlagShipSunken) {
