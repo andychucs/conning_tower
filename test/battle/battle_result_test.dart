@@ -52,8 +52,8 @@ main() {
     });
 
     test("Case 2 - S Victory", () {
-      final ourSquads = [sixShipSquad1];
-      final enemySquads = [sixShipSquad2];
+      final ourSquads = [sixShipSquad3];
+      final enemySquads = [sixShipSquad4];
 
       final battleInfo = BattleInfo();
       battleInfo.inBattleSquads = ourSquads;
@@ -70,5 +70,82 @@ main() {
       expect(result, equals("S"));
     });
 
+    test("Case 3 - A Victory", () {
+      final ourSquads = [sixShipSquad1];
+      final enemySquads = [sixShipSquad2];
+
+      final battleInfo = BattleInfo();
+      battleInfo.inBattleSquads = ourSquads;
+      battleInfo.enemySquads = enemySquads;
+
+      //reset hp
+      for (var ship in battleInfo.allShips) {
+        ship.nowHP = ship.maxHP;
+      }
+
+      final dmgTakenMap = {for (var ship in battleInfo.allEnemyShips) ship.hashCode: -100};
+      dmgTakenMap[battleInfo.enemySquads!.first.ships.first.hashCode] = -20;
+      dmgTakenMap.addAll({for (var ship in battleInfo.allOurShips) ship.hashCode: -20});
+
+      battleInfo.dmgTakenMap = dmgTakenMap;
+      battleInfo.updateShipHP();
+
+      // Expected result: A
+      final result = battleInfo.resultGuess;
+      expect(result, equals("A"));
+    });
+
+    test("Case 4 - B Victory (Enemy flagship sunk)", () {
+      final ourSquads = [sixShipSquad1];
+      final enemySquads = [sixShipSquad2];
+
+      final battleInfo = BattleInfo();
+      battleInfo.inBattleSquads = ourSquads;
+      battleInfo.enemySquads = enemySquads;
+
+      //reset hp
+      for (var ship in battleInfo.allShips) {
+        ship.nowHP = ship.maxHP;
+      }
+
+      final dmgTakenMap = {
+        for (var ship in battleInfo.allEnemyShips)
+          ship.hashCode: (ship == enemySquads[0].ships[0]) ? -100 : -30
+      };
+      dmgTakenMap.addAll({for (var ship in battleInfo.allOurShips) ship.hashCode: -30});
+
+      battleInfo.dmgTakenMap = dmgTakenMap;
+      battleInfo.updateShipHP();
+
+      // Expected result: B
+      final result = battleInfo.resultGuess;
+      expect(result, equals("B"));
+    });
+
+    test("Case 6 - D Defeat", () {
+      final ourSquads = [sixShipSquad1];
+      final enemySquads = [sixShipSquad2];
+
+      final battleInfo = BattleInfo();
+      battleInfo.inBattleSquads = ourSquads;
+      battleInfo.enemySquads = enemySquads;
+
+      //reset hp
+      for (var ship in battleInfo.allShips) {
+        ship.nowHP = ship.maxHP;
+      }
+
+      final dmgTakenMap = {
+        for (var ship in battleInfo.allEnemyShips) ship.hashCode: -6
+      };
+      dmgTakenMap.addAll({for (var ship in battleInfo.allOurShips) ship.hashCode: -10});
+
+      battleInfo.dmgTakenMap = dmgTakenMap;
+      battleInfo.updateShipHP();
+
+      // Expected result: D
+      final result = battleInfo.resultGuess;
+      expect(result, equals("D"));
+    });
   });
 }

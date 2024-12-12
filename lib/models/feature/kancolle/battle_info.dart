@@ -186,7 +186,7 @@ class BattleInfo with _$BattleInfo {
     dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
   }
 
-  void clear({bool resetMapInfo = false, bool resetDmgMap = false}) {
+  void clear({bool resetMapInfo = false, bool pointChanged = false}) {
     result = null;
     dropName = null;
     mvp = null;
@@ -196,12 +196,12 @@ class BattleInfo with _$BattleInfo {
     formation = null;
     eFormation = null;
     contact = null;
-    enemySquads?.clear();
-    if (resetDmgMap) {
+    if (pointChanged) {
       dmgMap = null;
       dmgTakenMap = null;
+      enemySquads = null;
+      friendSquads = null;
     }
-    friendSquads?.clear();
     note = null;
     resultGuess = null;
     if (resetMapInfo) {
@@ -333,6 +333,13 @@ class BattleInfo with _$BattleInfo {
   }
 
   void initDoubleEnemySquads(DoubleEnemyBattleData data) {
+    if (enemySquads != null) {
+      enemySquads!.first.updateEnemySquads(
+          data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps, data.apiESlot);
+      enemySquads!.last.updateEnemySquads(data.apiShipKeCombined!, data.apiShipLvCombined!,
+          data.apiEMaxhpsCombined!, data.apiENowhpsCombined!, data.apiESlotCombined!);
+      return;
+    }
     enemySquads = [
       Squad.fromSingleEnemy(
           data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps, data.apiESlot),
@@ -386,6 +393,11 @@ class BattleInfo with _$BattleInfo {
   }
 
   void initSingleEnemySquads(BattleBasicModel data) {
+    if (enemySquads != null) {
+      enemySquads!.first.updateEnemySquads(
+          data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps, data.apiESlot);
+      return;
+    }
     enemySquads = [
       Squad.fromSingleEnemy(
           data.apiShipKe, data.apiShipLv, data.apiEMaxhps, data.apiENowhps, data.apiESlot)
@@ -423,7 +435,7 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parsePracticeBattle(ReqPracticeBattleApiDataEntity data, Squad squad) {
-    clear(resetMapInfo: true, resetDmgMap: true);
+    clear(resetMapInfo: true, pointChanged: true);
     initSingleEnemySquads(data);
 
     inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
@@ -471,7 +483,8 @@ class BattleInfo with _$BattleInfo {
     clear();
     initSingleEnemySquads(data);
 
-    inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
+    // inBattleSquads = [Squad.fromJson(squad.toJson())];
+    // practice night battle no need to reset inBattleSquads
 
     initDMGMap();
 
@@ -772,8 +785,14 @@ class BattleInfo with _$BattleInfo {
       // enemy flag ship sunken
       if (enemyFlagShipSunken) {
         return "B";
-      } else if (ourSunkenNumber >= allOurShips.length / 2) {
+      }
+
+      if (ourSunkenNumber >= allOurShips.length / 2) {
         return "E";
+      }
+
+      if (ourBattleResult < enemyHPTotal * 0.5) {
+        return "D";
       }
 
       if (ourBattleResult >= enemyBattleResult * 2.5) {
@@ -785,14 +804,14 @@ class BattleInfo with _$BattleInfo {
         }
       }
 
-      if (enemyBattleResult > ourBattleResult) {
-        return "D";
-      } else {
+      if (ourBattleResult >= enemyBattleResult) {
         return "C";
+      } else {
+        return "D";
       }
     } else {
       if (!enemyFlagShipSunken) {
-        if (ourBattleResult > enemyBattleResult * 2.5) {
+        if (ourBattleResult >= enemyBattleResult * 2.5) {
           if (enemySunkenNumber >= (enemyNumber * 2 / 3).truncate() &&
               enemySunkenNumber > 0) {
             if (enemyBattleResult > ourBattleResult &&
@@ -805,7 +824,10 @@ class BattleInfo with _$BattleInfo {
           } else {
             return "C";
           }
+        } else if (ourBattleResult >= enemyBattleResult) {
+          return "C";
         }
+        return "D";
       } else {
         if (ourSunkenNumber < enemySunkenNumber) {
           return "B";
