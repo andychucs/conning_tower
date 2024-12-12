@@ -198,8 +198,8 @@ class BattleInfo with _$BattleInfo {
     contact = null;
     enemySquads?.clear();
     if (resetDmgMap) {
-      dmgMap?.clear();
-      dmgTakenMap?.clear();
+      dmgMap = null;
+      dmgTakenMap = null;
     }
     friendSquads?.clear();
     note = null;
@@ -423,7 +423,7 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parsePracticeBattle(ReqPracticeBattleApiDataEntity data, Squad squad) {
-    clear(resetMapInfo: true);
+    clear(resetMapInfo: true, resetDmgMap: true);
     initSingleEnemySquads(data);
 
     inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
