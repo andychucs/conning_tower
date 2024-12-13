@@ -113,14 +113,14 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
                           await _fetchImages();
                         },
                         backgroundColor: buttonColor,
-                        child: const Icon(CupertinoIcons.camera_viewfinder),
+                        icon: CupertinoIcons.camera_viewfinder,
                       ),
                       ImageOverButton(
                         onTap: () async {
                           await _fetchImages();
                         },
                         backgroundColor: buttonColor,
-                        child: const Icon(CupertinoIcons.refresh),
+                        icon: CupertinoIcons.refresh,
                       ),
                     ],
                   ),
@@ -154,7 +154,7 @@ class PhotoGalleryState extends ConsumerState<PhotoGallery> {
                                           context);
                                     },
                                     backgroundColor: buttonColor,
-                                    child: const Icon(CupertinoIcons.share),
+                                    icon: CupertinoIcons.share,
                                   );
                                 },
                               ),
@@ -204,12 +204,12 @@ class ImageOverButton extends StatelessWidget {
   const ImageOverButton({
     super.key,
     required this.onTap,
-    required this.child,
+    required this.icon,
     required this.backgroundColor,
   });
 
   final VoidCallback onTap;
-  final Widget child;
+  final IconData icon;
   final Color backgroundColor;
 
   @override
@@ -221,7 +221,8 @@ class ImageOverButton extends StatelessWidget {
           onTap.call();
         },
         child: Container(
-            width: 40, height: 40, color: backgroundColor, child: child),
+            width: 40, height: 40, color: backgroundColor, child: Icon(icon, color: CupertinoDynamicColor.resolve(
+            CupertinoColors.secondaryLabel, context))),
       ),
     );
   }

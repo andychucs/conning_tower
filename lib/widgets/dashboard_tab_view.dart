@@ -95,7 +95,6 @@ class _DashboardTabViewState extends ConsumerState<DashboardTabView>
       padding: widget.childPadding,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: CupertinoColors.systemGroupedBackground,
         bottomNavigationBar: TabBar.secondary(
           dividerHeight: 0.0,
           controller: _tabController,

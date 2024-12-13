@@ -160,7 +160,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
             tabs: tabs,
             contents: widget.children,
             childPadding: widget.largeScreen
-                ? const EdgeInsets.fromLTRB(0, 8, 0, 0)
+                ? EdgeInsets.zero
                 : const EdgeInsets.fromLTRB(0, 40, 0, 0),
             colors: colors,
           ),

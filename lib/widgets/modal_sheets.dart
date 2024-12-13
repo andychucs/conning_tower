@@ -6,17 +6,37 @@ import 'package:flutter/material.dart';
 class ModalFit extends StatelessWidget {
   final List<Widget> children;
 
-  const ModalFit({Key? key, required this.children}) : super(key: key);
+  const ModalFit({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: CupertinoTheme.of(context).scaffoldBackgroundColor,
       child: SafeArea(
         top: false,
+        bottom: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: children,
         ),
+      ),
+    );
+  }
+}
+
+class ModalFitSingleChild extends StatelessWidget {
+  final Widget child;
+
+  const ModalFitSingleChild({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: CupertinoTheme.of(context).scaffoldBackgroundColor,
+      child: SafeArea(
+        top: false,
+        bottom: false,
+        child: child,
       ),
     );
   }
