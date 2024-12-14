@@ -106,7 +106,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                     if (battleRank != null ||
                         battleInfo.battleResult?.expected != null)
                       Text(
-                        "${S.of(context).KCDashboardBattleRecord}: $battleRank ?? ${battleInfo.battleResult?.expected}?",
+                        "${S.of(context).KCDashboardBattleRecord}: ${battleRank ?? "${battleInfo.battleResult?.expected ?? ""}?"}",
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
                     if (battleInfo.battleResult?.dropShipName != null)
