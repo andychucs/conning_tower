@@ -159,8 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("攻略済み"),
         "KCDashboardBattleMoreInfo": MessageLookupByLibrary.simpleMessage("詳細"),
         "KCDashboardBattleOur": MessageLookupByLibrary.simpleMessage("味方艦隊"),
+        "KCDashboardBattleRecord": MessageLookupByLibrary.simpleMessage("戦績"),
         "KCDashboardBattleReport": MessageLookupByLibrary.simpleMessage("戦闘情報"),
-        "KCDashboardBattleResult": MessageLookupByLibrary.simpleMessage("戦闘結果"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("司令部"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("艦隊"),
         "KCDashboardFleetDescription": MessageLookupByLibrary.simpleMessage(

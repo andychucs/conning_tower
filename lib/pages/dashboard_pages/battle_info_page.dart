@@ -62,7 +62,7 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: LocalNavigatorBuilder(builder: (context) {
-            final battleResultLevel = battleInfo.battleResult?.actual;
+            final battleRank = battleInfo.battleResult?.actual;
             return CupertinoPageScaffold(
               backgroundColor: CupertinoColors.systemGroupedBackground,
               navigationBar: CupertinoNavigationBar(
@@ -71,8 +71,21 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                 backgroundColor: CupertinoColors.systemGroupedBackground,
                 border: null,
                 trailing: CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: Text(S.of(context).KCDashboardBattleMoreInfo),
+                  color: CupertinoDynamicColor.resolve(
+                      CupertinoColors.secondarySystemGroupedBackground,
+                      context),
+                  minSize: CupertinoTheme.of(context)
+                      .textTheme
+                      .tabLabelTextStyle
+                      .fontSize,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                  child: Text(
+                    S.of(context).KCDashboardBattleMoreInfo,
+                    style: CupertinoTheme.of(context).textTheme.textStyle.merge(
+                        TextStyle(
+                            color: CupertinoColors.label.resolveFrom(context))),
+                  ),
                   onPressed: () => navigatorToCupertino(
                           context, KancolleBattleMoreInfoPage())
                       .then((value) => setState(() {})),
@@ -80,20 +93,20 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                 middle: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    if (battleResultLevel == null)
+                    if (battleRank == null)
                       Text(
                         battleInfo.contactStatus,
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
-                    if (battleResultLevel == null &&
-                        battleInfo.airSuperiority != '')
+                    if (battleRank == null && battleInfo.airSuperiority != '')
                       Text(
                         battleInfo.airSuperiority,
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
-                    if (battleResultLevel != null)
+                    if (battleRank != null ||
+                        battleInfo.battleResult?.expected != null)
                       Text(
-                        battleResultLevel,
+                        "${S.of(context).KCDashboardBattleRecord}: $battleRank ?? ${battleInfo.battleResult?.expected}?",
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
                     if (battleInfo.battleResult?.dropShipName != null)
@@ -134,88 +147,82 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                             style:
                                 CupertinoTheme.of(context).textTheme.textStyle),
                       ),
-                    if (battleInfo.battleResult?.expected != null)
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          "${S.of(context).KCDashboardBattleResult}: ${battleInfo.battleResult?.expected}?",
-                          style:
-                              CupertinoTheme.of(context).textTheme.textStyle),
-                    ),
-                  if ((battleInfo.inBattleSquads ?? []).isNotEmpty)
+                    if ((battleInfo.inBattleSquads ?? []).isNotEmpty)
                       Expanded(
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             var items = [];
 
-                            for (final squad in [...?battleInfo.inBattleSquads]) {
+                            for (final squad in [
+                              ...?battleInfo.inBattleSquads
+                            ]) {
                               items.add(CupertinoListSection.insetGrouped(
                                 // margin: _kBattleInfoGridMargin,
-                                header: battleInfo.inBattleSquads?.first == squad
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                            CupertinoListSectionDescription(
-                                                '${squad.name} ${battleInfo.ourFormation}'),
-                                            GestureDetector(
-                                              child: Icon(
-                                                CupertinoIcons
-                                                    .exclamationmark_circle,
-                                                size: 20,
-                                                color:
-                                                    CupertinoDynamicColor.resolve(
-                                                        kHeaderFooterColor,
-                                                        context),
-                                              ),
-                                              onTap: () => navigatorToCupertino(
-                                                  context,
-                                                  CupertinoActionPage(
-                                                      title: S.current
-                                                          .KCDashboardBattleReport,
-                                                      child: ListView(
-                                                        children: [
-                                                          CupertinoListSection
-                                                              .insetGrouped(
-                                                            footer: SelectableText(
-                                                                "BattleInfo:\n${battleInfo.toString()}"),
-                                                            children: [
-                                                              CupertinoListTile(
-                                                                title: const Text(
-                                                                    "Copy Data"),
-                                                                subtitle: Text(ref
-                                                                    .watch(
-                                                                        rawDataProvider)
-                                                                    .source),
-                                                                onTap: () => Clipboard.setData(
-                                                                    ClipboardData(
-                                                                        text: ref
-                                                                            .watch(
-                                                                                rawDataProvider)
-                                                                            .data)),
-                                                              )
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ))),
-                                            ),
-                                          ])
-                                    : CupertinoListSectionDescription(squad.name),
+                                header:
+                                    battleInfo.inBattleSquads?.first == squad
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                                CupertinoListSectionDescription(
+                                                    '${squad.name} ${battleInfo.ourFormation}'),
+                                                GestureDetector(
+                                                  child: Icon(
+                                                    CupertinoIcons
+                                                        .exclamationmark_circle,
+                                                    size: 20,
+                                                    color: CupertinoDynamicColor
+                                                        .resolve(
+                                                            kHeaderFooterColor,
+                                                            context),
+                                                  ),
+                                                  onTap: () =>
+                                                      navigatorToCupertino(
+                                                          context,
+                                                          CupertinoActionPage(
+                                                              title: S.current
+                                                                  .KCDashboardBattleReport,
+                                                              child: ListView(
+                                                                children: [
+                                                                  CupertinoListSection
+                                                                      .insetGrouped(
+                                                                    footer: SelectableText(
+                                                                        "BattleInfo:\n${battleInfo.toString()}"),
+                                                                    children: [
+                                                                      CupertinoListTile(
+                                                                        title: const Text(
+                                                                            "Copy Data"),
+                                                                        subtitle: Text(ref
+                                                                            .watch(rawDataProvider)
+                                                                            .source),
+                                                                        onTap: () =>
+                                                                            Clipboard.setData(ClipboardData(text: ref.watch(rawDataProvider).data)),
+                                                                      )
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ))),
+                                                ),
+                                              ])
+                                        : CupertinoListSectionDescription(
+                                            squad.name),
                                 children: List.generate(
                                     squad.ships.length,
                                     (index) => ShipInfoInBattle(
                                           ship: squad.ships[index],
                                           name: squad.ships[index].name ??
-                                              shipInfo?[squad.ships[index].shipId]
+                                              shipInfo?[
+                                                      squad.ships[index].shipId]
                                                   ?.apiName ??
                                               'N/A',
-                                          dmg: battleInfo.dmgMap?[
-                                                  squad.ships[index].hashCode] ??
+                                          dmg: battleInfo.dmgMap?[squad
+                                                  .ships[index].hashCode] ??
                                               0,
                                           dmgTaken: battleInfo.dmgTakenMap?[
-                                                  squad.ships[index].hashCode] ??
+                                                  squad
+                                                      .ships[index].hashCode] ??
                                               0,
                                           useEmoji: ref
                                               .read(settingsProvider)
@@ -233,14 +240,16 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                                     (index) => ShipInfoInBattle(
                                           ship: squad.ships[index],
                                           name: squad.ships[index].name ??
-                                              shipInfo?[squad.ships[index].shipId]
+                                              shipInfo?[
+                                                      squad.ships[index].shipId]
                                                   ?.apiName ??
                                               'N/A',
-                                          dmg: battleInfo.dmgMap?[
-                                                  squad.ships[index].hashCode] ??
+                                          dmg: battleInfo.dmgMap?[squad
+                                                  .ships[index].hashCode] ??
                                               0,
                                           dmgTaken: battleInfo.dmgTakenMap?[
-                                                  squad.ships[index].hashCode] ??
+                                                  squad
+                                                      .ships[index].hashCode] ??
                                               0,
                                           useEmoji: ref
                                               .read(settingsProvider)
@@ -261,20 +270,23 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                                             CupertinoListSectionDescription(
                                                 '${squad.name} ${battleInfo.enemyFormation}'),
                                           ])
-                                    : CupertinoListSectionDescription(squad.name),
+                                    : CupertinoListSectionDescription(
+                                        squad.name),
                                 children: List.generate(
                                     squad.ships.length,
                                     (index) => ShipInfoInBattle(
                                           ship: squad.ships[index],
                                           name: squad.ships[index].name ??
-                                              shipInfo?[squad.ships[index].shipId]
+                                              shipInfo?[
+                                                      squad.ships[index].shipId]
                                                   ?.apiName ??
                                               'N/A',
-                                          dmg: battleInfo.dmgMap?[
-                                                  squad.ships[index].hashCode] ??
+                                          dmg: battleInfo.dmgMap?[squad
+                                                  .ships[index].hashCode] ??
                                               0,
                                           dmgTaken: battleInfo.dmgTakenMap?[
-                                                  squad.ships[index].hashCode] ??
+                                                  squad
+                                                      .ships[index].hashCode] ??
                                               0,
                                           useEmoji: ref
                                               .read(settingsProvider)

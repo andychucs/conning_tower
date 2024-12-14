@@ -840,21 +840,21 @@ class S {
     );
   }
 
-  /// `Report`
-  String get KCDashboardBattleReport {
+  /// `Rank`
+  String get KCDashboardBattleRecord {
     return Intl.message(
-      'Report',
-      name: 'KCDashboardBattleReport',
+      'Rank',
+      name: 'KCDashboardBattleRecord',
       desc: '',
       args: [],
     );
   }
 
-  /// `Result`
-  String get KCDashboardBattleResult {
+  /// `Report`
+  String get KCDashboardBattleReport {
     return Intl.message(
-      'Result',
-      name: 'KCDashboardBattleResult',
+      'Report',
+      name: 'KCDashboardBattleReport',
       desc: '',
       args: [],
     );
