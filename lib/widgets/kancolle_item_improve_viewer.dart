@@ -170,6 +170,7 @@ class _KancolleItemImproveViewerState
                         onTap: () {
                           showCupertinoModalBottomSheet(
                             context: context,
+                            backgroundColor: Colors.transparent,
                             builder: (context) => ImproveDetailSheet(
                               id: improveItem.id ?? 0,
                               pinedIds: pinedItemsId,

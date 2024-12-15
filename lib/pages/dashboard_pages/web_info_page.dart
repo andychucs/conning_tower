@@ -43,12 +43,13 @@ class _WebInfoState extends ConsumerState<WebInfoPage> {
         CupertinoListTile(title: Text(webInfo.cookies[index].toString())),
       );
     });
-    return SafeArea(
-      child: Padding(
-        padding: tabContentMargin,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: CupertinoPageScaffold(
+    return Padding(
+      padding: tabContentMargin,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: CupertinoPageScaffold(
+          child: SafeArea(
+            bottom: false,
             child: ScrollViewWithCupertinoScrollbar(
               children: [
                 CupertinoListSection.insetGrouped(

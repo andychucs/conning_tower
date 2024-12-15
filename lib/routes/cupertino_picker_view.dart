@@ -60,6 +60,7 @@ class _CupertinoPickerViewState extends ConsumerState<CupertinoPickerView> {
       builder: (context, orientation) {
         return SafeArea(
           bottom: false,
+          top: false,
           child: Row(
             children: [
               Expanded(

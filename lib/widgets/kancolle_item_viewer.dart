@@ -1,5 +1,6 @@
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -27,6 +28,7 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
                   onTap: () {
                     showCupertinoModalBottomSheet(
                       context: context,
+                      backgroundColor: Colors.transparent,
                       builder: (context) => Container(),
                     );
                   },
