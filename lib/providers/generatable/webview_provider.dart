@@ -25,16 +25,24 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../utils/asset_loader.dart';
+
 part 'webview_provider.g.dart';
 part 'webview_provider.freezed.dart';
 
 final gameUrlPath = Uri.parse(kGameUrl).path;
 
 UserScript get kancolleUserScript => UserScript(
-    source: kInterceptJS,
+    source: AssetLoader.kcInjectJS,
     injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
     forMainFrameOnly: false,
     groupName: "KC");
+
+UserScript get alignUserScript => UserScript(
+    source: AssetLoader.kcAlignJS, injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START);
+
+UserScript get screenshotUserScript => UserScript(
+    source: AssetLoader.kcScreenshotJS, injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START);
 
 UserScript get dmmCookieScript => UserScript(
     source: getDMMCookieString(),
@@ -371,7 +379,14 @@ class WebController extends _$WebController {
           _kancolleMessageHandle(message!);
         },
       );
+      // WebMessageListener kcCaptureListener = WebMessageListener(
+      //   jsObjectName: "kcCapture",
+      //   onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+      //     log("kcCapture: $message");
+      //   },
+      // );
       await controller.addWebMessageListener(kcListener);
+      // await controller.addWebMessageListener(kcCaptureListener);
     }
   }
 
@@ -415,7 +430,7 @@ class WebController extends _$WebController {
     return WebResourceResponse(
         contentEncoding: 'gzip',
         contentType: 'application/javascript',
-        data: convertStringToUint8List(kcResponse.body + kInterceptJS),
+        data: convertStringToUint8List(kcResponse.body + AssetLoader.kcInjectJS),
         headers: kcResponse.headers,
         reasonPhrase: kcResponse.reasonPhrase,
         statusCode: kcResponse.statusCode);
