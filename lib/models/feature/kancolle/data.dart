@@ -423,6 +423,8 @@ class KancolleData {
           updateOperationQueue(data, id);
         }
       }
+
+      cacheData(source, path, data);
     }
 
     if (model is GetMemberRequireInfoEntity) {
@@ -433,6 +435,8 @@ class KancolleData {
           .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
       seaForceBase.updateUseItem(model.apiData.apiUseitem);
+
+      cacheData(source, path, data);
     }
 
     if (model is GetMemberUseitemEntity) {
@@ -465,6 +469,8 @@ class KancolleData {
 
   void loadCachedData() {
     _loadCachedData(GetDataEntity.source);
+    _loadCachedData(GetMemberRequireInfoEntity.source);
+    _loadCachedData(PortEntity.source);
   }
 
   void _loadCachedData(String source) {
