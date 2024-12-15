@@ -63,7 +63,6 @@ XMLHttpRequest = class HackedXMLHttpRequest extends OriginalXMLHttpRequest {
 function SendToFlutter(xhr, type) {
     let messageData;
     if (!xhr.responseURL.includes('/kcsapi/')) {
-        console.log('XHR: request url - ' + xhr.responseURL);
         return;
     }
 

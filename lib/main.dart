@@ -2,6 +2,7 @@ import 'package:conning_tower/app.dart';
 import 'package:conning_tower/constants.dart';
 import 'package:conning_tower/firebase_options.dart';
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/utils/asset_loader.dart';
 import 'package:conning_tower/utils/objectbox.dart';
 import 'package:conning_tower/utils/logger.dart';
 import 'package:conning_tower/utils/notification_util.dart';
@@ -79,6 +80,8 @@ Future<void> init() async {
   localStorage = await SharedPreferences.getInstance();
 
   deviceType = await getDeviceType();
+
+  await AssetLoader.init();
 
   safeNavi = false;
   selectedIndex = 0;
