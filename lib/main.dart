@@ -36,6 +36,7 @@ Future<void> main() async {
 
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
     await InAppWebViewController.setWebContentsDebuggingEnabled(true);
+    await InAppWebViewController.enableSlowWholeDocumentDraw();
   }
   await notification.init();
 
