@@ -125,13 +125,11 @@ class TaskUtil extends _$TaskUtil {
       textSourceController: TextEditingController(text: ""));
 
   Future<File> get _localJsonFile async {
-    final path = await localPath;
-    return File('$path/providers/task/tasks.json');
+    return File(pathUtil.customTaskDataJsonPath);
   }
 
   Future<File> get _localYamlFile async {
-    final path = await localPath;
-    return File('$path/providers/task/tasks.yaml');
+    return File(pathUtil.customTaskDataYamlPath);
   }
 
   Future<void> setTasksUrl(String url) async {

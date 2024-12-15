@@ -3,10 +3,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:conning_tower/helper.dart';
+import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/log/kancolle_log.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 import 'package:conning_tower/objectbox.g.dart';
 import 'dart:developer' as dev;
 
@@ -35,10 +34,8 @@ class ObjectBox {
 
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<ObjectBox> create() async {
-    final docsDir = await getApplicationDocumentsDirectory();
     // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
-    debugPrint(docsDir.toString());
-    final store = await openStore(directory: p.join(docsDir.path, "obx"));
+    final store = await openStore(directory: pathUtil.objectBoxPath);
     return ObjectBox._create(store);
   }
 
@@ -128,8 +125,7 @@ class ObjectBox {
 
   Future<void> clear() async {
     close();
-    final docsDir = await getApplicationDocumentsDirectory();
-    final objBoxDirectory = Directory(p.join(docsDir.path, "obx"));
+    final objBoxDirectory = Directory(pathUtil.objectBoxPath);
     final isExists = await objBoxDirectory.exists();
     if (isExists) {
       debugPrint("obx path exists: $isExists");
@@ -138,8 +134,7 @@ class ObjectBox {
   }
 
   Future<String> storeSize() async {
-    final docsDir = await getApplicationDocumentsDirectory();
-    return getFileSize(p.join(docsDir.path, "obx", 'data.mdb'), 2);
+    return getFileSize(pathUtil.objectBoxDataDBPath, 2);
   }
 
   void saveQuest(int id, String logStr) {

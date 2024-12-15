@@ -5,6 +5,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/utils/objectbox.dart';
 import 'package:conning_tower/utils/logger.dart';
 import 'package:conning_tower/utils/notification_util.dart';
+import 'package:conning_tower/utils/path_util.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,9 +23,11 @@ late bool safeNavi;
 late int selectedIndex;
 late DeviceType deviceType;
 late ObjectBox objectbox;
+late PathUtil pathUtil;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  pathUtil = await PathUtil.create();
   objectbox = await ObjectBox.create();
   if (!kIsWeb && kReleaseChannel == ReleaseChannel.store) {
     // start the localhost server
