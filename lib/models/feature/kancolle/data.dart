@@ -300,6 +300,10 @@ class KancolleData {
           admiral: seaForceBase.admiral.name);
     }
 
+    if (model is ReqPracticeBattleResultEntity) {
+      battleInfo.parseReqPracticeBattleResult(model.apiData);
+    }
+
     if (model is GetDataEntity) {
       log("GetDataEntity");
       dataInfo.shipInfo =

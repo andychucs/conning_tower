@@ -894,6 +894,18 @@ class BattleInfo with _$BattleInfo {
 
     return formation;
   }
+
+  void parseReqPracticeBattleResult(ReqPracticeBattleResultApiDataEntity? data) {
+    Toast.battleResultNotify([]);
+    battleResult?.actual = data?.apiWinRank;
+    if (enemySquads != null) {
+      for (var squad in enemySquads!) {
+        squad.name =
+            data?.apiEnemyInfo?.apiDeckName ?? S.current.KCDashboardBattleEnemy;
+      }
+    }
+    mvp = data?.apiMvp;
+  }
 }
 
 enum CombinedFleetType {

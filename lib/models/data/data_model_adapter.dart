@@ -80,6 +80,7 @@ class DataModelAdapter {
           ReqKousyouGetshipEntity.fromJson(json),
         GetMemberUseitemEntity.source => GetMemberUseitemEntity.fromJson(json),
         ReqHenseiPresetSelectEntity.source => ReqHenseiPresetSelectEntity.fromJson(json),
+        ReqPracticeBattleResultEntity.source => ReqPracticeBattleResultEntity.fromJson(json),
         _ => null,
       };
 
