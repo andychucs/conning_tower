@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/data/kcsapi/kcsapi.dart';
+import 'package:conning_tower/models/feature/kancolle/battle_result.dart';
 import 'package:conning_tower/models/feature/log/kancolle_ship_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,11 +20,7 @@ const kSecondSquadIndexStart = 6;
 @unfreezed
 class BattleInfo with _$BattleInfo {
   factory BattleInfo({
-    String? result,
-    String? dropName,
     int? mvp,
-    int? dropItemId,
-    String? dropItemName,
     List<Squad>? enemySquads,
     List<Squad>? inBattleSquads,
     List<Squad>? friendSquads,
@@ -37,6 +34,7 @@ class BattleInfo with _$BattleInfo {
     int? mapRoute,
     List<Ship>? readyEscapeShips,
     String? note,
+    BattleResult? battleResult,
   }) = _BattleInfo;
 
   const BattleInfo._();
@@ -53,10 +51,10 @@ class BattleInfo with _$BattleInfo {
   List<Ship> get allEnemyShips =>
       enemySquads!.expand((squad) => squad.ships).toList();
 
-  List<Ship> get allShips => inBattleSquads!
-      .expand((squad) => squad.ships)
-      .followedBy(enemySquads!.expand((squad) => squad.ships))
-      .toList();
+  List<Ship> get allOurShips =>
+      inBattleSquads!.expand((squad) => squad.ships).toList();
+
+  List<Ship> get allShips => allEnemyShips + allOurShips;
 
   String get contactStatus => switch (contact) {
         1 => "同航戦",
@@ -185,20 +183,20 @@ class BattleInfo with _$BattleInfo {
     dmgTakenMap![defShipHash] = dmgTakenMap![defShipHash]! - damage.truncate();
   }
 
-  void clear({bool resetMapInfo = false}) {
-    result = null;
-    dropName = null;
+  void clear({bool resetMapInfo = false, bool pointChanged = false}) {
     mvp = null;
-    dropItemId = null;
-    dropItemName = null;
     airSuperiorityFlag = null;
     formation = null;
     eFormation = null;
     contact = null;
     enemySquads?.clear();
-    dmgMap?.clear();
-    dmgTakenMap?.clear();
     friendSquads?.clear();
+    battleResult ??= BattleResult(ourBattleScore: 0, enemyBattleScore: 0);
+    if (pointChanged) {
+      dmgMap = null;
+      dmgTakenMap = null;
+      battleResult = BattleResult(ourBattleScore: 0, enemyBattleScore: 0);
+    }
     note = null;
     if (resetMapInfo) {
       mapInfo = null;
@@ -419,7 +417,7 @@ class BattleInfo with _$BattleInfo {
   }
 
   void parsePracticeBattle(ReqPracticeBattleApiDataEntity data, Squad squad) {
-    clear(resetMapInfo: true);
+    clear(resetMapInfo: true, pointChanged: true);
     initSingleEnemySquads(data);
 
     inBattleSquads = [Squad.fromJson(squad.toJson())]; // deep copy
@@ -486,15 +484,18 @@ class BattleInfo with _$BattleInfo {
       setReadyEscapeShip(data.apiEscape!);
     }
     Toast.battleResultNotify(damagedShipNames);
-    result = data.apiWinRank;
-    dropName = data.apiGetShip?.apiShipName;
+    battleResult?.actual = data.apiWinRank;
+    final dropName = data.apiGetShip?.apiShipName;
+    battleResult?.dropShipName = dropName;
     if (dropName != null) {
-      objectbox.saveShipLog(admiral: admiral, type: ShipLogType.drop, shipName: dropName!);
+      objectbox.saveShipLog(
+          admiral: admiral, type: ShipLogType.drop, shipName: dropName);
     }
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
         if (data.apiEnemyInfo != null) {
-          squad.name = data.apiEnemyInfo?.apiDeckName ?? S.current.KCDashboardBattleEnemy;
+          squad.name = data.apiEnemyInfo?.apiDeckName ??
+              S.current.KCDashboardBattleEnemy;
         }
       }
     }
@@ -503,13 +504,13 @@ class BattleInfo with _$BattleInfo {
         data.apiGetExmapUseitemId != 0 &&
         data.apiGetExmapUseitemId != '') {
       if (data.apiGetExmapUseitemId is int) {
-        dropItemId = data.apiGetExmapUseitemId;
+        battleResult?.dropItemId = data.apiGetExmapUseitemId;
       }
       if (data.apiGetExmapUseitemId is String) {
         try {
-          dropItemId = int.parse(data.apiGetExmapUseitemId);
+          battleResult?.dropItemId = int.parse(data.apiGetExmapUseitemId);
         } catch (e) {
-          dropItemId = null;
+          battleResult?.dropItemId = null;
         }
       }
     }
@@ -520,35 +521,38 @@ class BattleInfo with _$BattleInfo {
       setReadyEscapeShip(data.apiEscape!);
     }
     Toast.battleResultNotify(damagedShipNames);
-    result = data.apiWinRank;
-    dropName = data.apiGetShip?.apiShipName;
+    battleResult?.actual = data.apiWinRank;
+    final dropName = data.apiGetShip?.apiShipName;
+    battleResult?.dropShipName = dropName;
     if (dropName != null) {
-      objectbox.saveShipLog(admiral: admiral, type: ShipLogType.drop, shipName: dropName!);
+      objectbox.saveShipLog(
+          admiral: admiral, type: ShipLogType.drop, shipName: dropName);
     }
     if (enemySquads != null) {
       for (var squad in enemySquads!) {
-        squad.name = data.apiEnemyInfo.apiDeckName ?? S.current.KCDashboardBattleEnemy;
+        squad.name =
+            data.apiEnemyInfo.apiDeckName ?? S.current.KCDashboardBattleEnemy;
       }
     }
     mvp = data.apiMvp;
     var item = data.apiGetUseitem;
     if (item != null) {
-      dropItemId = item.apiUseitemId;
+      battleResult?.dropItemId = item.apiUseitemId;
       if (item.apiUseitemName != '') {
-        dropItemName = item.apiUseitemName;
+        battleResult?.dropItemName = item.apiUseitemName;
       }
     } else if (data.apiGetExmapUseitemId != null &&
         data.apiGetExmapUseitemId != 0 &&
         data.apiGetExmapUseitemId != '') {
       // only record one of apiGetExmapUseitemId and apiGetExmapUseitemName now
       if (data.apiGetExmapUseitemId is int) {
-        dropItemId = data.apiGetExmapUseitemId;
+        battleResult?.dropItemId = data.apiGetExmapUseitemId;
       }
       if (data.apiGetExmapUseitemId is String) {
         try {
-          dropItemId = int.parse(data.apiGetExmapUseitemId);
+          battleResult?.dropItemId = int.parse(data.apiGetExmapUseitemId);
         } catch (e) {
-          dropItemId = null;
+          battleResult?.dropItemId = null;
         }
       }
     }
@@ -683,15 +687,34 @@ class BattleInfo with _$BattleInfo {
   }
 
   void updateShipHP() {
+    Map<int, int> hpChangeMap = {};
+    if (battleResult?.enemyHPTotal == null) {
+      final enemyHPTotal = allEnemyShips.fold(0, (t, e) => t + e.nowHP);
+      battleResult?.enemyHPTotal = enemyHPTotal;
+    }
+    if (battleResult?.ourHPTotal == null) {
+      final ourHPTotal = allOurShips.fold(0, (t, e) => t + e.nowHP);
+      battleResult?.ourHPTotal = ourHPTotal;
+    }
+
     if (dmgTakenMap != null) {
       final shipsMap = {for (Ship ship in allShips) ship.hashCode: ship};
 
       dmgTakenMap?.forEach((shipHash, damage) {
         if (damage != 0) {
-          shipsMap[shipHash]?.onHPChange(damage);
+          final hpChange = shipsMap[shipHash]?.onHPChange(damage);
+          if (hpChange != null) {
+            hpChangeMap[shipHash] = hpChange;
+          }
         }
       });
     }
+    battleResult?.parseExpected(
+      allOurShips,
+      allEnemyShips,
+      enemySquads!,
+      hpChangeMap,
+    );
   }
 
   void _parseBasicBattleApi(BattleBasicModel data) {

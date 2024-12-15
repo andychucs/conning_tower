@@ -62,15 +62,30 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: LocalNavigatorBuilder(builder: (context) {
+            final battleRank = battleInfo.battleResult?.actual;
             return CupertinoPageScaffold(
+              backgroundColor: CupertinoColors.systemGroupedBackground,
               navigationBar: CupertinoNavigationBar(
                 automaticallyImplyLeading: false,
                 transitionBetweenRoutes: false,
                 backgroundColor: CupertinoColors.systemGroupedBackground,
                 border: null,
                 trailing: CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: Text(S.of(context).KCDashboardBattleMoreInfo),
+                  color: CupertinoDynamicColor.resolve(
+                      CupertinoColors.secondarySystemGroupedBackground,
+                      context),
+                  minSize: CupertinoTheme.of(context)
+                      .textTheme
+                      .tabLabelTextStyle
+                      .fontSize,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                  child: Text(
+                    S.of(context).KCDashboardBattleMoreInfo,
+                    style: CupertinoTheme.of(context).textTheme.textStyle.merge(
+                        TextStyle(
+                            color: CupertinoColors.label.resolveFrom(context))),
+                  ),
                   onPressed: () => navigatorToCupertino(
                           context, KancolleBattleMoreInfoPage())
                       .then((value) => setState(() {})),
@@ -78,30 +93,30 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                 middle: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    if (battleInfo.result == null)
+                    if (battleRank == null)
                       Text(
                         battleInfo.contactStatus,
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
-                    if (battleInfo.result == null &&
-                        battleInfo.airSuperiority != '')
+                    if (battleRank == null && battleInfo.airSuperiority != '')
                       Text(
                         battleInfo.airSuperiority,
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
-                    if (battleInfo.result != null)
+                    if (battleRank != null ||
+                        battleInfo.battleResult?.expected != null)
                       Text(
-                        '${battleInfo.result}',
+                        "${S.of(context).KCDashboardBattleRecord}: ${battleRank ?? "${battleInfo.battleResult?.expected ?? ""}?"}",
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
-                    if (battleInfo.dropName != null)
+                    if (battleInfo.battleResult?.dropShipName != null)
                       Text(
-                        '${battleInfo.dropName} GET!',
+                        '${battleInfo.battleResult?.dropShipName} GET!',
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
-                    if (battleInfo.dropItemId != null)
+                    if (battleInfo.battleResult?.dropItemId != null)
                       Text(
-                        '${battleInfo.dropItemName ?? useItemData?[battleInfo.dropItemId]?.apiName} GET!',
+                        '${battleInfo.battleResult?.dropItemName ?? useItemData?[battleInfo.battleResult?.dropItemId]?.apiName} GET!',
                         style: TextStyle(fontWeight: FontWeight.normal),
                       ),
                     if (battleInfo.mapRoute != null &&
@@ -117,196 +132,206 @@ class _BattleInfoPageState extends ConsumerState<BattleInfoPage>
                   ],
                 ),
               ),
-              child: Column(
-                children: [
-                  if ((battleInfo.inBattleSquads ?? []).isEmpty)
-                    const Center(
-                      child: Text("暁の水平線に勝利を刻みなさい"),
-                    ),
-                  if (battleInfo.note != null)
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(battleInfo.note!,
-                          style:
-                              CupertinoTheme.of(context).textTheme.textStyle),
-                    ),
-                  if ((battleInfo.inBattleSquads ?? []).isNotEmpty)
-                    Expanded(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          var items = [];
-
-                          for (final squad in [...?battleInfo.inBattleSquads]) {
-                            items.add(CupertinoListSection.insetGrouped(
-                              // margin: _kBattleInfoGridMargin,
-                              header: battleInfo.inBattleSquads?.first == squad
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                          CupertinoListSectionDescription(
-                                              '${squad.name} ${battleInfo.ourFormation}'),
-                                          GestureDetector(
-                                            child: Icon(
-                                              CupertinoIcons
-                                                  .exclamationmark_circle,
-                                              size: 20,
-                                              color:
-                                                  CupertinoDynamicColor.resolve(
-                                                      kHeaderFooterColor,
-                                                      context),
-                                            ),
-                                            onTap: () => navigatorToCupertino(
-                                                context,
-                                                CupertinoActionPage(
-                                                    title: S.current
-                                                        .KCDashboardBattleReport,
-                                                    child: ListView(
-                                                      children: [
-                                                        CupertinoListSection
-                                                            .insetGrouped(
-                                                          footer: SelectableText(
-                                                              "BattleInfo:\n${battleInfo.toString()}"),
-                                                          children: [
-                                                            CupertinoListTile(
-                                                              title: const Text(
-                                                                  "Copy Data"),
-                                                              subtitle: Text(ref
-                                                                  .watch(
-                                                                      rawDataProvider)
-                                                                  .source),
-                                                              onTap: () => Clipboard.setData(
-                                                                  ClipboardData(
-                                                                      text: ref
-                                                                          .watch(
-                                                                              rawDataProvider)
-                                                                          .data)),
-                                                            )
-                                                          ],
-                                                        )
-                                                      ],
-                                                    ))),
-                                          ),
-                                        ])
-                                  : CupertinoListSectionDescription(squad.name),
-                              children: List.generate(
-                                  squad.ships.length,
-                                  (index) => ShipInfoInBattle(
-                                        ship: squad.ships[index],
-                                        name: squad.ships[index].name ??
-                                            shipInfo?[squad.ships[index].shipId]
-                                                ?.apiName ??
-                                            'N/A',
-                                        dmg: battleInfo.dmgMap?[
-                                                squad.ships[index].hashCode] ??
-                                            0,
-                                        dmgTaken: battleInfo.dmgTakenMap?[
-                                                squad.ships[index].hashCode] ??
-                                            0,
-                                        useEmoji: ref
-                                            .read(settingsProvider)
-                                            .kcSparkEmoji,
-                                      )),
-                            ));
-                          }
-                          for (final squad in [...?battleInfo.friendSquads]) {
-                            items.add(CupertinoListSection.insetGrouped(
-                              // margin: _kBattleInfoGridMargin,
-                              header:
-                                  CupertinoListSectionDescription(squad.name),
-                              children: List.generate(
-                                  squad.ships.length,
-                                  (index) => ShipInfoInBattle(
-                                        ship: squad.ships[index],
-                                        name: squad.ships[index].name ??
-                                            shipInfo?[squad.ships[index].shipId]
-                                                ?.apiName ??
-                                            'N/A',
-                                        dmg: battleInfo.dmgMap?[
-                                                squad.ships[index].hashCode] ??
-                                            0,
-                                        dmgTaken: battleInfo.dmgTakenMap?[
-                                                squad.ships[index].hashCode] ??
-                                            0,
-                                        useEmoji: ref
-                                            .read(settingsProvider)
-                                            .kcSparkEmoji,
-                                      )),
-                            ));
-                          }
-                          for (final squad in [...?battleInfo.enemySquads]) {
-                            items.add(CupertinoListSection.insetGrouped(
-                              // margin: _kBattleInfoGridMargin,
-                              header: battleInfo.enemySquads?.first == squad
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                          CupertinoListSectionDescription(
-                                              '${squad.name} ${battleInfo.enemyFormation}'),
-                                        ])
-                                  : CupertinoListSectionDescription(squad.name),
-                              children: List.generate(
-                                  squad.ships.length,
-                                  (index) => ShipInfoInBattle(
-                                        ship: squad.ships[index],
-                                        name: squad.ships[index].name ??
-                                            shipInfo?[squad.ships[index].shipId]
-                                                ?.apiName ??
-                                            'N/A',
-                                        dmg: battleInfo.dmgMap?[
-                                                squad.ships[index].hashCode] ??
-                                            0,
-                                        dmgTaken: battleInfo.dmgTakenMap?[
-                                                squad.ships[index].hashCode] ??
-                                            0,
-                                        useEmoji: ref
-                                            .read(settingsProvider)
-                                            .kcSparkEmoji,
-                                      )),
-                            ));
-                          }
-
-                          debugPrint(constraints.maxWidth.toString());
-                          if (constraints.maxWidth >= 600) {
-                            crossAxisCount = 2;
-                          }
-                          return MasonryGridView.count(
-                            crossAxisCount: crossAxisCount,
-                            itemCount: items.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return items[index];
-                            },
-                          );
-                        },
+              child: SafeArea(
+                bottom: false,
+                child: Column(
+                  children: [
+                    if ((battleInfo.inBattleSquads ?? []).isEmpty)
+                      const Center(
+                        child: Text("暁の水平線に勝利を刻みなさい"),
                       ),
-                    ),
-                  if (battleInfo.mapInfo != null)
-                    Center(
-                      child: Padding(
+                    if (battleInfo.note != null)
+                      Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            MapInfoButton(data: data, battleInfo: battleInfo),
-                            Text(
-                              routeName(battleInfo, kcWikiData),
-                              style: CupertinoTheme.of(context)
-                                  .textTheme
-                                  .textStyle
-                                  .merge(TextStyle(
-                                      color: CupertinoColors.secondaryLabel
-                                          .resolveFrom(context))),
-                            ),
-                          ],
+                        child: Text(battleInfo.note!,
+                            style:
+                                CupertinoTheme.of(context).textTheme.textStyle),
+                      ),
+                    if ((battleInfo.inBattleSquads ?? []).isNotEmpty)
+                      Expanded(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            var items = [];
+
+                            for (final squad in [
+                              ...?battleInfo.inBattleSquads
+                            ]) {
+                              items.add(CupertinoListSection.insetGrouped(
+                                // margin: _kBattleInfoGridMargin,
+                                header:
+                                    battleInfo.inBattleSquads?.first == squad
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                                CupertinoListSectionDescription(
+                                                    '${squad.name} ${battleInfo.ourFormation}'),
+                                                GestureDetector(
+                                                  child: Icon(
+                                                    CupertinoIcons
+                                                        .exclamationmark_circle,
+                                                    size: 20,
+                                                    color: CupertinoDynamicColor
+                                                        .resolve(
+                                                            kHeaderFooterColor,
+                                                            context),
+                                                  ),
+                                                  onTap: () =>
+                                                      navigatorToCupertino(
+                                                          context,
+                                                          CupertinoActionPage(
+                                                              title: S.current
+                                                                  .KCDashboardBattleReport,
+                                                              child: ListView(
+                                                                children: [
+                                                                  CupertinoListSection
+                                                                      .insetGrouped(
+                                                                    footer: SelectableText(
+                                                                        "BattleInfo:\n${battleInfo.toString()}"),
+                                                                    children: [
+                                                                      CupertinoListTile(
+                                                                        title: const Text(
+                                                                            "Copy Data"),
+                                                                        subtitle: Text(ref
+                                                                            .watch(rawDataProvider)
+                                                                            .source),
+                                                                        onTap: () =>
+                                                                            Clipboard.setData(ClipboardData(text: ref.watch(rawDataProvider).data)),
+                                                                      )
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ))),
+                                                ),
+                                              ])
+                                        : CupertinoListSectionDescription(
+                                            squad.name),
+                                children: List.generate(
+                                    squad.ships.length,
+                                    (index) => ShipInfoInBattle(
+                                          ship: squad.ships[index],
+                                          name: squad.ships[index].name ??
+                                              shipInfo?[
+                                                      squad.ships[index].shipId]
+                                                  ?.apiName ??
+                                              'N/A',
+                                          dmg: battleInfo.dmgMap?[squad
+                                                  .ships[index].hashCode] ??
+                                              0,
+                                          dmgTaken: battleInfo.dmgTakenMap?[
+                                                  squad
+                                                      .ships[index].hashCode] ??
+                                              0,
+                                          useEmoji: ref
+                                              .read(settingsProvider)
+                                              .kcSparkEmoji,
+                                        )),
+                              ));
+                            }
+                            for (final squad in [...?battleInfo.friendSquads]) {
+                              items.add(CupertinoListSection.insetGrouped(
+                                // margin: _kBattleInfoGridMargin,
+                                header:
+                                    CupertinoListSectionDescription(squad.name),
+                                children: List.generate(
+                                    squad.ships.length,
+                                    (index) => ShipInfoInBattle(
+                                          ship: squad.ships[index],
+                                          name: squad.ships[index].name ??
+                                              shipInfo?[
+                                                      squad.ships[index].shipId]
+                                                  ?.apiName ??
+                                              'N/A',
+                                          dmg: battleInfo.dmgMap?[squad
+                                                  .ships[index].hashCode] ??
+                                              0,
+                                          dmgTaken: battleInfo.dmgTakenMap?[
+                                                  squad
+                                                      .ships[index].hashCode] ??
+                                              0,
+                                          useEmoji: ref
+                                              .read(settingsProvider)
+                                              .kcSparkEmoji,
+                                        )),
+                              ));
+                            }
+                            for (final squad in [...?battleInfo.enemySquads]) {
+                              items.add(CupertinoListSection.insetGrouped(
+                                // margin: _kBattleInfoGridMargin,
+                                header: battleInfo.enemySquads?.first == squad
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                            CupertinoListSectionDescription(
+                                                '${squad.name} ${battleInfo.enemyFormation}'),
+                                          ])
+                                    : CupertinoListSectionDescription(
+                                        squad.name),
+                                children: List.generate(
+                                    squad.ships.length,
+                                    (index) => ShipInfoInBattle(
+                                          ship: squad.ships[index],
+                                          name: squad.ships[index].name ??
+                                              shipInfo?[
+                                                      squad.ships[index].shipId]
+                                                  ?.apiName ??
+                                              'N/A',
+                                          dmg: battleInfo.dmgMap?[squad
+                                                  .ships[index].hashCode] ??
+                                              0,
+                                          dmgTaken: battleInfo.dmgTakenMap?[
+                                                  squad
+                                                      .ships[index].hashCode] ??
+                                              0,
+                                          useEmoji: ref
+                                              .read(settingsProvider)
+                                              .kcSparkEmoji,
+                                        )),
+                              ));
+                            }
+
+                            debugPrint(constraints.maxWidth.toString());
+                            if (constraints.maxWidth >= 600) {
+                              crossAxisCount = 2;
+                            }
+                            return MasonryGridView.count(
+                              crossAxisCount: crossAxisCount,
+                              itemCount: items.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return items[index];
+                              },
+                            );
+                          },
                         ),
                       ),
-                    ),
-                ],
+                    if (battleInfo.mapInfo != null)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              MapInfoButton(data: data, battleInfo: battleInfo),
+                              Text(
+                                routeName(battleInfo, kcWikiData),
+                                style: CupertinoTheme.of(context)
+                                    .textTheme
+                                    .textStyle
+                                    .merge(TextStyle(
+                                        color: CupertinoColors.secondaryLabel
+                                            .resolveFrom(context))),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             );
           }),

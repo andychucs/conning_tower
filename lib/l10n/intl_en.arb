@@ -158,6 +158,8 @@
   "@KCDashboardBattleMoreInfo": {},
   "KCDashboardBattleOur": "Our Fleet",
   "@KCDashboardBattleOur": {},
+  "KCDashboardBattleRecord": "Rank",
+  "@KCDashboardBattleRecord": {},
   "KCDashboardBattleReport": "Report",
   "@KCDashboardBattleReport": {},
   "KCDashboardCommand": "Command",

@@ -171,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("More"),
         "KCDashboardBattleOur":
             MessageLookupByLibrary.simpleMessage("Our Fleet"),
+        "KCDashboardBattleRecord": MessageLookupByLibrary.simpleMessage("Rank"),
         "KCDashboardBattleReport":
             MessageLookupByLibrary.simpleMessage("Report"),
         "KCDashboardCommand": MessageLookupByLibrary.simpleMessage("Command"),

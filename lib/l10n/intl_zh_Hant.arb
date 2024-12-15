@@ -158,6 +158,8 @@
   "@KCDashboardBattleMoreInfo": {},
   "KCDashboardBattleOur": "我方艦隊",
   "@KCDashboardBattleOur": {},
+  "KCDashboardBattleRecord": "戰績",
+  "@KCDashboardBattleRecord": {},
   "KCDashboardBattleReport": "戰鬥報告",
   "@KCDashboardBattleReport": {},
   "KCDashboardCommand": "司令部",

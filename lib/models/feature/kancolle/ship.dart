@@ -88,11 +88,14 @@ class Ship with _$Ship {
     return false;
   }
 
-  void onHPChange(int damage) {
+  int onHPChange(int damage) {
+    final startHP = nowHP;
     nowHP = nowHP + damage;
     if (nowHP < 0) {
       nowHP = 0;
+      return startHP;
     }
+    return startHP - nowHP;
   }
 
   bool get damaged {
@@ -102,6 +105,8 @@ class Ship with _$Ship {
       return false;
     }
   }
+
+  bool get sunken => nowHP <= 0 && maxHP > 0;
 
   bool get sparked => condition! >= 50;
 

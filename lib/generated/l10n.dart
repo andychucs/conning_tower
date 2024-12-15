@@ -840,6 +840,16 @@ class S {
     );
   }
 
+  /// `Rank`
+  String get KCDashboardBattleRecord {
+    return Intl.message(
+      'Rank',
+      name: 'KCDashboardBattleRecord',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report`
   String get KCDashboardBattleReport {
     return Intl.message(
