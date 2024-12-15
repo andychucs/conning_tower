@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:conning_tower/generated/l10n.dart';
 import 'package:conning_tower/main.dart';
@@ -316,6 +317,8 @@ class KancolleData {
       };
       dataInfo.shipTypeList = model.apiData.apiMstStype;
       dataInfo.initShipUpgradeMap();
+
+      cacheData(source, path, data);
     }
 
     if (model is ReqMissionStartEntity) {
@@ -420,6 +423,8 @@ class KancolleData {
           updateOperationQueue(data, id);
         }
       }
+
+      cacheData(source, path, data);
     }
 
     if (model is GetMemberRequireInfoEntity) {
@@ -430,6 +435,8 @@ class KancolleData {
           .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
       seaForceBase.updateUseItem(model.apiData.apiUseitem);
+
+      cacheData(source, path, data);
     }
 
     if (model is GetMemberUseitemEntity) {
@@ -443,6 +450,40 @@ class KancolleData {
           .read(kancolleItemDataProvider.notifier)
           .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
+    }
+  }
+
+  void cacheData(String source, String path, String data) {
+    if (source.startsWith("local")) {
+      return;
+    }
+    // save data to local file
+    final file = File(pathUtil.getKcCacheDataPath(path));
+    final directory = file.parent;
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
+    file.writeAsString(data);
+  }
+
+
+  void loadCachedData() {
+    _loadCachedData(GetDataEntity.source);
+    _loadCachedData(GetMemberRequireInfoEntity.source);
+    _loadCachedData(PortEntity.source);
+  }
+
+  void _loadCachedData(String source) {
+    final localFile =
+    File(pathUtil.getKcCacheDataPath(source));
+    if (localFile.existsSync()) {
+      final cacheString = localFile.readAsStringSync();
+      final rawData = RawData(
+        source: "local/kcsapi$source",
+        data: cacheString,
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      );
+      parse(rawData);
     }
   }
 
