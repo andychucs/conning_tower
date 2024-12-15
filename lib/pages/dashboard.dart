@@ -159,9 +159,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
             initialIndex: _selectIndex ?? 0,
             tabs: tabs,
             contents: widget.children,
-            childPadding: widget.largeScreen
-                ? EdgeInsets.zero
-                : const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            childPadding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
             colors: colors,
           ),
         );
