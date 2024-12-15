@@ -22,6 +22,7 @@ export 'req_sortie_goback_port_entity.dart';
 export 'req_sortie_ld_airbattle_entity.dart';
 export 'result/req_combined_battle_result_entity.dart';
 export 'result/req_sortie_battle_result_entity.dart';
+export 'result/req_practice_battle_result_entity.dart';
 
 part 'battle.freezed.dart';
 part 'battle.g.dart';
