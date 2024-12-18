@@ -167,15 +167,14 @@ class _PortInfoState extends ConsumerState<PortInfo>
                         ),
                         InfoBox(
                           onTap: () {
-                            Toast.showWarning(title: "Not implemented yet.");
-                            // navigatorToCupertino(context, KancolleItemViewer());
+                            navigatorToCupertino(context, KancolleItemViewer());
                           },
                           top: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
                                   child: Text(S.of(context).TextEquipment)),
-                              // const CupertinoListTileChevron(),
+                              const CupertinoListTileChevron(),
                             ],
                           ),
                           bottom: AutoSizeText(

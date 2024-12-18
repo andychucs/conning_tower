@@ -1440,6 +1440,156 @@ class S {
     );
   }
 
+  /// `Secondary & AA Gun`
+  String get KCEquipmentMainTypeFilterAAGun {
+    return Intl.message(
+      'Secondary & AA Gun',
+      name: 'KCEquipmentMainTypeFilterAAGun',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ammo`
+  String get KCEquipmentMainTypeFilterAmmo {
+    return Intl.message(
+      'Ammo',
+      name: 'KCEquipmentMainTypeFilterAmmo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Anti-Sub`
+  String get KCEquipmentMainTypeFilterAntiSub {
+    return Intl.message(
+      'Anti-Sub',
+      name: 'KCEquipmentMainTypeFilterAntiSub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attack Aircraft`
+  String get KCEquipmentMainTypeFilterAttack {
+    return Intl.message(
+      'Attack Aircraft',
+      name: 'KCEquipmentMainTypeFilterAttack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Engine & Armor`
+  String get KCEquipmentMainTypeFilterEngineAndArmor {
+    return Intl.message(
+      'Engine & Armor',
+      name: 'KCEquipmentMainTypeFilterEngineAndArmor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fighter`
+  String get KCEquipmentMainTypeFilterFighter {
+    return Intl.message(
+      'Fighter',
+      name: 'KCEquipmentMainTypeFilterFighter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Main Gun`
+  String get KCEquipmentMainTypeFilterGun {
+    return Intl.message(
+      'Main Gun',
+      name: 'KCEquipmentMainTypeFilterGun',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Improvement & Resource`
+  String get KCEquipmentMainTypeFilterImprovementAndResource {
+    return Intl.message(
+      'Improvement & Resource',
+      name: 'KCEquipmentMainTypeFilterImprovementAndResource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Land-based Aircraft`
+  String get KCEquipmentMainTypeFilterLDAircraft {
+    return Intl.message(
+      'Land-based Aircraft',
+      name: 'KCEquipmentMainTypeFilterLDAircraft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Radar`
+  String get KCEquipmentMainTypeFilterRadar {
+    return Intl.message(
+      'Radar',
+      name: 'KCEquipmentMainTypeFilterRadar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recon Aircraft & Seaplane`
+  String get KCEquipmentMainTypeFilterReconAndSeaplane {
+    return Intl.message(
+      'Recon Aircraft & Seaplane',
+      name: 'KCEquipmentMainTypeFilterReconAndSeaplane',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Searchlight & Device`
+  String get KCEquipmentMainTypeFilterSearchlightAndDevice {
+    return Intl.message(
+      'Searchlight & Device',
+      name: 'KCEquipmentMainTypeFilterSearchlightAndDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Torpedo`
+  String get KCEquipmentMainTypeFilterTorpedo {
+    return Intl.message(
+      'Torpedo',
+      name: 'KCEquipmentMainTypeFilterTorpedo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle`
+  String get KCEquipmentMainTypeFilterVehicle {
+    return Intl.message(
+      'Vehicle',
+      name: 'KCEquipmentMainTypeFilterVehicle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Equipment Types: {type}. Total in Stock: {count}.`
+  String KCEquipmentViewerTotalNote(Object type, Object count) {
+    return Intl.message(
+      'Equipment Types: $type. Total in Stock: $count.',
+      name: 'KCEquipmentViewerTotalNote',
+      desc: '',
+      args: [type, count],
+    );
+  }
+
   /// `{name} arrived!`
   String KCGetNewShipNotify(Object name) {
     return Intl.message(
@@ -2250,6 +2400,16 @@ class S {
     );
   }
 
+  /// `Category`
+  String get TextCategory {
+    return Intl.message(
+      'Category',
+      name: 'TextCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Compact`
   String get TextCompact {
     return Intl.message(
@@ -2625,6 +2785,16 @@ class S {
     return Intl.message(
       'Open in Aerial Combat Simulator',
       name: 'TextOpenInNoro6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get TextOther {
+    return Intl.message(
+      'Other',
+      name: 'TextOther',
       desc: '',
       args: [],
     );

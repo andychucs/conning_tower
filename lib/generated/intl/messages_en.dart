@@ -26,19 +26,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "Fleet Girls: ${count}";
 
-  static String m3(name) => "${name} arrived!";
+  static String m3(type, count) =>
+      "Equipment Types: ${type}. Total in Stock: ${count}.";
 
-  static String m4(url) => "Now navigation to ${url}";
+  static String m4(name) => "${name} arrived!";
 
-  static String m5(url) => "Page finished loading: ${url}";
+  static String m5(url) => "Now navigation to ${url}";
 
-  static String m6(url) => "Page started loading: ${url}";
+  static String m6(url) => "Page finished loading: ${url}";
 
-  static String m7(taskTitle) => "${taskTitle} has been completed.";
+  static String m7(url) => "Page started loading: ${url}";
 
-  static String m8(length) => "${length} items will be imported.";
+  static String m8(taskTitle) => "${taskTitle} has been completed.";
 
-  static String m9(statusCode) => "Network Error: ${statusCode}";
+  static String m9(length) => "${length} items will be imported.";
+
+  static String m10(statusCode) => "Network Error: ${statusCode}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -275,7 +278,36 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Newest First"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("Fleet Girls"),
-        "KCGetNewShipNotify": m3,
+        "KCEquipmentMainTypeFilterAAGun":
+            MessageLookupByLibrary.simpleMessage("Secondary & AA Gun"),
+        "KCEquipmentMainTypeFilterAmmo":
+            MessageLookupByLibrary.simpleMessage("Ammo"),
+        "KCEquipmentMainTypeFilterAntiSub":
+            MessageLookupByLibrary.simpleMessage("Anti-Sub"),
+        "KCEquipmentMainTypeFilterAttack":
+            MessageLookupByLibrary.simpleMessage("Attack Aircraft"),
+        "KCEquipmentMainTypeFilterEngineAndArmor":
+            MessageLookupByLibrary.simpleMessage("Engine & Armor"),
+        "KCEquipmentMainTypeFilterFighter":
+            MessageLookupByLibrary.simpleMessage("Fighter"),
+        "KCEquipmentMainTypeFilterGun":
+            MessageLookupByLibrary.simpleMessage("Main Gun"),
+        "KCEquipmentMainTypeFilterImprovementAndResource":
+            MessageLookupByLibrary.simpleMessage("Improvement & Resource"),
+        "KCEquipmentMainTypeFilterLDAircraft":
+            MessageLookupByLibrary.simpleMessage("Land-based Aircraft"),
+        "KCEquipmentMainTypeFilterRadar":
+            MessageLookupByLibrary.simpleMessage("Radar"),
+        "KCEquipmentMainTypeFilterReconAndSeaplane":
+            MessageLookupByLibrary.simpleMessage("Recon Aircraft & Seaplane"),
+        "KCEquipmentMainTypeFilterSearchlightAndDevice":
+            MessageLookupByLibrary.simpleMessage("Searchlight & Device"),
+        "KCEquipmentMainTypeFilterTorpedo":
+            MessageLookupByLibrary.simpleMessage("Torpedo"),
+        "KCEquipmentMainTypeFilterVehicle":
+            MessageLookupByLibrary.simpleMessage("Vehicle"),
+        "KCEquipmentViewerTotalNote": m3,
+        "KCGetNewShipNotify": m4,
         "KCGetNewShipNotifyTitle":
             MessageLookupByLibrary.simpleMessage("New fleet girl"),
         "KCLowestCond": MessageLookupByLibrary.simpleMessage("Lowest Morale"),
@@ -309,17 +341,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Game homepage is loading"),
         "KCViewFuncMsgGameNaviBlock": MessageLookupByLibrary.simpleMessage(
             "refresh on game homepage is block"),
-        "KCViewFuncMsgNavi": m4,
+        "KCViewFuncMsgNavi": m5,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("Game load completed"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("Game load failed"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("Game not load complete yet"),
-        "KCViewFuncMsgPageFinished": m5,
+        "KCViewFuncMsgPageFinished": m6,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("is game origin url"),
-        "KCViewFuncMsgPageStart": m6,
+        "KCViewFuncMsgPageStart": m7,
         "KanColleDataListener":
             MessageLookupByLibrary.simpleMessage("Data Listener"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("Logbook"),
@@ -381,7 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("System Theme"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("Screenshot"),
-        "TaskCompleted": m7,
+        "TaskCompleted": m8,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("Tasks"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("Task Not Added"),
         "TaskNotificationAdded": MessageLookupByLibrary.simpleMessage(
@@ -401,6 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextBonus": MessageLookupByLibrary.simpleMessage("Bonus"),
         "TextBuild": MessageLookupByLibrary.simpleMessage("Build"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "TextCategory": MessageLookupByLibrary.simpleMessage("Category"),
         "TextCompact": MessageLookupByLibrary.simpleMessage("Compact"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower Format"),
@@ -427,7 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("Import"),
         "TextImportResourceFromPoi": MessageLookupByLibrary.simpleMessage(
             "Import csv file from poi logbook"),
-        "TextImportResourceNumberCheck": m8,
+        "TextImportResourceNumberCheck": m9,
         "TextImportResourceWarning": MessageLookupByLibrary.simpleMessage(
             "Are you sure to import these data?"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("Importing"),
@@ -446,7 +479,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("Medium"),
         "TextMovingAveragePeriod":
             MessageLookupByLibrary.simpleMessage("MA Period"),
-        "TextNetworkError": m9,
+        "TextNetworkError": m10,
         "TextNo": MessageLookupByLibrary.simpleMessage("No"),
         "TextNone": MessageLookupByLibrary.simpleMessage("None"),
         "TextNormal": MessageLookupByLibrary.simpleMessage("Normal"),
@@ -454,6 +487,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Open in Jervis FleetHub"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage(
             "Open in Aerial Combat Simulator"),
+        "TextOther": MessageLookupByLibrary.simpleMessage("Other"),
         "TextRefit": MessageLookupByLibrary.simpleMessage("Refit"),
         "TextResetZoom": MessageLookupByLibrary.simpleMessage("Reset Zoom"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("Return Port"),

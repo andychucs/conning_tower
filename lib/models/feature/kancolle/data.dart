@@ -434,10 +434,8 @@ class KancolleData {
     if (model is GetMemberRequireInfoEntity) {
       final Iterable<Equipment> equipments = (model.apiData.apiSlotItem ?? [])
           .map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
-      ref
-          .read(kancolleItemDataProvider.notifier)
-          .setEquipments(equipments.toList());
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
+      fleet.initEquipmentCollections(equipments);
       seaForceBase.updateUseItem(model.apiData.apiUseitem);
 
       cacheData(source, path, data);
@@ -450,9 +448,7 @@ class KancolleData {
     if (model is GetMemberSlotItemEntity) {
       final Iterable<Equipment> equipments =
           model.apiData.map((e) => Equipment.fromApi(e, dataInfo.slotItemInfo));
-      ref
-          .read(kancolleItemDataProvider.notifier)
-          .setEquipments(equipments.toList());
+      fleet.initEquipmentCollections(equipments);
       fleet.equipment = Map.fromIterable(equipments, key: (item) => item.id);
     }
   }
