@@ -2,6 +2,7 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../generated/l10n.dart';
@@ -47,6 +48,8 @@ class _KancollePortSettingsPageState
                   trailing: CupertinoListTileChevron(),
                   additionalInfo: Text(_layoutList[_layoutIndex]),
                   onTap: () {
+                    Feedback.forTap(context);
+                    HapticFeedback.lightImpact();
                     navigatorToCupertino(context, PortLayoutSettings()).then(
                       (value) {
                         setState(() {
@@ -84,6 +87,8 @@ class _PortLayoutSettingsState extends State<PortLayoutSettings> {
   }
 
   void setLayout(int index) {
+    Feedback.forTap(context);
+    HapticFeedback.lightImpact();
     setState(() {
       _index = index;
       localStorage.setInt("KC_PORT_LAYOUT", index);

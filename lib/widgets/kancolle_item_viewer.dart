@@ -1,13 +1,10 @@
-import 'dart:developer';
-
 import 'package:conning_tower/models/data/ooyodo/equipment_type.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../generated/l10n.dart';
@@ -109,8 +106,11 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
           },
           buttonBuilder: (context, showMenu) => CupertinoButton(
             padding: EdgeInsets.zero,
-            onPressed: showMenu,
-            child: Icon(
+            onPressed: () {
+              Feedback.forTap(context);
+              HapticFeedback.lightImpact();
+              showMenu();
+            },            child: Icon(
               CupertinoIcons.line_horizontal_3_decrease_circle,
               size:
                   CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
@@ -153,7 +153,11 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
                           Future<void> Function() showMenu) {
                         return CupertinoButton(
                           padding: EdgeInsets.only(left: 32, right: 8),
-                          onPressed: showMenu,
+                          onPressed: () {
+                            Feedback.forTap(context);
+                            HapticFeedback.lightImpact();
+                            showMenu();
+                          },
                           child: Icon(
                             Icons.keyboard_arrow_down,
                             size: CupertinoTheme.of(context)

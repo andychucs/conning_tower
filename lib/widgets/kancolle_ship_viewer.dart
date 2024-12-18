@@ -7,6 +7,7 @@ import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
@@ -167,7 +168,8 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
         trailing: pullDownButtonFilter(
           child: Icon(
             CupertinoIcons.line_horizontal_3_decrease_circle,
-            color: Theme.of(context).primaryColor,
+            size: CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
+            color: CupertinoColors.systemGrey2.resolveFrom(context),
           ),
           option: MenuOption.shipSort,
           items: {
@@ -477,7 +479,11 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
         return menuItems;
       },
       buttonBuilder: (context, showMenu) => GestureDetector(
-        onTap: showMenu,
+        onTap: () {
+          Feedback.forTap(context);
+          HapticFeedback.lightImpact();
+          showMenu();
+        },
         child: child,
       ),
     );

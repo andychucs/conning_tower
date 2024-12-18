@@ -10,6 +10,7 @@ import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -169,6 +170,8 @@ class _KancolleItemImproveViewerState
                             weekday: _selectedSegment.index)),
                         trailing: const CupertinoListTileChevron(),
                         onTap: () {
+                          Feedback.forTap(context);
+                          HapticFeedback.lightImpact();
                           showCupertinoModalBottomSheet(
                             context: context,
                             backgroundColor: Colors.transparent,
@@ -257,7 +260,11 @@ class _ImproveDetailSheetState extends State<ImproveDetailSheet> {
         middle: Text(widget.improve.name),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: onPinedItem,
+          onPressed: (){
+            Feedback.forTap(context);
+            HapticFeedback.lightImpact();
+            onPinedItem();
+          },
           child: Icon(
             _pined ? CupertinoIcons.pin_slash : CupertinoIcons.pin,
             size: CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
