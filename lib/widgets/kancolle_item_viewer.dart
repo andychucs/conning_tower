@@ -53,7 +53,10 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   late EquipmentTypeUtil equipmentTypeUtil;
   int _currentEquipmentSubType2 = 0;
 
-  List<int> get _currentEquipmentSubType2List => equipmentMainFilterSubType2Map[_mainFilter]!;
+  List<int> get _currentEquipmentSubType2List =>
+      equipmentMainFilterSubType2Map[_mainFilter]!;
+
+  Set<int> _currentCollectionSubType2Set = {0};
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +100,7 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
                     setState(() {
                       _mainFilter = value;
                       _currentEquipmentSubType2 = 0;
+                      _currentCollectionSubType2Set = {0};
                     });
                   },
                 );
@@ -120,17 +124,22 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
           children: [
             if (_mainFilter != EquipmentMainFilter.none)
               CupertinoListSection.insetGrouped(
-                header: CupertinoListSectionDescription(S.of(context).TextCategory),
+                header:
+                    CupertinoListSectionDescription(S.of(context).TextCategory),
                 children: [
                   CupertinoListTile(
-                    title: Text(equipmentTypeUtil.getSubType2Title(_currentEquipmentSubType2)),
+                    title: Text(equipmentTypeUtil
+                            .getSubType2Title(_currentEquipmentSubType2) ??
+                        S.of(context).TextAll),
                     trailing: PullDownButton(
                       scrollController: ScrollController(),
                       itemBuilder: (context) {
-                        return _currentEquipmentSubType2List.map(
+                        return _currentCollectionSubType2Set.map(
                           (value) {
                             return PullDownMenuItem(
-                              title: equipmentTypeUtil.getSubType2Title(value),
+                              title: equipmentTypeUtil
+                                      .getSubType2Title(value) ??
+                                  (value == 0 ? S.of(context).TextAll : 'N/A'),
                               onTap: () {
                                 setState(() {
                                   _currentEquipmentSubType2 = value;
@@ -140,14 +149,19 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
                           },
                         ).toList();
                       },
-                      buttonBuilder: (BuildContext context, Future<void> Function() showMenu) {
+                      buttonBuilder: (BuildContext context,
+                          Future<void> Function() showMenu) {
                         return CupertinoButton(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: EdgeInsets.only(left: 32, right: 8),
                           onPressed: showMenu,
                           child: Icon(
                             Icons.keyboard_arrow_down,
-                            size: CupertinoTheme.of(context).textTheme.textStyle.fontSize,
-                            color: CupertinoColors.systemGrey2.resolveFrom(context),
+                            size: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .fontSize,
+                            color: CupertinoColors.systemGrey2
+                                .resolveFrom(context),
                           ),
                         );
                       },
@@ -181,12 +195,14 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   void setCollections(Map<int, EquipmentCollection> collections) {
     _currentCollections = collections.values.toList();
     if (_mainFilter != EquipmentMainFilter.none) {
-      _currentCollections
-          .removeWhere((element) => !_currentEquipmentSubType2List.contains(element.subType2));
+      _currentCollections.removeWhere((element) =>
+          !_currentEquipmentSubType2List.contains(element.subType2));
+      _currentCollectionSubType2Set
+          .addAll(_currentCollections.map((element) => element.subType2));
     }
     if (_currentEquipmentSubType2 != 0) {
-      _currentCollections
-          .removeWhere((element) => element.subType2 != _currentEquipmentSubType2);
+      _currentCollections.removeWhere(
+          (element) => element.subType2 != _currentEquipmentSubType2);
     }
     _currentCollections.sort((a, b) => a.sortId.compareTo(b.sortId));
     _currentEquipmentNumber =

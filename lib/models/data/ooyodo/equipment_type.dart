@@ -636,7 +636,8 @@ class EquipmentTypeUtil {
     };
   }
 
-  String getSubType2Title(int subType2) {
-    return subType2Map[subType2] ?? "";
+  String? getSubType2Title(int subType2) {
+    if (subType2 == 0) return null;
+    return subType2Map[subType2];
   }
 }
