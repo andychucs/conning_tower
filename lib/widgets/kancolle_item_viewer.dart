@@ -104,17 +104,24 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
               },
             ).toList();
           },
-          buttonBuilder: (context, showMenu) => CupertinoButton(
-            padding: EdgeInsets.zero,
+          buttonBuilder: (context, showMenu) => CupertinoButton.tinted(
+            sizeStyle: CupertinoButtonSize.small,
             onPressed: () {
               Feedback.forTap(context);
               HapticFeedback.lightImpact();
               showMenu();
-            },            child: Icon(
-              CupertinoIcons.line_horizontal_3_decrease_circle,
-              size:
-                  CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
-              color: CupertinoColors.systemGrey2.resolveFrom(context),
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  CupertinoIcons.line_horizontal_3_decrease,
+                  // size:
+                  //     CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
+                  // color: CupertinoColors.systemGrey2.resolveFrom(context),
+                ),
+                Text(S.of(context).TextCategory),
+              ],
             ),
           ),
         ),

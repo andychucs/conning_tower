@@ -166,10 +166,14 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
               return Container();
             }),
         trailing: pullDownButtonFilter(
-          child: Icon(
-            CupertinoIcons.line_horizontal_3_decrease_circle,
-            size: CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
-            color: CupertinoColors.systemGrey2.resolveFrom(context),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                CupertinoIcons.sort_down,
+              ),
+              Text(S.of(context).TextSort),
+            ],
           ),
           option: MenuOption.shipSort,
           items: {
@@ -312,14 +316,14 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             pullDownButtonFilter(
-                child: FilterButton(title: _shipTypeTitle),
+                child: buildFilterContent(_shipTypeTitle),
                 option: MenuOption.shipType,
                 items: shipTypeMap),
             const SizedBox(
               width: 10,
             ),
             pullDownButtonFilter(
-                child: FilterButton(title: _shipStatusTitle),
+                child: buildFilterContent(_shipStatusTitle),
                 option: MenuOption.shipStatus,
                 items: {
                   S.current.TextAll: ShipStatus.all,
@@ -334,7 +338,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
               width: 10,
             ),
             pullDownButtonFilter(
-                child: FilterButton(title: _shipSlotTitle),
+                child: buildFilterContent(_shipSlotTitle),
                 option: MenuOption.shipSlot,
                 items: {
                   S.current.TextAll: ShipSlot.all,
@@ -347,7 +351,7 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
               width: 10,
             ),
             pullDownButtonFilter(
-                child: FilterButton(title: _shipSpeedTitle),
+                child: buildFilterContent(_shipSpeedTitle),
                 option: MenuOption.shipSpeed,
                 items: {
                   S.current.TextAll: ShipSpeed.all,
@@ -478,8 +482,9 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
         });
         return menuItems;
       },
-      buttonBuilder: (context, showMenu) => GestureDetector(
-        onTap: () {
+      buttonBuilder: (context, showMenu) => CupertinoButton.tinted(
+        sizeStyle: CupertinoButtonSize.small,
+        onPressed: () {
           Feedback.forTap(context);
           HapticFeedback.lightImpact();
           showMenu();
@@ -571,6 +576,21 @@ class _KancolleShipViewerState extends ConsumerState<KancolleShipViewer> {
           CupertinoIcons.checkmark_alt,
         ),
     ]);
+  }
+
+  Widget buildFilterContent(String title) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          CupertinoIcons.line_horizontal_3_decrease,
+        ),
+        Text(
+          title,
+          overflow: TextOverflow.ellipsis,
+        )
+      ],
+    );
   }
 }
 
