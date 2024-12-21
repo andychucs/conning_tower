@@ -23,6 +23,16 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AppHome": MessageLookupByLibrary.simpleMessage("홈페이지"),
+        "KCAdmiralRank1": MessageLookupByLibrary.simpleMessage("원수"),
+        "KCAdmiralRank10": MessageLookupByLibrary.simpleMessage("신임 소좌"),
+        "KCAdmiralRank2": MessageLookupByLibrary.simpleMessage("대장"),
+        "KCAdmiralRank3": MessageLookupByLibrary.simpleMessage("중장"),
+        "KCAdmiralRank4": MessageLookupByLibrary.simpleMessage("소장"),
+        "KCAdmiralRank5": MessageLookupByLibrary.simpleMessage("대좌"),
+        "KCAdmiralRank6": MessageLookupByLibrary.simpleMessage("중좌"),
+        "KCAdmiralRank7": MessageLookupByLibrary.simpleMessage("신임 중좌"),
+        "KCAdmiralRank8": MessageLookupByLibrary.simpleMessage("소좌"),
+        "KCAdmiralRank9": MessageLookupByLibrary.simpleMessage("중견 소좌"),
         "KCDashboardFleet": MessageLookupByLibrary.simpleMessage("함대를"),
         "KCDashboardQuest": MessageLookupByLibrary.simpleMessage("임무"),
         "KCResourceAmmo": MessageLookupByLibrary.simpleMessage("탄약"),

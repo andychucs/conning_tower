@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../generated/l10n.dart';
 import 'constants_poi.dart';
 import 'equipment.dart';
 import 'ship.dart';
@@ -19,8 +20,12 @@ class Fleet with _$Fleet {
     Map<int, EquipmentCollection>? equipmentCollections,
   }) = _Fleet;
 
-  String get combinedText =>
-      switch (combined) { 1 => "機動部隊", 2 => "水上部隊", 3 => "輸送部隊", 0 || _ => "" };
+  String get combinedText => switch (combined) {
+        1 => S.current.KCFleetCombinedCarrier,
+        2 => S.current.KCFleetCombinedSurface,
+        3 => S.current.KCFleetCombinedTransport,
+        0 || _ => ""
+      };
 
   Set<int> get shipIds => ships.map((e) => e.shipId).toSet();
 

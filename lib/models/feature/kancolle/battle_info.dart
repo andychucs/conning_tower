@@ -39,12 +39,13 @@ class BattleInfo with _$BattleInfo {
 
   const BattleInfo._();
 
+  /// Returns the air superiority status as a string based on the `airSuperiorityFlag`.
   String get airSuperiority => switch (airSuperiorityFlag) {
-        0 => '制空均衡',
-        1 => '制空権確保',
-        2 => '航空優勢',
-        3 => '航空劣勢',
-        4 => '制空権喪失',
+        0 => S.current.KCAirBattleParity,
+        1 => S.current.KCAirBattleSupremacy,
+        2 => S.current.KCAirBattleSuperiority,
+        3 => S.current.KCAirBattleDenial,
+        4 => S.current.KCAirBattleIncapability,
         _ => '',
       };
 
@@ -57,10 +58,10 @@ class BattleInfo with _$BattleInfo {
   List<Ship> get allShips => allEnemyShips + allOurShips;
 
   String get contactStatus => switch (contact) {
-        1 => "同航戦",
-        2 => "反航戦",
-        3 => "T字有利",
-        4 => "T字不利",
+        1 => S.current.KCBattleContactStatus1,
+        2 => S.current.KCBattleContactStatus2,
+        3 => S.current.KCBattleContactStatus3,
+        4 => S.current.KCBattleContactStatus4,
         _ => "",
       };
 
@@ -879,16 +880,16 @@ class BattleInfo with _$BattleInfo {
 
     formation = switch (flag) {
       -1 => "N/A",
-      1 => "単縦陣",
-      2 => "複縦陣",
-      3 => "輪形陣",
-      4 => "梯形陣",
-      5 => "単横陣",
-      6 => "警戒陣",
-      11 => "第1警戒航行序列",
-      12 => "第2警戒航行序列",
-      13 => "第3警戒航行序列",
-      14 => "第4警戒航行序列",
+      1 => S.current.KCBattleFormation1,
+      2 => S.current.KCBattleFormation2,
+      3 => S.current.KCBattleFormation3,
+      4 => S.current.KCBattleFormation4,
+      5 => S.current.KCBattleFormation5,
+      6 => S.current.KCBattleFormation6,
+      11 => S.current.KCBattleFormation11,
+      12 => S.current.KCBattleFormation12,
+      13 => S.current.KCBattleFormation13,
+      14 => S.current.KCBattleFormation14,
       _ => ""
     };
 
