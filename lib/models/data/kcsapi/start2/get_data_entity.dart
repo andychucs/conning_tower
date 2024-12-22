@@ -22,8 +22,7 @@ class GetDataApiDataEntity with _$GetDataApiDataEntity {
   factory GetDataApiDataEntity({
     @JsonKey(name: 'api_mst_ship')
     required List<GetDataApiDataApiMstShipEntity> apiMstShip,
-    @JsonKey(name: 'api_mst_slotitem_equiptype')
-    dynamic apiMstSlotitemEquiptype,
+    @JsonKey(name: 'api_mst_slotitem_equiptype') List<GetDataApiDataApiMstSlotitemEquiptypeEntity>? apiMstSlotitemEquiptype,
     @JsonKey(name: 'api_mst_equip_exslot') required List<int> apiMstEquipExslot,
     @JsonKey(name: 'api_mst_equip_exslot_ship') dynamic apiMstEquipExslotShip,
     @JsonKey(name: 'api_mst_stype')
