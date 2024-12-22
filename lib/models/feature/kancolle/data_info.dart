@@ -9,7 +9,7 @@ part 'data_info.freezed.dart';
 @unfreezed
 class DataInfo with _$DataInfo {
   const DataInfo._();
-  
+
   factory DataInfo({
     Map<int, GetDataApiDataApiMstShipEntity>? shipInfo,
     Map<int, GetDataApiDataApiMstUseitemEntity>? itemInfo,
@@ -19,8 +19,18 @@ class DataInfo with _$DataInfo {
     List<GetDataApiDataApiMstStypeEntity>? shipTypeList,
     Map<int, List<int>>? shipUpgradeMap,
   }) = _DataInfo;
-  
-  List<int>? get allOurShipIds => shipInfo?.values.where((e) => e.apiSortno != null).map((e) => e.apiId).toList();
+
+  List<int>? get allOurShipIds => shipInfo?.values
+      .where((e) => e.apiSortno != null)
+      .map((e) => e.apiId)
+      .toList();
+
+  /// slotItemInfo => {index: element.apiName}
+  Map<int, String>? get slotItemNameMap {
+    if (slotItemInfo == null) return null;
+    if (slotItemInfo!.isEmpty) return null;
+    return slotItemInfo!.map((key, value) => MapEntry(key, value.apiName));
+  }
 
   void initShipUpgradeMap() {
     shipUpgradeMap ??= {};

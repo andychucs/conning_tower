@@ -5,6 +5,7 @@ import 'package:conning_tower/models/data/ooyodo/akashi_schedule.dart';
 import 'package:conning_tower/providers/generatable/kancolle_item_data_provider.dart';
 import 'package:conning_tower/providers/generatable/kancolle_localization_provider.dart';
 import 'package:conning_tower/providers/generatable/kcwiki_data_provider.dart';
+import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/utils/toast.dart';
 import 'package:conning_tower/widgets/input_pages.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
@@ -44,6 +45,10 @@ class _KancolleItemImproveViewerState
   late WeekdaySelector _selectedSegment;
   String searchText = "";
   List<int> pinedItemsId = [];
+  bool useGameData = false;
+  Map<int, String>? slotItemMapOrigin;
+  Map<int, String>? slotItemMap;
+  bool isJapanese = false;
 
   @override
   void initState() {
@@ -73,8 +78,11 @@ class _KancolleItemImproveViewerState
 
   @override
   Widget build(BuildContext context) {
+    final gameData = ref.watch(kancolleDataProvider);
+    slotItemMapOrigin = gameData.dataInfo.slotItemNameMap;
     final itemData = ref.watch(akashiScheduleDataProvider);
     Locale locale = Localizations.localeOf(context);
+    isJapanese = locale.languageCode == 'ja';
     final l10n = ref.watch(kancolleLocalizationProvider(locale));
     final l10nData = l10n.whenData((data) => data.data).value;
     final kcWiki = ref.watch(kcWikiDataStateProvider);
@@ -125,13 +133,18 @@ class _KancolleItemImproveViewerState
               Map<int, String> shipMap = kcWikiData!.ships
                   .asMap()
                   .map((key, value) => MapEntry(value.id, value.name!));
-              Map<int, String> slotItemMap = l10nData!.equipment!;
-              Map<int, String> useItemMap = l10nData.itemInImprove!;
+              if (isJapanese) {
+                slotItemMap ??= slotItemMapOrigin ?? l10nData?.equipment;
+              } else if (slotItemMap == null) {
+                final localSlotItemMap = slotItemMapOrigin?.map((key, value) => MapEntry(key, l10nData?.equipmentLocal?[value] ?? value));
+                slotItemMap = localSlotItemMap ?? l10nData?.equipment;
+              }
+              Map<int, String> useItemMap = l10nData!.itemInImprove!;
 
               if (searchText.isNotEmpty) {
                 items = items
                     .where((item) =>
-                        slotItemMap[item.id]?.contains(searchText) ?? true)
+                        slotItemMap?[item.id]?.contains(searchText) ?? true)
                     .toList();
               }
 
@@ -162,7 +175,7 @@ class _KancolleItemImproveViewerState
                     children: List.generate(len, (index) {
                       ImproveItem improveItem = items[index];
                       EquipmentImprove improve = EquipmentImprove.fromData(
-                          improveItem, slotItemMap, useItemMap, shipMap);
+                          improveItem, slotItemMap!, useItemMap, shipMap);
 
                       return CupertinoListTile(
                         title: Text(improve.name),
@@ -180,7 +193,7 @@ class _KancolleItemImproveViewerState
                               pinedIds: pinedItemsId,
                               notifyParent: () => setState(() {}),
                               improve: improve,
-                              slotItemMap: slotItemMap,
+                              slotItemMap: slotItemMap!,
                               useItemMap: useItemMap,
                               shipMap: shipMap,
                             ),
