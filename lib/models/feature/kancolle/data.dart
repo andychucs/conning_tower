@@ -321,6 +321,7 @@ class KancolleData {
       };
       dataInfo.shipTypeList = model.apiData.apiMstStype;
       dataInfo.initShipUpgradeMap();
+      dataInfo.equipmentTypeNameMap = { for (var item in model.apiData.apiMstSlotitemEquiptype!) item.apiId : item.apiName };
 
       cacheData(source, path, data);
     }

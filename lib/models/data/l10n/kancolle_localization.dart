@@ -19,6 +19,7 @@ class KancolleLocalizationData with _$KancolleLocalizationData {
     Map<int, String>? itemInImprove,
     Map<String, String>? itemInImproveLocal,
     Map<int, QuestData>? quest,
+    Map<String, String>? equipmentTypeLocal,
   }) = _KancolleLocalizationData;
 
   String equipmentLocalName(String name) => equipmentLocal?[name] ?? name;

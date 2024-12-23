@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../generated/l10n.dart';
+import '../models/data/l10n/kancolle_localization.dart';
 import '../models/feature/kancolle/equipment.dart';
 import '../providers/generatable/kancolle_localization_provider.dart';
 import 'input_pages.dart';
@@ -47,7 +48,7 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   int _currentEquipmentTypes = 0;
   List<EquipmentCollection> _currentCollections = [];
   EquipmentMainFilter _mainFilter = EquipmentMainFilter.none;
-  late EquipmentTypeUtil equipmentTypeUtil;
+  Map<int, String>? equipmentTypeNameMap;
   int _currentEquipmentSubType2 = 0;
 
   List<int> get _currentEquipmentSubType2List =>
@@ -55,14 +56,27 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
 
   Set<int> _currentCollectionSubType2Set = {0};
 
+  String? getEquipmentSubType2Name(
+      KancolleLocalizationData? l10nData, Locale locale) {
+    if (_currentEquipmentSubType2 == 0) {
+      return null;
+    }
+    final originalName = equipmentTypeNameMap?[_currentEquipmentSubType2];
+    if (locale.languageCode == 'ja') {
+      return originalName;
+    }
+    return l10nData?.equipmentLocal?[originalName] ?? originalName;
+  }
+
   @override
   Widget build(BuildContext context) {
     final collections =
         ref.watch(kancolleDataProvider).fleet.equipmentCollections;
+    equipmentTypeNameMap =
+        ref.watch(kancolleDataProvider).dataInfo.equipmentTypeNameMap;
     Locale locale = Localizations.localeOf(context);
     final l10n = ref.watch(kancolleLocalizationProvider(locale));
     final l10nData = l10n.whenData((data) => data.data).value;
-    equipmentTypeUtil = EquipmentTypeUtil(locale: locale);
 
     if (collections == null) {
       return CupertinoPageScaffold(
@@ -135,8 +149,7 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
                     CupertinoListSectionDescription(S.of(context).TextCategory),
                 children: [
                   CupertinoListTile(
-                    title: Text(equipmentTypeUtil
-                            .getSubType2Title(_currentEquipmentSubType2) ??
+                    title: Text(getEquipmentSubType2Name(l10nData, locale) ??
                         S.of(context).TextAll),
                     trailing: PullDownButton(
                       scrollController: ScrollController(),
@@ -144,8 +157,8 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
                         return _currentCollectionSubType2Set.map(
                           (value) {
                             return PullDownMenuItem(
-                              title: equipmentTypeUtil
-                                      .getSubType2Title(value) ??
+                              title: getEquipmentSubType2Name(
+                                      l10nData, locale) ??
                                   (value == 0 ? S.of(context).TextAll : 'N/A'),
                               onTap: () {
                                 setState(() {
@@ -206,8 +219,13 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   void setCollections(Map<int, EquipmentCollection> collections) {
     _currentCollections = collections.values.toList();
     if (_mainFilter != EquipmentMainFilter.none) {
-      _currentCollections.removeWhere((element) =>
-          !_currentEquipmentSubType2List.contains(element.subType2));
+      if (_mainFilter == EquipmentMainFilter.other) {
+        _currentCollections.removeWhere(
+            (element) => knowEquipmentMainFilterIds.contains(element.subType2));
+      } else {
+        _currentCollections.removeWhere((element) =>
+            !_currentEquipmentSubType2List.contains(element.subType2));
+      }
       _currentCollectionSubType2Set
           .addAll(_currentCollections.map((element) => element.subType2));
     }

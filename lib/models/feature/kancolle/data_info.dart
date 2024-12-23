@@ -18,6 +18,7 @@ class DataInfo with _$DataInfo {
     Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfo,
     List<GetDataApiDataApiMstStypeEntity>? shipTypeList,
     Map<int, List<int>>? shipUpgradeMap,
+    Map<int, String>? equipmentTypeNameMap,
   }) = _DataInfo;
 
   List<int>? get allOurShipIds => shipInfo?.values
