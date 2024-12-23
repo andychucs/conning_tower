@@ -57,15 +57,15 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   Set<int> _currentCollectionSubType2Set = {0};
 
   String? getEquipmentSubType2Name(
-      KancolleLocalizationData? l10nData, Locale locale) {
-    if (_currentEquipmentSubType2 == 0) {
+      int id, KancolleLocalizationData? l10nData, Locale locale) {
+    if (id == 0) {
       return null;
     }
-    final originalName = equipmentTypeNameMap?[_currentEquipmentSubType2];
+    final originalName = equipmentTypeNameMap?[id];
     if (locale.languageCode == 'ja') {
       return originalName;
     }
-    return l10nData?.equipmentLocal?[originalName] ?? originalName;
+    return l10nData?.equipmentTypeLocal?[originalName] ?? originalName;
   }
 
   @override
@@ -145,52 +145,45 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
           children: [
             if (_mainFilter != EquipmentMainFilter.none)
               CupertinoListSection.insetGrouped(
-                header:
-                    CupertinoListSectionDescription(S.of(context).TextCategory),
                 children: [
-                  CupertinoListTile(
-                    title: Text(getEquipmentSubType2Name(l10nData, locale) ??
-                        S.of(context).TextAll),
-                    trailing: PullDownButton(
-                      scrollController: ScrollController(),
-                      itemBuilder: (context) {
-                        return _currentCollectionSubType2Set.map(
-                          (value) {
-                            return PullDownMenuItem(
-                              title: getEquipmentSubType2Name(
-                                      l10nData, locale) ??
-                                  (value == 0 ? S.of(context).TextAll : 'N/A'),
-                              onTap: () {
-                                setState(() {
-                                  _currentEquipmentSubType2 = value;
-                                });
-                              },
-                            );
-                          },
-                        ).toList();
-                      },
-                      buttonBuilder: (BuildContext context,
-                          Future<void> Function() showMenu) {
-                        return CupertinoButton(
-                          padding: EdgeInsets.only(left: 32, right: 8),
-                          onPressed: () {
-                            Feedback.forTap(context);
-                            HapticFeedback.lightImpact();
-                            showMenu();
-                          },
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            size: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .fontSize,
-                            color: CupertinoColors.systemGrey2
-                                .resolveFrom(context),
-                          ),
-                        );
-                      },
-                    ),
-                  )
+                  PullDownButton(
+                    scrollController: ScrollController(),
+                    itemBuilder: (context) {
+                      return _currentCollectionSubType2Set.map(
+                        (value) {
+                          return PullDownMenuItem(
+                            title: getEquipmentSubType2Name(
+                                    value, l10nData, locale) ??
+                                (value == 0 ? S.of(context).TextAll : 'N/A'),
+                            onTap: () {
+                              setState(() {
+                                _currentEquipmentSubType2 = value;
+                              });
+                            },
+                          );
+                        },
+                      ).toList();
+                    },
+                    buttonBuilder: (BuildContext context,
+                        Future<void> Function() showMenu) {
+                      return CupertinoListTile(
+                        title: Text(S.of(context).TextCategory),
+                        additionalInfo: Text(getEquipmentSubType2Name(
+                                _currentEquipmentSubType2, l10nData, locale) ??
+                            S.of(context).TextAll),
+                        onTap: () {
+                          Feedback.forTap(context);
+                          HapticFeedback.lightImpact();
+                          showMenu();
+                        },
+                        trailing: Icon(
+                          Icons.keyboard_arrow_down,
+                          color:
+                              CupertinoColors.systemGrey2.resolveFrom(context),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             CupertinoListSection.insetGrouped(
