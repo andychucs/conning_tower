@@ -128,24 +128,29 @@ class KancolleLocalization extends _$KancolleLocalization {
   }
 
   Future<KancolleLocalizationState> _fetchData(Locale locale) async {
-    final slotItemResponse =
-        await http.get(Uri.parse(kSlotItemLocalizationUrl));
-    final slotItemJson = jsonDecode(slotItemResponse.body);
-    _saveLocalData(slotItemLocalFile, slotItemJson);
+    try {
+      final slotItemResponse =
+      await http.get(Uri.parse(kSlotItemLocalizationUrl));
+      final slotItemJson = jsonDecode(slotItemResponse.body);
+      _saveLocalData(slotItemLocalFile, slotItemJson);
 
-    final useItemInImproveResponse =
-        await http.get(Uri.parse(kUseItemInImproveLocalizationUrl));
-    final useItemInImproveJson = jsonDecode(useItemInImproveResponse.body);
-    _saveLocalData(useItemInImproveLocalFile, useItemInImproveJson);
+      final useItemInImproveResponse =
+      await http.get(Uri.parse(kUseItemInImproveLocalizationUrl));
+      final useItemInImproveJson = jsonDecode(useItemInImproveResponse.body);
+      _saveLocalData(useItemInImproveLocalFile, useItemInImproveJson);
 
-    final equipmentTypeWithoutIdResponse =
-        await http.get(Uri.parse(kEquipmentTypeLocalizationUrl));
-    final equipmentTypeWithoutIdJson =
-        jsonDecode(equipmentTypeWithoutIdResponse.body);
-    _saveLocalData(equipmentTypeWithoutIdLocalFile, equipmentTypeWithoutIdJson);
+      final equipmentTypeWithoutIdResponse =
+      await http.get(Uri.parse(kEquipmentTypeLocalizationUrl));
+      final equipmentTypeWithoutIdJson =
+      jsonDecode(equipmentTypeWithoutIdResponse.body);
+      _saveLocalData(equipmentTypeWithoutIdLocalFile, equipmentTypeWithoutIdJson);
 
-    return covertData(
-        locale, slotItemJson, useItemInImproveJson, equipmentTypeWithoutIdJson);
+      return covertData(
+          locale, slotItemJson, useItemInImproveJson, equipmentTypeWithoutIdJson);
+    } catch (e) {
+      return KancolleLocalizationState(locale: locale);
+    }
+
   }
 
   Future<KancolleLocalizationData> fetchTranslate(String url) async {
