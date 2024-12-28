@@ -180,7 +180,7 @@ class WebController extends _$WebController {
     }
   }
 
-  Future<void> onLoadStart(WebUri uri) async {
+  Future<void> onLoadStart(WebUri uri, {bool useHttpForKancolle = false}) async {
     newLoad = true;
     state.setCurrUrl(uri);
     state.clearCurrPageUrls();
@@ -204,6 +204,16 @@ class WebController extends _$WebController {
     } else if (uri.host == kDMMOSAPIDomain) {
       inKancolleOsapiWindow = true;
     }
+
+    // make kancolle url always use http
+    if (uri.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
+      log("useHttpForKancolle:$useHttpForKancolle");
+      if (uri.scheme == 'https' && useHttpForKancolle) {
+        var httpUri = uri.replace(scheme: 'http');
+        state.controller.loadUrl(urlRequest: URLRequest(url: WebUri.uri(httpUri)));
+      }
+    }
+
   }
 
   Future<void> manageUserScriptOnDMM(bool enable) async {

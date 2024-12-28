@@ -440,6 +440,8 @@
   "@KancolleSpacingTopHide": {},
   "KancolleSpacingTopHideDesc": "如果遊戲畫面頂部有白邊則開啟此選項",
   "@KancolleSpacingTopHideDesc": {},
+  "KancolleUseHTTP": "在KC中強制使用HTTP",
+  "@KancolleUseHTTP": {},
   "LightTheme": "淺色主題",
   "@LightTheme": {},
   "MsgIOSNote": "使用iOS 15.0或以上版本系統的提督請注意，當你看到DMM GAMES頂欄有顯示並白屏時，請點擊「工具-Web-重定向」。",

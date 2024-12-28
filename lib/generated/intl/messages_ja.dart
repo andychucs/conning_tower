@@ -369,6 +369,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("上の余白を隠す"),
         "KancolleSpacingTopHideDesc": MessageLookupByLibrary.simpleMessage(
             "ゲーム画面の上に白い余白を表示する場合は、この機能を有効にしてください"),
+        "KancolleUseHTTP":
+            MessageLookupByLibrary.simpleMessage("KCサーバーにHTTPを使用する"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("ライトテーマ"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "iOS 15.0以降の端末をお使いの際、長時間DMM GAMESのトップバーと真っ白なページが表示されたままになることがあります。その場合、「ツール-Web-HTTPリダイレクト」を押すことでプレイ可能な状態になります。"),

@@ -440,6 +440,8 @@
   "@KancolleSpacingTopHide": {},
   "KancolleSpacingTopHideDesc": "If you see a blank row at the top of the game, please enable this feature.",
   "@KancolleSpacingTopHideDesc": {},
+  "KancolleUseHTTP": "Use HTTP instead of HTTPS for KC server",
+  "@KancolleUseHTTP": {},
   "LightTheme": "Light Theme",
   "@LightTheme": {},
   "MsgIOSNote": "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click 'Tools-Web-HTTP Redirect' button.",

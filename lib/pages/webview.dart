@@ -87,7 +87,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
                 print('Page started loading: $uri');
                 // urlController.setCurrentUrl(uri.toString());
                 // urlController.resetResponseUrls();
-                await webController.onLoadStart(uri!);
+                await webController.onLoadStart(uri!, useHttpForKancolle: settings.useHttpForKancolle);
                 // var uri = Uri.parse(uri);
               },
               onLoadStop: (controller, uri) {

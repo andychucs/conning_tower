@@ -26,6 +26,7 @@ class SettingsState with _$SettingsState {
     required bool useDMMCookieModify,
     required int kancolleListenerType,
     required bool kancolleAutoScrollDownOnLoad,
+    required bool useHttpForKancolle,
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
@@ -56,6 +57,8 @@ class Settings extends _$Settings {
     int kancolleListenerType = localStorage.getInt("kancolleListenerType") ?? 0;
     bool kancolleAutoScrollDownOnLoad =
         localStorage.getBool("kancolleAutoScrollDownOnLoad") ?? false;
+    bool useHttpForKancolle =
+        localStorage.getBool("useHttpForKancolle") ?? true;
     return SettingsState(
       dashboardIndex: dashboardIndex,
       kcSparkEmoji: kcSparkEmoji,
@@ -73,6 +76,7 @@ class Settings extends _$Settings {
       useDMMCookieModify: useDMMCookieModify,
       kancolleListenerType: kancolleListenerType,
       kancolleAutoScrollDownOnLoad: kancolleAutoScrollDownOnLoad,
+      useHttpForKancolle: useHttpForKancolle,
     );
   }
 

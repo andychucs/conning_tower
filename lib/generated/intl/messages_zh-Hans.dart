@@ -355,6 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("隐藏顶部白边"),
         "KancolleSpacingTopHideDesc":
             MessageLookupByLibrary.simpleMessage("如果游戏画面顶部有白边则开启此选项"),
+        "KancolleUseHTTP": MessageLookupByLibrary.simpleMessage("在KC中强制使用HTTP"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "使用iOS 15.0或以上版本系统的提督请注意，当你看到DMM GAMES顶栏有显示并白屏时，请点击「工具-Web-HTTP跳转」。"),

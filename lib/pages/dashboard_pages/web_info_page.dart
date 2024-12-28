@@ -114,6 +114,20 @@ class _WebInfoState extends ConsumerState<WebInfoPage> {
                   CupertinoListSection.insetGrouped(
                       children: [
                         CupertinoListTile(
+                          title: Text(S.of(context).KancolleUseHTTP),
+                          subtitle: Text(S.of(context).ToolUATip),
+                          leading: const DummyIcon(
+                              color: CupertinoColors.activeOrange,
+                              icon: CupertinoIcons.lock_open),
+                          trailing: CupertinoSwitch(
+                            value: settings.useHttpForKancolle,
+                            onChanged: (value) async {
+                              HapticFeedback.mediumImpact();
+                              ref.watch(settingsProvider.notifier).setBool('useHttpForKancolle', value);
+                            },
+                          ),
+                        ),
+                        CupertinoListTile(
                           title: Text(S.of(context).KancolleSpacingTopHide),
                           subtitle: Text(S.of(context).KancolleSpacingTopHideDesc),
                           leading: const DummyIcon(

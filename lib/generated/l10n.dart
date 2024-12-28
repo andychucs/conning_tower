@@ -2250,6 +2250,16 @@ class S {
     );
   }
 
+  /// `Use HTTP instead of HTTPS for KC server`
+  String get KancolleUseHTTP {
+    return Intl.message(
+      'Use HTTP instead of HTTPS for KC server',
+      name: 'KancolleUseHTTP',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Light Theme`
   String get LightTheme {
     return Intl.message(

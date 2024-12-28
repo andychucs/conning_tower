@@ -53,6 +53,20 @@ class _KancolleListenSettingsState
             CupertinoListSection.insetGrouped(
               children: [
                 CupertinoListTile(
+                  title: Text(S.of(context).KancolleUseHTTP),
+                  subtitle: Text(S.of(context).ToolUATip),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeOrange,
+                      icon: CupertinoIcons.lock_open),
+                  trailing: CupertinoSwitch(
+                    value: settings.useHttpForKancolle,
+                    onChanged: (value) async {
+                      HapticFeedback.mediumImpact();
+                      ref.watch(settingsProvider.notifier).setBool('useHttpForKancolle', value);
+                    },
+                  ),
+                ),
+                CupertinoListTile(
                   title: Text(S.of(context).KanColleDataListener),
                   subtitle: Text(S.of(context).ToolUATip),
                   leading: const DummyIcon(
