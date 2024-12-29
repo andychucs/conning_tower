@@ -16,6 +16,7 @@ class Fleet with _$Fleet {
     required Map<int, Equipment> equipment,
     int? combined,
     Set<int>? notInFleetIds,
+    Map<int, EquipmentCollection>? equipmentCollections,
   }) = _Fleet;
 
   String get combinedText =>
@@ -47,4 +48,20 @@ class Fleet with _$Fleet {
 
   Iterable<Equipment> get uncountedEquipments =>
       equipment.values.where((e) => kUncountedSlotitemId.contains(e.itemId));
+
+  void initEquipmentCollections(Iterable<Equipment> equipments) {
+    equipmentCollections ??= {};
+
+    final itemIds = equipments.map((e) => e.itemId!).toSet();
+    for (var itemId in itemIds) {
+      final subEquipments = equipments.where((e) => e.itemId == itemId);
+      equipmentCollections?[itemId] = EquipmentCollection(
+        id: subEquipments.first.itemId!,
+        type: subEquipments.first.type!,
+        sortNo: subEquipments.first.sortNo!,
+        name: subEquipments.first.name ?? "Item ${subEquipments.first.itemId}",
+        equipments: subEquipments.toList(),
+      );
+    }
+  }
 }

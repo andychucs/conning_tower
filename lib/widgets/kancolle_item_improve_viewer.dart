@@ -72,7 +72,7 @@ class _KancolleItemImproveViewerState
 
   @override
   Widget build(BuildContext context) {
-    final itemData = ref.watch(kancolleItemDataProvider);
+    final itemData = ref.watch(akashiScheduleDataProvider);
     Locale locale = Localizations.localeOf(context);
     final l10n = ref.watch(kancolleLocalizationProvider(locale));
     final l10nData = l10n.whenData((data) => data.data).value;
@@ -145,7 +145,8 @@ class _KancolleItemImproveViewerState
               return ScrollViewWithCupertinoScrollbar(
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(20.0, 8, 20.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 8, 20.0, 0.0),
                     child: CupertinoSearchTextField(
                       onChanged: (text) {
                         setState(() {
@@ -233,7 +234,6 @@ class _ImproveDetailSheetState extends State<ImproveDetailSheet> {
   }
 
   void onPinedItem() {
-
     List<int> pinedItems = [...widget.pinedIds];
     if (_pined) {
       Toast.show(title: "Unpin");
@@ -258,7 +258,10 @@ class _ImproveDetailSheetState extends State<ImproveDetailSheet> {
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: onPinedItem,
-          child: Icon(_pined ? CupertinoIcons.pin_slash : CupertinoIcons.pin),
+          child: Icon(
+            _pined ? CupertinoIcons.pin_slash : CupertinoIcons.pin,
+            size: CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
+          ),
         ),
       ),
       child: ListView(
@@ -331,14 +334,14 @@ class _ImproveDetailSheetState extends State<ImproveDetailSheet> {
       List<Widget> useItems = [];
       if (stage.getSlotCostMap(widget.slotItemMap).isNotEmpty) {
         for (var key in stage.getSlotCostMap(widget.slotItemMap).keys) {
-          slotItems.add(
-              Text("$key: ${stage.getSlotCostMap(widget.slotItemMap)[key]!.text}"));
+          slotItems.add(Text(
+              "$key: ${stage.getSlotCostMap(widget.slotItemMap)[key]!.text}"));
         }
       }
       if (stage.getUseCostMap(widget.useItemMap).isNotEmpty) {
         for (var key in stage.getUseCostMap(widget.useItemMap).keys) {
-          useItems
-              .add(Text("$key: ${stage.getUseCostMap(widget.useItemMap)[key]!.text}"));
+          useItems.add(Text(
+              "$key: ${stage.getUseCostMap(widget.useItemMap)[key]!.text}"));
         }
       }
       Widget stageWidget = Container();

@@ -26,19 +26,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "舰娘数: ${count}";
 
-  static String m3(name) => "${name}加入了舰队";
+  static String m3(type, count) => "${type}种装备共${count}件";
 
-  static String m4(url) => "正在访问${url}";
+  static String m4(name) => "${name}加入了舰队";
 
-  static String m5(url) => "页面加载完毕：${url}";
+  static String m5(url) => "正在访问${url}";
 
-  static String m6(url) => "页面开始加载：${url}";
+  static String m6(url) => "页面加载完毕：${url}";
 
-  static String m7(taskTitle) => "${taskTitle} 已完成。";
+  static String m7(url) => "页面开始加载：${url}";
 
-  static String m8(length) => "${length}个资源日志将被导入";
+  static String m8(taskTitle) => "${taskTitle} 已完成。";
 
-  static String m9(statusCode) => "网络错误，状态码：${statusCode}";
+  static String m9(length) => "${length}个资源日志将被导入";
+
+  static String m10(statusCode) => "网络错误，状态码：${statusCode}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -242,7 +244,36 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("从新到旧"),
         "KCDashboardShipViewerTitle":
             MessageLookupByLibrary.simpleMessage("舰娘"),
-        "KCGetNewShipNotify": m3,
+        "KCEquipmentMainTypeFilterAAGun":
+            MessageLookupByLibrary.simpleMessage("副炮 高射炮"),
+        "KCEquipmentMainTypeFilterAmmo":
+            MessageLookupByLibrary.simpleMessage("特殊弹药"),
+        "KCEquipmentMainTypeFilterAntiSub":
+            MessageLookupByLibrary.simpleMessage("反潜装备"),
+        "KCEquipmentMainTypeFilterAttack":
+            MessageLookupByLibrary.simpleMessage("舰载攻击机"),
+        "KCEquipmentMainTypeFilterEngineAndArmor":
+            MessageLookupByLibrary.simpleMessage("轮机 装甲"),
+        "KCEquipmentMainTypeFilterFighter":
+            MessageLookupByLibrary.simpleMessage("舰载战斗机"),
+        "KCEquipmentMainTypeFilterGun":
+            MessageLookupByLibrary.simpleMessage("主炮"),
+        "KCEquipmentMainTypeFilterImprovementAndResource":
+            MessageLookupByLibrary.simpleMessage("增益 物资"),
+        "KCEquipmentMainTypeFilterLDAircraft":
+            MessageLookupByLibrary.simpleMessage("陆基飞机"),
+        "KCEquipmentMainTypeFilterRadar":
+            MessageLookupByLibrary.simpleMessage("雷达"),
+        "KCEquipmentMainTypeFilterReconAndSeaplane":
+            MessageLookupByLibrary.simpleMessage("侦察机 水上飞机"),
+        "KCEquipmentMainTypeFilterSearchlightAndDevice":
+            MessageLookupByLibrary.simpleMessage("探照灯 设备"),
+        "KCEquipmentMainTypeFilterTorpedo":
+            MessageLookupByLibrary.simpleMessage("鱼雷"),
+        "KCEquipmentMainTypeFilterVehicle":
+            MessageLookupByLibrary.simpleMessage("载具"),
+        "KCEquipmentViewerTotalNote": m3,
+        "KCGetNewShipNotify": m4,
         "KCGetNewShipNotifyTitle": MessageLookupByLibrary.simpleMessage("新舰娘"),
         "KCLowestCond": MessageLookupByLibrary.simpleMessage("疲劳度最差"),
         "KCNeedLoginNoticeDesc":
@@ -271,17 +302,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("游戏主页加载中"),
         "KCViewFuncMsgGameNaviBlock":
             MessageLookupByLibrary.simpleMessage("游戏主页的重载已被拦截"),
-        "KCViewFuncMsgNavi": m4,
+        "KCViewFuncMsgNavi": m5,
         "KCViewFuncMsgNaviGameLoadCompleted":
             MessageLookupByLibrary.simpleMessage("游戏加载完毕"),
         "KCViewFuncMsgNaviGameLoadFailed":
             MessageLookupByLibrary.simpleMessage("游戏加载失败"),
         "KCViewFuncMsgNaviGameLoadNotCompleted":
             MessageLookupByLibrary.simpleMessage("游戏尚未加载完毕"),
-        "KCViewFuncMsgPageFinished": m5,
+        "KCViewFuncMsgPageFinished": m6,
         "KCViewFuncMsgPageFinishedIsGame":
             MessageLookupByLibrary.simpleMessage("当前页面为游戏原链接"),
-        "KCViewFuncMsgPageStart": m6,
+        "KCViewFuncMsgPageStart": m7,
         "KanColleDataListener": MessageLookupByLibrary.simpleMessage("数据监听"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("航海日志"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("浅色主题"),
@@ -333,7 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "StatusCode": MessageLookupByLibrary.simpleMessage("状态码"),
         "SystemTheme": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "TakeScreenshot": MessageLookupByLibrary.simpleMessage("截图"),
-        "TaskCompleted": m7,
+        "TaskCompleted": m8,
         "TaskDashboardTitle": MessageLookupByLibrary.simpleMessage("任务提醒"),
         "TaskNotAdded": MessageLookupByLibrary.simpleMessage("未添加任务"),
         "TaskNotificationAdded":
@@ -352,6 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextBonus": MessageLookupByLibrary.simpleMessage("奖励"),
         "TextBuild": MessageLookupByLibrary.simpleMessage("建造"),
         "TextCancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "TextCategory": MessageLookupByLibrary.simpleMessage("分类"),
         "TextCompact": MessageLookupByLibrary.simpleMessage("紧凑"),
         "TextConningTowerFormat":
             MessageLookupByLibrary.simpleMessage("ConningTower格式"),
@@ -376,7 +408,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextImport": MessageLookupByLibrary.simpleMessage("导入"),
         "TextImportResourceFromPoi":
             MessageLookupByLibrary.simpleMessage("从poi的CSV文件导入资源日志"),
-        "TextImportResourceNumberCheck": m8,
+        "TextImportResourceNumberCheck": m9,
         "TextImportResourceWarning":
             MessageLookupByLibrary.simpleMessage("确定导入吗?"),
         "TextImporting": MessageLookupByLibrary.simpleMessage("导入中"),
@@ -390,13 +422,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextMDamage": MessageLookupByLibrary.simpleMessage("中破"),
         "TextMediumRange": MessageLookupByLibrary.simpleMessage("中"),
         "TextMovingAveragePeriod": MessageLookupByLibrary.simpleMessage("MA周期"),
-        "TextNetworkError": m9,
+        "TextNetworkError": m10,
         "TextNo": MessageLookupByLibrary.simpleMessage("否"),
         "TextNone": MessageLookupByLibrary.simpleMessage("无"),
         "TextNormal": MessageLookupByLibrary.simpleMessage("通常"),
         "TextOpenInJervis":
             MessageLookupByLibrary.simpleMessage("在Jervis作战室打开"),
         "TextOpenInNoro6": MessageLookupByLibrary.simpleMessage("在制空权模拟器打开"),
+        "TextOther": MessageLookupByLibrary.simpleMessage("其他"),
         "TextRefit": MessageLookupByLibrary.simpleMessage("改修"),
         "TextResetZoom": MessageLookupByLibrary.simpleMessage("重置缩放"),
         "TextReturnPort": MessageLookupByLibrary.simpleMessage("归港"),

@@ -16,6 +16,7 @@ class Equipment with _$Equipment {
 
   factory Equipment({
     required int id,
+    int? sortNo,
     int? itemId,
     int? locked,
     int? level,
@@ -45,9 +46,9 @@ class Equipment with _$Equipment {
   }) = _Equipment;
 
   Map<String, int> toNoro6Data() => {
-    "api_slotitem_id": itemId ?? 0,
-    "api_level": level ?? 0,
-  };
+        "api_slotitem_id": itemId ?? 0,
+        "api_level": level ?? 0,
+      };
 
   factory Equipment.fromApi(SlotItem item,
       Map<int, GetDataApiDataApiMstSlotitemEntity>? slotItemInfoMap) {
@@ -61,6 +62,7 @@ class Equipment with _$Equipment {
       final slotItemInfo = slotItemInfoMap[item.apiSlotitemId];
       if (slotItemInfo != null) {
         equipment = equipment.copyWith(
+            sortNo: slotItemInfo.apiSortno,
             name: slotItemInfo.apiName,
             type: slotItemInfo.apiType,
             hp: slotItemInfo.apiTaik,
@@ -243,4 +245,66 @@ class ImproveResourceEntity with _$ImproveResourceEntity {
 
   factory ImproveResourceEntity.fromJson(Map<String, dynamic> json) =>
       _$ImproveResourceEntityFromJson(json);
+}
+
+@freezed
+class EquipmentCollection with _$EquipmentCollection {
+  factory EquipmentCollection({
+    required int id,
+    required String name,
+    required List<Equipment> equipments,
+    required List<int> type,
+    required int sortNo,
+  }) = _EquipmentCollection;
+
+  /// Returns a unique sort ID for the equipment collection.
+  ///
+  /// The sort ID is calculated by shifting the subType2 value 10 bits to the left
+  /// and then performing a bitwise OR operation with the sortNo value.
+  ///
+  /// Biggest sortNo is 549(三式指揮連絡機改二) now, so 10 bits should be enough
+  ///
+  /// This allows for a unique sorting of equipment collections based on their
+  /// subType2 and sortNo values.
+  int get sortId => subType2 << 10 | sortNo;
+
+  int get mainType => type.first;
+
+  int get subType1 => type[1]; // 図鑑表示
+
+  int get subType2 => type[2]; // api_mst_slotitem_equiptype
+
+  int get subType3 => type[3]; // アイコンID
+
+  int get subType4 => type[4]; // 航空機カテゴリ
+
+  factory EquipmentCollection.fromJson(Map<String, dynamic> json) =>
+      _$EquipmentCollectionFromJson(json);
+
+  const EquipmentCollection._();
+
+  String get levelMessage {
+    final map = levelTotalView;
+    final list = map.entries.toList();
+    list.sort((a, b) => b.key.compareTo(a.key));
+    if (list.isEmpty) return "";
+    if (list.length == 1 && list[0].key == 0) return "";
+    return list.map((e) => "★+${e.key}:${e.value}").join(" ");
+  }
+
+  Map<int, int> get levelTotalView {
+    final map = <int, int>{};
+    for (final equipment in equipments) {
+      map[equipment.level!] = (map[equipment.level!] ?? 0) + 1;
+    }
+    return map;
+  }
+
+  Map<int, int> get proficiencyTotalView {
+    final map = <int, int>{};
+    for (final equipment in equipments) {
+      map[equipment.proficiency!] = (map[equipment.proficiency!] ?? 0) + 1;
+    }
+    return map;
+  }
 }
