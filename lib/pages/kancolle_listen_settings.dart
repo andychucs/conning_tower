@@ -247,7 +247,7 @@ class _KancolleListenSettingsState
               children: [
                 CupertinoListTile(
                   title: Text("Automatic Bypass Foreign Block"),
-                  subtitle: Text("For oversea user"),
+                  subtitle: Text("For oversea user(Unstable, This feature not work now.)"),
                   leading: const DummyIcon(
                       color: CupertinoColors.activeBlue,
                       icon: CupertinoIcons.globe),

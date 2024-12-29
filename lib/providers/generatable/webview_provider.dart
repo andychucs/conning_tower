@@ -111,7 +111,8 @@ class WebController extends _$WebController {
   bool get useKancolleListener =>
       ref.watch(settingsProvider).useKancolleListener;
 
-  bool get useDMMCookieModify => ref.watch(settingsProvider).useDMMCookieModify;
+  /// disable dmm cookie modify, need more test
+  bool get useDMMCookieModify => false;
 
   bool get kancolleAutoScrollDownOnLoad => ref.watch(settingsProvider).kancolleAutoScrollDownOnLoad;
 
