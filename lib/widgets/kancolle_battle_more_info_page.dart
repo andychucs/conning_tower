@@ -166,6 +166,11 @@ class BattleInfoAllMapView extends StatelessWidget {
     if (mapStates == null) {
       return const Center(child: CupertinoActivityIndicator(radius: 20));
     }
+
+    if (mapStates.isEmpty) {
+      return Container();
+    }
+
     return ScrollViewWithCupertinoScrollbar(
       children: [
         CupertinoListSection.insetGrouped(

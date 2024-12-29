@@ -148,6 +148,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "InvalidYamlError":
             MessageLookupByLibrary.simpleMessage("Invalid YAML format."),
         "JsonExample": MessageLookupByLibrary.simpleMessage("JSON Example:"),
+        "KCAdmiralRank1": MessageLookupByLibrary.simpleMessage("Marshal Adm."),
+        "KCAdmiralRank10": MessageLookupByLibrary.simpleMessage("Novice Lt."),
+        "KCAdmiralRank2": MessageLookupByLibrary.simpleMessage("Admiral"),
+        "KCAdmiralRank3": MessageLookupByLibrary.simpleMessage("Vice Admiral"),
+        "KCAdmiralRank4": MessageLookupByLibrary.simpleMessage("Rear-Admiral"),
+        "KCAdmiralRank5": MessageLookupByLibrary.simpleMessage("Captain"),
+        "KCAdmiralRank6": MessageLookupByLibrary.simpleMessage("Commander"),
+        "KCAdmiralRank7": MessageLookupByLibrary.simpleMessage("Novice Cdr."),
+        "KCAdmiralRank8": MessageLookupByLibrary.simpleMessage("Lt. Cdr."),
+        "KCAdmiralRank9": MessageLookupByLibrary.simpleMessage("Lieutenant"),
+        "KCAirBattleDenial": MessageLookupByLibrary.simpleMessage("Air Denial"),
+        "KCAirBattleIncapability":
+            MessageLookupByLibrary.simpleMessage("Air Incapability"),
+        "KCAirBattleParity": MessageLookupByLibrary.simpleMessage("Air Parity"),
+        "KCAirBattleSuperiority":
+            MessageLookupByLibrary.simpleMessage("Air Superiority"),
+        "KCAirBattleSupremacy":
+            MessageLookupByLibrary.simpleMessage("Air Supremacy"),
         "KCAkashiStudio": MessageLookupByLibrary.simpleMessage("Akashi Studio"),
         "KCBattleAirbaseResourceLostLevel1":
             MessageLookupByLibrary.simpleMessage("Resources sustained losses"),
@@ -159,9 +177,33 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Land-based air squadrons sustained losses"),
         "KCBattleAirbaseResourceLostLevel4":
             MessageLookupByLibrary.simpleMessage("No damage was inflicted"),
+        "KCBattleContactStatus1":
+            MessageLookupByLibrary.simpleMessage("Parallel"),
+        "KCBattleContactStatus2":
+            MessageLookupByLibrary.simpleMessage("Head-on"),
+        "KCBattleContactStatus3":
+            MessageLookupByLibrary.simpleMessage("Green T"),
+        "KCBattleContactStatus4": MessageLookupByLibrary.simpleMessage("Red T"),
         "KCBattleDebuffUnlock": MessageLookupByLibrary.simpleMessage(
             "Debuff mechanism has taken effect!"),
         "KCBattleFinish": MessageLookupByLibrary.simpleMessage("Battle Finish"),
+        "KCBattleFormation1":
+            MessageLookupByLibrary.simpleMessage("Line Ahead"),
+        "KCBattleFormation11":
+            MessageLookupByLibrary.simpleMessage("Cruising Formation 1"),
+        "KCBattleFormation12":
+            MessageLookupByLibrary.simpleMessage("Cruising Formation 2"),
+        "KCBattleFormation13":
+            MessageLookupByLibrary.simpleMessage("Cruising Formation 3"),
+        "KCBattleFormation14":
+            MessageLookupByLibrary.simpleMessage("Cruising Formation 4"),
+        "KCBattleFormation2":
+            MessageLookupByLibrary.simpleMessage("Double Line"),
+        "KCBattleFormation3": MessageLookupByLibrary.simpleMessage("Diamond"),
+        "KCBattleFormation4": MessageLookupByLibrary.simpleMessage("Echelon"),
+        "KCBattleFormation5":
+            MessageLookupByLibrary.simpleMessage("Line Abreast"),
+        "KCBattleFormation6": MessageLookupByLibrary.simpleMessage("Vanguard"),
         "KCDashboardBattleAllMap": MessageLookupByLibrary.simpleMessage("Maps"),
         "KCDashboardBattleDescription": MessageLookupByLibrary.simpleMessage(
             "Currently, only the battle data of air combat, anti-submarine warfare, artillery battle, and torpedo battle in regular fleet versus regular fleet can be analyzed."),
@@ -307,6 +349,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "KCEquipmentMainTypeFilterVehicle":
             MessageLookupByLibrary.simpleMessage("Vehicle"),
         "KCEquipmentViewerTotalNote": m3,
+        "KCFleetCombined":
+            MessageLookupByLibrary.simpleMessage("Combined Fleet"),
+        "KCFleetCombinedCarrier":
+            MessageLookupByLibrary.simpleMessage("Carrier Division"),
+        "KCFleetCombinedSurface":
+            MessageLookupByLibrary.simpleMessage("Surface Division"),
+        "KCFleetCombinedTransport":
+            MessageLookupByLibrary.simpleMessage("Transport Escort Division"),
+        "KCFleetMono": MessageLookupByLibrary.simpleMessage("Squadron"),
         "KCGetNewShipNotify": m4,
         "KCGetNewShipNotifyTitle":
             MessageLookupByLibrary.simpleMessage("New fleet girl"),
@@ -498,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "TextShouldClose":
             MessageLookupByLibrary.simpleMessage("Should Close?"),
         "TextSlowSpeed": MessageLookupByLibrary.simpleMessage("Slow"),
+        "TextSort": MessageLookupByLibrary.simpleMessage("Sort"),
         "TextStatus": MessageLookupByLibrary.simpleMessage("Status"),
         "TextSunken": MessageLookupByLibrary.simpleMessage("Sunken"),
         "TextSuperLongRange":

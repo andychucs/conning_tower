@@ -700,6 +700,156 @@ class S {
     );
   }
 
+  /// `Marshal Adm.`
+  String get KCAdmiralRank1 {
+    return Intl.message(
+      'Marshal Adm.',
+      name: 'KCAdmiralRank1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Novice Lt.`
+  String get KCAdmiralRank10 {
+    return Intl.message(
+      'Novice Lt.',
+      name: 'KCAdmiralRank10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admiral`
+  String get KCAdmiralRank2 {
+    return Intl.message(
+      'Admiral',
+      name: 'KCAdmiralRank2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vice Admiral`
+  String get KCAdmiralRank3 {
+    return Intl.message(
+      'Vice Admiral',
+      name: 'KCAdmiralRank3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rear-Admiral`
+  String get KCAdmiralRank4 {
+    return Intl.message(
+      'Rear-Admiral',
+      name: 'KCAdmiralRank4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Captain`
+  String get KCAdmiralRank5 {
+    return Intl.message(
+      'Captain',
+      name: 'KCAdmiralRank5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Commander`
+  String get KCAdmiralRank6 {
+    return Intl.message(
+      'Commander',
+      name: 'KCAdmiralRank6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Novice Cdr.`
+  String get KCAdmiralRank7 {
+    return Intl.message(
+      'Novice Cdr.',
+      name: 'KCAdmiralRank7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lt. Cdr.`
+  String get KCAdmiralRank8 {
+    return Intl.message(
+      'Lt. Cdr.',
+      name: 'KCAdmiralRank8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lieutenant`
+  String get KCAdmiralRank9 {
+    return Intl.message(
+      'Lieutenant',
+      name: 'KCAdmiralRank9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Air Denial`
+  String get KCAirBattleDenial {
+    return Intl.message(
+      'Air Denial',
+      name: 'KCAirBattleDenial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Air Incapability`
+  String get KCAirBattleIncapability {
+    return Intl.message(
+      'Air Incapability',
+      name: 'KCAirBattleIncapability',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Air Parity`
+  String get KCAirBattleParity {
+    return Intl.message(
+      'Air Parity',
+      name: 'KCAirBattleParity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Air Superiority`
+  String get KCAirBattleSuperiority {
+    return Intl.message(
+      'Air Superiority',
+      name: 'KCAirBattleSuperiority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Air Supremacy`
+  String get KCAirBattleSupremacy {
+    return Intl.message(
+      'Air Supremacy',
+      name: 'KCAirBattleSupremacy',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Akashi Studio`
   String get KCAkashiStudio {
     return Intl.message(
@@ -750,6 +900,46 @@ class S {
     );
   }
 
+  /// `Parallel`
+  String get KCBattleContactStatus1 {
+    return Intl.message(
+      'Parallel',
+      name: 'KCBattleContactStatus1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Head-on`
+  String get KCBattleContactStatus2 {
+    return Intl.message(
+      'Head-on',
+      name: 'KCBattleContactStatus2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Green T`
+  String get KCBattleContactStatus3 {
+    return Intl.message(
+      'Green T',
+      name: 'KCBattleContactStatus3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Red T`
+  String get KCBattleContactStatus4 {
+    return Intl.message(
+      'Red T',
+      name: 'KCBattleContactStatus4',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Debuff mechanism has taken effect!`
   String get KCBattleDebuffUnlock {
     return Intl.message(
@@ -765,6 +955,106 @@ class S {
     return Intl.message(
       'Battle Finish',
       name: 'KCBattleFinish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Line Ahead`
+  String get KCBattleFormation1 {
+    return Intl.message(
+      'Line Ahead',
+      name: 'KCBattleFormation1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cruising Formation 1`
+  String get KCBattleFormation11 {
+    return Intl.message(
+      'Cruising Formation 1',
+      name: 'KCBattleFormation11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cruising Formation 2`
+  String get KCBattleFormation12 {
+    return Intl.message(
+      'Cruising Formation 2',
+      name: 'KCBattleFormation12',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cruising Formation 3`
+  String get KCBattleFormation13 {
+    return Intl.message(
+      'Cruising Formation 3',
+      name: 'KCBattleFormation13',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cruising Formation 4`
+  String get KCBattleFormation14 {
+    return Intl.message(
+      'Cruising Formation 4',
+      name: 'KCBattleFormation14',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Double Line`
+  String get KCBattleFormation2 {
+    return Intl.message(
+      'Double Line',
+      name: 'KCBattleFormation2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diamond`
+  String get KCBattleFormation3 {
+    return Intl.message(
+      'Diamond',
+      name: 'KCBattleFormation3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Echelon`
+  String get KCBattleFormation4 {
+    return Intl.message(
+      'Echelon',
+      name: 'KCBattleFormation4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Line Abreast`
+  String get KCBattleFormation5 {
+    return Intl.message(
+      'Line Abreast',
+      name: 'KCBattleFormation5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vanguard`
+  String get KCBattleFormation6 {
+    return Intl.message(
+      'Vanguard',
+      name: 'KCBattleFormation6',
       desc: '',
       args: [],
     );
@@ -1590,6 +1880,56 @@ class S {
     );
   }
 
+  /// `Combined Fleet`
+  String get KCFleetCombined {
+    return Intl.message(
+      'Combined Fleet',
+      name: 'KCFleetCombined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carrier Division`
+  String get KCFleetCombinedCarrier {
+    return Intl.message(
+      'Carrier Division',
+      name: 'KCFleetCombinedCarrier',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Surface Division`
+  String get KCFleetCombinedSurface {
+    return Intl.message(
+      'Surface Division',
+      name: 'KCFleetCombinedSurface',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transport Escort Division`
+  String get KCFleetCombinedTransport {
+    return Intl.message(
+      'Transport Escort Division',
+      name: 'KCFleetCombinedTransport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Squadron`
+  String get KCFleetMono {
+    return Intl.message(
+      'Squadron',
+      name: 'KCFleetMono',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{name} arrived!`
   String KCGetNewShipNotify(Object name) {
     return Intl.message(
@@ -1775,6 +2115,16 @@ class S {
     return Intl.message(
       'Loaded in game window!',
       name: 'KCViewFuncMsgAutoGameRedirect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort`
+  String get TextSort {
+    return Intl.message(
+      'Sort',
+      name: 'TextSort',
       desc: '',
       args: [],
     );

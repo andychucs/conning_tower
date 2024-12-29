@@ -15,6 +15,7 @@ class PathUtil {
 
   late String localL10nSlotItemPath;
   late String localL10nUseItemInImprovePath;
+  late String localL10nEquipmentTypeWithoutIdPath;
 
   late String customTaskDataJsonPath;
   late String customTaskDataYamlPath;
@@ -43,6 +44,8 @@ class PathUtil {
     localL10nSlotItemPath = p.join(localizationDir, "slotitem_l10n.json");
     localL10nUseItemInImprovePath =
         p.join(localizationDir, "useitem_in_improve_l10n.json");
+    localL10nEquipmentTypeWithoutIdPath =
+        p.join(localizationDir, "equipment_type_l10n_without_id.json");
   }
 
   String getKcCacheDataPath(String path) {

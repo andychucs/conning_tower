@@ -15,6 +15,7 @@ import 'package:conning_tower/widgets/kancolle_use_item_viewer.dart';
 import 'package:conning_tower/widgets/resource_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
@@ -394,7 +395,11 @@ class InfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Feedback.forTap(context);
+        HapticFeedback.lightImpact();
+        if (onTap != null) onTap!();
+      },
       child: CupertinoGroupedSection(
         padding: EdgeInsets.zero,
         child: Padding(

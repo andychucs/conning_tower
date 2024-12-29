@@ -1,16 +1,14 @@
-import 'dart:developer';
-
 import 'package:conning_tower/models/data/ooyodo/equipment_type.dart';
 import 'package:conning_tower/providers/kancolle_data_provider.dart';
 import 'package:conning_tower/widgets/scroll_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../generated/l10n.dart';
+import '../models/data/l10n/kancolle_localization.dart';
 import '../models/feature/kancolle/equipment.dart';
 import '../providers/generatable/kancolle_localization_provider.dart';
 import 'input_pages.dart';
@@ -50,7 +48,7 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   int _currentEquipmentTypes = 0;
   List<EquipmentCollection> _currentCollections = [];
   EquipmentMainFilter _mainFilter = EquipmentMainFilter.none;
-  late EquipmentTypeUtil equipmentTypeUtil;
+  Map<int, String>? equipmentTypeNameMap;
   int _currentEquipmentSubType2 = 0;
 
   List<int> get _currentEquipmentSubType2List =>
@@ -58,14 +56,27 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
 
   Set<int> _currentCollectionSubType2Set = {0};
 
+  String? getEquipmentSubType2Name(
+      int id, KancolleLocalizationData? l10nData, Locale locale) {
+    if (id == 0) {
+      return null;
+    }
+    final originalName = equipmentTypeNameMap?[id];
+    if (locale.languageCode == 'ja') {
+      return originalName;
+    }
+    return l10nData?.equipmentTypeLocal?[originalName] ?? originalName;
+  }
+
   @override
   Widget build(BuildContext context) {
     final collections =
         ref.watch(kancolleDataProvider).fleet.equipmentCollections;
+    equipmentTypeNameMap =
+        ref.watch(kancolleDataProvider).dataInfo.equipmentTypeNameMap;
     Locale locale = Localizations.localeOf(context);
     final l10n = ref.watch(kancolleLocalizationProvider(locale));
     final l10nData = l10n.whenData((data) => data.data).value;
-    equipmentTypeUtil = EquipmentTypeUtil(locale: locale);
 
     if (collections == null) {
       return CupertinoPageScaffold(
@@ -107,14 +118,24 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
               },
             ).toList();
           },
-          buttonBuilder: (context, showMenu) => CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: showMenu,
-            child: Icon(
-              CupertinoIcons.line_horizontal_3_decrease_circle,
-              size:
-                  CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
-              color: CupertinoColors.systemGrey2.resolveFrom(context),
+          buttonBuilder: (context, showMenu) => CupertinoButton.tinted(
+            sizeStyle: CupertinoButtonSize.small,
+            onPressed: () {
+              Feedback.forTap(context);
+              HapticFeedback.lightImpact();
+              showMenu();
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  CupertinoIcons.line_horizontal_3_decrease,
+                  // size:
+                  //     CupertinoTheme.of(context).textTheme.pickerTextStyle.fontSize,
+                  // color: CupertinoColors.systemGrey2.resolveFrom(context),
+                ),
+                Text(S.of(context).TextCategory),
+              ],
             ),
           ),
         ),
@@ -124,49 +145,45 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
           children: [
             if (_mainFilter != EquipmentMainFilter.none)
               CupertinoListSection.insetGrouped(
-                header:
-                    CupertinoListSectionDescription(S.of(context).TextCategory),
                 children: [
-                  CupertinoListTile(
-                    title: Text(equipmentTypeUtil
-                            .getSubType2Title(_currentEquipmentSubType2) ??
-                        S.of(context).TextAll),
-                    trailing: PullDownButton(
-                      scrollController: ScrollController(),
-                      itemBuilder: (context) {
-                        return _currentCollectionSubType2Set.map(
-                          (value) {
-                            return PullDownMenuItem(
-                              title: equipmentTypeUtil
-                                      .getSubType2Title(value) ??
-                                  (value == 0 ? S.of(context).TextAll : 'N/A'),
-                              onTap: () {
-                                setState(() {
-                                  _currentEquipmentSubType2 = value;
-                                });
-                              },
-                            );
-                          },
-                        ).toList();
-                      },
-                      buttonBuilder: (BuildContext context,
-                          Future<void> Function() showMenu) {
-                        return CupertinoButton(
-                          padding: EdgeInsets.only(left: 32, right: 8),
-                          onPressed: showMenu,
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            size: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .fontSize,
-                            color: CupertinoColors.systemGrey2
-                                .resolveFrom(context),
-                          ),
-                        );
-                      },
-                    ),
-                  )
+                  PullDownButton(
+                    scrollController: ScrollController(),
+                    itemBuilder: (context) {
+                      return _currentCollectionSubType2Set.map(
+                        (value) {
+                          return PullDownMenuItem(
+                            title: getEquipmentSubType2Name(
+                                    value, l10nData, locale) ??
+                                (value == 0 ? S.of(context).TextAll : 'N/A'),
+                            onTap: () {
+                              setState(() {
+                                _currentEquipmentSubType2 = value;
+                              });
+                            },
+                          );
+                        },
+                      ).toList();
+                    },
+                    buttonBuilder: (BuildContext context,
+                        Future<void> Function() showMenu) {
+                      return CupertinoListTile(
+                        title: Text(S.of(context).TextCategory),
+                        additionalInfo: Text(getEquipmentSubType2Name(
+                                _currentEquipmentSubType2, l10nData, locale) ??
+                            S.of(context).TextAll),
+                        onTap: () {
+                          Feedback.forTap(context);
+                          HapticFeedback.lightImpact();
+                          showMenu();
+                        },
+                        trailing: Icon(
+                          Icons.keyboard_arrow_down,
+                          color:
+                              CupertinoColors.systemGrey2.resolveFrom(context),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             CupertinoListSection.insetGrouped(
@@ -195,8 +212,13 @@ class _KancolleItemViewerState extends ConsumerState<KancolleItemViewer> {
   void setCollections(Map<int, EquipmentCollection> collections) {
     _currentCollections = collections.values.toList();
     if (_mainFilter != EquipmentMainFilter.none) {
-      _currentCollections.removeWhere((element) =>
-          !_currentEquipmentSubType2List.contains(element.subType2));
+      if (_mainFilter == EquipmentMainFilter.other) {
+        _currentCollections.removeWhere(
+            (element) => knowEquipmentMainFilterIds.contains(element.subType2));
+      } else {
+        _currentCollections.removeWhere((element) =>
+            !_currentEquipmentSubType2List.contains(element.subType2));
+      }
       _currentCollectionSubType2Set
           .addAll(_currentCollections.map((element) => element.subType2));
     }

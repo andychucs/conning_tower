@@ -20,6 +20,8 @@ const kSlotItemLocalizationUrl =
     'https://conntower.github.io/ooyodo/data/slotitem_l10n.json';
 const kUseItemInImproveLocalizationUrl =
     'https://conntower.github.io/ooyodo/data/useitem_in_improve_l10n.json';
+const kEquipmentTypeLocalizationUrl =
+    'https://conntower.github.io/ooyodo/data/equipment_type_l10n_without_id.json';
 
 @freezed
 class KancolleLocalizationState with _$KancolleLocalizationState {
@@ -34,6 +36,8 @@ class KancolleLocalization extends _$KancolleLocalization {
   File get slotItemLocalFile => File(pathUtil.localL10nSlotItemPath);
   File get useItemInImproveLocalFile =>
       File(pathUtil.localL10nUseItemInImprovePath);
+  File get equipmentTypeWithoutIdLocalFile =>
+      File(pathUtil.localL10nEquipmentTypeWithoutIdPath);
 
   @override
   Future<KancolleLocalizationState> build(Locale locale) async {
@@ -61,7 +65,12 @@ class KancolleLocalization extends _$KancolleLocalization {
           await useItemInImproveLocalFile.readAsString();
       final useItemInImproveJson = jsonDecode(useItemInImproveRaw);
 
-      final data = covertData(locale, slotItemJson, useItemInImproveJson);
+      final equipmentTypeWithoutIdRaw =
+          await equipmentTypeWithoutIdLocalFile.readAsString();
+      final equipmentTypeWithoutIdJson = jsonDecode(equipmentTypeWithoutIdRaw);
+
+      final data = covertData(locale, slotItemJson, useItemInImproveJson,
+          equipmentTypeWithoutIdJson);
       final dataVersion = await fetchDataVersion();
       if (dataVersion != '') {
         if (dataVersion != data.data?.version) {
@@ -77,7 +86,8 @@ class KancolleLocalization extends _$KancolleLocalization {
   KancolleLocalizationState covertData(
       Locale locale,
       Map<String, dynamic> slotItemData,
-      Map<String, dynamic> useItemInImproveData) {
+      Map<String, dynamic> useItemInImproveData,
+      Map<String, dynamic> equipmentTypeWithoutIdData) {
     Map<int, String> equipmentMap = {};
     Map<String, String> equipmentL10nMap = {};
     Map<int, String> itemInImproveMap = {};
@@ -99,6 +109,11 @@ class KancolleLocalization extends _$KancolleLocalization {
       itemInImproveL10nMap[translate['ja']] = translate[languageCode] ?? '';
     });
 
+    final equipmentTypeTranslate =
+        equipmentTypeWithoutIdData['data'] as Map<String, dynamic>;
+    final Map<String, String> equipmentTypeL10nMap = equipmentTypeTranslate
+        .map((key, value) => MapEntry(key, value[languageCode] ?? ''));
+
     return KancolleLocalizationState(
       locale: locale,
       data: KancolleLocalizationData(
@@ -107,22 +122,35 @@ class KancolleLocalization extends _$KancolleLocalization {
         equipmentLocal: equipmentL10nMap,
         itemInImprove: itemInImproveMap,
         itemInImproveLocal: itemInImproveL10nMap,
+        equipmentTypeLocal: equipmentTypeL10nMap,
       ),
     );
   }
 
   Future<KancolleLocalizationState> _fetchData(Locale locale) async {
-    final slotItemResponse =
-        await http.get(Uri.parse(kSlotItemLocalizationUrl));
-    final slotItemJson = jsonDecode(slotItemResponse.body);
-    _saveLocalData(slotItemLocalFile, slotItemJson);
+    try {
+      final slotItemResponse =
+      await http.get(Uri.parse(kSlotItemLocalizationUrl));
+      final slotItemJson = jsonDecode(slotItemResponse.body);
+      _saveLocalData(slotItemLocalFile, slotItemJson);
 
-    final useItemInImproveResponse =
-        await http.get(Uri.parse(kUseItemInImproveLocalizationUrl));
-    final useItemInImproveJson = jsonDecode(useItemInImproveResponse.body);
-    _saveLocalData(useItemInImproveLocalFile, useItemInImproveJson);
+      final useItemInImproveResponse =
+      await http.get(Uri.parse(kUseItemInImproveLocalizationUrl));
+      final useItemInImproveJson = jsonDecode(useItemInImproveResponse.body);
+      _saveLocalData(useItemInImproveLocalFile, useItemInImproveJson);
 
-    return covertData(locale, slotItemJson, useItemInImproveJson);
+      final equipmentTypeWithoutIdResponse =
+      await http.get(Uri.parse(kEquipmentTypeLocalizationUrl));
+      final equipmentTypeWithoutIdJson =
+      jsonDecode(equipmentTypeWithoutIdResponse.body);
+      _saveLocalData(equipmentTypeWithoutIdLocalFile, equipmentTypeWithoutIdJson);
+
+      return covertData(
+          locale, slotItemJson, useItemInImproveJson, equipmentTypeWithoutIdJson);
+    } catch (e) {
+      return KancolleLocalizationState(locale: locale);
+    }
+
   }
 
   Future<KancolleLocalizationData> fetchTranslate(String url) async {

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:conning_tower/main.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../generated/l10n.dart';
 import '../../data/kcsapi/kcsapi.dart';
 
 part 'sea_force_base.freezed.dart';part 'sea_force_base.g.dart';
@@ -125,16 +126,16 @@ class Admiral with _$Admiral {
   String get rankName {
     try {
       return [
-        '元帥',
-        '大将',
-        '中将',
-        '少将',
-        '大佐',
-        '中佐',
-        '新米中佐',
-        '少佐',
-        '中堅少佐',
-        '新米少佐'
+        S.current.KCAdmiralRank1,
+        S.current.KCAdmiralRank2,
+        S.current.KCAdmiralRank3,
+        S.current.KCAdmiralRank4,
+        S.current.KCAdmiralRank5,
+        S.current.KCAdmiralRank6,
+        S.current.KCAdmiralRank7,
+        S.current.KCAdmiralRank8,
+        S.current.KCAdmiralRank9,
+        S.current.KCAdmiralRank10,
       ][rank - 1];
     } catch (e) {
       return 'N/A';
