@@ -9,28 +9,30 @@ import 'package:conning_tower/helper.dart';
 import 'package:conning_tower/main.dart';
 import 'package:conning_tower/models/feature/kancolle/raw_data.dart';
 import 'package:conning_tower/models/feature/web_message_data.dart';
+import 'package:conning_tower/pages/webview.dart';
 import 'package:conning_tower/providers/generatable/settings_provider.dart';
 import 'package:conning_tower/providers/raw_data_provider.dart';
 import 'package:conning_tower/providers/web_info_provider.dart';
 import 'package:conning_tower/utils/toast.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:conning_tower/widgets/webview_tab.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../utils/asset_loader.dart';
 
-part 'webview_provider.g.dart';
 part 'webview_provider.freezed.dart';
+part 'webview_provider.g.dart';
 
 final gameUrlPath = Uri.parse(kGameUrl).path;
+final gameAppUrlPath = Uri.parse(kGameUrlApp).path;
 
 UserScript get kancolleUserScript => UserScript(
     source: AssetLoader.kcInjectJS,
@@ -83,6 +85,7 @@ class WebControllerState with _$WebControllerState {
 @riverpod
 class WebController extends _$WebController {
   late InAppWebViewController controller;
+  bool newLoad = false;
   bool isInit = false;
   WebUri currUrl = WebUri('');
   List<WebUri> currPageUrls = [];
@@ -91,9 +94,11 @@ class WebController extends _$WebController {
 
   bool inKancolleWindow = false;
 
+  bool inKancolleOsapiWindow = false;
+
   bool autoAdjusted = false;
 
-  bool gameLoadCompleted = false;
+  bool needScale = false;
 
   bool dmmCookieModified = false;
 
@@ -101,9 +106,16 @@ class WebController extends _$WebController {
 
   get enableAutoProcess => ref.watch(settingsProvider).enableAutoProcess;
 
-  bool get useKancolleListener => ref.watch(settingsProvider).useKancolleListener;
+  bool get loadedDMM => ref.watch(settingsProvider).loadedDMM;
+
+  bool get useKancolleListener =>
+      ref.watch(settingsProvider).useKancolleListener;
 
   bool get useDMMCookieModify => ref.watch(settingsProvider).useDMMCookieModify;
+
+  bool get kancolleAutoScrollDownOnLoad => ref.watch(settingsProvider).kancolleAutoScrollDownOnLoad;
+
+  bool get inKancolle => inKancolleWindow || inKancolleOsapiWindow;
 
   @override
   WebController build() {
@@ -113,6 +125,11 @@ class WebController extends _$WebController {
   void setController(InAppWebViewController _) {
     state.controller = _;
     state.isInit = true;
+  }
+
+  void setNeedScale(bool needScale) {
+    log('LargeScreen:$needScale');
+    state.needScale = needScale;
   }
 
   void setCurrUrl(WebUri _) {
@@ -164,6 +181,7 @@ class WebController extends _$WebController {
   }
 
   Future<void> onLoadStart(WebUri uri) async {
+    newLoad = true;
     state.setCurrUrl(uri);
     state.clearCurrPageUrls();
     if (uri.rawValue.startsWith(kLocalHomeUrl)) {
@@ -175,12 +193,16 @@ class WebController extends _$WebController {
       state.controller.loadUrl(urlRequest: URLRequest(url: WebUri(kGameUrlApp)));
     }
 
+    if (!loadedDMM && uri.host.endsWith(kDMMDomain)) {
+      ref.watch(settingsProvider.notifier).setBool('loadedDMM', true);
+    }
     inKancolleWindow = false;
     autoAdjusted = false;
     if (uri.path.startsWith(gameUrlPath)) {
       log("game load start");
+      ref.watch(settingsProvider.notifier).setBool('loadedKancolle', true);
     } else if (uri.host == kDMMOSAPIDomain) {
-      inKancolleWindow = true;
+      inKancolleOsapiWindow = true;
     }
   }
 
@@ -200,7 +222,6 @@ class WebController extends _$WebController {
     // ref
     //     .read(webInfoProvider.notifier)
     //     .update((state) => state.copyWith(url: uri.rawValue, cookies: cookies));
-
     if (safeNavi) {
       safeNavi = false;
     }
@@ -210,13 +231,33 @@ class WebController extends _$WebController {
             "input.value='$customHomeUrl';input.placeholder='🔍 ${S.current.AssetsHtmlSearchBarText}';goButton.textContent='${S.current.AssetsHtmlSearchBarGo}';",
       );
     }
-    if ((uri.path.startsWith(gameUrlPath) && Platform.isAndroid) ||
-        (uri.host.startsWith(kDMMOSAPIDomain) && Platform.isIOS)) {
-      inKancolleWindow = true;
-      gameLoadCompleted = true;
-      Toast.showSuccess(title: S.current.KCViewFuncMsgNaviGameLoadCompleted);
-      HapticFeedback.mediumImpact();
-      await screenResize();
+
+  }
+
+  Future<void> onProgressChanged(int progress) async {
+    log("onProgressChanged: $progress");
+    if (!newLoad) {
+      return;
+    }
+    if (progress >= 80) {
+      newLoad = false;
+      final uri = await state.controller.getUrl();
+
+      final favicons = await controller.getFavicons();
+      if (favicons.isNotEmpty) {
+        for (final favicon in favicons) {
+          if (favicon.width != null) {
+            ref.watch(webInfoProvider.notifier).update((state) => state.copyWith(url: uri!.rawValue, favicon: favicon));
+          }
+        }
+      }
+      if (uri!.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
+        // available align on url is app_id=854854 (Android) or  osapi.dmm.com (Android & iOS)
+        inKancolleWindow = true;
+        Toast.showSuccess(title: S.current.KCViewFuncMsgNaviGameLoadCompleted);
+        HapticFeedback.mediumImpact();
+        if(enableAutoProcess) await adjustWindow();
+      }
     }
   }
 
@@ -233,66 +274,55 @@ class WebController extends _$WebController {
     }
     debugPrint(
         "safeNavi:$safeNavi enableAutoProcess:$enableAutoProcess state.currPageUrls.isNotEmpty:${state.currPageUrls.isNotEmpty}");
-    if (!safeNavi && enableAutoProcess && state.currPageUrls.isNotEmpty) {
-      debugPrint("latest responseUrl: ${state.currPageUrls.last}");
-      var url = state.currPageUrls.last;
-      if (url.host == kDMMOSAPIDomain &&
-          currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
-        await Future.delayed(const Duration(seconds: 1));
-        // Delay to allow time for Webview to load previous page
-        if (url.scheme == 'https') {
-          debugPrint("replace scheme ${url.replace(scheme: 'http')}");
-          state.controller.loadUrl(
-              urlRequest:
-                  URLRequest(url: WebUri.uri(url.replace(scheme: 'http'))));
-        } else {
-          state.controller.loadUrl(urlRequest: URLRequest(url: url));
-        }
-        Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
-      }
-    }
+    // if (!safeNavi && enableAutoProcess && state.currPageUrls.isNotEmpty) {
+    //   debugPrint("latest responseUrl: ${state.currPageUrls.last}");
+    //   var url = state.currPageUrls.last;
+    //   if (url.host == kDMMOSAPIDomain &&
+    //       currUrl.path.startsWith(Uri.parse(kGameUrl).path)) {
+    //     await Future.delayed(const Duration(seconds: 1));
+    //     // Delay to allow time for Webview to load previous page
+    //     if (url.scheme == 'https') {
+    //       debugPrint("replace scheme ${url.replace(scheme: 'http')}");
+    //       state.controller.loadUrl(
+    //           urlRequest:
+    //               URLRequest(url: WebUri.uri(url.replace(scheme: 'http'))));
+    //     } else {
+    //       state.controller.loadUrl(urlRequest: URLRequest(url: url));
+    //     }
+    //     Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
+    //   }
+    // }
   }
 
   Future<void> onContentSizeChanged() async {
-    if (state.currUrl.host == kDMMOSAPIDomain && Platform.isIOS) {
-      EasyDebounce.debounce('resize-debounce',
-          const Duration(milliseconds: 800), () => screenResize());
+    log('onContentSizeChanged');
+    await onScreenResize();
+    if (inKancolleWindow || inKancolleOsapiWindow) {
+      await controller.zoomBy(zoomFactor: 0.1, animated: true);
+    }
+
+    if (inKancolleWindow && kancolleAutoScrollDownOnLoad) {
+      await tryHideSpacingTop();
     }
   }
 
-  Future<bool> autoAdjustWindowV2(InAppWebViewController controller,
-      {bool force = false, bool needToaste = false}) async {
-    //Adjust Kancolle window
-    if ((inKancolleWindow && !autoAdjusted) || force) {
-      if (Platform.isIOS) {
-        await controller.injectJavascriptFileFromAsset(
-            assetFilePath: autoScaleIOSJS);
-      } else if (Platform.isAndroid) {
-        await controller.injectJavascriptFileFromAsset(
-            assetFilePath: autoScaleAndroidJS);
-      }
-      autoAdjusted = true;
-      log("Auto adjust success");
-      if (needToaste)
-        Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
-      return true;
+  Future<void> onScreenResize() async {
+    if ((inKancolleWindow || inKancolleOsapiWindow) && needScale && autoAdjusted) {
+      await controller.evaluateJavascript(source: "window.resizeOnLargeScreen()");
     }
-    log("autoAdjustWindow fail");
-    if (needToaste)
-      Toast.showError(title: S.current.FutureAutoAdjustWindowFail);
-    return false;
   }
 
-  Future<void> screenResize() async {
-    if (!state.isInit) return;
-    if (!state.isScreenResize) {
-      log("screenResize");
-      state.isScreenResize = true;
-      if (enableAutoProcess) {
-        await autoAdjustWindowV2(controller);
-      }
-      state.isScreenResize = false;
+  Future<void> windowAlign({bool needToast = false}) async {
+    await controller.evaluateJavascript(source: "window.align()");
+    log("windowAlign");
+    if (needToast) {
+      Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
     }
+  }
+
+  Future<void> windowUnAlign() async {
+    log("windowUnAlign");
+    await controller.evaluateJavascript(source: "window.unAlign()");
   }
 
   Future<void> saveScreenShot() async {
@@ -316,17 +346,59 @@ class WebController extends _$WebController {
 
   Future<void> httpRedirect() async {
     await controller.injectJavascriptFileFromAsset(assetFilePath: httpRedirectJS);
-    inKancolleWindow = true;
+    inKancolleOsapiWindow = true;
     Toast.show(title: S.current.KCViewFuncMsgAutoGameRedirect);
     log("HTTP Redirect success");
   }
 
   Future<void> adjustWindow() async {
-    bool flag = await autoAdjustWindowV2(controller, force: true);
-    if (flag) {
-      Toast.showSuccess(title: S.current.FutureAutoAdjustWindowSuccess);
+    if (!autoAdjusted) {
+      await windowAlign(needToast: true);
+      autoAdjusted = true;
+      await onScreenResize();
+      if (inKancolleWindow && kancolleAutoScrollDownOnLoad) {
+        await tryHideSpacingTop();
+      }
     } else {
-      Toast.showError(title: S.current.FutureAutoAdjustWindowFail);
+      await windowUnAlign();
+      autoAdjusted = false;
+    }
+  }
+
+  Future<void> resetZoom() async {
+    await controller.zoomBy(zoomFactor: 0.1, animated: true);
+  }
+
+  // zoomIn is not implemented on iOS
+  Future<void> zoomIn() async {
+    await controller.zoomIn();
+  }
+
+  // zoomOut is not implemented on iOS
+  Future<void> zoomOut() async {
+    await controller.zoomOut();
+  }
+
+  Future<void> scrollToTop() async {
+    await controller.scrollTo(x: 0, y: 0, animated: true);
+  }
+
+  Future<void> scrollUp() async {
+    await controller.scrollBy(x: 0, y: -1, animated: true);
+  }
+
+  Future<void> scrollDown() async {
+    await controller.scrollBy(x: 0, y: 1, animated: true);
+  }
+
+  Future<void> scrollByY(int y) async {
+    await controller.scrollBy(x: 0, y: y, animated: true);
+  }
+
+  Future<void> tryHideSpacingTop() async {
+    final gameFrameTop = await controller.evaluateJavascript(source: "document.getElementById('game_frame').getBoundingClientRect().top");
+    if (gameFrameTop is num && gameFrameTop == 0) {
+      await controller.evaluateJavascript(source: "window.scrollTo(0, 16)");
     }
   }
 
@@ -361,8 +433,8 @@ class WebController extends _$WebController {
         // load parameters as parameters
         params = parseRequestBody(messageData.request!);
       }
-    ref.watch(rawDataProvider.notifier).update(
-        (state) => RawData.response(source: messageData.responseUrl, data: result?? "", params: params, status: messageData.status ?? 200));
+      ref.watch(rawDataProvider.notifier).update((state) => RawData.response(
+          source: messageData.responseUrl, data: result ?? "", params: params, status: messageData.status ?? 200));
     }
 
     if (messageData.type == "error") {
@@ -392,6 +464,7 @@ class WebController extends _$WebController {
 
   Future<void> addKCUserScript() async {
     await controller.addUserScript(userScript: kancolleUserScript);
+    await controller.addUserScript(userScript: alignUserScript);
   }
 
   Future<void> removeKCUserScript() async {
@@ -434,6 +507,22 @@ class WebController extends _$WebController {
         headers: kcResponse.headers,
         reasonPhrase: kcResponse.reasonPhrase,
         statusCode: kcResponse.statusCode);
+  }
+}
+
+@freezed
+class WebViewsState with _$WebViewsState {
+  const factory WebViewsState({
+    required Widget mainWebView,
+    required List<WebViewTab> tabs,
+  }) = _WebViewsState;
+}
+
+@riverpod
+class WebViews extends _$WebViews {
+  @override
+  WebViewsState build() {
+    return WebViewsState(mainWebView: AppWebView(key: GlobalKey()), tabs: []);
   }
 }
 

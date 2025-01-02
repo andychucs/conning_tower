@@ -9,6 +9,8 @@ class WebInfo with _$WebInfo {
   const factory WebInfo({
     required String url,
     required List<Cookie> cookies,
-    required int statusCode
+    required int statusCode,
+    required String title,
+    Favicon? favicon,
 }) = _WebInfo;
 }

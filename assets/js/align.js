@@ -1,7 +1,6 @@
 const alignCSS = document.createElement('style')
 alignCSS.innerHTML = `html {
   overflow: hidden;
-  background-color: #000;
 }
 #w, #main-ntg {
   position: absolute !important;
@@ -10,14 +9,12 @@ alignCSS.innerHTML = `html {
   z-index: 100;
   margin-left: 0 !important;
   margin-top: 0 !important;
-  background-color: #000;
 }
 #game_frame {
   width: 1200px !important;
   position: absolute;
   top: 0px;
   left: 0;
-  background-color: #000;
 }
 .naviapp {
   z-index: -1;
@@ -33,15 +30,17 @@ alignCSS.innerHTML = `html {
   top: 83px !important;
   border: 0;
 }
-#flashWrap {
-  background-color: #000;
-  z-index: 100;
-}
 `
 
-window.align = () => {
-    document.body.appendChild(alignCSS)
-    window.scrollTo(0, 0)
+window.align = function () {
+    if (
+        location.pathname.includes('854854') ||
+        location.hostname === 'osapi.dmm.com' ||
+        location.pathname.includes('kcs')
+    ) {
+        document.body.appendChild(alignCSS)
+        window.scrollTo(0, 0)
+    }
 }
 
 window.unAlign = () => {

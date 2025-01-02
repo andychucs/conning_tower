@@ -176,6 +176,23 @@ class _KancolleListenSettingsState
                     S.of(context).ToolTitleGameScreen),
                 children: [
                   CupertinoListTile(
+                    title: Text(S.of(context).KancolleSpacingTopHide),
+                    subtitle: Text(S.of(context).KancolleSpacingTopHideDesc),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeGreen,
+                        icon: CupertinoIcons.rectangle_expand_vertical),
+                    trailing: CupertinoSwitch(
+                      value: settings.kancolleAutoScrollDownOnLoad,
+                      onChanged: (value) async {
+                        HapticFeedback.mediumImpact();
+                        ref.watch(settingsProvider.notifier).setBool('kancolleAutoScrollDownOnLoad', value);
+                        if (value) {
+                          await ref.read(webControllerProvider).tryHideSpacingTop();
+                        }
+                      },
+                    ),
+                  ),
+                  CupertinoListTile(
                     title: Text(S.of(context).AppResize),
                     leading: const DummyIcon(
                         color: CupertinoColors.activeBlue,

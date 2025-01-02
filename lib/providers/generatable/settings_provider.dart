@@ -17,6 +17,7 @@ class SettingsState with _$SettingsState {
     required bool bottomPadding,
     required bool enableAutoLoadHomeUrl,
     required String customHomeUrl,
+    required bool loadedDMM,
     required bool enableHideFAB,
     required String customUA,
     required AppLayout appLayout,
@@ -24,6 +25,7 @@ class SettingsState with _$SettingsState {
     required bool useKancolleListener,
     required bool useDMMCookieModify,
     required int kancolleListenerType,
+    required bool kancolleAutoScrollDownOnLoad,
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
@@ -41,6 +43,7 @@ class Settings extends _$Settings {
     bool bottomPadding = localStorage.getBool('bottomPadding') ?? false;
     bool enableAutoLoadHomeUrl = localStorage.getBool('enableAutoLoadHomeUrl') ?? true;
     String customHomeUrl = localStorage.getString('customHomeUrl') ?? kGameUrl;
+    bool loadedDMM = localStorage.getBool('loadedDMM') ?? false;
     bool enableHideFAB = localStorage.getBool('enableHideFAB') ?? false;
     String customUA = localStorage.getString('customUA') ?? '';
     AppLayout appLayout = AppLayout.values[localStorage.getInt('appLayout') ??
@@ -51,6 +54,8 @@ class Settings extends _$Settings {
         localStorage.getBool("useKancolleListener") ?? true;
     bool useDMMCookieModify = localStorage.getBool("useDMMCookieModify") ?? false;
     int kancolleListenerType = localStorage.getInt("kancolleListenerType") ?? 0;
+    bool kancolleAutoScrollDownOnLoad =
+        localStorage.getBool("kancolleAutoScrollDownOnLoad") ?? false;
     return SettingsState(
       dashboardIndex: dashboardIndex,
       kcSparkEmoji: kcSparkEmoji,
@@ -59,6 +64,7 @@ class Settings extends _$Settings {
       bottomPadding: bottomPadding,
       enableAutoLoadHomeUrl: enableAutoLoadHomeUrl,
       customHomeUrl: customHomeUrl,
+      loadedDMM: loadedDMM,
       enableHideFAB: enableHideFAB,
       customUA: customUA,
       appLayout: appLayout,
@@ -66,6 +72,7 @@ class Settings extends _$Settings {
       useKancolleListener: useKancolleListener,
       useDMMCookieModify: useDMMCookieModify,
       kancolleListenerType: kancolleListenerType,
+      kancolleAutoScrollDownOnLoad: kancolleAutoScrollDownOnLoad,
     );
   }
 
