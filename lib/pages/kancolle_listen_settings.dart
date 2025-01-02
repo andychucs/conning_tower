@@ -53,6 +53,20 @@ class _KancolleListenSettingsState
             CupertinoListSection.insetGrouped(
               children: [
                 CupertinoListTile(
+                  title: Text(S.of(context).KancolleUseHTTP),
+                  subtitle: Text(S.of(context).ToolUATip),
+                  leading: const DummyIcon(
+                      color: CupertinoColors.activeOrange,
+                      icon: CupertinoIcons.lock_open),
+                  trailing: CupertinoSwitch(
+                    value: settings.useHttpForKancolle,
+                    onChanged: (value) async {
+                      HapticFeedback.mediumImpact();
+                      ref.watch(settingsProvider.notifier).setBool('useHttpForKancolle', value);
+                    },
+                  ),
+                ),
+                CupertinoListTile(
                   title: Text(S.of(context).KanColleDataListener),
                   subtitle: Text(S.of(context).ToolUATip),
                   leading: const DummyIcon(
@@ -176,6 +190,23 @@ class _KancolleListenSettingsState
                     S.of(context).ToolTitleGameScreen),
                 children: [
                   CupertinoListTile(
+                    title: Text(S.of(context).KancolleSpacingTopHide),
+                    subtitle: Text(S.of(context).KancolleSpacingTopHideDesc),
+                    leading: const DummyIcon(
+                        color: CupertinoColors.activeGreen,
+                        icon: CupertinoIcons.rectangle_expand_vertical),
+                    trailing: CupertinoSwitch(
+                      value: settings.kancolleAutoScrollDownOnLoad,
+                      onChanged: (value) async {
+                        HapticFeedback.mediumImpact();
+                        ref.watch(settingsProvider.notifier).setBool('kancolleAutoScrollDownOnLoad', value);
+                        if (value) {
+                          await ref.read(webControllerProvider).tryHideSpacingTop();
+                        }
+                      },
+                    ),
+                  ),
+                  CupertinoListTile(
                     title: Text(S.of(context).AppResize),
                     leading: const DummyIcon(
                         color: CupertinoColors.activeBlue,
@@ -216,7 +247,7 @@ class _KancolleListenSettingsState
               children: [
                 CupertinoListTile(
                   title: Text("Automatic Bypass Foreign Block"),
-                  subtitle: Text("For oversea user"),
+                  subtitle: Text("For oversea user(Unstable, This feature not work now.)"),
                   leading: const DummyIcon(
                       color: CupertinoColors.activeBlue,
                       icon: CupertinoIcons.globe),

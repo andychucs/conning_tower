@@ -406,6 +406,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "KanColleDataListener":
             MessageLookupByLibrary.simpleMessage("Data Listener"),
         "KanColleLogbook": MessageLookupByLibrary.simpleMessage("Logbook"),
+        "KancolleSpacingTopHide":
+            MessageLookupByLibrary.simpleMessage("Hide Blank Row at Top"),
+        "KancolleSpacingTopHideDesc": MessageLookupByLibrary.simpleMessage(
+            "If you see a blank row at the top of the game, please enable this feature."),
+        "KancolleUseHTTP": MessageLookupByLibrary.simpleMessage(
+            "Use HTTP instead of HTTPS for KC server"),
         "LightTheme": MessageLookupByLibrary.simpleMessage("Light Theme"),
         "MsgIOSNote": MessageLookupByLibrary.simpleMessage(
             "For Admiral using iOS 15.0 or above, when you see the top bar of DMM GAMES displayed and get a blank page, please click \'Tools-Web-HTTP Redirect\' button."),

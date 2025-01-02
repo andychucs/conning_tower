@@ -2120,16 +2120,6 @@ class S {
     );
   }
 
-  /// `Sort`
-  String get TextSort {
-    return Intl.message(
-      'Sort',
-      name: 'TextSort',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Game homepage is loading`
   String get KCViewFuncMsgGameNavi {
     return Intl.message(
@@ -2235,6 +2225,36 @@ class S {
     return Intl.message(
       'Logbook',
       name: 'KanColleLogbook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide Blank Row at Top`
+  String get KancolleSpacingTopHide {
+    return Intl.message(
+      'Hide Blank Row at Top',
+      name: 'KancolleSpacingTopHide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you see a blank row at the top of the game, please enable this feature.`
+  String get KancolleSpacingTopHideDesc {
+    return Intl.message(
+      'If you see a blank row at the top of the game, please enable this feature.',
+      name: 'KancolleSpacingTopHideDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use HTTP instead of HTTPS for KC server`
+  String get KancolleUseHTTP {
+    return Intl.message(
+      'Use HTTP instead of HTTPS for KC server',
+      name: 'KancolleUseHTTP',
       desc: '',
       args: [],
     );
@@ -3235,6 +3255,16 @@ class S {
     return Intl.message(
       'Slow',
       name: 'TextSlowSpeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort`
+  String get TextSort {
+    return Intl.message(
+      'Sort',
+      name: 'TextSort',
       desc: '',
       args: [],
     );
