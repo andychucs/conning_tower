@@ -140,7 +140,7 @@ class AppWebViewState extends ConsumerState<AppWebView> {
                 // print(response);
               },
             ),
-            progress < 1.0
+            progress < 1.0 && settings.webViewProgressBar
                 ? LinearProgressIndicator(
                     value: progress,
                     color: CupertinoColors.systemBlue.resolveFrom(context),

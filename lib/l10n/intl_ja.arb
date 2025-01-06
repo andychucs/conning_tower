@@ -502,6 +502,8 @@
   "@SettingsReset": {},
   "SettingsScreenOrientation": "画面の向きを設定する",
   "@SettingsScreenOrientation": {},
+  "SettingsShouldShowWebViewProgressBar": "進捗バーを表示する",
+  "@SettingsShouldShowWebViewProgressBar": {},
   "ShipData": "艦船データ",
   "@ShipData": {},
   "ShortTextAll": "全",

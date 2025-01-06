@@ -27,6 +27,7 @@ class SettingsState with _$SettingsState {
     required int kancolleListenerType,
     required bool kancolleAutoScrollDownOnLoad,
     required bool useHttpForKancolle,
+    required bool webViewProgressBar,
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Map<String, dynamic> json) =>
@@ -59,6 +60,7 @@ class Settings extends _$Settings {
         localStorage.getBool("kancolleAutoScrollDownOnLoad") ?? false;
     bool useHttpForKancolle =
         localStorage.getBool("useHttpForKancolle") ?? true;
+    bool webViewProgressBar = localStorage.getBool("webViewProgressBar") ?? true;
     return SettingsState(
       dashboardIndex: dashboardIndex,
       kcSparkEmoji: kcSparkEmoji,
@@ -77,6 +79,7 @@ class Settings extends _$Settings {
       kancolleListenerType: kancolleListenerType,
       kancolleAutoScrollDownOnLoad: kancolleAutoScrollDownOnLoad,
       useHttpForKancolle: useHttpForKancolle,
+      webViewProgressBar: webViewProgressBar,
     );
   }
 

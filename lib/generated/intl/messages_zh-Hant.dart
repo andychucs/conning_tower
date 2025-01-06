@@ -401,6 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("重設"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("屏幕方向設置"),
+        "SettingsShouldShowWebViewProgressBar":
+            MessageLookupByLibrary.simpleMessage("顯示進度條"),
         "ShipData": MessageLookupByLibrary.simpleMessage("艦艇資料"),
         "ShortTextAll": MessageLookupByLibrary.simpleMessage("全"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("狀態碼"),

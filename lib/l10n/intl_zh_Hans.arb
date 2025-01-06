@@ -502,6 +502,8 @@
   "@SettingsReset": {},
   "SettingsScreenOrientation": "屏幕方向设置",
   "@SettingsScreenOrientation": {},
+  "SettingsShouldShowWebViewProgressBar": "显示进度条",
+  "@SettingsShouldShowWebViewProgressBar": {},
   "ShipData": "舰船数据",
   "@ShipData": {},
   "ShortTextAll": "全",

@@ -2560,6 +2560,16 @@ class S {
     );
   }
 
+  /// `Show Progress Bar`
+  String get SettingsShouldShowWebViewProgressBar {
+    return Intl.message(
+      'Show Progress Bar',
+      name: 'SettingsShouldShowWebViewProgressBar',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ship Data`
   String get ShipData {
     return Intl.message(
