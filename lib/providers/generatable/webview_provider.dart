@@ -199,7 +199,7 @@ class WebController extends _$WebController {
     }
     inKancolleWindow = false;
     autoAdjusted = false;
-    if (uri.path.startsWith(gameUrlPath)) {
+    if (uri.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
       log("game load start");
       ref.watch(settingsProvider.notifier).setBool('loadedKancolle', true);
     } else if (uri.host == kDMMOSAPIDomain) {
