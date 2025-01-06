@@ -65,9 +65,21 @@ class _WebInfoState extends ConsumerState<WebInfoPage> {
                         S.of(context).ToolTitleGameScreen),
                     children: [
                       CupertinoListTile(
-                        title: Text(S.of(context).TextResetZoom),
+                        title: Text(S.of(context).SettingsShouldShowWebViewProgressBar),
                         leading: const DummyIcon(
                             color: AppColor.cerulean,
+                            icon: CupertinoIcons.compass),
+                        trailing: CupertinoSwitch(
+                            value: ref.watch(settingsProvider).webViewProgressBar,
+                            onChanged: (value) async {
+                              HapticFeedback.heavyImpact();
+                              ref.watch(settingsProvider.notifier).setBool("webViewProgressBar", value);
+                            }),
+                      ),
+                      CupertinoListTile(
+                        title: Text(S.of(context).TextResetZoom),
+                        leading: const DummyIcon(
+                            color: AppColor.verdigris,
                             icon:
                                 CupertinoIcons.arrow_down_right_arrow_up_left),
                         onTap: () async {

@@ -465,6 +465,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("Reset App"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("Change Screen Orientation"),
+        "SettingsShouldShowWebViewProgressBar":
+            MessageLookupByLibrary.simpleMessage("Show Progress Bar"),
         "ShipData": MessageLookupByLibrary.simpleMessage("Ship Data"),
         "ShortTextAll": MessageLookupByLibrary.simpleMessage("All"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("Status Code"),

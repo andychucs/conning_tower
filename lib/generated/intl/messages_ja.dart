@@ -418,6 +418,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "SettingsReset": MessageLookupByLibrary.simpleMessage("アプリを初期化"),
         "SettingsScreenOrientation":
             MessageLookupByLibrary.simpleMessage("画面の向きを設定する"),
+        "SettingsShouldShowWebViewProgressBar":
+            MessageLookupByLibrary.simpleMessage("進捗バーを表示する"),
         "ShipData": MessageLookupByLibrary.simpleMessage("艦船データ"),
         "ShortTextAll": MessageLookupByLibrary.simpleMessage("全"),
         "StatusCode": MessageLookupByLibrary.simpleMessage("ステータス"),

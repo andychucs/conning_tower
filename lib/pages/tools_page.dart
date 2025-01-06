@@ -188,6 +188,18 @@ class _ToolsPageState extends ConsumerState<ToolsPage> {
               },
             ),
             CupertinoListTile(
+              title: Text(S.of(context).SettingsShouldShowWebViewProgressBar),
+              leading: const DummyIcon(
+                  color: CupertinoColors.activeBlue,
+                  icon: CupertinoIcons.compass),
+              trailing: CupertinoSwitch(
+                  value: ref.watch(settingsProvider).webViewProgressBar,
+                  onChanged: (value) async {
+                    HapticFeedback.heavyImpact();
+                    ref.watch(settingsProvider.notifier).setBool("webViewProgressBar", value);
+                  }),
+            ),
+            CupertinoListTile(
               title: Text(S.of(context).AppClearCache),
               leading: const DummyIcon(
                   color: CupertinoColors.destructiveRed,
