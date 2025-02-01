@@ -199,7 +199,7 @@ class WebController extends _$WebController {
     }
     inKancolleWindow = false;
     autoAdjusted = false;
-    if (uri.path.startsWith(gameUrlPath)) {
+    if (uri.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
       log("game load start");
       ref.watch(settingsProvider.notifier).setBool('loadedKancolle', true);
     } else if (uri.host == kDMMOSAPIDomain) {
@@ -233,6 +233,15 @@ class WebController extends _$WebController {
     // ref
     //     .read(webInfoProvider.notifier)
     //     .update((state) => state.copyWith(url: uri.rawValue, cookies: cookies));
+
+    final favicons = await controller.getFavicons();
+    if (favicons.isNotEmpty) {
+      for (final favicon in favicons) {
+        if (favicon.width != null) {
+          ref.watch(webInfoProvider.notifier).update((state) => state.copyWith(url: uri.rawValue, favicon: favicon));
+        }
+      }
+    }
     if (safeNavi) {
       safeNavi = false;
     }
@@ -254,14 +263,6 @@ class WebController extends _$WebController {
       newLoad = false;
       final uri = await state.controller.getUrl();
 
-      final favicons = await controller.getFavicons();
-      if (favicons.isNotEmpty) {
-        for (final favicon in favicons) {
-          if (favicon.width != null) {
-            ref.watch(webInfoProvider.notifier).update((state) => state.copyWith(url: uri!.rawValue, favicon: favicon));
-          }
-        }
-      }
       if (uri!.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
         // available align on url is app_id=854854 (Android) or  osapi.dmm.com (Android & iOS)
         inKancolleWindow = true;
