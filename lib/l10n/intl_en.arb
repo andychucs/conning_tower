@@ -502,6 +502,8 @@
   "@SettingsReset": {},
   "SettingsScreenOrientation": "Change Screen Orientation",
   "@SettingsScreenOrientation": {},
+  "SettingsShouldShowWebViewProgressBar": "Show Progress Bar",
+  "@SettingsShouldShowWebViewProgressBar": {},
   "ShipData": "Ship Data",
   "@ShipData": {},
   "ShortTextAll": "All",
