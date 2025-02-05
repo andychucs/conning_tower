@@ -9,10 +9,10 @@ jobs:
     name: Release
     runs-on: macos-latest
     steps:
-      - name: Setup Xcode version
-        uses: maxim-lobanov/setup-xcode@v1.6.0
-        with:
-          xcode-version: latest-stable
+#      - name: Setup Xcode version
+#        uses: maxim-lobanov/setup-xcode@v1.6.0
+#        with:
+#          xcode-version: latest-stable
 
       - uses: actions/checkout@v4
       - name: Set version
@@ -32,6 +32,9 @@ jobs:
         with:
           cache: true
           flutter-version-file: pubspec.yaml
+
+      - name: Flutter Info
+        run: flutter doctor
 
       - run: flutter pub get
 
