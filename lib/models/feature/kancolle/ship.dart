@@ -322,9 +322,9 @@ class Ship with _$Ship {
         10 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 1.2, // 水上偵察機
         11 => (equip.los! + 1.15 * sqrt(equip.level ?? 0)) * 1.1, // 水上爆撃機
         12 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6, // 小型電探
-        13 => (equip.los! + 1.25 * sqrt(equip.level ?? 0)) * 0.6, // 大型電探
+        13 => (equip.los! + 1.4 * sqrt(equip.level ?? 0)) * 0.6, // 大型電探
         41 => (equip.los! + 1.2 * sqrt(equip.level ?? 0)) * 0.6, // 大型飛行艇
-        _ => equip.los ?? 0 * 0.6
+        _ => (equip.los ?? 0) * 0.6
       };
     }
 
