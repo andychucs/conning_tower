@@ -348,7 +348,7 @@ class KancolleData {
     if (model is ReqMapStartEntity) {
       log("Start");
       final battleSquadIndex = int.parse(params?["api_deck_id"]);
-      if (battleSquadIndex == 1 && fleet.combined != null) {
+      if (battleSquadIndex == 1 && fleet.combined != null && (fleet.combined ?? 0) > 0) {
         battleSquads = [squads[0], squads[1]];
       } else {
         battleSquads = [squads[battleSquadIndex - 1]];
