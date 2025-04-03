@@ -1,85 +1,94 @@
 {
-  "data_version": "2024081617",
+  "data_version": "2025040301",
   "data": {
     "1": {
-      "color": "0xffdfdfdf",
+      "color": "0xffeabe4d",
       "name": {
-        "ja": "本国艦隊",
-        "en": "Home Fleet",
-        "sc": "本国舰队",
-        "tc": "本國艦隊"
+        "ja": "第百四戦隊",
+        "en": "104th Squadron",
+        "sc": "第百四战队",
+        "tc": "第百四戰隊"
       }
     },
     "2": {
-      "color": "0xff8ed1f8",
+      "color": "0xffabed67",
       "name": {
-        "ja": "Force H",
-        "en": "Force H",
-        "sc": "Force H",
-        "tc": "Force H"
+        "ja": "第一艦隊",
+        "en": "1st Fleet",
+        "sc": "第一舰队",
+        "tc": "第一艦隊"
       }
     },
     "3": {
-      "color": "0xfff6a100",
+      "color": "0xffbfa2fe",
       "name": {
-        "ja": "Force M先遣隊",
-        "en": "Force M Advance Squadron",
-        "sc": "Force M先遣队",
-        "tc": "Force M先遣隊"
+        "ja": "第五艦隊",
+        "en": "5th Fleet",
+        "sc": "第五舰队",
+        "tc": "第五艦隊"
       }
     },
     "4": {
-      "color": "0xffb9ec00",
+      "color": "0xff1bd069",
       "name": {
-        "ja": "Force M",
-        "en": "Force M",
-        "sc": "Force M",
-        "tc": "Force M"
+        "ja": "連合艦隊",
+        "en": "Combined Fleet",
+        "sc": "联合舰队",
+        "tc": "聯合艦隊"
       }
     },
     "5": {
-      "color": "0xffbebefb",
+      "color": "0xff4ab5e3",
       "name": {
-        "ja": "渾作戦部隊",
-        "en": "Operation Kon Fleet",
-        "sc": "浑作战部队",
-        "tc": "渾作戰部隊"
+        "ja": "南西方面部隊",
+        "en": "Southwestern Area Unit",
+        "sc": "南西方面部队",
+        "tc": "南西方面部隊"
       }
     },
     "6": {
-      "color": "0xffe9a7a7",
+      "color": "0xfffde558",
       "name": {
-        "ja": "渾作戦増援",
-        "en": "Operation Kon Reinforcement",
-        "sc": "浑作战增援",
-        "tc": "渾作戰增援"
+        "ja": "礼号作戦部隊",
+        "en": "Operation Rei-Go Unit",
+        "sc": "礼号作战部队",
+        "tc": "禮號作戰部隊"
       }
     },
     "7": {
-      "color": "0xfff64e50",
+      "color": "0xffb8b8b8",
       "name": {
-        "ja": "ラバウル支援",
-        "en": "Rabaul Support",
-        "sc": "拉包尔支援",
-        "tc": "拉包爾支援"
+        "ja": "キャビア増援部隊",
+        "en": "Cavite Reinforcement Unit",
+        "sc": "甲米地增援部队",
+        "tc": "甲米地增援部隊"
       }
     },
     "8": {
-      "color": "0xff3ef989",
+      "color": "0xfffdbadb",
       "name": {
-        "ja": "MO攻略部隊",
-        "en": "MO Invasion Fleet",
-        "sc": "MO攻略部队",
-        "tc": "MO攻略部隊"
+        "ja": "第三十一戦隊",
+        "en": "31st Squadron",
+        "sc": "第三十一舰队",
+        "tc": "第三十一艦隊"
       }
     },
     "9": {
-      "color": "0xff2c7fff",
+      "color": "0xffec9151",
       "name": {
-        "ja": "MO機動部隊",
-        "en": "MO Mobile Fleet",
-        "sc": "MO机动部队",
-        "tc": "MO機動部隊"
+        "ja": "第四航空戦隊",
+        "en": "4th Carrier Division",
+        "sc": "第四航空战队",
+        "tc": "第四航空戰隊"
+      }
+    },
+    "10": {
+      "color": "0xffff484e",
+      "name": {
+        "ja": "第二遊撃部隊",
+        "en": "2nd Strike Force",
+        "sc": "第二游击部队",
+        "tc": "第二遊擊部隊"
       }
     }
   }
