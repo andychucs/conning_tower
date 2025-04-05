@@ -262,8 +262,8 @@ class WebController extends _$WebController {
     if (progress >= 80) {
       newLoad = false;
       final uri = await state.controller.getUrl();
-
-      if (uri!.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
+      if (uri == null) return;
+      if (uri.path.startsWith(gameUrlPath) || uri.path.startsWith(gameAppUrlPath)) {
         // available align on url is app_id=854854 (Android) or  osapi.dmm.com (Android & iOS)
         inKancolleWindow = true;
         Toast.showSuccess(title: S.current.KCViewFuncMsgNaviGameLoadCompleted);
